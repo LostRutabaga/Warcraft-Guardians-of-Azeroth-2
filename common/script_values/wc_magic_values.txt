@@ -3019,6 +3019,17 @@ wc_shadow_magic_resistance_value = {
 		}
 	}
 
+	if = {
+		limit = {
+			has_trait = void_sickness
+		}
+		add = {
+			value = -5
+			desc = trait_void_sickness
+			format = "WC_MAX_MANA_VALUE_FORMAT"
+		}
+	}
+
 	round = yes
 	max = 25
 	min = -5

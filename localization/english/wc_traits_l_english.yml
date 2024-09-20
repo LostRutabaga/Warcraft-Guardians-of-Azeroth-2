@@ -697,3 +697,8 @@
  trait_holy_wrath:0 "Holy Wrath"
  trait_holy_wrath_desc:0 "This character has been struck down by the power of the Light, and can suffer more damage from it."
  trait_holy_wrath_character_desc:0 "[ROOT.GetCharacter.GetFirstNameNoTooltip] has been struck down by the power of the Light, and can suffer more damage from it."
+
+ void_sickness:0 "Void Sickness"
+ void_sickness_desc:0 "This character has been afflicted by the void, and is weakened by its influence."
+ trait_void_sickness_character_desc:0 "[ROOT.GetCharacter.GetFirstNameNoTooltip] has been afflicted by the void, and is weakened by its influence."
+ TRAIT_FLAG_DESC_void_sickness_shadow_magic_resistance:0 "$wc_shadow_magic_resistance$ #N -5#!"
