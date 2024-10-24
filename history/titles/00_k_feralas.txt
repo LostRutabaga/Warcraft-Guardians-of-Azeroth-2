@@ -161,12 +161,12 @@ c_wyhelly = {
 	561.9.24 = { holder = murloc59 } #Mlrlg[murloc3]
 }
 c_branlor = {
-	560.10.12 = { holder = murloc145 }
-	579.9.11 = { holder = murloc146 }
+	560.10.12 = { holder = murloc47 }
+	579.9.11 = { holder = murloc48 }
 }
 c_madril = {
-	560.10.12 = { holder = murloc145 }
-	579.9.11 = { holder = murloc147 }
+	560.10.12 = { holder = murloc47 }
+	579.9.11 = { holder = murloc49 }
 }
 d_ravenwind = {
 	800.1.1={
