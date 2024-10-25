@@ -18117,7 +18117,7 @@ murloc49 = { #adding some family drama to make this island in Feralas a bit inte
 	religion = water_deities
 	culture = murloc
 	father=murloc47
-	trait = compassionate trait = craven trait = shy
+	trait = compassionate trait = patient trait = shy
 	562.3.3 = { 
 		birth = yes 
 		trait = creature_murloc 
