@@ -444,15 +444,16 @@ wc_change_amount_element_favour_effect = {
 
 	save_scope_value_as = {
 		name = working_value
-		value = $VALUE$
-	}
-
-	if = { 
-		limit = { 
-			scope:working_value > 0 
-			culture = { has_cultural_era_or_later = culture_era_late_medieval }
-		} 
-		elemental_favour_modifier_for_culture = { ELEMENT = $ELEMENT$ }
+		value = { 
+			value = $VALUE$
+			# cultural modifiers only apply to increases
+			if = { limit = { flag:$CHANGE$ = flag:add }
+				multiply = { 
+					value = wc_elemental_favour_penalty_for_innovations
+					add = wc_$ELEMENT$_favour_bonus_for_heritage
+				}
+			}
+		}
 	}
 
 
@@ -555,39 +556,6 @@ wc_change_amount_element_favour_effect = {
 		}
 	}
 	clamp_variable = { name = wc_$ELEMENT$_favour_variable max = wc_max_elemental_favour_value min = wc_min_elemental_favour_value }
-}
-
-elemental_favour_modifier_for_culture = {
-
-	save_temporary_scope_value_as = {
-		name = favour_penalty_multiplier
-		value = {
-			add = 1
-			if = { limit = {culture = { has_cultural_era_or_later = culture_era_late_medieval }}
-				add = -0.25
-			}
-			if = { limit = {culture = { has_cultural_era_or_later = culture_era_early_modern }}
-				add =  -0.25
-			}
-			if = { 
-				limit = { 
-					$ELEMENT$ = elemental_water 
-					culture_is_elemental_water_favoured_heritage = yes
-				} 
-				add = 0.25
-			}
-			else_if = { 
-				limit = { culture_is_elemental_favoured_heritage = yes }
-				add = 0.15
-			}
-			# add further stuff here
-		}
-	}
-
-	change_variable = {
-		name = scope:working_value
-		multiply = favour_penalty_multiplier
-	}
 }
 
 # secret effects

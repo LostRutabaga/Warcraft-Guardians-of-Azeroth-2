@@ -689,3 +689,15 @@ culture_is_elemental_water_favoured_heritage = {
 		has_cultural_pillar = heritage_azsharic
 	}
 }
+
+culture_is_elemental_fire_favored_heritage = { 
+	always = no # todo: change?
+}
+
+culture_is_elemental_air_favored_heritage ={ 
+	always = no # todo: change?
+}
+
+culture_is_elemental_earth_favored_heritage ={ 
+	always = no # todo: change?
+}

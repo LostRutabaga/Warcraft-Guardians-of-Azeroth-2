@@ -4641,3 +4641,70 @@ wc_disorder_magic_resistance_scale_value = {
 		}
 	}
 }
+
+wc_elemental_favour_penalty_for_innovations = { 
+	value = 1
+	if = { 
+		limit = {culture = { has_cultural_era_or_later = culture_era_late_medieval }}
+		add = -0.25
+	}
+	if = { limit = {culture = { has_cultural_era_or_later = culture_era_early_modern }}
+		add =  -0.25
+	}
+}
+
+wc_elemental_water_favour_bonus_for_heritage = { 
+	value = 1
+	if = { 
+		limit = { 
+			culture_is_elemental_water_favoured_heritage = yes
+		} 
+		add = 0.25
+	}
+	else_if = { 
+		limit = { culture_is_elemental_favoured_heritage = yes }
+		add = 0.15
+	}
+}
+
+wc_elemental_fire_favour_bonus_for_heritage = { 
+	value = 1
+	if = { 
+		limit = { 
+			culture_is_elemental_water_favoured_heritage = yes
+		} 
+		add = 0.25
+	}
+	else_if = { 
+		limit = { culture_is_elemental_favoured_heritage = yes }
+		add = 0.15
+	}
+}
+
+wc_elemental_air_favour_bonus_for_heritage = { 
+	value = 1
+	if = { 
+		limit = { 
+			culture_is_elemental_air_favoured_heritage = yes
+		} 
+		add = 0.25
+	}
+	else_if = { 
+		limit = { culture_is_elemental_favoured_heritage = yes }
+		add = 0.15
+	}
+}
+
+wc_elemental_earth_favour_bonus_for_heritage = { 
+	value = 1
+	if = { 
+		limit = { 
+			culture_is_elemental_earth_favoured_heritage = yes
+		} 
+		add = 0.25
+	}
+	else_if = { 
+		limit = { culture_is_elemental_favoured_heritage = yes }
+		add = 0.15
+	}
+}
