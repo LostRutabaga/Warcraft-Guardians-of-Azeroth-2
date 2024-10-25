@@ -441,9 +441,24 @@ wc_add_magic_boost_modifier = {
 	}
 }
 wc_change_amount_element_favour_effect = {
+
+	save_scope_value_as = {
+		name = working_value
+		value = $VALUE$
+	}
+
+	if = { 
+		limit = { 
+			scope:working_value > 0 
+			culture = { has_cultural_era_or_later = culture_era_late_medieval }
+		} 
+		elemental_favour_modifier_for_culture = { ELEMENT = $ELEMENT$ }
+	}
+
+
 	custom_description = { # Tooltip for changing elemental favour
 		text = wc_$CHANGE$_amount_$ELEMENT$_favour_effect
-		value = $VALUE$
+		value = scope:working_value
 	}
 
 	if = {
@@ -452,7 +467,7 @@ wc_change_amount_element_favour_effect = {
 			faith = { has_doctrine_parameter = $ELEMENT$_spirit_magic_approved }
 		}
 		add_piety = {
-			value = $VALUE$
+			value = scope:working_value
 			multiply = wc_piety_per_elemental_favour
 		}
 	}
@@ -462,7 +477,7 @@ wc_change_amount_element_favour_effect = {
 			faith = { has_doctrine_parameter = $ELEMENT$_spirit_magic_approved }
 		}
 		add_piety = {
-			value = $VALUE$
+			value = scope:working_value
 			multiply = -1
 			multiply = wc_piety_per_elemental_favour
 		}
@@ -473,7 +488,7 @@ wc_change_amount_element_favour_effect = {
 			faith = { has_doctrine_parameter = $ELEMENT$_decay_magic_approved }
 		}
 		add_piety = {
-			value = $VALUE$
+			value = scope:working_value
 			multiply = -1
 			multiply = wc_piety_per_elemental_favour
 		}
@@ -484,7 +499,7 @@ wc_change_amount_element_favour_effect = {
 			faith = { has_doctrine_parameter = $ELEMENT$_decay_magic_approved }
 		}
 		add_piety = {
-			value = $VALUE$
+			value = scope:working_value
 			multiply = wc_piety_per_elemental_favour
 		}
 	}
@@ -493,7 +508,7 @@ wc_change_amount_element_favour_effect = {
 		name = wc_elemental_favour_after_change_variable
 		value = {
 			value = 0
-			$CHANGE$ = $VALUE$
+			$CHANGE$ = scope:working_value
 		}
 	}
 
@@ -528,7 +543,7 @@ wc_change_amount_element_favour_effect = {
 
 		change_variable = { 
 			name = wc_$ELEMENT$_favour_variable 
-			$CHANGE$ = $VALUE$ 
+			$CHANGE$ = scope:working_value 
 		}
 	}
 	else = {
@@ -536,10 +551,43 @@ wc_change_amount_element_favour_effect = {
 
 		change_variable = { 
 			name = wc_$ELEMENT$_favour_variable 
-			$CHANGE$ = $VALUE$ 
+			$CHANGE$ = scope:working_value 
 		}
 	}
 	clamp_variable = { name = wc_$ELEMENT$_favour_variable max = wc_max_elemental_favour_value min = wc_min_elemental_favour_value }
+}
+
+elemental_favour_modifier_for_culture = {
+
+	save_temporary_scope_value_as = {
+		name = favour_penalty_multiplier
+		value = {
+			add = 1
+			if = { limit = {culture = { has_cultural_era_or_later = culture_era_late_medieval }}
+				add = -0.25
+			}
+			if = { limit = {culture = { has_cultural_era_or_later = culture_era_early_modern }}
+				add =  -0.25
+			}
+			if = { 
+				limit = { 
+					$ELEMENT$ = elemental_water 
+					culture_is_elemental_water_favoured_heritage = yes
+				} 
+				add = 0.25
+			}
+			else_if = { 
+				limit = { culture_is_elemental_favoured_heritage = yes }
+				add = 0.15
+			}
+			# add further stuff here
+		}
+	}
+
+	change_variable = {
+		name = scope:working_value
+		multiply = favour_penalty_multiplier
+	}
 }
 
 # secret effects
