@@ -1953,7 +1953,7 @@ wc_light_magic_resistance_value = {
 	max = 25
 	min = -5
 }
-wc_order_magic_resistance_value = {
+wc_Order_magic_resistance_value = {
 	
 	value = {
 		add = {
