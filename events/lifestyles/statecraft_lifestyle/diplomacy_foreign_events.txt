@@ -42,7 +42,14 @@ diplomacy_foreign.1074 = {
 	title = diplomacy_foreign.1074.t
 	desc = diplomacy_foreign.1074.desc
 	theme = diplomacy_foreign_affairs_focus
-	left_portrait = scope:heretic_ruler
+	left_portrait = {
+		character = root
+		animation = personality_zealous
+	}
+	right_portrait = {
+		character = scope:heretic_ruler
+		animation = personality_cynical
+	}
 	
 	trigger = {
 		NOT = { has_character_flag = had_event_diplomacy_foreign_1074 }
@@ -784,7 +791,7 @@ diplomacy_foreign.3004 = {
 							OR = {
 								has_diplomacy_lifestyle_trait_trigger = yes
 								has_lifestyle = diplomacy_lifestyle
-								diplomacy >= high_skill_rating
+								diplomacy >= 10
 							}
 						}
 					}
@@ -794,7 +801,7 @@ diplomacy_foreign.3004 = {
 							OR = {
 								has_martial_lifestyle_trait_trigger = yes
 								has_lifestyle = martial_lifestyle
-								martial >= decent_skill_rating
+								martial >= 10
 							}
 						}
 					}
@@ -804,7 +811,7 @@ diplomacy_foreign.3004 = {
 							OR = {
 								has_stewardship_lifestyle_trait_trigger = yes
 								has_lifestyle = stewardship_lifestyle
-								stewardship >= decent_skill_rating
+								stewardship >= 10
 							}
 						}
 					}
@@ -814,7 +821,7 @@ diplomacy_foreign.3004 = {
 							OR = {
 								has_intrigue_lifestyle_trait_trigger = yes
 								has_lifestyle = intrigue_lifestyle
-								intrigue >= decent_skill_rating
+								intrigue >= 10
 							}
 						}
 					}
@@ -824,7 +831,7 @@ diplomacy_foreign.3004 = {
 							OR = {
 								has_learning_lifestyle_trait_trigger = yes
 								has_lifestyle = learning_lifestyle
-								learning >= decent_skill_rating
+								learning >= 10
 							}
 						}
 					}
@@ -855,7 +862,7 @@ diplomacy_foreign.3005 = {
 	immediate = {
 		hidden_effect = {
 			random_list = {
-				25 = {
+				50 = {
 					modifier = {
 						add = -10
 						has_trait = shy
@@ -877,7 +884,7 @@ diplomacy_foreign.3005 = {
 					}
 
 				}
-				25 = {
+				50 = {
 					modifier = {
 						add = -10
 						has_trait = arrogant
@@ -911,7 +918,7 @@ diplomacy_foreign.3006 = {
 	immediate = {
 		hidden_effect = {
 			random_list = {
-				25 = {
+				80 = {
 					compare_modifier = {
 						value = ai_greed
 						multiplier = 0.5
@@ -924,7 +931,7 @@ diplomacy_foreign.3006 = {
 						}
 					}
 				}
-				25 = {
+				20 = {
 					compare_modifier = {
 						value = ai_greed
 						multiplier = -0.5
@@ -1009,6 +1016,7 @@ diplomacy_foreign.3007 = {
 		if = {
 			limit = {
 				exists = capital_county
+				is_landed = yes
 			}
 			capital_county = {
 				save_scope_as = capital
@@ -1038,7 +1046,8 @@ diplomacy_foreign.3007 = {
 		# Move closer to forming a friendship.
 		progress_towards_friend_effect = {
 			CHARACTER = scope:neighboring_ruler
-			OPINION = no
+			OPINION = 0
+			REASON = friend_penpals
 		}
 		
 
@@ -1097,10 +1106,9 @@ diplomacy_foreign.3007 = {
 	option = { #County modifier!
 		name = diplomacy_foreign.3007.b
 		trigger = {
-			exists = capital_county
-			NOT = {
-				scope:capital = {
-					 has_county_modifier = diplomacy_foreign_3001_trade_deal_modifier
+			scope:capital ?= {
+				NOT = {
+					has_county_modifier = diplomacy_foreign_3001_trade_deal_modifier
 				}
 			}
 		}
@@ -1372,7 +1380,7 @@ diplomacy_foreign_special.1017 = {
 	
 	trigger = {
 		has_focus = diplomacy_foreign_affairs_focus
-
+		is_landed = yes
 		#Expensive event, especially for those who aren't independent, so we restrict it for AI
 		trigger_if = {
 			limit = { is_ai = yes }
@@ -1492,12 +1500,14 @@ diplomacy_foreign_special.1017 = {
 							any_vassal_or_below = {
 								diplomacy_foreign_special_1017_potential_guest_trigger = yes
 								NOT = { any_in_list = { list = potential_guests this = prev } }
+								NOT = { this = root }
 							}
 						}
 						random_vassal_or_below = {
 							limit = {
 								diplomacy_foreign_special_1017_potential_guest_trigger = yes
 								NOT = { any_in_list = { list = potential_guests this = prev } }
+								NOT = { this = root }
 							}
 							weight = {
 								modifier = {
@@ -1659,7 +1669,7 @@ diplomacy_foreign_special.1019 = {
 	}
 	theme = diplomacy_foreign_affairs_focus
 	override_background = {
-		event_background = feast
+		reference = feast
 	}
 	left_portrait = scope:foreign_guest
 	right_portrait = scope:helper_spouse
@@ -1844,7 +1854,7 @@ diplomacy_foreign_special.1020 = {
 	desc = diplomacy_foreign_special.1020.desc
 	theme = diplomacy_foreign_affairs_focus
 	override_background = {
-		event_background = terrain
+		reference = terrain
 	}
 	left_portrait = scope:foreign_guest
 	
@@ -2171,7 +2181,7 @@ scripted_trigger diplomacy_foreign_special_1022_wants_to_manipulate = {
 		has_intrigue_lifestyle_trait_trigger = yes
 		any_scheme = {
 			hostile_scheme_trigger = yes
-			scheme_target = root
+			scheme_target_character = root
 		}
 		opinion = {
 			target = root
@@ -2223,7 +2233,7 @@ diplomacy_foreign_special.1022 = {
 	desc = diplomacy_foreign_special.1022.desc
 	theme = diplomacy_foreign_affairs_focus
 	override_background = {
-		event_background = feast
+		reference = feast
 	}
 	left_portrait = {
 		character = scope:foreign_guest
@@ -2328,7 +2338,7 @@ diplomacy_foreign_special.1022 = {
 								value < 0
 							}
 							has_trait = trusting
-							is_landed = yes
+							is_landed_or_landless_administrative = yes
 						}
 					}
 					modifier = {
@@ -2609,7 +2619,7 @@ diplomacy_foreign_special.1023 = {
 	desc = diplomacy_foreign_special.1023.desc
 	theme = diplomacy_foreign_affairs_focus
 	override_background = {
-		event_background = sitting_room
+		reference = sitting_room
 	}
 	left_portrait = {
 		character = scope:foreign_guest
@@ -2618,6 +2628,7 @@ diplomacy_foreign_special.1023 = {
 	right_portrait = scope:interesting_relation
 	
 	trigger = {
+		exists = scope:private_dinner_outcome
 		scope:private_dinner_outcome = flag:okay
 	}
 
@@ -2634,7 +2645,7 @@ diplomacy_foreign_special.1024 = {
 	desc = diplomacy_foreign_special.1024.desc
 	theme = diplomacy_foreign_affairs_focus
 	override_background = {
-		event_background = sitting_room
+		reference = sitting_room
 	}
 	left_portrait = {
 		character = scope:foreign_guest
@@ -2646,6 +2657,7 @@ diplomacy_foreign_special.1024 = {
 	}
 	
 	trigger = {
+		exists = scope:private_dinner_outcome
 		scope:private_dinner_outcome = flag:befriend
 	}
 
@@ -2694,7 +2706,7 @@ diplomacy_foreign_special.1025 = {
 	desc = diplomacy_foreign_special.1025.desc
 	theme = diplomacy_foreign_affairs_focus
 	override_background = {
-		event_background = sitting_room
+		reference = sitting_room
 	}
 	left_portrait = {
 		character = scope:foreign_guest
@@ -2706,6 +2718,7 @@ diplomacy_foreign_special.1025 = {
 	}
 	
 	trigger = {
+		exists = scope:private_dinner_outcome
 		scope:private_dinner_outcome = flag:manipulate
 	}
 
@@ -2773,7 +2786,7 @@ diplomacy_foreign_special.1026 = {
 	desc = diplomacy_foreign_special.1026.desc
 	theme = diplomacy_foreign_affairs_focus
 	override_background = {
-		event_background = sitting_room
+		reference = sitting_room
 	}
 	left_portrait = {
 		character = scope:foreign_guest
@@ -2785,6 +2798,7 @@ diplomacy_foreign_special.1026 = {
 	}
 	
 	trigger = {
+		exists = scope:private_dinner_outcome
 		scope:private_dinner_outcome = flag:seduce
 	}
 
@@ -2884,7 +2898,7 @@ diplomacy_foreign_special.1026 = {
 				send_interface_toast = {
 					title = diplomacy_foreign_special.1026.c.success
 					left_icon = scope:foreign_guest
-					left_icon = scope:interesting_relation
+					right_icon = scope:interesting_relation
 
 					custom_tooltip = diplomacy_foreign_special.court_visit.well
 					diplomacy_foreign_special_1010_court_visit_join_seduction_successfully_effect = { CHARACTER = scope:foreign_guest } #Sets lover and opinions
@@ -2937,7 +2951,7 @@ diplomacy_foreign_special.1026 = {
 				send_interface_toast = {
 					title = diplomacy_foreign_special.1026.c.success
 					left_icon = scope:foreign_guest
-					left_icon = scope:interesting_relation
+					right_icon = scope:interesting_relation
 
 					custom_tooltip = diplomacy_foreign_special.court_visit.well
 					diplomacy_foreign_special_1010_court_visit_join_seduction_successfully_effect = { CHARACTER = scope:foreign_guest }  #Sets lover and opinions
@@ -2961,7 +2975,7 @@ diplomacy_foreign_special.1026 = {
 				send_interface_toast = {
 					title = diplomacy_foreign_special.1026.c.failure
 					left_icon = scope:foreign_guest
-					left_icon = scope:interesting_relation
+					right_icon = scope:interesting_relation
 
 					custom_tooltip = diplomacy_foreign_special.court_visit.disaster
 					reverse_add_opinion = {
@@ -2994,7 +3008,7 @@ diplomacy_foreign_special.1027 = {
 	desc = diplomacy_foreign_special.1027.desc
 	theme = diplomacy_foreign_affairs_focus
 	override_background = {
-		event_background = corridor_night
+		reference = corridor_night
 	}
 	left_portrait = {
 		character = root
@@ -3034,7 +3048,7 @@ diplomacy_foreign_special.1028 = {
 	desc = diplomacy_foreign_special.1028.desc
 	theme = diplomacy_foreign_affairs_focus
 	override_background = {
-		event_background = garden
+		reference = garden
 	}
 	left_portrait = {
 		character = scope:foreign_guest
@@ -3445,8 +3459,8 @@ scripted_trigger diplomacy_foreign_1100_valid_neighbor_trigger = {
 	exists = player_heir
 	NOR = {
 		is_consort_of = root
-		has_government = republic_government
-		has_government = theocracy_government
+		government_has_flag = government_is_republic
+		government_has_flag = government_is_theocracy
 		player_heir = root.player_heir
 	}
 	save_temporary_scope_as = neighbor_check
@@ -3466,12 +3480,12 @@ diplomacy_foreign.1100 = {
 	sender = scope:other_ruler
 
 	trigger = {
-		is_landed = yes
+		is_landed_or_landless_administrative = yes
 		highest_held_title_tier >= tier_duchy
 		is_available = yes
 		is_independent_ruler = yes
 		is_at_war = no
-		NOT = { has_government = republic_government }
+		NOT = { government_has_flag = government_is_republic }
 		NOT = { has_character_flag = had_event_diplomacy_foreign_1100 }
 		exists = player_heir
 		player_heir = { # Must have a child available.
@@ -3779,7 +3793,7 @@ diplomacy_foreign.1102 = {
 	desc = diplomacy_foreign.1102.desc
 	theme = diplomacy_foreign_affairs_focus
 	override_background = {
-		event_background = throne_room_scope
+		reference = throne_room_scope
 	}
 	left_portrait = scope:main_heir
 	lower_left_portrait = scope:main_ruler
@@ -4006,13 +4020,13 @@ diplomacy_foreign.1103 = {
 	}
 	theme = diplomacy_foreign_affairs_focus
 	override_background = {
-		event_background = throne_room_scope
+		reference = throne_room_scope
 	}
 	left_portrait = {
 		character = scope:main_heir
 		triggered_animation = {
 			trigger = { exists = scope:diplomacy_foreign_1103_love }
-			animation = adoration
+			animation = admiration
 		}
 		triggered_animation = {
 			trigger = {
@@ -4047,7 +4061,7 @@ diplomacy_foreign.1103 = {
 
 	trigger = {
 		scope:main_ruler = {
-			is_landed = yes
+			is_landed_or_landless_administrative = yes
 			is_at_war = no
 			scope:main_heir = {
 				diplomacy_foreign_1102_valid_heir_trigger = yes
@@ -4055,7 +4069,7 @@ diplomacy_foreign.1103 = {
 			}
 		}
 		scope:other_ruler = {
-			is_landed = yes
+			is_landed_or_landless_administrative = yes
 			is_at_war = no
 			scope:other_heir = {
 				diplomacy_foreign_1102_valid_heir_trigger = yes
@@ -4246,10 +4260,21 @@ diplomacy_foreign.1103 = {
 			scope:main_heir = { can_marry_character_trigger = { CHARACTER = scope:other_heir } }
 		}
 		if = {
+			limit = {
+				has_ep2_dlc_trigger = yes
+			}
+			create_grand_wedding_betrothal = {
+				SPOUSE_1 = scope:main_heir
+				SPOUSE_2 = scope:other_heir
+				HOST = root
+				PROMISEE = scope:other_ruler
+			}
+		}
+		else_if = {
 			limit = { scope:main_heir = { is_female = no } }
 			scope:main_heir = { marry = scope:other_heir }
 		}
-		if = {
+		else_if = {
 			limit = { scope:main_heir = { is_female = yes } }
 			scope:main_heir = { marry_matrilineal = scope:other_heir }
 		}
@@ -4341,7 +4366,7 @@ diplomacy_foreign.1103 = {
 				exists = scope:diplomacy_foreign_1103_friendship
 			}
 			scope:main_heir = {
-				set_relation_friend = scope:other_heir
+				set_relation_friend = { reason = friend_hit_it_off target = scope:other_heir involved_character = root }
 			}
 		}
 		if = {
@@ -4349,7 +4374,7 @@ diplomacy_foreign.1103 = {
 				exists = scope:diplomacy_foreign_1103_love
 			}
 			scope:main_heir = {
-				set_relation_lover = scope:other_heir
+				set_relation_lover = { reason = lover_hit_it_off target = scope:other_heir involved_character = root }
 			}
 		}
 		if = {
@@ -4357,7 +4382,10 @@ diplomacy_foreign.1103 = {
 				exists = scope:diplomacy_foreign_1103_rivalry
 			}
 			scope:main_heir = {
-				set_relation_rival = scope:other_heir
+				set_relation_rival = {
+					target = scope:other_heir
+					reason = rival_heir_animosity
+				}
 			}
 		}
 		if = {
@@ -4481,13 +4509,13 @@ diplomacy_foreign.1104 = {
 	}
 	theme = diplomacy_foreign_affairs_focus
 	override_background = {
-		event_background = throne_room_scope
+		reference = throne_room_scope
 	}
 	left_portrait = {
 		character = scope:main_heir
 		triggered_animation = {
 			trigger = { has_character_flag = flag_diplomacy_foreign_1104_love }
-			animation = adoration
+			animation = admiration
 		}
 		triggered_animation = {
 			trigger = {
@@ -4522,14 +4550,14 @@ diplomacy_foreign.1104 = {
 
 	trigger = {
 		scope:main_ruler = {
-			is_landed = yes
+			is_landed_or_landless_administrative = yes
 			scope:main_heir = {
 				diplomacy_foreign_1102_valid_heir_trigger = yes
 				this = scope:main_ruler.player_heir
 			}
 		}
 		scope:other_ruler = {
-			is_landed = yes
+			is_landed_or_landless_administrative = yes
 			scope:other_heir = {
 				diplomacy_foreign_1102_valid_heir_trigger = yes
 				this = scope:other_ruler.player_heir
@@ -4725,6 +4753,7 @@ diplomacy_foreign.1104 = {
 		}
 	}
 
+	#TODO_CD_EP2 add option to offer a grand wedding if possible
 	
 	option = { # Ending.
 		name = diplomacy_foreign.1103.b
@@ -4809,7 +4838,7 @@ diplomacy_foreign.1104 = {
 				has_character_flag = flag_diplomacy_foreign_1104_friendship
 			}
 			scope:main_heir = {
-				set_relation_friend = scope:other_heir
+				set_relation_friend = { reason = friend_hit_it_off target = scope:other_heir involved_character = scope:other_ruler }
 			}
 		}
 		if = {
@@ -4817,7 +4846,7 @@ diplomacy_foreign.1104 = {
 				has_character_flag = flag_diplomacy_foreign_1104_love
 			}
 			scope:main_heir = {
-				set_relation_lover = scope:other_heir
+				set_relation_lover = { reason = lover_hit_it_off target = scope:other_heir involved_character = scope:other_ruler }
 			}
 		}
 		if = {
@@ -4825,7 +4854,10 @@ diplomacy_foreign.1104 = {
 				has_character_flag = flag_diplomacy_foreign_1104_rivalry
 			}
 			scope:main_heir = {
-				set_relation_rival = scope:other_heir
+				set_relation_rival = {
+					target = scope:other_heir
+					reason = rival_heir_animosity
+				}
 			}
 		}
 		if = {
@@ -4904,7 +4936,7 @@ diplomacy_foreign.1105 = {
 	}
 	theme = diplomacy_foreign_affairs_focus
 	override_background = {
-		event_background = throne_room_scope
+		reference = throne_room_scope
 	}
 	left_portrait = scope:main_heir
 	lower_left_portrait = scope:main_ruler
@@ -5057,7 +5089,7 @@ diplomacy_foreign.1150 = {
 	right_portrait = scope:neighbor
 
 	trigger = {
-		is_landed = yes
+		is_landed_or_landless_administrative = yes
 		is_at_war = no
 		is_available = yes
 		is_independent_ruler = yes
@@ -5404,6 +5436,7 @@ diplomacy_foreign.1200 = {
 	
 	trigger = {
 		NOT = { has_character_flag = had_diplomacy_foreign_1200_event }
+		is_landed = yes
 		OR = {
 			num_of_relation_friend = 0
 			NOT = {
@@ -5482,7 +5515,7 @@ diplomacy_foreign.1200 = {
 			}
 			text = diplomacy_foreign.1200.a.c
 		}
-		set_relation_friend = scope:diplomacy_friend
+		set_relation_friend = { reason = friend_helped_with_diplomacy target = scope:diplomacy_friend involved_character = scope:neighbor_ruler }
 		remove_character_flag = had_diplomacy_foreign_1200_event
 		add_character_flag = had_diplomacy_foreign_1200_event # For life if accepted.
 		reverse_add_opinion = {

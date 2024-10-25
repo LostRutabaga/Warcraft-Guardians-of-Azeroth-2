@@ -19,7 +19,23 @@
 				councillor_liege_has_family_business_bonus = yes
 			}
 			desc = task_organize_levies_family_business_bonus
-		}		
+		}
+		triggered_desc = {
+			trigger = {
+				councillor_liege_has_consulted_house_bonus = yes
+			}
+			desc = task_organize_levies_consulted_house_bonus
+		}
+		#Warcraft
+		# triggered_desc = {
+		# 	trigger = {
+		# 		scope:councillor_liege = {
+		# 			has_title = title:c_byzantion
+		# 			title:c_byzantion = { has_county_modifier = pandidakterion_university_modifier }
+		# 		}
+		# 	}
+		# 	desc = task_organize_levies_pandidakterion_bonus_desc
+		# }
 
 		### Army Maintenance
 		desc = {
@@ -35,11 +51,37 @@
 					councillor_liege_has_family_business_bonus = yes
 				}
 				desc = task_organize_levies_maintenance_family_business_bonus_desc
-			}			
+			}
+			triggered_desc = {
+				trigger = {
+					councillor_liege_has_consulted_house_bonus = yes
+				}
+				desc = task_organize_levies_maintenance_consulted_house_bonus_desc
+			}
+			#WARCRAFT
+			# triggered_desc = {
+			# 	trigger = {
+			# 		scope:councillor_liege = {
+			# 			has_title = title:c_byzantion
+			# 			title:c_byzantion = { has_county_modifier = pandidakterion_university_modifier }
+			# 		}
+			# 	}
+			# 	desc = task_organize_levies_maintenance_pandidakterion_bonus_desc
+			# }
 		}
 
 		desc = {
 			desc = council_task_possible_side_effects
+			triggered_desc = {
+				trigger = {
+					scope:councillor_liege = {
+						any_active_accolade = {
+							has_accolade_parameter = accolade_organize_army_bonus
+						}
+					}
+				}
+				desc = task_train_commanders_acclaimed_knight_levy_captaincy
+			}
 			triggered_desc = {
 				trigger = {
 					scope:councillor_liege = { 
@@ -98,23 +140,15 @@
 	
 	council_owner_modifier = {
 		name = task_organize_levies_modifier
-		levy_size = 1
-		garrison_size = 1
-		levy_reinforcement_rate = 1
-		scale = {
-			value = marshal_organize_levies_modifier_value
-			divide = 100
-			}		
+		garrison_size = 0.01
+		levy_reinforcement_rate = 0.01
+		scale = marshal_organize_levies_modifier_total
 	}
 
 	council_owner_modifier = {
 		name = task_organize_levies_maintenance_modifier
-
-		army_maintenance_mult = -1
-		scale = {
-			value = marshal_organize_levies_maintenance_total
-			divide = 100
-		}
+		army_maintenance_mult = -0.01
+		scale = marshal_organize_levies_maintenance_total
 	}
 
 	monthly_on_action = organize_the_levies_marshal_task_side_effects
@@ -132,10 +166,22 @@
 					}
 				}
 			}
-			add = 10
+			add = 8
 		}
 		
 		# Trying to get out of debt
+		if = { 
+			limit = {
+				scope:councillor_liege = {
+					is_at_war = yes
+					gold < 0
+					ai_rationality > 0
+				}
+			}
+			add = scope:councillor_liege.ai_rationality
+		}
+		
+		# Trying to avoid debt
 		if = { 
 			limit = {
 				scope:councillor_liege = {
@@ -147,6 +193,16 @@
 			add = 2000
 		}
 
+		# Trying to get the levy numbers bacc after the war
+		if = { 
+			limit = {
+				scope:councillor_liege = {
+					is_at_war = no
+					current_military_strength < eighty_percent_of_max_military_strength
+				}
+			}
+			add = 1000
+		}
 	}
 }
 
@@ -173,9 +229,40 @@ task_train_commanders = {
 			}
 			desc = task_train_commanders_commander_family_business_bonus_desc
 		}
+		triggered_desc = {
+			trigger = {
+				councillor_liege_has_consulted_house_bonus = yes
+			}
+			desc = task_train_commanders_commander_consulted_house_bonus_desc
+		}
+		triggered_desc = {
+			trigger = {
+				scope:councillor_liege = { has_character_modifier = employer_booner_master_of_horse_2_modifier }
+			}
+			desc = task_train_commanders_master_of_horse_2_bonus_desc
+		}
+		triggered_desc = {
+			trigger = {
+				scope:councillor_liege = { has_character_modifier = employer_booner_master_of_horse_3_modifier }
+			}
+			desc = task_train_commanders_master_of_horse_3_bonus_desc
+		}
 
 		desc = {
 			desc = council_task_possible_side_effects
+			triggered_desc = {
+				trigger = {
+					scope:councillor_liege = {
+						any_active_accolade = {
+							OR = {
+								has_accolade_parameter = accolade_train_commanders_bonus
+								has_accolade_parameter = accolade_train_commanders_bonus_high
+							}
+						}
+					}
+				}
+				desc = task_train_commanders_acclaimed_knight_drills_hastiludes
+			}
 			triggered_desc = {
 				trigger = {
 					martial > mediocre_skill_rating
@@ -238,6 +325,13 @@ task_train_commanders = {
 		heavy_cavalry_damage_mult = 1
 		heavy_cavalry_toughness_mult = 1
 
+		archer_cavalry_damage_mult = 1
+		archer_cavalry_toughness_mult = 1
+		camel_cavalry_damage_mult = 1
+		camel_cavalry_toughness_mult = 1
+		elephant_cavalry_damage_mult = 1
+		elephant_cavalry_toughness_mult = 1
+
 		siege_weapon_damage_mult = 1
 		siege_weapon_toughness_mult = 1
 		
@@ -250,25 +344,55 @@ task_train_commanders = {
 
 	on_start_task = {
 		set_variable = { 
-			name = marshal_overtime_boost
+			name = marshal_maa_overtime_boost
 			value = 0 
+		}
+		if = {
+			limit = {
+				any_task_contract = {
+					has_task_contract_type = laamp_help_train_commanders_contract
+					NOT = {	task_contract_target = scope:councillor_liege }
+				}
+				any_player = {
+					is_landless_adventurer = yes
+					is_within_diplo_range = { CHARACTER = scope:councillor }
+					any_character_task_contract = {
+						has_task_contract_type = laamp_help_train_commanders_contract
+						count <= council_task_contracts_limit_value
+					}
+					can_create_task_contract = {
+						type_name = laamp_help_train_commanders_contract
+						employer = scope:councillor
+					}
+					save_temporary_scope_as = player_laamp
+				}
+			}
+			scope:player_laamp = {
+				create_task_contract = {
+					task_contract_type = laamp_help_train_commanders_contract
+					task_contract_tier = scope:councillor.task_contract_tier_value
+					location = scope:councillor.councillor_task_target
+					task_contract_employer = scope:councillor
+					target = scope:councillor_liege
+				}
+			}
 		}
 	}
 
 	on_cancel_task = {
-		remove_variable = marshal_overtime_boost
+		remove_variable = marshal_maa_overtime_boost
 	}
 
-	monthly_on_action = train_commanders_marshal_task_side_effects
+	monthly_on_action = train_commanders_monthly_on_action
 
 	on_monthly = {
 		if = {
 			limit = {
-				has_variable = marshal_overtime_boost
-				martial > var:marshal_overtime_boost 
+				has_variable = marshal_maa_overtime_boost
+				martial > var:marshal_maa_overtime_boost 
 			}
 			change_variable = {
-				name = marshal_overtime_boost
+				name = marshal_maa_overtime_boost
 				add = 1
 			}
 		}
@@ -295,6 +419,17 @@ task_train_commanders = {
 			}
 			add = martial
 		}
+		
+		# AI directive
+		if = {
+			limit = {
+				scope:councillor_liege = {
+					has_character_flag = vassal_directive_train_commanders
+					vassal_is_valid_and_follows_directive_trigger = { VASSAL = this LIEGE = liege }
+				}
+			}
+			add = 10000
+		}
 	}
 }
 
@@ -314,6 +449,16 @@ task_increase_control = {
 		desc = task_increase_control_effect_desc
 		desc = {
 			desc = council_task_possible_side_effects
+			triggered_desc = {
+				trigger = {
+					scope:councillor_liege = {
+						any_active_accolade = {
+							has_accolade_parameter = accolade_increase_control_bonus
+						}
+					}
+				}
+				desc = task_increase_control_acclaimed_knight_subdues_peasantry
+			}
 			triggered_desc = {
 				trigger = {
 					martial > mediocre_skill_rating
@@ -436,6 +581,15 @@ task_increase_control = {
 		}
 		if = {
 			limit = {
+				councillor_liege_has_consulted_house_bonus = yes
+			}
+			add = {
+				value = scope:councillor.marshal_increase_county_control_consulted_house_bonus_monthly_change
+				desc = CONSULTED_HOUSE_BONUS_VALUE
+			}
+		}
+		if = {
+			limit = {
 				scope:councillor = { has_character_modifier = event_bonus_to_county_control }
 			}
 			add = {
@@ -446,7 +600,7 @@ task_increase_control = {
 		if = {
 			limit = { exists = scope:county }
 			multiply = {
-				value = scope:county.county_control_rate_modifier
+				value = scope:county.monthly_county_control_growth_factor
 				desc = MARSHAL_COUNTY_SPEED_MODIFIERS
 			}
 		}
@@ -456,8 +610,23 @@ task_increase_control = {
 				scope:county = { has_county_modifier = petition_liege_county_control_modifier }
 			}
 			add = {
-				value = scope:councillor.petition_liege_county_convert_modifier_value
+				value = scope:councillor.petition_liege_county_control_modifier_value
 				desc = MARSHAL_INCREASE_CONTROL_LOCAL_COUNTY_MODIFIERS
+			}
+		}
+		#EP3
+		if = {
+			limit = {
+				scope:councillor_liege = {
+					employs_court_position = court_jester_court_position
+					court_position:court_jester_court_position = {
+						has_character_flag = famous_mime_control
+					}
+				}
+			}
+			add = {
+				value = scope:councillor_liege.court_position:court_jester_court_position.marshal_court_jester_contribution_value
+				desc = MARSHAL_INCREASE_CONTROL_MIME_MODIFIER
 			}
 		}
 	}
@@ -474,16 +643,52 @@ task_increase_control = {
 					county_control < full_county_control
 				}
 			}
-			county_control_rate_modifier > 0
+			# If the growth factor is 0, no amount of trying to control helps
+			# (happens when the county is under siege/occupied most likely)
+			monthly_county_control_growth_factor > 0
 		}
 	}
 
 	county_modifier = {
 		name = marshal_increase_control_modifier
-		monthly_county_control_change_add = 1
+		monthly_county_control_growth_add = 1
 		scale = marshal_increase_control_total
 	}
 
+	on_start_task_county = {
+		#spawn a task contract
+		if = {
+			limit = {
+				scope:councillor_liege = {
+					is_independent_ruler = yes					
+				}
+				any_player = {
+					is_landless_adventurer = yes
+					is_within_diplo_range = { CHARACTER = scope:councillor }
+					any_character_task_contract = {
+						has_task_contract_type = laamp_help_increase_control_contract
+						count <= council_task_contracts_limit_value
+					}
+					can_create_task_contract = {
+						type_name = laamp_help_increase_control_contract
+						employer = scope:councillor
+					}
+					save_temporary_scope_as = player_laamp
+				}
+			}
+			scope:player_laamp = {
+				create_task_contract = {
+					task_contract_type = laamp_help_increase_control_contract
+					task_contract_tier = scope:councillor.task_contract_tier_value
+					location = scope:county.title_province
+					task_contract_employer = scope:councillor
+					target = scope:councillor.liege
+					destination = scope:county.title_province
+					save_scope_as = task_contract					
+				}
+			}
+		}
+	}
 	on_finish_task_county = {
 		if = {
 			limit = {
@@ -498,7 +703,7 @@ task_increase_control = {
 		}
 	}
 
-	monthly_on_action = task_increase_control_side_effects
+	monthly_on_action = increase_control_monthly_on_action
 
 	on_monthly_county = {
 		random = {
@@ -511,6 +716,14 @@ task_increase_control = {
 
 	ai_will_do = {
 		value = 1000 # Highest prio
+		if = { # Keep doing Organize levies if you're at war
+			limit = {
+				scope:councillor_liege = {
+					is_at_war = no
+				}
+			}
+			add = 19000
+		}
 		if = { # Keep doing Organize levies if you're at war
 			limit = {
 				is_performing_council_task = task_organize_levies
@@ -543,18 +756,42 @@ task_manage_guards = {
 	
 	effect_desc = {
 		desc = task_manage_guards_knights_desc
-		desc = task_manage_guards_scheme_desc
 		triggered_desc = {
 			trigger = {
 				councillor_liege_has_erudition_legacy_5_perk = yes
 			}
-			desc = task_manage_guards_erudition_bonus_desc
+			desc = task_manage_guards_erudition_bonus_knights
 		}
 		triggered_desc = {
 			trigger = {
 				councillor_liege_has_family_business_bonus = yes
 			}
-			desc = task_manage_guards_family_business_bonus_desc
+			desc = task_manage_guards_family_business_bonus_knights
+		}
+		triggered_desc = {
+			trigger = {
+				councillor_liege_has_consulted_house_bonus = yes
+			}
+			desc = task_manage_guards_consulted_house_bonus_knights
+		}
+		desc = task_manage_guards_scheme_desc
+		triggered_desc = {
+			trigger = {
+				councillor_liege_has_erudition_legacy_5_perk = yes
+			}
+			desc = task_manage_guards_erudition_bonus_scheme
+		}
+		triggered_desc = {
+			trigger = {
+				councillor_liege_has_family_business_bonus = yes
+			}
+			desc = task_manage_guards_family_business_bonus_scheme
+		}
+		triggered_desc = {
+			trigger = {
+				councillor_liege_has_consulted_house_bonus = yes
+			}
+			desc = task_manage_guards_consulted_house_bonus_scheme
 		}
 
 		desc = {
@@ -594,7 +831,7 @@ task_manage_guards = {
 		name = task_manage_guards_knight_modifier
 		knight_effectiveness_mult = 1
 		scale = {
-			value = marshal_knights_overtime_boost_scale
+			value = marshal_overtime_boost_scale
 			divide = 100
 		}
 	}
@@ -602,7 +839,7 @@ task_manage_guards = {
 		name = task_manage_guards_scheme_modifier
 		enemy_hostile_scheme_success_chance_add = -1
 		scale = {
-			value = marshal_scheme_overtime_boost_scale
+			value = marshal_overtime_decrease_scale
 		}
 	}
 	
@@ -613,19 +850,23 @@ task_manage_guards = {
 	}
 
 	on_start_task = {
-		set_variable = { 
-			name = marshal_overtime_boost
-			value = 0 
-		}
-		set_variable = { 
-			name = marshal_overtime_decrease
-			value = 0 
+		liege = {
+			set_variable = { 
+				name = marshal_overtime_boost
+				value = 0 
+			}
+			set_variable = { 
+				name = marshal_overtime_decrease
+				value = 0 
+			}
 		}
 	}
 
 	on_cancel_task = {
-		remove_variable = marshal_overtime_boost
-		remove_variable = marshal_overtime_decrease
+		liege = {
+			remove_variable = marshal_overtime_boost
+			remove_variable = marshal_overtime_decrease
+		}
 	}
 
 	monthly_on_action = manage_guards_marshal_task_side_effects
@@ -633,22 +874,47 @@ task_manage_guards = {
 	on_monthly = {
 		if = {
 			limit = {
-				has_variable = marshal_overtime_boost
-				var:marshal_overtime_boost < marshal_knight_overtime_boost_max
+				liege = { is_ai = no }
 			}
-			change_variable = {
-				name = marshal_overtime_boost
-				add = marshal_knight_overtime_boost_monthly_increase
+			if = {
+				limit = {
+					liege = {
+						has_variable = marshal_overtime_boost
+						var:marshal_overtime_boost < marshal_overtime_boost_max
+					}
+				}
+				liege = {
+					change_variable = {
+						name = marshal_overtime_boost
+						add = root.marshal_overtime_boost_monthly_increase
+					}
+				}
+			}
+			if = {
+				limit = {
+					liege = {
+						has_variable = marshal_overtime_decrease
+						var:marshal_overtime_decrease > marshal_overtime_decrease_max
+					}
+				}
+				liege = {
+					change_variable = {
+						name = marshal_overtime_decrease
+						add = root.marshal_overtime_decrease_monthly_increase
+					}
+				}
 			}
 		}
-		if = {
-			limit = {
-				has_variable = marshal_overtime_decrease
-				var:marshal_overtime_decrease > marshal_scheme_overtime_boost_max
-			}
-			change_variable = {
-				name = marshal_overtime_decrease
-				add = marshal_scheme_overtime_boost_monthly_increase
+		else = {
+			liege = {
+				set_variable = {
+					name = marshal_overtime_boost
+					value = root.marshal_overtime_boost_monthly_increase
+				}
+				set_variable = {
+					name = marshal_overtime_decrease
+					value = root.marshal_overtime_decrease_monthly_increase
+				}
 			}
 		}
 	}

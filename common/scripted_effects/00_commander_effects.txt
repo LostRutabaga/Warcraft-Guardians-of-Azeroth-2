@@ -92,7 +92,13 @@ knight_increase_prowess_chance_effect = {
 			}
 			modifier = {
 				factor = 0
-				has_trait = blademaster_3
+				AND = {
+					has_trait = lifestyle_blademaster
+					has_trait_xp = {
+						trait = lifestyle_blademaster
+						value >= trait_third_level
+					}
+				}
 			}
 		}
 	}
@@ -156,7 +162,7 @@ berserker_kill_version_randomization_effect = {
 				}
 			}
 			scope:enemy_knight = {
-				override_death_killer_effect = { DEATH_REASON = death_head_ripped_off KILLER = root }
+				override_death_killer_effect = { death_reason = death_head_ripped_off killer = root }
 			}
 		}
 		10 = {
@@ -170,7 +176,7 @@ berserker_kill_version_randomization_effect = {
 				}
 			}
 			scope:enemy_knight = {
-				override_death_killer_effect = { DEATH_REASON = death_cloven_in_half KILLER = root }
+				override_death_killer_effect = { death_reason = death_cloven_in_half killer = root }
 			}
 		}
 		10 = {
@@ -184,7 +190,7 @@ berserker_kill_version_randomization_effect = {
 				}
 			}
 			scope:enemy_knight = {
-				override_death_killer_effect = { DEATH_REASON = death_viciously_dismembered KILLER = root }
+				override_death_killer_effect = { death_reason = death_viciously_dismembered killer = root }
 			}
 		}
 		10 = {
@@ -198,7 +204,7 @@ berserker_kill_version_randomization_effect = {
 				}
 			}
 			scope:enemy_knight = {
-				override_death_killer_effect = { DEATH_REASON = death_ripped_apart_limb_by_limb KILLER = root }
+				override_death_killer_effect = { death_reason = death_ripped_apart_limb_by_limb killer = root }
 			}
 		}
 		10 = {
@@ -212,7 +218,7 @@ berserker_kill_version_randomization_effect = {
 				}
 			}
 			scope:enemy_knight = {
-				override_death_killer_effect = { DEATH_REASON = death_chopped_to_pieces KILLER = root }
+				override_death_killer_effect = { death_reason = death_chopped_to_pieces killer = root }
 			}
 		}
 		10 = {
@@ -226,7 +232,7 @@ berserker_kill_version_randomization_effect = {
 				}
 			}
 			scope:enemy_knight = {
-				override_death_killer_effect = { DEATH_REASON = death_heart_ripped_out KILLER = root }
+				override_death_killer_effect = { death_reason = death_heart_ripped_out killer = root }
 			}
 		}
 		1 = {
@@ -253,7 +259,7 @@ berserker_kill_version_randomization_effect = {
 				}
 			}
 			scope:enemy_knight = {
-				override_death_killer_effect = { DEATH_REASON = death_fear KILLER = root }
+				override_death_killer_effect = { death_reason = death_fear killer = root }
 			}
 		}
 		10 = {
@@ -267,7 +273,7 @@ berserker_kill_version_randomization_effect = {
 				}
 			}
 			scope:enemy_knight = {
-				override_death_killer_effect = { DEATH_REASON = death_skull_cracked_open KILLER = root }
+				override_death_killer_effect = { death_reason = death_skull_cracked_open killer = root }
 			}
 		}
 		10 = {
@@ -281,7 +287,7 @@ berserker_kill_version_randomization_effect = {
 				}
 			}
 			scope:enemy_knight = {
-				override_death_killer_effect = { DEATH_REASON = death_strangled_with_own_intestines KILLER = root }
+				override_death_killer_effect = { death_reason = death_strangled_with_own_intestines killer = root }
 			}
 		}
 	}
@@ -300,7 +306,7 @@ shieldmaiden_kill_version_randomisation_effect = {
 				}
 			}
 			scope:enemy_knight = {
-				override_death_killer_effect = { DEATH_REASON = death_decapitated KILLER = root }
+				override_death_killer_effect = { death_reason = death_decapitated killer = root }
 			}
 		}
 		10 = {
@@ -314,7 +320,7 @@ shieldmaiden_kill_version_randomisation_effect = {
 				}
 			}
 			scope:enemy_knight = {
-				override_death_killer_effect = { DEATH_REASON = death_cloven_in_half KILLER = root }
+				override_death_killer_effect = { death_reason = death_cloven_in_half killer = root }
 			}
 		}
 		10 = {
@@ -328,7 +334,7 @@ shieldmaiden_kill_version_randomisation_effect = {
 				}
 			}
 			scope:enemy_knight = {
-				override_death_killer_effect = { DEATH_REASON = death_viciously_dismembered KILLER = root }
+				override_death_killer_effect = { death_reason = death_viciously_dismembered killer = root }
 			}
 		}
 		10 = {
@@ -342,7 +348,7 @@ shieldmaiden_kill_version_randomisation_effect = {
 				}
 			}
 			scope:enemy_knight = {
-				override_death_killer_effect = { DEATH_REASON = death_piteously_cut_down KILLER = root }
+				override_death_killer_effect = { death_reason = death_piteously_cut_down killer = root }
 			}
 		}
 		10 = {
@@ -356,7 +362,7 @@ shieldmaiden_kill_version_randomisation_effect = {
 				}
 			}
 			scope:enemy_knight = {
-				override_death_killer_effect = { DEATH_REASON = death_chopped_to_pieces KILLER = root }
+				override_death_killer_effect = { death_reason = death_chopped_to_pieces killer = root }
 			}
 		}
 	}
@@ -367,6 +373,7 @@ recruit_terrain_specialist_effect = {
 		limit = {
 			exists = root.capital_province
 			any_pool_character = {
+				is_adult = yes
 				province = root.capital_province
 				can_be_combatant_based_on_gender_trigger = { ARMY_OWNER = root }
 				martial >= medium_skill_rating
@@ -380,6 +387,7 @@ recruit_terrain_specialist_effect = {
 		random_pool_character = {
 			province = root.capital_province
 			limit = {
+				is_adult = yes
 				can_be_combatant_based_on_gender_trigger = { ARMY_OWNER = root }
 				martial >= medium_skill_rating
 				culture = root.culture
@@ -388,7 +396,6 @@ recruit_terrain_specialist_effect = {
 					target = root
 				}
 			}
-			add_martial_skill = 5
 			if = {
 				limit = {
 					NOT = {
@@ -431,7 +438,6 @@ recruit_terrain_specialist_effect = {
 			exists = scope:new_commander
 		}
 		scope:new_commander = {
-			force_character_skill_recalculation = yes
 			add_character_flag = {
 				flag = blocked_from_leaving
 				years = 25

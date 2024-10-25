@@ -4,6 +4,7 @@
 	culture = zandalari
 	religion = zandism
 	holding = castle_holding
+	special_building = zuldazar_01
 }
 
 6073 = {	# Crafters' Terrace
@@ -103,8 +104,8 @@
 
 ###c_atalgral
 2239 = {	# Atal'gral
-	culture = zandalari
-	religion = zandism
+	culture = tortollan
+	religion = cult_of_torga
 	holding = church_holding
 }
 
@@ -121,7 +122,7 @@
 ##d_zuldazar ###################################
 ###c_covescale
 2240 = {	# Dreadpearl
-	culture = murloc
+	culture = gilblin
 	religion = water_deities
 	holding = tribal_holding
 }
@@ -375,8 +376,8 @@
 
 ###c_torga
 2254 = {	# Torga
-	culture = zandalari
-	religion = zandism
+	culture = tortollan
+	religion = cult_of_torga
 	holding = castle_holding
 }
 
@@ -394,6 +395,7 @@
 	culture = zandalari
 	religion = zandism
 	holding = church_holding
+	special_building = necropolis_01
 }
 
 

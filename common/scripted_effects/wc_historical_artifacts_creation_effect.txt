@@ -1,0 +1,264 @@
+﻿create_artifact_terenas_crown_effect = {
+	# Get the character the artifact is being made for.
+	$OWNER$ = { save_scope_as = owner }
+
+	set_artifact_rarity_famed = yes
+	
+	# Create the artifact
+	create_artifact = {	
+		name = terenas_crown_name
+		description = terenas_crown_desc
+		type = helmet
+		visuals = terenas_crown
+		wealth = scope:wealth
+		quality = scope:quality
+		history = {
+			type = created
+			date = 364.08.08
+			recipient = character:63146 #Lordain Menethil
+			location = title:c_lordaeron.title_province # Lordaeron
+		}
+		modifier = terenas_crown
+		save_scope_as = newly_created_artifact
+		decaying = no
+	}
+
+	scope:newly_created_artifact = {
+		set_variable = { name = historical_unique_artifact value = yes }
+		set_variable = {
+			name = terenas_crown
+			value = yes
+		}
+		add_artifact_title_history = {
+			target = title:k_lordaeron
+			date = 364.08.08
+		}
+		save_scope_as = epic
+	}
+}
+create_artifact_frostmourne_effect = {
+	# Get the character the artifact is being made for.
+	$OWNER$ = { save_scope_as = owner }
+	set_artifact_rarity_illustrious = yes
+
+	# Create the artifact
+	create_artifact = {
+		name = frostmourne_name
+		description = frostmourne_desc
+		type = sword
+		template = frostmourne_template
+		visuals = frostmourne
+		wealth = scope:wealth
+		quality = scope:quality
+		history = {
+			type = created_before_history
+		}
+		modifier = frostmourne_modifier
+		save_scope_as = newly_created_artifact
+		decaying = no
+	}
+
+	scope:newly_created_artifact = {
+		set_variable = { name = historical_unique_artifact value = yes }
+		set_variable = { name = no_damage value = yes }
+		set_variable = frostmourne
+		set_variable = { name = frostmourne_level value = 0 }
+	}
+}
+create_artifact_gorehowl_effect = {
+	# Get the character the artifact is being made for.
+	$OWNER$ = { save_scope_as = owner }
+	set_artifact_rarity_illustrious = yes
+
+	# Create the artifact
+	create_artifact = {
+		name = gorehowl_name
+		description = gorehowl_desc
+		type = axe
+		template = gorehowl_template
+		visuals = gorehowl
+		wealth = scope:wealth
+		quality = scope:quality
+		history = {
+			type = created_before_history
+		}
+		modifier = gorehowl_modifier
+		save_scope_as = newly_created_artifact
+		decaying = no
+	}
+
+	scope:newly_created_artifact = {
+		set_variable = { name = historical_unique_artifact value = yes }
+		set_variable = { name = gorehowl value = yes }
+	}
+}
+
+create_artifact_dark_crystal_effect = {
+	# Get the character the artifact is being made for.
+	$OWNER$ = { save_scope_as = owner }
+	set_artifact_rarity_illustrious = yes
+
+	# Create the artifact
+	create_artifact = {
+		name = dark_crystal_name
+		description = dark_crystal_desc
+		type = miscellaneous
+		template = dark_crystal_template
+		visuals = dark_crystal
+		wealth = scope:wealth
+		quality = scope:quality
+		history = {
+			type = created_before_history
+		}
+		modifier = dark_crystal_modifier
+		save_scope_as = newly_created_artifact
+		decaying = no
+	}
+
+	scope:newly_created_artifact = {
+		set_variable = { name = historical_unique_artifact value = yes }
+		set_variable = { name = dark_crystal value = yes }
+	}
+}
+
+create_artifact_hammer_of_twilight_effect = {
+	# Get the character the artifact is being made for.
+	$OWNER$ = { save_scope_as = owner }
+	set_artifact_rarity_illustrious = yes
+
+	# Create the artifact
+	create_artifact = {
+		name = hammer_of_twilight_name
+		description = hammer_of_twilight_desc
+		type = hammer
+		template = hammer_of_twilight_template
+		visuals = hammer_of_twilight
+		wealth = scope:wealth
+		quality = scope:quality
+		history = {
+			type = created_before_history
+		}
+		modifier = hammer_of_twilight_modifier
+		save_scope_as = newly_created_artifact
+		decaying = no
+	}
+
+	scope:newly_created_artifact = {
+		set_variable = { name = historical_unique_artifact value = yes }
+		set_variable = { name = hammer_of_twilight value = yes }
+	}
+}
+create_artifact_bloodhoof_runespear_effect = {
+	# Get the character the artifact is being made for.
+	$OWNER$ = { save_scope_as = owner }
+
+	set_artifact_rarity_illustrious = yes
+
+	# Create the artifact
+	create_artifact = {	
+		name = bloodhoof_runespear_name
+		description = bloodhoof_runespear_desc
+		type = spear
+		visuals = bloodhoof_runespear
+		wealth = scope:wealth
+		quality = scope:quality
+		history = {
+			type = created
+			date = 536.1.1
+			recipient = character:210089 #Voarn Bloodhoof
+			location = title:c_taurajo.title_province # Bloodhoof Clan
+		}
+		modifier = bloodhoof_runespear_modifier
+		save_scope_as = newly_created_artifact
+		decaying = no
+	}
+
+	scope:newly_created_artifact = {
+		set_variable = { name = historical_unique_artifact value = yes }
+		set_variable = { name = bloodhoof_runespear value = yes }
+	}
+}
+
+# Illustrious
+
+# LIBRAM_TYPE = compassion, holiness, justice, protection, retribution
+create_artifact_libram_effect = {
+	# Get the character the artifact is being made for.
+	$OWNER$ = { save_scope_as = owner }
+	set_artifact_rarity_illustrious = yes
+
+	# Create the artifact
+	create_artifact = {
+		name = libram_$LIBRAM_TYPE$_name
+		description = libram_$LIBRAM_TYPE$_desc
+		template = libram_$LIBRAM_TYPE$_template
+		type = regalia
+		visuals = regalia
+		wealth = scope:wealth
+		quality = scope:quality
+		history = {
+			type = created
+			date = 588.5.1
+			recipient = character:60300 #Alonsus Faol
+			location = province:324 #Stratholme
+		}
+		modifier = libram_$LIBRAM_TYPE$_modifier
+		save_scope_as = newly_created_artifact
+		decaying = no
+	}
+
+	scope:newly_created_artifact = {
+		set_variable = { name = historical_unique_artifact value = yes }
+		set_variable = { name = libram_$LIBRAM_TYPE$ value = yes }
+		if = { # Uther
+			limit = { scope:owner = character:60036 }
+			add_artifact_history = {
+				type = given
+				date = 588.5.10
+				actor = character:60300 #Alonsus Faol
+				recipient = character:60036 # Uther
+				location = province:324 #Stratholme
+			}
+		}
+		else_if = { # Gavinrad
+			limit = { scope:owner = character:5785 }
+			add_artifact_history = {
+				type = given
+				date = 588.5.10
+				actor = character:60300 #Alonsus Faol
+				recipient = character:5785 # Gavinrad
+				location = province:324 #Stratholme
+			}
+		}
+		else_if = { # Tirion
+			limit = { scope:owner = character:60014 }
+			add_artifact_history = {
+				type = given
+				date = 588.5.10
+				actor = character:60300 #Alonsus Faol
+				recipient = character:60014 # Tirion
+				location = province:324 #Stratholme
+			}
+		}
+		else_if = { # Saidan Dathrotan
+			limit = { scope:owner = character:60021 }
+			add_artifact_history = {
+				type = given
+				date = 588.5.10
+				actor = character:60300 #Alonsus Faol
+				recipient = character:60021 # Saidan Dathrotan
+				location = province:324 #Stratholme
+			}
+		}
+		else_if = { # Turalyon
+			limit = { scope:owner = character:60247 }
+			add_artifact_history = {
+				type = given
+				date = 588.5.10
+				actor = character:60300 #Alonsus Faol
+				recipient = character:60247 # Turalyon
+				location = province:324 #Stratholme
+			}
+		}
+	}
+}

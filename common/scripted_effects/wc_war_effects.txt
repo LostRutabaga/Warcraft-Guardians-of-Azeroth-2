@@ -1,6 +1,12 @@
 ﻿shatter_realm_effect = {
 	$LOSER$ = {
-		leave_or_break_any_pol_faction_effect = yes
+		if = {
+			limit = { leads_any_this_union_trigger = yes }
+			break_union_effect = yes
+		}
+		else = {
+			leave_or_break_this_union_effect = yes
+		}
 		custom_description = {
 			text = shatter_realm_tooltip
 			
@@ -301,21 +307,38 @@ title_and_vassal_resolver_invasion_effect = {
 	every_in_list = {
 		list = vassals_taken
 		remove_from_list = vassals_taken
-		
+
 		if = {
 			limit = { NOT = { any_liege_or_above = { is_in_list = vassals_taken } } }
 			if = {
 				limit = {
+					NOT = {
+						has_character_modifier = important_lore_character
+					}
 					can_become_undead_trigger = yes
-					$WINNER$ = { has_title = title:e_scourge }
+					OR = {
+						$WINNER$ = { has_title = title:e_scourge }
+						$WINNER$.top_liege = { has_title = title:e_scourge }
+					}
 				}
-				raise_undead_by_vassal_effect = { MASTER = $WINNER$ CHANGE = scope:change }
+				raise_undead_by_vassal_effect = { MASTER = $WINNER$ CHANGE = scope:change FROSTMOURNE = no }
 			}
 			else = {
 				change_liege = {
 					liege = $WINNER$
 					change = scope:change
 				}
+			}
+
+			if = {
+				limit = {
+					OR = {
+						$WINNER$ = { has_title = title:e_scourge }
+						$WINNER$.top_liege = { has_title = title:e_scourge }
+					}
+				}
+
+				turn_realm_undead_effect = { MASTER = $WINNER$ RULER = this }
 			}
 		}
 	}
@@ -421,7 +444,7 @@ title_and_vassal_plague_taker_effect = {
 		$LOSER$ = {
 			every_realm_county = {
 				limit = {
-					culture = culture:scourge
+					culture = { has_cultural_pillar = heritage_undead }
 					faith = $WINNER$.faith
 				}
 
@@ -494,12 +517,10 @@ war_reparation_victory_effect = {
 	}
 }
 war_reparation_defeat_effect = {
-	# Prestige level progress for the attacker
+	# Prestige level loss for the attacker
 	scope:attacker = {
-		pay_short_term_gold = {
-			gold = $GOLD$
-			target = scope:defender
-			yearly_income = yes
+		pay_short_term_gold_reparations_effect = {
+			GOLD_VALUE = $GOLD$
 		}
 		add_prestige_experience = {
 			value = $PRESTIGE$
@@ -507,10 +528,10 @@ war_reparation_defeat_effect = {
 		}
 	}
 
-	# Prestige loss for the defender
+	# Prestige gain for the defender
 	scope:defender = {
-		add_prestige = {
-			value = $PRESTIGE$
+		add_prestige_war_defender_effect = {
+			PRESTIGE_VALUE = $PRESTIGE$
 		}
 	}
 
@@ -530,5 +551,392 @@ war_reparation_defeat_effect = {
 			multiply = 0.75
 		}
 		opinion = { modifier = contributed_in_war }
+	}
+}
+i_need_a_knight_effect = {
+	create_character = {
+		employer = root
+		template = knight
+		faith = root.faith
+		culture = root.culture
+		gender_female_chance = {
+			if = {
+				limit = { root.culture = { has_cultural_parameter = martial_custom_male_only_combatant } }
+				add = 0
+			}
+			else_if = {
+				limit = { root.culture = { has_cultural_parameter = martial_custom_female_only_combatant } }
+				add = 100
+			}
+			else = {
+				add = 50
+			}
+		}
+		save_temporary_scope_as = new_commander
+	}
+	hidden_effect_new_object = {
+		scope:new_commander = {
+			add_character_flag = {
+				flag = blocked_from_leaving
+				years = 25
+			}
+		}
+		if = {
+			limit = {
+				scope:new_commander = {
+					NOT = {
+						is_courtier_of = root
+					}
+				}
+			}
+			add_courtier = scope:new_commander
+		}
+	}
+}
+
+join_every_war_effect = {
+	$JOIN_TO$ = {
+		every_character_war = {
+			limit = {
+				is_war_leader = $JOIN_TO$
+				$JOINER$ = {
+					NOR = {
+						is_at_war_with = prev.primary_defender
+						is_at_war_with = prev.primary_attacker
+					}
+				}
+			}
+			hidden_effect = {
+				set_called_to = $JOINER$
+			}
+			if = {
+				limit = {
+					is_attacker = $JOIN_TO$
+				}
+				add_attacker = $JOINER$
+			}
+			else_if = {
+				limit = {
+					is_defender = $JOIN_TO$
+				}
+				add_defender = $JOINER$
+			}
+		}
+	}
+}
+
+add_genocide_cb_rewards = {
+	save_scope_value_as = { name = attacker_culture_reward_mult value = 0 }
+	save_scope_value_as = { name = attacker_faith_reward_mult value = 0 }
+	save_scope_value_as = { name = defender_culture_reward_mult value = 0 }
+	save_scope_value_as = { name = defender_faith_reward_mult value = 0 }
+	save_scope_value_as = { name = base_prestige value = $PRESTIGE_BASE_VALUE$ }
+	save_scope_value_as = { name = base_piety value = $PIETY_BASE_VALUE$ }
+	scope:defender = {
+		every_realm_county = {
+			limit = {
+				OR = {
+					AND = {
+						has_variable = culture_genocided
+						var:culture_genocided = scope:attacker.culture
+					}
+
+					AND = {
+						has_variable = faith_genocided
+						var:faith_genocided = scope:attacker.faith
+					}
+				}
+			}
+
+			if = {
+				limit = {
+					has_variable = culture_genocided
+				}
+
+				save_scope_value_as = {
+					name = attacker_culture_reward_mult
+					value = {
+						value = scope:attacker_culture_reward_mult
+						if =  {
+							limit = {
+								$OUTCOME$ = flag:win
+							}
+							add = 1
+						}
+						if =  {
+							limit = {
+								$OUTCOME$ = flag:none
+							}
+							add = 0.5
+						}
+						if =  {
+							limit = {
+								$OUTCOME$ = flag:defeat
+							}
+							add = -1
+						}
+					}
+				}
+				save_scope_value_as = {
+					name = defender_culture_reward_mult
+					value = {
+						value = scope:defender_culture_reward_mult
+						if =  {
+							limit = {
+								$OUTCOME$ = flag:win
+							}
+							add = -1
+						}
+						if =  {
+							limit = {
+								$OUTCOME$ = flag:defeat
+							}
+							add = 1
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_variable = faith_genocided
+				}
+
+				save_scope_value_as = {
+					name = attacker_faith_reward_mult
+					value = {
+						value = scope:attacker_faith_reward_mult
+						if =  {
+							limit = {
+								$OUTCOME$ = flag:win
+							}
+							add = 1
+						}
+						if =  {
+							limit = {
+								$OUTCOME$ = flag:none
+							}
+							add = 0.5
+						}
+						if =  {
+							limit = {
+								$OUTCOME$ = flag:defeat
+							}
+							add = -1
+						}
+					}
+				}
+				save_scope_value_as = {
+					name = defender_faith_reward_mult
+					value = {
+						value = scope:defender_faith_reward_mult
+						if =  {
+							limit = {
+								$OUTCOME$ = flag:win
+							}
+							add = -1
+						}
+						if =  {
+							limit = {
+								$OUTCOME$ = flag:defeat
+							}
+							add = 1
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {
+					$OUTCOME$ = flag:win
+				}
+
+				change_title_holder = {
+					holder = scope:attacker
+					change = scope:change
+					take_baronies = yes
+				}
+			}
+		}
+	}
+
+	scope:attacker = {
+		add_prestige = {
+			value = scope:base_prestige
+			multiply = scope:attacker_culture_reward_mult
+		}
+
+		add_piety = {
+			value = scope:base_piety
+			multiply = scope:attacker_faith_reward_mult
+		}
+	}
+
+	scope:defender = {
+		if = {
+			limit = {
+				NOT = {
+					scope:defender_culture_reward_mult = 0
+				}
+			}
+			add_prestige = {
+				value = scope:base_prestige
+				multiply = scope:defender_culture_reward_mult
+			}
+		}
+
+		if = {
+			limit = {
+				NOT = {
+					scope:defender_faith_reward_mult = 0
+				}
+			}
+			add_piety = {
+				value = scope:base_piety
+				multiply = scope:defender_faith_reward_mult
+			}
+		}
+	}
+
+	if = {
+		limit = {
+			$OUTCOME$ = flag:defeat
+		}
+
+		# Allies on both sides get full prestige value for helping in the war, based on their war participation.
+		modify_allies_of_participants_fame_values_genocide = {
+			WINNER = scope:defender
+			FAME_BASE = genocide_cb_participation_prestige
+			PIETY_BASE = genocide_cb_participation_piety
+			GIVE_FAITH_REWARDS = genocide_cb_can_avenge_faith
+			GIVE_CULTURE_REWARDS = genocide_cb_can_avenge_culture
+			WINNER_ALLY_FAME_SCALE = 1
+			LOSER_ALLY_FAME_SCALE = 1
+		}
+	}
+	else = {
+		# Allies on both sides get full prestige value for helping in the war, based on their war participation.
+		modify_allies_of_participants_fame_values_genocide = {
+			WINNER = scope:attacker
+			FAME_BASE = genocide_cb_participation_prestige
+			PIETY_BASE = genocide_cb_participation_piety
+			GIVE_FAITH_REWARDS = genocide_cb_can_avenge_faith
+			GIVE_CULTURE_REWARDS = genocide_cb_can_avenge_culture
+			WINNER_ALLY_FAME_SCALE = 1
+			LOSER_ALLY_FAME_SCALE = 1
+		}
+	}
+}
+
+modify_allies_of_participants_fame_values_genocide = {
+	# Give the allies of both primary participants the appropriate type & amount of 'fame'.
+
+	if = {
+		# Religious wars award Piety to participants.
+		limit = {
+			OR = {
+				$GIVE_FAITH_REWARDS$ = yes
+				#always = yes
+			}
+		}
+		if = {
+			# Award Piety to the victorious attacker's allies.
+			limit = {
+				$WINNER$ = scope:attacker
+			}
+			add_from_contribution_attackers = {
+				piety = {
+					value = $PIETY_BASE$
+					multiply = $WINNER_ALLY_FAME_SCALE$
+				}
+				opinion = {
+					modifier = contributed_in_war
+				}
+			}
+			# Award Piety to the defeated defender's allies.
+			add_from_contribution_defenders = {
+				piety = {
+					value = $PIETY_BASE$
+					multiply = $LOSER_ALLY_FAME_SCALE$
+				}
+				opinion = {
+					modifier = contributed_in_war
+				}
+			}
+		}
+		else = {
+			# Award Piety to the victorious defender's allies.
+			add_from_contribution_defenders = {
+				piety = {
+					value = $PIETY_BASE$
+					multiply = $WINNER_ALLY_FAME_SCALE$
+				}
+				opinion = {
+					modifier = contributed_in_war
+				}
+			}
+			# Award Piety to the defeated attacker's allies.
+			add_from_contribution_attackers = {
+				piety = {
+					value = $PIETY_BASE$
+					multiply = $LOSER_ALLY_FAME_SCALE$
+				}
+				opinion = {
+					modifier = contributed_in_war
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			$GIVE_CULTURE_REWARDS$ = yes
+		}
+		# All other war types award Prestige to participants.
+		if = {
+			# Award Prestige to the victorious attacker's allies.
+			limit = {
+				$WINNER$ = scope:attacker
+			}
+			add_from_contribution_attackers = {
+				prestige = {
+					value = $FAME_BASE$
+					multiply = $WINNER_ALLY_FAME_SCALE$
+				}
+				opinion = {
+					modifier = contributed_in_war
+				}
+			}
+			# Award Prestige to the defeated defender's allies.
+			add_from_contribution_defenders = {
+				prestige = {
+					value = $FAME_BASE$
+					multiply = $LOSER_ALLY_FAME_SCALE$
+				}
+				opinion = {
+					modifier = contributed_in_war
+				}
+			}
+		}
+		else = {
+			# Award Prestige to the victorious defender's allies.
+			add_from_contribution_defenders = {
+				prestige = {
+					value = $FAME_BASE$
+					multiply = $WINNER_ALLY_FAME_SCALE$
+				}
+				opinion = {
+					modifier = contributed_in_war
+				}
+			}
+			# Award Prestige to the defeated attacker's allies.
+			add_from_contribution_attackers = {
+				prestige = {
+					value = $FAME_BASE$
+					multiply = $LOSER_ALLY_FAME_SCALE$
+				}
+				opinion = {
+					modifier = contributed_in_war
+				}
+			}
+		}
 	}
 }

@@ -6,6 +6,12 @@
 	language = language_mogu
 	martial_custom = martial_custom_male_only
 	traditions = {
+		tradition_loyal_soldiers
+		tradition_sorcerous_metallurgy
+		tradition_legalistic
+		tradition_mendicant_mystics
+		tradition_zealous_people
+		tradition_ce1_ritual_washing
 	}
 
 	name_list = name_list_jinyu
@@ -16,10 +22,7 @@
 	unit_gfx = { indian_unit_gfx }
 	
 	ethnicities = {
-		5 = caucasian_blond
-		30 = caucasian_ginger
-		35 = caucasian_brown_hair
-		30 = caucasian_dark_hair
+		100 = asian
 	}
 }
 
@@ -31,6 +34,11 @@ ankoan = {
 	language = language_mogu
 	martial_custom = martial_custom_male_only
 	traditions = {
+		tradition_warrior_culture
+		tradition_eye_for_an_eye
+		tradition_tribe_unity
+		tradition_hunters
+		tradition_reverence_for_veterans
 	}
 
 	name_list = name_list_jinyu
@@ -41,9 +49,6 @@ ankoan = {
 	unit_gfx = { indian_unit_gfx }
 	
 	ethnicities = {
-		5 = caucasian_blond
-		30 = caucasian_ginger
-		35 = caucasian_brown_hair
-		30 = caucasian_dark_hair
+		100 = asian
 	}
 }

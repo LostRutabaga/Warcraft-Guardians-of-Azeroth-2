@@ -19,6 +19,10 @@ seduce_ongoing_milestone_1 = {
 		100 = seduce_ongoing.5301 #Seducing close family - A Moment Alone
 		100 = seduce_ongoing.6041 #Spy on their preferences
 		100 = seduce_ongoing.7001 #Target is shy
+		100 = bp2_yearly.8080 #You have a ward
+
+		#Apply scheme modifiers from saved variables
+		1000 = personal_scheme_ongoing.1000 #Apply exotic wares modifier you procured while on a pilgrimage
 	}
 }
 
@@ -29,7 +33,7 @@ seduce_ongoing_milestone_2 = {
 	random_events = { # Any added events must set and remove scheme_event_active_flag to prevent simultaneous firing in MP
 		## Estimating Target's Preference
 		100 = seduce_ongoing.1001 #A Dance
-		100 = seduce_ongoing.1601 #Book Reading
+		#100 = seduce_ongoing.1601 #Book Reading
 		100 = seduce_ongoing.1701 #Jousting Day
 		## Owner Skill and Target Preference
 		100 = seduce_ongoing.2001 #Love Potion
@@ -61,7 +65,7 @@ seduce_ongoing_milestone_2 = {
 
 seduce_success = {
 	first_valid = {
-		seduce_outcome.2000 # Bedded the Pope!
+		#seduce_outcome.2000 # Bedded the Pope!
 		seduce_outcome.2307 # Seduce rival/someone you dislike a lot
 		seduce_outcome.2308 # Seduce close family member
 		seduce_outcome.2306 # Spouse seduction

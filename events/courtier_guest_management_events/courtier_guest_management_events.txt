@@ -4,6 +4,7 @@
 # 0001 - Courtier is planning to leave
 # 0102 - Courtier with claim is wanting to leave
 # 0500 - Guests leaves
+# 0999 - Maintenance - Force move to pool
 
 #GUESTS ARRIVING
 # 1001 - Guest arriving, message if they're great
@@ -142,7 +143,7 @@ courtier_guest_management.0102 = { #by Mathilda Bjarnehed
 	right_portrait = scope:courtier_claim
 	theme = crown
 	override_background = {
-		event_background = courtyard
+		reference = courtyard
 	}
 	
 	trigger = {
@@ -243,6 +244,7 @@ courtier_guest_management.0103 = {
 	hidden = yes
 
 	trigger = {
+		exists = scope:liege
 		is_courtier_of = scope:liege
 		NOT = {
 			scope:liege = {
@@ -350,6 +352,15 @@ courtier_guest_management.0500 = {
 	}
 }
 
+# Maintenance - Force move to pool
+courtier_guest_management.0999 = {
+	hidden = yes
+	
+	immediate = {
+		select_and_move_to_pool_effect = yes
+	}
+}
+
 
 
 ###################
@@ -370,7 +381,7 @@ scripted_trigger courtier_guest_management_1001_exceptional_marriage_candidate_t
 		AND = {
 			num_of_good_genetic_traits = 2
 			OR = {
-				has_trait = beauty_good_3
+				has_trait_beauty_good_trigger = yes
 				has_trait = intellect_good_3
 				has_trait = physique_good_3
 
@@ -398,7 +409,7 @@ scripted_trigger courtier_guest_management_1001_exceptional_marriage_candidate_t
 			AND = {
 				num_of_good_genetic_traits = 1
 				OR = {
-					has_trait = beauty_good_2
+					has_trait_beauty_good_trigger = yes
 					has_trait = intellect_good_2
 					has_trait = physique_good_2
 
@@ -499,7 +510,7 @@ courtier_guest_management.1001 = {
 				limit = {
 					scope:host = {
 						any_sub_realm_county = {
-							this = scope:location
+							this = scope:location.county
 						}
 					}
 				}
@@ -713,7 +724,11 @@ courtier_guest_management.1001 = {
 										}
 										desc = courtier_guest_management.1001.marriage_my_daughters.desc
 									}
-									desc = courtier_guest_management.1001.marriage_my_child.desc
+									triggered_desc = {
+										trigger = { exists = scope:marriage_child }
+										desc = courtier_guest_management.1001.marriage_my_child.desc
+									}
+									desc = courtier_guest_management.1001.marriage_my_children.desc
 								}
 							}
 						}
@@ -807,10 +822,10 @@ courtier_guest_management.2001 = {
 					limit = { # Warcraft
 					age_in_relation_to_humans_less_than_trigger = { age = 65 } 
 					}
-					override_death_effect = { DEATH_REASON = death_accident }
+					override_death_effect = { death_reason = death_accident }
 				}
 				else = {
-					override_death_effect = { DEATH_REASON = death_old_age }
+					override_death_effect = { death_reason = death_old_age }
 				}
 			}
 			else = { # Otherwise, go somewhere else.
@@ -904,7 +919,7 @@ scripted_trigger courtier_guest_management_3001_interesting_trigger = {
 		is_lowborn = no
 		has_trait = intellect_good
 		has_trait = physique_good
-		has_trait = beauty_good
+		has_trait_beauty_good_trigger = yes
 
 		# Warcraft 
 		has_trait = magic_good
@@ -964,7 +979,7 @@ courtier_guest_management.3001 = {
 							#is actually interesting... todo
 							can_start_scheme = {
 								type = seduce
-								target = root
+								target_character = root
 							}
 						}
 						weight = {
@@ -999,7 +1014,7 @@ courtier_guest_management.3001 = {
 						}
 						start_scheme = {
 							type = seduce
-							target = root
+							target_character = root
 						}
 					}
 				}
@@ -1026,7 +1041,7 @@ courtier_guest_management.3001 = {
 							}
 							can_start_scheme = {
 								type = courting
-								target = root
+								target_character = root
 							}
 						}
 						weight = {
@@ -1054,7 +1069,7 @@ courtier_guest_management.3001 = {
 						}
 						start_scheme = {
 							type = courting
-							target = root
+							target_character = root
 						}
 					}
 				}
@@ -1125,7 +1140,7 @@ courtier_guest_management.3001 = {
 							}
 
 							add_to_list = already_updated
-							set_relation_friend = scope:current_character
+							set_random_friendship_reason = { TARGET = scope:current_character }
 						}
 					}
 					# Lover
@@ -1155,10 +1170,21 @@ courtier_guest_management.3001 = {
 						trigger = {
 							is_married = no
 							is_concubine = no
+							might_cheat_on_every_partner_trigger = yes
 							NOR = {
 								has_trait = chaste
 								has_trait = celibate
 								has_sexuality = asexual
+							}
+							trigger_if = {
+								limit = {
+									is_courtier = yes
+									is_close_or_extended_family_of = liege
+								}
+								OR = {
+									has_trait = lustful
+									is_deviant_trigger = yes
+								}
 							}
 							any_relation = {
 								type = lover
@@ -1170,6 +1196,7 @@ courtier_guest_management.3001 = {
 							limit = {
 								is_married = no
 								is_concubine = no
+								might_cheat_on_every_partner_trigger = yes
 								NOR = {
 									has_trait = chaste
 									has_trait = celibate
@@ -1179,8 +1206,32 @@ courtier_guest_management.3001 = {
 									type = lover
 									count < 1
 								}
+								trigger_if = {
+									limit = {
+										is_courtier = yes
+										is_close_or_extended_family_of = liege
+										is_lowborn = no
+									}
+									scope:current_character = { is_lowborn = no }
+									OR = {
+										is_deviant_trigger = yes
+										has_trait = lustful
+										trait_compatibility = {
+											target = scope:current_character
+											value >= high_positive_trait_compatibility
+										}
+									}
+								}
 								NOT = { this = scope:current_character }
 								can_set_relation_lover_trigger = { CHARACTER = scope:current_character }
+								is_attracted_to_gender_of = scope:current_character
+								scope:current_character = { is_attracted_to_gender_of = prev }
+								age <= scope:current_character.age_plus_5
+								age >= scope:current_character.age_minus_10
+								trait_compatibility = {
+									target = scope:current_character
+									value >= low_positive_trait_compatibility
+								}
 								save_temporary_scope_as = incest_check
 								accepts_incest_with_each_other_trigger = {
 									CHARACTER_1 = scope:incest_check
@@ -1226,7 +1277,7 @@ courtier_guest_management.3001 = {
 
 							add_to_list = already_updated
 
-							set_relation_lover = scope:current_character
+							set_random_lover_reason = { TARGET = scope:current_character }
 						}
 					}
 					
@@ -1276,7 +1327,10 @@ courtier_guest_management.3001 = {
 							}
 
 							add_to_list = already_updated
-							set_relation_rival = scope:current_character
+							set_random_rivalry_reason = {
+								TARGET = scope:current_character
+								RELATION = rival
+							}
 						}
 					}
 					# Best friend
@@ -1296,7 +1350,7 @@ courtier_guest_management.3001 = {
 							}
 
 							add_to_list = already_updated
-							set_relation_best_friend = scope:current_character
+							set_relation_best_friend = { reason = best_friend_bonded_at_court copy_reason = friend target = scope:current_character involved_character = root.liege }
 						}
 					}
 					# Soulmate
@@ -1316,7 +1370,7 @@ courtier_guest_management.3001 = {
 							}
 
 							add_to_list = already_updated
-							set_relation_soulmate = scope:current_character
+							set_relation_soulmate = { reason = soulmate_love_at_court copy_reason = lover target = scope:current_character }
 						}
 					}
 					# Nemesis
@@ -1336,7 +1390,11 @@ courtier_guest_management.3001 = {
 							}
 
 							add_to_list = already_updated
-							set_relation_nemesis = scope:current_character
+							set_relation_nemesis = {
+								reason = nemesis_at_court
+								copy_reason = rival
+								target = scope:current_character
+							}
 						}
 					}
 
@@ -1355,3 +1413,74 @@ courtier_guest_management.3001 = {
 	}
 }
 
+############################
+# WANDERER INTO ADVENTURER #
+############################
+
+courtier_guest_management.4001 = {
+	hidden = yes
+	trigger = {
+		has_ep3_dlc_trigger = yes
+		is_pool_character = yes # Can cease to be in the pool between it queuing and executing
+		ai_can_valid_to_create_laamp_trigger = yes
+		is_valid_for_laampdom = yes
+		OR = {
+			has_character_flag = easteregg
+			has_trait = historical_character
+			culture = {
+					has_cultural_parameter = much_more_likely_to_be_laamps
+			}
+			AND = {
+				is_lowborn = no
+				culture = {
+					has_cultural_parameter = more_likely_to_be_laamps
+				}
+			}
+			any_claim = { tier >= tier_kingdom }
+		}
+		pool_character_is_pruneable_trigger = no # Avoid having uninteresting characters become Adventurers
+		is_ai = yes
+		NOT = {
+			any_heir_title = { count >= 1 }
+		}
+	}
+
+	immediate = {
+		random = {
+			chance = 0
+			modifier = { add = ep3_laamp_chance_score_value }
+			#Counteract bonus in above value somewhat
+			modifier = {
+				culture = { has_cultural_parameter = more_likely_to_be_laamps }
+				add = -75
+			}
+			modifier = {
+				has_trait = historical_character
+				add = 150
+			}
+			create_landless_adventurer_title_effect = {
+				REASON = flag:wanderer
+				FLAVOR_CHAR = root
+			}
+			trigger_event = ep3_laamps.0003
+			if = { # Debug AI tracking
+				limit = { debug_only = yes }
+				if = {
+					limit = { exists = global_var:ai_wanderer_laamp_count }
+					change_global_variable = {
+						name = ai_wanderer_laamp_count
+						add = 1
+					}
+				}
+				else = {
+					set_global_variable = {
+						name = ai_wanderer_laamp_count
+						value = 1
+					}
+				}
+				debug_log = "AI became adventurer due to cultural tradition"
+				debug_log_scopes = yes
+			}
+		}	
+	}
+}

@@ -7,18 +7,26 @@
 	martial_custom = martial_custom_equal
 	traditions = {
 		tradition_practiced_pirates
+		tradition_swords_for_hire
+		tradition_talent_acquisition
+		tradition_seafaring
+		tradition_battlefield_looters
+		tradition_xenophilic
 	}
 	
 	name_list = name_list_pirate_culture
 
-	coa_gfx = { tirassian_coa_gfx west_african_group_coa_gfx } 
-	building_gfx = { african_building_gfx mena_building_gfx } 
-	clothing_gfx = { creature_human_gfx african_clothing_gfx } 
-	unit_gfx = { sub_sahran_unit_gfx } 		
+	coa_gfx = { pirate_coa_gfx tirassian_coa_gfx west_african_group_coa_gfx } #pirate_coa_gfx for localization and remove error in error.log
+	building_gfx = { african_building_gfx mena_building_gfx }
+	clothing_gfx = { afr_berber_clothing_gfx turkic_clothing_gfx african_clothing_gfx creature_human_gfx }
+	unit_gfx = { iranian_unit_gfx }
 
 	ethnicities = {
-		10 = arab
-		4 = african
+		30 = arab
+		30 = african
+		20 = east_african
+		10 = indian
+		10 = south_indian
 	}
 }
 
@@ -26,7 +34,6 @@ wastewander = {
 	color = rgb { 255 239 149 }
 	
 	parents = { pirate_culture }
-
 	created = 605.1.1
 	
 	ethos = ethos_bellicose
@@ -34,19 +41,22 @@ wastewander = {
 	language = language_common
 	martial_custom = martial_custom_male_only
 	traditions = {
-		tradition_desert_ribat
+		tradition_adaptive_skirmishing
 		tradition_saharan_nomads
 		tradition_practiced_pirates
+		tradition_desert_nomads
+		tradition_battlefield_looters
 	}
 	
 	name_list = name_list_wastewander
 
-	coa_gfx = { berber_group_coa_gfx }
-	building_gfx = { berber_group_building_gfx mena_building_gfx }
-	clothing_gfx = { creature_human_gfx mena_clothing_gfx } 
-	unit_gfx = { mena_unit_gfx } 		
+	coa_gfx = { wastewander_coa_gfx iranian_group_coa_gfx berber_group_coa_gfx }
+	building_gfx = { iranian_building_gfx mena_building_gfx }
+	clothing_gfx = { dde_abbasid_clothing_gfx iranian_clothing_gfx creature_human_gfx mena_clothing_gfx }
+	unit_gfx = { mena_unit_gfx }
 
 	ethnicities = {
-		100 = arab
+		80 = arab
+		20 = mediterranean
 	}
 }

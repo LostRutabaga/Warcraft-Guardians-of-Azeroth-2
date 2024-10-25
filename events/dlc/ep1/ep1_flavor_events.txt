@@ -96,8 +96,19 @@ scripted_effect ep1_flavour_0001_marry_suitor_effect = {
 				right_icon = scope:scion_actual
 				# Calc all the bastard stuff.
 				ep1_flavour_0001_reveal_secret_child_effect = yes
-				# Scope:prospective_spouse & scope:scion_actual marry immediately.
-				scope:prospective_spouse = { marry = scope:scion_actual }
+				# Scope:prospective_spouse & scope:scion_actual marry immediately or asap through grand wedding
+				if = {
+					limit = {
+						has_ep2_dlc_trigger = yes
+					}
+					create_grand_wedding_betrothal = {
+						SPOUSE_1 = scope:prospective_spouse
+						SPOUSE_2 = scope:scion_actual
+						HOST = root
+						PROMISEE = scope:scion_parent
+					}
+				}
+				else = { scope:prospective_spouse = { marry = scope:scion_actual } }
 				# Create an alliance root & scope:scion_parent via the married couple.
 				create_alliance = {
 					target = scope:scion_parent
@@ -106,6 +117,7 @@ scripted_effect ep1_flavour_0001_marry_suitor_effect = {
 				}
 				# Scope:scion_parent steps rivalry with root.
 				progress_towards_rival_effect = {
+					REASON = rival_succeeded_force_marriage
 					CHARACTER = scope:scion_parent
 					OPINION = -50
 				}
@@ -129,6 +141,7 @@ scripted_effect ep1_flavour_0001_marry_suitor_effect = {
 				add_prestige = major_prestige_loss
 				# Scope:scion_parent steps rivalry with root, but a bit less because they still won.
 				progress_towards_rival_effect = {
+					REASON = rival_attempted_to_force_marriage
 					CHARACTER = scope:scion_parent
 					OPINION = -25
 				}
@@ -240,13 +253,14 @@ ep1_flavor.0001 = {
 		outfit_tags = { beggar_rags }
 	}
 	lower_center_portrait = scope:prospective_spouse
-	override_background = { event_background = tavern }
+	override_background = { reference = tavern }
 
 	cooldown = { years = 100 }
 
 	trigger = {
 		# Standard checks.
 		has_royal_court = yes
+		has_dlc_feature = royal_court
 		is_available_at_peace_adult = yes
 		# Is suitable/has suitable family for the marriage.
 		OR = {
@@ -432,13 +446,19 @@ ep1_flavor.0001 = {
 							scope:scion_parent = { has_trait = vengeful }
 							can_set_relation_nemesis_trigger = { CHARACTER = scope:scion_parent }
 						}
-						set_relation_nemesis = scope:scion_parent
+						set_relation_nemesis = {
+							target = scope:scion_parent
+							reason = rival_exposed_bastard
+						}
 					}
 					else_if = {
 						limit = {
 							can_set_relation_rival_trigger = { CHARACTER = scope:scion_parent }
 						}
-						set_relation_rival = scope:scion_parent
+						set_relation_rival = {
+							target = scope:scion_parent
+							reason = rival_exposed_bastard
+						}
 					}
 					else = {
 						reverse_add_opinion = {
@@ -466,6 +486,7 @@ ep1_flavor.0001 = {
 					add_prestige = major_prestige_loss
 					# Stepped rivalry with scope:scion_parent.
 					progress_towards_rival_effect = {
+						REASON = rival_attempted_to_reveal_offspring
 						CHARACTER = scope:scion_parent
 						OPINION = -25
 					}
@@ -571,7 +592,8 @@ ep1_flavor.0001 = {
 						is_married = no
 						NOT = { exists = scope:scion_revealed }
 					}
-					death = { death_reason = death_vanished }
+					# Warcraft
+					override_death_effect = { death_reason = death_vanished }
 				}
 			}
 		}
@@ -594,6 +616,7 @@ scripted_trigger ep1_flavour_0011_valid_diplomats_trigger = {
 		NOT = { this = root }
 		# Now discard any that lack royal courts or aren't in diplomatic range.
 		has_royal_court = yes
+		has_dlc_feature = royal_court
 		in_diplomatic_range = root
 		# Then any that lack a chancellor.
 		exists = cp:councillor_chancellor
@@ -645,13 +668,14 @@ ep1_flavor.0011 = {
 		animation = shame
 		outfit_tags = { no_clothes }
 	}
-	override_background = { event_background = feast }
+	override_background = { reference = feast }
 
 	cooldown = { years = 10 }
 
 	trigger = {
 		# Standard checks.
 		has_royal_court = yes
+		has_dlc_feature = royal_court
 		is_available_at_peace_adult = yes
 		# Any two valid foreign chancellors are available.
 		any_kingdom = {
@@ -714,16 +738,8 @@ ep1_flavor.0011 = {
 				}
 				## Revellers of all stripes.
 				if = {
-					limit = { has_trait = reveler_1 }
-					add = 10
-				}
-				if = {
-					limit = { has_trait = reveler_2 }
-					add = 10
-				}
-				if = {
-					limit = { has_trait = reveler_3 }
-					add = 10
+					limit = { has_trait = lifestyle_reveler }
+					add = 20
 				}
 				## Gluttons.
 				if = {
@@ -988,9 +1004,7 @@ ep1_flavor.0011 = {
 	option = {
 		name = ep1_flavor.0011.d
 		trigger = { has_trait = lifestyle_reveler }
-		trait = reveler_1
-		trait = reveler_2
-		trait = reveler_3
+		trait = lifestyle_reveler
 
 		# The diplomats are even happier.
 		ep1_flavour_0011_friendly_diplomats_effect = { OPINION = 50 }
@@ -1089,6 +1103,7 @@ scripted_trigger ep1_flavour_0021_valid_wrong_spelling_realm_trigger = {
 		NOT = { this = root }
 		# For erroring reasons, double check that their court is royal.
 		has_royal_court = yes
+		has_dlc_feature = royal_court
 		# Now ensure they speak the same court language.
 		has_same_court_language = root
 		# And that they can speak their *own* court language.
@@ -1205,6 +1220,7 @@ ep1_flavor.0021 = {
 	trigger = {
 		# Standard checks.
 		has_royal_court = yes
+		has_dlc_feature = royal_court
 		is_available_at_peace_adult = yes
 		# For flavour reasons, root must be able to speak their own court language.
 		knows_court_language_of = this
@@ -1426,7 +1442,8 @@ ep1_flavor.0021 = {
 		# Stepped friendship with the other ruler.
 		progress_towards_friend_effect = {
 			CHARACTER = scope:rival_monarch
-			OPINION = yes
+			OPINION = default_friend_opinion
+			REASON = friend_common_language
 		}
 		# And, if appropriate, a little cultural acceptance.
 		ep1_flavour_0021_apply_mutual_cultural_dislike_effect = {
@@ -1549,13 +1566,14 @@ ep1_flavor.0031 = {
 		character = scope:scholar_2
 		animation = personality_bold
 	}
-	override_background = { event_background = tavern }
+	override_background = { reference = tavern }
 
 	cooldown = { years = 5 }
 
 	trigger = {
 		# Standard checks.
 		has_royal_court = yes
+		has_dlc_feature = royal_court
 		is_available_at_peace_adult = yes
 		# Since this is a fairly scholar-specific thing, we restrict it to scholarly courts.
 		has_court_type = court_scholarly
@@ -1588,7 +1606,7 @@ ep1_flavor.0031 = {
 		name = ep1_flavor.0031.a
 
 		# Become friends with scope:scholar_1.
-		set_relation_friend = scope:scholar_1
+		set_relation_friend = { reason = friend_drinking_together target = scope:scholar_1 }
 		# Give scope:scholar_1 an inspiration.
 		scope:scholar_1 = {
 			ep1_flavour_0031_give_random_inspiration_effect = { THIS = scope:scholar_1 }
@@ -1612,7 +1630,7 @@ ep1_flavor.0031 = {
 		name = ep1_flavor.0031.b
 
 		# Become friends with scope:scholar_2.
-		set_relation_friend = scope:scholar_2
+		set_relation_friend = { reason = friend_drinking_together target = scope:scholar_1 }
 		# Give scope:scholar_2 an inspiration.
 		scope:scholar_2 = {
 			ep1_flavour_0031_give_random_inspiration_effect = { THIS = scope:scholar_2 }
@@ -1645,8 +1663,8 @@ ep1_flavor.0031 = {
 		trait = drunkard
 
 		# Become friends with *both* scholars.
-		set_relation_friend = scope:scholar_1
-		set_relation_friend = scope:scholar_2
+		set_relation_friend = { reason = friend_impressive_feat_of_alcoholism target = scope:scholar_1 }
+		set_relation_friend = { reason = friend_impressive_feat_of_alcoholism target = scope:scholar_2 }
 		# Plus, *both* get inspirations.
 		scope:scholar_1 = {
 			ep1_flavour_0031_give_random_inspiration_effect = { THIS = scope:scholar_1 }
@@ -1693,9 +1711,7 @@ ep1_flavor.0031 = {
 		stress_impact = {
 			shy = miniscule_stress_impact_loss
 			temperate = miniscule_stress_impact_loss
-			reveler_1 = minor_stress_impact_gain
-			reveler_2 = minor_stress_impact_gain
-			reveler_3 = minor_stress_impact_gain
+			lifestyle_reveler = minor_stress_impact_gain
 			drunkard = minor_stress_impact_gain
 			gregarious = minor_stress_impact_gain
 			gluttonous = minor_stress_impact_gain
@@ -1716,7 +1732,7 @@ ep1_flavor.0031 = {
 
 scripted_trigger appropriate_eunuch_trigger = {
 	is_available_ai_adult = yes
-	has_trait = eunuch
+	is_eunuch_trigger = yes
 	NOT = {
 		has_relation_rival = root
 	}
@@ -1727,19 +1743,10 @@ scripted_effect appoint_court_eunuch_effect = {
 		limit = {
 			culture = { has_cultural_parameter = can_appoint_chief_eunuch }
 		}
-		if = {
-			limit = { exists = scope:old_holder }
-			replace_court_position = {
-				recipient = scope:eunuch_target
-				holder = scope:old_holder
-				court_position = chief_eunuch_court_position
-			}
-		}
-		else = {
-			appoint_court_position = {
-				recipient = scope:eunuch_target
-				court_position = chief_eunuch_court_position
-			}
+		court_position_grant_effect = {
+			EMPLOYER = root
+			CANDIDATE = scope:eunuch_target
+			POS = chief_eunuch
 		}
 	}
 }
@@ -1751,7 +1758,7 @@ ep1_flavor.1000 = {
 	desc = ep1_flavor.1000.desc
 	theme = learning
 	override_background = {
-		event_background = sitting_room
+		reference = sitting_room
 	}
 	
 	cooldown = {
@@ -1765,7 +1772,7 @@ ep1_flavor.1000 = {
 	
 	trigger = {
 		has_ep1_dlc_trigger = yes
-		is_landed = yes
+		is_landed_or_landless_administrative = yes
 		culture = {
 			OR = {
 				has_cultural_parameter = can_castrate_prisoners
@@ -1932,7 +1939,8 @@ ep1_flavor.1000 = {
 					scope:eunuch_target = {
 						progress_towards_friend_effect = {
 							CHARACTER = root
-							OPINION = no
+							OPINION = 0
+							REASON = friend_court_position_recieved
 						}
 					}
 				}
@@ -2043,7 +2051,7 @@ ep1_flavor.1200 = {
 	
 	trigger = {
 		has_ep1_dlc_trigger = yes
-		is_landed = yes
+		is_landed_or_landless_administrative = yes
 		culture = {
 			OR = {
 				has_cultural_parameter = can_castrate_prisoners
@@ -2443,6 +2451,55 @@ scripted_effect ep1_flavor_2000_type_effect = {
 				years = 10
 			}
 		}
+		#Warcraft
+		flag:caster = {
+			add_character_modifier = {
+				modifier = ep1_2000_caster_modifier
+				years = 10
+			}
+			if = {
+				limit = {
+					culture = { culture_has_caster_maa = yes }
+				}
+				ep1_flavor_2000_culture_opinion_effect = yes
+			}
+		}
+		flag:massive_infantry = {
+			add_character_modifier = {
+				modifier = ep1_2000_massive_infantry_modifier
+				years = 10
+			}
+			if = {
+				limit = {
+					culture = { culture_has_massive_infantry_maa = yes }
+				}
+				ep1_flavor_2000_culture_opinion_effect = yes
+			}
+		}
+		flag:light_aerial = {
+			add_character_modifier = {
+				modifier = ep1_2000_light_aerial_modifier
+				years = 10
+			}
+			if = {
+				limit = {
+					culture = { culture_has_light_aerial_maa = yes }
+				}
+				ep1_flavor_2000_culture_opinion_effect = yes
+			}
+		}
+		flag:massive_aerial = {
+			add_character_modifier = {
+				modifier = ep1_2000_massive_aerial_modifier
+				years = 10
+			}
+			if = {
+				limit = {
+					culture = { culture_has_massive_aerial_maa = yes }
+				}
+				ep1_flavor_2000_culture_opinion_effect = yes
+			}
+		}
 	}
 }
 
@@ -2480,6 +2537,24 @@ ep1_flavor.2000 = {
 				trigger = { scope:maa_type_1 = flag:levies }
 				desc = ep1_flavor.2000.desc_levies
 			}
+
+			#Warcraft
+			triggered_desc = {
+				trigger = { scope:maa_type_1 = flag:levies }
+				desc = ep1_flavor.2000.desc_caster
+			}
+			triggered_desc = {
+				trigger = { scope:maa_type_1 = flag:massive_infantry }
+				desc = ep1_flavor.2000.desc_massive_infantry
+			}
+			triggered_desc = {
+				trigger = { scope:maa_type_1 = flag:light_aerial }
+				desc = ep1_flavor.2000.desc_light_aerial
+			}
+			triggered_desc = {
+				trigger = { scope:maa_type_1 = flag:massive_aerial }
+				desc = ep1_flavor.2000.desc_massive_aerial
+			}
 		}
 		desc = ep1_flavor.2000.desc_bridge
 		first_valid = {
@@ -2511,11 +2586,29 @@ ep1_flavor.2000 = {
 				trigger = { scope:maa_type_2 = flag:levies }
 				desc = ep1_flavor.2000.desc_levies
 			}
+
+			#Warcraft
+			triggered_desc = {
+				trigger = { scope:maa_type_2 = flag:levies }
+				desc = ep1_flavor.2000.desc_caster
+			}
+			triggered_desc = {
+				trigger = { scope:maa_type_2 = flag:massive_infantry }
+				desc = ep1_flavor.2000.desc_massive_infantry
+			}
+			triggered_desc = {
+				trigger = { scope:maa_type_2 = flag:light_aerial }
+				desc = ep1_flavor.2000.desc_light_aerial
+			}
+			triggered_desc = {
+				trigger = { scope:maa_type_2 = flag:massive_aerial }
+				desc = ep1_flavor.2000.desc_massive_aerial
+			}
 		}
 		desc = ep1_flavor.2000.desc_outro
 	}
 	theme = martial
-	override_background = { event_background = army_camp }
+	override_background = { reference = army_camp }
 	cooldown = { years = 10 }
 	left_portrait = {
 		character = scope:knight_scope
@@ -2529,7 +2622,8 @@ ep1_flavor.2000 = {
 	trigger = {
 		has_ep1_dlc_trigger = yes
 		has_royal_court = yes
-		is_landed = yes
+		has_dlc_feature = royal_court
+		is_landed_or_landless_administrative = yes
 		is_available_adult = yes
 		exists = cp:councillor_marshal
 		any_knight = {
@@ -2565,6 +2659,22 @@ ep1_flavor.2000 = {
 			}
 			number_maa_regiments_of_base_type = { type = elephant_cavalry value > 0 }
 			number_maa_regiments_of_base_type = { type = camel_cavalry value > 0 }
+			
+			#Warcraft
+			OR = {
+				culture = { culture_has_caster_maa = yes }
+				number_maa_regiments_of_base_type = { type = caster value > 0 }
+			}
+			OR = {
+				culture = { culture_has_massive_infantry_maa = yes }
+				number_maa_regiments_of_base_type = { type = massive_infantry value > 0 }
+			}
+			OR = {
+				culture = { culture_has_light_aerial_maa = yes }
+				culture = { culture_has_massive_aerial_maa = yes }
+				number_maa_regiments_of_base_type = { type = light_aerial value > 0 }
+				number_maa_regiments_of_base_type = { type = massive_aerial value > 0 }
+			}
 		}
 	}
 
@@ -2698,6 +2808,52 @@ ep1_flavor.2000 = {
 						}
 						ep1_flavor_2000_maa_scope_effect = { TYPE = levies }
 					}
+
+					#Warcraft
+					10 = { # caster
+						trigger = {
+							number_maa_regiments_of_base_type = { type = caster value > 0 }
+							ep1_flavor_2000_maa_scope_trigger = { TYPE = caster }
+						}
+						modifier = {
+							factor = 2
+							number_maa_regiments_of_base_type = { type = caster value > 4 }
+						}
+						ep1_flavor_2000_maa_scope_effect = { TYPE = caster }
+					}
+					10 = { # massive_infantry
+						trigger = {
+							number_maa_regiments_of_base_type = { type = massive_infantry value > 0 }
+							ep1_flavor_2000_maa_scope_trigger = { TYPE = massive_infantry }
+						}
+						modifier = {
+							factor = 2
+							number_maa_regiments_of_base_type = { type = massive_infantry value > 4 }
+						}
+						ep1_flavor_2000_maa_scope_effect = { TYPE = massive_infantry }
+					}
+					10 = { # light_aerial
+						trigger = {
+							number_maa_regiments_of_base_type = { type = light_aerial value > 0 }
+							ep1_flavor_2000_maa_scope_trigger = { TYPE = light_aerial }
+						}
+						modifier = {
+							factor = 2
+							number_maa_regiments_of_base_type = { type = light_aerial value > 4 }
+						}
+						ep1_flavor_2000_maa_scope_effect = { TYPE = light_aerial }
+					}
+					10 = { # massive_aerial
+						trigger = {
+							number_maa_regiments_of_base_type = { type = massive_aerial value > 0 }
+							ep1_flavor_2000_maa_scope_trigger = { TYPE = massive_aerial }
+						}
+						modifier = {
+							factor = 2
+							number_maa_regiments_of_base_type = { type = massive_aerial value > 4 }
+						}
+						ep1_flavor_2000_maa_scope_effect = { TYPE = massive_aerial }
+					}
 				}
 			}
 		}
@@ -2723,9 +2879,7 @@ ep1_flavor.2000 = {
 			trigger = { scope:maa_type_1 = flag:cavalry }
 			text = ep1_flavor.2000.cavalry
 		}
-		
-		# Warcraft
-		
+		# Warcraft - remove ethnic cavalry
 		name = {
 			trigger = { scope:maa_type_1 = flag:archer_cavalry }
 			text = ep1_flavor.2000.archer_cavalry
@@ -2746,10 +2900,32 @@ ep1_flavor.2000 = {
 			trigger = { scope:maa_type_1 = flag:levies }
 			text = ep1_flavor.2000.levies
 		}
+		
+		# Warcraft
+		name = {
+			trigger = { scope:maa_type_1 = flag:caster }
+			text = ep1_flavor.2000.caster
+		}
+
+		name = {
+			trigger = { scope:maa_type_1 = flag:massive_infantry }
+			text = ep1_flavor.2000.massive_infantry
+		}
+		
+		name = {
+			trigger = { scope:maa_type_1 = flag:light_aerial }
+			text = ep1_flavor.2000.light_aerial
+		}
+		name = {
+			trigger = { scope:maa_type_1 = flag:massive_aerial }
+			text = ep1_flavor.2000.massive_aerial
+		}
+
+		
 		name = {
 			trigger = {
 				scope:maa_type_1 = flag:levies
-				culture = { like_heritage_goidelic_trigger = yes }
+				culture = { like_heritage_goidelic_trigger = yes } # Warcraft
 			}
 			text = ep1_flavor.2000.levies_caid
 		}
@@ -2812,9 +2988,7 @@ ep1_flavor.2000 = {
 			trigger = { scope:maa_type_2 = flag:cavalry }
 			text = ep1_flavor.2000.cavalry
 		}
-		
-		# Warcraft
-		
+		# Warcraft - remove ethnic cavalry
 		name = { # Horse archers
 			trigger = { scope:maa_type_2 = flag:archer_cavalry }
 			text = ep1_flavor.2000.archer_cavalry
@@ -2835,10 +3009,32 @@ ep1_flavor.2000 = {
 			trigger = { scope:maa_type_2 = flag:levies }
 			text = ep1_flavor.2000.levies
 		}
+		
+		# Warcraft
+
+		name = {
+			trigger = { scope:maa_type_2 = flag:caster }
+			text = ep1_flavor.2000.caster
+		}
+
+		name = {
+			trigger = { scope:maa_type_2 = flag:massive_infantry }
+			text = ep1_flavor.2000.massive_infantry
+		}
+		
+		name = {
+			trigger = { scope:maa_type_2 = flag:light_aerial }
+			text = ep1_flavor.2000.light_aerial
+		}
+		name = {
+			trigger = { scope:maa_type_2 = flag:massive_aerial }
+			text = ep1_flavor.2000.massive_aerial
+		}
+		
 		name = { # Caid - gaelic
 			trigger = {
 				scope:maa_type_2 = flag:levies
-				culture = { like_heritage_goidelic_trigger = yes }
+				culture = { like_heritage_goidelic_trigger = yes } # Warcraft
 			}
 			text = ep1_flavor.2000.levies_caid
 		}
@@ -2889,9 +3085,7 @@ ep1_flavor.2000 = {
 			humble = medium_stress_impact_gain
 			lazy = medium_stress_impact_gain
 			greedy = major_stress_impact_gain
-			hunter_1 = medium_stress_impact_loss
-			hunter_2 = medium_stress_impact_loss
-			hunter_3 = medium_stress_impact_loss
+			lifestyle_hunter = medium_stress_impact_loss
 			athletic = minor_stress_impact_loss
 		}
 		# Effects
@@ -2937,9 +3131,7 @@ ep1_flavor.2000 = {
 			modifier = {
 				factor = 2
 				OR = {
-					has_trait = hunter_1
-					has_trait = hunter_2
-					has_trait = hunter_3
+					has_trait = lifestyle_hunter
 					has_trait = athletic
 				}
 			}
@@ -2967,9 +3159,7 @@ ep1_flavor.2000 = {
 		stress_impact = {
 			generous = medium_stress_impact_gain
 			athletic = medium_stress_impact_gain
-			hunter_1 = minor_stress_impact_gain
-			hunter_2 = medium_stress_impact_gain
-			hunter_3 = medium_stress_impact_gain
+			lifestyle_hunter = medium_stress_impact_gain
 			improvident = medium_stress_impact_gain
 			profligate = medium_stress_impact_gain
 		}
@@ -2982,9 +3172,7 @@ ep1_flavor.2000 = {
 			modifier = {
 				factor = 0.5
 				OR = {
-					has_trait = hunter_1
-					has_trait = hunter_2
-					has_trait = hunter_3
+					has_trait = lifestyle_hunter
 					has_trait = athletic
 				}
 			}
@@ -3026,13 +3214,13 @@ scripted_trigger ep1_flavor_2010_councillor_scheme_trigger = {
 	OR = { # Only 1 councillor in a plot against you
 		AND = {
 			scheme_owner = { is_in_list = ep1_2010_list }
-			any_scheme_agent = {
+			any_scheme_agent_character = {
 				count = 0
 				is_in_list = ep1_2010_list
 			}
 		}
-		any_scheme_agent = {
-			count <= 1
+		any_scheme_agent_character = {
+			count = 1
 			is_in_list = ep1_2010_list
 		}
 	}
@@ -3244,8 +3432,9 @@ ep1_flavor.2010 = {
 	
 	trigger = {
 		has_ep1_dlc_trigger = yes
-		is_landed = yes
+		is_landed_or_landless_administrative = yes
 		has_royal_court = yes
+		has_dlc_feature = royal_court
 		is_available_adult = yes
 		exists = cp:councillor_spymaster
 		cp:councillor_spymaster = { is_available_ai_adult = yes }
@@ -3272,7 +3461,7 @@ ep1_flavor.2010 = {
 			is_available_ai_adult = yes
 			can_start_scheme = {
 				type = murder
-				target = root
+				target_character = root
 			}
 		}
 	}
@@ -3351,7 +3540,7 @@ ep1_flavor.2010 = {
 			}
 			ordered_targeting_scheme = {
 				limit = { ep1_flavor_2010_councillor_scheme_trigger = yes }
-				order_by = scheme_power
+				order_by = scheme_phase_duration
 				save_scope_as = real_plot
 			}
 			random_in_list = {
@@ -3367,7 +3556,7 @@ ep1_flavor.2010 = {
 			}
 			ordered_targeting_scheme = {
 				limit = { ep1_flavor_2010_base_scheme_trigger = yes }
-				order_by = scheme_power
+				order_by = scheme_phase_duration
 				save_scope_as = real_plot
 				scheme_owner = { save_scope_as = real_plotter }
 			}
@@ -3379,7 +3568,7 @@ ep1_flavor.2010 = {
 					is_available_ai_adult = yes
 					can_start_scheme = {
 						type = murder
-						target = root
+						target_character = root
 					}
 				}
 				weight = {
@@ -3405,13 +3594,13 @@ ep1_flavor.2010 = {
 				save_scope_as = plotter
 				hidden_effect = {
 					start_scheme = {
-						target = root
+						target_character = root
 						type = murder
 					}
 				}
 				random_scheme = {
 					limit = {
-						scheme_target = root
+						scheme_target_character = root
 						scheme_type = murder
 					}
 					save_scope_as = real_plot
@@ -3428,7 +3617,7 @@ ep1_flavor.2010 = {
 		random_in_list = {
 			list = ep1_2010_list
 			limit = {
-				NOT = { this = scope:real_plot_revealer }
+				NOT = { scope:real_plot_revealer ?= this }
 			}
 			save_scope_as = fake_plot_revealer_1
 		}
@@ -3436,8 +3625,8 @@ ep1_flavor.2010 = {
 			list = ep1_2010_list
 			limit = {
 				NOR = {
-					this = scope:real_plot_revealer
-					this = scope:fake_plot_revealer_1
+					scope:real_plot_revealer ?= this
+					scope:fake_plot_revealer_1 ?= this
 				}
 			}
 			save_scope_as = fake_plot_revealer_2
@@ -3712,6 +3901,34 @@ scripted_effect ep1_flavor_2020_modifier_effect = {
 			years = 5
 		}
 	}
+	else_if = {
+		limit = { scope:$TYPE$ = flag:caster }
+		add_character_modifier = {
+			modifier = ep1_flavor_2020_caster_modifier
+			years = 5
+		}
+	}
+	else_if = {
+		limit = { scope:$TYPE$ = flag:massive_infantry }
+		add_character_modifier = {
+			modifier = ep1_flavor_2020_massive_infantry_modifier
+			years = 5
+		}
+	}
+	else_if = {
+		limit = { scope:$TYPE$ = flag:light_aerial }
+		add_character_modifier = {
+			modifier = ep1_flavor_2020_light_aerial_modifier
+			years = 5
+		}
+	}
+	else_if = {
+		limit = { scope:$TYPE$ = flag:massive_aerial }
+		add_character_modifier = {
+			modifier = ep1_flavor_2020_massive_aerial_modifier
+			years = 5
+		}
+	}
 }
 
 ep1_flavor.2020 = {
@@ -3756,6 +3973,24 @@ ep1_flavor.2020 = {
 				trigger = { scope:maa_type_1 = flag:camel_cavalry }
 				desc = ep1_flavor.2020.desc_knight_1_camel_cavalry
 			}
+	
+			#Warcraft
+			triggered_desc = {
+				trigger = { scope:maa_type_1 = flag:caster }
+				desc = ep1_flavor.2020.desc_knight_1_caster
+			}
+			triggered_desc = {
+				trigger = { scope:maa_type_1 = flag:massive_infantry }
+				desc = ep1_flavor.2020.desc_knight_1_massive_infantry
+			}
+			triggered_desc = {
+				trigger = { scope:maa_type_1 = flag:light_aerial }
+				desc = ep1_flavor.2020.desc_knight_1_light_aerial
+			}
+			triggered_desc = {
+				trigger = { scope:maa_type_1 = flag:massive_aerial }
+				desc = ep1_flavor.2020.desc_knight_1_massive_aerial
+			}
 		}
 		desc = ep1_flavor.2020.desc_bridge
 		first_valid = {
@@ -3795,10 +4030,28 @@ ep1_flavor.2020 = {
 				trigger = { scope:maa_type_2 = flag:camel_cavalry }
 				desc = ep1_flavor.2020.desc_knight_2_camel_cavalry
 			}
+
+			#Warcraft
+			triggered_desc = {
+				trigger = { scope:maa_type_2 = flag:caster }
+				desc = ep1_flavor.2020.desc_knight_2_caster
+			}
+			triggered_desc = {
+				trigger = { scope:maa_type_2 = flag:massive_infantry }
+				desc = ep1_flavor.2020.desc_knight_2_massive_infantry
+			}
+			triggered_desc = {
+				trigger = { scope:maa_type_2 = flag:light_aerial }
+				desc = ep1_flavor.2020.desc_knight_2_light_aerial
+			}
+			triggered_desc = {
+				trigger = { scope:maa_type_2 = flag:massive_aerial }
+				desc = ep1_flavor.2020.desc_knight_2_massive_aerial
+			}
 		}
 	}
 	theme = martial
-	override_background = { event_background = army_camp }
+	override_background = { reference = army_camp }
 	cooldown = { years = 10 }
 	left_portrait = {
 		character = scope:knight_1
@@ -3812,7 +4065,8 @@ ep1_flavor.2020 = {
 	trigger = {
 		has_ep1_dlc_trigger = yes
 		has_royal_court = yes
-		is_landed = yes
+		has_dlc_feature = royal_court
+		is_landed_or_landless_administrative = yes
 		is_available_adult = yes
 		number_of_maa_regiments > 0
 		calc_true_if = {
@@ -3826,6 +4080,10 @@ ep1_flavor.2020 = {
 			number_maa_regiments_of_base_type = { type = skirmishers value > 0 }
 			number_maa_regiments_of_base_type = { type = elephant_cavalry value > 0 }
 			number_maa_regiments_of_base_type = { type = camel_cavalry value > 0 }
+			number_maa_regiments_of_base_type = { type = caster value > 0 }
+			number_maa_regiments_of_base_type = { type = massive_infantry value > 0 }
+			number_maa_regiments_of_base_type = { type = light_aerial value > 0 }
+			number_maa_regiments_of_base_type = { type = massive_aerial value > 0 }
 		}
 		any_knight = {
 			count >= 2
@@ -3988,6 +4246,52 @@ ep1_flavor.2020 = {
 						ep1_2020_maa_regiment_modifier = { TYPE = camel_cavalry }
 						ep1_flavor_2020_maa_type_scope_effect = { TYPE = camel_cavalry }
 					}
+
+					#Warcraft
+					2 = { # caster
+						trigger = {
+							number_maa_regiments_of_base_type = { type = caster value > 0 }
+							NAND = {
+								exists = scope:maa_type_1
+								scope:maa_type_1 = flag:caster
+							}
+						}
+						ep1_2020_maa_regiment_modifier = { TYPE = caster }
+						ep1_flavor_2020_maa_type_scope_effect = { TYPE = caster }
+					}
+					2 = { # massive_infantry
+						trigger = {
+							number_maa_regiments_of_base_type = { type = massive_infantry value > 0 }
+							NAND = {
+								exists = scope:maa_type_1
+								scope:maa_type_1 = flag:massive_infantry
+							}
+						}
+						ep1_2020_maa_regiment_modifier = { TYPE = massive_infantry }
+						ep1_flavor_2020_maa_type_scope_effect = { TYPE = massive_infantry }
+					}
+					2 = { # light_aerial
+						trigger = {
+							number_maa_regiments_of_base_type = { type = light_aerial value > 0 }
+							NAND = {
+								exists = scope:maa_type_1
+								scope:maa_type_1 = flag:light_aerial
+							}
+						}
+						ep1_2020_maa_regiment_modifier = { TYPE = light_aerial }
+						ep1_flavor_2020_maa_type_scope_effect = { TYPE = light_aerial }
+					}
+					2 = { # massive_aerial
+						trigger = {
+							number_maa_regiments_of_base_type = { type = massive_aerial value > 0 }
+							NAND = {
+								exists = scope:maa_type_1
+								scope:maa_type_1 = flag:massive_aerial
+							}
+						}
+						ep1_2020_maa_regiment_modifier = { TYPE = massive_aerial }
+						ep1_flavor_2020_maa_type_scope_effect = { TYPE = massive_aerial }
+					}
 				}
 			}
 
@@ -4004,8 +4308,9 @@ ep1_flavor.2020 = {
 				opinion = 10
 			}
 			progress_towards_rival_effect = {
+				REASON = rival_snubbed_maa
 				CHARACTER = scope:knight_2
-				OPINION = no
+				OPINION = 0
 			}
 		}
 		scope:knight_2 = {
@@ -4053,8 +4358,9 @@ ep1_flavor.2020 = {
 				opinion = 10
 			}
 			progress_towards_rival_effect = {
+				REASON = rival_snubbed_maa
 				CHARACTER = scope:knight_1
-				OPINION = no
+				OPINION = 0
 			}
 		}
 		scope:knight_1 = {
@@ -4221,8 +4527,10 @@ scripted_trigger ep1_flavor_2040_foreign_holder_trigger = {
 		in_diplomatic_range = prev
 	}
 	has_royal_court = yes
-	is_landed = yes
+		has_dlc_feature = royal_court
+	is_landed_or_landless_administrative = yes
 	is_available_adult = yes
+	gold >= major_gold_value
 }
 
 scripted_trigger ep1_flavor_2040_artifact_trigger = {
@@ -4288,13 +4596,23 @@ scripted_effect ep1_flavor_2040_artifact_effect = {
 			}
 		}
 		else = {
-			random_county = {
+			random_independent_ruler = {
 				limit = {
-					NOT = {
-						culture = { this = scope:exotic_arms_target.culture }
+					in_diplomatic_range = root
+					any_realm_county = {
+						NOT = {
+							culture = { this = scope:exotic_arms_target.culture }
+						}
 					}
 				}
-				save_scope_as = merchant_county
+				random_realm_county = {
+					limit = {
+						NOT = {
+							culture = { this = scope:exotic_arms_target.culture }
+						}
+					}
+					save_scope_as = merchant_county
+				}
 			}
 		}
 	}
@@ -4467,7 +4785,7 @@ ep1_flavor.2040 = {
 						location = scope:exotic_arms_target.capital_province
 						actor = scope:exotic_arms_target
 						recipient = scope:foreign_merchant
-						type = given
+						type = purchased
 					}
 				}
 				set_owner = {
@@ -4476,7 +4794,7 @@ ep1_flavor.2040 = {
 						location = scope:exotic_blade_holder.capital_province
 						actor = scope:foreign_merchant
 						recipient = scope:exotic_blade_holder
-						type = given
+						type = purchased
 					}
 				}
 			}
@@ -4512,6 +4830,10 @@ ep1_flavor.2040 = {
 			ai_value_modifier = {
 				ai_greed = 2
 			}
+			modifier = {
+				factor = 0
+				gold <= major_gold_value
+			}
 		}
 	}
 
@@ -4543,8 +4865,9 @@ ep1_flavor.2041 = {
 	trigger = {
 		has_ep1_dlc_trigger = yes
 		has_royal_court = yes
+		has_dlc_feature = royal_court
 		is_ai = yes
-		is_landed = yes
+		is_landed_or_landless_administrative = yes
 		any_character_with_royal_court = { ep1_flavor_2040_foreign_holder_trigger = yes }
 	}
 
@@ -4661,15 +4984,9 @@ ep1_flavor.2070 = {
 			}
 			triggered_desc = { # Mystic
 				trigger = {
-					OR = {
-						scope:symposium_scholar = { has_trait = mystic_1 }
-						scope:symposium_scholar = { has_trait = mystic_2 }
-						scope:symposium_scholar = { has_trait = mystic_3 }
-					}
-					NOR = {
-						scope:symposium_courtier = { has_trait = mystic_1 }
-						scope:symposium_courtier = { has_trait = mystic_2 }
-						scope:symposium_courtier = { has_trait = mystic_3 }
+					scope:symposium_scholar = { has_trait = lifestyle_mystic }
+					NOT = {
+						scope:symposium_courtier = { has_trait = lifestyle_mystic }
 					}
 				}
 				desc = ep1_flavor.2070.desc.mystic
@@ -4677,12 +4994,8 @@ ep1_flavor.2070 = {
 			triggered_desc = { # Medicine
 				trigger = {
 					OR = {
-						scope:symposium_scholar = { has_trait = physician_1 }
-						scope:symposium_scholar = { has_trait = physician_2 }
-						scope:symposium_scholar = { has_trait = physician_3 }
-						scope:symposium_courtier = { has_trait = physician_1 }
-						scope:symposium_courtier = { has_trait = physician_2 }
-						scope:symposium_courtier = { has_trait = physician_3 }
+						scope:symposium_scholar = { has_trait = lifestyle_physician }
+						scope:symposium_courtier = { has_trait = lifestyle_physician }
 					}
 				}
 				desc = ep1_flavor.2070.desc.medicine
@@ -4727,7 +5040,8 @@ ep1_flavor.2070 = {
 	trigger = {
 		has_ep1_dlc_trigger = yes
 		has_royal_court = yes
-		is_landed = yes
+		has_dlc_feature = royal_court
+		is_landed_or_landless_administrative = yes
 		is_available_adult = yes
 		any_character_with_royal_court = { ep1_flavor_2070_foreign_court_trigger = yes }
 		any_vassal_or_below = { learning >= 6 }
@@ -4954,16 +5268,8 @@ ep1_flavor.2070 = {
 					scope:symposium_courtier = { is_theological_character_trigger = yes }
 				}
 				AND = {
-					OR = {
-						scope:symposium_scholar = { has_trait = mystic_1 }
-						scope:symposium_scholar = { has_trait = mystic_2 }
-						scope:symposium_scholar = { has_trait = mystic_3 }
-					}
-					NOR = {
-						has_trait = mystic_1
-						has_trait = mystic_2
-						has_trait = mystic_3
-					}
+					scope:symposium_scholar = { has_trait = lifestyle_mystic }
+					NOT = { has_trait = lifestyle_mystic }
 				}
 			}
 			has_trait = zealous
@@ -5028,7 +5334,8 @@ ep1_flavor.2060 = {
 	trigger = {
 		has_ep1_dlc_trigger = yes
 		has_royal_court = yes
-		is_landed = yes
+		has_dlc_feature = royal_court
+		is_landed_or_landless_administrative = yes
 		is_available_adult = yes
 		# Victim
 		any_pool_guest = {
@@ -5072,6 +5379,12 @@ ep1_flavor.2060 = {
 			intrigue = { min_template_low_skill max_template_decent_skill }
 			learning = { min_template_low_skill max_template_decent_skill }
 			prowess = { min_template_low_skill max_template_decent_skill }
+			
+			# Warcraft
+			after_creation = {
+				trigger_race_giving_no_gene_effect = yes
+			}
+			
 			save_scope_as = detective_scope
 		}
 		# Grocer
@@ -5101,6 +5414,12 @@ ep1_flavor.2060 = {
 			intrigue = { min_template_low_skill max_template_low_skill }
 			learning = { min_template_low_skill max_template_decent_skill }
 			prowess = { min_template_low_skill max_template_decent_skill }
+			
+			# Warcraft
+			after_creation = {
+				trigger_race_giving_no_gene_effect = yes
+			}
+			
 			save_scope_as = grocer_scope
 		}
 		scope:grocer_scope = {
@@ -5119,7 +5438,7 @@ ep1_flavor.2060 = {
 		}
 		hidden_effect = {
 			scope:victim_scope = {
-				death = {
+				override_death_killer_effect = { # Warcraft
 					death_reason = death_disappearance
 					killer = scope:grocer_scope
 				}
@@ -5184,7 +5503,7 @@ ep1_flavor.2060 = {
  					type = dungeon
 				}
 			}
-			recruit_courtier = scope:detective_scope
+			add_courtier = scope:detective_scope
 		}
 		hidden_effect = {
 			scope:grocer_scope = {
@@ -5232,12 +5551,12 @@ ep1_flavor.2060 = {
 			left_icon = scope:grocer_scope
 			right_icon = scope:detective_scope
 			scope:detective_scope = {
-				death = {
+				override_death_killer_effect = { # Warcraft
 					death_reason = death_disappearance
 					killer = root
 				}
 			}
-			recruit_courtier = scope:grocer_scope
+			add_courtier = scope:grocer_scope
 		}
 		add_secret = {
 			type = secret_murder
@@ -5300,7 +5619,7 @@ scripted_effect ep1_flavor_2030_local_dispute_scope_effect = {
 		}
 		save_scope_as = local_dispute_1
 		if = {
-			limit = { is_landed = yes }
+			limit = { is_landed_or_landless_administrative = yes }
 			capital_province.county = { save_scope_as = local_county_1 }
 		}
 		else = {
@@ -5332,7 +5651,7 @@ scripted_effect ep1_flavor_2030_local_dispute_scope_effect = {
 		}
 		save_scope_as = local_dispute_2
 		if = {
-			limit = { is_landed = yes }
+			limit = { is_landed_or_landless_administrative = yes }
 			capital_province.county = { save_scope_as = local_county_2 }
 		}
 		else = {
@@ -5486,8 +5805,8 @@ ep1_flavor.2030 = {
 				trigger = {
 					exists = scope:local_dispute_1
 					scope:local_dispute_1 = {
-						is_landed = yes
-						has_government = theocracy_government
+						is_landed_or_landless_administrative = yes
+						government_has_flag = government_is_theocracy
 					}
 				}
 				desc = ep1_flavor.2030.desc_1_bishop
@@ -5495,7 +5814,7 @@ ep1_flavor.2030 = {
 			triggered_desc = { # Baron
 				trigger = {
 					exists = scope:local_dispute_1
-					scope:local_dispute_1 = { is_landed = yes }
+					scope:local_dispute_1 = { is_landed_or_landless_administrative = yes }
 				}
 				desc = ep1_flavor.2030.desc_1_baron
 			}
@@ -5555,8 +5874,8 @@ ep1_flavor.2030 = {
 				trigger = {
 					exists = scope:local_dispute_2
 					scope:local_dispute_2 = {
-						is_landed = yes
-						has_government = theocracy_government
+						is_landed_or_landless_administrative = yes
+						government_has_flag = government_is_theocracy
 					}
 				}
 				desc = ep1_flavor.2030.desc_2_bishop
@@ -5564,7 +5883,7 @@ ep1_flavor.2030 = {
 			triggered_desc = { # Baron
 				trigger = {
 					exists = scope:local_dispute_2
-					scope:local_dispute_2 = { is_landed = yes }
+					scope:local_dispute_2 = { is_landed_or_landless_administrative = yes }
 				}
 				desc = ep1_flavor.2030.desc_2_baron
 			}
@@ -5614,7 +5933,7 @@ ep1_flavor.2030 = {
 		desc = ep1_flavor.2030.desc_outro
 	}
 	theme = stewardship
-	override_background = { event_background = market }
+	override_background = { reference = market }
 	cooldown = { years = 100 }
 	left_portrait = {
 		character = scope:local_dispute_1
@@ -5627,8 +5946,9 @@ ep1_flavor.2030 = {
 	
 	trigger = {
 		has_ep1_dlc_trigger = yes
-		is_landed = yes
+		is_landed_or_landless_administrative = yes
 		has_royal_court = yes
+		has_dlc_feature = royal_court
 		is_available_adult = yes
 		any_sub_realm_county = { count >= 3 }
 	}
@@ -5689,7 +6009,7 @@ ep1_flavor.2030 = {
 										list = dispute_characters
 										AND = {
 											exists = scope:local_dispute_temp_county
-											is_landed = yes
+											is_landed_or_landless_administrative = yes
 											primary_title.county = scope:local_dispute_temp_county
 										}
 									}
@@ -5700,7 +6020,7 @@ ep1_flavor.2030 = {
 							add = -5
 							any_in_list = {
 								list = dispute_characters
-								is_landed = yes
+								is_landed_or_landless_administrative = yes
 								has_same_government = prev
 							}
 						}
@@ -5725,7 +6045,7 @@ ep1_flavor.2030 = {
 							add = -9
 							any_in_list = {
 								list = dispute_characters
-								is_landed = no
+								is_landed_or_landless_administrative = no
 							}
 						}
 						every_sub_realm_county = { add_to_list = local_dispute_county_list }
@@ -5845,7 +6165,7 @@ ep1_flavor.2030 = {
 		send_interface_toast = {
 			title = ep1_flavor.2030.c.tt
 			left_icon = scope:local_dispute_1
-			recruit_courtier = scope:local_dispute_1
+			add_courtier = scope:local_dispute_1
 		}
 		scope:local_dispute_1 = { 
 			add_opinion = {
@@ -5882,7 +6202,7 @@ ep1_flavor.2030 = {
 		send_interface_toast = {
 			title = ep1_flavor.2030.d.tt
 			left_icon = scope:local_dispute_2
-			recruit_courtier = scope:local_dispute_2
+			add_courtier = scope:local_dispute_2
 		}
 		scope:local_dispute_2 = { 
 			add_opinion = {

@@ -23,24 +23,11 @@
 		base = 100
 		
 		###GENERAL WEIGHTS###
-		#Max: 150 (450 if marriage candidate, 300 if vassal candidate)
-		#Min: -1230
-		opinion_modifier = {
-			opinion_target = scope:host
-			multiplier = {
-				value = 1.5
-				if = {
-					limit = { guest_marriage_candidate_trigger = yes }
-					multiply = 3
-				}
-				else_if = {
-					limit = { guest_vassal_candidate_trigger = yes }
-				}
-				multiply = 2
-			}
-		}
+		
 		modifier = {
-			NOT = { culture = scope:host.culture }
+			NOT = {
+				culture = scope:host.culture
+			}
 			add = -20
 		}
 		modifier = {
@@ -249,6 +236,15 @@
 						}
 					}
 					multiply = 2
+				}
+				if = {
+					limit = {
+						prowess >= high_skill_rating
+						NOT = { culture = scope:host.culture }
+						scope:host.culture = { has_cultural_parameter = powerful_foreign_knights_find_you_attractive }
+					}
+					# Oh yeah, you're gonna get you a Cid.
+					multiply = 4
 				}
 			}
 		}
@@ -576,7 +572,7 @@
 			add = {		
 				if = {
 					limit = {
-						scope:host = { has_royal_court = yes }
+						scope:host = { has_royal_court = yes has_dlc_feature = royal_court }
 					}
 					if = {
 						limit = {
@@ -631,6 +627,7 @@
 					if = {
 						limit = {
 							has_royal_court = yes
+							has_dlc_feature = royal_court
 						}
 						if = {
 							limit = {
@@ -681,6 +678,7 @@
 						if = {
 							limit = {
 								has_royal_court = yes
+								has_dlc_feature = royal_court
 							}
 							if = {
 								limit = {
@@ -1107,28 +1105,12 @@
 				desc = guest_description.learning_start.desc
 				first_valid = {
 					triggered_desc = {
-						trigger = { has_trait = physician_1 }
+						trigger = { has_trait = lifestyle_physician }
 						desc = guest_description.learning_physician_trait_1.desc
 					}
 					triggered_desc = {
-						trigger = { has_trait = physician_2 }
-						desc = guest_description.learning_physician_trait_2.desc
-					}
-					triggered_desc = {
-						trigger = { has_trait = physician_3 }
-						desc = guest_description.learning_physician_trait_3.desc
-					}
-					triggered_desc = {
-						trigger = { has_trait = mystic_1 }
+						trigger = { has_trait = lifestyle_mystic }
 						desc = guest_description.learning_mystic_trait_1.desc
-					}
-					triggered_desc = {
-						trigger = { has_trait = mystic_2 }
-						desc = guest_description.learning_mystic_trait_2.desc
-					}
-					triggered_desc = {
-						trigger = { has_trait = mystic_3 }
-						desc = guest_description.learning_mystic_trait_3.desc
 					}
 					triggered_desc = {
 						trigger = { has_trait = lifestyle_herbalist }

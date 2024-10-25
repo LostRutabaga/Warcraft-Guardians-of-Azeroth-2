@@ -1,4 +1,6 @@
 ﻿k_kalidar = {
+	1.1.1 = {
+	}
 }
 d_darnassus = {
 	6.1.1={
@@ -23,7 +25,7 @@ c_oracle_glade = {
 	7.1.1={
 		liege=d_darnassus
 	}
-	10.7.13 = { holder = night_elf35 } #Italles[night_elf8]
+	10.7.13 = { holder = night_elf35 } #Isyiann
 }
 c_banethil = {
 	7.1.1={
@@ -53,26 +55,30 @@ c_gnarlpine = {
 	563.12.23={holder=130568} #Vareboorz[50023]
 }
 d_kalidar = {
+	1.1.1 = {
+	}
 }
 c_dolanaar = {
 	7.1.1={
 		liege=d_darnassus
 	}
-	10.4.27 = { holder = night_elf40 } #Wavath[night_elf9]
+	10.4.27 = { holder = night_elf40 } #Varonil
 }
 c_alameth = {
 	7.1.1={
 		liege=d_darnassus
 	}
-	10.4.27 = { holder = night_elf40 } #Wavath[night_elf9]
+	10.4.27 = { holder = night_elf40 } #Varonil
 }
 d_shadowglen = {
+	1.1.1 = {
+	}
 }
 c_shadowglen = {
 	7.1.1={
 		liege=d_darnassus
 	}
-	10.7.13 = { holder = night_elf35 } #Italles[night_elf8]
+	10.7.13 = { holder = night_elf35 } #Isyiann
 }
 c_starbreeze = {
 	25.1.1={holder=130500} #Bragtenc[50023]
@@ -96,5 +102,5 @@ c_lenalli = {
 	7.1.1={
 		liege=d_darnassus
 	}
-	10.7.13 = { holder = night_elf35 } #Italles[night_elf8]
+	10.7.13 = { holder = night_elf35 } #Isyiann
 }

@@ -3,10 +3,6 @@
 	exists = location
 }
 
-#Can this character drink alcohol?
-wc_can_drink_alcohol = {
-	is_humanoid_trigger = yes
-}
 can_fabricate_dynastic_claims_trigger = {
 	evil_public_religion_trigger = no # Otherwise, doesn't care about dynastic claims, just goes war
 	# # Otherwise, doesn't care about dynasty
@@ -22,10 +18,7 @@ can_be_targeted_by_dynastic_claims_trigger = {
 has_warrior_culture_or_religion_trigger = {
 	OR = {
 		culture = { has_cultural_pillar = heritage_orcish }
-		culture = culture:titanforged
-		culture = culture:frozen_giant
-		culture = culture:titanforged
-		culture = culture:storm_giant
+		culture = { has_cultural_pillar = heritage_ulduaric }
 		culture = { has_cultural_pillar = heritage_vrykulic }
 	}
 }
@@ -64,14 +57,6 @@ is_syncretic_with_faith = {
 	}
 }
 
-is_incapable_trigger = {
-	OR = {
-		has_trait = incapable
-		has_trait = in_twisting_nether
-		has_trait = in_ice_prison
-	}
-}
-
 wc_can_be_imprisoned_trigger = {
 	is_in_twisting_nether_trigger = no
 	NOT = { has_trait = in_ice_prison }
@@ -96,4 +81,28 @@ wc_can_write_poem_for_trigger = {
 }
 scaly_possible_trigger = {
 	has_trait_with_flag = mammal_class
+}
+
+tier_or_family_member_tier_equal_trigger = {
+	OR = {
+		highest_held_title_tier = $TIER$
+		any_spouse = {
+			highest_held_title_tier = $TIER$
+		}
+		any_close_family_member = {
+			highest_held_title_tier = $TIER$
+		}
+	}
+}
+
+tier_or_family_member_tier_greater_or_equal_trigger = {
+	OR = {
+		highest_held_title_tier >= $TIER$
+		any_spouse = {
+			highest_held_title_tier >= $TIER$
+		}
+		any_close_family_member = {
+			highest_held_title_tier >= $TIER$
+		}
+	}
 }

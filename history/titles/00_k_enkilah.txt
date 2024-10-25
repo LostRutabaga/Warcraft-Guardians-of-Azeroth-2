@@ -24,13 +24,13 @@ c_amber_ledge = {
 	3.1.1={
 		liege=e_blue_dragonflight
 	}
-	3.1.1={holder=62600} #Malygos[38150]
+	20.1.1={holder=62600} #Malygos[38150]
 }
 c_yokkek = {
 	3.1.1={
 		liege=e_blue_dragonflight
 	}
-	3.1.1={holder=62600} #Malygos[38150]
+	20.1.1={holder=62600} #Malygos[38150]
 }
 c_coldrock = {
 	# d_kalu_ak
@@ -113,12 +113,12 @@ d_transborea = {
 	137.09.11={holder=190310} #Urel'ant[115003]
 	200.10.15={holder=190316} #Tonako[115003]
 	252.04.17={holder=190322} #Udorb[115003]
-	289.12.15={holder=190328} #Ksannarak[115003]
+	289.12.15={holder=190328} #Ksannarok[115003]
 	332.06.13={holder=190332} #Gananott[115003]
 	347.05.06={holder=190336} #Voarn[115003]
 	388.04.01={holder=190340} #Hahanfar[115003]
 	413.11.21={holder=190342} #Del'hago[115003]
-	455.01.28={holder=190345} #Ksannarak[115003]
+	455.01.28={holder=190345} #Ksannarok[115003]
 	487.02.09={holder=190349} #Unadzhak[115003]
 	525.10.13={holder=190352} #Yovahet[115003]
 	546.12.06={holder=190354} #Ksanufar[115003]
@@ -166,12 +166,12 @@ c_taunkale = {
 	137.09.11={holder=190310} #Urel'ant[115003]
 	200.10.15={holder=190316} #Tonako[115003]
 	252.04.17={holder=190322} #Udorb[115003]
-	289.12.15={holder=190328} #Ksannarak[115003]
+	289.12.15={holder=190328} #Ksannarok[115003]
 	332.06.13={holder=190332} #Gananott[115003]
 	347.05.06={holder=190336} #Voarn[115003]
 	388.04.01={holder=190340} #Hahanfar[115003]
 	413.11.21={holder=190342} #Del'hago[115003]
-	455.01.28={holder=190345} #Ksannarak[115003]
+	455.01.28={holder=190345} #Ksannarok[115003]
 	487.02.09={holder=190349} #Unadzhak[115003]
 	525.10.13={holder=190352} #Yovahet[115003]
 	546.12.06={holder=190354} #Ksanufar[115003]
@@ -190,12 +190,12 @@ c_taima = {
 	137.09.11={holder=190310} #Urel'ant[115003]
 	200.10.15={holder=190316} #Tonako[115003]
 	252.04.17={holder=190322} #Udorb[115003]
-	289.12.15={holder=190328} #Ksannarak[115003]
+	289.12.15={holder=190328} #Ksannarok[115003]
 	332.06.13={holder=190332} #Gananott[115003]
 	347.05.06={holder=190336} #Voarn[115003]
 	388.04.01={holder=190340} #Hahanfar[115003]
 	413.11.21={holder=190342} #Del'hago[115003]
-	455.01.28={holder=190345} #Ksannarak[115003]
+	455.01.28={holder=190345} #Ksannarok[115003]
 	487.02.09={holder=190349} #Unadzhak[115003]
 	525.10.13={holder=190352} #Yovahet[115003]
 	546.12.06={holder=190354} #Ksanufar[115003]
@@ -485,6 +485,8 @@ c_frozen_reach = {
 	}
 }
 d_geyser_fields = {
+	1.1.1 = {
+	}
 }
 c_coldwall = {
 	10.1.26 = { holder = magnataur20 } #Stargreilk[114012]

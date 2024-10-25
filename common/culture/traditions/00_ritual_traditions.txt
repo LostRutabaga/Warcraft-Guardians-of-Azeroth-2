@@ -19,14 +19,14 @@ tradition_monogamous = {
 					OR = {
 						NOT = { exists = scope:replacing }
 						NOR = {
-							scope:replacing = flag:tradition_polygamous
-							scope:replacing = flag:tradition_concubines
+							scope:replacing = culture_tradition:tradition_polygamous
+							scope:replacing = culture_tradition:tradition_concubines
 						}
 					}
 				}
 				NOR = {
-					any_in_list = { list = traits this = flag:tradition_polygamous }
-					any_in_list = { list = traits this = flag:tradition_concubines }
+					culture_tradition:tradition_polygamous = { is_in_list = traits }
+					culture_tradition:tradition_concubines = { is_in_list = traits }
 				}
 			}
 		}
@@ -35,7 +35,7 @@ tradition_monogamous = {
 		custom_tooltip = {
 			text = only_one_marriage_tradition_allowed
 			NOT = { # Only blocks polygamous to avoid duplicate warnings, but is blocked by concubines
-				any_in_list = { list = traits this = flag:tradition_polygamous }
+				culture_tradition:tradition_polygamous = { is_in_list = traits }
 			}
 		}
 	}
@@ -94,14 +94,14 @@ tradition_polygamous = {
 					OR = {
 						NOT = { exists = scope:replacing }
 						NOR = {
-							scope:replacing = flag:tradition_monogamous
-						scope:replacing = flag:tradition_concubines
+							scope:replacing = culture_tradition:tradition_monogamous
+							scope:replacing = culture_tradition:tradition_concubines
 						}
 					}
 				}
 				NOR = {
-					any_in_list = { list = traits this = flag:tradition_monogamous }
-					any_in_list = { list = traits this = flag:tradition_concubines }
+					culture_tradition:tradition_monogamous = { is_in_list = traits }
+					culture_tradition:tradition_concubines = { is_in_list = traits }
 				}
 			}
 		}
@@ -110,7 +110,7 @@ tradition_polygamous = {
 		custom_tooltip = {
 			text = only_one_marriage_tradition_allowed
 			NOT = { # Only blocks concubines to avoid duplicate warnings, but is blocked by monogamous
-				any_in_list = { list = traits this = flag:tradition_concubines }
+				culture_tradition:tradition_concubines = { is_in_list = traits }
 			}
 		}
 	}
@@ -167,14 +167,14 @@ tradition_concubines = {
 					OR = {
 						NOT = { exists = scope:replacing }
 						NOR = {
-							scope:replacing = flag:tradition_monogamous
-							scope:replacing = flag:tradition_polygamous
+							scope:replacing = culture_tradition:tradition_monogamous
+							scope:replacing = culture_tradition:tradition_polygamous
 						}
 					}
 				}
 				NOR = {
-					any_in_list = { list = traits this = flag:tradition_monogamous }
-					any_in_list = { list = traits this = flag:tradition_polygamous }
+					culture_tradition:tradition_monogamous = { is_in_list = traits }
+					culture_tradition:tradition_polygamous = { is_in_list = traits }
 				}
 			}
 		}
@@ -183,7 +183,7 @@ tradition_concubines = {
 		custom_tooltip = {
 			text = only_one_marriage_tradition_allowed
 			NOT = { # Only blocks monogamous to avoid duplicate warnings, but is blocked by polygamous
-				any_in_list = { list = traits this = flag:tradition_monogamous }
+				culture_tradition:tradition_monogamous = { is_in_list = traits }
 			}
 		}
 	}
@@ -235,18 +235,15 @@ tradition_sacred_mountains = {
 
 	is_shown = {
 		NOR = {
-			like_heritage_somalian_trigger = yes
-			like_heritage_east_african_trigger = yes
+			# Warcraft
 			like_heritage_tibetan_trigger = yes
-			like_heritage_qiangic_trigger = yes
-			any_culture_county = {
-				title_province = {
-					geographical_region = world_himalaya
-				}
-			}
-			has_cultural_tradition = tradition_himalayan_settlers
+		#	like_heritage_somalian_trigger = yes
+		#	like_heritage_east_african_trigger = yes
+		#	like_heritage_tibetan_trigger = yes
+		#	like_heritage_qiangic_trigger = yes
 		}
-		scope:character = { has_government = tribal_government }
+		# scope:character = { has_government = tribal_government }
+			# End of Warcraft
 	}
 	can_pick = {
 		custom_description = {
@@ -280,7 +277,7 @@ tradition_sacred_mountains = {
 			if = {
 				limit = {
 					NOT = {
-						any_in_list = { list = traits this = flag:ethos_spiritual }
+						culture_pillar:ethos_spiritual = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -316,9 +313,17 @@ tradition_sacred_mountains = {
 		value = 100
 		if = {
 			limit = {
-				NOT = { any_in_list = { list = traits this = flag:ethos_spiritual } }
+				NOT = { culture_pillar:ethos_spiritual = { is_in_list = traits } }
 			}
 			multiply = 0.25
+		}
+		else_if = {
+			limit = {
+				scope:character ?= {
+					piety_level >= 3
+				}
+			}
+			multiply = scope:character.piety_level
 		}
 		if = {
 			limit = {
@@ -339,6 +344,20 @@ tradition_sacred_mountains = {
 			}
 			multiply = 0
 		}
+		else_if = {
+			limit = {
+				any_culture_county = {
+					percent >= 0.6
+					any_county_province = {
+						OR = {
+							terrain = mountains
+							terrain = desert_mountains
+						}
+					}
+				}
+			}
+			multiply = 2
+		}
 	}
 }
 
@@ -352,7 +371,9 @@ tradition_sacred_groves = {
 	}
 	
 	is_shown = {
-		scope:character = { has_government = tribal_government }
+		# Warcraft
+		scope:character = { religion = { is_in_family = rf_life } }
+		# End of Warcraft
 	}
 	can_pick = {
 		custom_description = {
@@ -388,7 +409,7 @@ tradition_sacred_groves = {
 			if = {
 				limit = {
 					NOT = {
-						any_in_list = { list = traits this = flag:ethos_spiritual }
+						culture_pillar:ethos_spiritual = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -425,9 +446,17 @@ tradition_sacred_groves = {
 		value = 100
 		if = {
 			limit = {
-				NOT = { any_in_list = { list = traits this = flag:ethos_spiritual } }
+				NOT = { culture_pillar:ethos_spiritual = { is_in_list = traits } }
 			}
 			multiply = 0.25
+		}
+		else_if = {
+			limit = {
+				scope:character ?= {
+					piety_level >= 3
+				}
+			}
+			multiply = scope:character.piety_level
 		}
 		if = {
 			limit = {
@@ -448,6 +477,21 @@ tradition_sacred_groves = {
 				}
 			}
 			multiply = 0
+		}
+		else_if = {
+			limit = {
+				any_culture_county = {
+					percent >= 0.6
+					any_county_province = {
+						OR = {
+							terrain = forest
+							terrain = taiga
+							terrain = jungle
+						}
+					}
+				}
+			}
+			multiply = 4
 		}
 	}
 }
@@ -492,9 +536,9 @@ tradition_culinary_art = {
 			if = {
 				limit = {
 					NOR = {
-						any_in_list = { list = traits this = flag:ethos_courtly }
-						any_in_list = { list = traits this = flag:ethos_communal }
-						any_in_list = { list = traits this = flag:ethos_spiritual }
+						culture_pillar:ethos_courtly = { is_in_list = traits }
+						culture_pillar:ethos_communal = { is_in_list = traits }
+						culture_pillar:ethos_spiritual = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -527,7 +571,7 @@ tradition_culinary_art = {
 	}
 	
 	ai_will_do = {
-		value = 100
+		value = 50
 		if = {
 			limit = {
 				NOT = {
@@ -575,9 +619,9 @@ tradition_festivities = {
 			if = {
 				limit = {
 					NOR = {
-						any_in_list = { list = traits this = flag:ethos_courtly }
-						any_in_list = { list = traits this = flag:ethos_communal }
-						any_in_list = { list = traits this = flag:ethos_stoic }
+						culture_pillar:ethos_courtly = { is_in_list = traits }
+						culture_pillar:ethos_communal = { is_in_list = traits }
+						culture_pillar:ethos_stoic = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -620,13 +664,19 @@ tradition_festivities = {
 		value = 100
 		if = {
 			limit = {
-				NOT = {
-					scope:character = {
+				# Warcraft
+				NOR = {
+					scope:character ?= {
 						has_trait = lifestyle_reveler
 					}
+					has_cultural_tradition = tradition_life_is_just_a_joke
 				}
+				# End of Warcraft
 			}
 			multiply = 0.5
+		}
+		else = {
+			multiply = 2
 		}
 	}
 }
@@ -646,7 +696,12 @@ tradition_sorcerous_metallurgy = {
 	can_pick = {
 		scope:character = {
 			faith = {
-				has_doctrine = doctrine_witchcraft_accepted
+				# Warcraft
+				OR = {
+					has_doctrine_parameter = order_magic_openly_learnable
+					any_element_magic_openly_learnable_trigger = yes
+				}
+				# End of Warcraft
 			}
 		}
 	}
@@ -658,7 +713,7 @@ tradition_sorcerous_metallurgy = {
 	}
 
 	character_modifier = {
-		prowess_per_piety_level = 1
+		prowess_per_piety_level = 2
 	}
 	
 	cost = {
@@ -671,8 +726,8 @@ tradition_sorcerous_metallurgy = {
 			if = {
 				limit = {
 					NOR = {
-						any_in_list = { list = traits this = flag:ethos_spiritual }
-						any_in_list = { list = traits this = flag:ethos_communal }
+						culture_pillar:ethos_spiritual = { is_in_list = traits }
+						culture_pillar:ethos_communal = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -680,32 +735,36 @@ tradition_sorcerous_metallurgy = {
 					desc = not_spiritual_or_communal_desc
 				}
 			}
-			if = {
-				limit = {
-					trigger_if = {
-						limit = {
-							scope:character = {
-								is_ai = no
-							}
-						}
-						NOT = {
-							any_ruler = {
-								count >= 3
-								culture = prev
-								primary_title.tier >= tier_county
-								has_trait = witch
-							}
-						}
-					}
-					trigger_else = {
-						always = no
-					}
-				}
-				add = {
-					value = tradition_unfulfilled_criteria_penalty
-					desc = three_witch_rulers_desc
-				}
-			}
+			
+			# Warcraft
+			# TODO Replace with fitting criteria
+			# if = {
+				# limit = {
+					# trigger_if = {
+						# limit = {
+							# scope:character = {
+								# is_ai = no
+							# }
+						# }
+						# NOT = {
+							# any_ruler = {
+								# count >= 3
+								# culture = prev
+								# primary_title.tier >= tier_county
+								# has_trait = witch
+							# }
+						# }
+					# }
+					# trigger_else = {
+						# always = no
+					# }
+				# }
+				# add = {
+					# value = tradition_unfulfilled_criteria_penalty
+					# desc = three_witch_rulers_desc
+				# }
+			# }
+			# End of Warcraft
 			
 			multiply = tradition_replacement_cost_if_relevant
 		}
@@ -723,6 +782,9 @@ tradition_sorcerous_metallurgy = {
 			}
 			multiply = 0.5
 		}
+		else = {
+			multiply = 8
+		}
 	}
 }
 
@@ -736,18 +798,15 @@ tradition_mystical_ancestors = {
 	}
 
 	is_shown = {
-		any_parent_culture_or_above = {
-			has_cultural_tradition = tradition_mystical_ancestors
-		}
+		# Warcraft
+		has_mystical_ancestors_trigger = yes
+		# End of Warcraft
 	}
 
-	can_pick = { #Can pick if your culture has mystical ancestors in its history
-		custom_tooltip = {
-			text = any_ancestor_culture_was_mystical
-			any_parent_culture_or_above = {
-				has_cultural_tradition = tradition_mystical_ancestors
-			}
-		}
+	can_pick = {
+		# Warcraft
+		has_mystical_ancestors_trigger = yes
+		# End of Warcraft
 	}
 	
 	parameters = {
@@ -769,7 +828,7 @@ tradition_mystical_ancestors = {
 			if = {
 				limit = {
 					NOT = {
-						any_in_list = { list = traits this = flag:ethos_spiritual }
+						culture_pillar:ethos_spiritual = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -795,9 +854,14 @@ tradition_religion_blending = {
 	}
 	
 	is_shown = {
-		NOT = {
-			any_in_list = { list = traits this = flag:tradition_steppe_tolerance }
-		}
+		
+		# Warcraft - steppe_tolerance is not adapted
+		always = yes
+		
+		#NOT = {
+		#	any_in_list = { list = traits this = flag:tradition_steppe_tolerance }
+		#}
+		# End of Warcraft 
 	}
 	can_pick = {
 		custom_tooltip = {
@@ -832,9 +896,9 @@ tradition_religion_blending = {
 			if = {
 				limit = {
 					NOR = {
-						any_in_list = { list = traits this = flag:ethos_courtly }
-						any_in_list = { list = traits this = flag:ethos_communal }
-						any_in_list = { list = traits this = flag:ethos_spiritual }
+						culture_pillar:ethos_courtly = { is_in_list = traits }
+						culture_pillar:ethos_communal = { is_in_list = traits }
+						culture_pillar:ethos_spiritual = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -907,6 +971,7 @@ tradition_religious_patronage = {
 	parameters = {
 		extra_piety_from_temple_construction = yes
 		renown_from_temple_construction = yes
+		consolidate_rule_decision = yes
 	}
 	character_modifier = {
 		monthly_piety_from_buildings_mult = 0.25
@@ -922,9 +987,9 @@ tradition_religious_patronage = {
 			if = {
 				limit = {
 					NOR = {
-						any_in_list = { list = traits this = flag:ethos_courtly }
-						any_in_list = { list = traits this = flag:ethos_communal }
-						any_in_list = { list = traits this = flag:ethos_spiritual }
+						culture_pillar:ethos_courtly = { is_in_list = traits }
+						culture_pillar:ethos_communal = { is_in_list = traits }
+						culture_pillar:ethos_spiritual = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -965,14 +1030,16 @@ tradition_religious_patronage = {
 	}
 	ai_will_do = {
 		value = 100
-		if = {
-			limit = {
-				scope:character = {
-					has_government = tribal_government
-				}
-			}
-			multiply = 0
-		}
+		# Warcraft
+		# if = {
+		#	limit = {
+		#		scope:character = {
+		#			has_government = tribal_government
+		#		}
+		#	}
+		#	multiply = 0
+		# }
+		# End of Warcraft
 	}
 }
 
@@ -1004,8 +1071,8 @@ tradition_medicinal_plants = {
 			if = {
 				limit = {
 					NOR = {
-						any_in_list = { list = traits this = flag:ethos_bureaucratic }
-						any_in_list = { list = traits this = flag:ethos_stoic }
+						culture_pillar:ethos_bureaucratic = { is_in_list = traits }
+						culture_pillar:ethos_stoic = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -1048,7 +1115,7 @@ tradition_medicinal_plants = {
 		value = 100
 		if = {
 			limit = {
-				scope:character = {
+				scope:character ?= {
 					NOT = {
 						has_trait = lifestyle_herbalist
 					}
@@ -1056,6 +1123,18 @@ tradition_medicinal_plants = {
 			}
 			multiply = 0.75
 		}
+		# Warcraft
+		if = {
+			limit = {
+				OR = {
+					has_cultural_pillar = heritage_undead
+					has_cultural_pillar = heritage_zulite
+					scope:character = { has_trait = witch }
+				}
+			}
+			multiply = 1.25
+		}
+		# End of Warcraft
 	}
 }
 
@@ -1072,7 +1151,7 @@ tradition_sacred_hunts = {
 		culture_not_pacifistic_trigger = yes
 		custom_tooltip = {
 			text = cannot_have_tradition_vegetarianism
-			NOT = { any_in_list = { list = traits this = flag:tradition_vegetarianism } }
+			NOT = { culture_tradition:tradition_vegetarianism = { is_in_list = traits } }
 		}
 	}
 	
@@ -1091,9 +1170,9 @@ tradition_sacred_hunts = {
 			if = {
 				limit = {
 					NOR = {
-						any_in_list = { list = traits this = flag:ethos_bellicose }
-						any_in_list = { list = traits this = flag:ethos_spiritual }
-						any_in_list = { list = traits this = flag:ethos_stoic }
+						culture_pillar:ethos_bellicose = { is_in_list = traits }
+						culture_pillar:ethos_spiritual = { is_in_list = traits }
+						culture_pillar:ethos_stoic = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -1137,8 +1216,8 @@ tradition_sacred_hunts = {
 		if = {
 			limit = {
 				NOR = {
-					any_in_list = { list = traits this = flag:ethos_spiritual }
-					any_in_list = { list = traits this = flag:ethos_bellicose }
+					culture_pillar:ethos_spiritual = { is_in_list = traits }
+					culture_pillar:ethos_bellicose = { is_in_list = traits }
 				}
 			}
 			multiply = 0.5
@@ -1172,7 +1251,7 @@ tradition_faith_bound = {
 			if = {
 				limit = {
 					NOT = {
-						any_in_list = { list = traits this = flag:ethos_spiritual }
+						culture_pillar:ethos_spiritual = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -1186,6 +1265,12 @@ tradition_faith_bound = {
 						limit = {
 							scope:character = {
 								is_ai = no
+							}
+							any_ruler = {
+								culture = prev
+								NOT = { THIS = scope:character }
+								faith = scope:character.faith
+								primary_title.tier >= tier_county
 							}
 						}
 						NOT = {
@@ -1204,6 +1289,18 @@ tradition_faith_bound = {
 				add = {
 					value = tradition_unfulfilled_criteria_penalty
 					desc = rulers_with_same_faith_desc
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						has_variable = defensive_traditionalist_discount
+						has_variable = aggressive_traditionalist_discount
+					}
+				}
+				add = {
+					value = traditionalist_discount
+					desc = traditionalist_discount_desc
 				}
 			}
 			
@@ -1264,7 +1361,7 @@ tradition_by_the_sword = {
 			if = {
 				limit = {
 					NOT = {
-						any_in_list = { list = traits this = flag:ethos_spiritual }
+						culture_pillar:ethos_spiritual = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -1307,11 +1404,19 @@ tradition_by_the_sword = {
 		value = 0
 		if = {
 			limit = {
-				scope:character = {
+				scope:character ?= {
 					has_trait = zealous
+					ai_has_warlike_personality = yes
+					any_neighboring_top_liege_realm_owner = {
+						count >= 2
+						primary_title.tier >= tier_kingdom
+						NOT = {
+							faith = prev.faith
+						}
+					}
 				}
 			}
-			add = 100
+			add = 1000
 		}
 	}
 }
@@ -1332,7 +1437,7 @@ tradition_language_scholars = {
 		rulers_want_to_learn_languages_of_coreligionists = yes
 	}
 	character_modifier = {
-		learn_language_scheme_power_mult = 0.25
+		learn_language_scheme_phase_duration_add = medium_scheme_phase_duration_bonus_value
 	}
 	cost = {
 		prestige = {
@@ -1344,9 +1449,9 @@ tradition_language_scholars = {
 			if = {
 				limit = {
 					NOR = {
-						any_in_list = { list = traits this = flag:ethos_spiritual }
-						any_in_list = { list = traits this = flag:ethos_bureaucratic }
-						any_in_list = { list = traits this = flag:ethos_egalitarian }
+						culture_pillar:ethos_spiritual = { is_in_list = traits }
+						culture_pillar:ethos_bureaucratic = { is_in_list = traits }
+						culture_pillar:ethos_egalitarian = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -1389,13 +1494,12 @@ tradition_runestones = {
 
 	# Runestones are available in a slightly reduced form in the base title, so we let you access this tradition regardless of whether you have FP1 or not.
 	is_shown = {
-		like_north_germanic_group_trigger = yes
-	}
-	can_pick = {
-		custom_tooltip = {
-			text = cannot_have_tradition_fp1_northern_stories
-			NOT = { any_in_list = { list = traits this = flag:tradition_fp1_northern_stories } }
-		}
+		# Warcraft
+		can_have_tradition_runestones_trigger = yes
+		has_fp1_dlc_trigger = no
+		
+		# like_north_germanic_group_trigger = yes
+		# End of Warcraft
 	}
 	
 	parameters = {
@@ -1411,18 +1515,18 @@ tradition_runestones = {
 				format = "BASE_VALUE_FORMAT"
 			}
 			# Ethos requirement.
-			if = {
-				limit = {
-					NOR = {
-						any_in_list = { list = traits this = flag:ethos_bellicose }
-						any_in_list = { list = traits this = flag:ethos_bureaucratic }
-					}
-				}
-				add = {
-					value = tradition_incompatible_ethos_penalty
-					desc = not_bellicose_or_bureaucratic_desc
-				}
-			}
+			# if = {
+			#	limit = {
+			#		NOR = {
+			#			any_in_list = { list = traits this = flag:ethos_bellicose }
+			#			any_in_list = { list = traits this = flag:ethos_bureaucratic }
+			#		}
+			#	}
+			#	add = {
+			#		value = tradition_incompatible_ethos_penalty
+			#		desc = not_bellicose_or_bureaucratic_desc
+			#	}
+			# }
 			# Poet, Arrogant, or Journaller requirement.
 			if = {
 				limit = {
@@ -1460,7 +1564,20 @@ tradition_runestones = {
 	}
 	
 	ai_will_do = {
-		value = 100
+		if = {
+			limit = {
+				any_culture_county = {
+					title_province = {
+						OR = {
+							geographical_region = world_northrend
+							geographical_region = world_broken_isles
+						}
+					}
+				}
+			}
+			add = 100
+		}
+		value = 0
 	}
 }
 
@@ -1476,7 +1593,7 @@ tradition_merciful_blindings = {
 	can_pick = {
 		custom_tooltip = {
 			text = cannot_have_tradition_byzantine_succession
-			NOT = { any_in_list = { list = traits this = flag:tradition_byzantine_succession } }
+			NOT = { culture_tradition:tradition_byzantine_succession = { is_in_list = traits } }
 		}
 	}
 	
@@ -1495,8 +1612,8 @@ tradition_merciful_blindings = {
 			if = {
 				limit = {
 					NOR = {
-						any_in_list = { list = traits this = flag:ethos_spiritual }
-						any_in_list = { list = traits this = flag:ethos_courtly }
+						culture_pillar:ethos_spiritual = { is_in_list = traits }
+						culture_pillar:ethos_courtly = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -1533,7 +1650,7 @@ tradition_merciful_blindings = {
 		value = 100
 		if = {
 			limit = { # Reduce chance of picking this if the culture has another use of prisoners already
-				any_in_list = { list = traits this = flag:tradition_talent_acquisition }
+				culture_tradition:tradition_talent_acquisition = { is_in_list = traits }
 			}
 			multiply = 0.5
 		}

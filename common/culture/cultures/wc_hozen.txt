@@ -6,11 +6,16 @@
 	language = language_hozen
 	martial_custom = martial_custom_male_only
 	traditions = {
+		tradition_jungle_warriors
+		tradition_family_entrepreneurship
+		tradition_quarrelsome
+		tradition_life_is_just_a_joke
+		tradition_might_is_right
 	}
 
 	name_list = name_list_jungle_hozen
 	
-	coa_gfx = { tibetan_group_coa_gfx }
+	coa_gfx = { hozen_coa_gfx  tibetan_group_coa_gfx }
 	building_gfx = { indian_building_gfx }
 	clothing_gfx = { creature_hozen_gfx mongol_clothing_gfx }
 	unit_gfx = { mongol_unit_gfx }
@@ -31,11 +36,16 @@ forest_hozen = {
 	language = language_hozen
 	martial_custom = martial_custom_male_only
 	traditions = {
+		tradition_forest_fighters
+		tradition_family_entrepreneurship
+		tradition_quarrelsome
+		tradition_life_is_just_a_joke
+		tradition_might_is_right
 	}
 
 	name_list = name_list_forest_hozen
 	
-	coa_gfx = { tibetan_group_coa_gfx }
+	coa_gfx = { hozen_coa_gfx  tibetan_group_coa_gfx}
 	building_gfx = { indian_building_gfx }
 	clothing_gfx = { creature_hozen_gfx mongol_clothing_gfx }
 	unit_gfx = { mongol_unit_gfx }
@@ -56,11 +66,16 @@ mountain_hozen = {
 	language = language_hozen
 	martial_custom = martial_custom_male_only
 	traditions = {
+		tradition_mountaineers
+		tradition_battlefield_looters
+		tradition_quarrelsome
+		tradition_only_the_strong
+		tradition_might_is_right	
 	}
 
 	name_list = name_list_mountain_hozen
 	
-	coa_gfx = { tibetan_group_coa_gfx }
+	coa_gfx = { hozen_coa_gfx tibetan_group_coa_gfx }
 	building_gfx = { indian_building_gfx }
 	clothing_gfx = { creature_hozen_gfx mongol_clothing_gfx }
 	unit_gfx = { mongol_unit_gfx }

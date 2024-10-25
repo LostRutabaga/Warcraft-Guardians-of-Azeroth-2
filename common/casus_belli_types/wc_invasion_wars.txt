@@ -1,5 +1,6 @@
 ﻿shatter_realm_cb = {
 	group = invasion
+	icon = dissolution_war
 	ai_only_against_neighbors = yes
 
 	allowed_for_character = {
@@ -10,21 +11,33 @@
 	# scope:attacker is the attacker
 	# scope:defender is the defender
 	allowed_against_character = {
-		scope:defender = {
-			is_independent_ruler = yes
-			
-			is_great_invader_trigger = yes
-		}
+		shatter_realm_cb_valid = yes
 	}
 	
 	cost = {
 		# No cost
+		prestige = {
+			add = {
+				value = 0
+				desc = CB_BASE_COST
+			}
+			if = {
+				limit = {
+					exists = scope:defender
+					scope:defender = { is_crisis_trigger = no }
+				}
+				add = {
+					value = 3000
+					desc = IS_NOT_CRISIS
+				}
+			}
+			
+			multiply = prestige_cost_multiply_value
+		}
 	}
 	
 	should_invalidate = {
-		scope:defender = {
-			is_great_invader_trigger = no
-		}
+		shatter_realm_cb_valid = no
 	}
 	
 	on_declaration = {
@@ -56,6 +69,11 @@
 		
 		# FP1: note the victory for future memorialisation via stele (if applicable).
 		scope:attacker = { fp1_remember_recent_conquest_victory_effect = yes }
+
+		add_legitimacy_attacker_victory_effect = yes
+
+		# EP3: note gold gained from military assistance/join war contracts and their war contribution threshold
+		laamp_as_mercenary_payout_tooltip_effect = yes
 	}
 
 	on_white_peace_desc = {
@@ -71,11 +89,15 @@
 	on_white_peace = {
 		scope:attacker = { show_pow_release_message_effect = yes }
 		
-		war_reparation_victory_effect = {
+		war_reparation_defeat_effect = {
+			GOLD = 0
 			PRESTIGE = medium_prestige_value
 		}
 		
 		add_truce_white_peace_effect = yes
+
+		# EP3: note gold gained from military assistance/join war contracts and their war contribution threshold
+		laamp_as_mercenary_payout_tooltip_effect = yes
 	}
 
 	on_defeat_desc = {
@@ -90,6 +112,9 @@
 	
 	on_defeat = {
 		scope:attacker = { show_pow_release_message_effect = yes }
+
+		#EP2 accolade glory gain for winning against higher ranked enemy
+		scope:defender = { accolade_defender_war_end_glory_gain_med_effect = yes }
 		
 		war_reparation_defeat_effect = {
 			GOLD = 3
@@ -99,7 +124,15 @@
 		# Truce
 		add_truce_attacker_defeat_effect = yes
 		
-		on_lost_aggression_war_discontent_loss = { LOSER = scope:attacker }
+		scope:attacker = {
+			save_temporary_scope_as = loser
+		}
+		on_lost_aggression_war_discontent_loss = yes
+
+		add_legitimacy_attacker_defeat_effect = yes
+
+		# EP3: note gold gained from military assistance/join war contracts and their war contribution threshold
+		laamp_as_mercenary_payout_tooltip_effect = yes
 	}
 	
 	on_primary_attacker_death = inherit

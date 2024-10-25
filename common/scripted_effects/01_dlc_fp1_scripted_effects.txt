@@ -7,6 +7,7 @@
 fp1_apply_generic_stele_bonuses_effect = {
 	add_piety = major_piety_gain
 	add_prestige = major_prestige_gain
+	add_legitimacy = medium_legitimacy_gain
 	every_vassal = {
 		limit = { fp1_can_raise_stele_trigger = yes }
 		custom = fp1_raise_runestone_vassals
@@ -142,7 +143,7 @@ fp1_tbc_death_effect = {
 		$TBC_VICTOR$ = { add_prestige = minor_prestige_gain }
 	}
 	$TBC_LOSER$ = {
-		override_death_killer_effect = { DEATH_REASON = death_duel KILLER = $TBC_VICTOR$ }
+		override_death_killer_effect = { death_reason = death_duel killer = $TBC_VICTOR$ }
 	}
 }
 
@@ -208,6 +209,10 @@ replace_with_learning_trait_effect = {
 		remove_trait = education_intrigue_4
 	}
 	else_if = {
+		limit = { has_trait = education_intrigue_5 }
+		remove_trait = education_intrigue_5
+	}
+	else_if = {
 		limit = { has_trait = education_diplomacy_1 }
 		remove_trait = education_diplomacy_1
 	}
@@ -222,6 +227,10 @@ replace_with_learning_trait_effect = {
 	else_if = {
 		limit = { has_trait = education_diplomacy_4 }
 		remove_trait = education_diplomacy_4
+	}
+	else_if = {
+		limit = { has_trait = education_diplomacy_5 }
+		remove_trait = education_diplomacy_5
 	}
 	else_if = {
 		limit = { has_trait = education_stewardship_1 }
@@ -240,6 +249,10 @@ replace_with_learning_trait_effect = {
 		remove_trait = education_stewardship_4
 	}
 	else_if = {
+		limit = { has_trait = education_stewardship_5 }
+		remove_trait = education_stewardship_5
+	}
+	else_if = {
 		limit = { has_trait = education_martial_1 }
 		remove_trait = education_martial_1
 	}
@@ -254,6 +267,10 @@ replace_with_learning_trait_effect = {
 	else_if = {
 		limit = { has_trait = education_martial_4 }
 		remove_trait = education_martial_4
+	}
+	else_if = {
+		limit = { has_trait = education_martial_5 }
+		remove_trait = education_martial_5
 	}
 	random_list = {
 		2 = { add_trait = education_learning_2 }
@@ -276,8 +293,8 @@ clean_scandinavian_adventurer_effect = {
 				limit = {
 					scope:attacker = { is_landed = yes }
 					OR = {
-						this = title:d_warsong
-						this = title:d_laughing_skull
+						this = title:k_warsong_clan
+						this = title:d_laughing_skull_clan
 					}
 				}
 				
@@ -287,7 +304,12 @@ clean_scandinavian_adventurer_effect = {
 				remove_variable = temporary_title
 				
 				# Make them tribal, force laws
-				clan_setup_effect = { clan = this }
+				scope:attacker = {
+					if = {
+						limit = { NOT = { government_has_flag = government_is_tribal } }
+						clan_setup_effect = { clan = primary_title }
+					}
+				}
 			}
 			else = {
 				save_scope_as = destroyable_title
@@ -540,7 +562,36 @@ calculate_authority_cooldown_break_effect = {
 	else_if = {
 		limit = {
 			has_variable = tribal_authority_cooldown
-			realm_law_use_crown_authority = no
+			realm_law_use_tribal_authority = yes
+		}
+		# Set it up if it doesn't exist.
+		if = {
+			limit = {
+				NOT = { has_variable = authority_cooldown_break_tally }
+			}
+			set_variable = {
+				name = authority_cooldown_break_tally
+				value = authority_cooldown_breaker_value
+			}
+			# And increment it once, since they've just taken the first use and we give no freebies.
+			change_variable = {
+				name = authority_cooldown_break_tally
+				add = authority_cooldown_breaker_value
+			}
+		}
+		# Otherwise, increment it.
+		else_if = {
+			limit = { has_variable = authority_cooldown_break_tally }
+			change_variable = {
+				name = authority_cooldown_break_tally
+				add = authority_cooldown_breaker_value
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			has_variable = imperial_bureaucracy_cooldown
+			realm_law_use_imperial_bureaucracy = yes
 		}
 		# Set it up if it doesn't exist.
 		if = {

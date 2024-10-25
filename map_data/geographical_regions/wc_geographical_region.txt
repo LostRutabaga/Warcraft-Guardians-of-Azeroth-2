@@ -5,14 +5,14 @@
 #	provinces = { }, takes province id numbers declared in /history/provinces
 #	regions = { }, a region can also include other regions, however the subregions needs to be declared before the parent region.
 #		E.g. If the region world_europe contains the region world_europe_west then world_europe_west needs to be declared as a region before (i.e. higher up in this file) world_europe.
-
+#
 ###########################################################################
 # World Regions
 #	These groups are mutually exclusive on the same tier & should cover every part of the map
 ###########################################################################
-
+#
 # Eastern Kingdoms
-world_eastern_kingdoms_kul_tiras = {
+world_eastern_kingdoms_lordaeron_kul_tiras = {
 	duchies={
 		d_tiragarde
 		d_ashvane
@@ -22,7 +22,7 @@ world_eastern_kingdoms_kul_tiras = {
 		d_tidesong
 	}
 }
-world_eastern_kingdoms_mechagon = {
+world_eastern_kingdoms_lordaeron_mechagon = {
 	duchies={
 		d_junkwatt
 	}
@@ -243,6 +243,8 @@ world_eastern_kingdoms_lordaeron = {
 		world_eastern_kingdoms_lordaeron_baradin_bay
 		world_eastern_kingdoms_lordaeron_gilnean_peninsula
 		world_eastern_kingdoms_lordaeron_alterac_mountains
+		world_eastern_kingdoms_lordaeron_kul_tiras
+		world_eastern_kingdoms_lordaeron_mechagon
 	}
 }
 world_eastern_kingdoms_quelthalas_queldanas_isle = {
@@ -283,8 +285,6 @@ world_eastern_kingdoms={
 		world_eastern_kingdoms_lordaeron
 		world_eastern_kingdoms_khaz_modan
 		world_eastern_kingdoms_quelthalas
-		world_eastern_kingdoms_kul_tiras
-		world_eastern_kingdoms_mechagon
 	}
 }
 
@@ -377,13 +377,13 @@ world_northrend_storm_peaks={
 		d_thunderfall
 		d_tuwu
 		d_zabana
-		d_eanorah
+		d_eastern_terrace
 		d_thorheim
 		d_vanglheim
 		d_nidavelir
-		d_iahienal
+		d_western_terrace
 		d_auzisih
-		d_yiovora
+		d_formation_grounds
 		d_cohe
 	}
 }
@@ -475,6 +475,34 @@ world_northrend = {
 		world_northrend_zuldrak
 		world_northrend_strand_of_ancients
 		world_northrend_hrothgars_landing
+	}
+}
+
+world_northrend_west = {
+	regions = {
+		world_northrend_borean_tundra
+		world_northrend_sholazar_basin
+		world_northrend_wintergrasp
+		world_northrend_isle_of_conquest
+	}
+}
+
+world_northrend_central = {
+	regions = {
+		world_northrend_icecrown_glacier
+		world_northrend_dragonblight
+		world_northrend_storm_peaks
+		world_northrend_crystalsong
+		world_northrend_grizzly_hills
+	}
+}
+
+world_northrend_east = {
+	regions = {
+		world_northrend_strand_of_ancients
+		world_northrend_hrothgars_landing
+		world_northrend_howling_fjord
+		world_northrend_zuldrak
 	}
 }
 
@@ -705,6 +733,8 @@ world_kalimdor_south_silithus = {
 		d_waterscar
 		d_silithid_vale
 		d_southwind
+		d_ahnqisan
+		d_ahnsenai
 	}
 }
 world_kalimdor_south_tanaris = {
@@ -982,6 +1012,66 @@ world_pandaria={
 		world_pandaria_north
 	}
 }
+world_broken_shores={
+	duchies = {
+		d_broken_shore
+		d_ancient_tomb
+		d_dead_mans_bay
+		d_faronaar
+	}
+}
+world_broken_isles_azsuna={
+	duchies = {
+		d_narthalas
+		d_grey_shoals
+		d_olivian_veil
+		d_zarkhenar
+	}
+}
+world_broken_isles_highmountain={
+	duchies = {
+		d_highmountain
+		d_highmountain_caves
+		d_marshlands
+		d_skyhorn
+		d_sylvan_falls
+		d_toroks_bluff
+	}
+}
+world_broken_isles_stormheim={
+	duchies = {
+		d_stormheim
+		d_gloomshore
+		d_hydrshal
+		d_nastrondir
+	}
+}
+world_broken_isles_suramar={
+	duchies = {
+		d_suramar
+		d_ambervale
+		d_crimson_thicket
+		d_moonguard
+	}
+}
+world_broken_isles_valsharah={
+	duchies = {
+		d_thastalah
+		d_blackrook
+		d_cenarius_grove
+		d_darkheart_thicket
+	}
+}
+world_broken_isles={
+	regions = {
+		world_broken_shores
+		world_broken_isles_azsuna
+		world_broken_isles_highmountain
+		world_broken_isles_stormheim
+		world_broken_isles_suramar
+		world_broken_isles_valsharah
+	}
+}
 
 ###########################################################################
 # Custom Regions
@@ -1011,13 +1101,23 @@ custom_oasis = {
 		world_kalimdor_south_tanaris
 	}
 }
-
-custom_arid_regions = {
+# Regions with normal or severe winters
+custom_winter = {
 	regions = {
-		custom_deserts
-		custom_drylands
+		custom_taiga
+		world_eastern_kingdoms_lordaeron
+		world_broken_isles
 	}
-
+}
+# Regions with severe winters or/and dominated by taiga
+custom_taiga = {
+	regions = {
+		world_eastern_kingdoms_khaz_modan
+		world_northrend
+		world_pandaria_kun_lai_summit
+		world_kalimdor_north_hyjal
+		world_kalimdor_north_winterspring
+	}
 }
 
 custom_south_seas_except_deserts = {
@@ -1070,6 +1170,15 @@ custom_dense_forests = {
 	}
 }
 
+custom_foggy = { 
+	regions = { 
+		world_eastern_kingdoms_lordaeron_western_lordaeron
+		world_eastern_kingdoms_lordaeron_kul_tiras
+		world_eastern_kingdoms_lordaeron_gilnean_peninsula
+		world_kalimdor_north_darkshore
+	}
+}
+
 custom_kaldorei_empire = {
 	regions = {
 		world_kalimdor_north_ashenvale
@@ -1077,12 +1186,14 @@ custom_kaldorei_empire = {
 		world_kalimdor_south_feralas
 		world_kalimdor_south_feralas_isles
 		world_kalimdor_north_hyjal
+		world_kalimdor_north_darkshore
+		world_kalimdor_north_pinkwood
 	}
 }
 
 custom_sea_locked = {
 	regions = {
-		world_eastern_kingdoms_kul_tiras
+		world_eastern_kingdoms_lordaeron_kul_tiras
 		world_eastern_kingdoms_azeroth_stranglethorn
 		world_eastern_kingdoms_lordaeron_baradin_bay
 		world_northrend_howling_fjord
@@ -1101,26 +1212,6 @@ custom_kalimdor_settling = {
 	}
 }
 
-custom_frigid_regions = {
-	regions = {
-		world_eastern_kingdoms_lordaeron_alterac_mountains
-		world_eastern_kingdoms_khaz_modan_dun_morogh
-		world_northrend_borean_tundra
-		world_northrend_crystalsong
-		world_northrend_dragonblight
-		world_northrend_icecrown_glacier
-		world_northrend_sholazar_basin
-		world_northrend_storm_peaks
-	}
-}
-
-custom_guerilla_regions = {
-	regions = {
-		custom_dense_forests
-		custom_jungles
-	}
-}
-
 custom_kyparite_regions = {
 	regions = {
 		world_pandaria_townlong_steppes
@@ -1133,7 +1224,25 @@ custom_draenor_raiding_region = {
 		world_eastern_kingdoms_azeroth
 		world_eastern_kingdoms_lordaeron
 		world_eastern_kingdoms_khaz_modan
-		world_eastern_kingdoms_kul_tiras
+	}
+}
+
+custom_islands_region = { 
+	# TODO:  Flesh this out before 1.12.x patch release
+
+	duchies = {
+		d_tol_barad
+		d_channel_islands
+		d_darkmoon_island
+		d_zuldare
+		d_isle_of_conquest
+	}
+
+	regions = {
+		world_south_seas_darkspear_islands
+		world_kalimdor_south_feralas_isles
+		world_kalimdor_north_veiled_isles
+		world_south_seas_kezan_isles
 	}
 }
 
@@ -1200,9 +1309,25 @@ special_snow_desert = {
 	}
 }
 
+special_duchies_temperate_climate = {
+	duchies = {
+		d_blackrook d_cenarius_grove d_darkheart_thicket d_stormheim d_hydrshal d_shobassa d_hildor d_lohdi d_redridge_mountains d_stonewatch d_shanze d_xuen d_binan d_broketooth d_firebough d_hakshix d_kota d_shil_qem d_muskpaw
+	}
+}
+special_duchies_tropical_climate = {
+	duchies = {
+		d_thastalah d_ramkahen d_akhenet d_sakhet d_kubitis d_asova d_stonard d_bogpaddle d_swamp_of_sorrows d_tainted_forest d_diremoor d_ihgaluk d_lei_shen d_zouchin d_jehsed d_korune d_nalaksha d_snowblossom
+	}
+}
 ##############################
 # Men At Arms
 ###############################
+
+world_innovation_arachnathid = {
+	regions = {
+		world_northrend_icecrown_glacier
+	}
+}
 
 world_innovation_elephants = {
 	regions = {
@@ -1213,6 +1338,12 @@ world_innovation_camels = {
 	regions = {
 		world_kalimdor_south_uldum
 		world_kalimdor_south_tanaris
+		
+	}
+}
+world_innovation_dragonhawks = {
+	regions = {
+		world_eastern_kingdoms_quelthalas_quelthalas
 	}
 }
 world_innovation_gryphons = {
@@ -1220,7 +1351,7 @@ world_innovation_gryphons = {
 		world_eastern_kingdoms_azeroth_azeroth
 		world_eastern_kingdoms_lordaeron_the_hinterlands
 		world_eastern_kingdoms_khaz_modan_dun_morogh
-		world_eastern_kingdoms_kul_tiras
+		world_eastern_kingdoms_lordaeron_kul_tiras
 	}
 	duchies = {
 		#Grizzly Hills Humans
@@ -1239,6 +1370,14 @@ world_innovation_kodos = {
 		world_kalimdor_central_mulgore
 	}
 }
+world_innovation_mushan = {
+	regions = {
+		world_pandaria_dread_wastes
+		world_pandaria_kun_lai_summit
+		world_pandaria_townlong_steppes
+		world_pandaria_valley_of_the_four_winds
+	}
+}
 world_innovation_wyverns = {
 	regions = {
 		world_kalimdor_central_barrens
@@ -1249,111 +1388,20 @@ world_innovation_wyverns = {
 	}
 }
 
-#####################
-# The Northern Lords Regions
-#####################
+##############################
+# building regions
+###############################
 
-dlc_fp1_region_western_scandinavia_pool = {
+world_titan_forge_buildable_regions = {
 	regions = {
-		world_northrend_storm_peaks
-		world_northrend_howling_fjord
+		world_kalimdor_south_uldum
+		world_eastern_kingdoms_lordaeron_mechagon
 	}
-}
-
-dlc_fp1_region_eastern_scandinavia_pool = {
-	regions = {
-		world_northrend_icecrown_glacier
-	}
-}
-
-dlc_fp1_region_core_mainland_scandinavia = {
-	regions = {
-		dlc_fp1_region_western_scandinavia_pool
-		dlc_fp1_region_eastern_scandinavia_pool
-	}
-}
-
-dlc_fp1_region_mysterious_stranger_locations = {
-	regions = {
-		world_northrend
-	}
-}
-
-###########################################################################
-# Graphical Regions
-###########################################################################
-
-graphical_western = {
-	graphical = yes
-	color = { 255 0 0 }
-	regions = {
-		world_eastern_kingdoms_kul_tiras
-		world_eastern_kingdoms_mechagon
-		world_eastern_kingdoms_khaz_modan
-		world_eastern_kingdoms_lordaeron
-		world_eastern_kingdoms_quelthalas
-		
-		world_northrend_borean_tundra
-		world_northrend_icecrown_glacier
-		world_northrend_isle_of_conquest
-		world_northrend_dragonblight
-		world_northrend_storm_peaks
-		world_northrend_crystalsong
-		world_northrend_grizzly_hills
-		world_northrend_howling_fjord
-		world_northrend_wintergrasp
-		world_northrend_zuldrak
-		world_northrend_strand_of_ancients
-		world_northrend_hrothgars_landing
-		
-		world_kalimdor_north_ashenvale
-		world_kalimdor_north_darkshore
-		world_kalimdor_north_pinkwood
-		world_kalimdor_north_azshara
-		world_kalimdor_north_hyjal
-		world_kalimdor_north_winterspring
-		world_kalimdor_north_veiled_isles
-		world_kalimdor_north_kalidar
-		
-		world_south_seas_kezan
-	}
-}
-
-graphical_mena = {
-	graphical = yes
-	color = { 255 255 0 }
-	regions = {
-		custom_deserts
-	}
-}
-
-graphical_india = {
-	graphical = yes
-	color = { 0 255 0 }
-	regions = {
-		custom_jungles_except_pandaria
-		world_pandaria
-	}
-}
-
-graphical_mediterranean = {
-	graphical = yes
-	color = { 0 0 255 }
-	regions = {
-		world_eastern_kingdoms_azeroth_azeroth
-		world_eastern_kingdoms_azeroth_redridge_mountains
-	}
-}
-
-graphical_steppe = {
-	graphical = yes
-	color = { 0 255 255 }
-	regions = {
-		world_kalimdor_central_durotar
-		world_kalimdor_central_barrens
-		world_kalimdor_central_dustwallow
-		world_kalimdor_central_mulgore
-		world_kalimdor_central_stonetalon
-		world_kalimdor_central_desolace
+	duchies = {
+		d_ulduar
+		d_formation_grounds
+		d_auzisih
+		d_cohe
+		d_mogushan
 	}
 }

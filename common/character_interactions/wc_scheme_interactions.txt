@@ -4,7 +4,7 @@ start_plague_interaction = {
 	is_highlighted = {
 		always = yes
 	}
-	icon = "gfx/interface/icons/character_interactions/declare_war_interaction.dds"
+	icon = death_disease
 
 	send_name = start_plague_interaction
 
@@ -41,7 +41,7 @@ start_plague_interaction = {
 			
 			can_start_scheme = {
 				type = plague
-				target = scope:recipient
+				target_character = scope:recipient
 			}
 		}
 	}

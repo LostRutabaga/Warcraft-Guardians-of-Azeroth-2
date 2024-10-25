@@ -1,12 +1,16 @@
 ﻿de_jure_cb = {
+	icon = de_jure_cb
 	group = de_jure
 	should_check_for_interface_availability = no # Covered by the county dejure cb
 
 	allowed_for_character = {
 		scope:attacker = {
 			culture = {
-				has_innovation = innovation_rightful_ownership
+				has_innovation = innovation_divine_right
 			}
+		}
+		NOT = {
+			government_has_flag = government_is_landless_adventurer
 		}
 	}
 	
@@ -45,41 +49,7 @@
 	cost = {
 		piety = {
 			value = 0
-			if = { # Attacking your HoF is impious
-				limit = {
-					exists = scope:attacker.faith.religious_head
-					scope:attacker.faith.religious_head = scope:defender
-				}
-				if = {
-					limit = {
-						scope:attacker.faith = {
-							has_doctrine = doctrine_spiritual_head
-						}
-					}
-					add = {
-						value = massive_piety_value
-						desc = CB_ATTACKER_HOF
-					}
-				}
-				else = {
-					add = {
-						value = medium_piety_value
-						desc = CB_ATTACKER_HOF
-					}
-				}
-			}
-			if = {
-				limit = {
-					scope:attacker.faith = scope:defender.faith
-					scope:defender = {
-						has_government = theocracy_government
-					}
-				}
-				add = {
-					value = medium_piety_value
-					desc = CB_ATTACKER_THEOCRACY
-				}
-			}
+			add = common_cb_impious_piety_cost
 		}
 		prestige = {
 			value = 0
@@ -96,84 +66,7 @@
 				desc = CB_CLAIM_COST_TARGET_TITLES
 			}
 
-			#Innovation Prestige Discounts
-			if = {
-				limit = { innovation_prestige_trigger = yes }
-				multiply = {
-					value = innovation_prestige_value
-					desc = CB_ATTACKER_INNOVATIONS
-				}
-			}
-
-			# Bellum Justum Perk
-			if = {
-				limit = {
-					scope:attacker = {
-						has_perk = bellum_justum_perk
-					}
-				}
-				multiply = {
-					add = bellum_justum_discount_percentage
-					divide = 100
-					desc = CB_ATTACKER_BELLUM_JUSTUM
-				}
-			}
-
-			# Dynasty Warfare Perk
-			if = {
-				limit = {
-					scope:attacker = {
-						has_dynasty = yes
-						dynasty = {
-							has_dynasty_perk = warfare_legacy_2
-						}
-					}
-				}
-				multiply = {
-					value = warfare_legacy_2_discount
-					desc = CB_ATTACKER_DYNASTY_WARFARE
-				}
-			}
-
-			# Culture
-			if = {
-				limit = {
-					scope:attacker = {
-						culture = {
-							has_cultural_parameter = cheaper_cbs
-						}
-					}
-				}
-				multiply = {
-					value = 0.8
-					desc = "CB_ATTACKER_CULTURE"
-				}
-			}
-
-			# Vassal contract in-realm cost reduction
-			if = {
-				limit = {
-					scope:attacker = {
-						is_independent_ruler = no
-						vassal_contract_has_flag = vassal_contract_war_override
-						liege = scope:defender.liege
-					}
-				}
-				multiply = {
-					value = war_declaration_rights_allowed_cost_reduction
-					desc = "CB_ATTACKER_VASSAL_CONTRACT"
-				}
-			}
-			
-			if = {
-				limit = {
-					has_game_rule = no_cost_casus_belli_costs
-				}
-				multiply = {
-					value = 0
-					desc = CB_GAME_RULE_NO_COST
-				}
-			}
+			multiply = common_cb_prestige_cost_multiplier
 		}
 	}
 
@@ -207,6 +100,13 @@
 	
 	on_victory = {
 		scope:attacker = { show_pow_release_message_effect = yes }
+		
+		# Legitimacy
+		add_legitimacy_attacker_victory_effect = yes
+
+		#EP2 accolade glory gain for winning against higher ranked enemy
+		scope:attacker = { accolade_attacker_war_end_glory_gain_med_effect = yes }
+
 		every_in_list = {
 			list = target_titles
 			de_jure_liege.holder = { save_scope_as = temp_de_jure_liege }
@@ -244,6 +144,9 @@
 
 		# FP1: note the victory for future memorialisation via stele (if applicable).
 		scope:attacker = { fp1_remember_recent_conquest_victory_effect = yes }
+
+		# EP3: note gold gained from military assistance/join war contracts and their war contribution threshold
+		laamp_as_mercenary_payout_tooltip_effect = yes
 	}
 
 	on_white_peace_desc = {
@@ -259,6 +162,9 @@
 	
 	on_white_peace = {
 		scope:attacker = { show_pow_release_message_effect = yes }
+
+		#EP2 accolade glory gain for doing ok against higher ranked enemy
+		scope:defender = { accolade_defender_war_end_glory_gain_low_effect = yes }
 
 		# Create an 'helper' de jure CB which we won't execute, but can use to determine how much Prestige should be given to war participants.
 		setup_de_jure_cb = {
@@ -295,6 +201,9 @@
 		
 		# Truce
 		add_truce_white_peace_effect = yes
+
+		# EP3: note gold gained from military assistance/join war contracts and their war contribution threshold
+		laamp_as_mercenary_payout_tooltip_effect = yes
 	}
 
 	on_defeat_desc = {
@@ -315,6 +224,13 @@
 	
 	on_defeat = {
 		scope:attacker = { show_pow_release_message_effect = yes }
+		
+		# Legitimacy
+		add_legitimacy_attacker_defeat_effect = yes
+
+		#EP2 accolade glory gain for winning against higher ranked enemy
+		scope:defender = { accolade_defender_war_end_glory_gain_med_effect = yes }
+
 		# Attacker must pay the defender war reparations.
 		scope:attacker = {
 			pay_short_term_gold_reparations_effect = {
@@ -349,6 +265,9 @@
 			save_temporary_scope_as = loser
 		}
 		on_lost_aggression_war_discontent_loss = yes
+
+		# EP3: note gold gained from military assistance/join war contracts and their war contribution threshold
+		laamp_as_mercenary_payout_tooltip_effect = yes
 	}
 	
 	on_primary_attacker_death = inherit
@@ -366,10 +285,14 @@
 	
 	attacker_wargoal_percentage = 0.8
 	
+	max_defender_score_from_occupation = 150
+	max_attacker_score_from_occupation = 150
+	
 	max_ai_diplo_distance_to_title = 500
 }
 
 individual_county_de_jure_cb = {
+	icon = individual_county_de_jure_cb
 	group = de_jure
 	
 	combine_into_one = yes
@@ -460,41 +383,7 @@ individual_county_de_jure_cb = {
 	cost = {
 		piety = {
 			value = 0
-			if = { # Attacking your HoF is impious
-				limit = {
-					exists = scope:attacker.faith.religious_head
-					scope:attacker.faith.religious_head = scope:defender
-				}
-				if = {
-					limit = {
-						scope:attacker.faith = {
-							has_doctrine = doctrine_spiritual_head
-						}
-					}
-					add = {
-						value = massive_piety_value
-						desc = CB_ATTACKER_HOF
-					}
-				}
-				else = {
-					add = {
-						value = medium_piety_value
-						desc = CB_ATTACKER_HOF
-					}
-				}
-			}
-			if = {
-				limit = {
-					scope:attacker.faith = scope:defender.faith
-					scope:defender = {
-						has_government = theocracy_government
-					}
-				}
-				add = {
-					value = medium_piety_value
-					desc = CB_ATTACKER_THEOCRACY
-				}
-			}
+			add = common_cb_impious_piety_cost
 		}
 		prestige = {
 			# scale base value based on number of counties x 100, in this case 1
@@ -503,84 +392,7 @@ individual_county_de_jure_cb = {
 				desc = CB_CLAIM_COST_TARGET_TITLES
 			}
 
-			#Innovation Prestige Discounts
-			if = {
-				limit = { innovation_prestige_trigger = yes }
-				multiply = {
-					value = innovation_prestige_value
-					desc = CB_ATTACKER_INNOVATIONS
-				}
-			}
-
-			# Bellum Justum Perk
-			if = {
-				limit = {
-					scope:attacker = {
-						has_perk = bellum_justum_perk
-					}
-				}
-				multiply = {
-					add = bellum_justum_discount_percentage
-					divide = 100
-					desc = CB_ATTACKER_BELLUM_JUSTUM
-				}
-			}
-
-			# Dynasty Warfare Perk
-			if = {
-				limit = {
-					scope:attacker = {
-						has_dynasty = yes
-						dynasty = {
-							has_dynasty_perk = warfare_legacy_2
-						}
-					}
-				}
-				multiply = {
-					value = warfare_legacy_2_discount
-					desc = CB_ATTACKER_DYNASTY_WARFARE
-				}
-			}
-
-			# Culture
-			if = {
-				limit = {
-					scope:attacker = {
-						culture = {
-							has_cultural_parameter = cheaper_cbs
-						}
-					}
-				}
-				multiply = {
-					value = 0.8
-					desc = "CB_ATTACKER_CULTURE"
-				}
-			}
-
-			# Vassal contract in-realm cost reduction
-			if = {
-				limit = {
-					scope:attacker = {
-						is_independent_ruler = no
-						vassal_contract_has_flag = vassal_contract_war_override
-						liege = scope:defender.liege
-					}
-				}
-				multiply = {
-					value = war_declaration_rights_allowed_cost_reduction
-					desc = "CB_ATTACKER_VASSAL_CONTRACT"
-				}
-			}
-			
-			if = {
-				limit = {
-					has_game_rule = no_cost_casus_belli_costs
-				}
-				multiply = {
-					value = 0
-					desc = CB_GAME_RULE_NO_COST
-				}
-			}
+			multiply = common_cb_prestige_cost_multiplier
 		}
 	}
 
@@ -602,6 +414,13 @@ individual_county_de_jure_cb = {
 	
 	on_victory = {
 		scope:attacker = { show_pow_release_message_effect = yes }
+		
+		# Legitimacy
+		add_legitimacy_attacker_victory_effect = yes
+
+		#EP2 accolade glory gain for winnning against higher ranked enemy
+		scope:attacker = { accolade_attacker_war_end_glory_gain_low_effect = yes }
+
 		every_in_list = {
 			list = target_titles
 			if = {
@@ -649,6 +468,9 @@ individual_county_de_jure_cb = {
 
 		# FP1: note the victory for future memorialisation via stele (if applicable).
 		scope:attacker = { fp1_remember_recent_conquest_victory_effect = yes }
+
+		# EP3: note gold gained from military assistance/join war contracts and their war contribution threshold
+		laamp_as_mercenary_payout_tooltip_effect = yes
 	}
 
 	on_white_peace_desc = {
@@ -695,6 +517,9 @@ individual_county_de_jure_cb = {
 		
 		# Truce
 		add_truce_white_peace_effect = yes
+
+		# EP3: note gold gained from military assistance/join war contracts and their war contribution threshold
+		laamp_as_mercenary_payout_tooltip_effect = yes
 	}
 
 	on_defeat_desc = {
@@ -715,6 +540,13 @@ individual_county_de_jure_cb = {
 	
 	on_defeat = {
 		scope:attacker = { show_pow_release_message_effect = yes }
+		
+		# Legitimacy
+		add_legitimacy_attacker_defeat_effect = yes
+
+		#EP2 accolade glory gain for winning against higher ranked enemy
+		scope:defender = { accolade_defender_war_end_glory_gain_low_effect = yes }
+
 		# Attacker must pay the defender war reparations.
 		scope:attacker = {
 			pay_short_term_gold_reparations_effect = {
@@ -752,6 +584,9 @@ individual_county_de_jure_cb = {
 			save_temporary_scope_as = loser
 		}
 		on_lost_aggression_war_discontent_loss = yes
+
+		# EP3: note gold gained from military assistance/join war contracts and their war contribution threshold
+		laamp_as_mercenary_payout_tooltip_effect = yes
 	}
 	
 	on_primary_attacker_death = inherit
@@ -770,10 +605,14 @@ individual_county_de_jure_cb = {
 	
 	attacker_wargoal_percentage = 0.8
 	
+	max_defender_score_from_occupation = 150
+	max_attacker_score_from_occupation = 150
+	
 	max_ai_diplo_distance_to_title = 500
 }
 
 individual_duchy_de_jure_cb = {
+	icon = individual_duchy_de_jure_cb
 	group = de_jure
 	should_check_for_interface_availability = no # Covered by the county dejure cb
 	
@@ -784,7 +623,7 @@ individual_duchy_de_jure_cb = {
 	allowed_for_character = {
 		scope:attacker = {
 			culture = {
-				has_innovation = innovation_chronicle_writing
+				has_innovation = innovation_casus_belli
 			}
 		}
 	}
@@ -819,46 +658,32 @@ individual_duchy_de_jure_cb = {
 				}
 			}
 		}
+		scope:target = {
+			trigger_if = {
+				limit = {
+					scope:attacker = {
+						is_ai = yes
+					}
+				}
+				any_in_de_jure_hierarchy = {
+					continue = { tier > tier_county }
+					count >= 2
+					tier = tier_county
+					holder ?= {
+						OR = {
+							this = scope:defender
+							is_vassal_or_below_of = scope:defender
+						}
+					}
+				}
+			}
+		}
 	}
 
 	cost = {
 		piety = {
 			value = 0
-			if = { # Attacking your HoF is impious
-				limit = {
-					exists = scope:attacker.faith.religious_head
-					scope:attacker.faith.religious_head = scope:defender
-				}
-				if = {
-					limit = {
-						scope:attacker.faith = {
-							has_doctrine = doctrine_spiritual_head
-						}
-					}
-					add = {
-						value = massive_piety_value
-						desc = CB_ATTACKER_HOF
-					}
-				}
-				else = {
-					add = {
-						value = medium_piety_value
-						desc = CB_ATTACKER_HOF
-					}
-				}
-			}
-			if = {
-				limit = {
-					scope:attacker.faith = scope:defender.faith
-					scope:defender = {
-						has_government = theocracy_government
-					}
-				}
-				add = {
-					value = medium_piety_value
-					desc = CB_ATTACKER_THEOCRACY
-				}
-			}
+			add = common_cb_impious_piety_cost
 		}
 		prestige = {
 			value = 0
@@ -877,84 +702,7 @@ individual_duchy_de_jure_cb = {
 				desc = CB_CLAIM_COST_TARGET_TITLES
 			}
 
-			#Innovation Prestige Discounts
-			if = {
-				limit = { innovation_prestige_trigger = yes }
-				multiply = {
-					value = innovation_prestige_value
-					desc = CB_ATTACKER_INNOVATIONS
-				}
-			}
-
-			# Bellum Justum Perk
-			if = {
-				limit = {
-					scope:attacker = {
-						has_perk = bellum_justum_perk
-					}
-				}
-				multiply = {
-					add = bellum_justum_discount_percentage
-					divide = 100
-					desc = CB_ATTACKER_BELLUM_JUSTUM
-				}
-			}
-
-			# Dynasty Warfare Perk
-			if = {
-				limit = {
-					scope:attacker = {
-						has_dynasty = yes
-						dynasty = {
-							has_dynasty_perk = warfare_legacy_2
-						}
-					}
-				}
-				multiply = {
-					value = warfare_legacy_2_discount
-					desc = CB_ATTACKER_DYNASTY_WARFARE
-				}
-			}
-
-			# Culture
-			if = {
-				limit = {
-					scope:attacker = {
-						culture = {
-							has_cultural_parameter = cheaper_cbs
-						}
-					}
-				}
-				multiply = {
-					value = 0.8
-					desc = "CB_ATTACKER_CULTURE"
-				}
-			}
-
-			# Vassal contract in-realm cost reduction
-			if = {
-				limit = {
-					scope:attacker = {
-						is_independent_ruler = no
-						vassal_contract_has_flag = vassal_contract_war_override
-						liege = scope:defender.liege
-					}
-				}
-				multiply = {
-					value = war_declaration_rights_allowed_cost_reduction
-					desc = "CB_ATTACKER_VASSAL_CONTRACT"
-				}
-			}
-			
-			if = {
-				limit = {
-					has_game_rule = no_cost_casus_belli_costs
-				}
-				multiply = {
-					value = 0
-					desc = CB_GAME_RULE_NO_COST
-				}
-			}
+			multiply = common_cb_prestige_cost_multiplier
 		}
 	}
 
@@ -1016,6 +764,13 @@ individual_duchy_de_jure_cb = {
 	
 	on_victory = {
 		scope:attacker = { show_pow_release_message_effect = yes }
+		
+		# Legitimacy
+		add_legitimacy_attacker_victory_effect = yes
+
+		#EP2 accolade glory gain for winning against higher ranked enemy
+		scope:attacker = { accolade_attacker_war_end_glory_gain_med_effect = yes }
+
 		every_in_list = {
 			list = target_titles
 			limit = { exists = holder }
@@ -1060,6 +815,9 @@ individual_duchy_de_jure_cb = {
 
 		# FP1: note the victory for future memorialisation via stele (if applicable).
 		scope:attacker = { fp1_remember_recent_conquest_victory_effect = yes }
+
+		# EP3: note gold gained from military assistance/join war contracts and their war contribution threshold
+		laamp_as_mercenary_payout_tooltip_effect = yes
 	}
 
 	on_white_peace_desc = {
@@ -1076,6 +834,10 @@ individual_duchy_de_jure_cb = {
 	
 	on_white_peace = {
 		scope:attacker = { show_pow_release_message_effect = yes }
+
+		#EP2 accolade glory gain for doing ok against higher ranked enemy
+		scope:defender = { accolade_defender_war_end_glory_gain_low_effect = yes }
+
 		# Create an 'helper' de jure CB which we won't execute, but can use to determine how much Prestige should be given to war participants.
 		every_in_list = {
 			list = target_titles
@@ -1106,6 +868,9 @@ individual_duchy_de_jure_cb = {
 		
 		# Truce
 		add_truce_white_peace_effect = yes
+
+		# EP3: note gold gained from military assistance/join war contracts and their war contribution threshold
+		laamp_as_mercenary_payout_tooltip_effect = yes
 	}
 
 	on_defeat_desc = {
@@ -1126,6 +891,13 @@ individual_duchy_de_jure_cb = {
 	
 	on_defeat = {
 		scope:attacker = { show_pow_release_message_effect = yes }
+		
+		# Legitimacy
+		add_legitimacy_attacker_defeat_effect = yes
+
+		#EP2 accolade glory gain for winning against higher ranked enemy
+		scope:defender = { accolade_defender_war_end_glory_gain_med_effect = yes }
+
 		# Attacker must pay the defender war reparations.
 		scope:attacker = {
 			pay_short_term_gold_reparations_effect = {
@@ -1163,6 +935,9 @@ individual_duchy_de_jure_cb = {
 			save_temporary_scope_as = loser
 		}
 		on_lost_aggression_war_discontent_loss = yes
+
+		# EP3: note gold gained from military assistance/join war contracts and their war contribution threshold
+		laamp_as_mercenary_payout_tooltip_effect = yes
 	}
 	
 	on_primary_attacker_death = inherit
@@ -1181,6 +956,9 @@ individual_duchy_de_jure_cb = {
 	
 	attacker_wargoal_percentage = 0.8
 	
+	max_defender_score_from_occupation = 150
+	max_attacker_score_from_occupation = 150
+	
 	max_ai_diplo_distance_to_title = 500
 }
 
@@ -1190,4 +968,4 @@ individual_duchy_de_jure_cb = {
 # dismantle_holy_pretender_cb = {
 
 # dismantle_byz_pretender_cb = {
-# 
+

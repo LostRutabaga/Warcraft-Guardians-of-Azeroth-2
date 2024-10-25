@@ -523,12 +523,11 @@ scripted_trigger stress_threshold_special_2001_valid_attraction_target_trigger =
 		target = root
 		value >= low_positive_opinion
 	}
-
+	is_eunuch_trigger = no
 	# Disqualifying conditions for target character
 	NOR = {
 		has_trait = chaste
 		has_trait = celibate
-		has_trait = eunuch
 		has_sexuality = asexual
 	}
 
@@ -601,12 +600,14 @@ stress_threshold_special.2001 = {
 		animation = flirtation
 	}
 	override_background = {
-		event_background = bedchamber
+		reference = bedchamber
 	}
 
 	trigger = {
 		has_trait = rakish
 		has_trait = celibate
+
+		might_cheat_on_every_partner_trigger = yes
 	}
 
 	weight_multiplier = {
@@ -750,9 +751,7 @@ stress_threshold_special.2001 = {
 		name = stress_threshold_special.2001.a
 		remove_trait = celibate
 		if = {
-			limit = {
-				has_perk = restraint_perk
-			}
+			limit = { has_perk = restraint_perk }
 			hidden_effect = { remove_perk = restraint_perk }
 			custom_tooltip = stress_threshold_special.2001.a.tt 
 		}

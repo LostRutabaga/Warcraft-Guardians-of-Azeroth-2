@@ -41,6 +41,14 @@
 	doctrine = doctrine_clerical_gender_either
 	doctrine = doctrine_clerical_marriage_allowed
 	doctrine = doctrine_clerical_succession_temporal_appointment
+	
+	doctrine = special_doctrine_is_primitive_faith
+
+	#Allow pilgrimages
+	doctrine = doctrine_pilgrimage_encouraged
+	
+	#Funeral tradition
+	doctrine = doctrine_funeral_sky_burial
 
 	# Placeholder
 	traits = {
@@ -70,10 +78,12 @@
 		dualism_custom_1
 		# Feather
 		kitebacilweism meshefaresism yazidi_custom_1 yazidism
+		# Dove
+		custom_faith_dove
 		# Totem
 		custom_faith_fp1_thors_hammer custom_faith_fp1_irminsul
 		# Head
-		kiratism mande yoruba west_african_custom
+		kiratism mande yoruba west_african_custom spidy
 		# Temple
 		hellenic_custom
 	}
@@ -91,6 +101,8 @@
 	localization = {
 		#HighGod
 		HighGodName = ALAKIR_NAME
+		HighGodName2 = ALAKIR_NAME
+		HighGodName3 = ALAKIR_NAME
 		HighGodNamePossessive = ALAKIR_POSSESSIVE
 		HighGodNameSheHe = CHARACTER_SHEHE_HE
 		HighGodHerselfHimself = CHARACTER_HIMSELF
@@ -176,6 +188,8 @@
 		WaterGodHerHim = CHARACTER_HERHIM_HIM
 
 		PantheonTerm = religion_the_spirits
+		PantheonTerm2 = religion_the_spirits
+		PantheonTerm3 = religion_the_spirits
 		PantheonTermHasHave = pantheon_term_have
 		
 		GoodGodNames = {
@@ -192,10 +206,18 @@
 		}
 		
 		HouseOfWorship = TEMPLE_NAME
+		HouseOfWorship2 = TEMPLE_NAME
+		HouseOfWorship3 = TEMPLE_NAME
 		HouseOfWorshipPlural = TEMPLE_PLURAL
+		HouseOfWorship2 = TEMPLE_NAME
+		HouseOfWorship3 = TEMPLE_NAME
 		
 		ReligiousSymbol = WIND_NAME
+		ReligiousSymbol2 = WIND_NAME
+		ReligiousSymbol3 = WIND_NAME
 		ReligiousText = STORIES_NAME
+		ReligiousText2 = STORIES_NAME
+		ReligiousText3 = STORIES_NAME
 		
 		ReligiousHeadName = HIGH_SHAMAN_MALE_NAME
 		ReligiousHeadNameFemale = HIGH_SHAMAN_FEMALE_NAME
@@ -224,15 +246,23 @@
 		BishopNeuterPlural = SHAMAN_MALE_PLURAL
 		
 		DivineRealm = SKYWALL_NAME
+		DivineRealm2 = SKYWALL_NAME
+		DivineRealm3 = SKYWALL_NAME
 		PositiveAfterLife = SKYWALL_NAME
+		PositiveAfterLife2 = SKYWALL_NAME
+		PositiveAfterLife3 = SKYWALL_NAME
 		NegativeAfterLife = MAW_NAME
+		NegativeAfterLife2 = MAW_NAME
+		NegativeAfterLife3 = MAW_NAME
 		
 		DeathDeityName = DEATH_NAME
 		DeathDeityNamePossessive = DEATH_POSSESSIVE
-		DeathDeitySheHe = CHARACTER_SHEHE_HE
-		DeathDeityHerHis = CHARACTER_HERHIS_HIS
+		DeathDeitySheHe = CHARACTER_SHEHE_IT
+		DeathDeityHerHis = CHARACTER_HERHIS_ITS
+		DeathDeityHerHim = CHARACTER_HERHIM_IT
 		
 		WitchGodName = OLD_ONE_NAME
+		WitchGodNamePossessive  = OLD_ONE_POSSESSIVE
 		WitchGodHerHis = CHARACTER_HERHIS_HIS
 		WitchGodSheHe = CHARACTER_SHEHE_HE
 		WitchGodHerHim = CHARACTER_HERHIM_HIM

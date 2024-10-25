@@ -25,7 +25,19 @@
 stress_trait_ongoing.0501 = {
 	type = character_event
 	title = stress_trait_ongoing.0501.t
-	desc = stress_trait_ongoing.0501.desc
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { is_landless_adventurer = yes }
+				desc = stress_trait_ongoing.0501.adventurer
+			}
+			triggered_desc = {
+				trigger = { is_landless_administrative = yes }
+				desc = stress_trait_ongoing.0501.administrative
+			}
+			desc = stress_trait_ongoing.0501.desc
+		}
+	}
 	theme = mental_break
 	left_portrait = {
 		character = root
@@ -36,7 +48,7 @@ stress_trait_ongoing.0501 = {
 		is_available_at_peace_adult = yes
 		NOT = { has_character_flag = had_event_stress_trait_ongoing_0501 }
 		has_trait = hashishiyah
-		stress >= major_stress_impact_loss
+		stress >= 50
 	}
 
 	weight_multiplier = {
@@ -282,7 +294,7 @@ stress_trait_ongoing.0506 = {
 		is_available_at_peace_adult = yes
 		NOT = { has_character_flag = had_event_stress_trait_ongoing_0506 }
 		has_trait = hashishiyah
-		stress >= major_stress_impact_loss
+		stress >= 50
 		stress_ongoing_suitable_medical_problems = yes
 		any_courtier_or_guest = { stress_ongoing_0506_valid_courtier_for_sharing = yes }
 	}
@@ -398,6 +410,7 @@ stress_trait_ongoing.0506 = {
 			progress_towards_friend_effect = {
 				CHARACTER = scope:medication_friend
 				OPINION = 20
+				REASON = friend_hashish_cakes
 			}
 		}
 		add_character_modifier = {
@@ -435,7 +448,7 @@ scripted_trigger stress_ongoing_0511_valid_crusty_old_person = {
 		has_trait = hashishiyah
 	}
 	OR = {
-		has_government = theocracy_government	#Everyone loves church lectures!
+		government_has_flag = government_is_theocracy	#Everyone loves church lectures!
 		is_close_or_extended_family_of = root	#Everyone loves familial lectures!
 		is_councillor = yes	#Everyone loves underling lectures!
 		is_powerful_vassal = yes	#Everyone loves even underlingier lectures!
@@ -461,11 +474,9 @@ stress_trait_ongoing.0511 = {
 		is_available_at_peace_adult = yes
 		NOT = { has_character_flag = had_event_stress_trait_ongoing_0511 }
 		has_trait = hashishiyah
-		stress >= major_stress_impact_loss
-
+		stress >= 50
 		# Warcraft
 		age <= age_30_value	#Must be youthful-ish.
-
 		faith = {	#If God says it's good, then it must be great.
 			NOR = {
 				trait_is_virtue = gluttonous
@@ -648,7 +659,7 @@ stress_trait_ongoing.0516 = {
 		is_available_at_peace_adult = yes
 		NOT = { has_character_flag = had_event_stress_trait_ongoing_0516 }
 		has_trait = hashishiyah
-		stress >= major_stress_impact_loss
+		stress >= 50
 		OR = {	#Must have at least one valid person to have an important meeting with.
 			any_vassal = {
 				is_powerful_vassal = yes
@@ -657,6 +668,10 @@ stress_trait_ongoing.0516 = {
 			any_ally = { stress_ongoing_0516_suitable_important_figure = yes }
 			any_councillor = { stress_ongoing_0516_suitable_important_figure = yes }
 			any_neighboring_realm_same_rank_owner = { stress_ongoing_0516_suitable_important_figure = yes }
+			AND = {
+				is_landed = no
+				any_courtier = { stress_ongoing_0516_suitable_important_figure = yes }
+			}
 		}
 	}
 
@@ -696,6 +711,13 @@ stress_trait_ongoing.0516 = {
 		every_neighboring_realm_same_rank_owner = {
 			limit = { stress_ongoing_0516_suitable_important_figure = yes }
 			add_to_list = suitable_important_figures_list
+		}
+		if = {
+			limit = { is_landed = no }
+			every_courtier = {
+				limit = { stress_ongoing_0516_suitable_important_figure = yes }
+				add_to_list = suitable_important_figures_list
+			}
 		}
 
 		random_in_list = {
@@ -881,7 +903,7 @@ scripted_trigger stress_trait_ongoing_1501_valid_obsession_target = {
 		has_relation_rival = root
 		has_relation_nemesis = root
 	}
-
+	might_cheat_on_every_partner_trigger = yes
 }
 
 stress_trait_ongoing.1501 = {
@@ -984,13 +1006,14 @@ stress_trait_ongoing.1501 = {
 
 	trigger = {
 		has_trait = rakish
-		stress >= major_stress_impact_loss
+		stress >= 50
 		NOT = {
 			has_character_flag = had_event_stress_trait_ongoing_1501
 		}
 		any_courtier_or_guest = {
 			stress_trait_ongoing_1501_valid_obsession_target = yes
 		}
+		might_cheat_on_every_partner_trigger = yes
 	}
 
 	weight_multiplier = {
@@ -1131,6 +1154,7 @@ stress_trait_ongoing.1501 = {
 					}
 					progress_towards_lover_effect = {
 						CHARACTER = scope:obsession
+						REASON = lover_scoped_out_in_hallway
 						OPINION = 10
 					}
 				} 	
@@ -1246,7 +1270,7 @@ stress_trait_ongoing.4501 = {
 	
 	trigger = {
 		has_trait = comfort_eater
-		stress >= major_stress_impact_loss
+		stress >= 50
 		NOR = {
 			has_trait = cannibal
 			any_secret = {

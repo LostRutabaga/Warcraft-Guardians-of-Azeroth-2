@@ -23,6 +23,12 @@
 			}
 			desc = task_collect_taxes_family_business_bonus_desc
 		}
+		triggered_desc = {
+			trigger = {
+				councillor_liege_has_consulted_house_bonus = yes
+			}
+			desc = task_collect_taxes_consulted_house_bonus_desc
+		}
 		desc = {
 			desc = council_task_possible_side_effects
 			triggered_desc = {
@@ -95,6 +101,14 @@
 		else_if = {
 			limit = {
 				scope:councillor_liege.gold < 10
+			}
+			add = 500
+		}
+		if = { # Conquerors want more money
+			limit = {
+				scope:councillor_liege = {
+					ai_has_conqueror_personality = yes
+				}
 			}
 			add = 500
 		}
@@ -234,6 +248,15 @@ task_develop_county = {
 				desc = FAMILY_BUSINESS_BONUS_VALUE
 			}
 		}
+		if = {
+			limit = {
+				councillor_liege_has_consulted_house_bonus = yes
+			}
+			add = {
+				value = scope:councillor.steward_develop_county_consulted_house_monthly_increase
+				desc = CONSULTED_HOUSE_BONUS_VALUE
+			}
+		}
 
 		# Relation Bonuses/Penalties
 		if = { # Friend
@@ -313,6 +336,34 @@ task_develop_county = {
 				desc = STEWARD_COUNTY_SPEED_MODIFIERS
 			}
 		}
+
+        # Royal Architect
+        if = {
+            limit = {
+                scope:councillor_liege = { has_character_modifier = employer_booner_royal_architect_2_modifier }
+                OR = {
+                    target_is_vassal_or_below = scope:target_character
+                    this = scope:target_character
+                }
+            }
+            multiply = {
+                value = 1.1
+                desc = employer_booner_royal_architect_2_modifier
+            }
+        }
+        else_if = {
+            limit = {
+                scope:councillor_liege = { has_character_modifier = employer_booner_royal_architect_3_modifier }
+                OR = {
+                    target_is_vassal_or_below = scope:target_character
+                    this = scope:target_character
+                }
+            }
+            multiply = {
+                value = 1.1
+                desc = employer_booner_royal_architect_3_modifier
+            }
+        }
 	}
 	full_progress = steward_develop_county_full_progress
 	custom_other_loc = STEWARD_COUNTY_SPEED_OTHER
@@ -341,6 +392,10 @@ task_develop_county = {
 					}
 				}
 				OR = {
+					scope:councillor_liege = {
+						has_character_flag = vassal_directive_improve_development
+						vassal_is_valid_and_follows_directive_trigger = { VASSAL = this LIEGE = liege }
+					}
 					culture = scope:councillor_liege.culture
 					culture = {
 						cultural_acceptance = { target = scope:councillor_liege.culture value >= 50 }
@@ -348,6 +403,14 @@ task_develop_county = {
 					scope:councillor_liege = {
 						primary_title.tier < tier_duchy
 					}
+					# AND = {
+					# 	# scope:councillor_liege = {
+					# 	# 	has_character_flag = agenda_towards_deescalation
+					# 	# }
+					# 	NOT = {
+					# 		culture = scope:councillor_liege.culture
+					# 	}
+					# }
 				}
 			}
 		}
@@ -386,6 +449,19 @@ task_develop_county = {
 		}
 	}
 
+	on_start_task_county = {
+		# save current development_level for catalyst purpose
+		if = {
+			limit = { exists = scope:county }
+			scope:county = {
+				set_variable = {
+					name = current_development_level
+					value = development_level
+				}
+			}
+		}
+	}
+
 	on_finish_task_county = {
 		if = {
 			limit = {
@@ -403,70 +479,110 @@ task_develop_county = {
 			}
 			start_default_task = yes
 		}
-		scope:councillor_liege = {
-			if = { # Try to make relevant AI's focus on Acceptance
-				limit = {
-					exists = primary_title
-					primary_title.tier >= tier_kingdom
-					any_sub_realm_county = {
-						culture = {
-							cultural_acceptance = { target = scope:councillor_liege.culture value < 52 }
-						}
-					}
-					NOT = {
-						has_focus = stewardship_domain_focus
-					}
-				}
-				add_character_flag = {
-					flag = no_ai_increase_development
-					years = 30
-				}
-			}
-			else = {
-				add_character_flag = {
-					flag = no_ai_increase_development
-					years = 10
-				}
-			}
-			add_character_flag = {
-				flag = ai_development_max_years
-				years = 10
-			}
-		}
 	}
 
 	monthly_on_action = task_develop_county_side_effects
 
 	on_monthly_county = {
 		scope:councillor_liege = {
+			# Check development level progress
 			if = {
 				limit = {
-					NOT = {
-						has_character_flag = ai_development_max_years
+					exists = scope:county
+					exists = scope:county.var:current_development_level
+					scope:county = {
+						floored_development_value > floored_current_development_value
 					}
 				}
-				if = { # Try to make relevant AI's focus on Acceptance
-					limit = {
-						exists = primary_title
-						primary_title.tier >= tier_kingdom
-						any_sub_realm_county = {
-							culture = {
-								cultural_acceptance = { target = scope:councillor_liege.culture value < 52 }
+				scope:county = {
+					set_variable = {
+						name = current_development_level
+						value = development_level
+					}
+				}
+				
+				scope:councillor_liege = {
+					if = { # Try to make relevant AI's focus on Acceptance
+						limit = {
+							exists = primary_title
+							primary_title.tier >= tier_kingdom
+							any_sub_realm_county = {
+								culture = {
+									cultural_acceptance = { target = scope:councillor_liege.culture value < 52 }
+								}
+							}
+							NOT = {
+								has_focus = stewardship_domain_focus
 							}
 						}
-						NOT = {
-							has_focus = stewardship_domain_focus
+						add_character_flag = {
+							flag = no_ai_increase_development
+							years = 15
 						}
 					}
-					add_character_flag = {
-						flag = no_ai_increase_development
-						years = 30
+					else = {
+						add_character_flag = {
+							flag = no_ai_increase_development
+							years = 5
+						}
 					}
 				}
-				else = {
-					add_character_flag = {
-						flag = no_ai_increase_development
-						years = 10
+
+				# Struggle Catalyst
+				#if = {
+				#	limit = {
+				#		exists = scope:county
+				#		# target someone from diff faith or culture
+				#		scope:county = {
+				#			NAND = {
+				#				faith = scope:councillor_liege.faith
+				#				culture = scope:councillor_liege.culture
+				#			}
+				#		}
+				#
+				#		any_character_struggle = {
+				#			involvement = involved
+				#			phase_has_catalyst = catalyst_improve_development_vassal_diff_faith_culture
+				#		}
+				#	}
+				#	scope:councillor_liege = {
+				#		every_character_struggle = {
+				#			involvement = involved
+				#			activate_struggle_catalyst = {
+				#				catalyst = catalyst_improve_development_vassal_diff_faith_culture
+				#				character = scope:councillor_liege
+				#			}
+				#		}
+				#	}
+				#	# Struggle Parameter
+				#	if = {
+				#		limit = {
+				#			NOT = { scope:county.culture  = scope:councillor_liege.culture }
+				#			any_character_struggle = {
+				#				involvement = involved
+				#				has_struggle_phase_parameter = gain_acceptance_when_developing_other_culture_county
+				#			}
+				#		}
+				#		scope:county.culture = {
+				#			save_scope_as = current_culture
+				#			change_cultural_acceptance = {
+				#				target = scope:councillor_liege.culture
+				#				value =	miniscule_cultural_acceptance_value
+				#				desc = cultural_acceptance_gain_from_phase_effects
+				#			}
+				#		}
+				#	}
+				#
+				#}
+			}
+			else_if = { # fallback for previous save: the effect would trigger a month later
+				limit = {
+					exists = scope:county
+				}
+				scope:county = {
+					set_variable = {
+						name = current_development_level
+						value = development_level
 					}
 				}
 			}
@@ -476,16 +592,42 @@ task_develop_county = {
 	ai_will_do = {
 		value = 0
 		if = {
+			limit = {
+				scope:councillor = {
+					is_performing_council_task = task_develop_county
+				}
+			}
+			add = 10000 # Always keep going if this is already chosen
+		}
+		if = {
 			# Don't do this too often
 			limit = {
 				scope:councillor_liege = { has_character_flag = no_ai_increase_development }
 			}
+			multiply = 0
 		}
 		else_if = {
 			limit = {
 				scope:councillor_liege.gold >= steward_increase_development_value
 			}
-			add = 100
+			add = 300
+		}
+		if = {
+			limit = {
+				scope:councillor_liege.gold < 10
+			}
+			multiply = 0
+		}
+		
+		# AI directive
+		if = {
+			limit = {
+				scope:councillor_liege = {
+					has_character_flag = vassal_directive_improve_development
+					vassal_is_valid_and_follows_directive_trigger = { VASSAL = this LIEGE = liege }
+				}
+			}
+			add = 50000
 		}
 	}
 }
@@ -503,13 +645,22 @@ task_promote_culture = {
 	effect_desc = {
 		desc = {
 			desc = task_promote_culture_effect_desc
-			
+
 			# Warcraft
 			triggered_desc = {
 				trigger = { scope:councillor_liege = { government_has_flag = government_dark_frenzy_from_conversions } }
 				desc = task_dark_frenzy_gain
 			}
-			
+			triggered_desc = {
+				trigger = {
+					scope:councillor_liege = {
+						any_vassal = {
+							has_vassal_stance = minority
+						}
+					}
+				}
+				desc = minority_disapproves_conversion_tooltip
+			}
 			triggered_desc = {
 				trigger = {
 					trigger_if = {
@@ -659,6 +810,57 @@ task_promote_culture = {
 				desc = GAME_RULE_FASTER_REASON
 			}
 		}
+		# Faster conversion for FP2 Hostility ending, if county is in Iberia and culture was involved
+		# Warcraft
+		if = {
+			limit = {
+				scope:councillor_liege = {
+					has_character_modifier = devoted_to_tradition_modifier
+				}
+			}
+			multiply = {
+				value = 1.25
+				desc = bp2_devoted_to_tradition_modifier_conversion_task_desc
+			}
+		}		
+		if = {
+			limit = {
+				scope:councillor_liege = {
+					has_realm_law = theramore_laws_culture_1
+				}
+			}
+			multiply = {
+				value = 0.5
+				desc = theramore_culture_convertion_bonus_subtract
+			}
+		}
+		else_if = {
+			limit = {
+				scope:councillor_liege = {
+					has_realm_law = theramore_laws_culture_3
+				}
+			}
+			multiply = {
+				value = 1.3
+				desc = theramore_culture_convertion_bonus_add
+			}
+		}
+
+		if = { 
+			limit = { 
+				scope:councillor_liege = { 
+					OR = { 
+						var:propaganda_campaign ?= flag:cultural 
+						var:propaganda_campaign ?= flag:cultural_and_religious
+					}
+				}
+			}
+			multiply = { 
+				value = 1.3
+				desc = propaganda_campaign_bonus_add
+			}
+		}
+
 	}
 
 	potential_county = {
@@ -678,7 +880,7 @@ task_promote_culture = {
 			limit = {
 				scope:councillor_liege = { is_ai = yes }
 			}
-			
+
 			# Warcraft
 
 			OR = {
@@ -692,14 +894,14 @@ task_promote_culture = {
 						is_hybrid_culture = yes
 						is_divergent_culture = yes
 					}
-					
+
 					# Warcraft
 
 					any_parent_culture = {
 						this = scope:county.culture
 					}
 				}
-				
+
 				# Warcraft
 			}
 			OR = {
@@ -714,7 +916,7 @@ task_promote_culture = {
 						this = scope:county.culture
 					}
 				}
-				
+
 				# Warcraft
 			}
 			OR = {
@@ -732,83 +934,9 @@ task_promote_culture = {
 							}
 						}
 					}
-					OR = {
-						#scope:councillor_liege.culture = { # All AI's are motivated to spread new Hybrid cultures
-						#	is_hybrid_culture = yes
-						#	any_parent_culture = {
-						#		this = scope:county.culture
-						#	}
-						#}
-						# Unless they're a nomadic culture converting in the steppe or Asia Minor...
-						#AND = { # Deprecated as of the Culture Update, nomadic cultures now try to hybridize aggressively
-						#	OR = {
-						#		scope:councillor_liege.culture = { like_mongolic_group_trigger = yes }
-						#		scope:councillor_liege.culture = { like_turkic_group_trigger = yes }
-						#	}
-						#	scope:county.title_province = {
-						#		OR = {
-						#			geographical_region = world_asia_minor
-						#			steppe_region_trigger = yes
-						#		}
-						#	}
-						#}
-						AND = { # The English want to convert the Anglo Saxons and Cumbrians
-							scope:councillor_liege.culture = culture:english
-							OR = {
-								scope:county.culture = culture:anglo_saxon
-								scope:county.culture = culture:cumbrian
-							}
-						}
-						AND = { # The Scots want to convert the Anglo Saxons, Cumbrians and Gaelic
-							scope:councillor_liege.culture = culture:scottish
-							OR = {
-								scope:county.culture = culture:anglo_saxon
-								scope:county.culture = culture:gaelic
-								scope:county.culture = culture:cumbrian
-								scope:county.culture = culture:pictish
-							}
-						}
-						AND = { # The Gaels want to convert the Picts and Cumbrians
-							scope:councillor_liege.culture = culture:gaelic
-							OR = {
-								scope:county.culture = culture:cumbrian
-								scope:county.culture = culture:pictish
-							}
-						}
-						AND = { # The modern scandinavians want to convert the Norse
-							OR = {
-								scope:councillor_liege.culture = culture:swedish
-								scope:councillor_liege.culture = culture:danish
-								scope:councillor_liege.culture = culture:norwegian
-							}
-							scope:county.culture = culture:norse
-						}
-						#AND = { # The vikings want to culture convert the Brits, OBSOLETE as of the Hybrid Culture update - they want to create hybrids instead!
-						#	OR = {
-						#		scope:councillor_liege.culture = culture:norse
-						#		scope:councillor_liege.culture = culture:norwegian
-						#	}
-						#	scope:county = {
-						#		any_county_province = {
-						#			is_coastal = yes
-						#		}
-						#	}
-						#	OR = {
-						#		scope:county.culture = { like_heritage_west_germanic_trigger = yes }
-						#		scope:county.culture = { like_heritage_goidelic_trigger = yes }
-						#		scope:county.culture = { like_heritage_brythonic_trigger = yes }
-						#	}
-						#}
-						AND = { # The Portuguese should want to convert Suebi
-							scope:councillor_liege.culture = culture:portuguese
-							scope:county.culture = culture:suebi
-						}
-						AND = { # The Iberians want to convert Visigothic
-							scope:councillor_liege.culture = { like_heritage_iberian_trigger = yes }
-							NOT = { scope:councillor_liege.culture = culture:portuguese }
-							scope:county.culture = culture:visigothic
-						}
-					}
+					# Warcraft
+					scope:councillor_liege.culture = { has_newly_formed_culture_trigger = yes }
+					scope:county.culture = { has_newly_formed_culture_trigger = no }
 				}
 			}
 		}
@@ -883,17 +1011,18 @@ task_promote_culture = {
 			}
 			add = 10000 # Always keep going if this is already chosen
 		}
-		else_if = {
-			limit = {
-				scope:councillor_liege.culture = {
-					has_innovation = innovation_desert_tactics #Best way to check if the culture is Outremer
-				}
-				scope:councillor_liege = {
-					gold >= steward_convert_culture_value
-				}
-			}
-			add = 500
-		}
+		# Warcraft
+		# else_if = {
+		#	limit = {
+		#		scope:councillor_liege.culture = {
+		#			has_innovation = innovation_desert_tactics #Best way to check if the culture is Outremer
+		#		}
+		#		scope:councillor_liege = {
+		#			gold >= steward_convert_culture_value
+		#		}
+		#	}
+		#	add = 500
+		#} Warcraft deleted innovation
 		else_if = {
 			limit = {
 				scope:councillor_liege = {
@@ -925,6 +1054,14 @@ task_promote_culture = {
 		}
 		if = {
 			limit = {
+				scope:councillor_liege.culture = {
+					has_cultural_parameter = less_likely_to_promote_culture
+				}
+			}
+			add = -250
+		}
+		if = {
+			limit = {
 				scope:councillor_liege = {
 					culture = {
 						OR = {
@@ -946,10 +1083,33 @@ task_promote_culture = {
 			}
 			add = 200
 		}
+		# Motivate the AI with an escalation agenda to take this task
+		#if = {
+		#	limit = {
+		#		has_character_flag = agenda_towards_escalation
+		#	}
+		#	add = 500
+		#}
+		#else_if = {
+		#	limit = {
+		#		has_character_flag = agenda_towards_deescalation
+		#	}
+		#	add = -250
+		#}
 		if = {
 			# Don't do this too often
 			limit = {
-				scope:councillor_liege = { has_character_flag = no_ai_culture_convert }
+				scope:councillor_liege = {
+					has_character_flag = no_ai_culture_convert
+					#NAND = { # ignore it if in Hostility with escalation
+					#	has_character_flag = agenda_towards_escalation
+					#	any_character_struggle = {
+					#		involvement = involved
+					#		is_struggle_type = iberian_struggle
+					#		is_struggle_phase = struggle_iberia_phase_hostility
+					#	}
+					#}
+				}
 			}
 			multiply = 0
 		}
@@ -961,6 +1121,17 @@ task_promote_culture = {
 				}
 			}
 			multiply = 0
+		}
+		
+		# AI directive
+		if = {
+			limit = {
+				scope:councillor_liege = {
+					has_character_flag = vassal_directive_convert_culture
+					vassal_is_valid_and_follows_directive_trigger = { VASSAL = this LIEGE = liege }
+				}
+			}
+			add = 50000
 		}
 	}
 }
@@ -997,6 +1168,7 @@ task_accept_culture = {
 			trigger = {
 				scope:councillor_liege = {
 					has_royal_court = yes
+					has_dlc_feature = royal_court
 					has_court_type = court_administrative
 					court_grandeur_current_level >= 4
 				}
@@ -1020,6 +1192,12 @@ task_accept_culture = {
 				councillor_liege_has_family_business_bonus = yes
 			}
 			desc = task_accept_culture_family_business_bonus_desc
+		}
+		triggered_desc = {
+			trigger = {
+				councillor_liege_has_consulted_house_bonus = yes
+			}
+			desc = task_accept_culture_consulted_house_bonus_desc
 		}
 		triggered_desc = {
 			trigger = {
@@ -1221,6 +1399,7 @@ task_accept_culture = {
 			limit = {
 				scope:councillor_liege = {
 					has_royal_court = yes
+					has_dlc_feature = royal_court
 					has_court_type = court_administrative
 					court_grandeur_current_level >= 4
 				}
@@ -1245,6 +1424,10 @@ task_accept_culture = {
 					scope:councillor_liege = { is_ai = yes }
 				}
 				OR = {
+					scope:councillor_liege = {
+						has_character_flag = vassal_directive_improve_cultural_acceptance
+						vassal_is_valid_and_follows_directive_trigger = { VASSAL = this LIEGE = liege }
+					}
 					this = scope:councillor_liege.capital_county
 					scope:councillor_liege.capital_county = {
 						OR = {
@@ -1296,8 +1479,9 @@ task_accept_culture = {
 		if = {
 			# And the norse!
 			limit = {
-				scope:councillor_liege = {
-					culture = culture:norse
+				scope:councillor_liege.culture = {
+					# Warcraft Changed to tradition_malleable_invaders
+					has_cultural_tradition = tradition_malleable_invaders
 				}
 			}
 			add = 15
@@ -1349,7 +1533,10 @@ task_accept_culture = {
 			limit = {
 				scope:councillor_liege = {
 					culture = {
-						has_cultural_tradition = tradition_xenophilic
+						OR = {
+							has_cultural_tradition = tradition_xenophilic
+							has_cultural_tradition = tradition_fp2_malleable_subjects
+						}
 					}
 				}
 			}
@@ -1363,6 +1550,17 @@ task_accept_culture = {
 				}
 			}
 			multiply = 0
+		}
+		
+		# AI directive
+		if = {
+			limit = {
+				scope:councillor_liege = {
+					has_character_flag = vassal_directive_improve_cultural_acceptance
+					vassal_is_valid_and_follows_directive_trigger = { VASSAL = this LIEGE = liege }
+				}
+			}
+			add = 50000
 		}
 	}
 }
@@ -1557,6 +1755,24 @@ task_convince_dejure = {
 			add = {
 				value = steward_convince_dejure_erudition_bonus
 				desc = ERUDITION_DYNASTY_PERK_BONUS_VALUE
+			}
+		}
+		if = {
+			limit = {
+				councillor_liege_has_family_business_bonus = yes
+			}
+			add = {
+				value = steward_convince_dejure_family_business_bonus
+				desc = FAMILY_BUSINESS_BONUS_VALUE
+			}
+		}
+		if = {
+			limit = {
+				councillor_liege_has_consulted_house_bonus = yes
+			}
+			add = {
+				value = steward_convince_dejure_consulted_house_bonus
+				desc = CONSULTED_HOUSE_BONUS_VALUE
 			}
 		}
 	}

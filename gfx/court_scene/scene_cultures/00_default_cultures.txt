@@ -1,0 +1,84 @@
+﻿byzantine = {
+	trigger = {
+		has_ep3_dlc_trigger = yes
+		OR = {
+			culture = {
+				like_greek_culture_trigger = yes
+				any_parent_culture_or_above = {
+					like_greek_culture_trigger = yes
+				}
+				like_byzantine_group_trigger = yes
+			}
+		}
+	}
+}
+
+mediterranean = {
+	trigger = {
+		exists = capital_county
+		capital_county.culture = {
+			OR = {
+				has_graphical_mediterranean_culture_group_trigger = yes
+				AND = {
+					has_graphical_iberian_culture_group_trigger  = yes
+					#NOT = { prev.religion = religion:islam_religion }
+					prev = { like_islam_religion_trigger = no }
+				}
+			}
+		}
+		trigger_if = {
+			limit = {
+				has_ep3_dlc_trigger = yes
+			}
+			NOR = {
+				culture = {
+					like_greek_culture_trigger = yes
+					any_parent_culture_or_above = {
+						like_greek_culture_trigger = yes
+					}
+					like_byzantine_group_trigger = yes
+				}
+			}
+		}
+	}
+}
+
+mena = {
+	trigger = {
+		exists = capital_county
+		capital_county.culture = {
+			OR = {
+				has_graphical_mena_culture_group_trigger = yes
+				has_graphical_iranian_culture_group_trigger = yes
+				has_graphical_african_culture_group_trigger = yes
+				has_graphical_steppe_culture_group_trigger = yes
+				AND = {
+					has_graphical_iberian_culture_group_trigger  = yes
+					#prev.religion = religion:islam_religion
+					prev = { like_islam_religion_trigger = yes }
+				}
+			}
+		}
+	}
+}
+
+indian = {
+	trigger = {
+		exists = capital_county
+		capital_county.culture = {
+			has_graphical_india_culture_group_trigger = yes
+		}
+	}
+}
+
+western = {
+	trigger = {
+		exists = capital_county
+		capital_county.culture = {
+			OR = {
+				has_graphical_western_culture_group_trigger = yes
+				has_graphical_norse_culture_group_trigger = yes
+			}
+		}
+	}
+}

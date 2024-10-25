@@ -24,6 +24,7 @@ scripted_trigger yearly_4001_neighboring_ruler_trigger = {
 	basic_is_available_ai = yes
 	NOT = { is_at_war_with = root } 
 	is_adult = yes
+	save_temporary_scope_as = neighboring_ruler_temp
 	OR = {
 		any_relation = {
 			type = rival
@@ -35,13 +36,10 @@ scripted_trigger yearly_4001_neighboring_ruler_trigger = {
 				secret_type = secret_lover
 				secret_type = secret_murder
 			}
-			prev = {
-				is_close_or_extended_family_of = prev.secret_target
-			}
-			any_in_list = {
-				list = potential_vassal
+			secret_target = {
+				is_close_or_extended_family_of = scope:neighboring_ruler_temp
 				reverse_opinion = {
-					target = prev
+					target = scope:neighboring_ruler_temp
 					value <= neutral_opinion
 				}
 			}
@@ -280,7 +278,10 @@ yearly.4001 = {
 				random_list = {
 					10 = { #Rivalry
 						scope:vassal = {
-							set_relation_rival = scope:neighboring_ruler
+							set_relation_rival = {
+								target = scope:neighboring_ruler
+								reason = rival_grave_insult
+							}
 							reverse_add_opinion = {
 								target = scope:neighboring_ruler
 								modifier = insult_opinion
@@ -338,7 +339,7 @@ yearly.4001 = {
 									value = yes
 								}
 								save_scope_as = neighboring_ruler_secondary
-								set_relation_lover = scope:vassal
+								set_random_lover_reason = { TARGET = scope:vassal }
 								scope:vassal = {
 									random_secret = {
 										limit = {
@@ -398,7 +399,7 @@ yearly.4001 = {
 									name = murder
 									value = yes
 								}
-								override_death_killer_effect = { DEATH_REASON = death_murder KILLER = scope:vassal }
+								override_death_killer_effect = { death_reason = death_murder killer = scope:vassal }
 							}
 						}
 					}
@@ -438,7 +439,7 @@ yearly.4001 = {
 					exists = scope:murder
 				}
 				scope:neighboring_ruler_secondary = {
-					override_death_killer_effect = { DEATH_REASON = death_murder KILLER = scope:vassal }
+					override_death_killer_effect = { death_reason = death_murder killer = scope:vassal }
 				}
 			}
 		}
@@ -561,17 +562,15 @@ yearly.4001 = {
 				opinion = -30
 			}
 		}
-		if = { #If the neighboring ruler is a rival of yours you gain rival points
+		if = { #If the neighboring ruler is a rival of yours you gain a friend
 			limit = {
 				has_relation_rival = scope:neighboring_ruler
 			}
 			if = { #The enemy of my enemy...
 				limit = {
-					NOT = {
-						can_set_relation_friend_trigger = { CHARACTER = scope:vassal }
-					}
+					can_set_relation_friend_trigger = { CHARACTER = scope:vassal }
 				}
-				set_relation_friend = scope:vassal
+				set_relation_friend = { reason = friend_insulted_rival target = scope:vassal involved_character = scope:neighboring_ruler }
 			}
 		}
 		else = { #If they don't become your friend you get an opinion boost!
@@ -616,13 +615,13 @@ scripted_trigger yearly_4011_vassal_trigger = {
 	is_powerful_vassal = yes
 	is_adult = yes
 	NOR = {
-		is_player_heir_of_trigger = { CHARACTER = root }
+		is_player_heir_of = root
 		is_close_or_extended_family_of = root.player_heir
 		has_relation_lover = root
 		has_relation_friend = root
 		any_scheme = {
 			scheme_type = murder
-			scheme_target = root
+			scheme_target_character = root
 		}
 	}
 	opinion = {
@@ -636,12 +635,12 @@ scripted_trigger yearly_4011_vassal_trigger = {
 	OR = {
 		can_start_scheme = {
 			type = murder
-			target = root
+			target_character = root
 		}
 		root.player_heir = {
 			can_start_scheme = {
 				type = murder
-				target = root
+				target_character = root
 			}
 		}
 	}
@@ -666,13 +665,13 @@ scripted_trigger yearly_4011_potential_plot_conditions_trigger = {
 		scope:heir = {
 			can_start_scheme = {
 				type = murder
-				target = root
+				target_character = root
 			}
 		}
 		scope:vassal = {
 			can_start_scheme = {
 				type = murder
-				target = root
+				target_character = root
 			}
 		}
 	}
@@ -694,7 +693,7 @@ yearly.4011 = {
 			NOT = {
 				any_scheme = {
 					scheme_type = murder
-					scheme_target = root
+					scheme_target_character = root
 				}
 			}
 		}
@@ -999,7 +998,8 @@ yearly.4011 = {
 						}
 						progress_towards_friend_effect = {
 							CHARACTER = scope:heir
-							OPINION = no
+							OPINION = 0
+							REASON = friend_pleasant_conversation
 						}
 					}
 					if = {
@@ -1011,7 +1011,8 @@ yearly.4011 = {
 						}
 						progress_towards_friend_effect = {
 							CHARACTER = scope:vassal
-							OPINION = no
+							OPINION = 0
+							REASON = friend_pleasant_conversation
 						}
 					}
 				}
@@ -1093,7 +1094,7 @@ yearly.4012 = {
 
 	immediate = {
 		scope:heir = {
-			set_relation_friend = scope:vassal
+			set_relation_friend = { reason = friend_common_ground target = scope:vassal }
 		}
 	}
 }
@@ -1114,7 +1115,7 @@ yearly.4013 = {
 
 	immediate = {
 		scope:heir = {
-			set_relation_lover = scope:vassal
+			set_relation_lover = { reason = lover_encouraged target = scope:vassal involved_character = root }
 		}
 	}
 }
@@ -1139,19 +1140,19 @@ yearly.4014 = {
 				scope:vassal = {
 					can_start_scheme = {
 						type = murder
-						target = root
+						target_character = root
 					}
 				}
 			}
 			scope:vassal = {
 				start_scheme = {
 					type = murder
-					target = root
+					target_character = root
 				}
 				random_scheme = {
 					limit = {
 						scheme_type = murder
-						scheme_target = root
+						scheme_target_character = root
 					}
 					save_scope_as = murder_friends_scheme
 				}
@@ -1162,11 +1163,12 @@ yearly.4014 = {
 						scope:murder_friends_scheme = {
 							NOT = { scheme_is_character_agent = prev }
 						}
-						is_valid_as_agent_in_scheme = scope:murder_friends_scheme
+						char_can_fit_into_scheme_trigger = { SCHEME = scope:murder_friends_scheme }
 					}
-					force_add_to_scheme = {
-						scheme = scope:murder_friends_scheme
-						years = 5
+					force_assign_character_to_random_agent_slot_effect = {
+						SCHEME = scope:murder_friends_scheme
+						CHAR = scope:heir
+						YEARS = 5
 					}
 				}
 			}
@@ -1176,19 +1178,19 @@ yearly.4014 = {
 				scope:heir = {
 					can_start_scheme = {
 						type = murder
-						target = root
+						target_character = root
 					}
 				}
 			}
 			scope:heir = {
 				start_scheme = {
 					type = murder
-					target = root
+					target_character = root
 				}
 				random_scheme = {
 					limit = {
 						scheme_type = murder
-						scheme_target = root
+						scheme_target_character = root
 					}
 					save_scope_as = murder_friends_scheme
 				}
@@ -1199,23 +1201,18 @@ yearly.4014 = {
 						scope:murder_friends_scheme = {
 							NOT = { scheme_is_character_agent = prev }
 						}
-						is_valid_as_agent_in_scheme = scope:murder_friends_scheme
+						char_can_fit_into_scheme_trigger = { SCHEME = scope:murder_friends_scheme }
 					}
-					force_add_to_scheme = {
-						scheme = scope:murder_friends_scheme
-						years = 5
+					force_assign_character_to_random_agent_slot_effect = {
+						SCHEME = scope:murder_friends_scheme
+						CHAR = scope:vassal
+						YEARS = 5
 					}
 				}
 			}
 		}
 		scope:murder_friends_scheme = {
 			add_scheme_progress = scheme_progress_gain
-			if = { #If the progress is negative it will get a boost
-				limit = {
-					scheme_monthly_progress <= 0
-				}
-				add_scheme_modifier = {	type = murder_trusted_by_target_modifier days = 1825 }
-			}
 		}
 	}
 }
@@ -1292,7 +1289,7 @@ yearly.4021 = {
 				base = 1
 				modifier = {
 					add = 4
-					is_player_heir_of_trigger = { CHARACTER = root }
+					is_player_heir_of = root
 				}
 			}
 			save_scope_as = child
@@ -1327,17 +1324,6 @@ yearly.4021 = {
 				target = scope:child
 				modifier = reason_child_died
 			}
-			#They will not be happy with your kid
-			if = {
-				limit = {
-					NOT = {
-						has_relation_rival = scope:child
-					}
-				}
-				hidden_effect = {
-					set_relation_rival = scope:child
-				}
-			}
 			random_child = {
 				limit = {
 					yearly_4021_basic_child_trigger = yes
@@ -1346,7 +1332,24 @@ yearly.4021 = {
 					}
 				}
 				save_scope_as = vassal_kid
-				override_death_effect = { DEATH_REASON = death_accident }
+				override_death_effect = {
+					death_reason = death_accident
+				}
+			}
+			#They will not be happy with your kid
+			if = {
+				limit = {
+					NOT = {
+						has_relation_rival = scope:child
+					}
+				}
+				hidden_effect = {
+					set_relation_rival = {
+						target = scope:child
+						reason = rival_roughed_up_child
+						involved_character = scope:vassal_kid
+					}
+				}
 			}
 		}
 	}
@@ -1361,7 +1364,11 @@ yearly.4021 = {
 			}
 		}
 		#This vassal will not be happy with you...
-		progress_towards_rival_effect = { CHARACTER = scope:vassal OPINION = no }
+		progress_towards_rival_effect = { 
+			REASON = rival_dead_child
+			CHARACTER = scope:vassal 
+			OPINION = 0
+		}
 		
 		hidden_effect = { #It's more likely that the kid turns into a sadist if they face no consequences!
 			scope:child = {
@@ -1394,29 +1401,6 @@ yearly.4021 = {
 						trigger_event = { #Make them sadistic
 							id = child_personality.0010
 							days = { 14 30 }
-						}
-						#To start story about finding dead people around your house
-						if = {
-							limit = {
-								root = {
-									is_ai = no
-									NOT = {
-										has_character_flag = had_murderer_at_court_story_cycle
-									}
-								}
-							}
-							root = {
-								add_character_flag = {
-									flag = child_as_murderer
-									days = 3
-								}
-								set_variable = {
-									name = murderer_to_save
-									value = scope:child
-									days = 3
-								}
-								create_story = story_cycle_murders_at_court
-							}
 						}
 					}
 				}
@@ -1621,29 +1605,6 @@ yearly.4021 = {
 					else = {
 						add_diplomacy_skill = -1
 					}
-					#To start story about finding dead people around your house
-					if = {
-						limit = {
-							root = {
-								is_ai = no
-								NOT = {
-									has_character_flag = had_murderer_at_court_story_cycle
-								}
-							}
-						}
-						root = {
-							add_character_flag = {
-								flag = child_as_murderer
-								days = 3
-							}
-							set_variable = {
-								name = murderer_to_save
-								value = scope:child
-								days = 3
-							}
-							create_story = story_cycle_murders_at_court
-						}
-					}
 				}
 			}
 		}
@@ -1735,6 +1696,14 @@ yearly.4022 = {
 		animation = personality_vengeful
 	}
 
+	trigger = {
+		#Blocking for landless adventurer/administrative
+		OR = {
+			is_landless_adventurer = no
+			is_landless_administrative = no
+		}	
+	}
+
 	immediate = {
 		scope:child = {
 			if = {
@@ -1750,7 +1719,10 @@ yearly.4022 = {
 	option = {
 		name = yearly.4022.a
 		scope:child = {
-			set_relation_rival = root
+			set_relation_rival = {
+				target= root
+				reason = rival_was_imprisoned_by_parent
+			}
 			#To start story about finding dead people around your house
 			if = {
 				limit = {
@@ -1786,6 +1758,7 @@ yearly.4022 = {
 
 scripted_trigger yearly_4031_basic_check_trigger = {
 	is_ai = yes
+	is_available = yes
 	is_physically_able_adult = yes
 }
 
@@ -1796,7 +1769,7 @@ scripted_trigger yearly_4031_courtier_trigger = {
 		is_of_minor_interest_to_root_trigger = yes
 		is_cannibal_trigger = yes
 		AND = {
-			faith = { NOT = { has_doctrine = doctrine_witchcraft_accepted } }
+			faith = { NOT = { has_doctrine_parameter = witchcraft_accepted } }
 			is_witch_trigger = yes
 		}
 	}
@@ -1834,6 +1807,7 @@ yearly.4031 = {
 	
 	trigger = {
 		NOT = { has_character_flag = had_event_yearly_4031 }
+		is_landed = yes # Thematically landed
 		OR = {
 			any_owned_story = {
 				story_type = story_cycle_murders_at_court
@@ -1980,6 +1954,10 @@ yearly.4031 = {
 								modifier = {
 									add = 100
 									yearly_4031_murderous_trigger = yes
+								}
+								modifier = {
+									add = 200
+									exists = var:2037_rescued_manhunted_prisoner
 								}
 							}
 							save_scope_as = murderer
@@ -2133,11 +2111,7 @@ yearly.4051 = {
 
 	option = {
 		name = intrigue_scheme_ongoing.5015.a
-		
-		add_character_modifier = {
-			modifier = has_plush_carpet_modifier
-			days = 3650
-		}
+		add_carpet_modifier_effect = yes
 			
 		ai_chance = {
 			base = 1
@@ -2196,7 +2170,7 @@ yearly.4061 = {
 	}
 	theme = learning
 	override_background = {
-		event_background = throne_room
+		reference = throne_room
 	}
 	left_portrait = scope:hodja
 	right_portrait = {
@@ -2205,6 +2179,7 @@ yearly.4061 = {
 	}
 	
 	trigger = {
+		is_landed = yes # Thematically landed
 		# Warcraft
 		like_islam_religion_trigger = yes
 
@@ -2364,7 +2339,7 @@ yearly.4071 = {
 	}
 	theme = learning
 	override_background = {
-		event_background = throne_room
+		reference = throne_room
 	}
 	left_portrait = {
 		character = scope:councillor
@@ -2375,7 +2350,10 @@ yearly.4071 = {
 		# Warcraft
 		like_islam_religion_trigger = yes
 
-		exists = cp:councillor_court_chaplain
+		OR = {
+			exists = cp:councillor_court_chaplain
+			employs_court_position = chief_engineer_camp_officer			
+		}
 		NOT = { has_character_flag = had_event_yearly_4071 }
 		learning >= medium_skill_rating
 		NOT = { has_character_modifier = useful_insights_modifier }
@@ -2394,9 +2372,14 @@ yearly.4071 = {
 			flag = had_event_yearly_4071
 			years = 10
 		}
-		cp:councillor_court_chaplain = {
+		cp:councillor_court_chaplain ?= {
 			save_scope_as = councillor
 		}
+		random_court_position_holder = {
+			type = chief_engineer_camp_officer
+			save_scope_as = councillor
+		}
+		
 	}
 
 	option = { #Study the books
@@ -2476,7 +2459,7 @@ yearly.4081 = {
 	desc = yearly.4081.desc
 	theme = learning
 	override_background = {
-		event_background = throne_room
+		reference = throne_room
 	}
 	left_portrait = scope:councillor
 	
@@ -2577,9 +2560,10 @@ yearly.4081 = {
 			modifier = {
 				add = -100
 				scope:court_physician = {
-					has_trait_rank = {
+					has_trait = lifestyle_physician
+					has_trait_xp = {
 						trait = lifestyle_physician
-						rank = 3
+						value >= 100
 					}
 				}
 			}
@@ -2719,77 +2703,79 @@ yearly.4081 = {
 # by Linnéa Thimrén
 #######################
 
-yearly.4091 = {
-	type = character_event
-	title = yearly.4091.t
-	desc = {
-		desc = yearly.4091.desc_opening
-		first_valid = {
-			triggered_desc = {
-				trigger = {
-					any_realm_province = {
-						has_building = house_of_wisdom_01
-					}
-				}
-				desc = yearly.4091.desc_house
-			}
-			desc = yearly.4091.desc_no_house
-		}
-		desc = yearly.4091.desc
-	}
-	theme = learning
-	left_portrait = scope:ward
-	
-	trigger = {
-		# Warcraft
-		like_islam_religion_trigger = yes
-
-		NOT = { has_character_flag = had_event_yearly_4091 }
-		any_relation = {
-			type = ward
-			is_available_ai_child = yes
-			has_education_focus_trigger = yes
-		}
-	}
-
-	immediate = {
-		add_character_flag = {
-			flag = had_event_yearly_4091
-			years = 10
-		}
-		random_relation = {
-			type = ward
-			limit = {
-				is_available_ai_child = yes
-			}
-			save_scope_as = ward
-		}
-		capital_province = {
-			save_scope_as = capital
-		}
-	}
-
-	option = { #Ward learns
-		name = yearly.4091.a
-		custom_tooltip = yearly.4091.a.tt
-		scope:ward = {
-			hidden_effect = {
-				education_point_acquisition_effect = yes
-			}
-		}
-		ai_chance = {
-			base = 50
-		}
-	}
-
-	option = { #I'll learn
-		name = yearly.4091.b
-		add_character_modifier = {
-			modifier = diligent_student
-			years = 3
-		}
-		ai_chance = {
-			base = 50
-		}
-	}
-}
+# Warcraft
+# Library of Bagdad
+# yearly.4091 = {
+# 	type = character_event
+# 	title = yearly.4091.t
+# 	desc = {
+# 		desc = yearly.4091.desc_opening
+# 		first_valid = {
+# 			triggered_desc = {
+# 				trigger = {
+# 					any_realm_province = {
+# 						has_building = house_of_wisdom_01
+# 					}
+# 				}
+# 				desc = yearly.4091.desc_house
+# 			}
+# 			desc = yearly.4091.desc_no_house
+# 		}
+# 		desc = yearly.4091.desc
+# 	}
+# 	theme = learning
+# 	left_portrait = scope:ward
+# 	
+# 	trigger = {
+# 		# Warcraft
+# 		like_islam_religion_trigger = yes
+# 
+# 		NOT = { has_character_flag = had_event_yearly_4091 }
+# 		any_relation = {
+# 			type = ward
+# 			is_available_ai_child = yes
+# 			has_education_focus_trigger = yes
+# 		}
+# 	}
+# 
+# 	immediate = {
+# 		add_character_flag = {
+# 			flag = had_event_yearly_4091
+# 			years = 10
+# 		}
+# 		random_relation = {
+# 			type = ward
+# 			limit = {
+# 				is_available_ai_child = yes
+# 			}
+# 			save_scope_as = ward
+# 		}
+# 		capital_province = {
+# 			save_scope_as = capital
+# 		}
+# 	}
+# 
+# 	option = { #Ward learns
+# 		name = yearly.4091.a
+# 		custom_tooltip = yearly.4091.a.tt
+# 		scope:ward = {
+# 			hidden_effect = {
+# 				education_point_acquisition_effect = yes
+# 			}
+# 		}
+# 		ai_chance = {
+# 			base = 50
+# 		}
+# 	}
+# 
+# 	option = { #I'll learn
+# 		name = yearly.4091.b
+# 		add_character_modifier = {
+# 			modifier = diligent_student
+# 			years = 3
+# 		}
+# 		ai_chance = {
+# 			base = 50
+# 		}
+# 	}
+# }

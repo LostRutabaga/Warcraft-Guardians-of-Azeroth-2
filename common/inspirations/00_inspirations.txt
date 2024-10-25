@@ -41,6 +41,18 @@
 				min = 0.5
 			}
 		}
+		
+		# If you used the "Comission Artifact" decision and have a relevant estate buildling, you get a discount
+		if = {
+			limit = {
+				exists = scope:inspiration_owner
+				scope:inspiration_owner = {
+					has_character_flag = local_artisan
+				}
+				liege.domicile ?= { has_domicile_parameter = estate_reduce_commission_artifact_cost } # We check liege specifically because scope:inspiration_sponsor does not exist yet
+			}
+			multiply = estate_reduce_commission_artifact_cost_value
+		}
 		round = yes
 	}
 	progress_chance = 75
@@ -173,6 +185,18 @@ armor_inspiration = {
 				# Min cost cannot drop beyond 50%
 				min = 0.5
 			}
+		}
+		
+		# If you used the "Comission Artifact" decision and have a relevant estate buildling, you get a discount
+		if = {
+			limit = {
+				exists = scope:inspiration_owner
+				scope:inspiration_owner = {
+					has_character_flag = local_artisan
+				}
+				liege.domicile ?= { has_domicile_parameter = estate_reduce_commission_artifact_cost } # We check liege specifically because scope:inspiration_sponsor does not exist yet
+			}
+			multiply = estate_reduce_commission_artifact_cost_value
 		}
 		round = yes
 	}
@@ -330,7 +354,20 @@ book_inspiration = {
 
 				# Min cost cannot drop beyond 50%
 				min = 0.5
+				max = 3.0 # we gotta cap this, man
 			}
+		}
+		
+		# If you used the "Comission Artifact" decision and have a relevant estate buildling, you get a discount
+		if = {
+			limit = {
+				exists = scope:inspiration_owner
+				scope:inspiration_owner = {
+					has_character_flag = local_artisan
+				}
+				liege.domicile ?= { has_domicile_parameter = estate_reduce_commission_artifact_cost } # We check liege specifically because scope:inspiration_sponsor does not exist yet
+			}
+			multiply = estate_reduce_commission_artifact_cost_value
 		}
 		round = yes
 	}
@@ -461,6 +498,18 @@ weaver_inspiration = {
 				# Min cost cannot drop beyond 50%
 				min = 0.5
 			}
+		}
+		
+		# If you used the "Comission Artifact" decision and have a relevant estate buildling, you get a discount
+		if = {
+			limit = {
+				exists = scope:inspiration_owner
+				scope:inspiration_owner = {
+					has_character_flag = local_artisan
+				}
+				liege.domicile ?= { has_domicile_parameter = estate_reduce_commission_artifact_cost } # We check liege specifically because scope:inspiration_sponsor does not exist yet
+			}
+			multiply = estate_reduce_commission_artifact_cost_value
 		}
 		round = yes
 	}
@@ -953,6 +1002,18 @@ artisan_inspiration = {
 				min = 0.5
 			}
 		}
+		
+		# If you used the "Comission Artifact" decision and have a relevant estate buildling, you get a discount
+		if = {
+			limit = {
+				exists = scope:inspiration_owner
+				scope:inspiration_owner = {
+					has_character_flag = local_artisan
+				}
+				liege.domicile ?= { has_domicile_parameter = estate_reduce_commission_artifact_cost } # We check liege specifically because scope:inspiration_sponsor does not exist yet
+			}
+			multiply = estate_reduce_commission_artifact_cost_value
+		}
 		round = yes
 	}
 	progress_chance = 75
@@ -998,9 +1059,10 @@ artisan_inspiration = {
 										10 = { # Stone
 											modifier = {
 												factor = 0.2
+												# Warcraft
 												AND = { # Pagans prefer wood
-													NOT = { faith = faith:hellenic_pagan }
-													religion = { is_in_family = rf_pagan }
+													# NOT = { faith = faith:hellenic_pagan }
+													religion = { is_in_family = rf_life }
 												}
 											}
 											set_variable = {
@@ -1021,6 +1083,12 @@ artisan_inspiration = {
 									set_variable = {
 										name = artifact_artisan_type
 										value = flag:artisan_type_throne
+									}
+								}
+								10 = {
+									set_variable = {
+										name = artifact_artisan_type
+										value = flag:artisan_type_urn
 									}
 								}
 							}
@@ -1151,6 +1219,18 @@ smith_inspiration = {
 				min = 0.5
 			}
 		}
+		
+		# If you used the "Comission Artifact" decision and have a relevant estate buildling, you get a discount
+		if = {
+			limit = {
+				exists = scope:inspiration_owner
+				scope:inspiration_owner = {
+					has_character_flag = local_artisan
+				}
+				liege.domicile ?= { has_domicile_parameter = estate_reduce_commission_artifact_cost } # We check liege specifically because scope:inspiration_sponsor does not exist yet
+			}
+			multiply = estate_reduce_commission_artifact_cost_value
+		}
 		round = yes
 	}
 	progress_chance = 75
@@ -1164,6 +1244,21 @@ smith_inspiration = {
 					}
 					random_list = {
 						10 = { #Unspecified! Sponsor can choose
+							trigger = {
+								trigger_if = {
+									limit = {
+										liege ?= {
+											is_landless_adventurer = yes
+										}
+									}
+									liege = {
+										is_landless_adventurer = no
+									}
+								}
+								trigger_else = {
+									always = yes
+								}
+							}
 							modifier = {
 								add = 20
 								has_personality_submissive_trigger = yes
@@ -1188,12 +1283,42 @@ smith_inspiration = {
 									}
 								}
 								10 = {
+									trigger = {
+										trigger_if = {
+											limit = {
+												liege ?= {
+													is_landless_adventurer = yes
+												}
+											}
+											liege = {
+												is_landless_adventurer = no
+											}
+										}
+										trigger_else = {
+											always = yes
+										}
+									}
 									set_variable = {
 										name = artifact_smith_type
 										value = flag:smith_type_crown
 									}
 								}
 								10 = {
+									trigger = {
+										trigger_if = {
+											limit = {
+												liege ?= {
+													is_landless_adventurer = yes
+												}
+											}
+											liege = {
+												is_landless_adventurer = no
+											}
+										}
+										trigger_else = {
+											always = yes
+										}
+									}
 									set_variable = {
 										name = artifact_smith_type
 										value = flag:smith_type_goblet
@@ -1410,6 +1535,172 @@ alchemy_inspiration = {
 			}
 		}
 	}
+	on_sponsor_invalidated = {
+		save_scope_value_as = {
+			name = alchemy_inspiration
+			value = yes
+		}
+		if = {
+			limit = { exists = scope:inspiration_sponsor }
+			scope:inspiration_sponsor = {
+				trigger_event = {
+					on_action = inspiration_invalidated_events
+				}
+			}
+		}
+	}
+}
+
+research_inspiration = {
+	gold = fp3_research_base_cost
+
+	progress_chance = 75
+
+	is_valid = {
+		scope:inspiration_owner = {
+			# Must be court scholar of sponsor
+			has_court_position = court_scholar_court_position
+			trigger_if = {
+				limit = { is_imprisoned = yes }
+				is_imprisoned_by = scope:inspiration_owner
+			}
+			NOT = { has_character_flag = research_invalidated }
+		}
+	}
+
+	on_monthly = {
+		scope:inspiration_sponsor = {
+			trigger_event = { on_action = research_ongoing_events }
+		}
+	}
+	on_complete = {
+		scope:inspiration_owner = {
+			set_variable = {
+				name = created_artifact_for
+				value = scope:inspiration_sponsor
+			}
+			set_variable = {
+				name = created_artifact_type
+				value = flag:research
+			}
+		}
+		scope:inspiration_sponsor = { 
+			trigger_event = fp3_scholarship.8999 
+		}
+	}
+
+	on_owner_death = {
+		# For loc
+		save_scope_value_as = {
+			name = research_inspiration
+			value = yes
+		}
+		if = {
+			limit = { exists = scope:inspiration_sponsor }
+			scope:inspiration_sponsor = {
+				trigger_event = {
+					on_action = inspiration_invalidated_events
+				}
+			}
+		}
+	}
+
+	on_invalidated = {
+		save_scope_value_as = {
+			name = research_inspiration
+			value = yes
+		}
+		if = {
+			limit = {
+				exists = scope:inspiration_owner
+				scope:inspiration_owner = { NOT = { has_character_flag = research_invalidated } }
+			}
+			scope:inspiration_sponsor = {
+				trigger_event = {
+					on_action = inspiration_invalidated_events
+				}
+			}
+		}
+	}
+
+	on_sponsor_invalidated = {
+		save_scope_value_as = {
+			name = research_inspiration
+			value = yes
+		}
+		if = {
+			limit = { exists = scope:inspiration_sponsor }
+			scope:inspiration_sponsor = {
+				trigger_event = {
+					on_action = inspiration_invalidated_events
+				}
+			}
+		}
+	}
+}
+
+religious_inspiration = {
+	gold = medium_gold_value
+
+	progress_chance = 100
+
+	is_valid = {
+	}
+
+	on_monthly = { # No events needed; rare and always-succeeding inspiration!
+		#scope:inspiration_sponsor = {
+		#	trigger_event = { on_action = research_ongoing_events }
+		#}
+	}
+	on_complete = {
+		scope:inspiration_owner = {
+			set_variable = {
+				name = created_artifact_for
+				value = scope:inspiration_sponsor
+			}
+			set_variable = {
+				name = created_artifact_type
+				value = flag:major_religious_inspiration
+			}
+		}
+		scope:inspiration_sponsor = { 
+			trigger_event = historical_char_creation_events.2
+		}
+	}
+
+	on_owner_death = {
+		# For loc
+		save_scope_value_as = {
+			name = alchemy_inspiration
+			value = yes
+		}
+		if = {
+			limit = { exists = scope:inspiration_sponsor }
+			scope:inspiration_sponsor = {
+				trigger_event = {
+					on_action = inspiration_invalidated_events
+				}
+			}
+		}
+	}
+
+	on_invalidated = {
+		save_scope_value_as = {
+			name = alchemy_inspiration
+			value = yes
+		}
+		if = {
+			limit = {
+				exists = scope:inspiration_owner
+			}
+			scope:inspiration_sponsor = {
+				trigger_event = {
+					on_action = inspiration_invalidated_events
+				}
+			}
+		}
+	}
+
 	on_sponsor_invalidated = {
 		save_scope_value_as = {
 			name = alchemy_inspiration

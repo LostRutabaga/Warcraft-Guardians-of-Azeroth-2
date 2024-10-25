@@ -7,7 +7,7 @@
 		if = {
 			limit = {
 				has_dlc_feature = hybridize_culture
-				should_show_tutorial_alert = { LESSON = reactive_advice_form_hybrid_culture }	
+				#should_show_tutorial_alert = { LESSON = reactive_advice_form_hybrid_culture }	
 				is_tutorial_lesson_completed = reactive_advice_dynamic_culture
 
 				any_sub_realm_county = {
@@ -53,7 +53,7 @@ action_reactive_advice_should_form_hybrid_culture = {
 	check_create_action = {
 		if = {
 			limit = {
-				should_show_tutorial_alert = { LESSON = reactive_advice_should_form_hybrid_culture }
+				#should_show_tutorial_alert = { LESSON = reactive_advice_should_form_hybrid_culture }
 				has_dlc_feature = hybridize_culture
 				NOT = { is_tutorial_lesson_completed = reactive_advice_should_form_hybrid_culture }
 
@@ -110,7 +110,7 @@ action_reactive_advice_royal_court = {
 			limit = {
 				has_dlc_feature = royal_court
 				has_royal_court = yes
-				should_show_tutorial_alert = { LESSON = reactive_advice_royal_court }	
+				#should_show_tutorial_alert = { LESSON = reactive_advice_royal_court }	
 			}
 			try_create_important_action = {
 				important_action_type = action_reactive_advice_royal_court

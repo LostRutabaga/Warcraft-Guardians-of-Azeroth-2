@@ -80,10 +80,48 @@ court_yearly.1000 = {
 	theme = court
 	left_portrait = {
 		character = root
+		animation = stress
+	}
+	right_portrait = {
+		character = scope:child
+		triggered_animation = {
+			trigger = {
+				scope:debauchery_type = flag:drunkard
+			}
+  			animation = drink
+  		}
+		triggered_animation = {
+			trigger = {
+				scope:debauchery_type = flag:hashishiyah
+			}
+  			animation = personality_irrational
+  		}
+		triggered_animation = {
+			trigger = {
+				scope:debauchery_type = flag:rakish
+			}
+  			animation = flirtation
+  		}
+	}
+	override_background = {
+		trigger = {
+			OR = {
+				scope:debauchery_type = flag:drunkard
+				scope:debauchery_type = flag:rakish
+			}
+		}
+		reference = tavern
+	}
+	override_background = {
+		trigger = {
+			scope:debauchery_type = flag:hashishiyah
+		}
+		reference = bp1_wine_cellar
 	}
 	
 	trigger = {
 		has_royal_court = yes
+		has_dlc_feature = royal_court
 		any_child = {
 			court_1000_valid_child = yes
 		}
@@ -110,6 +148,7 @@ court_yearly.1000 = {
 						factor = 0.1
 						OR = {
 							faith = { trait_is_sin = drunkard }
+							# Warcraft
 							like_islam_religion_trigger = yes
 						}
 					}
@@ -294,6 +333,7 @@ court_yearly.1001 = {
 	trigger = {
 		# We are still in the same court as the initial debaucher.
 		has_royal_court = yes
+		has_dlc_feature = royal_court
 		scope:child = {
 			is_courtier_of = root.court_owner
 		}
@@ -387,6 +427,7 @@ court_yearly.1020 = {
 	
 	trigger = {
 		has_royal_court = yes
+		has_dlc_feature = royal_court
 		any_pool_guest = { court_1020_suitable_guest_trigger = yes }
 		any_neighboring_and_across_water_top_liege_realm = {
 			exists = holder
@@ -676,6 +717,7 @@ court_yearly.2001 = {
 	trigger = {
 		# DLC check.
 		has_royal_court = yes
+		has_dlc_feature = royal_court
 		# Standard checks.
 		is_available_at_peace_adult = yes
 		is_landed = yes
@@ -779,6 +821,7 @@ court_yearly.2001 = {
 			50 = {
 				desc = court.2001.a.sadistic.crony_a_wins
 				send_interface_toast = {	
+					type = event_toast_effect_neutral
 					title = court.2001.a.sadistic.crony_a_wins
 					left_icon = scope:crony_a
 					pay_short_term_gold = {
@@ -789,7 +832,8 @@ court_yearly.2001 = {
 			}
 			50 = {
 				desc = court.2001.a.sadistic.crony_b_wins
-				send_interface_toast = {	
+				send_interface_toast = {
+					type = event_toast_effect_neutral
 					title = court.2001.a.sadistic.crony_b_wins
 					left_icon = scope:crony_b
 					pay_short_term_gold = {
@@ -958,6 +1002,7 @@ court_yearly.6040 = {
 
 	trigger = {
 		has_royal_court = yes
+		has_dlc_feature = royal_court
 		any_courtier_or_guest = {
 			court_6040_has_valid_scrounger_trigger = yes
 		}
@@ -1020,19 +1065,7 @@ court_yearly.6040 = {
 				exists = scope:jester
 			}
 		}
-		if = {
-			limit = {
-				exists = scope:jester
-			}
-			revoke_court_position = {
-				recipient = scope:jester
-				court_position = court_jester_court_position
-			}
-		}
-		appoint_court_position = {
-			recipient = scope:scrounger
-			court_position = court_jester_court_position
-		}
+		court_position_grant_effect = { POS = court_jester CANDIDATE = scope:scrounger EMPLOYER = root }
 		change_current_court_grandeur = minor_court_grandeur_gain
 		every_courtier_or_guest = {
 			custom = court_6000_all_courtiers_and_guests
@@ -1067,7 +1100,7 @@ court_yearly.6040 = {
 				has_relation_potential_friend = scope:scrounger
 				can_set_relation_friend_trigger = { CHARACTER = scope:scrounger }
 			}
-			set_relation_friend = scope:scrounger
+			set_relation_friend = { reason = friend_amusing_antics target = scope:scrounger }
 		}
 		scope:scrounger = {
 			target_weight_modifier_effect = {
@@ -1112,7 +1145,10 @@ court_yearly.6040 = {
 				has_relation_potential_rival = scope:scrounger
 				can_set_relation_rival_trigger = { CHARACTER = scope:scrounger }
 			}
-			set_relation_rival = scope:scrounger
+			set_relation_rival = {
+				target = scope:scrounger
+				reason = rival_scrounger_kicked_out_of_court
+			}
 		}
 		add_stress = medium_stress_loss
 		ai_chance = {
@@ -1141,7 +1177,9 @@ court_yearly.6041 = {
 
 	trigger = {
 		has_royal_court = yes
+		has_dlc_feature = royal_court
 		exists = scope:scrounger #checking that they are still alive
+		scope:scrounger = { is_alive = yes }
 	}
 
 	immediate = {
@@ -1184,7 +1222,7 @@ court_yearly.6041 = {
 		}
 		employ_character_as_position_in_current_scope_court_effect = { 
 	        CHARACTER = scope:scrounger 
-	        POSITION = court_poet_court_position
+	        POSITION = court_poet
 	    }
 	    ai_chance = {
 			base = 40
@@ -1215,6 +1253,7 @@ court_yearly.6041 = {
 					}
 					root = {
 						send_interface_toast = {
+							type = event_toast_effect_bad
 							title = court.6041.b.failure.tt
 							left_icon = scope:scrounger
 							stress_impact = {
@@ -1233,6 +1272,7 @@ court_yearly.6041 = {
 					custom_tooltip = inspire_interaction_book
 					root = {
 						send_interface_toast = {
+							type = event_toast_effect_good
 							title = court.6041.b.success.tt
 							left_icon = scope:scrounger
 						}
@@ -1317,6 +1357,7 @@ court_yearly.5001 = {
 	
 	trigger = {
 		has_royal_court = yes
+		has_dlc_feature = royal_court
 		NOT = { has_character_flag = had_event_court_5001 }
 		any_relation = {
 			type = friend
@@ -1480,7 +1521,7 @@ court_yearly.5001 = {
 			limit = {
 				can_set_relation_best_friend_trigger = { CHARACTER = scope:friend }
 			}
-			set_relation_best_friend = scope:friend
+			set_relation_best_friend = { reason = best_friend_make_time copy_reason = friend target = scope:friend }
 		}
 	}
 
@@ -1593,7 +1634,7 @@ court_yearly.5010 = {
 	desc = court.5010.desc
 	theme = court
 	override_background = {
-		event_background = corridor_night
+		reference = corridor_night
 	}
 	left_portrait = {
 		character = scope:family_member
@@ -1602,6 +1643,7 @@ court_yearly.5010 = {
 	
 	trigger = {
 		has_royal_court = yes
+		has_dlc_feature = royal_court
 		is_ai = no
 		location = {
 			exists = var:possible_haunting
@@ -1745,6 +1787,7 @@ court_yearly.5020 = {
 	
 	trigger = {
 		has_royal_court = yes
+		has_dlc_feature = royal_court
 		NOT = { has_character_flag = had_event_court_5020 }
 		any_owned_story = {
 			story_type = story_cycle_pet_cat
@@ -1809,8 +1852,9 @@ court_yearly.5020 = {
 				NOT = { has_relation_rival = scope:courtier }
 			}
 			progress_towards_rival_effect = {
+				REASON = rival_deposed_for_cat
 				CHARACTER = scope:courtier
-				OPINION = yes
+				OPINION = default_rival_opinion
 			}
 		}
 		else = {
@@ -1891,6 +1935,7 @@ court_yearly.5021 = {
 	
 	trigger = {
 		has_royal_court = yes
+		has_dlc_feature = royal_court
 		exists = scope:story
 		scope:courtier = {
 			is_alive = yes
@@ -1987,6 +2032,7 @@ court_yearly.6030 = {
 
 	trigger = {
 		has_royal_court = yes
+		has_dlc_feature = royal_court
 		highest_held_title_tier >= tier_kingdom
 		is_adult = yes
 		NOT = {
@@ -2239,7 +2285,7 @@ court_yearly.6030 = {
 				has_trait = sadistic
 				has_trait = torturer
 				has_trait = vengeful
-				has_trait = giant
+				has_dire_or_giant_trigger = yes
 				has_trait = physique_good
 				has_trait = berserker
 			}
@@ -2248,10 +2294,8 @@ court_yearly.6030 = {
 		random_list = {
 			20 = {
 				scope:6030_courtier = {
-					death = {
-						death_reason = death_beaten
-						killer = root
-					}
+					# Warcraft
+					override_death_killer_effect = { death_reason = death_beaten killer = root }
 				}
 			}
 			50 = {
@@ -2261,6 +2305,7 @@ court_yearly.6030 = {
 			}
 			30 = {
 				progress_towards_rival_effect = {
+					REASON = rival_punched_for_song
 					CHARACTER = scope:6030_courtier
 					OPINION = -30
 				}
@@ -2280,6 +2325,7 @@ court_yearly.6030 = {
 			}
 		}
 		stress_impact = {
+			eccentric = medium_stress_impact_loss
 			shy = major_stress_impact_gain
 			compassionate = major_stress_impact_gain
 			patient = major_stress_impact_gain
@@ -2371,6 +2417,7 @@ court_yearly.7100 = {
 
 	trigger = {
 		has_royal_court = yes
+		has_dlc_feature = royal_court
 		# Has Master of the Hunt employed
 		any_court_position_holder = {
 			court_7100_huntsmaster_trigger = yes
@@ -2468,18 +2515,22 @@ court_yearly.7100 = {
 	# I shall keep it as a pet!
 	option = { 
 		name = court.7100.b
-
 		stress_impact = {
 			craven = medium_stress_impact_gain
 		}
-
 		random = {
-			chance = 50
+			chance = 75
+			modifier = {
+				add = {
+					value = prowess
+					multiply = -1
+					multiply = 2.5
+					min = -50
+				}
+			}
 			increase_wounds_no_death_effect = { REASON = wild_animal }
 		}
-
 		court_7100_animal_bonus_effect = yes
-
 	}
 
 	# You can keep it!
@@ -2493,10 +2544,17 @@ court_yearly.7100 = {
 				opinion = -10
 			}
 			random = {
-				chance = 50
+				chance = 75
+				modifier = {
+					add = {
+						value = scope:huntmaster.prowess
+						multiply = -1
+						multiply = 2.5
+						min = -50
+					}
+				}
 				increase_wounds_no_death_effect = { REASON = wild_animal }
 			}	
-
 			court_7100_animal_bonus_effect = yes
 		}
 	}
@@ -2567,6 +2625,7 @@ court_yearly.7200 = {
 
 	trigger = {
 		has_royal_court = yes
+		has_dlc_feature = royal_court
 		# Employs a Court Musician
 		any_court_position_holder = {
 			court_7200_court_musician_trigger = yes
@@ -2713,6 +2772,7 @@ court_yearly.7030 = {
 
 	trigger = {
 		has_royal_court = yes
+		has_dlc_feature = royal_court
 		exists = cp:councillor_steward
 		cp:councillor_steward = {
 			is_available_ai_adult = yes
@@ -2871,6 +2931,7 @@ court_yearly.7030 = {
 		}
 
 		stress_impact = {
+			eccentric = minor_stress_impact_loss
 			generous = medium_stress_impact_gain
 			compassionate = medium_stress_impact_gain
 			cynical = minor_stress_impact_gain
@@ -2886,8 +2947,9 @@ scripted_trigger court_7040_ascetic_religion_trigger = {
 			like_christianity_religion_trigger = yes
 			like_buddhism_religion_trigger = yes
 			like_jainism_religion_trigger = yes
-			religion_tag = taoism_religion
-			religion_tag = dualism_religion
+			# Warcraft
+			like_taoism_religion_trigger = yes
+			# religion_tag = dualism_religion
 			has_doctrine = tenet_asceticism
 		}
 	}
@@ -2911,6 +2973,7 @@ court_yearly.7040 = {
 
 	trigger = {
 		has_royal_court = yes
+		has_dlc_feature = royal_court
 		NOT = { has_character_modifier = court_7040_ascetic_practices }
 		# Must follow a faith that historically practised asceticism, or possess the asceticism tenet
 
@@ -3093,8 +3156,8 @@ court_yearly.4350 = {
 	
 	trigger = {
 		has_royal_court = yes
-		NOT = { 
-		has_character_flag = has_had_caravan_islamic_event }
+		has_dlc_feature = royal_court
+		NOT = { has_character_flag = has_had_caravan_islamic_event }
 		is_at_war = no
 		like_islam_religion_trigger = yes
 		any_neighboring_realm_same_rank_owner = {
@@ -3264,6 +3327,7 @@ court_yearly.4355 = {
 	
 	trigger = {
 		has_royal_court = yes
+		has_dlc_feature = royal_court
 		NOT = { has_character_flag = has_had_caravan_christian_event }
 		is_at_war = no
 		like_christianity_religion_trigger = yes 
@@ -3467,10 +3531,18 @@ court_yearly.4800 = {
 	theme = court
 	trigger = {
 		has_royal_court = yes
-		any_court_position_holder = {
-			type = bodyguard_court_position
-			is_available_ai_adult = yes
+		has_dlc_feature = royal_court
+		OR = {
+			any_court_position_holder = {
+				type = bodyguard_court_position
+				is_available_ai_adult = yes
+			}  # Warcraft - Remove
+			# any_court_position_holder = {
+			# 	type = akolouthos_court_position
+			# 	is_available_ai_adult = yes
+			# }
 		}
+		
 		OR = {
 			AND = {
 				employs_court_position = court_jester_court_position
@@ -3502,13 +3574,28 @@ court_yearly.4800 = {
 	}
 
 	immediate = {
-		random_court_position_holder = {
-			type = bodyguard_court_position
+		if = {
 			limit = {
-				is_available_ai_adult = yes
+				employs_court_position = bodyguard_court_position
 			}
-			save_scope_as = defenestrating_bodyguard
+			# random_court_position_holder = {
+			# 	type = akolouthos_court_position
+			# 	limit = {
+			# 		is_available_ai_adult = yes
+			# 	}
+			# 	save_scope_as = defenestrating_bodyguard
+			# }
 		}
+		else = {
+			random_court_position_holder = {
+				type = bodyguard_court_position
+				limit = {
+					is_available_ai_adult = yes
+				}
+				save_scope_as = defenestrating_bodyguard
+			}
+		}
+		
 		if = {
 			limit ={
 				employs_court_position = court_jester_court_position
@@ -3542,7 +3629,7 @@ court_yearly.4800 = {
 			10 = {
 				scope:defenestrated_character = {
 					increase_wounds_effect = { REASON = defenestration }
-					add_trait = maimed
+					apply_maimed_trait_and_modifier_effect = yes
 					add_opinion = {
 						target = root
 						opinion = -20
@@ -3556,12 +3643,13 @@ court_yearly.4800 = {
 				}
 				hidden_effect = {
 					send_interface_toast = {
+						type = event_toast_effect_neutral
 						left_icon = scope:defenestrated_character
 						title = court.4800.maimed_toast
 						show_as_tooltip = {
 							scope:defenestrated_character = {
 								increase_wounds_effect = { REASON = defenestration }
-								add_trait = maimed
+								apply_maimed_trait_and_modifier_effect = yes
 							}
 						}
 					}
@@ -3569,21 +3657,18 @@ court_yearly.4800 = {
 			}
 			5 = {
 				scope:defenestrated_character = {
-					death = {
-						death_reason = death_defenestration
-						killer = scope:defenestrating_bodyguard
-					}
+					# Warcraft
+					override_death_killer_effect = { death_reason = death_defenestration killer = scope:defenestrating_bodyguard }
 				}
 				hidden_effect = {
 					send_interface_toast = {
+						type = event_toast_effect_neutral
 						left_icon = scope:defenestrated_character
 						title = court.4800.death_toast
 						show_as_tooltip = {
 							scope:defenestrated_character = {
-								death = {
-									death_reason = death_defenestration
-									killer = scope:defenestrating_bodyguard
-								}
+								# Warcraft
+								override_death_killer_effect = { death_reason = death_defenestration killer = scope:defenestrating_bodyguard }
 							}
 						}
 					}
@@ -3649,10 +3734,24 @@ court_yearly.4800 = {
 	
 	option = {
 		name = court.4800.c
-		revoke_court_position = {
-			recipient = scope:defenestrating_bodyguard
-			court_position = bodyguard_court_position
-		}
+		if = {
+			limit = {
+				scope:defenestrating_bodyguard = {
+					has_court_position = bodyguard_court_position
+					
+				}
+			}
+			revoke_court_position = {
+				recipient = scope:defenestrating_bodyguard
+				court_position = bodyguard_court_position
+			}
+		}  # Warcraft - Remove
+		# else = {
+		# 	revoke_court_position = {
+		# 		recipient = scope:defenestrating_bodyguard
+		# 		court_position = akolouthos_court_position
+		# 	}
+		# }
 		reverse_add_opinion = {
 			target = scope:defenestrated_character
 			opinion = 30
@@ -3688,13 +3787,17 @@ scripted_effect event_0101_spawn_criminal_effect = {
 			10 = {
 				modifier = {
 					factor = 0
-					root.faith = { has_doctrine = doctrine_deviancy_accepted }
+					root.faith = { has_doctrine_parameter = deviancy_accepted }
 				}
 				modifier = {
 					factor = 0.5
-					root.faith = { has_doctrine = doctrine_deviancy_shunned }
+					root.faith = { has_doctrine_parameter = deviancy_shunned }
 				}
 				add_trait = deviant
+				save_scope_value_as = {
+					name = criminal_trait
+					value = flag:deviant_trait_flag
+				}
 			}
 			10 = {
 				add_trait = murderer
@@ -3702,13 +3805,17 @@ scripted_effect event_0101_spawn_criminal_effect = {
 			10 = {
 				modifier = {
 					factor = 0
-					root.faith = { has_doctrine = doctrine_witchcraft_accepted }
+					root.faith = { has_doctrine_parameter = witchcraft_accepted }
 				}
 				modifier = {
 					factor = 0.5
-					root.faith = { has_doctrine = doctrine_witchcraft_shunned }
+					root.faith = { has_doctrine_parameter = witchcraft_shunned }
 				}
 				add_trait = witch
+				save_scope_value_as = {
+					name = criminal_trait
+					value = flag:witch_trait_flag
+				}
 			}
 			10 = {
 				add_trait = lazy
@@ -3735,9 +3842,17 @@ scripted_effect event_0101_spawn_criminal_effect = {
 					every_spouse  = {
 						add_trait = cannibal
 					}
+					save_scope_value_as = {
+						name = criminal_trait
+						value = flag:cannibal_trait_flag
+					}
 				}
 				10 = {
 					add_trait = sadistic
+					save_scope_value_as = {
+						name = criminal_trait
+						value = flag:sadistic_trait_flag
+					}
 				}
 				10 = { #Holy man murderer
 					modifier = {
@@ -3981,6 +4096,10 @@ court_yearly.0101 = {
 		character = scope:executioner
 		animation = schadenfreude
 	}
+	right_portrait = {
+		character  = scope:lowborn_criminal
+		animation = fear
+	}
 	
 	
 	# More likely to trigger if you are a sadistic person 
@@ -3994,6 +4113,7 @@ court_yearly.0101 = {
 
 	trigger = {
 		has_royal_court = yes
+		has_dlc_feature = royal_court
 		is_available_at_peace_adult = yes
 		employs_court_position = executioner_court_position
 	}
@@ -4038,7 +4158,8 @@ court_yearly.0101 = {
 				scope:lowborn_criminal = {
 					has_trait = murderer
 					has_character_flag = need_priest_outfit
-					faith = { has_doctrine = tenet_sky_burials }
+					# Warcraft
+					# faith = { has_doctrine = tenet_sky_burials }
 				}
 			}
 			text = court.0101.a.priest.sky
@@ -4125,33 +4246,31 @@ court_yearly.0101 = {
 				limit = {
 					has_trait = cannibal
 				}
-				death = {
-					killer = root
-					death_reason = death_torture
-				}
+				
+				# Warcraft
+				override_death_killer_effect = { death_reason = death_torture killer = root }
 			}
 			every_spouse = {
 				limit = {
 					has_trait = cannibal
 				}
-				death = {
-					killer = root
-					death_reason = death_torture
-				}
+				
+				# Warcraft
+				override_death_killer_effect = { death_reason = death_torture killer = root }
 			}
-			death = {
-				killer = root
-				death_reason = death_torture
-			}
+			
+			# Warcraft
+			override_death_killer_effect = { death_reason = death_torture killer = root }
 		}
 		progress_towards_friend_effect = {
 			CHARACTER = scope:executioner
-			OPINION = yes
+			OPINION = default_friend_opinion
+			REASON = friend_art_of_torture_punishment
 		}
 	}
 
 	#Option C: I like this person, bring them to court!
-	option = { 
+	option = {
 		trigger = {
 			OR = {
 				AND = {
@@ -4159,36 +4278,28 @@ court_yearly.0101 = {
 						has_trait = sadistic
 						any_secret = { secret_type = secret_murder }
 					}
-					scope:lowborn_criminal = {
-						has_trait = sadistic
-					}
+					scope:criminal_trait ?= flag:sadistic_trait_flag
 				}
 				AND = {
 					OR = {
 						has_trait = cannibal
 						any_secret = { secret_type = secret_cannibal }
 					}
-					scope:lowborn_criminal = {
-						has_trait = cannibal
-					}
+					scope:criminal_trait ?= flag:cannibal_trait_flag
 				}
 				AND = {
 					OR = {
 						has_trait = deviant
 						any_secret = { secret_type = secret_deviant }
 					}
-					scope:lowborn_criminal = {
-						has_trait = deviant
-					}
+					scope:criminal_trait ?= flag:deviant_trait_flag
 				}
 				AND = {
 					OR = {
 						has_trait = witch
 						any_secret = { secret_type = secret_witch }
 					}
-					scope:lowborn_criminal = {
-						has_trait = witch
-					}
+					scope:criminal_trait ?= flag:witch_trait_flag
 				}
 			}
 		}
@@ -4230,7 +4341,7 @@ court_yearly.0101 = {
 		every_in_list = {
 			list = lowborn_criminal_list
 			root = {
-				recruit_courtier = prev
+				add_courtier = prev
 			}
 		}
 		if = {
@@ -4238,7 +4349,7 @@ court_yearly.0101 = {
 				has_trait = deviant
 				can_set_relation_lover_trigger = { CHARACTER = scope:lowborn_criminal }
 			}
-			set_relation_lover = scope:lowborn_criminal
+			set_relation_lover = { reason = lover_deviant target = scope:lowborn_criminal }
 		}
 	}
 
@@ -4248,7 +4359,7 @@ court_yearly.0101 = {
 		every_in_list = {
 			list = lowborn_criminal_list
 			root = {
-				recruit_courtier = prev
+				add_courtier = prev
 			}
 			rightfully_imprison_character_effect = {
 				TARGET = this
@@ -4286,6 +4397,7 @@ court_yearly.0102 = {
 
 	trigger = {
 		has_royal_court = yes
+		has_dlc_feature = royal_court
 		employs_court_position = executioner_court_position
 		is_available_adult = yes
 		any_court_position_holder = {
@@ -4339,7 +4451,8 @@ court_yearly.0102 = {
 		name = court.0102.a
 		progress_towards_friend_effect = {
 			CHARACTER = scope:executioner
-			OPINION = yes
+			OPINION = default_friend_opinion
+			REASON = friend_took_pity
 		}
 		reverse_add_opinion = {
 	 		target = scope:executioner
@@ -4366,6 +4479,7 @@ court_yearly.0102 = {
 	option = { 
 		name = court.0102.c
 		progress_towards_rival_effect = {
+			REASON = rival_reprimanded_lonely
 			CHARACTER = scope:executioner
 			OPINION = -25
 		}
@@ -4459,6 +4573,7 @@ court_yearly.0103 = {
 
 	trigger = {
 		has_royal_court = yes
+		has_dlc_feature = royal_court
 		employs_court_position = executioner_court_position
 		is_available_adult = yes
 		any_court_position_holder = {
@@ -4632,6 +4747,7 @@ court_yearly.0104 = {
 
 	trigger = {
 		has_royal_court = yes
+		has_dlc_feature = royal_court
 		employs_court_position = executioner_court_position
 		any_relation = {
 			type = ward
@@ -4722,7 +4838,8 @@ court_yearly.0104 = {
 		}
 		progress_towards_friend_effect = {
 			CHARACTER = scope:morbid_child
-			OPINION = yes
+			OPINION = default_friend_opinion
+			REASON = friend_torture_stories
 		}
 		reverse_add_opinion = {
 	 		target = scope:morbid_child
@@ -4731,7 +4848,8 @@ court_yearly.0104 = {
 	 	}
 		progress_towards_friend_effect = {
 			CHARACTER = scope:executioner
-			OPINION = yes
+			OPINION = default_friend_opinion
+			REASON = friend_torture_stories
 		}
 		reverse_add_opinion = {
 	 		target = scope:executioner
@@ -4741,7 +4859,8 @@ court_yearly.0104 = {
 	 	scope:morbid_child = {
 			progress_towards_friend_effect = {
 				CHARACTER = scope:executioner
-				OPINION = yes
+				OPINION = default_friend_opinion
+				REASON = friend_torture_stories
 			}
 		}
 		stress_impact = {
@@ -4767,6 +4886,7 @@ court_yearly.0104 = {
 	option = { 
 		name = court.0104.b
 		progress_towards_rival_effect = {
+			REASON = rival_morbid_child
 			CHARACTER = scope:morbid_child
 			OPINION = -25
 		}
@@ -4774,6 +4894,7 @@ court_yearly.0104 = {
 			add_stress = minor_stress_gain
 		}
 		progress_towards_rival_effect = {
+			REASON = rival_reprimanded_child
 			CHARACTER = scope:executioner
 			OPINION = -25
 		}
@@ -4813,7 +4934,8 @@ court_yearly.0104 = {
 	 	scope:morbid_child = {
 			progress_towards_friend_effect = {
 				CHARACTER = scope:executioner
-				OPINION = yes
+				OPINION = default_friend_opinion
+				REASON = friend_torture_stories
 			}
 		}
 		stress_impact = {
@@ -4843,6 +4965,7 @@ court_yearly.0106 = {
 
 	trigger = {
 		has_royal_court = yes
+		has_dlc_feature = royal_court
 		employs_court_position = executioner_court_position
 		is_available_adult = yes
 		any_court_position_holder = {
@@ -4930,7 +5053,8 @@ court_yearly.0106 = {
 			scope:executioner = { add_stress = major_stress_impact_loss }
 			progress_towards_friend_effect = {
 				CHARACTER = scope:executioner
-				OPINION = yes
+				OPINION = default_friend_opinion
+				REASON = friend_shared_opinions_on_punishment
 			}
 		}
 		else_if = {
@@ -4941,8 +5065,9 @@ court_yearly.0106 = {
 			}
 			scope:executioner = { add_stress = major_stress_impact_gain }
 			progress_towards_rival_effect = {
+				REASON = rival_go_hard_on_prisoners
 				CHARACTER = scope:executioner
-				OPINION = yes
+				OPINION = default_rival_opinion
 			}
 		}
 		stress_impact = {
@@ -4972,7 +5097,8 @@ court_yearly.0106 = {
 			scope:executioner = { add_stress = major_stress_impact_loss }
 			progress_towards_friend_effect = {
 				CHARACTER = scope:executioner
-				OPINION = yes
+				OPINION = default_friend_opinion
+				REASON = friend_shared_opinions_on_punishment
 			}
 		}
 		else_if = {
@@ -4983,8 +5109,9 @@ court_yearly.0106 = {
 			}
 			scope:executioner = { add_stress = major_stress_impact_gain }
 			progress_towards_rival_effect = {
+				REASON = rival_go_easy_on_prisoners
 				CHARACTER = scope:executioner
-				OPINION = yes
+				OPINION = default_rival_opinion
 			}
 		}
 		stress_impact = {
@@ -5080,16 +5207,14 @@ court_yearly.0110 = {
 
 	trigger = {
 		has_royal_court = yes
+		has_dlc_feature = royal_court
 		any_parent = {
 			exists = yes
 			is_available_adult = yes
 			liege = root
 			is_landed = no
 		}
-		cp:councillor_court_chaplain = {
-			exists = yes
-			is_available_adult = yes
-		}
+		cp:councillor_court_chaplain ?= { is_available_adult = yes }
 		is_available_adult = yes
 		OR = {
 			trait_is_shunned_in_faith_trigger = { TRAIT = adulterer FAITH = root.faith GENDER_CHARACTER = root } #Fornicator is handled by same rules
@@ -5107,9 +5232,9 @@ court_yearly.0110 = {
 				NOT = { is_consort_of = root }
 			}
 		}
+		is_eunuch_trigger = no
 		NOR = {
 			has_trait = celibate
-			has_trait = eunuch
 			has_trait = chaste
 		}
 	}
@@ -5164,12 +5289,14 @@ court_yearly.0110 = {
 	option = { 
 		name = court.0110.a
 		progress_towards_rival_effect = {
+			REASON = rival_parent_imprisoned
 			CHARACTER = scope:parent
-			OPINION = yes
+			OPINION = default_rival_opinion
 		}
 		progress_towards_rival_effect = {
+			REASON = rival_parent_imprisoned
 			CHARACTER = cp:councillor_court_chaplain
-			OPINION = yes
+			OPINION = default_rival_opinion
 		}
 		imprison_character_effect = {
 			TARGET = scope:parent
@@ -5261,7 +5388,7 @@ court_yearly.0110 = {
 
 scripted_trigger court_8100_physician_trigger = {
 	is_available_ai_adult = yes
-	NOT = { has_government = theocracy_government }
+	NOT = { government_has_flag = government_is_theocracy }
 	NOT = { has_trait = devoted }
 	NAND = {
 		exists = ROOT.cp:councillor_court_chaplain
@@ -5295,6 +5422,7 @@ court_yearly.8100 = {
 
     trigger = {
     	has_royal_court = yes
+		has_dlc_feature = royal_court
     	employs_court_position = court_physician_court_position
     	any_court_position_holder = {
     		type = court_physician_court_position
@@ -5403,10 +5531,10 @@ court_yearly.8100 = {
                     factor = 2
                     scope:physician = { learning < average_skill_rating }
                 }
-                death = {
-                    death_reason = death_strongest_potion
-                    killer = scope:physician
-                }
+				
+				# Warcraft
+				override_death_killer_effect = { death_reason = death_strongest_potion killer = scope:physician }
+				
                 add_internal_flag = dangerous
             }
         }
@@ -5506,10 +5634,8 @@ court_yearly.8100 = {
                     scope:physician = { learning < average_skill_rating }
                 }
                 scope:food_taster = {
-                    death = {
-                        death_reason = death_strongest_potion
-                        killer = scope:physician
-                    }
+					# Warcraft
+					override_death_killer_effect = { death_reason = death_strongest_potion killer = scope:physician }
                 }
                 add_opinion = {
                     target = scope:physician
@@ -5796,6 +5922,7 @@ court_yearly.8120 = {
    
     trigger = {
     	has_royal_court = yes
+		has_dlc_feature = royal_court
     	any_courtier_or_guest = { court_8120_debater_trigger = yes }
     	trigger_if = {
     		limit = {
@@ -5892,7 +6019,7 @@ court_yearly.8120 = {
     				if = { # Accuser attacks magic
     					limit = {
     						NOT = {
-    							faith = { has_doctrine = doctrine_witchcraft_accepted }
+    							faith = { has_doctrine_parameter = witchcraft_accepted }
     						}
     					}
     					save_scope_as = accuser
@@ -6079,6 +6206,7 @@ court_yearly.8120 = {
         	base = minor_stress_impact_loss
         	diplomat = minor_stress_impact_loss
         	cynical = medium_stress_impact_gain
+        	eccentric = minor_stress_impact_gain
         }
         ai_chance = {
         	base = 100
@@ -6189,8 +6317,9 @@ court_yearly.8120 = {
 	        	opinion = 10
 	        }
 	        progress_towards_rival_effect = {
+	        	REASON = rival_refuted_faith
 				CHARACTER = scope:accuser
-				OPINION = no
+				OPINION = 0
 			}
         }
         else = {

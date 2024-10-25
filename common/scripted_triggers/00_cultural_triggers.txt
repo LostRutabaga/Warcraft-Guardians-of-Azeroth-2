@@ -10,18 +10,23 @@
 ######################
 
 drinks_alcohol_trigger = {
+	is_adult = yes
 	OR = {
 		has_trait = drunkard
-		NOR = {
-			# Warcraft
-			wc_can_drink_alcohol = no
-			
-			like_islam_religion_trigger = yes # Prohibited by khamr, a prohibition against intoxicants
-			like_jainism_religion_trigger = yes # Prohibited along with the consumption of any fermented food
-			AND = {
-				has_trait = zealous
-				like_buddhism_religion_trigger = yes # Discouraged as it disrupts progress along the eightfold path
-			}
+		faith_forbids_alcohol_trigger = no
+	}
+}
+
+faith_forbids_alcohol_trigger = {
+	OR = {
+		# Warcraft - using new triggers
+		wc_can_drink_alcohol = no
+
+		like_islam_religion_trigger = yes # Prohibited by khamr, a prohibition against intoxicants
+		like_jainism_religion_trigger = yes # Prohibited along with the consumption of any fermented food
+		AND = {
+			has_trait = zealous
+			like_buddhism_religion_trigger = yes # Discouraged as it disrupts progress along the eightfold path
 		}
 	}
 }
@@ -49,13 +54,7 @@ culture_in_winter_geographical_region_trigger = {
 		text = culture_in_winter_geographical_region_trigger_desc
 		any_culture_county = {
 			any_county_province = {
-				OR = {
-					geographical_region = world_europe_north
-					geographical_region = world_europe_west
-					geographical_region = world_europe_east
-					steppe_region_trigger = yes
-					geographical_region = world_tibet
-				}
+				winter_region_trigger = yes			# Warcraft
 			}
 		}
 	}
@@ -67,7 +66,7 @@ culture_in_non_sedentary_geographical_region_trigger = {
 		any_culture_county = {
 			any_county_province = {
 				OR = {
-					steppe_region_trigger = yes
+					steppe_region_trigger = yes		# Warcraft
 				}
 			}
 		}
@@ -78,7 +77,7 @@ culture_not_pacifistic_trigger = {
 	custom_description = {
 		text = culture_not_pacifist_trigger_desc
 		NOT = {
-			any_in_list = { list = traits this = flag:tradition_pacifism }
+			culture_tradition:tradition_pacifism = { is_in_list = traits }
 		}
 	}
 }
@@ -87,83 +86,83 @@ culture_not_warlike_trigger = {
 	custom_description = {
 		text = culture_not_warlike_trigger_desc
 		NOR = {
-			any_in_list = { list = traits this = flag:tradition_winter_warriors }
-			any_in_list = { list = traits this = flag:tradition_forest_fighters }
-			any_in_list = { list = traits this = flag:tradition_mountaineers }
-			any_in_list = { list = traits this = flag:tradition_warriors_of_the_dry }
-			any_in_list = { list = traits this = flag:tradition_highland_warriors }
-			any_in_list = { list = traits this = flag:tradition_jungle_warriors }
-			any_in_list = { list = traits this = flag:tradition_quarrelsome }
-			any_in_list = { list = traits this = flag:tradition_malleable_invaders }
-			any_in_list = { list = traits this = flag:tradition_hunters }
-			any_in_list = { list = traits this = flag:tradition_warrior_culture }
-			any_in_list = { list = traits this = flag:tradition_martial_admiration }
+			culture_tradition:tradition_winter_warriors = { is_in_list = traits }
+			culture_tradition:tradition_forest_fighters = { is_in_list = traits }
+			culture_tradition:tradition_mountaineers = { is_in_list = traits }
+			culture_tradition:tradition_warriors_of_the_dry = { is_in_list = traits }
+			culture_tradition:tradition_highland_warriors = { is_in_list = traits }
+			culture_tradition:tradition_jungle_warriors = { is_in_list = traits }
+			culture_tradition:tradition_quarrelsome = { is_in_list = traits }
+			culture_tradition:tradition_malleable_invaders = { is_in_list = traits }
+			culture_tradition:tradition_hunters = { is_in_list = traits }
+			culture_tradition:tradition_warrior_culture = { is_in_list = traits }
+			culture_tradition:tradition_martial_admiration = { is_in_list = traits }
 		}
 	}
 	custom_description = {
 		text = culture_has_winter_warriors_desc
 		NOT = {
-			any_in_list = { list = traits this = flag:tradition_winter_warriors }
+			culture_tradition:tradition_winter_warriors = { is_in_list = traits }
 		}
 	}
 	custom_description = {
 		text = culture_has_forest_fighter_desc
 		NOT = {
-			any_in_list = { list = traits this = flag:tradition_forest_fighters }
+			culture_tradition:tradition_forest_fighters = { is_in_list = traits }
 		}
 	}
 	custom_description = {
 		text = culture_has_mountaineers_desc
 		NOT = {
-			any_in_list = { list = traits this = flag:tradition_mountaineers }
+			culture_tradition:tradition_mountaineers = { is_in_list = traits }
 		}
 	}
 	custom_description = {
 		text = culture_has_warriors_of_the_dry_desc
 		NOT = {
-			any_in_list = { list = traits this = flag:tradition_warriors_of_the_dry }
+			culture_tradition:tradition_warriors_of_the_dry = { is_in_list = traits }
 		}
 	}
 	custom_description = {
 		text = culture_has_highland_warriors_desc
 		NOT = {
-			any_in_list = { list = traits this = flag:tradition_highland_warriors }
+			culture_tradition:tradition_highland_warriors = { is_in_list = traits }
 		}
 	}
 	custom_description = {
 		text = culture_has_jungle_warriors_desc
 		NOT = {
-			any_in_list = { list = traits this = flag:tradition_jungle_warriors }
+			culture_tradition:tradition_jungle_warriors = { is_in_list = traits }
 		}
 	}
 	custom_description = {
 		text = culture_has_quarrelsome_desc
 		NOT = {
-			any_in_list = { list = traits this = flag:tradition_quarrelsome }
+			culture_tradition:tradition_quarrelsome = { is_in_list = traits }
 		}
 	}
 	custom_description = {
 		text = culture_has_malleable_invaders_desc
 		NOT = {
-			any_in_list = { list = traits this = flag:tradition_malleable_invaders }
+			culture_tradition:tradition_malleable_invaders = { is_in_list = traits }
 		}
 	}
 	custom_description = {
 		text = culture_has_hunters_desc
 		NOT = {
-			any_in_list = { list = traits this = flag:tradition_hunters }
+			culture_tradition:tradition_hunters = { is_in_list = traits }
 		}
 	}
 	custom_description = {
 		text = culture_has_warrior_culture_desc
 		NOT = {
-			any_in_list = { list = traits this = flag:tradition_warrior_culture }
+			culture_tradition:tradition_warrior_culture = { is_in_list = traits }
 		}
 	}
 	custom_description = {
 		text = culture_has_martial_admiration_desc
 		NOT = {
-			any_in_list = { list = traits this = flag:tradition_martial_admiration }
+			culture_tradition:tradition_martial_admiration = { is_in_list = traits }
 		}
 	}
 }
@@ -173,33 +172,32 @@ should_have_same_faith_succession_trigger = {
 		has_cultural_parameter = same_faith_inheritance_only
 	}
 	NOR = {
-		has_government = theocracy_government # Handled separately
-		has_government = holy_order_government # Handled separately
-		has_government = mercenary_government # Irrelevant
+		government_has_flag = government_is_theocracy # Handled separately
+		government_has_flag = government_is_holy_order # Handled separately
+		government_has_flag = government_is_mercenary # Irrelevant
 	}
 }
 
 not_tribal_raid_trigger = {
-	culture = {
-		has_cultural_parameter = not_tribal_raiding_malus
-	}
-	NOT = { has_government = tribal_government }
+	#Warcraft - parameter was deleted
+	#culture = {
+	#	has_cultural_parameter = not_tribal_raiding_malus
+	#}
+	#NOT = { government_has_flag = government_is_tribal }
+	always = no  # TODO: investigate for wild govt (SS)
 }
 
 culture_is_not_historical_hybrid_trigger = {
 	#Used to tell if a hybrid culture is one of the historical hybrids or not, mainly in checks for AI hybridization checks related to game rules.
 	#Expects to be used in culture scope
+	# Warcraft - TODO: Add Elementals 
 	NOR = {
-		this = culture:norman
-		this = culture:maghrebi
-		this = culture:gaelic
-		this = culture:anglo_saxon
-		this = culture:scottish
-		this = culture:andalusian
-		this = culture:catalan
-		this = culture:english
-		this = culture:sicilian
-		this = culture:cisalpine
+		#Unique to historical and physiological origin
+		this = culture:naga
+		this = culture:satyr
+		this = culture:centaur
+		#Worker swarms controlled by hive mind. Other insect races more free-thinking.
+		this = culture:qiraji
 	}
 }
 
@@ -209,13 +207,41 @@ culture_has_skirmisher_maa = {
 		# Warcraft
 		# has_cultural_parameter = unlock_maa_horn_warrior
 		# has_cultural_parameter = unlock_maa_shomer
-		has_cultural_parameter = unlock_maa_abudrar
+		# has_cultural_parameter = unlock_maa_abudrar
 		# has_cultural_parameter = unlock_maa_guinea_warrior
 		# has_innovation = innovation_adaptive_militia #Goedendag - Later Era MAA
 
+		# Warcraft when we use traditions
+		#has_cultural_parameter = unlock_maa_arachnathid
+		#has_cultural_parameter = unlock_maa_bearpaws
+		#has_cultural_parameter = unlock_maa_blademaster
+		#has_cultural_parameter = unlock_maa_brute
+		#has_cultural_parameter = unlock_maa_buccaneer
+		#has_cultural_parameter = unlock_maa_candleholder
+		#has_cultural_parameter = unlock_maa_dervishes
+		#has_cultural_parameter = unlock_maa_ghoul
+		#has_cultural_parameter = unlock_maa_gladiator
+		#has_cultural_parameter = unlock_maa_savage
+		#has_cultural_parameter = unlock_maa_snow_hunter
+		#has_cultural_parameter = unlock_maa_swarm
+		#has_cultural_parameter = unlock_maa_tidehunter
+
 		# Warcraft
-		# TODO
-		# Add mod MaAs here
+		has_innovation = innovation_arachnathid
+		has_innovation = innovation_blademaster
+		has_innovation = innovation_brute
+		has_innovation = innovation_buccaneer
+		has_innovation = innovation_candleholder
+		has_innovation = innovation_dervishes
+		has_innovation = innovation_gladiator
+		has_innovation = innovation_pandaren_tactics
+		has_innovation = innovation_savage
+		has_innovation = innovation_snow_hunter
+		has_innovation = innovation_swarm
+		has_innovation = innovation_tidehunter
+		has_innovation = innovation_undead_tactics
+
+
 	}
 }
 
@@ -225,62 +251,114 @@ culture_has_archer_maa = {
 		# has_cultural_parameter = unlock_maa_archers_of_the_nile
 		# has_cultural_parameter = unlock_maa_bush_hunter
 		# has_cultural_parameter = unlock_maa_metsanvartija
-		# has_cultural_parameter = unlock_maa_longbowmen
+		has_cultural_parameter = unlock_maa_longbowmen
 		# has_innovation = innovation_repeating_crossbow #Chu-ko-nu Archers
 		# has_innovation = innovation_bamboo_bows #Paiks
 
+		# Warcraft when we use traditions
+		#has_cultural_parameter = unlock_maa_blunderbuss_corsairs
+		#has_cultural_parameter = unlock_maa_dark_ranger
+		#has_cultural_parameter = unlock_maa_dwarven_riflemen
+		#has_cultural_parameter = unlock_maa_farstriders
+		#has_cultural_parameter = unlock_maa_headhunter
+		#has_cultural_parameter = unlock_maa_impaler
+		#has_cultural_parameter = unlock_maa_rangari
+		#has_cultural_parameter = unlock_maa_sentinel
+		#has_cultural_parameter = unlock_maa_trapper
+		#has_cultural_parameter = unlock_maa_webspinner
+
 		# Warcraft
-		# TODO
-		# Add mod MaAs here
+		has_innovation = innovation_centaur_tactics
+		has_innovation = innovation_corsair
+		has_innovation = innovation_draenei_tactics
+		has_innovation = innovation_dwarven_arsenal
+		has_innovation = innovation_farstrider_tactics
+		has_innovation = innovation_forsaken_ranged
+		has_innovation = innovation_nerubian_tactics
+		has_innovation = innovation_sentinel
+		has_innovation = innovation_troll_tactics
+		has_innovation = innovation_tuskarr_tactics
 	}
 }
 
 culture_has_heavy_infantry_maa = {
 	OR = {
 		# has_cultural_parameter = unlock_maa_ayyar
-		has_cultural_parameter = unlock_maa_mubarizun
-		has_cultural_parameter = unlock_maa_druzhina
+		# has_cultural_parameter = unlock_maa_mubarizun
+		# has_cultural_parameter = unlock_maa_druzhina
 		# has_cultural_parameter = unlock_maa_khandayat
 		# has_cultural_parameter = unlock_maa_garudas
 		# has_cultural_parameter = unlock_maa_palace_guards
 		has_cultural_parameter = unlock_maa_huscarls
-		# has_cultural_parameter = unlock_maa_mountaineer
+		has_cultural_parameter = unlock_maa_mountaineer
 		# has_cultural_parameter = unlock_maa_zbrojnosh
 		# has_innovation = innovation_sarawit #Sarawit - Later Era MAA
 		# has_innovation = innovation_legionnaires #Praetorian
 
+		# Warcraft when we use traditions
+		#has_cultural_parameter = unlock_maa_blackrock_legionnaire
+		#has_cultural_parameter = unlock_maa_drakonid
+		#has_cultural_parameter = unlock_maa_fel_guard
+		#has_cultural_parameter = unlock_maa_mauler
+		#has_cultural_parameter = unlock_maa_myrmidon
+		#has_cultural_parameter = unlock_maa_peacekeeper
+		#has_cultural_parameter = unlock_maa_spellbreaker
+		#has_cultural_parameter = unlock_maa_thornguard
+		#has_cultural_parameter = unlock_maa_ursa
+		#has_cultural_parameter = unlock_maa_warbrave
+		#has_cultural_parameter = unlock_maa_wardancer
+		#has_cultural_parameter = unlock_maa_watcher
+
 		# Warcraft
-		# TODO
-		# Add mod MaAs here
+		has_innovation = innovation_blackrock_legionnaire
+		has_innovation = innovation_draenei_tactics
+		has_innovation = innovation_fel_guard
+		has_innovation = innovation_naga_army
+		has_innovation = innovation_night_elf_ground
+		has_innovation = innovation_ogre_tactics
+		has_innovation = innovation_pandaren_tactics
+		has_innovation = innovation_quillboar_tactics
+		has_innovation = innovation_spellbreaker
+		has_innovation = innovation_ursa
+		has_innovation = innovation_warbrave
 	}
 }
 
 culture_has_pikemen_maa = { #I.e. Spearmen
 	OR = {
-		# Warcraft
+		# Warcraft when we use traditions
 		# has_innovation = innovation_rectilinear_schiltron #Schiltron - Later Era MAA
 		# has_innovation = innovation_pike_columns #Picchieri - Later Era MAA
 		# has_innovation = innovation_zweihanders #Later Era MAA
 
+		# Warcraft when we use traditions
+		#has_cultural_parameter = unlock_maa_baradian_marine
+
 		# Warcraft
-		# TODO
-		# Add mod MaAs here
+		has_innovation = innovation_baradian_marine
 	}
 }
 
 culture_has_light_cavalry_maa = {
 	OR = {
-		# Warcraft
-		has_cultural_parameter = unlock_maa_mulaththamun
+		# Warcraft when we use traditions
+		# has_cultural_parameter = unlock_maa_mulaththamun
 		# has_cultural_parameter = unlock_maa_hussar #Konni
 		# has_innovation = innovation_desert_tactics #Chasseur
 		# has_innovation = innovation_caballeros #Caballero
 		# has_innovation = innovation_hobbies #Hobelar
 		# has_innovation = innovation_sahel_horsemen #Sahel Horsemen
 
+		# Warcraft when we use traditions
+		#has_cultural_parameter = unlock_maa_huntress
+		#has_cultural_parameter = unlock_maa_marauder
+		#has_cultural_parameter = unlock_maa_wolfrider
+
 		# Warcraft
-		# TODO
-		# Add mod MaAs here
+		has_innovation = innovation_centaur_tactics
+		has_innovation = innovation_night_elf_mounted
+		has_innovation = innovation_wolfrider
+		has_cultural_parameter = unlock_maa_tawashi
 	}
 }
 
@@ -291,15 +369,35 @@ culture_has_heavy_cavalry_maa = {
 		# has_cultural_parameter = unlock_maa_monaspa
 		# has_innovation = innovation_valets #Gendarme - Later Era MAA
 
+		# Warcraft when we use traditions
+		#has_cultural_parameter = unlock_maa_kodo_rider
+		#has_cultural_parameter = unlock_maa_mushan_rider
+		#has_cultural_parameter = unlock_maa_turtle_rider
+		#has_cultural_parameter = unlock_maa_war_dinosaur
+
+		has_innovation = innovation_kodo
+		has_innovation = innovation_mushan
+		has_innovation = innovation_tuskarr_tactics
+		has_cultural_parameter = unlock_maa_tarkhan
+
+	}
+}
+culture_has_elephant_cavalry_maa = {
+	OR = {
+		#has_cultural_parameter = unlock_maa_war_elephant
+
+		# Warcraft when we use traditions
+		#has_cultural_parameter = unlock_maa_war_dinosaur
+
 		# Warcraft
-		# TODO
-		# Add mod MaAs here
+		has_innovation = innovation_elephantry
+		has_innovation = innovation_war_dinosaur
+
 	}
 }
 
 culture_has_archer_cavalry_maa = {
-	# Warcraft
-	# has_cultural_parameter = unlock_maa_horse_archers
+	has_cultural_parameter = unlock_maa_horse_archers
 
 	# Warcraft
 	# TODO
@@ -309,25 +407,46 @@ culture_has_archer_cavalry_maa = {
 # Language trigger - Makes languages available when you diverge your culture
 language_is_shown_trigger = {
 	scope:character = {
-		# The target language needs to fulfill ALL of the following:
-		any_sub_realm_county = { # Language needs to be well-represented within your realm
-			percent >= 0.1
-			culture = { has_cultural_pillar = $LANGUAGE$ }
+	OR = {
+		AND = {
+			exists = var:legendary_culture
+			var:legendary_culture = { has_cultural_pillar = $LANGUAGE$ }
 		}
-		any_sub_realm_county = { # Language needs to border your own culture
-			culture = { has_cultural_pillar = $LANGUAGE$ }
-			any_neighboring_county = {
-				culture = { this = scope:character.culture }
+		AND = {
+			# The target language needs to fulfill ALL of the following:
+			any_sub_realm_county = { # Language needs to be well-represented within your realm
+				percent >= 0.1
+				culture = { has_cultural_pillar = $LANGUAGE$ }
 			}
-		}
-		any_sub_realm_county = { # You need a minimum acceptance with any culture speaking the language
-			culture = {
-				has_cultural_pillar = $LANGUAGE$
-				cultural_acceptance = {
-					target = scope:character.culture
-					value >= 25
+			any_sub_realm_county = { # Language needs to border your own culture
+				culture = { has_cultural_pillar = $LANGUAGE$ }
+				any_neighboring_county = {
+					culture = { this = scope:character.culture }
 				}
 			}
+			any_sub_realm_county = { # You need a minimum acceptance with any culture speaking the language
+					culture = {
+						has_cultural_pillar = $LANGUAGE$
+						cultural_acceptance = {
+							target = scope:character.culture
+							value >= 25
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+# Language trigger - Makes heritages available when you diverge your culture
+heritage_is_shown_trigger = {
+	scope:character = {
+		OR = {
+			AND = {
+				exists = var:legendary_culture
+				var:legendary_culture = { has_cultural_pillar = $HERITAGE$ }
+			}
+			culture = { has_cultural_pillar = $HERITAGE$ }
 		}
 	}
 }
@@ -405,18 +524,23 @@ cultures_share_relevant_region_trigger = {
 		limit = { culture_overlaps_geographical_region = world_eastern_kingdoms_quelthalas }
 		scope:culture = { culture_overlaps_geographical_region = world_eastern_kingdoms_quelthalas }
 	}
-	#world_eastern_kingdoms_kul_tiras
+	#world_eastern_kingdoms_lordaeron_kul_tiras
 	trigger_else_if = {
-		limit = { culture_overlaps_geographical_region = world_eastern_kingdoms_kul_tiras }
-		scope:culture = { culture_overlaps_geographical_region = world_eastern_kingdoms_kul_tiras }
+		limit = { culture_overlaps_geographical_region = world_eastern_kingdoms_lordaeron_kul_tiras }
+		scope:culture = { culture_overlaps_geographical_region = world_eastern_kingdoms_lordaeron_kul_tiras }
 	}
-	
+	#world_eastern_kingdoms_lordaeron_mechagon
+	trigger_else_if = {
+		limit = { culture_overlaps_geographical_region = world_eastern_kingdoms_lordaeron_mechagon }
+		scope:culture = { culture_overlaps_geographical_region = world_eastern_kingdoms_lordaeron_mechagon }
+	}
+
 	#world_northrend
 	trigger_else_if = {
 		limit = { culture_overlaps_geographical_region = world_northrend }
 		scope:culture = { culture_overlaps_geographical_region = world_northrend }
 	}
-	
+
 	#world_kalimdor_south
 	trigger_else_if = {
 		limit = { culture_overlaps_geographical_region = world_kalimdor_south }
@@ -441,5 +565,24 @@ cultures_share_relevant_region_trigger = {
 	trigger_else = {
 		culture_overlaps_geographical_region = world_pandaria
 		scope:culture = { culture_overlaps_geographical_region = world_pandaria }
+	}
+}
+
+is_vegetarian_trigger = {
+	OR = {
+		culture = {
+			has_cultural_parameter = cannot_hunt
+		}
+		faith_is_vegetarian_trigger = yes
+	}
+}
+
+faith_is_vegetarian_trigger = {
+	faith = {
+		OR = {
+			like_buddhism_religion_trigger = yes
+			like_jainism_religion_trigger = yes
+			like_bon_religion_trigger = yes
+		}
 	}
 }

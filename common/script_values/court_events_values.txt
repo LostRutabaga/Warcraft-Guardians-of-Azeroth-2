@@ -1,27 +1,4 @@
-﻿#
-hold_court_7000_diplomacy_value = {
-	value = 0
-	add = scope:rival_1.diplomacy
-	add = scope:rival_2.diplomacy
-	divide = 2
-}
-
-hold_court_7000_intrigue_value = {
-	value = 0
-	add = scope:rival_1.intrigue
-	add = scope:rival_2.intrigue
-	divide = 2
-}
-
-hold_court_7000_prowess_value = {
-	value = 0
-	add = scope:rival_1.prowess
-	add = scope:rival_2.prowess
-	divide = 2
-}
-
-
-#Learning-oriented intelligence check
+﻿#Learning-oriented intelligence check
 learning_intellect_value = {
 	value = 0
 	# Intellect traits
@@ -67,27 +44,51 @@ learning_intellect_value = {
 		add = 15
 	}
 	if = {
-		limit = { has_trait = mystic_1 }
+		limit = { has_trait = lifestyle_mystic }
 		add = 5
 	}
 	if = {
-		limit = { has_trait = mystic_2 }
+		limit = {
+			has_trait =  lifestyle_mystic
+			has_trait_xp = {
+				trait = lifestyle_mystic
+				value >= 50
+			}
+		}
 		add = 10
 	}
 	if = {
-		limit = { has_trait = mystic_3 }
+		limit = {
+			has_trait =  lifestyle_mystic
+			has_trait_xp = {
+				trait = lifestyle_mystic
+				value >= 100
+			}
+		}
 		add = 15
 	}
 	if = {
-		limit = { has_trait = physician_1 }
+		limit = { has_trait = lifestyle_physician }
 		add = 5
 	}
 	if = {
-		limit = { has_trait = physician_2 }
+		limit = {
+			has_trait =  lifestyle_physician
+			has_trait_xp = {
+				trait = lifestyle_physician
+				value >= 50
+			}
+		}
 		add = 10
 	}
 	if = {
-		limit = { has_trait = physician_3 }
+		limit = {
+			has_trait =  lifestyle_physician
+			has_trait_xp = {
+				trait = lifestyle_physician
+				value >= 100
+			}
+		}
 		add = 15
 	}
 	# Personality
@@ -173,16 +174,8 @@ diplomacy_intellect_value = {
 		add = 25
 	}
 	if = {
-		limit = { has_trait = reveler_1 }
-		add = 5
-	}
-	if = {
-		limit = { has_trait = reveler_2 }
+		limit = { has_trait = lifestyle_reveler }
 		add = 10
-	}
-	if = {
-		limit = { has_trait = reveler_3 }
-		add = 15
 	}	
 	# Diplomacy education
 	if = {
@@ -289,7 +282,7 @@ martial_prowess_value = {
 	value = 0
 	# Genetic
 	if = {
-		limit = { has_trait = giant }
+		limit = { has_dire_or_giant_trigger = yes }
 		add = 20
 	}
 	if = {
@@ -346,24 +339,42 @@ martial_prowess_value = {
 		add = 10
 	}
 	if = {
-		limit = { has_trait = blademaster_2 }
-		add = 10
+		limit = { has_trait = lifestyle_blademaster }
+		add = 5
+		if = {
+			limit = {
+				has_trait_xp = {
+					trait = lifestyle_blademaster
+					value >= 50
+				}
+			}
+			add = 5
+		}
+		if = {
+			limit = {
+				has_trait_xp = {
+					trait = lifestyle_blademaster
+					value >= 100
+				}
+			}
+			add = 5
+		}
 	}
 	if = {
-		limit = { has_trait = blademaster_3 }
-		add = 15
-	}
-	if = {
-		limit = { has_trait = hunter_1 }
+		limit = { has_trait = lifestyle_hunter }
 		add = 5
 	}
 	if = {
-		limit = { has_trait = hunter_2 }
-		add = 10
+		limit = {
+			hunt_lifestyle_track_greater_equal_trigger = { TRACK = hunter GREATER_EQUAL = 50 }
+		}
+		add = 5
 	}
 	if = {
-		limit = { has_trait = hunter_3 }
-		add = 15
+		limit = {
+			hunt_lifestyle_track_greater_equal_trigger = { TRACK = hunter GREATER_EQUAL = 100 }
+		}
+		add = 5
 	}
 	if = {
 		limit = { has_trait = gallant }
@@ -375,28 +386,42 @@ martial_prowess_value = {
 	}
 	# Lifestyle
 	if = {
-		limit = { has_trait = blademaster_1 }
+		limit = { has_trait = lifestyle_blademaster }
+		add = 5
+		if = {
+			limit = {
+				has_trait_xp = {
+					trait = lifestyle_blademaster
+					value >= 50
+				}
+			}
+			add = 5
+		}
+		if = {
+			limit = {
+				has_trait_xp = {
+					trait = lifestyle_blademaster
+					value >= 100
+				}
+			}
+			add = 5
+		}
+	}
+	if = {
+		limit = { has_trait = lifestyle_hunter }
 		add = 5
 	}
 	if = {
-		limit = { has_trait = blademaster_2 }
-		add = 10
-	}
-	if = {
-		limit = { has_trait = blademaster_3 }
-		add = 15
-	}
-	if = {
-		limit = { has_trait = hunter_1 }
+		limit = { 
+			hunt_lifestyle_track_greater_equal_trigger = { TRACK = hunter GREATER_EQUAL = 50 }
+	    }
 		add = 5
 	}
 	if = {
-		limit = { has_trait = hunter_2 }
-		add = 10
-	}
-	if = {
-		limit = { has_trait = hunter_3 }
-		add = 15
+		limit = {
+			hunt_lifestyle_track_greater_equal_trigger = { TRACK = hunter GREATER_EQUAL = 100 }
+		}
+		add = 5
 	}
 	if = {
 		limit = { has_trait = gallant }
@@ -467,4 +492,26 @@ martial_prowess_value = {
 6210_architect_promote_culture_bonus = {
 	add = steward_promote_culture_base_total
 	multiply = 1.2
+}
+
+court_grandeur_current_minus_ten_value = {
+	value = 0
+	add = court_grandeur_current
+	add = -10
+}
+
+court_grandeur_current_plus_ten_value = {
+	value = 0
+	add = court_grandeur_current
+	add = 10
+}
+
+easier_to_convert_bonus = {
+	add = steward_promote_culture_base_total
+	multiply = 1.25
+}
+
+steward_fashion_bonus = {
+	add = steward_promote_culture_base_total
+	multiply = 1.1
 }

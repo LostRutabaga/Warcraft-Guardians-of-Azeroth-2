@@ -3,14 +3,31 @@
 scripted_trigger wrong_gender_for_fighting_in_faith_trigger = {
 	#Has access to the appropriate cultural parameter.
 	culture = { has_cultural_parameter = has_access_to_shieldmaidens }
-	OR = {
-		AND = {
-			is_female = yes
-			faith = { has_doctrine = doctrine_gender_male_dominated }
+	trigger_if = { # Has the Royal Court and thus can modify pillars
+		limit = {
+			has_dlc_feature = diverge_culture # Can modify pillars
 		}
-		AND = {
-			is_male = yes
-			faith = { has_doctrine = doctrine_gender_female_dominated }
+		OR = {
+			AND = {
+				culture = { has_cultural_parameter = martial_custom_male_only_combatant }
+				is_female = yes
+			}
+			AND = {
+				culture = { has_cultural_parameter = martial_custom_female_only_combatant }
+				is_male = yes
+			}
+		}
+	}
+	trigger_else = { # Does not have the Royal Court and thus combatant is governed by faith
+		OR = {
+			AND = {
+				faith = { has_doctrine_parameter = combatant_must_be_male_if_no_roco }
+				is_female = yes
+			}
+			AND = {
+				faith = { has_doctrine_parameter = combatant_must_be_female_if_no_roco }
+				is_male = yes
+			}
 		}
 	}
 }
@@ -22,23 +39,35 @@ scripted_trigger wrong_gender_for_fighting_in_faith_trigger = {
 ##################################################
 
 scripted_trigger likely_to_be_offended_list_trigger = {
-	#Separate religions already think your ways are terrible already, co-religionists think you're making them look bad.
-	religion = root.religion
-	#No bias, no problem.
-	faith = {
-		OR = {
-			has_doctrine = doctrine_gender_male_dominated
-			has_doctrine = doctrine_gender_female_dominated
+	trigger_if = { # Has the Royal Court and thus can modify pillars
+		limit = { has_dlc_feature = diverge_culture }
+		culture = {
+			NOT = { has_cultural_parameter = martial_custom_equal_combatant	}
 		}
+	}
+	trigger_else = {
+		#Separate religions already think your ways are terrible already, co-religionists think you're making them look bad.
+		religion = root.religion
+		#No bias, no problem.
+		faith = {
+			NOT = { has_doctrine_parameter = combatant_can_be_either_gender_if_no_roco }
+		}
+	}
+	culture = {
+		# Warrior by merit, if strong enought you can be a warrior regardless of gender
+		NOT = { has_cultural_parameter = high_prowess_ignores_knight_restrictions }
 	}
 	#Existing shieldmaidens cut slack.
 	NOT = { has_trait = shieldmaiden }
+	age >= childhood_education_start_age
 }
 
 scripted_trigger valid_to_become_shieldperson_trigger = {
 	wrong_gender_for_fighting_in_faith_trigger = yes
 	is_available_ai_adult = yes
 	prowess >= decent_skill_rating
+	NOT = { has_trait = shieldmaiden }
+	NOT = { has_trait = craven }
 }
 
 scripted_trigger child_dreams_of_shieldpersonhood_trigger = {
@@ -62,19 +91,24 @@ fp1_shieldmaiden.0001 = {
 		character = scope:challenged_knight
 		animation = dismissal
 	}
-	override_background = { event_background = throne_room }
+	override_background = { reference = throne_room }
 
 	trigger = {
 		#DLC check.
 		has_fp1_dlc_trigger = yes
 		#Standard checks.
 		is_available_at_peace_adult = yes
+		is_landed = yes
 		NOT = { has_character_flag = had_event_fp1_shieldmaiden_0001 }
 		#Has access to the appropriate cultural parameter.
 		culture = { has_cultural_parameter = has_access_to_shieldmaidens }
 		#Your society must consider one gender or the other lesser.
-		NOT = {
-			faith = { has_doctrine = doctrine_gender_equal }
+		trigger_if = { # Has the Royal Court and thus can modify pillars
+			limit = { has_dlc_feature = diverge_culture }
+			culture = { NOT = { has_cultural_parameter = martial_custom_equal_combatant } }
+		}
+		trigger_else = {
+			faith = { NOT = { has_doctrine_parameter = combatant_can_be_either_gender_if_no_roco } }
 		}
 		#You've got to have at least one suitable courtier or guest.
 		any_courtier_or_guest = {
@@ -93,12 +127,14 @@ fp1_shieldmaiden.0001 = {
 		any_knight = {
 			is_available_ai_adult = yes
 			is_ruler = no
+			wrong_gender_for_fighting_in_faith_trigger = no
+			NOT = { has_trait = shieldmaiden }
 		}
 	}
 
 	weight_multiplier = {
 		base = 1
-		
+
 		#More likely if you're a ruling wrong-gender person yourself.
 		modifier = {
 			add = 1
@@ -172,7 +208,7 @@ fp1_shieldmaiden.0001 = {
 				}
 				if = {
 					limit = { has_trait = shy }
-					add = 5
+					add = -5
 				}
 			}
 			save_scope_as = shieldmaiden
@@ -182,6 +218,8 @@ fp1_shieldmaiden.0001 = {
 			limit = {
 				is_available_ai_adult = yes
 				is_ruler = no
+				wrong_gender_for_fighting_in_faith_trigger = no
+				NOT = { has_trait = shieldmaiden }
 			}
 			order_by = prowess
 			save_scope_as = challenged_knight
@@ -261,7 +299,7 @@ fp1_shieldmaiden.0001 = {
 					}
 					desc = fp1_shieldmaiden.0001.a.tt_failure
 					root = {
-						send_interface_toast = {	
+						send_interface_toast = {
 							title = fp1_shieldmaiden.0001.a.tt_failure
 							left_icon = scope:shieldmaiden
 							scope:shieldmaiden = {
@@ -304,7 +342,7 @@ fp1_shieldmaiden.0001 = {
 			}
 		}
 	}
-	
+
 	#You take the challenge yourself.
 	option = {
 		name = fp1_shieldmaiden.0001.b
@@ -357,7 +395,7 @@ fp1_shieldmaiden.0001 = {
 					min = -49
 				}
 				desc = fp1_shieldmaiden.0001.b.tt_failure
-				send_interface_toast = {	
+				send_interface_toast = {
 					title = fp1_shieldmaiden.0001.b.tt_failure
 					left_icon = scope:shieldmaiden
 					scope:shieldmaiden = {
@@ -409,7 +447,7 @@ fp1_shieldmaiden.0001 = {
 			}
 		}
 	}
-	
+
 	#Accept them outright.
 	option = {
 		name = fp1_shieldmaiden.0001.c
@@ -422,11 +460,36 @@ fp1_shieldmaiden.0001 = {
 				target = root
 				modifier = fp1_accepted_my_sword_opinion
 			}
+			#If scope:shieldmaiden is a guest, you get them for free.
+			if = {
+				limit = { is_pool_guest = yes }
+				root = { add_courtier = scope:shieldmaiden }
+			}
 		}
 		#Loyalty hook on the new shieldmaiden for your trust.
-		add_hook = {
-			type = loyalty_hook
-			target = scope:shieldmaiden
+		if = {
+			limit = {
+				NOR = {
+					has_hook_of_type = {
+						target = scope:shieldmaiden
+						type = loyalty_hook
+					}
+					has_hook_of_type = {
+						target = scope:shieldmaiden
+						type = ritual_best_friend_hook
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_hook = scope:shieldmaiden
+				}
+				hidden_effect = { remove_hook = { target = scope:shieldmaiden } }
+			}
+			add_hook = {
+				type = loyalty_hook
+				target = scope:shieldmaiden
+			}
 		}
 		#Opinion loss with all courtiers who do not feel they should be able to fight.
 		if = {
@@ -499,8 +562,9 @@ fp1_shieldmaiden.0001 = {
 
 		#Stepped rivalry between you and the potential shieldmaiden.
 		progress_towards_rival_effect = {
+			REASON = rival_shieldmaiden_declined
 			CHARACTER = scope:shieldmaiden
-			OPINION = no
+			OPINION = 0
 		}
 
 		stress_impact = {
@@ -662,23 +726,13 @@ fp1_shieldmaiden.0012 = {
 
 scripted_trigger suitable_shieldmaiden_savior_trigger = {
 	has_trait = shieldmaiden
-	save_temporary_scope_as = prospective_shieldmaiden
-	NOR = {
-		#Require that they don't hate their liege.
-		has_relation_rival = scope:target
-		opinion = {
-			target = scope:imprisoner
-			value <= high_negative_opinion
-		}
-		#Can't be directly involved with the scheme either.
-		any_scheme_agent = { this = scope:prospective_shieldmaiden }
-		root = scope:prospective_shieldmaiden
-	}
+	bodyguard_will_actually_do_job_trigger = yes
 }
 
 #	Scheme owner: shieldmaiden intervenes in murder.
 fp1_shieldmaiden.0021 = {
 	type = character_event
+	window = scheme_failed_event
 	title = fp1_shieldmaiden.0021.t
 	desc = {
 		first_valid = {
@@ -707,65 +761,95 @@ fp1_shieldmaiden.0021 = {
 	}
 	theme = murder_scheme
 	left_portrait = {
-		character = scope:target
-		animation = shock
+		character = scope:owner
+		triggered_animation = {
+			trigger = { exists = scope:scheme_discovered }
+			animation = fear
+		}
+		animation = stress
+	}
+	center_portrait = {
+		character = scope:bodyguard
+		triggered_animation = {
+			trigger = { is_alive = no }
+			animation = map_fear
+		}
+		animation = random_weapon_aggressive
+		camera = camera_event_center_pointing_left
 	}
 	right_portrait = {
-		character = scope:shieldmaiden
-		animation = rage
+		character = scope:target
+		triggered_animation = {
+			trigger = { exists = scope:scheme_discovered }
+			animation = rage
+		}
+		animation = paranoia
 	}
 	widget = {
 		gui = "event_window_widget_scheme"
 		container = "custom_widgets_container"
 	}
-	
+
 	trigger = {
 		#DLC check.
 		has_fp1_dlc_trigger = yes
-		OR = {
-			scope:murder_method = flag:hired_assassin
-			scope:murder_method = flag:hired_thugs
-			scope:murder_method = flag:riled_up_mob
-			scope:murder_method = flag:lured_into_forest
-			scope:murder_method = flag:child_pushed
-		}
 		scope:target = {
-			any_courtier = { suitable_shieldmaiden_savior_trigger = yes }
-			NOT = { has_character_flag = recently_saved_by_shieldmaiden }
+			any_court_position_holder = {
+				type = bodyguard_court_position
+				suitable_shieldmaiden_savior_trigger = yes
+			}
 		}
-	}
-
-	weight_multiplier = {
-		base = 1
 	}
 
 	immediate = {
-		save_scope_value_as = {
-			name = murder_saved
-			value = flag:shieldmaiden_stopped_assassin
-		}
-		scope:target = {
-			random_courtier_or_guest = {
-				limit = { suitable_shieldmaiden_savior_trigger = yes }
-				weight = {
-					base = 1
-					compare_modifier = {
-						value = ai_boldness
-						multiplier = 0.01
-						min = 0
-					}
-					opinion_modifier = {
-						opinion_target = scope:target
-						multiplier = 0.01
-						min = 0
-					}
+		# Select a murder method.
+		random_list = {
+			100 = {
+				save_scope_value_as = {
+					name = murder_method
+					value = flag:hired_assassin
 				}
+			}
+			100 = {
+				save_scope_value_as = {
+					name = murder_method
+					value = flag:hired_thugs
+				}
+			}
+			100 = {
+				save_scope_value_as = {
+					name = murder_method
+					value = flag:riled_up_mob
+				}
+			}
+			100 = {
+				save_scope_value_as = {
+					name = murder_method
+					value = flag:lured_into_forest
+				}
+			}
+			100 = {
+				save_scope_value_as = {
+					name = murder_method
+					value = flag:child_pushed
+				}
+				# Try to grab a suitable thing to lure them in with too.
+				rooftop_murder_lure_for_child_effect = yes
+			}
+		}
+		# Sort our shieldmaiden
+		scope:target = {
+			ordered_court_position_holder = {
+				type = bodyguard_court_position
+				limit = { suitable_shieldmaiden_savior_trigger = yes }
+				order_by = { value = murder_weight_best_bodyguard_value }
 				save_scope_as = shieldmaiden
 			}
 		}
 		hidden_effect = {
 			if = {
 				limit = {
+					# Shieldmaidens can't die from some murder methods.
 					NOR = {
 						scope:murder_method = flag:lured_into_forest
 						scope:murder_method = flag:child_pushed
@@ -773,7 +857,7 @@ fp1_shieldmaiden.0021 = {
 				}
 				random = {
 					chance = {
-						value = 30
+						value = 75
 						subtract = scope:shieldmaiden.prowess
 					}
 					set_local_variable = {
@@ -786,108 +870,68 @@ fp1_shieldmaiden.0021 = {
 		if = {
 			limit = { exists = local_var:shieldmaiden_dies }
 			show_as_tooltip = {
-				if = {
-					limit = {
-						exists = scope:scheme_discovered
-					}
-					known_murder_effect = {
-						VICTIM = scope:shieldmaiden
-						MURDERER = root
-						EXPOSER = scope:target
-					}
-				}
-				else = {
-					unknown_murder_effect = {
-						VICTIM = scope:shieldmaiden
-						MURDERER = root
-						REASON = death_duel
-					}
+				murder_interception_handle_extra_deaths_effect = {
+					VICTIM = scope:shieldmaiden
+					REASON = death_murder
 				}
 			}
 		}
 		random_dummy_gender_assassin_effect = yes
-		murder_failure_effect = yes # Fires the response for the target
+		murder_failure_effect = yes
 	}
 
 	#It's over.
-	option = {
-		name = fp1_shieldmaiden.0021.a
-		show_as_tooltip = {
-			if = {
-				limit = { exists = scope:scheme_discovered }
-				add_dread = medium_dread_gain
-			}
-			scope:scheme = {
-				end_scheme = yes
-			}
-		}
-		ai_chance = {
-			base = 100
-		}
-	}
+	option = { name = fp1_shieldmaiden.0021.a }
 
 	#It's not over till I say it's over!
 	option = {
 		name = fp1_shieldmaiden.0021.b
-		show_as_tooltip = {
-			if = {
-				limit = { exists = scope:scheme_discovered }
-				add_dread = medium_dread_gain
-			}
-			start_scheme = {
-				type = murder
-				target = scope:target
-			}
+		trigger = {
+			NOT = { exists = scope:scheme_discovered }
 		}
-		hidden_effect = {
-			save_scope_value_as = {
-				name = restart_scheme
-				value = yes
-			}
-		}
-		ai_chance = {
-			base = 0
-		}
+		restart_murder_scheme_effect = yes
 	}
 
+	# Fire the rest of the outcome.
 	after = {
-		hidden_effect = { trigger_event = murder_outcome.9999 }
+		scope:target = { trigger_event = fp1_shieldmaiden.0022 }
 	}
 }
 
 # Shieldmaiden saves you from murder
 fp1_shieldmaiden.0022 = {
 	type = character_event
+	window = scheme_target_event
 	title = fp1_shieldmaiden.0022.t
 	desc = {
 		# This block is only for the setup of child_pushed.
 		first_valid = {
 			triggered_desc = {
-			    trigger = {
-			    	scope:murder_method = flag:child_pushed
+				trigger = {
+					scope:murder_method = flag:child_pushed
 					exists = scope:child_pushed_dog
-			    }
-			    desc = murder_outcome.5001.child_pushed_dog
+				}
+				desc = murder_outcome.5001.child_pushed_dog
 			}
 			triggered_desc = {
-			    trigger = {
-			    	scope:murder_method = flag:child_pushed
+				trigger = {
+					scope:murder_method = flag:child_pushed
 					exists = scope:child_pushed_cat
-			    }
-			    desc = murder_outcome.5001.child_pushed_cat
+				}
+				desc = murder_outcome.5001.child_pushed_cat
 			}
 			triggered_desc = {
-			    trigger = {
-			    	scope:murder_method = flag:child_pushed
+				trigger = {
+					scope:murder_method = flag:child_pushed
 					exists = scope:child_pushed_toy
-			    }
-			    desc = murder_outcome.5001.child_pushed_toy
+				}
+				desc = murder_outcome.5001.child_pushed_toy
 			}
 			triggered_desc = {
-			    trigger = {
-			    	scope:murder_method = flag:child_pushed
-			    }
-			    desc = murder_outcome.5001.child_pushed
+				trigger = {
+					scope:murder_method = flag:child_pushed
+				}
+				desc = murder_outcome.5001.child_pushed
 			}
 		}
 		# Shieldmaided saves you!
@@ -911,7 +955,7 @@ fp1_shieldmaiden.0022 = {
 			desc =  fp1_shieldmaiden.0022.desc.assassin
 		}
 		# ...but did they pay the ultimate price?
-		first_valid = {	
+		first_valid = {
 			triggered_desc = {
 				trigger = {
 					exists = local_var:shieldmaiden_dies
@@ -948,46 +992,49 @@ fp1_shieldmaiden.0022 = {
 		}
 	}
 	theme = murder_scheme
-	override_background = { 
+	override_background = {
 		trigger = { scope:murder_method = flag:hired_thugs }
-		event_background = wilderness_scope
+		reference = wilderness_scope
 	}
-	override_background = { 
+	override_background = {
 		trigger = {
 			OR = {
 				scope:murder_method = flag:riled_up_mob
 				scope:murder_method = flag:child_pushed
 			}
 		}
-		event_background = courtyard
+		reference = courtyard
 	}
-	override_background = { 
+	override_background = {
 		trigger = { scope:murder_method = flag:lured_into_forest }
-		event_background = wilderness_forest
+		reference = wilderness_forest
 	}
-
 	left_portrait = {
-		character = scope:shieldmaiden
-		animation = rage
+		character = scope:target
+		triggered_animation = {
+			trigger = { exists = scope:scheme_discovered }
+			animation = rage
+		}
+		animation = paranoia
+	}
+	center_portrait = {
+		character = scope:bodyguard
+		triggered_animation = {
+			trigger = { is_alive = no }
+			animation = map_fear
+		}
+		animation = random_weapon_aggressive
 	}
 	right_portrait = {
-		character = scope:owner_revealed
-		animation = anger
-	}
-
-	trigger = {
-		exists = scope:murder_saved
-		scope:murder_saved = flag:shieldmaiden_stopped_assassin
-		scope:target = {
-			NOT = { has_character_flag = recently_saved_by_shieldmaiden }
+		character = scope:owner_to_reveal
+		triggered_animation = {
+			trigger = { exists = scope:scheme_discovered }
+			animation = fear
 		}
+		animation = stress
 	}
 
 	immediate = {
-		add_character_flag = {
-			flag = recently_saved_by_shieldmaiden
-			years = 10
-		}
 		if = {
 			limit = { scope:murder_method = flag:hired_thugs }
 			scope:home_province = {	save_scope_as = background_wilderness_scope }
@@ -995,22 +1042,9 @@ fp1_shieldmaiden.0022 = {
 		# Handle the death of the Shieldmaiden if necessary
 		if = {
 			limit = { exists = local_var:shieldmaiden_dies }
-			if = {
-				limit = {
-					exists = scope:scheme_discovered
-				}
-				known_murder_effect = {
-					VICTIM = scope:shieldmaiden
-					MURDERER = root
-					EXPOSER = scope:target
-				}
-			}
-			else = {
-				unknown_murder_effect = {
-					VICTIM = scope:shieldmaiden
-					MURDERER = root
-					REASON = death_duel
-				}
+			murder_interception_handle_extra_deaths_effect = {
+				VICTIM = scope:shieldmaiden
+				REASON = death_murder
 			}
 		}
 	}
@@ -1019,9 +1053,7 @@ fp1_shieldmaiden.0022 = {
 	option = {
 		name = fp1_shieldmaiden.0022.a
 		trigger = {
-			NOT = {
-				exists = scope:scheme_discovered
-			}
+			NOT = { exists = scope:scheme_discovered }
 		}
 		custom_tooltip = murder_save.failure_unknown_owner_tt
 	}
@@ -1029,9 +1061,7 @@ fp1_shieldmaiden.0022 = {
 	#Vengeance!
 	option = {
 		name = fp1_shieldmaiden.0022.b
-		trigger = {
-			exists = scope:scheme_discovered
-		}
+		trigger = { exists = scope:scheme_discovered }
 		custom_tooltip = murder_save.failure_known_owner_tt
 	}
 
@@ -1146,7 +1176,7 @@ fp1_shieldmaiden.0032 = {
 		character = scope:shieldmaiden
 		animation = rage
 	}
-	override_background = { event_background = army_camp }
+	override_background = { reference = army_camp }
 
 	trigger = {
 		#DLC check.
@@ -1163,7 +1193,7 @@ fp1_shieldmaiden.0032 = {
 
 	weight_multiplier = {
 		base = 1
-		
+
 		# Much more likely if you're a shieldmaiden yourself.
 		modifier = {
 			add = 2
@@ -1268,7 +1298,7 @@ fp1_shieldmaiden.0032 = {
 			}
 		}
 	}
-	
+
 	# Prowess: see how they swing that sword!
 	option = {
 		# Separate loc for first person POV.
@@ -1327,7 +1357,7 @@ fp1_shieldmaiden.0032 = {
 			}
 		}
 	}
-	
+
 	# Intrigue: never a finer backstabber!
 	option = {
 		# Separate loc for first person POV.
@@ -1377,9 +1407,14 @@ fp1_shieldmaiden.0032 = {
 		}
 
 		# Minor stress revolving around paranoia: what if they backstab *YOU*, after all?
-		stress_impact = {
-			trusting = minor_stress_impact_loss
-			paranoid = minor_stress_impact_gain
+		if = {
+			limit = {
+				NOT = { scope:shieldmaiden = root }
+			}
+			stress_impact = {
+				trusting = minor_stress_impact_loss
+				paranoid = minor_stress_impact_gain
+			}
 		}
 		ai_chance = {
 			base = 100
@@ -1389,10 +1424,12 @@ fp1_shieldmaiden.0032 = {
 			}
 			modifier = {	#Weight up for stress.
 				add = 10
+				NOT = { scope:shieldmaiden = root }
 				has_trait = trusting
 			}
 			modifier = {	#Weight down for stress.
 				add = -10
+				NOT = { scope:shieldmaiden = root }
 				has_trait = paranoid
 			}
 		}

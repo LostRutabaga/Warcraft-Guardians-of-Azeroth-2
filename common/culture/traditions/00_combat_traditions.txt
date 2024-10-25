@@ -19,6 +19,10 @@ tradition_winter_warriors = {
 		winter_soldier_trait_more_common = yes
 		winter_trait_bonuses = yes
 		can_recruit_winter_specialist = yes
+		resistant_to_winter_privation = yes
+	}
+	character_modifier = {
+		taiga_travel_danger = taiga_low_danger_reduction
 	}
 	cost = {
 		prestige = {
@@ -30,9 +34,9 @@ tradition_winter_warriors = {
 			if = {
 				limit = {
 					NOR = {
-						any_in_list = { list = traits this = flag:ethos_bellicose }
-						any_in_list = { list = traits this = flag:ethos_stoic }
-						any_in_list = { list = traits this = flag:ethos_communal }
+						culture_pillar:ethos_bellicose = { is_in_list = traits }
+						culture_pillar:ethos_stoic = { is_in_list = traits }
+						culture_pillar:ethos_communal = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -47,11 +51,12 @@ tradition_winter_warriors = {
 							percent >= 0.3
 							any_county_province = {
 								OR = {
-									geographical_region = world_europe_north
-									geographical_region = world_europe_west
-									geographical_region = world_europe_east
-									steppe_region_trigger = yes
-									geographical_region = world_tibet
+									# Warcraft
+									geographical_region = world_eastern_kingdoms_lordaeron
+									geographical_region = world_kalimdor_north
+									geographical_region = world_northrend
+									geographical_region = world_pandaria_kun_lai_summit
+									# End of Warcraft
 								}
 							}
 						}
@@ -67,7 +72,7 @@ tradition_winter_warriors = {
 		}
 	}
 	ai_will_do = {
-		value = 100
+		value = 400
 		if = {
 			limit = {
 				NOT = {
@@ -77,11 +82,12 @@ tradition_winter_warriors = {
 							culture = scope:character.culture
 							any_county_province = {
 								OR = {
-									geographical_region = world_europe_north
-									geographical_region = world_europe_west
-									geographical_region = world_europe_east
-									steppe_region_trigger = yes
-									geographical_region = world_tibet
+									# Warcraft
+									geographical_region = world_eastern_kingdoms_lordaeron
+									geographical_region = world_kalimdor_north
+									geographical_region = world_northrend
+									geographical_region = world_pandaria_kun_lai_summit
+									# End of Warcraft
 								}
 							}
 						}
@@ -121,6 +127,10 @@ tradition_forest_fighters = {
 		forest_trait_bonuses = yes
 		can_recruit_forest_specialist = yes
 	}
+	character_modifier = {
+		forest_travel_danger = forest_low_danger_reduction
+		taiga_travel_danger = taiga_low_danger_reduction
+	}
 	province_modifier = {
 		forest_levy_size = 0.1
 		taiga_levy_size = 0.1
@@ -137,9 +147,9 @@ tradition_forest_fighters = {
 			if = {
 				limit = {
 					NOR = {
-						any_in_list = { list = traits this = flag:ethos_bellicose }
-						any_in_list = { list = traits this = flag:ethos_stoic }
-						any_in_list = { list = traits this = flag:ethos_communal }
+						culture_pillar:ethos_bellicose = { is_in_list = traits }
+						culture_pillar:ethos_stoic = { is_in_list = traits }
+						culture_pillar:ethos_communal = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -171,7 +181,7 @@ tradition_forest_fighters = {
 		}
 	}
 	ai_will_do = {
-		value = 100
+		value = 200
 		if = {
 			limit = {
 				NOT = {
@@ -191,6 +201,20 @@ tradition_forest_fighters = {
 			}
 			multiply = 0
 		}
+		else_if = {
+			limit = {
+				any_culture_county = {
+					percent >= 0.6
+					any_county_province = {
+						OR = {
+							terrain = forest
+							terrain = taiga
+						}
+					}
+				}
+			}
+			multiply = 2
+		}
 	}
 }
 
@@ -204,16 +228,21 @@ tradition_mountaineers = {
 	}
 	
 	is_shown = { #Replaced by Horn Mountain Skirmishing & Caucasian Wolves
-		NOR = {
-			like_heritage_somalian_trigger = yes
-			like_heritage_east_african_trigger = yes
-			this = culture:georgian
-			any_parent_culture_or_above = {
-				this = culture:georgian
-			}
-			has_cultural_tradition = tradition_caucasian_wolves
-			has_cultural_tradition = tradition_horn_mountain_skirmishing
-		}
+		# Warcraft
+		
+		always = yes
+	
+		#NOR = {
+		#	has_cultural_pillar = heritage_somalian
+		#	has_cultural_pillar = heritage_east_african
+		#	this = culture:georgian
+		#	any_parent_culture_or_above = {
+		#		this = culture:georgian
+		#	}
+		#	has_cultural_tradition = tradition_caucasian_wolves
+		#	has_cultural_tradition = tradition_horn_mountain_skirmishing
+		#}
+		# End of Warcraft
 	}
 
 	can_pick = {
@@ -234,6 +263,11 @@ tradition_mountaineers = {
 		rough_terrain_expert_trait_more_common = yes
 		mountain_trait_bonuses = yes
 		can_recruit_mountain_specialist = yes
+		resistant_to_mountain_privation = yes
+	}
+	character_modifier = {
+		mountains_travel_danger = mountains_low_danger_reduction
+		desert_mountains_travel_danger = desert_mountains_low_danger_reduction
 	}
 	province_modifier = {
 		mountains_levy_size = 0.1
@@ -251,9 +285,9 @@ tradition_mountaineers = {
 			if = {
 				limit = {
 					NOR = {
-						any_in_list = { list = traits this = flag:ethos_bellicose }
-						any_in_list = { list = traits this = flag:ethos_stoic }
-						any_in_list = { list = traits this = flag:ethos_communal }
+						culture_pillar:ethos_bellicose = { is_in_list = traits }
+						culture_pillar:ethos_stoic = { is_in_list = traits }
+						culture_pillar:ethos_communal = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -285,7 +319,7 @@ tradition_mountaineers = {
 		}
 	}
 	ai_will_do = {
-		value = 100
+		value = 200
 		if = {
 			limit = {
 				NOT = {
@@ -305,6 +339,38 @@ tradition_mountaineers = {
 			}
 			multiply = 0
 		}
+		else_if = {
+			limit = {
+				scope:character.culture ?= {
+					any_culture_county = {
+						percent > 0.6
+						any_county_province = {
+							OR = {
+								terrain = mountains
+								terrain = desert_mountains
+							}
+						}
+					}
+				}
+			}
+			multiply = 6
+		}
+		else_if = {
+			limit = {
+				scope:character.culture ?= {
+					any_culture_county = {
+						percent > 0.4
+						any_county_province = {
+							OR = {
+								terrain = mountains
+								terrain = desert_mountains
+							}
+						}
+					}
+				}
+			}
+			multiply = 2
+		}
 	}
 }
 
@@ -317,8 +383,12 @@ tradition_warriors_of_the_dry = {
 		4 = desert.dds
 	}
 
-	is_shown = { #Replaced by Mubarizuns
-		NOT = { like_heritage_arabic_trigger = yes }
+	is_shown = {
+		always = yes
+		
+		# Warcraft - TODO - adapt it and `tradition_mubarizuns` for wastewanders
+		# NOT = { like_heritage_arabic_trigger = yes }
+		# End of Warcraft
 	}
 	
 	can_pick = {
@@ -334,12 +404,17 @@ tradition_warriors_of_the_dry = {
 				}
 			}
 		}
-		NOT = { has_cultural_tradition = tradition_mubarizuns } #To prevent stacking after hybridization
+		#NOT = { has_cultural_tradition = tradition_mubarizuns } #To prevent stacking after hybridization
 	}
 	parameters = {
 		desert_warrior_trait_more_common = yes
 		dry_trait_bonuses = yes
 		can_recruit_dry_specialist = yes
+	}
+	character_modifier = {
+		desert_travel_danger = desert_low_danger_reduction
+		drylands_travel_danger = drylands_low_danger_reduction
+		desert_mountains_travel_danger = desert_mountains_low_danger_reduction
 	}
 	province_modifier = {
 		drylands_levy_size = 0.1
@@ -357,9 +432,9 @@ tradition_warriors_of_the_dry = {
 			if = {
 				limit = {
 					NOR = {
-						any_in_list = { list = traits this = flag:ethos_bellicose }
-						any_in_list = { list = traits this = flag:ethos_stoic }
-						any_in_list = { list = traits this = flag:ethos_communal }
+						culture_pillar:ethos_bellicose = { is_in_list = traits }
+						culture_pillar:ethos_stoic = { is_in_list = traits }
+						culture_pillar:ethos_communal = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -391,7 +466,7 @@ tradition_warriors_of_the_dry = {
 		}
 	}
 	ai_will_do = {
-		value = 100
+		value = 200
 		if = {
 			limit = {
 				NOT = {
@@ -411,6 +486,38 @@ tradition_warriors_of_the_dry = {
 			}
 			multiply = 0
 		}
+		else_if = {
+			limit = {
+				scope:character.culture ?= {
+					any_culture_county = {
+						percent > 0.6
+						any_county_province = {
+							OR = {
+								terrain = drylands
+								terrain = desert
+							}
+						}
+					}
+				}
+			}
+			multiply = 6
+		}
+		else_if = {
+			limit = {
+				scope:character.culture ?= {
+					any_culture_county = {
+						percent > 0.4
+						any_county_province = {
+							OR = {
+								terrain = drylands
+								terrain = desert
+							}
+						}
+					}
+				}
+			}
+			multiply = 2
+		}
 	}
 }
 
@@ -423,11 +530,16 @@ tradition_highland_warriors = {
 		4 = mountain.dds
 	}
 
-	is_shown = { #Replaced by Upland Skirmishing
-		NOR = {
-			like_heritage_west_african_trigger = yes
-			has_cultural_tradition = tradition_upland_skirmishing
-		}
+	is_shown = { #Replaced by Upland Skirmishing # TODO: Maybe adapting ?
+		# Warcraft
+		
+		always = yes
+		
+		#NOR = {
+		#	has_cultural_pillar = heritage_west_african
+		#	has_cultural_tradition = tradition_upland_skirmishing
+		#}
+		# End of Warcraft
 	}
 	can_pick = {
 		culture_not_pacifistic_trigger = yes
@@ -450,6 +562,9 @@ tradition_highland_warriors = {
 		hills_levy_size = 0.1
 		hills_supply_limit_mult = 0.25
 	}
+	character_modifier = {
+		hills_travel_danger = hills_low_danger_reduction
+	}
 	
 	cost = {
 		prestige = {
@@ -461,9 +576,9 @@ tradition_highland_warriors = {
 			if = {
 				limit = {
 					NOR = {
-						any_in_list = { list = traits this = flag:ethos_bellicose }
-						any_in_list = { list = traits this = flag:ethos_stoic }
-						any_in_list = { list = traits this = flag:ethos_communal }
+						culture_pillar:ethos_bellicose = { is_in_list = traits }
+						culture_pillar:ethos_stoic = { is_in_list = traits }
+						culture_pillar:ethos_communal = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -510,6 +625,32 @@ tradition_highland_warriors = {
 			}
 			multiply = 0
 		}
+		else_if = {
+			limit = {
+				scope:character.culture ?= {
+					any_culture_county = {
+						percent > 0.6
+						any_county_province = {
+							terrain = hills
+						}
+					}
+				}
+			}
+			multiply = 6
+		}
+		else_if = {
+			limit = {
+				scope:character.culture ?= {
+					any_culture_county = {
+						percent > 0.4
+						any_county_province = {
+							terrain = hills
+						}
+					}
+				}
+			}
+			multiply = 2
+		}
 	}
 }
 
@@ -522,12 +663,17 @@ tradition_jungle_warriors = {
 		4 = jungle.dds
 	}
 
-	is_shown = { #Replaced by Bush Hunting
-		NOR = {
-			like_heritage_akan_trigger = yes
-			like_heritage_yoruba_trigger = yes
-			has_cultural_tradition = tradition_bush_hunting
-		}
+	is_shown = { #Replaced by Bush Hunting # TODO: Maybe adapting ?
+		# Warcraft
+		
+		always = yes
+		
+		#NOR = {
+		#	has_cultural_pillar = heritage_akan
+		#	has_cultural_pillar = heritage_yoruba
+		#	has_cultural_tradition = tradition_bush_hunting
+		# }
+		# End of Warcraft
 	}
 	
 	can_pick = {
@@ -546,6 +692,9 @@ tradition_jungle_warriors = {
 		jungle_trait_bonuses = yes
 		can_recruit_jungle_specialist = yes
 	}
+	character_modifier = {
+		jungle_travel_danger = jungle_low_danger_reduction
+	}
 	province_modifier = {
 		jungle_levy_size = 0.1
 		jungle_supply_limit_mult = 0.25
@@ -560,9 +709,9 @@ tradition_jungle_warriors = {
 			if = {
 				limit = {
 					NOR = {
-						any_in_list = { list = traits this = flag:ethos_bellicose }
-						any_in_list = { list = traits this = flag:ethos_stoic }
-						any_in_list = { list = traits this = flag:ethos_communal }
+						culture_pillar:ethos_bellicose = { is_in_list = traits }
+						culture_pillar:ethos_stoic = { is_in_list = traits }
+						culture_pillar:ethos_communal = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -608,6 +757,32 @@ tradition_jungle_warriors = {
 			}
 			multiply = 0
 		}
+		else_if = {
+			limit = {
+				scope:character.culture ?= {
+					any_culture_county = {
+						percent > 0.6
+						any_county_province = {
+							terrain = jungle
+						}
+					}
+				}
+			}
+			multiply = 6
+		}
+		else_if = {
+			limit = {
+				scope:character.culture ?= {
+					any_culture_county = {
+						percent > 0.4
+						any_county_province = {
+							terrain = jungle
+						}
+					}
+				}
+			}
+			multiply = 2
+		}
 	}
 }
 
@@ -624,7 +799,7 @@ tradition_only_the_strong = {
 		custom_description = {
 			text = culture_not_egalitarian
 			NOT = {
-				any_in_list = { list = traits this = flag:ethos_egalitarian }
+				culture_pillar:ethos_egalitarian = { is_in_list = traits }
 			}
 		}
 	}
@@ -641,6 +816,11 @@ tradition_only_the_strong = {
 		men_at_arms_recruitment_cost = 0.25
 		knight_effectiveness_mult = 1
 		knight_limit = 2
+		accolade_glory_gain_mult = 0.2
+		men_at_arms_limit = -2
+		men_at_arms_cap = -1
+		maa_damage_add = 8
+		maa_toughness_add = 8
 	}
 	
 	cost = {
@@ -653,8 +833,8 @@ tradition_only_the_strong = {
 			if = {
 				limit = {
 					NOR = {
-						any_in_list = { list = traits this = flag:ethos_bellicose }
-						any_in_list = { list = traits this = flag:ethos_stoic }
+						culture_pillar:ethos_bellicose = { is_in_list = traits }
+						culture_pillar:ethos_stoic = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -673,6 +853,16 @@ tradition_only_the_strong = {
 						}
 					}
 				}
+				
+				# Warcraft
+				if = {
+					limit = {
+						has_cultural_tradition = tradition_warrior_culture
+					}
+					multiply = 1.15
+				}
+				# End of Warcraft
+				
 				add = {
 					value = tradition_unfulfilled_criteria_penalty
 					desc = knights_with_prowess_desc
@@ -684,7 +874,7 @@ tradition_only_the_strong = {
 	}
 	
 	ai_will_do = {
-		value = 100
+		value = 200
 		if = {
 			limit = {
 				scope:character = {
@@ -696,6 +886,18 @@ tradition_only_the_strong = {
 				}
 			}
 			multiply = 0.25
+		}
+		else_if = {
+			limit = {
+				scope:character ?= {
+					ai_has_warlike_personality = yes
+					any_courtier = {
+						count >= 10
+						prowess >= 12
+					}
+				}
+			}
+			multiply = 4
 		}
 	}
 }
@@ -718,7 +920,8 @@ tradition_warriors_by_merit = {
 		blademaster_traits_more_common = yes
 	}
 	character_modifier = {
-		prowess_per_prestige_level = 1
+		prowess_per_prestige_level = 2
+		accolade_glory_gain_mult = 0.1
 	}
 	
 	cost = {
@@ -731,9 +934,9 @@ tradition_warriors_by_merit = {
 			if = {
 				limit = {
 					NOR = {
-						any_in_list = { list = traits this = flag:ethos_bellicose }
-						any_in_list = { list = traits this = flag:ethos_egalitarian }
-						any_in_list = { list = traits this = flag:ethos_communal }
+						culture_pillar:ethos_bellicose = { is_in_list = traits }
+						culture_pillar:ethos_egalitarian = { is_in_list = traits }
+						culture_pillar:ethos_communal = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -761,17 +964,24 @@ tradition_warriors_by_merit = {
 					desc = courtiers_with_prowess_who_cant_be_knight_desc
 				}
 			}
-			
+			# Warcraft
+			if = {
+				limit = {
+					culture_tradition:tradition_talent_acquisition = { is_in_list = traits }
+				}
+				add = 25
+			}
+			# End of Warcraft
 			multiply = tradition_replacement_cost_if_relevant
 		}
 	}
 	
 	ai_will_do = {
-		value = 100
+		value = 150
 		if = {
 			limit = {
 				NOR = {
-					any_in_list = { list = traits this = flag:ethos_egalitarian }
+					culture_pillar:ethos_egalitarian = { is_in_list = traits }
 					scope:character = {
 						NOT = {
 							can_be_combatant_based_on_gender_trigger = { ARMY_OWNER = this }
@@ -780,6 +990,14 @@ tradition_warriors_by_merit = {
 				}
 			}
 			multiply = 0.25
+		}
+		else_if = {
+			limit = {
+				scope:character ?= {
+					ai_has_warlike_personality = yes
+				}
+			}
+			multiply = 4
 		}
 	}
 }
@@ -800,6 +1018,7 @@ tradition_warrior_monks = {
 	parameters = {
 		prowess_from_religious_traits = yes
 		culture_clergy_can_fight = yes
+		monastery_prowess_martial_bonus = yes
 	}
 	character_modifier = {
 		prowess_per_piety_level = 1
@@ -815,8 +1034,8 @@ tradition_warrior_monks = {
 			if = {
 				limit = {
 					NOR = {
-						any_in_list = { list = traits this = flag:ethos_bellicose }
-						any_in_list = { list = traits this = flag:ethos_spiritual }
+						culture_pillar:ethos_bellicose = { is_in_list = traits }
+						culture_pillar:ethos_spiritual = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -858,18 +1077,30 @@ tradition_warrior_monks = {
 					desc = culture_head_faith_clergy_prowess_desc
 				}
 			}
-			
+			# Warcraft
+			if = {
+				limit = {
+					scope:character.faith = {
+						OR = {
+							has_doctrine = doctrine_pluralism_fundamentalist
+							has_doctrine = doctrine_pluralism_dark
+						}
+					}
+				}
+				multiply = 1.15
+			}
+			# End of Warcraft
 			multiply = tradition_replacement_cost_if_relevant
 		}
 	}
 	
 	ai_will_do = {
-		value = 100
+		value = 200
 		if = {
 			limit = {
 				NOR = {
-					any_in_list = { list = traits this = flag:ethos_bellicose }
-					any_in_list = { list = traits this = flag:ethos_spiritual }
+					culture_pillar:ethos_bellicose = { is_in_list = traits }
+					culture_pillar:ethos_spiritual = { is_in_list = traits }
 				}
 			}
 			multiply = 0.25
@@ -895,6 +1126,9 @@ tradition_talent_acquisition = {
 		better_knights_from_decision = yes
 		pardoning_gives_loyalty = yes
 	}
+	character_modifier = {
+		accolade_glory_gain_mult = 0.1
+	}
 	
 	cost = {
 		prestige = {
@@ -906,9 +1140,9 @@ tradition_talent_acquisition = {
 			if = {
 				limit = {
 					NOR = {
-						any_in_list = { list = traits this = flag:ethos_bellicose }
-						any_in_list = { list = traits this = flag:ethos_egalitarian }
-						any_in_list = { list = traits this = flag:ethos_courtly }
+						culture_pillar:ethos_bellicose = { is_in_list = traits }
+						culture_pillar:ethos_egalitarian = { is_in_list = traits }
+						culture_pillar:ethos_courtly = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -944,19 +1178,31 @@ tradition_talent_acquisition = {
 					desc = skilled_prisoners_desc
 				}
 			}
-			
+			# Warcraft - Evil Religions convert prisoners
+			if = {
+				limit = {
+					NOT = { has_cultural_tradition = tradition_only_the_strong }
+						scope:character = {
+							religion = {
+								is_in_dark_religion_family_trigger = yes
+							}
+						}
+				}
+				multiply = 1.15
+			}
+			# End of Warcraft
 			multiply = tradition_replacement_cost_if_relevant
 		}
 	}
 	
 	ai_will_do = {
-		value = 100
+		value = 200
 		if = {
 			limit = {
 				NOR = {
-					any_in_list = { list = traits this = flag:ethos_bellicose }
-					any_in_list = { list = traits this = flag:ethos_egalitarian }
-					any_in_list = { list = traits this = flag:ethos_courtly }
+					culture_pillar:ethos_bellicose = { is_in_list = traits }
+					culture_pillar:ethos_egalitarian = { is_in_list = traits }
+					culture_pillar:ethos_courtly = { is_in_list = traits }
 				}
 			}
 			multiply = 0.5
@@ -972,22 +1218,17 @@ tradition_strength_in_numbers = {
 		1 = mena
 		4 = soldiers3.dds
 	}
+
+	parameters = {
+		strength_in_numbers_maa_limit_bonus = yes
+		strength_in_numbers_heavy_maa_ban = yes
+	}
 	
 	province_modifier = {
-		levy_size = 0.15
+		levy_size = 0.25
 	}
 	character_modifier = {
-		light_cavalry_max_size_add = 2
-		archers_max_size_add = 2
-		skirmishers_max_size_add = 2
-		pikemen_max_size_add = -2
-		heavy_infantry_max_size_add = -2
-		elephant_cavalry_max_size_add = -2
-		heavy_cavalry_max_size_add = -2
-		skirmishers_recruitment_cost_mult = -0.15
-		light_cavalry_recruitment_cost_mult = -0.15
-		archers_recruitment_cost_mult = -0.15
-		knight_limit = -2
+		supply_limit_mult = 0.5
 	}
 	
 	cost = {
@@ -1000,8 +1241,8 @@ tradition_strength_in_numbers = {
 			if = {
 				limit = {
 					NOR = {
-						any_in_list = { list = traits this = flag:ethos_bellicose }
-						any_in_list = { list = traits this = flag:ethos_spiritual }
+						culture_pillar:ethos_bellicose = { is_in_list = traits }
+						culture_pillar:ethos_spiritual = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -1035,7 +1276,12 @@ tradition_strength_in_numbers = {
 	}
 	
 	ai_will_do = {
-		value = 5 # The AI shouldn't really pick this very often
+		# Warcraft
+		value = 5
+		if = {
+			limit = { is_small_culture_trigger = yes }
+			multiply = 20
+		}
 		if = {
 			limit = {
 				OR = {
@@ -1057,15 +1303,20 @@ tradition_frugal_armorsmiths = {
 		1 = western
 		4 = shield.dds
 	}
+
+	parameters = {
+		frugal_blacksmith_maa_size = yes
+	}
 	
 	character_modifier = {
-		army_maintenance_mult = -0.15
-		men_at_arms_recruitment_cost = -0.15
-		heavy_infantry_toughness_mult = -0.2
-		pikemen_toughness_mult = -0.2
-		heavy_cavalry_toughness_mult = -0.2
-		elephant_cavalry_toughness_mult = -0.2
-		knight_effectiveness_mult = -0.2
+		army_maintenance_mult = -0.25
+		men_at_arms_recruitment_cost = -0.25
+		knight_effectiveness_mult = -0.6
+		maa_toughness_add = -6
+		levy_toughness = -8
+		heavy_cavalry_toughness_add = -14
+		pikemen_toughness_add = -4
+		heavy_infantry_toughness_add = -4
 	}
 	
 	cost = {
@@ -1078,9 +1329,9 @@ tradition_frugal_armorsmiths = {
 			if = {
 				limit = {
 					NOR = {
-						any_in_list = { list = traits this = flag:ethos_bellicose }
-						any_in_list = { list = traits this = flag:ethos_stoic }
-						any_in_list = { list = traits this = flag:ethos_communal }
+						culture_pillar:ethos_bellicose = { is_in_list = traits }
+						culture_pillar:ethos_stoic = { is_in_list = traits }
+						culture_pillar:ethos_communal = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -1114,7 +1365,7 @@ tradition_frugal_armorsmiths = {
 	}
 	
 	ai_will_do = {
-		value = 25 # The AI shouldn't really pick this very often
+		value = 5 # The AI shouldn't really pick this very often
 		if = {
 			limit = {
 				scope:character = {
@@ -1164,10 +1415,20 @@ tradition_malleable_invaders = {
 	
 	is_shown = {
 		has_dlc_feature = hybridize_culture
+		
+		# Warcraft
+		OR = {
+			heritage_gives_sea_raiding_trigger = yes
+			draenor_culture_trigger = yes
+		}
+		# End of Warcraft
 	}
 	can_pick = {
-		culture_in_non_sedentary_geographical_region_trigger = yes
-		culture_not_pacifistic_trigger = yes
+		# Warcraft
+		custom_description = {
+			text = culture_not_pacifist_trigger_desc
+			culture_not_pacifistic_trigger = yes
+		}
 	}
 	
 	parameters = {
@@ -1193,9 +1454,9 @@ tradition_malleable_invaders = {
 			if = {
 				limit = {
 					NOR = {
-						any_in_list = { list = traits this = flag:ethos_bellicose }
-						any_in_list = { list = traits this = flag:ethos_egalitarian }
-						any_in_list = { list = traits this = flag:ethos_bureaucratic }
+						culture_pillar:ethos_bellicose = { is_in_list = traits }
+						culture_pillar:ethos_egalitarian = { is_in_list = traits }
+						culture_pillar:ethos_bureaucratic = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -1203,24 +1464,36 @@ tradition_malleable_invaders = {
 					desc = not_bellicose_egalitarian_or_bureaucratic_desc
 				}
 			}
-			if = {
-				limit = {
-					NOR = {
-						any_in_list = { list = traits this = flag:heritage_turkic }
-						any_in_list = { list = traits this = flag:heritage_mongolic }
-					}
-				}
-				add = {
-					value = tradition_unfulfilled_criteria_penalty
-					desc = turkic_or_mongolic_desc
-				}
-			}
+			# Warcraft
+			# if = {
+			#	limit = {
+			#		NOR = {
+			#			culture_pillar:heritage_turkic = { is_in_list = traits }
+			#			culture_pillar:heritage_mongolic = { is_in_list = traits }
+			#		}
+			#	}
+			#	add = {
+			#		value = tradition_unfulfilled_criteria_penalty
+			#		desc = turkic_or_mongolic_desc
+			#	}
+			# }
+			# End of Warcraft
 			
 			multiply = tradition_replacement_cost_if_relevant
 		}
 	}
 	
 	ai_will_do = {
+		# Warcraft
+		if = {
+			limit = {
+				OR = {
+					culture_pillar:ethos_bellicose = { is_in_list = traits }
+					culture_pillar:ethos_communal = { is_in_list = traits }
+				}
+			}
+			add = 15
+		}
 		value = 0
 	}
 }
@@ -1242,10 +1515,11 @@ tradition_quarrelsome = {
 		can_use_conquest_cbs = yes
 		cb_lower_prestige_level_requirement = yes
 		cheaper_cbs = yes
+		disloyal_trait_less_spurned = yes
+		disloyal_trait_more_common = yes
 	}
 	character_modifier = {
-		monthly_county_control_change_factor = -0.4
-		vassal_opinion = -5
+		monthly_county_control_growth_factor = -0.4
 		
 		ai_honor = -20
 		ai_war_chance = 0.5
@@ -1262,8 +1536,8 @@ tradition_quarrelsome = {
 			if = {
 				limit = {
 					NOR = {
-						any_in_list = { list = traits this = flag:ethos_bellicose }
-						any_in_list = { list = traits this = flag:ethos_spiritual }
+						culture_pillar:ethos_bellicose = { is_in_list = traits }
+						culture_pillar:ethos_spiritual = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -1303,12 +1577,12 @@ tradition_quarrelsome = {
 	}
 	
 	ai_will_do = {
-		value = 100
+		value = 50
 		if = {
 			limit = {
 				NOT = {
 					scope:character = {
-						has_government = tribal_government
+						government_has_flag = government_is_tribal
 					}
 				}
 			}
@@ -1317,8 +1591,10 @@ tradition_quarrelsome = {
 		if = {
 			limit = {
 				NOR = {
-					any_in_list = { list = traits this = flag:heritage_turkic }
-					any_in_list = { list = traits this = flag:heritage_mongolic }
+					# Warcraft
+					# culture_pillar:heritage_turkic = { is_in_list = traits }
+					# culture_pillar:heritage_mongolic = { is_in_list = traits }
+					# End of Warcraft
 					is_divergent_culture = yes
 				}
 			}
@@ -1335,6 +1611,10 @@ tradition_swords_for_hire = {
 		1 = indian
 		4 = swords.dds
 	}
+
+	is_shown = {
+		NOT = { has_cultural_tradition = tradition_ep3_audacious_cadets }
+	}
 	
 	can_pick = {
 		
@@ -1344,12 +1624,16 @@ tradition_swords_for_hire = {
 		wanderers_gain_extra_combat_skills = yes
 		mercenary_courtiers_gain_extra_skills = yes
 		more_likely_to_leave_court = yes
+		unlock_voluntary_laampdom = yes
+		more_likely_to_be_laamps = yes
 	}
 	culture_modifier = {
 		mercenary_count_mult = 1
 	}
 	character_modifier = {
 		same_culture_mercenary_hire_cost_mult = -0.15
+		character_travel_speed_mult = 0.1
+		character_travel_safety_mult = 0.1
 	}
 	
 	cost = {
@@ -1362,9 +1646,9 @@ tradition_swords_for_hire = {
 			if = {
 				limit = {
 					NOR = {
-						any_in_list = { list = traits this = flag:ethos_bellicose }
-						any_in_list = { list = traits this = flag:ethos_courtly }
-						any_in_list = { list = traits this = flag:ethos_communal }
+						culture_pillar:ethos_bellicose = { is_in_list = traits }
+						culture_pillar:ethos_courtly = { is_in_list = traits }
+						culture_pillar:ethos_communal = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -1404,12 +1688,15 @@ tradition_swords_for_hire = {
 	}
 	
 	ai_will_do = {
-		value = 100
+		value = 50
+		# Warcraft
 		if = {
 			limit = {
-				like_heritage_central_germanic_trigger = yes
+				scope:character = {
+					faith = { no_mercenaries_faith_trigger = yes }
+				}
 			}
-			multiply = 1.25
+			multiply = 2
 		}
 	}
 }
@@ -1426,6 +1713,7 @@ tradition_reverence_for_veterans = {
 	parameters = {
 		wounds_and_scars_give_bonuses = yes
 		guardians_can_transfer_commander_traits = yes
+		warrior_lodges_lift_restrictions = yes
 	}
 	
 	cost = {
@@ -1438,9 +1726,9 @@ tradition_reverence_for_veterans = {
 			if = {
 				limit = {
 					NOR = {
-						any_in_list = { list = traits this = flag:ethos_bellicose }
-						any_in_list = { list = traits this = flag:ethos_stoic }
-						any_in_list = { list = traits this = flag:ethos_egalitarian }
+						culture_pillar:ethos_bellicose = { is_in_list = traits }
+						culture_pillar:ethos_stoic = { is_in_list = traits }
+						culture_pillar:ethos_egalitarian = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -1486,7 +1774,12 @@ tradition_reverence_for_veterans = {
 	}
 	
 	ai_will_do = { # Generally good & flavorful
-		value = 100
+		value = 400
+		# Warcraft
+		if = {
+			limit = { scope:character = { has_faith = faith:illidari } }
+			multiply = 1.25
+		}
 	}
 }
 
@@ -1503,9 +1796,11 @@ tradition_stalwart_defenders = {
 		can_end_defensive_wars_earlier = yes
 		more_fame_for_successful_defensive_wars = yes
 		more_gold_for_successful_defensive_wars = yes
+		next_level_fortification = yes
 	}
 	character_modifier = {
 		defender_advantage = 5
+		controlled_province_advantage = 5
 	}
 	province_modifier = {
 		garrison_size = 0.25
@@ -1521,9 +1816,9 @@ tradition_stalwart_defenders = {
 			if = {
 				limit = {
 					NOR = {
-						any_in_list = { list = traits this = flag:ethos_bellicose }
-						any_in_list = { list = traits this = flag:ethos_stoic }
-						any_in_list = { list = traits this = flag:ethos_courtly }
+						culture_pillar:ethos_bellicose = { is_in_list = traits }
+						culture_pillar:ethos_stoic = { is_in_list = traits }
+						culture_pillar:ethos_courtly = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -1546,24 +1841,41 @@ tradition_stalwart_defenders = {
 					desc = march_building_desc
 				}
 			}
+			if = {
+				limit = {
+					has_variable = defensive_traditionalist_discount
+				}
+				add = {
+					value = traditionalist_discount
+					desc = traditionalist_discount_desc
+				}
+			}
 			
 			multiply = tradition_replacement_cost_if_relevant
 		}
 	}
 	
 	ai_will_do = {
-		value = 100
+		value = 400
 		if = {
 			limit = {
 				NOR = {
-					any_in_list = { list = traits this = flag:ethos_bellicose }
-					any_in_list = { list = traits this = flag:ethos_stoic }
+					culture_pillar:ethos_bellicose = { is_in_list = traits }
+					culture_pillar:ethos_stoic = { is_in_list = traits }
 					scope:character = {
 						sub_realm_size <= medium_realm_size
 					}
 				}
 			}
 			multiply = 0.25
+		}
+		else_if = {
+			limit = {
+				scope:character ?= {
+					ai_has_warlike_personality = yes
+				}
+			}
+			multiply = 2
 		}
 	}
 }
@@ -1582,7 +1894,7 @@ tradition_battlefield_looters = {
 		less_prestige_from_battles = yes
 	}
 	character_modifier = {
-		max_loot_mult = 0.5
+		max_loot_mult = 0.75
 	}
 	
 	cost = {
@@ -1595,8 +1907,8 @@ tradition_battlefield_looters = {
 			if = {
 				limit = {
 					NOR = {
-						any_in_list = { list = traits this = flag:ethos_bellicose }
-						any_in_list = { list = traits this = flag:ethos_bureaucratic }
+						culture_pillar:ethos_bellicose = { is_in_list = traits }
+						culture_pillar:ethos_bureaucratic = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -1623,12 +1935,14 @@ tradition_battlefield_looters = {
 							}
 						}
 					}
-					trigger_else = {
-						NOR = {
-							any_in_list = { list = traits this = flag:heritage_turkic }
-							any_in_list = { list = traits this = flag:heritage_mongolic }
-						}
-					}
+					# Warcraft
+					#trigger_else = {
+					#	NOR = {
+					#		culture_pillar:heritage_turkic = { is_in_list = traits }
+					#		culture_pillar:heritage_mongolic = { is_in_list = traits }
+					#	}
+					# }
+					# End of Warcraft
 				}
 				add = {
 					value = tradition_unfulfilled_criteria_penalty
@@ -1641,14 +1955,16 @@ tradition_battlefield_looters = {
 	}
 	
 	ai_will_do = {
-		value = 100
+		value = 75
 		if = {
 			limit = {
 				NOR = {
-					any_in_list = { list = traits this = flag:heritage_turkic }
-					any_in_list = { list = traits this = flag:heritage_mongolic }
+					# Warcraft
+					# culture_pillar:heritage_turkic = { is_in_list = traits }
+					# culture_pillar:heritage_mongolic = { is_in_list = traits }
+					# End of Warcraft
 					scope:character = {
-						has_government = tribal_government
+						government_has_flag = government_is_tribal
 					}
 				}
 			}
@@ -1667,34 +1983,38 @@ tradition_hit_and_run = {
 	}
 	
 	is_shown = {
-		NOR = { #Replaced by Konni Raids (tradition_hussar)
-			like_heritage_south_slavic_trigger = yes
-			like_heritage_magyar_trigger = yes
-			like_heritage_west_slavic_trigger = yes
-		}
+		# Warcraft
+		# NOR = { #Replaced by Konni Raids (tradition_hussar)
+		#	like_heritage_south_slavic_trigger = yes
+		#	like_heritage_magyar_trigger = yes
+		#	like_heritage_west_slavic_trigger = yes
+		# }
+		# End of Warcraft
+		always = yes
 	}
 	can_pick = {
-		trigger_if = {
-			limit = {
-				OR = {
-					NOT = { exists = scope:replacing }
-					NOT = { scope:replacing = flag:tradition_hussar }
-				}	
-			}
-			NOT = { has_cultural_tradition = tradition_hussar } #To prevent stacking after hybridization
-		}
+		#trigger_if = {
+		#	limit = {
+		#		#OR = {
+		#			NOT = { exists = scope:replacing }
+		#			# Warcraft
+		#			# NOT = { scope:replacing = flag:tradition_hussar }
+		#			# End of Warcraft
+		#		#}	
+		#	}
+		#	#NOT = { has_cultural_tradition = tradition_hussar } #To prevent stacking after hybridization
+		#}
+		always = yes
 	}
 
 	# Iberian: Concurso Tactics
 	character_modifier = {
-		skirmishers_damage_mult = 0.05
-		skirmishers_screen_mult = 0.1
-		light_cavalry_damage_mult = 0.05
-		light_cavalry_screen_mult = 0.1
-		siege_weapon_siege_value_mult = -0.2
+		skirmishers_damage_add = 2
+		skirmishers_screen_add = 4
+		light_cavalry_damage_add = 4
+		light_cavalry_screen_add = 4
 		retreat_losses = -0.1
 		hard_casualty_modifier = -0.1
-		advantage = -2
 	}
 	
 	cost = {
@@ -1707,9 +2027,9 @@ tradition_hit_and_run = {
 			if = {
 				limit = {
 					NOR = {
-						any_in_list = { list = traits this = flag:ethos_bellicose }
-						any_in_list = { list = traits this = flag:ethos_egalitarian }
-						any_in_list = { list = traits this = flag:ethos_spiritual }
+						culture_pillar:ethos_bellicose = { is_in_list = traits }
+						culture_pillar:ethos_egalitarian = { is_in_list = traits }
+						culture_pillar:ethos_spiritual = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -1743,15 +2063,28 @@ tradition_hit_and_run = {
 	}
 	
 	ai_will_do = {
-		value = 100
+		value = 200
 		if = {
 			limit = {
 				NOR = {
 					culture_has_skirmisher_maa = yes
 					culture_has_light_cavalry_maa = yes
+					
+					# Warcraft
+					has_cenarius_heritage_trigger = yes
+					is_culture_or_parent_culture_trigger = { CULTURE = culture:warsong }
+					# End of Warcraft
 				}
 			}
 			multiply = 0.25
+		}
+		else_if = {
+			limit = {
+				scope:character ?= {
+					ai_has_warlike_personality = yes
+				}
+			}
+			multiply = 4
 		}
 	}
 }
@@ -1760,10 +2093,15 @@ tradition_stand_and_fight = {
 	category = combat
 
 	is_shown = {
-		NOR = { #Replaced by Mobile Guards
-			like_heritage_israelite_trigger = yes
-			has_cultural_tradition = tradition_mobile_guards
-		}
+		# Warcraft
+		
+		always = yes
+		
+		#NOR = { #Replaced by Mobile Guards
+		#	has_cultural_pillar = heritage_israelite
+		#	has_cultural_tradition = tradition_mobile_guards
+		#}
+		# End of Warcraft
 	}
 
 	layers = {
@@ -1773,14 +2111,13 @@ tradition_stand_and_fight = {
 	}
 	
 	character_modifier = {
-		heavy_infantry_toughness_mult = 0.1
-		heavy_infantry_maintenance_mult = 0.2
-		heavy_cavalry_toughness_mult = 0.1
-		heavy_cavalry_maintenance_mult = 0.1
-		pikemen_toughness_mult = 0.1
-		pikemen_maintenance_mult = 0.2
-		hard_casualty_modifier = 0.1
-		defender_advantage = 2
+		levy_toughness = 2
+		maa_toughness_add = 4
+		heavy_infantry_toughness_add = 4
+		heavy_cavalry_toughness_add = 20
+		pikemen_toughness_add = 6
+		hard_casualty_modifier = 0.4
+		defender_advantage = 8
 	}
 	
 	cost = {
@@ -1793,9 +2130,9 @@ tradition_stand_and_fight = {
 			if = {
 				limit = {
 					NOR = {
-						any_in_list = { list = traits this = flag:ethos_bellicose }
-						any_in_list = { list = traits this = flag:ethos_spiritual }
-						any_in_list = { list = traits this = flag:ethos_stoic }
+						culture_pillar:ethos_bellicose = { is_in_list = traits }
+						culture_pillar:ethos_spiritual = { is_in_list = traits }
+						culture_pillar:ethos_stoic = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -1829,7 +2166,7 @@ tradition_stand_and_fight = {
 	}
 	
 	ai_will_do = {
-		value = 100
+		value = 400
 		if = {
 			limit = {
 				NOR = {
@@ -1839,6 +2176,14 @@ tradition_stand_and_fight = {
 				}
 			}
 			multiply = 0.25
+		}
+		else_if = {
+			limit = {
+				scope:character ?= {
+					ai_has_warlike_personality = yes
+				}
+			}
+			multiply = 2
 		}
 	}
 }
@@ -1851,19 +2196,19 @@ tradition_adaptive_skirmishing = {
 		1 = western
 		4 = soldiers4.dds
 	}
+
+	parameters = {
+		next_level_military_camps = yes
+	}
 	
 	character_modifier = {
-		skirmishers_damage_mult = 0.05
-		skirmishers_toughness_mult = 0.1
-		skirmishers_maintenance_mult = -0.05
-		archers_damage_mult = 0.1
-		archers_toughness_mult = 0.05
-		archers_maintenance_mult = -0.05
 		enemy_terrain_advantage = -0.25
-		heavy_cavalry_damage_mult = -0.1
-		heavy_cavalry_toughness_mult = -0.05
-		heavy_infantry_damage_mult = -0.1
-		heavy_infantry_toughness_mult = -0.05
+		archers_damage_add = 4
+		archers_toughness_add = 2
+		archers_maintenance_mult = -0.05
+		skirmishers_damage_add = 2
+		skirmishers_toughness_add = 4
+		skirmishers_maintenance_mult = -0.05	
 	}
 	
 	cost = {
@@ -1876,9 +2221,9 @@ tradition_adaptive_skirmishing = {
 			if = {
 				limit = {
 					NOR = {
-						any_in_list = { list = traits this = flag:ethos_bellicose }
-						any_in_list = { list = traits this = flag:ethos_spiritual }
-						any_in_list = { list = traits this = flag:ethos_stoic }
+						culture_pillar:ethos_bellicose = { is_in_list = traits }
+						culture_pillar:ethos_spiritual = { is_in_list = traits }
+						culture_pillar:ethos_stoic = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -1912,7 +2257,7 @@ tradition_adaptive_skirmishing = {
 	}
 	
 	ai_will_do = {
-		value = 100
+		value = 400
 		if = {
 			limit = {
 				scope:character = {
@@ -1939,7 +2284,7 @@ tradition_adaptive_skirmishing = {
 			}
 			multiply = 0
 		}
-		if = {
+		else_if = {
 			limit = {
 				NOR = {
 					culture_has_archer_maa = yes
@@ -1948,6 +2293,26 @@ tradition_adaptive_skirmishing = {
 			}
 			multiply = 0.25
 		}
+		else_if = {
+			limit = {
+				scope:character ?= {
+					ai_has_warlike_personality = yes
+				}
+			}
+			multiply = 2
+		}
+		# Warcraft
+		if = {
+			limit = {
+				has_innovation = innovation_small_soldiers 
+				OR = {
+					culture_pillar:ethos_bellicose = { is_in_list = traits }
+					culture_pillar:ethos_stoic = { is_in_list = traits }
+				}
+			}
+			multiply = 2
+		}
+		# End of Warcraft
 	}
 }
 
@@ -1964,17 +2329,18 @@ tradition_formation_fighting = {
 		0 = martial
 	}
 
+	parameters = {
+		next_level_barracks = yes
+		formation_fighting_strategist = yes
+	}
+
 	character_modifier = {
-		pikemen_damage_mult = 0.05
-		pikemen_toughness_mult = 0.1
-		archers_damage_mult = 0.1
-		archers_toughness_mult = 0.05
 		counter_efficiency = 0.15
 		pursue_efficiency = -0.15
-		skirmishers_damage_mult = -0.15
-		skirmishers_toughness_mult = -0.05
-		light_cavalry_damage_mult = -0.15
-		light_cavalry_toughness_mult = -0.05
+		archers_damage_add = 2
+		archers_toughness_add = 4
+		pikemen_damage_add = 4
+		pikemen_toughness_add = 6
 	}
 	
 	cost = {
@@ -1987,9 +2353,9 @@ tradition_formation_fighting = {
 			if = {
 				limit = {
 					NOR = {
-						any_in_list = { list = traits this = flag:ethos_bellicose }
-						any_in_list = { list = traits this = flag:ethos_courtly }
-						any_in_list = { list = traits this = flag:ethos_communal }
+						culture_pillar:ethos_bellicose = { is_in_list = traits }
+						culture_pillar:ethos_courtly = { is_in_list = traits }
+						culture_pillar:ethos_communal = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -2023,7 +2389,7 @@ tradition_formation_fighting = {
 	}
 	
 	ai_will_do = {
-		value = 100
+		value = 200
 		if = {
 			limit = {
 				scope:character = {
@@ -2050,7 +2416,7 @@ tradition_formation_fighting = {
 			}
 			multiply = 0
 		}
-		if = {
+		else_if = {
 			limit = {
 				NOR = {
 					culture_has_archer_maa = yes
@@ -2059,6 +2425,20 @@ tradition_formation_fighting = {
 			}
 			multiply = 0.25
 		}
+		else_if = {
+			limit = {
+				scope:character ?= {
+					ai_has_warlike_personality = yes
+				}
+			}
+			multiply = 4
+		}
+		# Warcraft
+		if = {
+			limit = { has_human_heritage_trigger = yes }
+			multiply = 1.15
+		}
+		# End of Warcraft
 	}
 }
 
@@ -2077,6 +2457,10 @@ tradition_horse_breeder = {
 			culture_has_heavy_cavalry_maa = yes
 			culture_has_archer_cavalry_maa = yes
 		}
+	}
+
+	parameters = {
+		next_level_stables = yes
 	}
 	
 	character_modifier = {
@@ -2098,9 +2482,9 @@ tradition_horse_breeder = {
 			if = {
 				limit = {
 					NOR = {
-						any_in_list = { list = traits this = flag:ethos_bellicose }
-						any_in_list = { list = traits this = flag:ethos_stoic }
-						any_in_list = { list = traits this = flag:ethos_communal }
+						culture_pillar:ethos_bellicose = { is_in_list = traits }
+						culture_pillar:ethos_stoic = { is_in_list = traits }
+						culture_pillar:ethos_communal = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -2138,15 +2522,23 @@ tradition_horse_breeder = {
 	}
 	
 	ai_will_do = {
-		value = 100
+		value = 200
 		if = {
-			limit = { # Reduce chance slightly if the culture has access to other "cavalry" types
+			limit = { # Reduce chance  if the culture has access to other "cavalry" types
 				OR = {
 					has_innovation = innovation_war_camels
 					has_innovation = innovation_elephantry
 				}
 			}
-			multiply = 0.8
+			multiply = 0.2
+		}
+		else_if = {
+			limit = {
+				scope:character ?= {
+					ai_has_warlike_personality = yes
+				}
+			}
+			multiply = 2
 		}
 	}
 }
@@ -2161,16 +2553,22 @@ tradition_longbow_competitions = {
 	
 	is_shown = {
 		OR = {
+			# Warcraft
 			like_heritage_west_germanic_trigger = yes
 			like_heritage_brythonic_trigger = yes
 			like_heritage_goidelic_trigger = yes
+			bow_culture_trigger = yes
+			# End of Warcraft
 		}
 	}
 	can_pick = {
 		OR = {
+			# Warcraft
 			like_heritage_west_germanic_trigger = yes
 			like_heritage_brythonic_trigger = yes
 			like_heritage_goidelic_trigger = yes
+			bow_culture_trigger = yes
+			# End of Warcraft
 		}
 	}
 	
@@ -2179,7 +2577,7 @@ tradition_longbow_competitions = {
 		archer_era_improvement = yes
 	}
 	character_modifier = {
-		archers_max_size_add = 2
+		archers_max_size_add = 4
 		heavy_cavalry_max_size_add = -2
 		pikemen_max_size_add = -2
 	}
@@ -2195,16 +2593,8 @@ tradition_longbow_competitions = {
 			if = {
 				limit = {
 					NOR = {
-						# Stoic
-						any_in_list = {
-							list = traits
-							this = flag:ethos_stoic
-						}
-						# Bureaucratic
-						any_in_list = {
-							list = traits
-							this = flag:ethos_bureaucratic
-						}
+						culture_pillar:ethos_stoic = { is_in_list = traits }
+						culture_pillar:ethos_bureaucratic = { is_in_list = traits }
 					}
 				}
 				add = {
@@ -2234,7 +2624,7 @@ tradition_longbow_competitions = {
 	}
 	
 	ai_will_do = {
-		value = 100
+		value = 800
 		if = {
 			limit = {
 				OR = {

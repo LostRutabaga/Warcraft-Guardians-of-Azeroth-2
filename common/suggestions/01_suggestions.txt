@@ -6,11 +6,11 @@
 			add = 0.5
 			number_of_maa_regiments < recommended_num_maa_regiments_value
 			trigger_if = {
-				limit = { has_government = tribal_government }
+				limit = { government_has_flag = government_is_tribal }
 				prestige >= 150 # Cost of Archers for tribal rulers, a good middle-of-the-road MaA unit.
 			}
 			trigger_if = {
-				limit = { NOT = { has_government = tribal_government} }
+				limit = { NOT = { government_has_flag = government_is_tribal} }
 				gold >= 75 # Cost of Archers for non-trbal rulers, a good middle-of-the-road MaA unit.
 			}
 		}
@@ -23,11 +23,11 @@
 		modifier = { # More likely if you have a lot of extra money
 			add = 0.5
 			trigger_if = {
-				limit = { has_government = tribal_government }
+				limit = { government_has_flag = government_is_tribal }
 				prestige >= 300 # Cost of some elite men-at-arms for tribal rulers
 			}
 			trigger_if = {
-				limit = { NOT = { has_government = tribal_government} }
+				limit = { NOT = { government_has_flag = government_is_tribal} }
 				gold >= 150 # Cost of some elite men-at-arms for tribal rulers
 			}
 		}
@@ -44,14 +44,13 @@
 	}
 
 	is_valid = {
-		is_local_player = yes
-		number_of_maa_regiments < recommended_num_maa_regiments_value # Still under the recommended regiment count.
+				number_of_maa_regiments < recommended_num_maa_regiments_value # Still under the recommended regiment count.
 		trigger_if = {
-			limit = { has_government = tribal_government }
+			limit = { government_has_flag = government_is_tribal }
 			prestige >= 150 # Cost of Archers for tribal rulers, a good middle-of-the-road MaA unit.
 		}
 		trigger_if = {
-			limit = { NOT = { has_government = tribal_government} }
+			limit = { NOT = { government_has_flag = government_is_tribal} }
 			gold >= 75 # Cost of Archers for non-trbal rulers, a good middle-of-the-road MaA unit.
 		}
 	}
@@ -79,6 +78,9 @@ suggestion_declare_war = {
 						is_allied_to = prev
 						has_truce = prev
 					}
+
+					# Not in an activity 
+					NOT = { exists = involved_activity }
 				}			
 			}
 		}
@@ -111,7 +113,7 @@ suggestion_declare_war = {
 		modifier = { #Less likely if they're possibly stronger than you
 			add = -0.5
 			any_neighboring_and_across_water_top_liege_realm_owner = {
-				max_military_strength < root.max_military_strength
+				current_military_strength < root.current_military_strength
 				root = {
 					# Must have a valid CB.
 					has_any_cb_on = prev
@@ -151,6 +153,9 @@ suggestion_declare_war = {
 							is_allied_to = prev
 							has_truce = prev
 						}
+
+						# Not in an activity 
+						NOT = { exists = involved_activity }
 					}
 				}
 				try_create_suggestion = {
@@ -299,10 +304,10 @@ suggestion_declare_war = {
 					}
 				}
 
-				#LEss likely if they're stronger than you
+				#Less likely if they're stronger than you
 				if = {
 					limit = {
-						scope:actor.max_military_strength > scope:recipient.max_military_strength
+						scope:actor.current_military_strength > scope:recipient.current_military_strength
 					}
 					add = -50
 				}
@@ -327,10 +332,10 @@ suggestion_declare_war = {
 				# Multiplies the whole thing by the ratio of each ruler's military strength.
 				multiply = {
 					add = 1
-					add = scope:actor.max_military_strength
+					add = scope:actor.current_military_strength
 					divide = {
 						add = 1 # No division by zero!
-						add = scope:recipient.max_military_strength
+						add = scope:recipient.current_military_strength
 					}
 					min = 0.25
 					max = 4.0
@@ -341,13 +346,14 @@ suggestion_declare_war = {
 
 	is_valid = {
 		scope:actor = {
-			is_local_player = yes
-			has_any_cb_on = scope:recipient
+						has_any_cb_on = scope:recipient
 			NOR = {
 				is_at_war = yes
 				is_allied_to = scope:recipient
 				has_truce = scope:recipient
 			}
+			# Not in an activity 
+			NOT = { exists = involved_activity }
 			gold >= 0
 		}
 	}
@@ -735,10 +741,10 @@ suggestion_fabricate_claim = {
 					}
 					multiply = {
 						add = 1
-						add = root.max_military_strength
+						add = root.current_military_strength
 						divide = {
 							add = 1 # No division by zero!
-							add = scope:landed_title.holder.top_liege.max_military_strength
+							add = scope:landed_title.holder.top_liege.current_military_strength
 						}
 						min = 0.75
 						max = 1.5
@@ -748,10 +754,10 @@ suggestion_fabricate_claim = {
 					# Otherwise, just compare it to the holder's direct military strength (not perfectly accurate since they can still have a liege to protect them, but it's close enough).
 					multiply = {
 						add = 1
-						add = root.max_military_strength
+						add = root.current_military_strength
 						divide = {
 							add = 1 # No division by zero!
-							add = scope:landed_title.holder.max_military_strength
+							add = scope:landed_title.holder.current_military_strength
 						}
 						min = 0.75
 						max = 1.5
@@ -1314,7 +1320,7 @@ suggestion_increase_opinion = {
 					target = root
 					value <= 0
 				}
-				is_landed = no
+				is_landed_or_landless_administrative = no
 				OR = { 
 					#excluding spouse for this one
     				has_council_position = councillor_marshal
@@ -1433,7 +1439,7 @@ suggestion_increase_opinion = {
 					value <= 0
 				}
 				is_councillor_of = root
-				is_landed = no
+				is_landed_or_landless_administrative = no
 				OR = { 
     				has_council_position = councillor_marshal
     				has_council_position = councillor_chancellor
@@ -1490,7 +1496,7 @@ suggestion_raid = {
 			any_character_to_title_neighboring_county = {
 				holder = {
 					valid_raid_target_trigger = yes
-					max_military_strength < root.max_military_strength
+					current_military_strength < root.current_military_strength
 				}
 			}
 		}
@@ -1546,7 +1552,7 @@ suggestion_raid = {
 				#Score higher if they're weaker than you
 				if = {
 					limit = {
-						scope:landed_title.county.holder.max_military_strength < root.max_military_strength
+						scope:landed_title.county.holder.current_military_strength < root.current_military_strength
 					}
 					add = 60
 				}
@@ -1737,8 +1743,7 @@ suggestion_can_hire_court_positions = {
 	}
 
 	is_valid = {
-		is_local_player = yes
-		court_positions_currently_filled < court_positions_currently_available
+				court_positions_currently_filled < court_positions_currently_available
 	}
 }
 
@@ -1763,9 +1768,8 @@ suggestion_request_war_aid_petition = {
 	}
 
 	is_valid = {
-		is_local_player = yes
 		NOT = { is_decision_on_cooldown = petition_liege_decision }
-		is_landed = yes
+		is_playable_character = yes
 		is_independent_ruler = no
 		liege = { has_royal_court = yes }
 		is_at_war_with_liege = no
@@ -1773,5 +1777,48 @@ suggestion_request_war_aid_petition = {
 		petition_liege_war_aid_trigger = yes
 		petition_war_aid_liege_ally_value >= petition_war_aid_rebels_value
 		petition_liege_war_liege_involvement_trigger = yes
+	}
+}
+
+
+# Create a Naton Fracturing Faction
+suggestion_create_nation_fracturing_faction = {
+	weight = {
+		base = 10
+	}
+
+	check_create_suggestion = {
+		try_create_suggestion = {
+			suggestion_type = suggestion_create_nation_fracturing_faction
+		}
+	}
+
+	effect = {
+		open_view_data = {
+			view = factions_window
+		}
+	}
+
+	is_valid = {
+		# Warcraft [disable this suggestion]
+		always = no
+		has_fp2_dlc_trigger = yes
+		#is_local_player = yes # TODO_CD commented out due to causing errors
+		is_playable_character = yes
+		is_independent_ruler = no
+		is_a_faction_member = no
+		is_a_faction_leader = no
+		is_powerful_vassal_of = liege
+		NOT  = { is_allied_to = liege }
+
+		#any_character_struggle = {
+		#	involvement = involved
+		#}
+		#liege = {
+		#	any_character_struggle = {
+		#		involvement = involved
+		#	}
+		#}
+		liege.primary_title.tier >= tier_kingdom
 	}
 }

@@ -16,6 +16,13 @@ armor_inspiration_average_skill_value = {
 }
 book_inspiration_average_skill_value = {
 	value = learning
+	
+	# if = {
+	# 	limit = {
+	# 		has_variable = legendary_author
+	# 	}
+	# 	add = 1000
+	# }
 }
 weaver_inspiration_average_skill_value = {
 	value = diplomacy
@@ -164,6 +171,17 @@ artifact_wealth_quality_average_value = {
 	}
 }
 
+artifact_wealth_quality_combined_value = {
+	value = 0
+	if = {
+		limit = { exists = scope:wealth }
+		add = scope:wealth
+	}
+	if = {
+		limit = { exists = scope:quality }
+		add = scope:quality
+	}
+}
 
 
 # Modifiers to decide what armor type someone wants to make/is created
@@ -298,4 +316,9 @@ conquered_banner_value = {
 		}
 		add = 20
 	}
+}
+
+artifact_durability_percent = {
+	value = artifact_durability
+	divide = artifact_max_durability	
 }

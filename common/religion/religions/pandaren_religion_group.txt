@@ -37,10 +37,18 @@
 	doctrine = doctrine_elemental_earth_spirit_magic_approved
 
 	#Clerical Functions
-	doctrine = doctrine_clerical_function_taxation
+	doctrine = doctrine_clerical_function_recruitment
 	doctrine = doctrine_clerical_gender_either
 	doctrine = doctrine_clerical_marriage_disallowed
 	doctrine = doctrine_clerical_succession_spiritual_fixed_appointment
+	
+	doctrine = special_doctrine_is_mortal_faith
+
+	#Allow pilgrimages
+	doctrine = doctrine_pilgrimage_encouraged
+	
+	#Funeral tradition
+	doctrine = doctrine_funeral_stoic
 
 	# Placeholder
 	traits = {
@@ -73,6 +81,10 @@
 		custom_faith_6 waaqism custom_faith_fp1_yggdrasil
 		# Flower
 		custom_faith_10
+		# Bush
+		custom_faith_burning_bush
+		# Lotus
+		custom_faith_lotus
 		# Stork
 		melieism
 		# Raven
@@ -81,10 +93,16 @@
 		pagan_magyar
 		# Snake
 		custom_faith_fp1_jormungandr
+		# Sheep
+		custom_faith_lamb custom_faith_black_sheep
+		# Dove
+		custom_faith_dove
 		# Circle
-		christianity_bogomilist
+		christianity_bogomilist custom_faith_boromian_circles
 		# Key
 		christianity_paulicanism
+		# Symbols
+		taoism taoism_custom_1 shangqing quanzhen bon custom_faith_gankyil custom_faith_aum_tibetan
 	}
 
 	holy_order_names = {
@@ -97,6 +115,8 @@
 	localization = {
 		#HighGod
 		HighGodName = SHAOHAO_NAME
+		HighGodName2 = SHAOHAO_NAME
+		HighGodName3 = SHAOHAO_NAME
 		HighGodNamePossessive = SHAOHAO_POSSESSIVE
 		HighGodNameSheHe = CHARACTER_SHEHE_HE
 		HighGodHerselfHimself = CHARACTER_HIMSELF
@@ -182,6 +202,8 @@
 		WaterGodHerHim = CHARACTER_HERHIM_HER
 
 		PantheonTerm = religion_the_gods
+		PantheonTerm2 = religion_the_gods
+		PantheonTerm3 = religion_the_gods
 		PantheonTermHasHave = pantheon_term_have
 		GoodGodNames = {
 			CHI_JI_NAME
@@ -199,13 +221,21 @@
 		DevilHerselfHimself = CHARACTER_ITSELF
 		EvilGodNames = {
 			SHA_NAME
+			LEI_SHEN_NAME
+			THE_THUNDER_KING_NAME
 		}
 		
 		HouseOfWorship = TEMPLE_NAME
+		HouseOfWorship2 = TEMPLE_NAME
+		HouseOfWorship3 = TEMPLE_NAME
 		HouseOfWorshipPlural = TEMPLE_PLURAL
 		
 		ReligiousSymbol = SERPENT_NAME
+		ReligiousSymbol2 = SERPENT_NAME
+		ReligiousSymbol3 = SERPENT_NAME
 		ReligiousText = SCRIPTURES_NAME
+		ReligiousText2 = SCRIPTURES_NAME
+		ReligiousText3 = SCRIPTURES_NAME
 		
 		ReligiousHeadName = HIGH_PRIEST_MALE_NAME
 		ReligiousHeadNameFemale = HIGH_PRIEST_FEMALE_NAME
@@ -234,15 +264,23 @@
 		BishopNeuterPlural = PRIEST_PLURAL
 		
 		DivineRealm = MISTS_NAME
+		DivineRealm2 = MISTS_NAME
+		DivineRealm3 = MISTS_NAME
 		PositiveAfterLife = MISTS_NAME
+		PositiveAfterLife2 = MISTS_NAME
+		PositiveAfterLife3 = MISTS_NAME
 		NegativeAfterLife = MAW_NAME
+		NegativeAfterLife2 = MAW_NAME
+		NegativeAfterLife3 = MAW_NAME
 		
 		DeathDeityName = DEATH_NAME
 		DeathDeityNamePossessive = DEATH_POSSESSIVE
-		DeathDeitySheHe = CHARACTER_SHEHE_HE
-		DeathDeityHerHis = CHARACTER_HERHIS_HIS
+		DeathDeitySheHe = CHARACTER_SHEHE_IT
+		DeathDeityHerHis = CHARACTER_HERHIS_ITS
+		DeathDeityHerHim = CHARACTER_HERHIM_IT
 		
 		WitchGodName = SHA_NAME
+		WitchGodNamePossessive  = SHA_POSSESSIVE
 		WitchGodHerHis = CHARACTER_HERHIS_ITS
 		WitchGodSheHe = CHARACTER_SHEHE_IT
 		WitchGodHerHim = CHARACTER_HERHIM_IT

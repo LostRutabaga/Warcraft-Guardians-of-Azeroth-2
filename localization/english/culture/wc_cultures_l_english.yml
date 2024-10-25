@@ -4,6 +4,10 @@
 
  azerothian:1 "Stormwindian"
  azerothian_collective_noun:2 "Stormwindians"
+ azerothian_alt:1 "Azerothian"
+ azerothian_alt_collective_noun:2 "Azerothians"
+ azerothien:1 "Azerothien"
+ azerothien_collective_noun:2 "Azerothiens"
  gilnean:0 "Gilnean"
  gilnean_collective_noun:1 "Gilneans"
  arathorian:0 "Stromic"
@@ -86,6 +90,8 @@
 
  storm_giant:1 "Gymerir"
  storm_giant_collective_noun:2 "Gymerirs"
+ skrog:1 "Skrog"
+ skrog_collective_noun:2 "Skrog"
 
  #Demonic group
 
@@ -134,10 +140,14 @@
  highborne_collective_noun:2 "Highborne"
  nightborne:1 "Shal'dorei"
  nightborne_collective_noun:2 "Shal'dorei"
+ faldorei:1 "Fal'dorei"
+ faldorei_collective_noun:2 "Fal'dorei"
  naga:1 "Nazja"
  naga_collective_noun:2 "Nazja"
  satyr:1 "Mala'dorei"
  satyr_collective_noun:2 "Mala'dorei"
+ void_elf:1 "Ren'dorei"
+ void_elf_collective_noun:2 "Ren'dorei"
 
  #Troll group
 
@@ -181,9 +191,11 @@
  frost_vrykul:0 "Iskronir"
  frost_vrykul_collective_noun:1 "Iskronir"
  drust:0 "Drust"
- drust_collective_noun:2 "Drusts"
+ drust_collective_noun:2 "Drust"
  stormheimir:0 "Stormheimir"
  stormheimir_collective_noun:1 "Stormheimir"
+ lucardir:0 "Lucardir"
+ lucardir_collective_noun:1 "Lucardir"
 
  #Aqir group
 
@@ -215,7 +227,7 @@
  scourge:1 "Damned"
  scourge_collective_noun:2 "Damned"
  forsaken:1 "Forsaken"
- forsaken_collective_noun:2 "Forsakens"
+ forsaken_collective_noun:2 "Forsaken"
 
  #Ancient group
  
@@ -254,8 +266,8 @@
  goblin_collective_noun:2 "Kezanians"
  blackwater:0 "Blackwater"
  blackwater_collective_noun:1 "Blackwaters"
- gilblin:1 "Gilgoblin"
- gilblin_collective_noun:2 "Gilgoblins"
+ gilblin:1 "Gilblin"
+ gilblin_collective_noun:2 "Gilblins"
 
  #Kobold group
  
@@ -282,10 +294,13 @@
  #Murloc group
 
 
- murloc:1 "Nerglish"
- murloc_collective_noun:2 "Nerglish"
+ murloc:1 "Murloc"
+ murloc_collective_noun:2 "Murlocs"
  gorloc:1 "Gorlish"
  gorloc_collective_noun:2 "Gorlish"
+ 
+ makrura:1 "Makrura"
+ makrura_collective_noun:2 "Makrura"
 
  #Tuskarr group
 
@@ -342,9 +357,32 @@
  #Pandaren group
  
 
- mainland_pandaren:0 "Sheili"
- mainland_pandaren_collective_noun:1 "Sheili"
+ old_pandaren:0 "Shao-li"
+ old_pandaren_prefix:0 "Shao"
+ old_pandaren_collective_noun:1 "Shao-li"
+
+ mountain_pandaren:0 "Kun-li"
+ mountain_pandaren_prefix:0 "Kun"
+ mountain_pandaren_collective_noun:1 "Kun-li"
+
+ spiritual_pandaren:0 "Xue-li"
+ spiritual_pandaren_prefix:0 "Xue"
+ spiritual_pandaren_collective_noun:1 "Xue-li"
+
+ mainland_pandaren:0 "Shei-li"
+ mainland_pandaren_prefix:0 "Shei"
+ mainland_pandaren_collective_noun:1 "Shei-li"
+ 
+ forest_pandaren:0 "Jian-li"
+ forest_pandaren_prefix:0 "Jian"
+ forest_pandaren_collective_noun:1 "Jian-li"
+ 
+ fisher_pandaren:0 "Chui-li"
+ fisher_pandaren_prefix:0 "Chui"
+ fisher_pandaren_collective_noun:1 "Chui-li"
+ 
  wandering_pandaren:0 "Shen-zin"
+ wandering_pandaren_prefix:0 "Shen"
  wandering_pandaren_collective_noun:1 "Shen-zin"
 
  #Harpy group
@@ -372,12 +410,6 @@
 
  pygmy:1 "Bayaka"
  pygmy_collective_noun:2 "Bayaka"
-
- #Ogre group
- 
-
- ogre:1 "Gorian"
- ogre_collective_noun:2 "Gorians"
 
  #Vulpera group
  
@@ -411,17 +443,20 @@
 
  drogbar:0 "Drogbar"
  drogbar_collective_noun:1 "Drogbars"
+ 
+ northsea:0 "Northsea"
+ northsea_collective_noun:1 "Northseans"
 
  #News cultures
  arathi:0 "Arathi"
  arathi_prefix:0 "Arathi"
  arathi_collective_noun:1 "Arathi"
- eastron:0 "Eastron"
- eastron_prefix:0 "Eastron"
- eastron_collective_noun:1 "Eastrons"
- westran:0 "Westran"
- westran_prefix:0 "Westran"
- westran_collective_noun:1 "Westrans"
+
+
+
+
+
+
 
  #Aquatic group
  #Nothing
@@ -435,11 +470,11 @@
  ignan_collective_noun:1 "Ignans"
 
  #Prefixes
- quilboar_prefix:0 "Quilboar"
+ quilboar_prefix:0 "Agamaggano"
  murloc_prefix:0 "Nerglo"
  gorloc_prefix:0 "Gorlo"
- arakkoa_prefix:0 "Arrakoa"
- qiraji_prefix:0 "Qiraji"
+ arakkoa_prefix:0 "Arrako"
+ qiraji_prefix:0 "Qirajid"
  nerubian_prefix:0 "Nerubi"
  mantid_prefix:0 "Mantid"
  gurubashi_prefix:0 "Gurubashi"
@@ -449,27 +484,29 @@
  zandalari_prefix:0 "Zandalari"
  dark_troll_prefix:0 "Rushani"
  blood_troll_prefix:0 "Nazmani"
- lordaeronian_prefix:0 "Lordaerono"
+ lordaeronian_prefix:0 "Lordaeroni"
  arathorian_prefix:0 "Stromic"
  alteraci_prefix:0 "Alteraci"
  dalaranian_prefix:0 "Dalarano"
- baradin_prefix:0 "Baradino"
+ baradin_prefix:0 "Baradi"
  hillsbrad_prefix:0 "Hillsbradi"
  azerothian_prefix:0 "Stormwindian"
+ azerothian_alt_prefix:0 "Azerothian"
+ azerothien_prefix:0 "Azerothien"
  draenei_prefix:0 "Draenei"
  harpy_prefix:0 "Harpy"
  naga_prefix:0 "Nazja"
- dryad_prefix:0 "Dryado"
+ dryad_prefix:0 "Dryadi"
  frostnymph_prefix:0 "Nympho"
  tortollan_prefix:0 "Tortollan"
  night_elf_prefix:0 "Kaldorei"
  protector_prefix:0 "Ancient"
  eredar_prefix:0 "Eredar"
- annihilan_prefix:0 "Annihilan"
- nathrezim_prefix:0 "Nathrezim"
+ annihilan_prefix:0 "Annihilo"
+ nathrezim_prefix:0 "Nathrezi"
  eredruin_prefix:0 "Eredo"
- shivarra_prefix:0 "Shivarra"
- moarg_prefix:0 "Mo'arg"
+ shivarra_prefix:0 "Shivarro"
+ moarg_prefix:0 "Mo'argo"
  observer_prefix:0 "Observer"
  sayaadi_prefix:0 "Sayaadi"
  green_dragon_prefix:0 "Green Dragon"
@@ -482,23 +519,25 @@
  dark_iron_prefix:0 "Dark Iron"
  old_dwarven_prefix:0 "Khazo"
  frostborn_prefix:0 "Frostborn"
- gilnean_prefix:0 "Gilneano"
+ gilnean_prefix:0 "Gilnean"
  tirassian_prefix:0 "Tirano"
  theramore_prefix:0 "Theramorean"
  gnome_prefix:0 "Gnomeregano"
  goblin_prefix:0 "Kezano"
  blackwater_prefix:0 "Blackwater"
- gilblin_prefix:0 "Gilgoblino"
+ gilblin_prefix:0 "Gilblino"
  grummle_prefix:0 "Tian"
  ogre_prefix:0 "Gorano"
  highborne_prefix:0 "Highborne"
  high_elf_prefix:0 "Quel'dorei"
  blood_elf_prefix:0 "Sin'dorei"
  nightborne_prefix:0 "Shal'dorei"
+ faldorei_prefix:0 "Fal'dorei"
+ void_elf_prefix:0 "Ren'dorei"
  forest_hozen_prefix:0 "Forest Hozen"
  jungle_hozen_prefix:0 "Jungle Hozen"
  mountain_hozen_prefix:0 "Mountain Hozen"
- gnoll_prefix:0 "Gnoll"
+ gnoll_prefix:0 "Gnollic"
  furbolg_prefix:0 "Furbolg"
  jinyu_prefix:0 "Shinji"
  ankoan_prefix:0 "Anko"
@@ -506,7 +545,7 @@
  mogu_prefix:0 "Nalaki"
  kobold_prefix:0 "Kobold"
  snobold_prefix:0 "Snobold"
- northern_prefix:0 "Solstico"
+ northern_prefix:0 "Solstici"
  tuskarr_prefix:0 "Iqaluk'a"
  warsong_prefix:0 "Warsong"
  shadowmoon_prefix:0 "Shadowmoon"
@@ -522,25 +561,23 @@
  twilights_hammer_prefix:0 "Twilight's Hammer"
  dragonmaw_prefix:0 "Dragonmaw"
  durotaric_prefix:0 "Durotaro"
- maghar_prefix:0 "Mag'har"
+ maghar_prefix:0 "Mag'haro"
  moknathal_prefix:0 "Mok'nathal"
- mainland_pandaren_prefix:0 "Sheili"
- wandering_pandaren_prefix:0 "Shen-zin"
  pygmy_prefix:0 "Bayako"
  saurok_prefix:0 "Xiyi"
- sethrak_prefix:0 "Sethrak"
+ sethrak_prefix:0 "Sethraki"
  nraqi_prefix:0 "Shath'yar"
- pirate_culture_prefix:0 "Southseano"
+ pirate_culture_prefix:0 "Southsea"
  wastewander_prefix:0 "Wastewander"
  taunka_prefix:0 "No'halo"
  tauren_prefix:0 "Shu'halo"
  highmountain_prefix:0 "Hi'halo"
  magnataur_prefix:0 "Magnataur"
- trogg_prefix:0 "Trogg"
+ trogg_prefix:0 "Troggo"
  drogbar_prefix:0 "Drogbar"
  titanforged_prefix:0 "Titanforged"
  frozen_giant_prefix:0 "Hodiro"
- mechagnome_prefix:0 "Ymiro"
+ mechagnome_prefix:0 "Mimiro"
  earthen_prefix:0 "Earthen"
  iron_dwarf_prefix:0 "Iron Dwarf"
  storm_giant_prefix:0 "Gymero"
@@ -553,7 +590,11 @@
  frost_vrykul_prefix:0 "Iskronir"
  drust_prefix:0 "Drust"
  stormheimir_prefix:0 "Stormheimir"
+ lucardir_prefix:0 "Lucardir"
  vulpera_prefix:0 "Volduno"
  satyr_prefix:0 "Mala'dorei"
- yaungol_prefix:0 "Townlong"
- centaur_prefix:0 "Maraudico"
+ yaungol_prefix:0 "Ordoso"
+ centaur_prefix:0 "Maraudino"
+ northsea_prefix:0 "Northsea"
+ skrog_prefix:0 "Skrog"
+ makrura_prefix:0 "Makrura"

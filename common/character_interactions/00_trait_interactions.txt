@@ -14,7 +14,7 @@ abandon_hook_interaction = {
 	}
 
 	is_valid_showing_failures_only = {
-		scope:recipient = { is_diplomatically_available = yes } 
+		scope:recipient = { is_busy_in_events_localised = yes } 
 		scope:actor = {
 			has_usable_hook = scope:recipient
 		}
@@ -29,29 +29,41 @@ abandon_hook_interaction = {
 			}
 			text = need_non_house_head_hook
 		}
+		custom_description = {
+			scope:actor = {
+				NOT = {
+					has_hook_of_type = {
+						target = scope:recipient
+						type = ritual_best_friend_hook
+					}
+				}
+			}
+			text = need_non_best_friend_hook
+		}
 	}
 	
 	on_accept = {
 		scope:actor = {	
 			send_interface_toast = {
-			title =  msg_abandon_hook_interaction_title
-			left_icon = scope:actor
-			right_icon = scope:recipient
-			
-			use_hook = scope:recipient
-			if = {
-				limit = {
-					has_strong_hook = scope:recipient
+				type = event_toast_effect_neutral
+				title =  msg_abandon_hook_interaction_title
+				left_icon = scope:actor
+				right_icon = scope:recipient
+				
+				use_hook = scope:recipient
+				if = {
+					limit = {
+						has_strong_hook = scope:recipient
+					}
+					stress_impact = {
+						forgiving = major_stress_impact_loss
+					}
 				}
-				stress_impact = {
-					forgiving = major_stress_impact_loss
+				else = {
+					stress_impact = {
+						forgiving = medium_stress_impact_loss
+					}
 				}
-			}
-			else = {
-				stress_impact = {
-					forgiving = medium_stress_impact_loss
-				}
-			}
 		
 				scope:recipient = {
 					add_opinion = {
@@ -60,6 +72,15 @@ abandon_hook_interaction = {
 					}
 				}
 			}
+		}
+
+		# If we're a clan this interaction affects unity
+		add_clan_unity_interaction_effect = {
+			CHARACTER = scope:actor
+			TARGET = scope:recipient
+			VALUE = minor_unity_gain
+			DESC = clan_unity_abandon_hook.desc
+			REVERSE_NON_HOUSE_TARGET = no
 		}
 	}
 
@@ -129,6 +150,7 @@ dismiss_strong_hook_interaction = {
 	on_accept = {
 		scope:actor = {
 			send_interface_toast = {
+				type = event_toast_effect_neutral
 				title =  msg_dismiss_hook_interaction_title
 				left_icon = scope:actor
 				right_icon = scope:recipient
@@ -143,6 +165,15 @@ dismiss_strong_hook_interaction = {
 
 				add_tyranny = 35	
 			}
+		}
+
+		# If we're a clan this interaction affects unity
+		add_clan_unity_interaction_effect = {
+			CHARACTER = scope:actor
+			TARGET = scope:recipient
+			VALUE = medium_unity_gain
+			DESC = clan_unity_dismiss_strong_hook.desc
+			REVERSE_NON_HOUSE_TARGET = no
 		}
 	}
 
@@ -211,6 +242,7 @@ dismiss_weak_hook_interaction = {
 	on_accept = {
 		scope:actor = {
 			send_interface_toast = {
+				type = event_toast_effect_neutral
 				title =  msg_dismiss_hook_interaction_title
 				left_icon = scope:actor
 				right_icon = scope:recipient
@@ -223,13 +255,23 @@ dismiss_weak_hook_interaction = {
 					}
 					progress_towards_rival_effect = {
 						CHARACTER = scope:actor
- 						OPINION = yes
+						REASON = rival_dismissed_weak_hook
+ 						OPINION = default_rival_opinion
 					}
 				}
 
 				add_tyranny = 15
 			}
-		}	
+		}
+
+		# If we're a clan this interaction affects unity
+		add_clan_unity_interaction_effect = {
+			CHARACTER = scope:actor
+			TARGET = scope:recipient
+			VALUE = minor_unity_gain
+			DESC = clan_unity_dismiss_weak_hook.desc
+			REVERSE_NON_HOUSE_TARGET = no
+		}
 	}
 
 	ai_targets = {
@@ -571,6 +613,15 @@ force_duel_anyone_interaction = {
 			LOCALE = terrain_scope
 			OUTPUT_EVENT = perk_interaction.0101
 			INVALIDATION_EVENT = fp1_tbc.0102
+		}
+
+		# If we're a clan this interaction affects unity
+		add_clan_unity_interaction_effect = {
+			CHARACTER = scope:actor
+			TARGET = scope:recipient
+			VALUE = medium_unity_loss
+			DESC = clan_unity_released_anger.desc
+			REVERSE_NON_HOUSE_TARGET = no
 		}
 	}
 

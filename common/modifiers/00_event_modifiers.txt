@@ -43,7 +43,7 @@ confident_lover = {
 
 clear_mind_modifier = {
 	icon = diplomacy_positive
-	stress_gain_mult = -0.25
+	stress_gain_mult = -0.15
 	learning = 1
 }
 
@@ -57,10 +57,6 @@ prowess_student_modifier = {
 	prowess = 1
 }
 
-medicine_student_modifier = {
-	icon = health_positive
-	learning = 1
-}
 intrigue_student_modifier = {
 	icon = intrigue_positive
 	intrigue = 1
@@ -68,7 +64,7 @@ intrigue_student_modifier = {
 
 on_edge_modifier = {
 	icon = intrigue_positive
-	hostile_scheme_resistance_add = 20
+	enemy_hostile_scheme_phase_duration_add = medium_scheme_phase_duration_malus_value
 }
 
 amateur_cook_modifier = {
@@ -79,7 +75,7 @@ amateur_cook_modifier = {
 
 invigorated_modifier = {
 	icon = health_positive
-	health = 1
+	health = 0.25
 }
 
 seeker_of_knowledge = {
@@ -110,10 +106,10 @@ strumpet_modifier = {
 	general_opinion = -10
 }
 
-avenger_of_the_martyrs = {
-	icon = piety_positive
-	same_faith_opinion = 10
-}
+#avenger_of_the_martyrs = {
+#	icon = piety_positive
+#	same_faith_opinion = 10
+#}
 
 defender_of_the_faith = {
 	icon = piety_positive
@@ -136,9 +132,9 @@ dynasty_of_many_crowns = {
 	levy_size = 0.1
 }
 
-ireland_laudabiliter_modifier = { #Unlocks cb vs Ireland lands.
-	icon = prestige_positive
-}
+#ireland_laudabiliter_modifier = { #Unlocks cb vs Ireland lands.
+#	icon = prestige_positive
+#}
 
 ruler_of_the_ganges_modifier = {
 	icon = learning_positive
@@ -148,23 +144,18 @@ ruler_of_the_ganges_modifier = {
 	theocracy_government_opinion_same_faith = 10
 }
 
-bactria_royal_tolls_modifier = {
-	icon = county_modifier_development_positive
-	development_growth = 0.5
-	build_speed = -0.1
-	build_gold_cost = -0.1
-}
+#bactria_royal_tolls_modifier = {
+#	icon = county_modifier_development_positive
+#	development_growth = 0.5
+#	build_speed = -0.1
+#	build_gold_cost = -0.1
+#}
 witch_coven = {
 	icon = outdoors_positive
-	hostile_scheme_resistance_add = 10
-	hostile_scheme_power_add = 10
+	enemy_hostile_scheme_phase_duration_add = minor_scheme_phase_duration_malus_value
+	hostile_scheme_phase_duration_add = minor_scheme_phase_duration_bonus_value
 	negate_health_penalty_add = 0.25
 	fertility = 0.1
-}
-
-overturned_old_barbarity = {
-	icon = diplomacy_positive
-	short_reign_duration_mult = -0.5
 }
 
 allowed_to_go_outside = {
@@ -177,20 +168,6 @@ moldy_gruel_diet = {
 	health = -0.25
 }
 
-trepanning_learning_penalty_modifier = {
-	icon = health_negative
-	learning = -6
-}
-trepanning_coordination_penalty_modifier = {
-	icon = health_negative
-	prowess = -6
-}
-
-overflowing_diaper = {
-	icon = excrement_negative
-	health = -0.25
-}
-
 covered_in_feces = {
 	icon = excrement_negative
 	health = -0.25
@@ -199,21 +176,21 @@ covered_in_feces = {
 
 aspiring_flatulist = {
 	icon = excrement_positive
-	stress_gain_mult = -0.25
+	stress_gain_mult = -0.15
 	diplomacy = -2
 }
 
 suspicious_of_furniture = {
 	icon = bed_positive
 	enemy_hostile_scheme_success_chance_add = -10
-	hostile_scheme_resistance_add = 5
+	enemy_hostile_scheme_phase_duration_add = miniscule_scheme_phase_duration_malus_value
 	diplomacy = -1
 }
 
 playing_with_miniatures = {
 	icon = prestige_negative
 	monthly_prestige = -0.1
-	monthly_income_mult = -0.01 
+	monthly_income_mult = -0.01
 	learning = 2
 }
 
@@ -233,9 +210,16 @@ recently_blinded = {
 	health = -0.25
 }
 
-recently_castrated = {
+recently_disfigured = {
 	icon = health_negative
 	health = -0.25
+}
+
+recently_maimed_modifier = {
+	icon = health_negative
+	# These are so high because they used to be in the modifier.
+	health = -3
+	fertility = -0.5
 }
 
 county_mediation_1 = {
@@ -253,14 +237,14 @@ county_mediation_3 = {
 	county_opinion_add = 40
 }
 
-focused_modifier = {
-	icon = economy_positive
-	monthly_income_mult = 0.1
-	build_speed = -0.15
-}
+# focused_modifier = {
+# 	icon = economy_positive
+# 	monthly_income_mult = 0.1
+# 	build_speed = -0.15
+# }
 
 generous_ruler = {
-	icon = social_positive
+	icon = social_mixed
 	direct_vassal_opinion = 15
 	vassal_tax_mult = -0.05
 }
@@ -282,12 +266,8 @@ very_successful_fertility_treatment = {
 
 guarded_modifier = {
 	icon = intrigue_positive
-	personal_scheme_resistance_add = 20
+	enemy_personal_scheme_phase_duration_add = medium_scheme_phase_duration_malus_value
 	intrigue = 1
-}
-honest_speaker_modifier = {
-	icon = intrigue_positive
-	personal_scheme_power_add = 4
 }
 
 smithy_investment_modifier = {
@@ -418,22 +398,33 @@ studied_venomous_animal_modifier = {
 has_plush_carpet_modifier = {
 	icon = prestige_positive
 	monthly_prestige_gain_mult = 0.2
-	hostile_scheme_resistance_add = -10
+	enemy_hostile_scheme_phase_duration_add = minor_scheme_phase_duration_bonus_value
 }
 
 suspicious_of_carpet_modifier = {
 	icon = intrigue_positive
-	hostile_scheme_resistance_add = 10
+	enemy_hostile_scheme_phase_duration_add = minor_scheme_phase_duration_malus_value
 }
 
 the_great_khan_modifier = {
 	icon = horse_positive
 	dread_baseline_add = 30
 	dread_decay_mult = -0.5
-	hostile_scheme_resistance_add = 20
-	enemy_hostile_scheme_success_chance_add = -15
+	enemy_hostile_scheme_phase_duration_add = major_scheme_phase_duration_malus_value
+	enemy_hostile_scheme_success_chance_add = -75
 	vassal_limit = 75
+	minority_opinion = 20
 	army_maintenance_mult = -0.5
+	archer_cavalry_siege_value_add = 0.3
+	light_cavalry_siege_value_add = 0.3
+	
+	archer_cavalry_toughness_mult = 0.75
+	light_cavalry_toughness_mult = 0.75
+	heavy_cavalry_toughness_mult = 0.75
+	
+	archer_cavalry_damage_mult = 0.75
+	light_cavalry_damage_mult = 0.75
+	heavy_cavalry_damage_mult = 0.75
 }
 
 focused_reading_modifier = {
@@ -510,47 +501,25 @@ almohad_leader_modifier = {
 	icon = learning_positive
 	martial = 1
 	learning = 1
-	hostile_scheme_resistance_add = 20
+	enemy_hostile_scheme_phase_duration_add = medium_scheme_phase_duration_malus_value
 	enemy_hostile_scheme_success_chance_add = -15
 }
 
-rebuilding_marrakesh_modifier = {
-	icon = county_modifier_development_positive
-	development_growth_factor = 0.25
-	build_gold_cost = -0.15
-	build_piety_cost = -0.5
-}
+#rebuilding_marrakesh_modifier = {
+#	icon = county_modifier_development_positive
+#	development_growth_factor = 0.25
+#	build_gold_cost = -0.15
+#	build_piety_cost = -0.5
+#}
 
-refused_to_rebuild_marrakesh_modifier = {
-	icon = county_modifier_development_negative
-	same_faith_opinion = -10
-}
+#refused_to_rebuild_marrakesh_modifier = {
+#	icon = county_modifier_development_negative
+#	same_faith_opinion = -10
+#}
 
 leading_looting_modifier = {
 	icon = economy_positive
-	monthly_income_mult = 0.05 
-}
-
-dashing_mask = {
-	icon = mask_positive
-	attraction_opinion = 20
-	dread_decay_mult = 0.1
-}
-
-striking_traditional_garb = {
-	icon = fashion_positive
-	diplomacy = 1
-}
-
-striking_false_traditional_garb = {
-	icon = fashion_negative
-	diplomacy = -1
-}
-
-
-poisoned_wine_cellar = {
-	icon = drink_positive
-	owned_hostile_scheme_success_chance_add = 5
+	monthly_income_mult = 0.05
 }
 
 # digging_holy_latrines_modifier = {
@@ -559,37 +528,37 @@ poisoned_wine_cellar = {
 # }
 
 #Heroic comparisons
-compared_to_valmiki = {
-	icon = learning_positive
-	monthly_lifestyle_xp_gain_mult = 0.15
-}
+#compared_to_valmiki = {
+#	icon = learning_positive
+#	monthly_lifestyle_xp_gain_mult = 0.15
+#}
+#
+#compared_to_lady_godiva = {
+#	icon = fertility_positive
+#	attraction_opinion = 15
+#}
+#compared_to_nasreddin= {
+#	icon = learning_positive
+#	monthly_lifestyle_xp_gain_mult = 0.15
+#}
+#compared_to_sinbad= {
+#	icon = magic_positive
+#	naval_movement_speed_mult = 0.05
+#	monthly_prestige_gain_mult = 0.05
+#}
+#compared_to_caligula= {
+#	icon = horse_positive
+#	dread_gain_mult = 0.2
+#	direct_vassal_opinion = -5
+#}
 
-compared_to_lady_godiva = {
-	icon = fertility_positive
-	attraction_opinion = 15
-}
-compared_to_nasreddin= {
-	icon = learning_positive
-	monthly_lifestyle_xp_gain_mult = 0.15
-}
-compared_to_sinbad= {
-	icon = magic_positive
-	naval_movement_speed_mult = 0.05
-	monthly_prestige_gain_mult = 0.05
-}
-compared_to_caligula= {
-	icon = horse_positive
-	dread_gain_mult = 0.2
-	direct_vassal_opinion = -5
-}
 
-
-micromanaging_modifier = {
-	icon = stress_negative
-	stress_gain_mult = 0.25
-	dread_decay_mult = -0.15
-	diplomacy = -2
-}
+#micromanaging_modifier = {
+#	icon = stress_negative
+#	stress_gain_mult = 0.25
+#	dread_decay_mult = -0.15
+#	diplomacy = -2
+#}
 
 
 crushing_charge_modifier = {
@@ -617,25 +586,19 @@ liege_discourages_pillaging_modifier = {
 
 best_meal_of_my_life_modifier = {
 	icon = treat_positive
-	stress_gain_mult = -0.5
-	health = 0.5
+	stress_gain_mult = -0.25
+	health = 0.25
 }
 
 suspicious_against_pies_modifier = {
 	icon = treat_positive
 	enemy_hostile_scheme_success_chance_add = -25
-	hostile_scheme_resistance_add = 10
-}
-
-
-ghost_writer_modifier = {
-	icon = letter_positive
-	diplomacy = 2
+	enemy_hostile_scheme_phase_duration_add = minor_scheme_phase_duration_malus_value
 }
 
 dying_of_thirst_modifier = {
-	icon = love_negative
-	health = 0.2
+	icon = health_negative
+	health = -0.2
 }
 
 phallic_mountain_modifier = {
@@ -668,4 +631,12 @@ supported_local_business_modifier = {
 destroyed_market_stall_modifier = {
 	icon = social_negative
 	county_opinion_add = -10
+}
+
+retired_modifier = {
+	icon = social_negative
+	general_opinion = -15
+	stress_gain_mult = -0.25
+	negate_health_penalty_add = 0.25
+	prowess = -6
 }

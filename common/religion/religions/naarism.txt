@@ -6,7 +6,7 @@
 
 	#Main Group
 	doctrine = doctrine_spiritual_head
-	doctrine = doctrine_gender_male_dominated
+	doctrine = doctrine_gender_equal
 	doctrine = doctrine_pluralism_righteous
 	doctrine = doctrine_theocracy_temporal
 
@@ -41,6 +41,14 @@
 	doctrine = doctrine_clerical_gender_either
 	doctrine = doctrine_clerical_marriage_disallowed
 	doctrine = doctrine_clerical_succession_spiritual_fixed_appointment
+	
+	doctrine = special_doctrine_is_mortal_faith
+
+	#Allow pilgrimages
+	doctrine = doctrine_pilgrimage_encouraged
+	
+	#Funeral tradition
+	doctrine = doctrine_funeral_stoic
 
 	# Placeholder
 	traits = {
@@ -68,7 +76,7 @@
 		# Elephant
 		custom_faith_5
 		# Circle
-		christianity_bogomilist
+		christianity_bogomilist custom_faith_boromian_circles
 		# Key
 		christianity_paulicanism
 		# Sun
@@ -89,6 +97,8 @@
 	localization = {
 		#HighGod
 		HighGodName = LIGHT_NAME
+		HighGodName2 = LIGHT_NAME
+		HighGodName3 = LIGHT_NAME
 		HighGodNamePossessive = LIGHT_POSSESSIVE
 		HighGodNameSheHe = CHARACTER_SHEHE_IT
 		HighGodHerselfHimself = CHARACTER_ITSELF
@@ -174,6 +184,8 @@
 		WaterGodHerHim = CHARACTER_HERHIM_IT
 
 		PantheonTerm = LIGHT_NAME
+		PantheonTerm2 = LIGHT_NAME
+		PantheonTerm3 = LIGHT_NAME
 		PantheonTermHasHave = pantheon_term_has
 		GoodGodNames = {
 			LIGHT_NAME
@@ -197,14 +209,20 @@
 		}
 		
 		HouseOfWorship = CHURCH_NAME
+		HouseOfWorship2 = CHURCH_NAME
+		HouseOfWorship3 = CHURCH_NAME
 		HouseOfWorshipPlural = CHURCH_PLURAL
 		
 		ReligiousSymbol = CREST_NAME
+		ReligiousSymbol2 = CREST_NAME
+		ReligiousSymbol3 = CREST_NAME
 		ReligiousText = SCRIPTURES_NAME
+		ReligiousText2 = SCRIPTURES_NAME
+		ReligiousText3 = SCRIPTURES_NAME
 		
-		ReligiousHeadName = ARCHBISHOP_NAME
-		ReligiousHeadNameFemale = ARCHBISHOP_FEMALE_NAME
-		ReligiousHeadTitleName = ARCHBISHOPRIC_NAME
+		ReligiousHeadName = NAARU_ARCHBISHOPRIC_NAME
+		ReligiousHeadNameFemale = NAARU_ARCHBISHOPRIC_NAME
+		ReligiousHeadTitleName = NAARU_ARCHBISHOPRIC_NAME
 		
 		DevoteeMale = MONK_NAME
 		DevoteeMalePlural = MONK_PLURAL
@@ -229,15 +247,23 @@
 		BishopNeuterPlural = BISHOP_MALE_PLURAL
 		
 		DivineRealm = GREAT_BRIGHT_BEYOND_NAME
+		DivineRealm2 = GREAT_BRIGHT_BEYOND_NAME
+		DivineRealm3 = GREAT_BRIGHT_BEYOND_NAME
 		PositiveAfterLife = GREAT_BRIGHT_BEYOND_NAME
+		PositiveAfterLife2 = GREAT_BRIGHT_BEYOND_NAME
+		PositiveAfterLife3 = GREAT_BRIGHT_BEYOND_NAME
 		NegativeAfterLife = MAW_NAME
+		NegativeAfterLife2 = MAW_NAME
+		NegativeAfterLife3 = MAW_NAME
 		
 		DeathDeityName = DEATH_NAME
 		DeathDeityNamePossessive = DEATH_POSSESSIVE
-		DeathDeitySheHe = CHARACTER_SHEHE_HE
-		DeathDeityHerHis = CHARACTER_HERHIS_HIS
+		DeathDeitySheHe = CHARACTER_SHEHE_IT
+		DeathDeityHerHis = CHARACTER_HERHIS_ITS
+		DeathDeityHerHim = CHARACTER_HERHIM_IT
 		
 		WitchGodName = UNSEEN_GUESTS_NAME
+		WitchGodNamePossessive  = UNSEEN_GUESTS_POSSESSIVE
 		WitchGodHerHis = CHARACTER_HERHIS_THEIR
 		WitchGodSheHe = CHARACTER_SHEHE_THEY
 		WitchGodHerHim = CHARACTER_HERHIM_THEM

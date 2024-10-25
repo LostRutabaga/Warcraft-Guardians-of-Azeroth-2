@@ -20,6 +20,9 @@
 					recipient = player_heir
 					interaction = marry_off_interaction
 				}
+				NOT = {
+					has_government = landless_adventurer_government
+				}
 			}
 			try_create_important_action = {
 				important_action_type = action_adult_player_heir_not_married
@@ -54,6 +57,9 @@ action_adult_ruler_not_married = {
 				is_character_interaction_valid = {
 					recipient = root
 					interaction = marry_off_interaction
+				}
+				NOT = {
+					has_government = landless_adventurer_government
 				}
 			}
 			try_create_important_action = {
@@ -90,6 +96,9 @@ action_non_adult_ruler_not_betrothed = {
 					recipient = root
 					interaction = marry_off_interaction
 				}
+				NOT = {
+					has_government = landless_adventurer_government
+				}
 			}
 			try_create_important_action = {
 				important_action_type = action_non_adult_ruler_not_betrothed
@@ -117,8 +126,10 @@ action_betrothed_can_marry = {
 				limit = {
 					is_betrothed = yes
 					is_adult = yes
+					can_marry_common_trigger = yes
 					betrothed = {
 						is_adult = yes
+						can_marry_common_trigger = yes
 						trigger_if = {
 							limit = {
 								sex_opposite_of = prev
@@ -134,6 +145,11 @@ action_betrothed_can_marry = {
 							exists = prev.betrothed.court_owner
 							is_at_war_with = prev.betrothed.court_owner
 						}
+					}
+					# Check that a promise of grand wedding was not attached to this. If there is one, it should trigger the specific Organize Grand Wedding action
+					NOR = {
+						prev = { has_been_promised_grand_wedding = yes }
+						betrothed = { has_been_promised_grand_wedding = yes }
 					}
 				}
 				try_create_important_action = {
@@ -166,7 +182,7 @@ action_close_family_can_marry = {
 		every_child = {
 			if = {
 				limit = {
-					is_landed = yes
+					is_playable_character = yes
 					is_married = no
 					is_betrothed = no
 					is_adult = yes
@@ -190,7 +206,7 @@ action_close_family_can_marry = {
 				limit = {
 					NAND = {
 						is_child_of = root
-						is_landed = yes
+						is_playable_character = yes
 					}
 					is_married = no
 					is_betrothed = no
@@ -204,6 +220,11 @@ action_close_family_can_marry = {
 						}
 					}
 					is_visibly_fertile = yes
+					NOR = {
+						is_parent_of = root
+						is_grandparent_of = root
+						is_great_grandparent_of = root
+					}
 				}
 				try_create_important_action = {
 					important_action_type = action_close_family_can_marry
@@ -216,6 +237,7 @@ action_close_family_can_marry = {
 
 	unimportant = {
 		scope:recipient = {
+			NOT = { is_heir_of = root }
 			OR = { #Either not a child of root, or not one of the three oldest
 				NOT = { is_child_of = root }
 				any_sibling = {
@@ -280,6 +302,9 @@ action_can_take_concubine = {
 					recipient = scope:concubine
 					interaction = make_concubine_interaction
 				}
+				NOT = {
+					has_government = landless_adventurer_government
+				}
 			}
 			try_create_important_action = {
 				important_action_type = action_can_take_concubine
@@ -335,6 +360,9 @@ action_too_few_spouses = {
 						count < 1
 					}
 				}
+				NOT = {
+					has_government = landless_adventurer_government
+				}
 			}
 			try_create_important_action = {
 				important_action_type = action_too_few_spouses
@@ -347,6 +375,70 @@ action_too_few_spouses = {
 			interaction = marry_off_interaction
 			actor = root
 			recipient = root
+		}
+	}
+}
+
+action_grand_wedding_can_marry = {
+	type = alert
+
+	check_create_action = {
+		every_potential_marriage_option = {
+			if = {
+				limit = {
+					NOT = {
+						has_government = landless_adventurer_government
+					}
+					is_betrothed = yes
+					is_adult = yes
+					has_been_promised_grand_wedding = yes
+					var:promised_grand_wedding_by = root
+					betrothed = {
+						is_adult = yes
+						has_been_promised_grand_wedding = yes
+						var:promised_grand_wedding_by = root
+						trigger_if = {
+							limit = {
+								sex_opposite_of = prev
+							}
+							NAND = { # To avoid getting two alerts when both parties are in your own court. Since sex is really the only thing we can check to make sure it's just one of them we're picking this will only work if they're opposite sex
+								is_female = no
+								matchmaker = prev.matchmaker
+							}
+						}
+					}
+					NOR = {
+						root = {
+							exists = prev.betrothed.court_owner
+							is_at_war_with = prev.betrothed.court_owner
+						}
+						# Invalidate the alert if you are already organizing/participating in the same wedding!
+						root = {
+							exists = involved_activity
+							involved_activity = {
+								has_activity_type = activity_wedding
+								activity_host = root
+							}
+						}
+						# Make the alert disappear if you are planning the wedding
+						is_game_view_open = activity_planner
+					}
+				}
+				try_create_important_action = {
+					important_action_type = action_grand_wedding_can_marry
+					actor = root
+					recipient = betrothed.matchmaker
+					secondary_actor = this
+					secondary_recipient = betrothed
+				}
+			}
+		}
+	}
+
+	effect = {
+		open_view_data = {
+			view = activity_list_detail_host_window
+			data = activity_type:activity_wedding
 		}
 	}
 }

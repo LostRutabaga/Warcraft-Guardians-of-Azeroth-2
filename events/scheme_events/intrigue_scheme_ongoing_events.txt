@@ -1,6 +1,4 @@
-﻿#Events for intrigue schemes
-
-namespace = intrigue_scheme_ongoing
+﻿namespace = intrigue_scheme_ongoing
 
 # 1001-1999: Events triggered by agents
 # 2001-2999: Events triggered by the target
@@ -15,7 +13,7 @@ namespace = intrigue_scheme_ongoing
 # by Linnéa Thimrén and Petter Vilberg
 #######################
 # Can pay gold for scheme progress
- intrigue_scheme_ongoing.1001 = {
+intrigue_scheme_ongoing.1001 = {
 	type = character_event
 	title = {
 		first_valid = {
@@ -53,15 +51,20 @@ namespace = intrigue_scheme_ongoing
 		container = "custom_widgets_container"
 	}
 	left_portrait = {
+		character = root
+		animation = bribing
+	}
+	right_portrait = {
 		character = scope:agent
 		animation = personality_greedy
 	}
-	right_portrait = scope:target
+	lower_right_portrait = scope:target
 
 	trigger = {
+		exists = scope:scheme
 		scope:scheme = {
-			scheme_number_of_agents > 0
-			any_scheme_agent = {
+			any_scheme_agent_character = { count >= 0 }
+			any_scheme_agent_character = {
 				is_alive = yes
 				is_courtier_of = scope:target
 			}
@@ -72,7 +75,7 @@ namespace = intrigue_scheme_ongoing
 
 	immediate = {
 		scope:scheme = {
-			random_scheme_agent = {
+			random_scheme_agent_character = {
 				limit = {
 					is_courtier_of = scope:target
 					is_alive = yes
@@ -105,7 +108,7 @@ namespace = intrigue_scheme_ongoing
 			duel = {
 				skill = intrigue
 				value = 10
-				20 = {		
+				20 = {
 					desc = intrigue_scheme_ongoing.1008.a.success
 					compare_modifier = {
 						value = scope:duel_value
@@ -124,7 +127,7 @@ namespace = intrigue_scheme_ongoing
 						}
 					}
 				}
-				10 = {		
+				10 = {
 					desc = intrigue_scheme_ongoing.1008.a.failure
 					compare_modifier = {
 						value = scope:duel_value
@@ -198,10 +201,14 @@ intrigue_scheme_ongoing.1002 = {
 	desc = intrigue_scheme_ongoing.1002.desc
 	theme = generic_intrigue_scheme
 	left_portrait = {
+		character = root
+		animation = scheme
+	}
+	right_portrait = {
 		character = scope:agent_in_question
 		animation = personality_zealous
 	}
-	right_portrait = scope:target
+	lower_right_portrait = scope:target
 	widget = {
 		gui = "event_window_widget_scheme"
 		container = "custom_widgets_container"
@@ -209,18 +216,18 @@ intrigue_scheme_ongoing.1002 = {
 
 	trigger = {
 		scope:scheme = {
-			any_scheme_agent = {
+			any_scheme_agent_character = {
 				has_trait = zealous
 				is_christian_trigger = yes
 				intrigue < 4
 				NOT = { is_agent_exposed_in_scheme = scope:scheme }
 			}
-			scheme_target = {
+			scheme_target_character = {
 				piety_level <= medium_piety_level
 			}
 			NOT = { has_variable = had_overly_zealous_agent_event }
 		}
-		scope:scheme.scheme_target = {
+		scope:scheme.scheme_target_character = {
 			# Warcraft
 			age > age_15_value
 			is_christian_trigger = yes
@@ -238,9 +245,9 @@ intrigue_scheme_ongoing.1002 = {
 		modifier = {
 			factor = 1.5
 			scope:scheme = {
-				any_scheme_agent = {
+				any_scheme_agent_character = {
 					has_trait = zealous
-					NOT = { faith = scope:scheme.scheme_target.faith }
+					NOT = { faith = scope:scheme.scheme_target_character.faith }
 					NOT = { is_agent_exposed_in_scheme = scope:scheme }
 				}
 			}
@@ -249,10 +256,10 @@ intrigue_scheme_ongoing.1002 = {
 
 	immediate = {
 		scope:scheme = {
-			random_scheme_agent = {
+			random_scheme_agent_character = {
 				limit = {
 					has_trait = zealous
-					NOT = { faith = scope:scheme.scheme_target.faith }
+					NOT = { faith = scope:scheme.scheme_target_character.faith }
 					NOT = { is_agent_exposed_in_scheme = scope:scheme }
 				}
 				alternative_limit = {
@@ -322,7 +329,7 @@ intrigue_scheme_ongoing.1002 = {
 									expose_scheme_agent = scope:agent_in_question
 								}
 							}
-							else = {		
+							else = {
 								scope:scheme = {
 									expose_scheme_agent = scope:agent_in_question
 								}
@@ -389,10 +396,14 @@ intrigue_scheme_ongoing.1004 = {
 	desc = intrigue_scheme_ongoing.1004.desc
 	theme = generic_intrigue_scheme
 	left_portrait = {
-		character = scope:agent_in_question
+		character = root
 		animation = scheme
 	}
-	right_portrait = scope:target
+	right_portrait = {
+		character = scope:agent_in_question
+		animation = toast
+	}
+	lower_right_portrait = scope:target
 	widget = {
 		gui = "event_window_widget_scheme"
 		container = "custom_widgets_container"
@@ -400,7 +411,7 @@ intrigue_scheme_ongoing.1004 = {
 
 	trigger = {
 		scope:scheme = {
-			any_scheme_agent = {
+			any_scheme_agent_character = {
 				has_trait = gregarious
 			}
 		}
@@ -409,7 +420,7 @@ intrigue_scheme_ongoing.1004 = {
 
 	immediate = {
 		scope:scheme = {
-			random_scheme_agent = {
+			random_scheme_agent_character = {
 				limit = { has_trait = gregarious }
 				save_scope_as = agent_in_question
 				add_character_flag = {
@@ -423,7 +434,7 @@ intrigue_scheme_ongoing.1004 = {
 				value = yes
 				days = 3650
 			}
-		}	
+		}
 	}
 
 	# Let them blabber on
@@ -433,7 +444,7 @@ intrigue_scheme_ongoing.1004 = {
 			duel = {
 				skill = intrigue
 				value = 10
-				20 = {		
+				20 = {
 					desc = intrigue_scheme_ongoing.1004.a.success
 					compare_modifier = {
 						value = scope:duel_value
@@ -452,7 +463,7 @@ intrigue_scheme_ongoing.1004 = {
 						}
 					}
 				}
-				10 = {		
+				10 = {
 					desc = intrigue_scheme_ongoing.1004.a.failure
 					compare_modifier = {
 						value = scope:duel_value
@@ -473,7 +484,7 @@ intrigue_scheme_ongoing.1004 = {
 									expose_scheme = yes
 								}
 							}
-							else = {						
+							else = {
 								scope:scheme = {
 									expose_scheme_agent = scope:agent_in_question
 								}
@@ -534,10 +545,14 @@ intrigue_scheme_ongoing.1006 = {
 	}
 	theme = generic_intrigue_scheme
 	left_portrait = {
+		character = root
+		animation = scheme
+	}
+	right_portrait = {
 		character = scope:agent_in_question
 		animation = personality_irrational
 	}
-	right_portrait = scope:target
+	lower_right_portrait = scope:target
 	widget = {
 		gui = "event_window_widget_scheme"
 		container = "custom_widgets_container"
@@ -546,7 +561,7 @@ intrigue_scheme_ongoing.1006 = {
 	trigger = {
 		scope:scheme = {
 			NOT = { exists = var:had_slothful_clues_event }
-			any_scheme_agent = {
+			any_scheme_agent_character = {
 				has_trait = lazy
 			}
 		}
@@ -562,7 +577,7 @@ intrigue_scheme_ongoing.1006 = {
 				value = yes
 				days = 3650
 			}
-			random_scheme_agent = {
+			random_scheme_agent_character = {
 				limit = { has_trait = lazy }
 				save_scope_as = agent_in_question
 				add_character_flag = {
@@ -579,7 +594,7 @@ intrigue_scheme_ongoing.1006 = {
 			duel = {
 				skill = intrigue
 				target = scope:target
-				20 = {		
+				20 = {
 					desc = intrigue_scheme_ongoing.1006.a.success
 					compare_modifier = {
 						value = scope:duel_value
@@ -601,7 +616,7 @@ intrigue_scheme_ongoing.1006 = {
 						}
 					}
 				}
-				10 = {		
+				10 = {
 					desc = intrigue_scheme_ongoing.1006.a.failure
 					compare_modifier = {
 						value = scope:duel_value
@@ -622,7 +637,7 @@ intrigue_scheme_ongoing.1006 = {
 									expose_scheme = yes
 								}
 							}
-							else = {						
+							else = {
 								scope:scheme = {
 									expose_scheme_agent = scope:agent_in_question
 								}
@@ -697,20 +712,25 @@ intrigue_scheme_ongoing.1007 = {
 	desc = intrigue_scheme_ongoing.1007.desc
 	theme = generic_intrigue_scheme
 	left_portrait = {
+		character = root
+		animation = scheme
+	}
+	right_portrait = {
 		character = scope:caring_agent
 		animation = worry
 	}
-	right_portrait = scope:target
+	lower_right_portrait = scope:target
 	widget = {
 		gui = "event_window_widget_scheme"
 		container = "custom_widgets_container"
 	}
-	
+
 	trigger = {
 		scope:scheme = {
-			any_scheme_agent = {
+			any_scheme_agent_character = {
 				intrigue_scheme_ongoing_1007_caring_character = yes
 			}
+			scheme_agent_charges < opportunity_cap_value
 		}
 		NOT = {
 			has_character_flag = had_intrigue_scheme_ongoing_1007_event
@@ -722,17 +742,10 @@ intrigue_scheme_ongoing.1007 = {
 		modifier = {
 			add = 1
 			scope:scheme = {
-				any_scheme_agent = {
+				any_scheme_agent_character = {
 					intrigue_scheme_ongoing_1007_particularly_caring_character = yes
 				}
 			}
-		}
-		compare_modifier = {
-			target = scope:scheme
-			value = scheme_power_resistance_ratio
-			multiplier = -0.5
-			min = -0.9
-			max = 1
 		}
 	}
 
@@ -741,8 +754,9 @@ intrigue_scheme_ongoing.1007 = {
 			flag = had_intrigue_scheme_ongoing_1007_event
 			days = 1825
 		}
+		save_scope_as = second
 		scope:scheme = {
-			random_scheme_agent = {
+			random_scheme_agent_character = {
 				limit = {
 					intrigue_scheme_ongoing_1007_particularly_caring_character = yes
 				}
@@ -772,7 +786,7 @@ intrigue_scheme_ongoing.1007 = {
 	option = { #Focus on scheme
 		name = intrigue_scheme_ongoing.1007.a
 		scope:scheme = {
-			add_scheme_progress = scheme_progress_gain
+			change_opportunities = 2
 		}
 		ai_chance = {
 			base = 50
@@ -783,7 +797,7 @@ intrigue_scheme_ongoing.1007 = {
 		}
 	}
 
-	
+
 	option = { #Focus on them
 		name = intrigue_scheme_ongoing.1007.b
 		reverse_add_opinion = {
@@ -822,19 +836,26 @@ intrigue_scheme_ongoing.1008 = {
 	title = intrigue_scheme_ongoing.1008.t
 	desc = intrigue_scheme_ongoing.1008.desc
 	theme = generic_intrigue_scheme
-	left_portrait = scope:agent
-	right_portrait = scope:defender
-	lower_right_portrait = scope:spymaster
+	left_portrait = {
+		character = root
+		animation = scheme
+	}
+	right_portrait = {
+		character = scope:agent
+		animation = scheme
+	}
+	lower_right_portrait = scope:defender
+	lower_left_portrait = scope:spymaster
 	widget = {
 		gui = "event_window_widget_scheme"
 		container = "custom_widgets_container"
 	}
-	
+
 	trigger = {
-		NOT = { scope:scheme.scheme_target.court_owner = root }
+		NOT = { scope:scheme.scheme_target_character.court_owner = root }
 		NOT = { has_character_flag = had_intrigue_scheme_ongoing_1008_event }
 		scope:scheme = {
-			any_scheme_agent = {
+			any_scheme_agent_character = {
 				intrigue_scheme_ongoing_1008_suitable_agent = yes
 			}
 		}
@@ -871,7 +892,7 @@ intrigue_scheme_ongoing.1008 = {
 			scheme_defender = {
 				save_scope_as = defender
 			}
-			random_scheme_agent = {
+			random_scheme_agent_character = {
 				limit = {
 					intrigue_scheme_ongoing_1008_suitable_agent = yes
 				}
@@ -907,6 +928,15 @@ intrigue_scheme_ongoing.1008 = {
 				save_scope_as = councillor
 			}
 		}
+		else_if = {
+			limit = {
+				employs_court_position = second_camp_officer
+			}
+			random_court_position_holder = {
+				type = second_camp_officer
+				save_scope_as = councillor
+			}
+		}
 	}
 
 	#Let them work it out on their own
@@ -916,7 +946,7 @@ intrigue_scheme_ongoing.1008 = {
 			duel = {
 				skill = intrigue
 				value = 10
-				15 = {		
+				15 = {
 					desc = intrigue_scheme_ongoing.1008.a.success
 					compare_modifier = {
 						value = scope:duel_value
@@ -933,7 +963,7 @@ intrigue_scheme_ongoing.1008 = {
 						}
 					}
 				}
-				15 = {		
+				15 = {
 					desc = intrigue_scheme_ongoing.1008.a.failure
 					compare_modifier = {
 						value = scope:duel_value
@@ -954,7 +984,7 @@ intrigue_scheme_ongoing.1008 = {
 									expose_scheme = yes
 								}
 							}
-							else = {						
+							else = {
 								scope:scheme = {
 									expose_scheme_agent = scope:agent
 								}
@@ -973,7 +1003,7 @@ intrigue_scheme_ongoing.1008 = {
 			forbid_from_scheme = scope:scheme
 		}
 	}
-	
+
 	#Have your spymaster intervene
 	option = {
 		name = intrigue_scheme_ongoing.1008.c
@@ -999,7 +1029,7 @@ scripted_trigger intrigue_scheme_ongoing_1008_close_relation = {
 	scope:scheme = {
 		NOT = { scheme_is_character_agent = prev }
 	}
-	is_valid_as_agent_in_scheme = scope:scheme
+	char_can_fit_into_scheme_trigger = { SCHEME = scope:scheme }
 	join_scheme_chance = {
 		scheme = scope:scheme
 		min = -15
@@ -1025,16 +1055,23 @@ intrigue_scheme_ongoing.1009 = {
 		}
 	}
 	theme = generic_intrigue_scheme
-	left_portrait = scope:potential_agent
-	right_portrait = scope:target
+	left_portrait = {
+		character = root
+		animation = scheme
+	}
+	right_portrait = {
+		character = scope:potential_agent
+		animation = personality_rational
+	}
+	lower_right_portrait = scope:target
 	widget = {
 		gui = "event_window_widget_scheme"
 		container = "custom_widgets_container"
 	}
-	
+
 	trigger = {
 		scope:scheme = {
-			scheme_progress < 8
+			scheme_agent_charges < opportunity_cap_value
 		}
 		OR = {
 			any_relation = {
@@ -1085,11 +1122,10 @@ intrigue_scheme_ongoing.1009 = {
 
 	option = { #Please help me
 		name = intrigue_scheme_ongoing.1009.a
-		scope:potential_agent = {
-			force_add_to_scheme = {
-				scheme = scope:scheme
-				years = 5
-			}
+		try_to_force_assign_character_to_random_agent_slot_effect = {
+			SCHEME = scope:scheme
+			CHAR = scope:potential_agent
+			YEARS = 5
 		}
 		ai_chance = {
 			base = 100
@@ -1105,18 +1141,10 @@ intrigue_scheme_ongoing.1009 = {
 	option = { #There is one thing you can do...
 		name = intrigue_scheme_ongoing.1009.b
 		scope:scheme = {
-			add_scheme_progress = scheme_progress_gain
+			change_opportunities = 2
 		}
 		ai_chance = {
 			base = 100
-			modifier = {
-				add = -50
-				scope:scheme.scheme_power_resistance_difference < 0
-			}
-			compare_modifier = { #Less likely the less advantage you have in the scheme
-				value = scope:scheme.scheme_power_resistance_difference
-				multiplier = -1
-			}
 		}
 	}
 }
@@ -1141,33 +1169,41 @@ intrigue_scheme_ongoing.2001 = {
 		gui = "event_window_widget_scheme"
 		container = "custom_widgets_container"
 	}
-	left_portrait = scope:target
-	right_portrait = scope:agent_in_question
+	left_portrait = {
+		character = root
+		animation = scheme
+	}
+	right_portrait = {
+		character = scope:agent_in_question
+		animation = personality_callous
+	}
+	lower_right_portrait = scope:target
 
 	trigger = {
-		scope:scheme.scheme_target = {
+		scope:target = {
 			has_trait = trusting
 			# Warcraft
 			age > age_14_value
 			is_ai = yes
 		}
 		scope:scheme = {
-			any_scheme_agent = {
+			any_scheme_agent_character = {
 				reverse_opinion = {
-					target = scope:scheme.scheme_target
+					target = scope:target
 					value >= 10
 				}
 			}
+			scheme_agent_charges < opportunity_cap_value
 		}
 		NOT = { exists = scope:scheme.var:trusting_target_event }
 	}
 
 	immediate = {
 		scope:scheme = {
-			random_scheme_agent = {
+			random_scheme_agent_character = {
 				limit = {
 					#Try to find someone the target has a very high opinion of.
-					scope:scheme.scheme_target = {
+					scope:target = {
 						opinion = {
 							target = prev
 							value >= 40
@@ -1176,12 +1212,12 @@ intrigue_scheme_ongoing.2001 = {
 				}
 				alternative_limit = {
 					# Or just settle for someone they like well enough
-					scope:scheme.scheme_target = {
+					scope:target = {
 						opinion = {
 							target = prev
 							value >= 10
 						}
-					}	
+					}
 				}
 				save_scope_as = agent_in_question
 				add_character_flag = {
@@ -1211,7 +1247,7 @@ intrigue_scheme_ongoing.2001 = {
 	option = {
 		name = intrigue_scheme_ongoing.2001.b
 		scope:scheme = {
-			add_scheme_progress = scheme_progress_gain
+			change_opportunities = 2
 		}
 	}
 }
@@ -1230,10 +1266,18 @@ scripted_trigger intrigue_scheme_ongoing_2002_agent_trigger = {
 
 intrigue_scheme_ongoing.2002 = {
 	type = character_event
+	title = intrigue_scheme_ongoing.2002.t
 	desc = intrigue_scheme_ongoing.2002.desc
 	theme = generic_intrigue_scheme
-	left_portrait = scope:target
-	right_portrait = scope:agent_in_question
+	left_portrait = {
+		character = root
+		animation = scheme
+	}
+	right_portrait = {
+		character = scope:agent_in_question
+		animation = toast_goblet
+	}
+	lower_right_portrait = scope:target
 	widget = {
 		gui = "event_window_widget_scheme"
 		container = "custom_widgets_container"
@@ -1246,9 +1290,9 @@ intrigue_scheme_ongoing.2002 = {
 			is_ai = yes
 		}
 		scope:scheme = {
-			scheme_number_of_agents > 0
+			any_scheme_agent_character = { count >= 0 }
 			NOT = { has_variable = had_drunkard_target_scheme_event }
-			any_scheme_agent = {
+			any_scheme_agent_character = {
 				intrigue_scheme_ongoing_2002_agent_trigger = yes
 			}
 		}
@@ -1261,7 +1305,7 @@ intrigue_scheme_ongoing.2002 = {
 				value = yes
 				days = 3650
 			}
-			random_scheme_agent = {
+			random_scheme_agent_character = {
 				limit = {
 					intrigue_scheme_ongoing_2002_agent_trigger = yes
 				}
@@ -1294,7 +1338,7 @@ intrigue_scheme_ongoing.2002 = {
 			}
 		}
 		scope:scheme = {
-			add_scheme_modifier = {	
+			add_scheme_modifier = {
 				type = scheme_drunkard_murder_target_modifier
 			}
 		}
@@ -1380,14 +1424,21 @@ intrigue_scheme_ongoing.2003 = {
 		}
 	}
 	theme = generic_intrigue_scheme
-	left_portrait = scope:agent
-	right_portrait = scope:other_secret_target
+	left_portrait = {
+		character = root
+		animation = scheme
+	}
+	right_portrait = {
+		character = scope:agent
+		animation = spymaster
+	}
+	lower_center_portrait = scope:other_secret_target
 	lower_right_portrait = scope:secret_target
 	widget = {
 		gui = "event_window_widget_scheme"
 		container = "custom_widgets_container"
 	}
-	
+
 	trigger = {
 		exists = scope:target.court_owner
 		scope:target.court_owner = {
@@ -1402,11 +1453,10 @@ intrigue_scheme_ongoing.2003 = {
 			}
 		}
 		scope:scheme = {
-			scheme_number_of_agents > 0
-			any_scheme_agent = {
+			any_scheme_agent_character = { count >= 0 }
+			any_scheme_agent_character = {
 				NOT = { is_agent_exposed_in_scheme = scope:scheme }
 			}
-			scheme_power_resistance_difference > 0
 		}
 		NOT = {
 			has_character_flag = had_intrigue_scheme_ongoing_2003_event
@@ -1418,8 +1468,8 @@ intrigue_scheme_ongoing.2003 = {
 		modifier = {
 			add = 1
 			scope:scheme = {
-				scheme_number_of_agents = 1
-				any_scheme_agent = {
+				any_scheme_agent_character = { count = 1 }
+				any_scheme_agent_character = {
 					NOT = { is_agent_exposed_in_scheme = scope:scheme }
 				}
 			}
@@ -1468,7 +1518,7 @@ intrigue_scheme_ongoing.2003 = {
 			}
 		}
 		scope:scheme = {
-			random_scheme_agent = {
+			random_scheme_agent_character = {
 				limit = {
 					NOT = { is_agent_exposed_in_scheme = scope:scheme }
 				}
@@ -1519,11 +1569,15 @@ intrigue_scheme_ongoing.3001 = {
 		character = root
 		animation = worry
 	}
+	right_portrait = {
+		character = scope:target
+		animation = boredom
+	}
 	widget = {
 		gui = "event_window_widget_scheme"
 		container = "custom_widgets_container"
 	}
-	
+
 	trigger = {
 		has_trait = just
 		NOT = { has_character_flag = had_intrigue_scheme_ongoing_1003_event }
@@ -1531,6 +1585,7 @@ intrigue_scheme_ongoing.3001 = {
 			NOT = {
 				has_scheme_modifier = modifier_just_scheming_less
 			}
+			scheme_agent_charges < opportunity_cap_value
 		}
 	}
 
@@ -1548,6 +1603,9 @@ intrigue_scheme_ongoing.3001 = {
 	#Keep scheming
 	option = {
 		name = intrigue_scheme_ongoing.3001.a
+		scope:scheme = {
+			change_opportunities = 2
+		}
 		stress_impact = {
 			just = medium_stress_impact_gain
 		}
@@ -1600,7 +1658,11 @@ intrigue_scheme_ongoing.3002 = {
 		character = root
 		animation = worry
 	}
-	
+	right_portrait = {
+		character = scope:target
+		animation = boredom
+	}
+
 	trigger = {
 		NOT = { has_character_flag = had_intrigue_scheme_ongoing_3002_event }
 		OR = {
@@ -1610,8 +1672,7 @@ intrigue_scheme_ongoing.3002 = {
 		}
 		ai_compassion > 10
 		scope:scheme = {
-			scheme_progress > 2
-			scheme_power_resistance_difference > 0
+			scheme_agent_charges < opportunity_cap_value
 		}
 	}
 
@@ -1639,7 +1700,7 @@ intrigue_scheme_ongoing.3002 = {
 			}
 		}
 		scope:scheme = {
-			add_scheme_progress = scheme_progress_loss
+			change_opportunities = 2
 		}
 		stress_impact = {
 			compassionate = massive_stress_impact_gain
@@ -1663,7 +1724,7 @@ intrigue_scheme_ongoing.3002 = {
 			honest = minor_stress_impact_gain
 		}
 	}
-	
+
 	#End it
 	option = {
 		name = intrigue_scheme_ongoing.3002.c
@@ -1674,7 +1735,7 @@ intrigue_scheme_ongoing.3002 = {
 			stubborn = medium_stress_impact_gain
 		}
 	}
-	
+
 	#If I tell them, it's fine
 	option = {
 		name = intrigue_scheme_ongoing.3002.d
@@ -1751,22 +1812,23 @@ intrigue_scheme_ongoing.3003 = { #by Mathilda Bjarnehed
 				}
 				desc = intrigue_scheme_ongoing.leave_with_target.3003.desc
 			}
-			triggered_desc = {
-				trigger = {
-					scope:scheme = { scheme_type = plague }
-				}
-				desc = intrigue_scheme_ongoing.plague.3003.desc
-			}
 			desc = intrigue_scheme_ongoing.escape_route.3003.desc
 		}
 		desc = intrigue_scheme_ongoing.end.3003.desc
 	}
 	theme = generic_intrigue_scheme
 	override_background = {
-		event_background = terrain_scope
+		reference = terrain_scope
 	}
-	left_portrait = scope:hunter
-	right_portrait = scope:target
+	left_portrait = {
+		character = root
+		animation = scheme
+	}
+	right_portrait = {
+		character = scope:hunter
+		animation = hunting_longbow_rest_arrow_default
+	}
+	lower_right_portrait = scope:target
 	widget = {
 		gui = "event_window_widget_scheme"
 		container = "custom_widgets_container"
@@ -1776,7 +1838,7 @@ intrigue_scheme_ongoing.3003 = { #by Mathilda Bjarnehed
 		exists = scope:target.host
 		exists = scope:target.host.capital_province
 		scope:target.host = { NOT = { this = root } }
-			scope:scheme = {
+		scope:scheme = {
 			NOT = {
 				has_variable = had_intrigue_scheme_ongoing_3003_event
 			}
@@ -1804,7 +1866,6 @@ intrigue_scheme_ongoing.3003 = { #by Mathilda Bjarnehed
 			
 			# Warcraft
 			scope:target.host = { save_scope_as = defender }
-			#Save location for image and text
 			if = {
 				limit = { exists = scope:scheme.var:plague_center }
 				scope:scheme.var:plague_center.title_province = {
@@ -1813,10 +1874,12 @@ intrigue_scheme_ongoing.3003 = { #by Mathilda Bjarnehed
 				}
 			}
 			else = {
-				scope:target.host = {
-					capital_province = {
-						save_scope_as = scheme_location
-						save_scope_as = background_terrain_scope
+					#Save location for image and text
+					scope:target.host = {
+					save_scope_as = defender
+						capital_province = {
+							save_scope_as = scheme_location
+							save_scope_as = background_terrain_scope
 					}
 				}
 			}
@@ -1875,8 +1938,10 @@ intrigue_scheme_ongoing.3003 = { #by Mathilda Bjarnehed
 					}
 					save_scope_as = hunter
 					if = {
-						limit = { NOT = { has_trait = lifestyle_hunter } }
-						add_trait = hunter_1
+						limit = {
+							NOT = { has_trait = lifestyle_hunter }
+						}
+						add_trait = lifestyle_hunter
 					}
 				}
 
@@ -1905,7 +1970,7 @@ intrigue_scheme_ongoing.3003 = { #by Mathilda Bjarnehed
 				scope:hunter = { has_court_position = master_of_hunt_court_position }
 			}
 		}
-		
+
 		pay_short_term_gold = {
 			target = scope:hunter
 			gold = minor_gold_value
@@ -1935,13 +2000,13 @@ intrigue_scheme_ongoing.3003 = { #by Mathilda Bjarnehed
 				}
 				hidden_effect = {
 					if = {
-						limit = { 	
+						limit = {
 							can_set_relation_potential_friend_trigger = { CHARACTER = scope:hunter }
 							scope:hunter.prowess >= decent_skill_rating
 						}
 						set_relation_potential_friend = scope:hunter
 					}
-				}	
+				}
 			}
 			40 = { # Hunter tells tales
 				desc = intrigue_scheme_ongoing.3003.a.failure
@@ -2070,28 +2135,28 @@ intrigue_scheme_ongoing.3003 = { #by Mathilda Bjarnehed
 			60 = { # Success
 				desc = intrigue_scheme_ongoing.3003.b.success
 				send_interface_toast = {
-						title = intrigue_scheme_ongoing.3003.b.success
+					title = intrigue_scheme_ongoing.3003.b.success
 					scope:scheme = {
 						add_scheme_modifier = {
 							type = intrigue_scheme_mapped_surroundings_modifier
 						}
 					}
-					}
+				}
 			}
 			30 = { # Failure
 				desc = intrigue_scheme_ongoing.3003.b.soft_failure
 				send_interface_toast = {
-						title = intrigue_scheme_ongoing.3003.b.soft_failure
+					title = intrigue_scheme_ongoing.3003.b.soft_failure
 					add_stress = minor_stress_gain
-					}
+				}
 			}
 			10 = { # Sick
 				desc = intrigue_scheme_ongoing.3003.b.hard_failure
 				send_interface_toast = {
-						title = intrigue_scheme_ongoing.3003.b.hard_failure
+					title = intrigue_scheme_ongoing.3003.b.hard_failure
 					add_stress = medium_stress_gain
 					contract_disease_effect = { DISEASE = ill TREATMENT_EVENT = yes }
-					}
+				}
 			}
 		}
 
@@ -2109,15 +2174,12 @@ intrigue_scheme_ongoing.3003 = { #by Mathilda Bjarnehed
 	# Do it yourself very well
 	option = {
 		name = intrigue_scheme_ongoing.3003.b
-		trigger = {
+		trigger = { 
 			# Warcraft
 			is_incapable_trigger = no
-			
-			has_trait = lifestyle_hunter
+			has_trait = lifestyle_hunter 
 		}
-		trait = hunter_1
-		trait = hunter_2
-		trait = hunter_3
+		trait = lifestyle_hunter
 
 		scope:scheme = {
 			add_scheme_modifier = {
@@ -2135,11 +2197,11 @@ intrigue_scheme_ongoing.3003 = { #by Mathilda Bjarnehed
 				base = 100
 		}
 	}
-	
+
 	# Ignore
 	option = {
 		name = intrigue_scheme_ongoing.3003.c
-		
+
 		stress_impact = {
 			diligent = minor_stress_impact_gain
 		}
@@ -2157,13 +2219,17 @@ intrigue_scheme_ongoing.3004 = { #by Mathilda Bjarnehed
 	desc = intrigue_scheme_ongoing.3004.desc
 	theme = generic_intrigue_scheme
 	override_background = {
-		event_background = tavern
+		reference = tavern
 	}
 	left_portrait = {
+		character = root
+		animation = worry
+	}
+	right_portrait = {
 		character = scope:hunter
 		animation = personality_irrational
 	}
-	
+
 	immediate = {
 		add_character_modifier = {
 			modifier = more_vigilant_recistance_modifier
@@ -2185,7 +2251,7 @@ intrigue_scheme_ongoing.3004 = { #by Mathilda Bjarnehed
 	# Thanks for telling me
 	option = {
 		name = intrigue_scheme_ongoing.3004.a
-	
+
 		stress_impact = {
 			sadistic = minor_stress_impact_gain
 			wrathful = medium_stress_impact_gain
@@ -2208,7 +2274,7 @@ intrigue_scheme_ongoing.3004 = { #by Mathilda Bjarnehed
 			forgiving = major_stress_impact_gain
 			trusting = minor_stress_impact_gain
 			calm = minor_stress_impact_gain
-		}	
+		}
 	}
 
 	# Torture the information out of hunter
@@ -2234,12 +2300,12 @@ intrigue_scheme_ongoing.3004 = { #by Mathilda Bjarnehed
 		}
 		custom_tooltip = intrigue_scheme_ongoing.3004.c.tt
 		scope:hunter = {
-			override_death_killer_effect = { DEATH_REASON = death_dungeon KILLER = root }
+			override_death_killer_effect = { death_reason = death_dungeon killer = root }
 		}
 	}
 }
 
-	
+
 ########################
 # Messenger pigeon by Mathilda Bjarnehed
 ##########################
@@ -2281,19 +2347,26 @@ intrigue_scheme_ongoing.3005 = { #by Mathilda Bjarnehed
 	}
 	desc = intrigue_scheme_ongoing.3005.desc
 	theme = generic_intrigue_scheme
-	left_portrait = scope:pigeon_recipient
-	right_portrait = scope:right_portrait
+	left_portrait = {
+		character = root
+		animation = writing
+	}
+	right_portrait = {
+		character = scope:pigeon_recipient
+		animation = reading
+	}
+	lower_right_portrait = scope:right_portrait
 	widget = {
 		gui = "event_window_widget_scheme"
 		container = "custom_widgets_container"
 	}
-	
+
 	trigger = {
 		scope:scheme = {
 			NOT = { has_variable = had_intrigue_scheme_ongoing_3005_event }
 			OR = {
 				scheme_type = elope
-				any_scheme_agent = { intrigue_scheme_ongoing_3005_other_agent_trigger = yes }
+				any_scheme_agent_character = { intrigue_scheme_ongoing_3005_other_agent_trigger = yes }
 			}
 		}
 		exists = scope:target.host
@@ -2310,7 +2383,7 @@ intrigue_scheme_ongoing.3005 = { #by Mathilda Bjarnehed
 
 	immediate = {
 		scope:scheme = {
-			set_variable = {	
+			set_variable = {
 				name = had_intrigue_scheme_ongoing_3005_event
 				value = yes
 			}
@@ -2323,7 +2396,7 @@ intrigue_scheme_ongoing.3005 = { #by Mathilda Bjarnehed
 
 			#Try to save a random agent
 			scope:scheme = {
-				random_scheme_agent = {
+				random_scheme_agent_character = {
 					limit = { intrigue_scheme_ongoing_3005_elope_agent_trigger = yes }
 					save_scope_as = elope_agent
 					add_character_flag = {
@@ -2340,7 +2413,7 @@ intrigue_scheme_ongoing.3005 = { #by Mathilda Bjarnehed
 		# Murder/abduct: agent
 		else = {
 			scope:scheme = {
-				random_scheme_agent = {
+				random_scheme_agent_character = {
 					limit = { intrigue_scheme_ongoing_3005_other_agent_trigger = yes }
 					save_scope_as = pigeon_recipient
 					add_character_flag = {
@@ -2437,13 +2510,195 @@ intrigue_scheme_ongoing.3005 = { #by Mathilda Bjarnehed
 			}
 		}
 	}
-	
+
 	# Bad idea
 	option = {
 		name = intrigue_scheme_ongoing.3005.d
 	}
 }
 
+#########################################
+# by Letter Translation by Daniel Moore #
+#########################################
+
+intrigue_scheme_ongoing.3010 = {
+	type = character_event
+	title = intrigue_scheme_ongoing.3010.t
+	desc = intrigue_scheme_ongoing.3010.desc
+	theme = generic_intrigue_scheme
+	left_portrait = {
+		character = root
+		animation = reading
+	}
+	right_portrait = {
+		character = scope:target
+		animation = writing
+	}
+
+	trigger = {
+		scope:scheme = {
+			NOT = {
+				has_variable = had_intrigue_scheme_ongoing_3010_event
+			}
+			scheme_agent_charges < opportunity_cap_value
+		}
+		knows_language_of_culture = scope:target.culture
+		NOT = {
+			scope:target.culture = {
+				has_same_culture_language = root.culture
+			}
+		}
+	}
+
+	immediate = {
+		scope:scheme = {
+			set_variable = {
+				name = had_intrigue_scheme_ongoing_3010_event
+				value = yes
+			}
+		}
+	}
+
+	option = { #Do it yourself
+		name = intrigue_scheme_ongoing.3010.a
+		add_stress = minor_stress_gain
+		scope:scheme = {
+			add_scheme_modifier = {
+				type = intrigue_scheme_personally_translating_letters_modifier
+			}
+		}
+		stress_impact = {
+			lazy = medium_stress_gain
+		}
+
+		ai_chance = {
+			base = 50
+			ai_value_modifier = {
+				ai_energy = 0.5
+			}
+		}
+	}
+
+	option = { #Let the translators handle it
+		name = intrigue_scheme_ongoing.3010.b
+		scope:scheme = {
+			change_opportunities = 2
+		}
+		ai_chance = {
+			base = 50
+			ai_value_modifier = {
+				ai_energy = -0.5
+			}
+		}
+	}
+
+
+}
+
+###############################
+# Secret Code by Daniel Moore #
+###############################
+
+intrigue_scheme_ongoing.3011 = { #By Daniel Moore
+	type = character_event
+	title = intrigue_scheme_ongoing.3011.t
+	desc = intrigue_scheme_ongoing.3011.desc
+	theme = generic_intrigue_scheme
+	left_portrait = {
+		character = root
+		animation = scheme
+	}
+	right_portrait = {
+		character = scope:multilingual_agent
+		animation = throne_room_writer
+	}
+	lower_right_portrait = scope:target
+
+	trigger = {
+		scope:scheme = {
+			NOT = {
+				has_variable = had_intrigue_scheme_ongoing_3011_event
+			}
+			scheme_agent_charges < opportunity_cap_value
+			any_scheme_agent_character = {
+				num_of_known_languages > 2
+			}
+		}
+	}
+
+	immediate = {
+		scope:scheme = {
+			set_variable = {
+				name = had_intrigue_scheme_ongoing_3011_event
+				value = yes
+			}
+
+			random_scheme_agent_character = {
+				limit = {
+					num_of_known_languages > 2
+				}
+				save_scope_as = multilingual_agent
+
+			}
+
+			random_culture_global = {
+				limit = {
+					scope:multilingual_agent = { knows_language_of_culture = prev }
+					NOT = { has_same_culture_language = scope:multilingual_agent.culture }
+				}
+
+				save_scope_as = language_culture
+			}
+
+			random_culture_global = {
+				limit = {
+					scope:multilingual_agent = { knows_language_of_culture = prev }
+					NOT = { has_same_culture_language = scope:multilingual_agent.culture }
+					NOT = { has_same_culture_language = scope:language_culture }
+				}
+
+				save_scope_as = language_culture_2
+			}
+		}
+	}
+
+	option = { #Excellent Idea
+		name = intrigue_scheme_ongoing.3011.a
+		#Lower discovery chance
+		scope:scheme = {
+			add_scheme_modifier = {
+				type = intrigue_scheme_secret_code_modifier
+			}
+		}
+		ai_chance = {
+			base = 50
+			ai_value_modifier = {
+				ai_energy = 0.5
+			}
+		}
+
+	}
+
+	option = { #Our efforts are best spent elsewhere
+		name = intrigue_scheme_ongoing.3011.b
+		scope:scheme = {
+			change_opportunities = 2
+		}
+		scope:multilingual_agent = {
+			add_opinion = {
+				modifier = opinion_scheme_code_rejected
+				target = root
+			}
+		}
+
+		ai_chance = {
+			base = 50
+			ai_value_modifier = {
+				ai_rationality = 0.5
+			}
+		}
+	}
+}
 
 
 ###########################################################
@@ -2471,8 +2726,15 @@ intrigue_scheme_ongoing.4001 = {
 	}
 	desc = intrigue_scheme_ongoing.4001.desc
 	theme = generic_intrigue_scheme
-	left_portrait = scope:agent_in_question
-	right_portrait = scope:target
+	left_portrait = {
+		character = root
+		animation = scheme
+	}
+	right_portrait = {
+		character = scope:agent_in_question
+		animation = survey
+	}
+	lower_right_portrait = scope:target
 	widget = {
 		gui = "event_window_widget_scheme"
 		container = "custom_widgets_container"
@@ -2480,16 +2742,14 @@ intrigue_scheme_ongoing.4001 = {
 
 	trigger = {
 		scope:scheme = {
-			scheme_target = {
-				is_adult = no
-			}
-			any_scheme_agent ={
+			any_scheme_agent_character ={
 				is_landed = no
-				is_in_the_same_court_as = scope:scheme.scheme_target
+				is_in_the_same_court_as = scope:target
 			}
 		}
 		scope:target = {
 			is_landed = yes
+			is_adult = no
 		}
 		scope:scheme = {
 			has_variable = child_murder_agent_in_charge
@@ -2498,10 +2758,10 @@ intrigue_scheme_ongoing.4001 = {
 
 	immediate = {
 		scope:scheme = {
-			random_scheme_agent = {
+			random_scheme_agent_character = {
 				limit = {
 					is_landed = no
-					is_in_the_same_court_as = scope:scheme.scheme_target
+					is_in_the_same_court_as = scope:scheme.scheme_target_character
 				}
 				save_scope_as = agent_in_question
 				add_character_flag = {
@@ -2555,8 +2815,15 @@ intrigue_scheme_ongoing.4002 = {
 	title = intrigue_scheme_ongoing.4002.t
 	desc = intrigue_scheme_ongoing.4002.desc
 	theme = generic_intrigue_scheme
-	left_portrait = scope:target
-	right_portrait = scope:parent
+	left_portrait = {
+		character = root
+		animation = scheme
+	}
+	right_portrait = {
+		character = scope:target
+		animation = personality_compassionate
+	}
+	lower_right_portrait = scope:parent
 	widget = {
 		gui = "event_window_widget_scheme"
 		container = "custom_widgets_container"
@@ -2564,7 +2831,7 @@ intrigue_scheme_ongoing.4002 = {
 
 	trigger = {
 		scope:scheme = {
-			scheme_target = {
+			scheme_target_character = {
 				is_adult = no
 				age >= childhood_education_start_age
 				# Warcraft
@@ -2579,6 +2846,7 @@ intrigue_scheme_ongoing.4002 = {
 				}
 				is_at_same_location = scope:scheme.scheme_owner
 			}
+			scheme_agent_charges < opportunity_cap_value
 		}
 		NOT = { exists = scope:scheme.var:had_child_murder_naivety_event }
 	}
@@ -2626,7 +2894,7 @@ intrigue_scheme_ongoing.4002 = {
 	option = {
 		name = intrigue_scheme_ongoing.4002.b
 		scope:scheme = {
-			add_scheme_progress = scheme_progress_gain
+			change_opportunities = 2
 		}
 	}
 }
@@ -2640,22 +2908,30 @@ intrigue_scheme_ongoing.4003 = {
 	title = intrigue_scheme_ongoing.4003.t
 	desc = intrigue_scheme_ongoing.4003.desc
 	theme = generic_intrigue_scheme
-	left_portrait = scope:agent_in_question
-	right_portrait = scope:target
+	left_portrait = {
+		character = root
+		animation = disappointed
+	}
+	right_portrait = {
+		character = scope:agent_in_question
+		animation = disapproval
+	}
+	lower_right_portrait = scope:target
 	widget = {
 		gui = "event_window_widget_scheme"
 		container = "custom_widgets_container"
 	}
 
 	trigger = {
+		scope:target = {
+			# Warcraft
+			age_in_relation_to_humans_less_than_trigger = { age = 15 }
+		}
 		scope:scheme = {
-			scheme_target = {
-				# Warcraft
-				age_in_relation_to_humans_less_than_trigger = { age = 15 }
-			}
 			exists = scope:scheme.var:friend_of_child_target
 			scope:scheme.var:friend_of_child_target = { is_alive = yes }
 			scheme_is_character_agent = scope:scheme.var:friend_of_child_target
+			scheme_agent_charges < opportunity_cap_value
 		}
 		NOT = { exists = scope:scheme.var:had_child_murder_agent_second_thoughts_event }
 	}
@@ -2710,7 +2986,7 @@ intrigue_scheme_ongoing.4003 = {
 			cynical = minor_stress_impact_gain
 		}
 		scope:scheme = {
-			add_scheme_progress = scheme_progress_loss
+			change_opportunities = 2
 		}
 	}
 }
@@ -2748,8 +3024,15 @@ intrigue_scheme_ongoing.5001 = {
 	}
 	desc = intrigue_scheme_ongoing.5001.desc
 	theme = generic_intrigue_scheme
-	left_portrait = scope:servant
-	right_portrait = scope:target
+	left_portrait = {
+		character = root
+		animation = scheme
+	}
+	right_portrait = {
+		character = scope:servant
+		animation = schadenfreude
+	}
+	lower_right_portrait = scope:target
 	widget = {
 		gui = "event_window_widget_scheme"
 		container = "custom_widgets_container"
@@ -2759,10 +3042,12 @@ intrigue_scheme_ongoing.5001 = {
 		is_available_adult = yes
 		scope:scheme = {
 			NOT = { has_variable = had_itching_scheme_event }
+			scheme_agent_charges < opportunity_cap_value
 		}
 		scope:target = {
 			is_landed = yes
 			is_ai = yes # We don't want to spontaneously create mystery servant characters for players
+			is_adult = yes
 		}
 	}
 
@@ -2793,7 +3078,7 @@ intrigue_scheme_ongoing.5001 = {
 		name = intrigue_scheme_ongoing.5001.a
 		remove_short_term_gold = 50
 		scope:scheme = {
-			add_scheme_progress = scheme_progress_gain
+			change_opportunities = 2
 		}
 		ai_chance = {
 			base = 100
@@ -2826,9 +3111,18 @@ intrigue_scheme_ongoing.5001 = {
 intrigue_scheme_ongoing.5002 = {
 	type = character_event
 	title = intrigue_scheme_ongoing.5002.t
-	desc = intrigue_scheme_ongoing.5002.desc
+	desc = 	intrigue_scheme_ongoing.5002.desc
 	theme = generic_intrigue_scheme
-	left_portrait = scope:target
+	left_portrait = {
+		character = root
+		animation = scheme
+	}
+	right_portrait = {
+		character = scope:local_mystic
+		animation = schadenfreude
+	}
+	lower_right_portrait = scope:target
+	lower_left_portrait = scope:assassin
 	widget = {
 		gui = "event_window_widget_scheme"
 		container = "custom_widgets_container"
@@ -2838,6 +3132,8 @@ intrigue_scheme_ongoing.5002 = {
 		is_available_adult = yes
 		scope:scheme = {
 			NOT = { has_variable = had_omen_scheme_event }
+			scheme_agent_charges >= 2
+			scheme_agent_charges < opportunity_cap_value
 		}
 		exists = scope:target.court_owner
 		scope:target = {
@@ -2846,6 +3142,15 @@ intrigue_scheme_ongoing.5002 = {
 	}
 
 	immediate = {
+
+		if = { #for use in the assassin version of the event
+			limit = { employs_court_position = master_assassin_court_position }
+			random_court_position_holder = { 
+				type = master_assassin_court_position
+				save_scope_as = assassin 
+			}
+		}
+
 		scope:scheme = {
 			set_variable = {
 				name = had_omen_scheme_event
@@ -2853,7 +3158,25 @@ intrigue_scheme_ongoing.5002 = {
 				days = 3650
 			}
 		}
-		random_dummy_gender_clergy_effect = yes
+		random_pool_character = {
+			province = root.location
+			limit = {
+				has_trait = lifestyle_mystic
+			}
+			save_scope_as = local_mystic
+		}
+		if = {
+			limit = {
+				NOT = { exists = scope:local_mystic }
+			}
+			create_character = {
+				template = default_mystic_character
+				location = root.location
+				faith = root.faith
+				culture = root.culture
+				save_scope_as = local_mystic
+			}
+		}
 	}
 
 	# Give bad omen
@@ -2888,7 +3211,7 @@ intrigue_scheme_ongoing.5002 = {
 						}
 					}
 					scope:scheme = {
-						add_scheme_progress = scheme_progress_gain
+						change_opportunities = 2
 					}
 				}
 				scope:target = { #To give the omen to the character
@@ -2901,7 +3224,7 @@ intrigue_scheme_ongoing.5002 = {
 				send_interface_toast = {
 					title = intrigue_scheme_ongoing.5002.a.failure
 					scope:scheme = {
-						add_scheme_progress = scheme_progress_loss
+						change_opportunities = -2
 					}
 				}
 			}
@@ -2936,7 +3259,7 @@ intrigue_scheme_ongoing.5002 = {
 						}
 					}
 					scope:scheme = {
-						add_scheme_progress = scheme_progress_gain
+						change_opportunities = 2
 					}
 				}
 				scope:target = { #To give the omen to the character
@@ -2961,7 +3284,7 @@ intrigue_scheme_ongoing.5002 = {
 				send_interface_toast = {
 					title = intrigue_scheme_ongoing.5002.b.failure
 					scope:scheme = {
-						add_scheme_progress = scheme_progress_loss
+						change_opportunities = -2
 					}
 				}
 			}
@@ -2979,9 +3302,16 @@ intrigue_scheme_ongoing.5003 = {
 	}
 	theme = skull
 	override_background = {
-		event_background = throne_room
+		reference = throne_room
 	}
-	left_portrait = scope:target
+	left_portrait = {
+		character = scope:target
+		animation = disbelief
+	}
+	right_portrait = {
+		character = scope:local_mystic
+		animation = worry
+	}
 
 	immediate = {
 		add_character_modifier = {
@@ -2992,6 +3322,19 @@ intrigue_scheme_ongoing.5003 = {
 
 	option = {
 		name = intrigue_scheme_ongoing.5003.a
+	}
+
+	after = {
+		if = {
+			limit = {
+				scope:local_mystic = {
+					is_pool_character = no					
+				}
+			}
+			scope:local_mystic = {
+				silent_disappearance_effect = yes
+			}
+		}
 	}
 }
 
@@ -3005,9 +3348,16 @@ intrigue_scheme_ongoing.5004 = {
 	}
 	theme = recovery
 	override_background = {
-		event_background = throne_room
+		reference = throne_room
 	}
-	left_portrait = scope:target
+	left_portrait = {
+		character = scope:target
+		animation = disbelief
+	}
+	right_portrait = {
+		character = scope:local_mystic
+		animation = happiness
+	}
 
 	immediate = {
 		add_character_modifier = {
@@ -3018,6 +3368,19 @@ intrigue_scheme_ongoing.5004 = {
 
 	option = {
 		name = intrigue_scheme_ongoing.5004.a
+	}
+
+	after = {
+		if = {
+			limit = {
+				scope:local_mystic = {
+					is_pool_character = no					
+				}
+			}
+			scope:local_mystic = {
+				silent_disappearance_effect = yes
+			}
+		}
 	}
 }
 
@@ -3031,8 +3394,15 @@ intrigue_scheme_ongoing.5005 = {
 	title = intrigue_scheme_ongoing.5005.t
 	desc = intrigue_scheme_ongoing.5005.desc
 	theme = generic_intrigue_scheme
-	left_portrait = scope:spymaster
-	right_portrait = scope:target
+	left_portrait = {
+		character = root
+		animation = scheme
+	}
+	right_portrait = {
+		character = scope:spymaster
+		animation = bribing
+	}
+	lower_left_portrait = scope:target
 	widget = {
 		gui = "event_window_widget_scheme"
 		container = "custom_widgets_container"
@@ -3043,8 +3413,17 @@ intrigue_scheme_ongoing.5005 = {
 		gold > root.minor_gold_value
 		scope:scheme = {
 			NOT = { has_variable = had_poisonous_gold_event }
+			scheme_agent_charges < opportunity_cap_value
 		}
-		exists = cp:councillor_spymaster
+		OR = {
+			cp:councillor_spymaster ?= {
+				NOT = { this = scope:target }
+			}
+			any_court_position_holder = {
+				type = second_camp_officer
+				NOT = { this = scope:target }
+			}
+		}
 		scope:target = {
 			is_physically_able_adult = yes
 		}
@@ -3060,11 +3439,18 @@ intrigue_scheme_ongoing.5005 = {
 		}
 		if = {
 			limit = {
-				exists = cp:councillor_spymaster
+				any_court_position_holder = {
+					type = second_camp_officer
+					NOT = { this = scope:target }
+				}
 			}
-			cp:councillor_spymaster = {
+			random_court_position_holder = {
+				type = second_camp_officer
 				save_scope_as = spymaster
 			}
+		}
+		cp:councillor_spymaster ?= {
+			save_scope_as = spymaster
 		}
 	}
 
@@ -3084,7 +3470,7 @@ intrigue_scheme_ongoing.5005 = {
 			}
 		}
 		scope:scheme = {
-			add_scheme_progress = scheme_progress_gain
+			change_opportunities = 2
 		}
 		scope:target = { #Response event
 			trigger_event = intrigue_scheme_ongoing.5006
@@ -3147,11 +3533,18 @@ intrigue_scheme_ongoing.5006 = {
 	title = intrigue_scheme_ongoing.5006.t
 	desc = intrigue_scheme_ongoing.5006.desc
 	theme = friendly
-	left_portrait = scope:target
+	left_portrait = {
+		character = root
+		animation = personality_greedy
+	}
+	right_portrait = {
+		character = scope:spymaster
+		animation = schadenfreude
+	}
 
 	immediate = {
 		show_as_tooltip = {
-			scope:actor = {
+			scope:owner = {
 				pay_short_term_gold = {
 					target = scope:target
 					gold = root.minor_gold_value
@@ -3178,7 +3571,14 @@ intrigue_scheme_ongoing.5007 = {
 		desc = intrigue_scheme_ongoing.5007.desc
 	}
 	theme = skull
-	left_portrait = scope:poisoned
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	right_portrait = {
+		character = scope:poisoned
+		animation = sick_stomach
+	}
 
 	immediate = {
 		random_child = {
@@ -3209,7 +3609,14 @@ intrigue_scheme_ongoing.5008 = {
 		desc = intrigue_scheme_ongoing.5008.desc
 	}
 	theme = skull
-	left_portrait = scope:poisoned
+	left_portrait = {
+		character = root
+		animation = eyeroll
+	}
+	right_portrait = {
+		character = scope:poisoned
+		animation = sick_stomach
+	}
 
 	immediate = {
 		cp:councillor_spymaster = {
@@ -3253,7 +3660,14 @@ intrigue_scheme_ongoing.5009 = {
 	}
 	desc = intrigue_scheme_ongoing.5009.desc
 	theme = generic_intrigue_scheme
-	left_portrait = scope:target
+	left_portrait = {
+		character = root
+		animation = survey
+	}
+	right_portrait = {
+		character = scope:target
+		animation = boredom
+	}
 	widget = {
 		gui = "event_window_widget_scheme"
 		container = "custom_widgets_container"
@@ -3264,6 +3678,7 @@ intrigue_scheme_ongoing.5009 = {
 		has_character_modifier = modifier_hunt_friend_of_animal
 		scope:scheme = {
 			NOT = { has_variable = had_friend_of_animals_event }
+			scheme_agent_charges < opportunity_cap_value
 		}
 		scope:target = {
 			is_landed = yes
@@ -3302,7 +3717,14 @@ intrigue_scheme_ongoing.5010 = {
 	title = intrigue_scheme_ongoing.5009.t
 	desc = intrigue_scheme_ongoing.5010.desc
 	theme = generic_intrigue_scheme
-	left_portrait = scope:target
+	left_portrait = {
+		character = root
+		animation = scheme
+	}
+	right_portrait = {
+		character = scope:target
+		animation = boredom
+	}
 
 	trigger = {
 		exists = scope:scheme
@@ -3310,7 +3732,7 @@ intrigue_scheme_ongoing.5010 = {
 
 	immediate = {
 		scope:scheme = {
-			add_scheme_progress = scheme_progress_gain
+			change_opportunities = 2
 		}
 		hidden_effect = {
 			if = {
@@ -3340,7 +3762,7 @@ intrigue_scheme_ongoing.5010 = {
 		trigger = {
 			exists = scope:sick
 		}
-		add_trait = ill
+		contract_disease_effect = { DISEASE = ill TREATMENT_EVENT = yes }
 	}
 }
 
@@ -3354,7 +3776,14 @@ intrigue_scheme_ongoing.5011 = {
 	title = intrigue_scheme_ongoing.5011.t
 	desc = intrigue_scheme_ongoing.5011.desc
 	theme = generic_intrigue_scheme
-	left_portrait = scope:target
+	left_portrait = {
+		character = root
+		animation = scheme
+	}
+	right_portrait = {
+		character = scope:target
+		animation = personality_greedy
+	}
 	widget = {
 		gui = "event_window_widget_scheme"
 		container = "custom_widgets_container"
@@ -3460,7 +3889,14 @@ intrigue_scheme_ongoing.5014 = {
 	title = intrigue_scheme_ongoing.5014.t
 	desc = intrigue_scheme_ongoing.5014.desc
 	theme = generic_intrigue_scheme
-	left_portrait = scope:target
+	left_portrait = {
+		character = root
+		animation = scheme
+	}
+	right_portrait = {
+		character = scope:target
+		animation = personality_greedy
+	}
 	widget = {
 		gui = "event_window_widget_scheme"
 		container = "custom_widgets_container"
@@ -3494,13 +3930,8 @@ intrigue_scheme_ongoing.5014 = {
 				50 = {
 					show_chance = no
 					desc = intrigue_scheme_ongoing.5014.a.success
-					scope:scheme = { add_scheme_progress = scheme_progress_gain }
-					scope:target = {
-						add_character_modifier = {
-							modifier = has_plush_carpet_modifier
-							days = 3650
-						}
-					}
+					scope:scheme = { change_opportunities = 2 }
+					scope:target = { add_carpet_modifier_effect = yes }
 				}
 				50 = {
 					show_chance = no
@@ -3521,10 +3952,7 @@ intrigue_scheme_ongoing.5014 = {
 	# Use it yourself
 	option = {
 		name = intrigue_scheme_ongoing.5014.b
-		add_character_modifier = {
-			modifier = has_plush_carpet_modifier
-			days = 3650
-		}
+		add_carpet_modifier_effect = yes
 		ai_chance = {
 			base = 0
 			ai_value_modifier = {
@@ -3544,7 +3972,14 @@ intrigue_scheme_ongoing.5015 = {
 	title = intrigue_scheme_ongoing.5014.t
 	desc = intrigue_scheme_ongoing.5015.desc
 	theme = friendly
-	left_portrait = scope:owner
+	left_portrait = {
+		character = root
+		animation = thinking
+	}
+	right_portrait = {
+		character = scope:owner
+		animation = personality_compassionate
+	}
 
 	immediate = {
 		scope:scheme = {
@@ -3559,26 +3994,14 @@ intrigue_scheme_ongoing.5015 = {
 	# ooh, fancy!
 	option = {
 		name = intrigue_scheme_ongoing.5015.a
-		scope:target = {
-			add_character_modifier = {
-				modifier = has_plush_carpet_modifier
-				days = 3650
-			}
-		}
+		scope:target = { add_carpet_modifier_effect = yes }
 		hidden_effect = {
 			scope:owner = {
 				send_interface_toast = {
 					title = intrigue_scheme_ongoing.5014.a.success
 					right_icon = scope:target
 					scope:scheme = { add_scheme_progress = scheme_progress_gain }
-					show_as_tooltip = {
-						scope:target = {
-							add_character_modifier = {
-								modifier = has_plush_carpet_modifier
-								days = 3650
-							}
-						}
-					}
+					show_as_tooltip = { scope:target = { add_carpet_modifier_effect = yes } }
 				}
 			}
 		}
@@ -3638,7 +4061,7 @@ scripted_trigger intrigue_scheme_ongoing_5016_target_courtier = {
 	scope:scheme = {
 		NOT = { scheme_is_character_agent = prev }
 	}
-	is_valid_as_agent_in_scheme = scope:scheme
+	char_can_fit_into_scheme_trigger = { SCHEME = scope:scheme }
 }
 
 intrigue_scheme_ongoing.5016 = {
@@ -3646,8 +4069,15 @@ intrigue_scheme_ongoing.5016 = {
 	title = intrigue_scheme_ongoing.5016.t
 	desc = intrigue_scheme_ongoing.5016.desc
 	theme = generic_intrigue_scheme
-	left_portrait = scope:servant
-	right_portrait = scope:target
+	left_portrait = {
+		character = root
+		animation = scheme
+	}
+	right_portrait = {
+		character = scope:servant
+		animation = schadenfreude
+	}
+	lower_right_portrait = scope:target
 	widget = {
 		gui = "event_window_widget_scheme"
 		container = "custom_widgets_container"
@@ -3658,6 +4088,7 @@ intrigue_scheme_ongoing.5016 = {
 		short_term_gold < minor_gold_value_check
 		scope:scheme = {
 			NOT = { has_variable = had_courtier_slander_event }
+			scheme_agent_charges < opportunity_cap_value
 		}
 		scope:target = {
 			is_ai = yes #Let's not create servants and manipulate courtier's opinion too much for players
@@ -3700,9 +4131,13 @@ intrigue_scheme_ongoing.5016 = {
 			}
 		}
 		ai_chance = {
-			base = 1
+			base = 10
 			ai_value_modifier = {
 				ai_honor = -0.5
+			}
+			modifier = {
+				short_term_gold < minor_gold_value
+				factor = 0
 			}
 		}
 	}
@@ -3710,11 +4145,15 @@ intrigue_scheme_ongoing.5016 = {
 	option = {
 		name = intrigue_scheme_ongoing.5016.b
 		remove_short_term_gold = minor_gold_value
-		scope:scheme = { add_scheme_progress = scheme_progress_gain }
+		scope:scheme = { change_opportunities = 2 }
 		ai_chance = {
-			base = 1
+			base = 10
 			ai_value_modifier = {
 				ai_boldness = 0.75
+			}
+			modifier = {
+				short_term_gold < minor_gold_value
+				factor = 0
 			}
 		}
 	}
@@ -3730,7 +4169,7 @@ intrigue_scheme_ongoing.5016 = {
 		}
 		remove_short_term_gold = 2
 		ai_chance = {
-			base = 0
+			base = 1
 		}
 	}
 }
@@ -3747,7 +4186,7 @@ scripted_trigger intrigue_scheme_ongoing_5017_spouse = {
 	scope:scheme = {
 		NOT = { scheme_is_character_agent = prev }
 	}
-	is_valid_as_agent_in_scheme = scope:scheme
+	char_can_fit_into_scheme_trigger = { SCHEME = scope:scheme }
 }
 
 intrigue_scheme_ongoing.5017 = {
@@ -3755,8 +4194,15 @@ intrigue_scheme_ongoing.5017 = {
 	title = intrigue_scheme_ongoing.5017.t
 	desc = intrigue_scheme_ongoing.5017.desc
 	theme = generic_intrigue_scheme
-	left_portrait = scope:spouse
-	right_portrait = scope:target
+	left_portrait = {
+		character = root
+		animation = scheme
+	}
+	right_portrait = {
+		character = scope:spouse
+		animation = personality_callous
+	}
+	lower_right_portrait = scope:target
 	widget = {
 		gui = "event_window_widget_scheme"
 		container = "custom_widgets_container"
@@ -3859,7 +4305,7 @@ intrigue_scheme_ongoing.5017 = {
 						}
 					}
 				}
-				
+
 			}
 		}
 		ai_chance = {
@@ -3873,7 +4319,7 @@ intrigue_scheme_ongoing.5017 = {
 	#
 	option = {
 		name = intrigue_scheme_ongoing.5017.b
-		scope:scheme = { add_scheme_progress = scheme_progress_gain }
+		scope:scheme = { change_opportunities = 2 }
 		ai_chance = {
 			base = 1
 		}
@@ -3891,7 +4337,17 @@ intrigue_scheme_ongoing.5018 = {
 	title = intrigue_scheme_ongoing.5018.t
 	desc = intrigue_scheme_ongoing.5018.desc
 	theme = generic_intrigue_scheme
-	left_portrait = scope:target
+	override_background = { reference = army_camp } #fix for FP3, felt highly appropriate
+
+	left_portrait = {
+		character = root
+		animation = scheme
+	}
+	right_portrait = {
+		character = scope:target
+		animation = marshal
+	}
+	lower_right_portrait = scope:assassin
 	widget = {
 		gui = "event_window_widget_scheme"
 		container = "custom_widgets_container"
@@ -3901,6 +4357,7 @@ intrigue_scheme_ongoing.5018 = {
 		is_available_adult = yes
 		scope:scheme = {
 			NOT = { has_variable = had_target_at_war_event }
+			scheme_agent_charges < opportunity_cap_value
 		}
 		scope:target = {
 			is_at_war = yes
@@ -3926,7 +4383,7 @@ intrigue_scheme_ongoing.5018 = {
 	# Plant agents
 	option = {
 		name = intrigue_scheme_ongoing.5018.a
-		scope:scheme = { add_scheme_progress = scheme_progress_gain }
+		scope:scheme = { change_opportunities = 2 }
 		ai_chance = {
 			base = 1.25
 		}
@@ -3990,8 +4447,15 @@ intrigue_scheme_ongoing.5019 = {
 	}
 	desc = intrigue_scheme_ongoing.5019.desc
 	theme = generic_intrigue_scheme
-	left_portrait = scope:agent
-	right_portrait = scope:target
+	left_portrait = {
+		character = root
+		animation = scheme
+	}
+	right_portrait = {
+		character = scope:agent
+		animation = happy_teacher
+	}
+	lower_right_portrait = scope:target
 	widget = {
 		gui = "event_window_widget_scheme"
 		container = "custom_widgets_container"
@@ -4005,7 +4469,8 @@ intrigue_scheme_ongoing.5019 = {
 		}
 		scope:scheme = {
 			NOT = { has_variable = had_architectural_papers_event }
-			any_scheme_agent = {
+			scheme_agent_charges < opportunity_cap_value
+			any_scheme_agent_character = {
 				is_alive = yes
 			}
 		}
@@ -4018,7 +4483,7 @@ intrigue_scheme_ongoing.5019 = {
 				value = yes
 				days = 3650
 			}
-			random_scheme_agent = {
+			random_scheme_agent_character = {
 				limit = {
 					is_courtier_of = scope:target
 					is_alive = yes
@@ -4050,7 +4515,9 @@ intrigue_scheme_ongoing.5019 = {
 	# Cool, let's use them!
 	option = {
 		name = intrigue_scheme_ongoing.5019.a
-		scope:scheme = { add_scheme_progress = scheme_progress_gain }
+		scope:scheme = {
+			change_opportunities = 2
+		}
 	}
 
 	# Inspiration for own rebuilding!
@@ -4091,7 +4558,21 @@ intrigue_scheme_ongoing.5021 = {
 	title = intrigue_scheme_ongoing.5021.t
 	desc = intrigue_scheme_ongoing.5021.desc
 	theme = intrigue
-	left_portrait = scope:owner
+	left_portrait = {
+		character = root
+		triggered_animation = {
+			trigger = {
+				has_any_bad_relationship_with_character_trigger = { CHARACTER = scope:target }
+			}
+			animation = personality_callous
+		}
+		animation = disbelief
+	}
+	right_portrait = {
+		character = scope:owner
+		animation = stressed_teacher
+	}
+	lower_right_portrait = scope:target
 
 	trigger = {
 		# Warcraft
@@ -4153,7 +4634,7 @@ intrigue_scheme_ongoing.5021 = {
 						scheme_owner = {
 							save_scope_as = owner
 						}
-						scheme_target = {
+						scheme_target_character = {
 							save_scope_as = target
 						}
 					}
@@ -4174,7 +4655,7 @@ intrigue_scheme_ongoing.5021 = {
 						scheme_owner = {
 							save_scope_as = owner
 						}
-						scheme_target = {
+						scheme_target_character = {
 							save_scope_as = target
 						}
 					}
@@ -4220,7 +4701,7 @@ intrigue_scheme_ongoing.5021 = {
 			base = 0.75
 			ai_value_modifier = {
 				ai_honor = 0.75
-			}	
+			}
 		}
 	}
 
@@ -4247,9 +4728,20 @@ intrigue_scheme_ongoing.5022 = {
 	desc = intrigue_scheme_ongoing.5022.desc
 	theme = generic_intrigue_scheme
 	left_portrait = {
-		character = scope:family_member
-		animation = fear
+		character = root
+		animation = stressed_teacher
 	}
+	right_portrait = {
+		character = scope:family_member
+		triggered_animation = {
+			trigger = {
+				has_any_bad_relationship_with_character_trigger = { CHARACTER = scope:target }
+			}
+			animation = personality_callous
+		}
+		animation = disbelief
+	}
+	lower_right_portrait = scope:target
 
 	option = { #I would never!!
 		name = intrigue_scheme_ongoing.5022.a
@@ -4271,12 +4763,10 @@ intrigue_scheme_ongoing.5022 = {
 					scope:family_member = {
 						send_interface_toast = {
 							title = intrigue_scheme_ongoing.5021.a.failure
-							scope:owner = {
-								add_opinion = {
-									target = root
-									modifier = insult_opinion
-									opinion = -20
-								}
+							add_opinion = {
+								target = root
+								modifier = insult_opinion
+								opinion = -20
 							}
 						}
 					}
@@ -4390,8 +4880,12 @@ intrigue_scheme_ongoing.5023 = {
 	desc = intrigue_scheme_ongoing.5023.desc
 	theme = generic_intrigue_scheme
 	left_portrait = {
+		character = root
+		animation = fear
+	}
+	right_portrait = {
 		character = scope:owner
-		animation = anger
+		animation = aggressive_dagger
 	}
 
 	immediate = {
@@ -4419,8 +4913,15 @@ intrigue_scheme_ongoing.5024 = {
 	title = intrigue_scheme_ongoing.5024.t
 	desc = intrigue_scheme_ongoing.5024.desc
 	theme = generic_intrigue_scheme
-	left_portrait = scope:target
-	right_portrait = scope:agent
+	left_portrait = {
+		character = root
+		animation = scheme
+	}
+	right_portrait = {
+		character = scope:agent
+		animation = schadenfreude
+	}
+	lower_right_portrait = scope:target
 	widget = {
 		gui = "event_window_widget_scheme"
 		container = "custom_widgets_container"
@@ -4431,7 +4932,7 @@ intrigue_scheme_ongoing.5024 = {
 		short_term_gold >= medium_gold_value
 		scope:scheme = {
 			NOT = { has_variable = had_local_celebration_event }
-			scheme_number_of_agents > 0
+			any_scheme_agent_character = { count >= 0 } 
 		}
 		scope:target = {
 			OR = {
@@ -4463,8 +4964,9 @@ intrigue_scheme_ongoing.5024 = {
 				location = { save_scope_as = province }
 			}
 		}
-		scope:scheme = {
-			random_scheme_agent = {
+
+		scope:scheme = { 
+			random_scheme_agent_character = {
 				limit = {
 					is_alive = yes
 				}
@@ -4502,7 +5004,11 @@ intrigue_scheme_ongoing.5024 = {
 			greedy = medium_stress_impact_gain
 		}
 		ai_chance = {
-			base = 100	
+			base = 100
+			modifier = {
+				factor = 0
+				short_term_gold < medium_gold_value
+			}
 		}
 	}
 
@@ -4518,6 +5024,10 @@ intrigue_scheme_ongoing.5024 = {
 			modifier = {
 				add = 50
 				has_trait = greedy
+			}
+			modifier = {
+				add = 1
+				short_term_gold < medium_gold_value
 			}
 		}
 	}
@@ -4543,8 +5053,15 @@ intrigue_scheme_ongoing.5026 = {
 	title = intrigue_scheme_ongoing.5026.t
 	desc = intrigue_scheme_ongoing.5026.desc
 	theme = generic_intrigue_scheme
-	left_portrait = scope:target
-	right_portrait = scope:court_chaplain
+	left_portrait = {
+		character = root
+		animation = scheme
+	}
+	right_portrait = {
+		character = scope:court_chaplain
+		animation = personality_zealous
+	}
+	lower_right_portrait = scope:target
 	widget = {
 		gui = "event_window_widget_scheme"
 		container = "custom_widgets_container"
@@ -4587,7 +5104,7 @@ intrigue_scheme_ongoing.5026 = {
 		modifier = { #the court chaplain is an agent in the scheme
 			add = 0.5
 			scope:scheme = {
-				any_scheme_agent = {
+				any_scheme_agent_character = {
 					this = scope:target.cp:councillor_court_chaplain
 				}
 			}
@@ -4644,7 +5161,7 @@ intrigue_scheme_ongoing.5026 = {
 		duel = {
 			skill = diplomacy
 			target = scope:court_chaplain
-			20 = {		
+			20 = {
 				desc = intrigue_scheme_ongoing.5026.a.success
 				compare_modifier = {
 					value = scope:duel_value
@@ -4675,7 +5192,7 @@ intrigue_scheme_ongoing.5026 = {
 					}
 				}
 			}
-			10 = {		
+			10 = {
 				desc = intrigue_scheme_ongoing.5026.a.failure
 				compare_modifier = {
 					value = scope:duel_value
@@ -4754,7 +5271,7 @@ intrigue_scheme_ongoing.5026 = {
 			zealous = minor_stress_impact_gain
 		}
 		ai_chance = {
-			base = 100	
+			base = 100
 		}
 	}
 
@@ -4775,7 +5292,7 @@ intrigue_scheme_ongoing.5026 = {
 		duel = {
 			skill = learning
 			target = scope:court_chaplain
-			20 = {		
+			20 = {
 				desc = intrigue_scheme_ongoing.5026.a.success
 				compare_modifier = {
 					value = scope:duel_value
@@ -4806,7 +5323,7 @@ intrigue_scheme_ongoing.5026 = {
 					}
 				}
 			}
-			10 = {		
+			10 = {
 				desc = intrigue_scheme_ongoing.5026.a.failure
 				compare_modifier = {
 					value = scope:duel_value
@@ -4851,7 +5368,7 @@ intrigue_scheme_ongoing.5026 = {
 			modifier = {
 				add = -25
 				scope:court_chaplain.learning > root.learning
-			}	
+			}
 		}
 	}
 
@@ -4884,7 +5401,7 @@ intrigue_scheme_ongoing.5026 = {
 			zealous = medium_stress_impact_gain
 		}
 		ai_chance = {
-			base = 100	
+			base = 100
 		}
 	}
 
