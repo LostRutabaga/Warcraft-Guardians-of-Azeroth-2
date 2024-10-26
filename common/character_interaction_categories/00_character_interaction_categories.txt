@@ -4,79 +4,74 @@
 #														#
 #########################################################
 
-interaction_category_nomad = {
-	index = 0
-	desc = "NOMAD_ACTIONS"
-}
-
 interaction_category_admin = {
-	index = 1
+	index = 0
 	desc = "ADMIN_ACTIONS"
 }
 
 interaction_category_diplomacy = {
-	index = 2
+	index = 1
 	desc = "DIPLOMACY_ACTIONS"
 }
 
 interaction_category_friendly = {
-	index = 3
+	index = 2
 	desc = "FRIENDLY_ACTIONS"
 }
 
 interaction_category_clan = {
-	index = 4
+	index = 3
 	desc = "CLAN_ACTIONS"
 }
 
 interaction_category_laamp =  {
-	index = 5
+	index = 4
 	desc = "LAAMP_ACTIONS"
 }
 
 interaction_category_hostile = {
-	index = 6
+	index = 5
 	desc = "HOSTILE_ACTIONS"
 }
 
 interaction_category_diarch = {
-	index = 7
+	index = 6
 	desc = "DIARCH_ACTIONS"
 }
 
 interaction_category_vassal = {
-	index = 8
+	index = 7
 	desc = "VASSAL_ACTIONS"
 }
 
 interaction_category_prison = {
-	index = 9
+	index = 8
 	desc = "IMPRISOMENT_ACTIONS"
 }
 
 interaction_category_religion = {
-	index = 10
+	index = 9
 	desc = "RELIGIOUS_ACTIONS"
 }
 
 # Warcraft
 interaction_category_wc_magic = {
-	index = 11
+	index = 10
 	desc = "WC_MAGIC_ACTIONS"
 }
 
 interaction_category_uncategorized = {
-	index = 12
+	index = 11
 	default = yes
 	desc = "UNCATEGORIZED_ACTIONS"
 }
 
 interaction_debug_main = {
-	index = 13
+	index = 12
 	desc =  "DEBUG_MAIN"
 }
 
 interaction_debug_admin = {
-	index = 14
+	index = 13
 	desc = "interaction_debug_admin"
 }

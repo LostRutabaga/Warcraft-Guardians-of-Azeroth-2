@@ -205,14 +205,266 @@ on_travel_plan_movement = {
 
 			apply_character_evocation_effect = yes
 		}
-		else_if = {
+		# General laamp effects.
+		if = {
 			limit = {
-				exists = current_travel_plan.current_location
-				has_character_modifier = wc_evocation_character_modifier
+				current_travel_plan = { is_travel_with_domicile = yes }
 			}
-			remove_character_modifier = wc_evocation_character_modifier
+			# Trigger interface alert if provisions are critically low
+			root = {
+				if = {
+					limit = {
+						domicile.provisions < provisions_threshold_critical_low_value
+						NOT = { has_character_flag = notified_of_low_provisions }
+					}
+					send_interface_message = {
+						type = danger_landless_adventurer_bad_with_text
+						title = critically_low_provisions_alert
+						left_icon = root
+						# Add a small cooldown, or it will trigger for every province you enter!
+						add_character_flag = {
+							flag = notified_of_low_provisions
+							years = 1
+						}
+						desc = critically_low_provisions_alert_desc
+					}
+				}
+			}
+			# Trigger the low provisions events if appropriate.
+			trigger_event = { on_action = travel_laamps_provisions_on_action }
+			# Small chance of seeing contracts on the road as you go.
+			if = {
+				limit = {
+					is_ai = no
+					location = { is_sea_province = no }
+				}
+				random = {
+					chance = 5
+					save_scope_value_as = {
+						name = toggle_distance_ignore
+						value = yes
+					}
+					populate_location_with_special_contracts_effect = {
+						AREA_CHAR = location.county.holder
+						AMOUNT = 1
+					}
+				}
+			}
+			# Clean up old contracts after you.
+			if = {
+				limit = { is_ai = no }
+				save_scope_as = char_temp
+				every_character_task_contract = {
+					limit = {
+						NOR = {
+							has_variable = retain_despite_distance
+							#TODO_CD_EP3; we should get code support to just check if a contract has been actively taken, can't be a hard trigger.
+							save_temporary_scope_as = contract_temp
+							scope:char_temp = {
+								any_character_active_contract = { this = scope:contract_temp }
+							}
+						}
+						"task_contract_location.squared_distance(scope:char_temp.location)" > define:NTaskContract|ADVENTURER_DISTANCE_RESTRICTION
+					}
+					invalidate_contract = yes
+				}
+			}
 		}
-		# End Warcraft
+		if = {
+			limit = {
+				current_travel_plan ?= { has_travel_option = adventurers_make_local_deals_option }
+				NOT = {
+					is_target_in_variable_list = {
+						name = haggle_provinces
+						target = root.current_travel_plan.current_location
+					}
+				}
+				root.current_travel_plan.current_location.available_loot > 0
+			}
+			add_gold = adventurers_make_local_deals_option_value
+			add_to_variable_list = {
+				name = haggle_provinces
+				target = root.current_travel_plan.current_location 
+			}
+		}
+		if = {
+			limit = {
+				current_travel_plan ?= { has_travel_option = adventurers_search_for_secrets_option }
+				root.current_travel_plan.current_location = {
+					any_character_in_location = {
+						NOR = {
+							this = root
+							is_courtier_of = root
+						}
+						any_secret = {
+							NOT = { is_known_by = root }
+							is_blackmailable_secret_trigger = {
+								PARTICIPANT = prev
+								BLACKMAILER = root
+							}
+						}
+					}
+				}
+			}
+			random = {
+				chance = root.intrigue
+				root.current_travel_plan.current_location = {
+					random_character_in_location = {
+						limit = {
+							NOR = {
+								this = root
+								is_courtier_of = root
+							}
+							any_secret = {
+								NOT = { is_known_by = root }
+								is_blackmailable_secret_trigger = {
+									PARTICIPANT = prev
+									BLACKMAILER = root
+								}
+							}
+						}
+						random_secret = {
+							limit = {
+								NOT = { is_known_by = root }
+								is_blackmailable_secret_trigger = {
+									PARTICIPANT = prev
+									BLACKMAILER = root
+								}
+							}
+							save_scope_as = secret_target
+						}
+						save_scope_as = secret_target_holder
+					}
+				}
+				send_interface_message = {
+					type = secret_discovered_message
+					title = adventurers_search_for_secrets_option.title
+					left_icon = scope:secret_target_holder
+					scope:secret_target = {
+						reveal_to_without_events_effect = {
+							CHARACTER = root
+						}
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				current_travel_plan ?= { has_travel_option = adventurers_proselytize_zealously_option }
+				any_pool_character = {
+					province = root.current_travel_plan.current_location
+					is_physically_able_adult = yes
+					NOR = {
+						faith = root.faith
+						has_relation_rival = root
+						has_character_flag = ai_will_not_convert
+						has_trait = zealous
+					}
+					OR = {
+						is_pool_character = yes
+						is_pool_guest = yes
+					}
+				}
+			}
+			random = {
+				chance = root.learning
+				random_pool_character = {
+					province = root.current_travel_plan.current_location
+					limit = {
+						is_physically_able_adult = yes
+						NOR = {
+							faith = root.faith
+							has_relation_rival = root
+							has_character_flag = ai_will_not_convert
+							has_trait = zealous
+						}
+						OR = {
+							is_pool_character = yes
+							is_pool_guest = yes
+						}
+					}
+					save_scope_as = wanderer_to_convert
+				}
+				send_interface_message = {
+					type = send_interface_message_good
+					title = adventurers_proselytize_zealously_option.title
+					left_icon = scope:wanderer_to_convert
+					add_piety = miniscule_piety_value
+					scope:wanderer_to_convert = {
+						set_character_faith = root.faith
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				current_travel_plan ?= { has_travel_option = adventurers_gather_inspiration_option }
+				any_courtier = {
+					is_physically_able_ai_adult = yes
+					NOT = { exists = inspiration }
+				}
+			}
+			random = {
+				chance = {
+					value = root.stewardship
+					divide = 6
+					min = 1
+				}
+				random_courtier = {
+					limit = {
+						is_physically_able_ai_adult = yes
+						NOT = { exists = inspiration }
+					}
+					save_scope_as = inspired_follower
+					grant_inspiration_to_character_no_court_artifacts_effect = { CHARACTER = this }
+				}
+				send_interface_message = {
+					type = send_interface_message_good
+					title = adventurers_gather_inspiration_option.title
+					left_icon = scope:inspired_follower
+					scope:inspired_follower = {
+						custom_tooltip = {
+							text = adventurers_gather_inspiration_option.effect
+						}
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_perk = church_and_state_perk
+				is_landless_adventurer = yes
+				location = { has_holding_type = church_holding }
+			}
+			add_piety = miniscule_piety_gain
+		}
+		# laamp_base_1041/Ambush Travellers task contract minigame.
+		current_travel_plan ?= {
+			if = {
+				limit = { has_variable = activate_laamp_base_1041_logic }
+				travel_plan_owner.var:laamp_base_1041_travel_plan_contract_storage = {
+					if = {
+						limit = { var:event_ratio_tracker >= 1 }
+						increment_variable_effect = {
+							VAR = event_ratio_tracker
+							VAL = -1
+						}
+					}
+					else_if = {
+						limit = { var:encounters_tally < var:encounters_max }
+						root = { trigger_event = laamp_base_contract_schemes.1782 }
+						set_variable = {
+							name = event_ratio_tracker
+							value = var:event_ratio
+						}
+						increment_variable_effect = {
+							VAR = encounters_tally
+							VAL = 1
+						}
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -900,8 +1152,14 @@ on_travel_plan_abort = {
 				title = petition_liege_costs_refunded
 				left_icon = root 
 				remove_decision_cooldown = petition_liege_decision
-				# refund prestige cost
-				add_prestige = standard_activity_cost
+				# refund prestige and influence cost
+				if = {
+					limit = { petition_liege_admin_valid_trigger = yes }
+					change_influence_no_experience = standard_activity_cost
+				}
+				else = {
+					add_prestige_no_experience = standard_activity_cost
+				}
 			}
 			# remove variables and flags 
 			petition_liege_variable_cleanup_effect = yes
@@ -927,8 +1185,14 @@ on_travel_plan_cancel = {
 				title = petition_liege_costs_refunded
 				left_icon = root 
 				remove_decision_cooldown = petition_liege_decision
-				# refund prestige cost
-				add_prestige = standard_activity_cost
+				# refund prestige and influence cost
+				if = {
+					limit = { petition_liege_admin_valid_trigger = yes }
+					change_influence_no_experience = standard_activity_cost
+				}
+				else = {
+					add_prestige_no_experience = standard_activity_cost
+				}
 			}
 			# remove variables and flags 
 			petition_liege_variable_cleanup_effect = yes

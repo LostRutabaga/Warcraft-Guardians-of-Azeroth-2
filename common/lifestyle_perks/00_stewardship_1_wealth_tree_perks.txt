@@ -123,6 +123,11 @@ detailed_ledgers_perk = {
 		provisions_loss_mult = -0.2
 	}
 	
+	government_character_modifier = {
+		flag = government_is_administrative
+		administrative_government_tax_contribution_mult = 0.1
+	}
+	
 	effect = {
 		# Warcraft
 		trigger_event = { on_action = on_vanilla_lifestyle_perk_gained }

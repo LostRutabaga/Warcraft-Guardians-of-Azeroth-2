@@ -2930,12 +2930,13 @@ arellas_fireleaf={ #High Wizard of the Scarlet Crusade
 		}
 	}
 	605.9.9={
-		religion=scarlet
+		religion=scarletism
 	}
 	704.1.6={ death=yes }
 }
 fellari_swiftarrow={ #Ranger Captain of the Scarlet Crusade
 	name=Fellari
+	female=yes
 	dynasty=swiftarrow
 	culture=high_elf religion=cult_of_sunwell
 	trait=education_martial_2 trait=impatient trait=humble
@@ -2950,7 +2951,7 @@ fellari_swiftarrow={ #Ranger Captain of the Scarlet Crusade
 		}
 	}
 	605.9.9={
-		religion=scarlet
+		religion=scarletism
 	}
 	704.1.6={ death=yes }
 }
