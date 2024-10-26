@@ -5261,7 +5261,7 @@ types HUD
         layer = top
 
         # Warcraft +100 0
-		size = { 740 38 }
+		#size = { 740 38 }
 
         using = Animation_ShowHide_Quick
 
@@ -5348,6 +5348,11 @@ types HUD
                     widget = {
                         name = "gold"
                         size = { 100 70 }
+
+                        datacontext = "[GetScriptedGui('wc_show_mana_gui')]"
+						datacontext = "[GetPlayer.MakeScope]"
+						visible = "[ScriptedGui.IsShown( GuiScope.SetRoot( GetPlayer.MakeScope ).End)]"
+
 
                         widget = {
                             size = { 100 45 }
@@ -5473,7 +5478,6 @@ types HUD
 
 
                         background = {
-                            visible = "[ScriptedGui.IsShown( GuiScope.SetRoot( GetPlayer.MakeScope ).End)]"
                             texture = "gfx/interface/skinned/resource_panel_start.dds"
                         }
 
