@@ -593,7 +593,7 @@
 			#Main Group
 			color = rgb { 97 45 115 }
 			religious_head = d_rushatali_council
-			icon = wcmw_loa_mask_custom_1_4
+			icon = wcmw_rushism
 
 			holy_site = nordrassil
 			holy_site = zin_malor
