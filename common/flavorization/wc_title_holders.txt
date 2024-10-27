@@ -31,7 +31,9 @@ warchief_male_emperor = {
 	gender = male
 	special = holder
 	priority = @special_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	titles = { e_horde }
 }
 warchief_female_emperor = {
@@ -39,7 +41,9 @@ warchief_female_emperor = {
 	gender = female
 	special = holder
 	priority = @special_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	titles = { e_horde }
 }
 
@@ -48,9 +52,11 @@ lich_king_male = {
 	type = character
 	gender = male
 	special = holder
-	only_holder = yes
 	priority = @special_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+		only_holder = yes
+	}
 	titles = { e_scourge }
 }
 
@@ -58,9 +64,11 @@ lich_king_female = {
 	type = character
 	gender = female
 	special = holder
-	only_holder = yes
 	priority = @special_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+		only_holder = yes
+	}
 	titles = { e_scourge }
 }
 
@@ -69,9 +77,11 @@ aspect_male = {
 	type = character
 	gender = male
 	special = holder
-	only_holder = yes
 	priority = @special_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+		only_holder = yes
+	}
 	titles = { e_black_dragonflight e_green_dragonflight e_bronze_dragonflight e_blue_dragonflight e_red_dragonflight }
 }
 
@@ -79,9 +89,11 @@ aspect_female = {
 	type = character
 	gender = female
 	special = holder
-	only_holder = yes
 	priority = @special_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+		only_holder = yes
+	}
 	titles = { e_black_dragonflight e_green_dragonflight e_bronze_dragonflight e_blue_dragonflight e_red_dragonflight }
 }
 
@@ -90,9 +102,11 @@ high_priest_kaldorei_male = {
 	type = character
 	gender = male
 	special = holder
-	only_holder = yes
 	priority = @special_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+		only_holder = yes
+	}
 	religions = { druidism_group }
 	governments = { theocracy_government }
 	titles = { e_kaldorei }
@@ -101,9 +115,11 @@ high_priestess_kaldorei_female = {
 	type = character
 	gender = female
 	special = holder
-	only_holder = yes
 	priority = @special_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+		only_holder = yes
+	}
 	religions = { druidism_group }
 	governments = { theocracy_government }
 	titles = { e_kaldorei }
@@ -116,7 +132,9 @@ goblin_banker_male = {
 	tier = kingdom
 	priority = @special_prio
 	titles = { k_goblin_bankers }
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 }
 goblin_banker_female = {
 	type = character
@@ -125,10 +143,37 @@ goblin_banker_female = {
 	tier = kingdom
 	priority = @special_prio
 	titles = { k_goblin_bankers }
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 }
-# Special cultural titles (sorted by culture, then government type).
 
+# Silver Hand
+highlord_male_king = {
+	type = character
+	gender = male
+	special = holder
+	tier = kingdom
+	priority = @special_prio
+	titles = { k_order_of_the_silver_hand }
+	flavourization_rules = { 
+		top_liege = no
+	}
+}
+
+highlord_female_king = {
+	type = character
+	gender = female
+	special = holder
+	tier = kingdom
+	priority = @special_prio
+	titles = { k_order_of_the_silver_hand }
+	flavourization_rules = { 
+		top_liege = no
+	}
+}
+
+# Special cultural titles (sorted by culture, then government type).
 ### Orcs ###
 # Titles
 overlord_male_orc_count = {
@@ -137,7 +182,9 @@ overlord_male_orc_count = {
 	special = holder
 	tier = county
 	priority = @county_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	heritages = { heritage_orcish }
 	governments = { feudal_government clan_government }
 }
@@ -147,7 +194,9 @@ overlord_female_orc_count = {
 	special = holder
 	tier = county
 	priority = @county_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	heritages = { heritage_orcish }
 	governments = { feudal_government clan_government }
 }
@@ -157,7 +206,9 @@ high_overlord_male_orc_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	heritages = { heritage_orcish }
 	governments = { feudal_government clan_government }
 }
@@ -167,7 +218,9 @@ high_overlord_female_orc_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	heritages = { heritage_orcish }
 	governments = { feudal_government clan_government }
 }
@@ -177,7 +230,9 @@ warlord_male_orc_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	heritages = { heritage_orcish }
 }
@@ -187,7 +242,9 @@ warlord_female_orc_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	heritages = { heritage_orcish }
 }
@@ -197,7 +254,9 @@ warchief_male_orc_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	heritages = { heritage_orcish }
 }
@@ -207,7 +266,9 @@ warchief_female_orc_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	heritages = { heritage_orcish }
 }
@@ -220,7 +281,9 @@ lord_male_highelf_count = {
 	special = holder
 	tier = county
 	priority = @county_low_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_darnassian heritage_highborne heritage_xavic heritage_azsharic }
 }
@@ -230,7 +293,9 @@ lady_female_highelf_count = {
 	special = holder
 	tier = county
 	priority = @county_low_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_darnassian heritage_highborne heritage_xavic heritage_azsharic }
 }
@@ -247,7 +312,9 @@ prince_male_highborne_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_low_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government theocracy_government }
 	heritages = { heritage_darnassian heritage_highborne heritage_xavic heritage_azsharic }
 }
@@ -257,7 +324,9 @@ princess_female_highborne_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_low_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government theocracy_government }
 	heritages = { heritage_darnassian heritage_highborne heritage_xavic heritage_azsharic }
 }
@@ -319,7 +388,9 @@ high_king_male_highelf_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	name_lists = { name_list_quel_dorei name_list_sin_dorei }
 }
@@ -329,7 +400,9 @@ high_queen_female_highelf_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	name_lists = { name_list_quel_dorei name_list_sin_dorei }
 }
@@ -375,7 +448,9 @@ artificer_male_exodar_count = {
 	special = holder
 	tier = county
 	priority = @county_low_heritage_prio
-	top_liege = yes
+	flavourization_rules = { 
+		top_liege = no
+	}
 	gender = male
 	governments = { feudal_government clan_government }
 	heritages = { heritage_argusean }
@@ -385,7 +460,9 @@ artificer_female_exodar_count = {
 	special = holder
 	tier = county
 	priority = @county_low_heritage_prio
-	top_liege = yes
+	flavourization_rules = { 
+		top_liege = yes
+	}
 	gender = female
 	governments = { feudal_government clan_government }
 	heritages = { heritage_argusean }
@@ -402,7 +479,9 @@ harbinger_male_exodar_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_low_heritage_prio
-	top_liege = yes
+	flavourization_rules = { 
+		top_liege = yes
+	}
 	gender = male
 	governments = { feudal_government clan_government theocracy_government }
 	heritages = { heritage_argusean }
@@ -412,7 +491,9 @@ harbinger_female_exodar_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_low_heritage_prio
-	top_liege = yes
+	flavourization_rules = { 
+		top_liege = yes
+	}
 	gender = female
 	governments = { feudal_government clan_government theocracy_government }
 	heritages = { heritage_argusean }
@@ -588,10 +669,11 @@ high_king_male_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government necro_government }
 	heritages = { heritage_northern heritage_arathi heritage_gilnean heritage_southern }
-	name_lists = { name_list_old_dwarven name_list_bronzebeard name_list_wildhammer name_list_frostborn }
 }
 high_queen_female_emperor = {
 	type = character
@@ -599,10 +681,11 @@ high_queen_female_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government necro_government }
 	heritages = { heritage_northern heritage_arathi heritage_gilnean heritage_southern }
-	name_lists = { name_list_old_dwarven name_list_bronzebeard name_list_wildhammer name_list_frostborn }
 }
 high_kingdom_empire = {
 	type = title
@@ -610,7 +693,144 @@ high_kingdom_empire = {
 	priority = @empire_cultural_prio
     governments = { feudal_government clan_government necro_government }
 	heritages = { heritage_northern heritage_arathi heritage_gilnean heritage_southern }
+}
+high_king_male_dwarven_emperor = {
+	type = character
+	gender = male
+	special = holder
+	tier = empire
+	priority = @empire_cultural_prio
+	flavourization_rules = {
+		top_liege = no
+	}
+	governments = { feudal_government clan_government necro_government }
 	name_lists = { name_list_old_dwarven name_list_bronzebeard name_list_wildhammer name_list_frostborn }
+}
+high_queen_female_dwarven_emperor = {
+	type = character
+	gender = female
+	special = holder
+	tier = empire
+	priority = @empire_cultural_prio
+	flavourization_rules = {
+		top_liege = no
+	}
+	governments = { feudal_government clan_government necro_government }
+	name_lists = { name_list_old_dwarven name_list_bronzebeard name_list_wildhammer name_list_frostborn }
+}
+high_kingdom_dwarven_empire = {
+	type = title
+	tier = empire
+	priority = @empire_cultural_prio
+    governments = { feudal_government clan_government necro_government }
+	name_lists = { name_list_old_dwarven name_list_bronzebeard name_list_wildhammer name_list_frostborn }
+}
+
+# Theocracy
+abbot_male_count = {
+	type = character
+	gender = male
+	special = holder
+	tier = county
+	priority = @county_cultural_prio
+	governments = { theocracy_government }
+	titles = { c_northshire }
+	religions = { tyrism_religion }
+	flavourization_rules = {
+		top_liege = no
+	}
+}
+
+abbot_male_duke = {
+	type = character
+	gender = male
+	special = holder
+	tier = duchy
+	priority = @duchy_cultural_prio
+	governments = { theocracy_government }
+	titles = { d_northwoods }
+	religions = { tyrism_religion }
+	flavourization_rules = {
+		top_liege = no
+	}
+}
+
+abbess_female_count = {
+	type = character
+	gender = female
+	special = holder
+	tier = county
+	priority = @county_cultural_prio
+	governments = { theocracy_government }
+	titles = { c_northshire }
+	religions = { tyrism_religion }
+	flavourization_rules = {
+		top_liege = no
+	}
+}
+
+abbess_female_duke = {
+	type = character
+	gender = female
+	special = holder
+	tier = duchy
+	priority = @duchy_cultural_prio
+	governments = { theocracy_government }
+	titles = { d_northwoods }
+	religions = { tyrism_religion }
+	flavourization_rules = {
+		top_liege = no
+	}
+}
+
+abbey_theocracy_northshire = {
+	type = title
+	tier = county
+	priority = @county_cultural_prio
+	governments = { theocracy_government }
+	titles = { c_northshire }
+	religions = { tyrism_religion }
+	flavourization_rules = {
+		top_liege = no
+	}
+}
+
+brotherhood_theocracy_northshire = {
+	type = title
+	tier = duchy
+	priority = @duchy_cultural_prio
+	governments = { theocracy_government }
+	titles = { d_northwoods }
+	religions = { tyrism_religion }
+	flavourization_rules = {
+		top_liege = no
+	}
+}
+
+# Holy Orders
+deacon_holy_order_male = {
+	type = character
+	gender = male
+	special = holder
+	tier = duchy
+	priority = @duchy_cultural_prio
+	governments = { holy_order_government }
+	faiths = { holy_light }
+	flavourization_rules = {
+		top_liege = no
+	}
+}
+deaconesses_holy_order_female = {
+	type = character
+	gender = female
+	special = holder
+	tier = duchy
+	priority = @duchy_cultural_prio
+	governments = { holy_order_government }
+	faiths = { holy_light }
+	flavourization_rules = {
+		top_liege = no
+	}
 }
 
 # Republic
@@ -620,7 +840,9 @@ magistrate_male_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { republic_government }
 	heritages = { heritage_northern heritage_arathi heritage_gilnean heritage_southern heritage_dwarven }
 }
@@ -630,7 +852,9 @@ magistrate_female_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { republic_government }
 	heritages = { heritage_northern heritage_arathi heritage_gilnean heritage_southern heritage_dwarven }
 }
@@ -638,7 +862,9 @@ magistracy_duchy = {
 	type = title
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
     governments = { republic_government }
 	heritages = { heritage_northern heritage_arathi heritage_gilnean heritage_southern heritage_dwarven }
 }
@@ -662,7 +888,9 @@ lord_male_tirassian_duke {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	name_lists = { name_list_tirassian }
 }
@@ -672,7 +900,9 @@ lady_female_tirassian_duke {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	name_lists = { name_list_tirassian }
 }
@@ -682,7 +912,9 @@ admiral_male_tirassian_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	name_lists = { name_list_tirassian }
 	faiths = { tidemother }
@@ -693,7 +925,9 @@ admiral_female_tirassian_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	name_lists = { name_list_tirassian }
 	faiths = { tidemother }
@@ -712,7 +946,9 @@ grand_admiral_male_tirassian_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	name_lists = { name_list_tirassian }
 	faiths = { tidemother }
@@ -723,7 +959,9 @@ grand_admiral_female_tirassian_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	name_lists = { name_list_tirassian }
 	faiths = { tidemother }
@@ -745,7 +983,9 @@ high_tinker_male_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { republic_government }
 	heritages = { heritage_gnomish }
 }
@@ -755,7 +995,9 @@ high_tinker_female_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { republic_government }
 	heritages = { heritage_gnomish }
 }
@@ -763,7 +1005,9 @@ high_tinkership_kingdom = {
 	type = title
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
     governments = { republic_government }
 	heritages = { heritage_gnomish }
 }
@@ -773,7 +1017,9 @@ grand_tinker_male_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { republic_government }
 	heritages = { heritage_gnomish }
 }
@@ -783,7 +1029,9 @@ grand_tinker_female_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { republic_government }
 	heritages = { heritage_gnomish }
 }
@@ -791,7 +1039,9 @@ grand_tinkership_empire = {
 	type = title
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
     governments = { republic_government }
 	heritages = { heritage_gnomish }
 }
@@ -804,7 +1054,9 @@ god_king_feudal_emperor {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	heritages = { heritage_zulite }
 	religions = { loa_group }
@@ -815,7 +1067,9 @@ god_queen_feudal_emperor {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	heritages = { heritage_zulite }
 	religions = { loa_group }
@@ -828,7 +1082,9 @@ blood_troll_male = {
 	gender = male
 	special = holder
 	priority = @special_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government eldritch_government necro_government tribal_government }
 	name_lists = { name_list_nazmani }
 	faiths = { ghuun_worship }
@@ -839,7 +1095,9 @@ warmother_female_blood_troll_count = {
 	special = holder
 	tier = county
 	priority = @county_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government eldritch_government necro_government tribal_government }
 	name_lists = { name_list_nazmani }
 	faiths = { ghuun_worship }
@@ -850,7 +1108,9 @@ grand_mada_female_blood_troll_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government eldritch_government necro_government tribal_government }
 	name_lists = { name_list_nazmani }
 	faiths = { ghuun_worship }
@@ -861,7 +1121,9 @@ queen_mada_female_blood_troll_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government eldritch_government necro_government tribal_government }
 	name_lists = { name_list_nazmani }
 	faiths = { ghuun_worship }
@@ -872,7 +1134,9 @@ divine_mada_female_blood_troll_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government eldritch_government necro_government tribal_government }
 	name_lists = { name_list_nazmani }
 	faiths = { ghuun_worship }
@@ -886,7 +1150,9 @@ frost_king_feudal_king {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	name_lists = { name_list_drakkari }
 	religions = { loa_group }
@@ -897,7 +1163,9 @@ frost_queen_feudal_king {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	name_lists = { name_list_drakkari }
 	religions = { loa_group }
@@ -910,7 +1178,9 @@ warlord_male_troll_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	name_lists = { name_list_amani }
 }
@@ -920,7 +1190,9 @@ warlord_female_troll_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	name_lists = { name_list_amani }
 }
@@ -932,7 +1204,9 @@ lord_male_dragon_count {
 	special = holder
 	tier = county
 	priority = @county_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_draconic }
 }
@@ -942,7 +1216,9 @@ lady_male_dragon_count {
 	special = holder
 	tier = county
 	priority = @county_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_draconic }
 }
@@ -959,7 +1235,9 @@ overlord_male_dragon_duke {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_draconic }
 }
@@ -969,7 +1247,9 @@ overlady_female_dragon_duke {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_draconic }
 }
@@ -986,7 +1266,9 @@ dragonking_male_dragon_king {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_draconic }
 }
@@ -996,7 +1278,9 @@ dragonqueen_female_dragon_king {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_draconic }
 }
@@ -1006,7 +1290,9 @@ high_dragonking_male_dragon_emperor {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_draconic }
 }
@@ -1016,7 +1302,9 @@ high_dragonqueen_female_dragon_emperor {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_draconic }
 }
@@ -1028,7 +1316,9 @@ emperor_male_mantid {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government necro_government eldritch_government }
 	name_lists = { name_list_mantid }
 }
@@ -1038,7 +1328,9 @@ empress_female_mantid {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government necro_government eldritch_government }
 	name_lists = { name_list_mantid }
 }
@@ -1051,7 +1343,9 @@ emperor_ahn_qiraj_male_qiraji {
 	special = holder
 	tier = kingdom
 	priority = @special_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government necro_government eldritch_government republic_government }
 	name_lists = { name_list_qiraji }
 	titles = { k_ahnqiraj }
@@ -1062,7 +1356,9 @@ empress_ahn_qiraj_female_qiraji {
 	special = holder
 	tier = kingdom
 	priority = @special_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government necro_government eldritch_government republic_government }
 	name_lists = { name_list_qiraji }
 	titles = { k_ahnqiraj }
@@ -1082,7 +1378,9 @@ lord_male_qiraji_count = {
 	special = holder
 	tier = county
 	priority = @county_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government necro_government eldritch_government republic_government }
 	name_lists = { name_list_qiraji }
 }
@@ -1092,7 +1390,9 @@ lady_female_qiraji_count = {
 	special = holder
 	tier = county
 	priority = @county_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government necro_government eldritch_government republic_government }
 	name_lists = { name_list_qiraji }
 }
@@ -1109,7 +1409,9 @@ high_overlord_male_qiraji_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government necro_government eldritch_government republic_government }
 	name_lists = { name_list_qiraji }
 }
@@ -1119,7 +1421,9 @@ high_overlady_female_qiraji_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government necro_government eldritch_government republic_government }
 	name_lists = { name_list_qiraji }
 }
@@ -1139,7 +1443,9 @@ chief_male_wildhammer_count = {
 	special = holder
 	tier = county
 	priority = @county_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government tribal_government clan_government }
 	name_lists = { name_list_wildhammer }
 	faiths = { shamanism }
@@ -1150,7 +1456,9 @@ chieftess_female_wildhammer_count = {
 	special = holder
 	tier = county
 	priority = @county_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government tribal_government clan_government }
 	name_lists = { name_list_wildhammer }
 	faiths = { shamanism }
@@ -1169,7 +1477,9 @@ thane_male_wildhammer_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government tribal_government clan_government }
 	name_lists = { name_list_wildhammer }
 }
@@ -1179,7 +1489,9 @@ thane_female_wildhammer_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government tribal_government clan_government }
 	name_lists = { name_list_wildhammer }
 }
@@ -1187,7 +1499,9 @@ high_chiefdom_wildhammer_duchy = {
 	type = title
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government tribal_government clan_government }
 	name_lists = { name_list_wildhammer }
 }
@@ -1197,7 +1511,9 @@ high_thane_male_wildhammer_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government tribal_government clan_government }
 	name_lists = { name_list_wildhammer }
 }
@@ -1207,7 +1523,9 @@ high_thane_female_wildhammer_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government tribal_government clan_government }
 	name_lists = { name_list_wildhammer }
 }
@@ -1220,7 +1538,9 @@ lord_male_darkiron_count = {
 	special = holder
 	tier = county
 	priority = @county_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	name_lists = { name_list_dark_iron }
 }
@@ -1230,7 +1550,9 @@ lady_female_darkiron_count = {
 	special = holder
 	tier = county
 	priority = @county_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	name_lists = { name_list_dark_iron }
 }
@@ -1247,7 +1569,9 @@ thane_male_darkiron_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	name_lists = { name_list_dark_iron }
 }
@@ -1257,7 +1581,9 @@ thane_female_darkiron_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	name_lists = { name_list_dark_iron }
 }
@@ -1276,7 +1602,9 @@ chief_male_old_dwarven_count = {
 	special = holder
 	tier = county
 	priority = @county_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government tribal_government clan_government }
 	name_lists = { name_list_old_dwarven name_list_frostborn }
 }
@@ -1286,7 +1614,9 @@ chieftess_female_old_dwarven_count = {
 	special = holder
 	tier = county
 	priority = @county_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government tribal_government clan_government }
 	name_lists = { name_list_old_dwarven name_list_frostborn }
 }
@@ -1303,7 +1633,9 @@ thane_male_old_dwarven_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government tribal_government clan_government }
 	name_lists = { name_list_old_dwarven name_list_frostborn }
 }
@@ -1313,7 +1645,9 @@ thane_female_old_dwarven_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government tribal_government clan_government }
 	name_lists = { name_list_old_dwarven name_list_frostborn }
 }
@@ -1330,7 +1664,9 @@ high_thane_male_old_dwarven_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government tribal_government clan_government }
 	name_lists = { name_list_old_dwarven name_list_frostborn }
 }
@@ -1340,7 +1676,9 @@ high_thane_female_old_dwarven_kingdom = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government tribal_government clan_government }
 	name_lists = { name_list_old_dwarven name_list_frostborn }
 }
@@ -1353,7 +1691,9 @@ thane_male_vrykul_count = {
 	special = holder
 	tier = county
 	priority = @county_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government necro_government }
 	heritages = { heritage_vrykulic }
 }
@@ -1363,7 +1703,9 @@ thane_female_vrykul_count = {
 	special = holder
 	tier = county
 	priority = @county_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government necro_government }
 	heritages = { heritage_vrykulic }
 }
@@ -1380,7 +1722,9 @@ jarl_male_vrykul_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government necro_government }
 	heritages = { heritage_vrykulic }
 }
@@ -1390,7 +1734,9 @@ frue_female_vrykul_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government necro_government }
 	heritages = { heritage_vrykulic }
 }
@@ -1407,7 +1753,9 @@ high_king_male_vrykul_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government necro_government }
 	heritages = { heritage_vrykulic }
 }
@@ -1417,7 +1765,9 @@ high_queen_female_vrykul_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government necro_government }
 	heritages = { heritage_vrykulic }
 }
@@ -1437,7 +1787,9 @@ drottinn_male_kvaldir_duke = {
 	special = holder
 	tier = duchy
 	priority = @special_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government necro_government }
 	name_lists = { name_list_kvaldir }
 }
@@ -1447,7 +1799,9 @@ drottning_female_kvaldir_duke = {
 	special = holder
 	tier = duchy
 	priority = @special_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government necro_government }
 	name_lists = { name_list_kvaldir }
 }
@@ -1467,7 +1821,9 @@ drottlag_kvaldir_duchy = {
 #	special = holder
 #	tier = county
 #	priority = @special_prio
-#	top_liege = no
+#	flavourization_rules = {
+		top_liege = no
+	}
 #	governments = { feudal_government clan_government tribal_government necro_government }
 #	cultures = { lucardir } #paradox code doesn't accept specific cultures for some reason
 #}
@@ -1477,7 +1833,9 @@ drottlag_kvaldir_duchy = {
 #	special = holder
 #	tier = county
 #	priority = @special_prio
-#	top_liege = no
+#	flavourization_rules = {
+		top_liege = no
+	}
 #	governments = { feudal_government clan_government tribal_government necro_government }
 #	cultures = { lucardir }
 #}
@@ -1497,7 +1855,9 @@ grand_prince_male_solstice_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_northern }
 }
@@ -1507,7 +1867,9 @@ grand_princess_female_solstice_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_northern }
 }
@@ -1524,7 +1886,9 @@ tsar_male_solstice_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_northern }
 }
@@ -1534,7 +1898,9 @@ tsaritsa_female_solstice_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_northern }
 }
@@ -1553,7 +1919,9 @@ tender_male_dryad_group_baron = {
 	special = holder
 	tier = barony
 	priority = @barony_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	heritages = { heritage_cenaric }
 	religions = { druidism_group shamanism_group }
@@ -1564,7 +1932,9 @@ tender_female_dryad_group_baron = {
 	special = holder
 	tier = barony
 	priority = @barony_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	heritages = { heritage_cenaric }
 	religions = { druidism_group shamanism_group }
@@ -1573,7 +1943,9 @@ refuge_dryad_group_baronny = {
 	type = title
 	tier = barony
 	priority = @barony_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	heritages = { heritage_cenaric }
 	religions = { druidism_group shamanism_group }
@@ -1584,7 +1956,9 @@ guardian_male_dryad_group_count = {
 	special = holder
 	tier = county
 	priority = @county_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	heritages = { heritage_cenaric }
 	religions = { druidism_group shamanism_group }
@@ -1595,7 +1969,9 @@ guardian_female_dryad_group_count = {
 	special = holder
 	tier = county
 	priority = @county_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	heritages = { heritage_cenaric }
 	religions = { druidism_group shamanism_group }
@@ -1604,7 +1980,9 @@ grove_dryad_group_county = {
 	type = title
 	tier = county
 	priority = @county_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	heritages = { heritage_cenaric }
 	religions = { druidism_group shamanism_group }
@@ -1615,7 +1993,9 @@ lord_male_dryad_group_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	heritages = { heritage_cenaric }
 	religions = { druidism_group shamanism_group }
@@ -1626,7 +2006,9 @@ lady_female_dryad_group_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	heritages = { heritage_cenaric }
 	religions = { druidism_group shamanism_group }
@@ -1635,7 +2017,9 @@ grand_grove_dryad_group_duchy = {
 	type = title
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	heritages = { heritage_cenaric }
 	religions = { druidism_group shamanism_group }
@@ -1646,7 +2030,9 @@ high_lord_male_dryad_group_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	heritages = { heritage_cenaric }
 	religions = { druidism_group shamanism_group }
@@ -1657,7 +2043,9 @@ high_lady_female_dryad_group_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	heritages = { heritage_cenaric }
 	religions = { druidism_group shamanism_group }
@@ -1666,7 +2054,9 @@ domain_dryad_group_kingdom = {
 	type = title
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	heritages = { heritage_cenaric }
 	religions = { druidism_group shamanism_group }
@@ -1677,7 +2067,9 @@ king_male_dryad_group_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	heritages = { heritage_cenaric }
 	religions = { druidism_group shamanism_group }
@@ -1688,7 +2080,9 @@ queen_female_dryad_group_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	heritages = { heritage_cenaric }
 	religions = { druidism_group shamanism_group }
@@ -1710,7 +2104,9 @@ hatya_male_tolvir_baron = {
 	special = holder
 	tier = barony
 	priority = @barony_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government republic_government }
 	heritages = { heritage_uldumic }
 }
@@ -1720,7 +2116,9 @@ hatya_female_tolvir_baron = {
 	special = holder
 	tier = barony
 	priority = @barony_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government republic_government }
 	heritages = { heritage_uldumic }
 }
@@ -1737,7 +2135,9 @@ heqa_male_tolvir_count = {
 	special = holder
 	tier = county
 	priority = @county_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government republic_government }
 	heritages = { heritage_uldumic }
 }
@@ -1747,7 +2147,9 @@ heqa_female_tolvir_count = {
 	special = holder
 	tier = county
 	priority = @county_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government republic_government }
 	heritages = { heritage_uldumic }
 }
@@ -1764,7 +2166,9 @@ nomarch_male_tolvir_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_uldumic }
 }
@@ -1774,7 +2178,9 @@ nomarch_female_tolvir_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_uldumic }
 }
@@ -1791,7 +2197,9 @@ pharaoh_male_tolvir_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_uldumic }
 }
@@ -1801,7 +2209,9 @@ pharaoh_female_tolvir_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_uldumic }
 }
@@ -1813,7 +2223,9 @@ dark_pharaoh_male_tolvir_king = {
 	special = holder
 	tier = kingdom
 	priority = @special_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	heritages = { heritage_uldumic }
 	governments = { feudal_government clan_government }
 	religions = { shathgral void_group necromancy_group fel_group deathbringer doombringer }
@@ -1825,7 +2237,9 @@ dark_pharaoh_female_tolvir_king = {
 	special = holder
 	tier = kingdom
 	priority = @special_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	heritages = { heritage_uldumic }
 	governments = { feudal_government clan_government }
 	religions = { shathgral void_group necromancy_group fel_group deathbringer doombringer }
@@ -1839,7 +2253,9 @@ zhang_male_mogu_baron = {
 	special = holder
 	tier = barony
 	priority = @barony_low_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_mogu heritage_grummle heritage_sauroken heritage_pandaren heritage_jinyu heritage_hozen }
 }
@@ -1849,7 +2265,9 @@ zhang_female_mogu_baron = {
 	special = holder
 	tier = barony
 	priority = @barony_low_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_mogu heritage_grummle heritage_sauroken heritage_pandaren heritage_jinyu heritage_hozen }
 }
@@ -1866,7 +2284,9 @@ taishou_male_mogu_count = {
 	special = holder
 	tier = county
 	priority = @county_low_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_mogu heritage_grummle heritage_sauroken heritage_pandaren heritage_jinyu heritage_hozen }
 }
@@ -1876,7 +2296,9 @@ taishou_female_mogu_count = {
 	special = holder
 	tier = county
 	priority = @county_low_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_mogu heritage_grummle heritage_sauroken heritage_pandaren heritage_jinyu heritage_hozen }
 }
@@ -1895,7 +2317,9 @@ mu_male_pandaren_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_pandaren heritage_grummle }
 }
@@ -1905,7 +2329,9 @@ mu_female_pandaren_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_pandaren heritage_grummle }
 }
@@ -1923,7 +2349,9 @@ shodo_pan_male_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { clan_government }
 	heritages = { heritage_pandaren }
 }
@@ -1933,7 +2361,9 @@ shodo_pan_female_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { clan_government }
 	heritages = { heritage_pandaren }
 }
@@ -1952,7 +2382,9 @@ warlord_male_mogu_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_mogu heritage_sauroken heritage_hozen }
 }
@@ -1962,7 +2394,9 @@ warlady_female_mogu_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_mogu heritage_sauroken heritage_hozen }
 }
@@ -1981,7 +2415,9 @@ elder_male_pandaren_baron = {
 	special = holder
 	tier = barony
 	priority = @barony_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { theocracy_government }
 	heritages = { heritage_pandaren heritage_hozen heritage_grummle }
 }
@@ -2000,7 +2436,9 @@ master_male_pandaren_count = {
 	special = holder
 	tier = county
 	priority = @county_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { theocracy_government }
 	heritages = { heritage_pandaren heritage_hozen heritage_grummle }
 }
@@ -2010,7 +2448,9 @@ master_female_pandaren_count = {
 	special = holder
 	tier = county
 	priority = @county_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { theocracy_government }
 	heritages = { heritage_pandaren heritage_hozen heritage_grummle }
 }
@@ -2020,7 +2460,9 @@ master_male_pandaren_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { theocracy_government }
 	heritages = { heritage_pandaren heritage_hozen heritage_grummle }
 }
@@ -2030,7 +2472,9 @@ master_female_pandaren_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { theocracy_government }
 	heritages = { heritage_pandaren heritage_hozen heritage_grummle }
 }
@@ -2040,7 +2484,9 @@ grand_master_male_pandaren_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { theocracy_government }
 	heritages = { heritage_pandaren heritage_hozen heritage_grummle }
 }
@@ -2050,7 +2496,9 @@ grand_master_female_pandaren_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { theocracy_government }
 	heritages = { heritage_pandaren heritage_hozen heritage_grummle }
 }
@@ -2060,7 +2508,9 @@ high_master_male_pandaren_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { theocracy_government }
 	heritages = { heritage_pandaren heritage_hozen heritage_grummle }
 }
@@ -2070,7 +2520,9 @@ high_master_female_pandaren_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { theocracy_government }
 	heritages = { heritage_pandaren heritage_hozen heritage_grummle }
 }
@@ -2078,7 +2530,9 @@ order_pandaren_duchy = {
 	type = title
 	tier = duchy
 	priority = @duchy_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { theocracy_government }
 	heritages = { heritage_pandaren heritage_hozen heritage_grummle }
 }
@@ -2086,7 +2540,9 @@ order_pandaren_kingdom = {
 	type = title
 	tier = kingdom
 	priority = @kingdom_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { theocracy_government }
 	heritages = { heritage_pandaren heritage_hozen heritage_grummle }
 }
@@ -2094,7 +2550,9 @@ high_order_pandaren_empire = {
 	type = title
 	tier = empire
 	priority = @empire_heritage_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { theocracy_government }
 	heritages = { heritage_pandaren heritage_hozen heritage_grummle }
 }
@@ -2104,54 +2562,66 @@ caretaker_male = {
 	type = character
 	gender = male
 	special = holder
-	only_holder = yes
 	priority = @special_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+		only_holder = yes
+	}
 	titles = { k_golden_lotus }
 }
 caretaker_female = {
 	type = character
 	gender = female
 	special = holder
-	only_holder = yes
 	priority = @special_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+		only_holder = yes
+	}
 	titles = { k_golden_lotus }
 }
 serpent_master_male = {
 	type = character
 	gender = male
 	special = holder
-	only_holder = yes
 	priority = @special_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+		only_holder = yes
+	}
 	titles = { d_jade_serpent }
 }
 serpent_master_female = {
 	type = character
 	gender = female
 	special = holder
-	only_holder = yes
 	priority = @special_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+		only_holder = yes
+	}
 	titles = { d_jade_serpent }
 }
 sentinel_commander_male = {
 	type = character
 	gender = male
 	special = holder
-	only_holder = yes
 	priority = @special_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+		only_holder = yes
+	}
 	titles = { d_black_ox }
 }
 sentinel_commander_female = {
 	type = character
 	gender = female
 	special = holder
-	only_holder = yes
 	priority = @special_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+		only_holder = yes
+	}
 	titles = { d_black_ox }
 }
 
@@ -2163,7 +2633,9 @@ joshu_male_jinyu_baron = {
 	special = holder
 	tier = barony
 	priority = @barony_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_jinyu }
 }
@@ -2173,7 +2645,9 @@ joshu_female_jinyu_baron = {
 	special = holder
 	tier = barony
 	priority = @barony_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_jinyu }
 }
@@ -2190,7 +2664,9 @@ kokujin_male_jinyu_count = {
 	special = holder
 	tier = county
 	priority = @county_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_jinyu }
 }
@@ -2200,7 +2676,9 @@ kokujin_female_jinyu_count = {
 	special = holder
 	tier = county
 	priority = @county_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_jinyu }
 }
@@ -2217,7 +2695,9 @@ daimyo_male_jinyu_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_jinyu }
 }
@@ -2227,7 +2707,9 @@ daimyo_female_jinyu_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_jinyu }
 }
@@ -2244,7 +2726,9 @@ kokuo_male_jinyu_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_jinyu }
 }
@@ -2254,7 +2738,9 @@ kohi_female_jinyu_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government }
 	heritages = { heritage_jinyu }
 }
@@ -2273,7 +2759,9 @@ toshiyori_male_jinyu_baron = {
 	special = holder
 	tier = barony
 	priority = @barony_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { republic_government }
 	heritages = { heritage_jinyu }
 }
@@ -2283,7 +2771,9 @@ toshiyori_female_jinyu_baron = {
 	special = holder
 	tier = barony
 	priority = @barony_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { republic_government }
 	heritages = { heritage_jinyu }
 }
@@ -2300,7 +2790,9 @@ yuso_male_jinyu_count = {
 	special = holder
 	tier = county
 	priority = @county_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { republic_government }
 	heritages = { heritage_jinyu }
 }
@@ -2310,7 +2802,9 @@ yuso_female_jinyu_count = {
 	special = holder
 	tier = county
 	priority = @county_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { republic_government }
 	heritages = { heritage_jinyu }
 }
@@ -2327,7 +2821,9 @@ odoshiyori_male_jinyu_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { republic_government }
 	heritages = { heritage_jinyu }
 }
@@ -2337,7 +2833,9 @@ odoshiyori_female_jinyu_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { republic_government }
 	heritages = { heritage_jinyu }
 }
@@ -2354,7 +2852,9 @@ sokan_male_jinyu_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { republic_government }
 	heritages = { heritage_jinyu }
 }
@@ -2364,7 +2864,9 @@ sokan_female_jinyu_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { republic_government }
 	heritages = { heritage_jinyu }
 }
@@ -2381,7 +2883,9 @@ shushoo_male_jinyu_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { republic_government }
 	heritages = { heritage_jinyu }
 }
@@ -2391,7 +2895,9 @@ shushoo_female_jinyu_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { republic_government }
 	heritages = { heritage_jinyu }
 }
@@ -2410,7 +2916,9 @@ juji_male_jinyu_baron = {
 	special = holder
 	tier = barony
 	priority = @barony_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { theocracy_government }
 	heritages = { heritage_jinyu }
 }
@@ -2420,7 +2928,9 @@ juji_female_jinyu_baron = {
 	special = holder
 	tier = barony
 	priority = @barony_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { theocracy_government }
 	heritages = { heritage_jinyu }
 }
@@ -2437,7 +2947,9 @@ saito_male_jinyu_count = {
 	special = holder
 	tier = county
 	priority = @county_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { theocracy_government }
 	heritages = { heritage_jinyu }
 }
@@ -2447,7 +2959,9 @@ saito_female_jinyu_count = {
 	special = holder
 	tier = county
 	priority = @county_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { theocracy_government }
 	heritages = { heritage_jinyu }
 }
@@ -2464,7 +2978,9 @@ dai_sojo_male_jinyu_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { theocracy_government }
 	heritages = { heritage_jinyu }
 }
@@ -2474,7 +2990,9 @@ dai_sojo_female_jinyu_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { theocracy_government }
 	heritages = { heritage_jinyu }
 }
@@ -2491,7 +3009,9 @@ hossu_male_jinyu_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { theocracy_government }
 	heritages = { heritage_jinyu }
 }
@@ -2501,7 +3021,9 @@ hossu_female_jinyu_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { theocracy_government }
 	heritages = { heritage_jinyu }
 }
@@ -2518,7 +3040,9 @@ haku_male_jinyu_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { theocracy_government }
 	heritages = { heritage_jinyu }
 }
@@ -2528,7 +3052,9 @@ haku_female_jinyu_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { theocracy_government }
 	heritages = { heritage_jinyu }
 }
@@ -2548,7 +3074,9 @@ trade_baron_male_goblin_count = {
 	special = holder
 	tier = county
 	priority = @county_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government republic_government }
 	faiths = { cult_of_wealth }
 }
@@ -2558,7 +3086,9 @@ trade_baroness_female_goblin_count = {
 	special = holder
 	tier = county
 	priority = @county_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government republic_government }
 	faiths = { cult_of_wealth }
 }
@@ -2575,7 +3105,9 @@ mogul_male_goblin_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government republic_government }
 	faiths = { cult_of_wealth }
 }
@@ -2585,7 +3117,9 @@ mogul_female_goblin_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government republic_government }
 	faiths = { cult_of_wealth }
 }
@@ -2602,7 +3136,9 @@ trade_prince_male_goblin_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government republic_government }
 	faiths = { cult_of_wealth }
 }
@@ -2612,7 +3148,9 @@ trade_princess_female_goblin_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government republic_government }
 	faiths = { cult_of_wealth }
 }
@@ -2629,7 +3167,9 @@ president_male_goblin_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government republic_government }
 	faiths = { cult_of_wealth }
 }
@@ -2639,7 +3179,9 @@ president_female_goblin_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government republic_government }
 	faiths = { cult_of_wealth }
 }
@@ -2659,7 +3201,9 @@ khan_male_centaur_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	heritages = { heritage_zaetaric }
 }
@@ -2669,7 +3213,9 @@ khan_female_centaur_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	heritages = { heritage_zaetaric }
 }
@@ -2686,7 +3232,9 @@ khagan_male_centaur_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	heritages = { heritage_zaetaric }
 }
@@ -2696,7 +3244,9 @@ khagan_female_centaur_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	heritages = { heritage_zaetaric }
 }
@@ -2716,7 +3266,9 @@ chieftain_male_tauren_count = {
 	special = holder
 	tier = county
 	priority = @county_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	heritages = { heritage_yaungolic heritage_tauren heritage_taunka }
 }
@@ -2726,7 +3278,9 @@ chieftain_female_tauren_count = {
 	special = holder
 	tier = county
 	priority = @county_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	heritages = { heritage_yaungolic heritage_tauren heritage_taunka }
 }
@@ -2743,7 +3297,9 @@ high_chieftain_male_tauren_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	heritages = { heritage_yaungolic heritage_tauren heritage_taunka }
 }
@@ -2753,7 +3309,9 @@ high_chieftain_female_tauren_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	heritages = { heritage_yaungolic heritage_tauren heritage_taunka }
 }
@@ -2770,7 +3328,9 @@ great_chieftain_male_tauren_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	heritages = { heritage_yaungolic heritage_tauren heritage_taunka }
 }
@@ -2780,7 +3340,9 @@ great_chieftain_female_tauren_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	heritages = { heritage_yaungolic heritage_tauren heritage_taunka }
 }
@@ -2797,7 +3359,9 @@ patriarch_male_tauren_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	heritages = { heritage_yaungolic heritage_tauren heritage_taunka }
 }
@@ -2807,7 +3371,9 @@ matriarch_female_tauren_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government }
 	heritages = { heritage_yaungolic heritage_tauren heritage_taunka }
 }
@@ -2827,7 +3393,9 @@ lord_male_nerubian_count = {
 	special = holder
 	tier = county
 	priority = @county_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government necro_government }
 	name_lists = { name_list_nerubian }
 }
@@ -2837,7 +3405,9 @@ lady_female_nerubian_count = {
 	special = holder
 	tier = county
 	priority = @county_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government necro_government }
 	name_lists = { name_list_nerubian }
 }
@@ -2854,7 +3424,9 @@ high_lord_male_nerubian_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government necro_government }
 	name_lists = { name_list_nerubian }
 }
@@ -2864,7 +3436,9 @@ high_lady_female_nerubian_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government necro_government }
 	name_lists = { name_list_nerubian }
 }
@@ -2881,7 +3455,9 @@ underking_male_nerubian_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government necro_government }
 	name_lists = { name_list_nerubian }
 }
@@ -2891,7 +3467,9 @@ underqueen_female_nerubian_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government necro_government }
 	name_lists = { name_list_nerubian }
 }
@@ -2901,7 +3479,9 @@ king_male_nerubian_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government necro_government }
 	name_lists = { name_list_nerubian }
 }
@@ -2911,7 +3491,9 @@ queen_female_nerubian_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government clan_government tribal_government necro_government }
 	name_lists = { name_list_nerubian }
 }
@@ -2924,7 +3506,9 @@ groundskeeper_male_titanforged_count = {
 	special = holder
 	tier = county
 	priority = @county_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government }
 	name_lists = { name_list_titanforged }
 }
@@ -2934,7 +3518,9 @@ groundskeeper_female_titanforged_count = {
 	special = holder
 	tier = county
 	priority = @county_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government }
 	name_lists = { name_list_titanforged }
 }
@@ -2944,7 +3530,9 @@ watcher_male_titanforged_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government }
 	name_lists = { name_list_titanforged }
 }
@@ -2954,7 +3542,9 @@ watcher_female_titanforged_duke = {
 	special = holder
 	tier = duchy
 	priority = @duchy_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government }
 	name_lists = { name_list_titanforged }
 }
@@ -2964,7 +3554,9 @@ keeper_male_titanforged_king = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government }
 	name_lists = { name_list_titanforged }
 }
@@ -2974,7 +3566,9 @@ keeper_female_titanforged_queen = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government }
 	name_lists = { name_list_titanforged }
 }
@@ -2984,7 +3578,9 @@ highkeeper_male_titanforged_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government }
 	name_lists = { name_list_titanforged }
 }
@@ -2994,7 +3590,9 @@ highkeeper_female_titanforged_emperor = {
 	special = holder
 	tier = empire
 	priority = @empire_cultural_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { feudal_government }
 	name_lists = { name_list_titanforged }
 }
@@ -3008,7 +3606,9 @@ legionlord_male = {
 	special = holder
 	tier = empire
 	priority = @empire_government_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { demonic_government }
 }
 legionlord_female = {
@@ -3017,7 +3617,9 @@ legionlord_female = {
 	special = holder
 	tier = empire
 	priority = @empire_government_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { demonic_government }
 }
 legion = {
@@ -3033,7 +3635,9 @@ overlord_demonic_male = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_government_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { demonic_government }
 }
 overlord_demonic_female = {
@@ -3042,7 +3646,9 @@ overlord_demonic_female = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_government_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { demonic_government }
 }
 overlordship_demonic = {
@@ -3058,7 +3664,9 @@ overseer_male = {
 	special = holder
 	tier = duchy
 	priority = @duchy_government_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { demonic_government }
 }
 overseer_female = {
@@ -3067,7 +3675,9 @@ overseer_female = {
 	special = holder
 	tier = duchy
 	priority = @duchy_government_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { demonic_government }
 }
 vile_duchy = {
@@ -3083,7 +3693,9 @@ lord_demonic_male = {
 	special = holder
 	tier = county
 	priority = @county_government_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { demonic_government }
 }
 lady_demonic_female = {
@@ -3092,7 +3704,9 @@ lady_demonic_female = {
 	special = holder
 	tier = county
 	priority = @county_government_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { demonic_government }
 }
 lordship_demonic = {
@@ -3115,7 +3729,9 @@ grand_prince_eldritch_male = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_government_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { eldritch_government }
 }
 grand_princess_eldritch_female = {
@@ -3124,7 +3740,9 @@ grand_princess_eldritch_female = {
 	special = holder
 	tier = kingdom
 	priority = @kingdom_government_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { eldritch_government }
 }
 grand_principality_eldritch = {
@@ -3140,7 +3758,9 @@ prince_eldritch_male = {
 	special = holder
 	tier = duchy
 	priority = @duchy_government_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { eldritch_government }
 }
 princess_eldritch_female = {
@@ -3149,7 +3769,9 @@ princess_eldritch_female = {
 	special = holder
 	tier = duchy
 	priority = @duchy_government_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { eldritch_government }
 }
 principality_eldritch = {
@@ -3165,7 +3787,9 @@ lord_eldritch_male = {
 	special = holder
 	tier = county
 	priority = @county_government_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { eldritch_government }
 }
 lady_eldritch_female = {
@@ -3174,7 +3798,9 @@ lady_eldritch_female = {
 	special = holder
 	tier = county
 	priority = @county_government_prio
-	top_liege = no
+	flavourization_rules = {
+		top_liege = no
+	}
 	governments = { eldritch_government }
 }
 lordship_eldritch = {
