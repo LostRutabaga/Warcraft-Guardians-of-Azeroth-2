@@ -2,11 +2,11 @@
 ###c_blackrock_depths
 103 = {	# Blackrock Depths
 	culture = dark_iron
-	religion = khazism
+	religion = khazic
 	holding = castle_holding
 
 	355.1.1 = {
-		religion = fire_cult
+		religion = ragnarism
 	}
 }
 
@@ -18,11 +18,11 @@
 ###c_blackrock_spire
 104 = {	# Blackrock Spire
 	culture = dark_iron
-	religion = khazism
+	religion = khazic
 	holding = castle_holding
 
 	355.1.1 = {
-		religion = fire_cult
+		religion = ragnarism
 	}
 	589.11.1 = {
 		culture = black_dragon
@@ -40,11 +40,11 @@
 ###c_redhelm
 105 = {	# Redhelm
 	culture = dark_iron
-	religion = khazism
+	religion = khazic
 	holding = castle_holding
 
 	355.1.1 = {
-		religion = fire_cult
+		religion = ragnarism
 	}
 	589.11.1 = {
 		culture = blackrock
@@ -69,7 +69,7 @@
 
 	355.1.1 = {
 		culture = dark_iron
-		religion = fire_cult
+		religion = ragnarism
 	}
 	589.11.1 = {
 		culture = ogre
@@ -86,12 +86,12 @@
 ###c_joumindan
 112 = {	# Joumindan
 	culture = dark_iron
-	religion = khazism
+	religion = khazic
 	holding = castle_holding
 
 	355.1.1 = {
 		culture = dark_iron
-		religion = fire_cult
+		religion = ragnarism
 	}
 	589.11.1 = {
 		culture = blackrock
@@ -111,12 +111,12 @@
 ###c_borual
 113 = {	# Borual
 	culture = dark_iron
-	religion = khazism
+	religion = khazic
 	holding = castle_holding
 
 	355.1.1 = {
 		culture = dark_iron
-		religion = fire_cult
+		religion = ragnarism
 	}
 	589.11.1 = {
 		culture = blackrock
@@ -140,12 +140,12 @@
 ###c_ogderm
 114 = {	# Ogderm
 	culture = dark_iron
-	religion = khazism
+	religion = khazic
 	holding = castle_holding
 
 	355.1.1 = {
 		culture = dark_iron
-		religion = fire_cult
+		religion = ragnarism
 	}
 	589.11.1 = {
 		culture = blackrock
@@ -172,7 +172,7 @@
 
 	355.1.1 = {
 		culture = dark_iron
-		religion = fire_cult
+		religion = ragnarism
 	}
 	589.11.1 = {
 		culture = amani
@@ -194,7 +194,7 @@
 
 	355.1.1 = {
 		culture = dark_iron
-		religion = fire_cult
+		religion = ragnarism
 		holding = castle_holding
 	}
 	589.11.1 = {
@@ -216,7 +216,7 @@
 
 	355.1.1 = {
 		culture = dark_iron
-		religion = fire_cult
+		religion = ragnarism
 		holding = castle_holding
 	}
 	589.11.1 = {
@@ -238,7 +238,7 @@
 
 	355.1.1 = {
 		culture = dark_iron
-		religion = fire_cult
+		religion = ragnarism
 	}
 	589.11.1 = {
 		culture = amani
@@ -259,11 +259,11 @@
 ###c_thaurissan
 109 = {	# Thaurissan
 	culture = dark_iron
-	religion = khazism
+	religion = khazic
 	holding = castle_holding
 
 	355.1.1 = {
-		religion = fire_cult
+		religion = ragnarism
 	}
 	589.11.1 = {
 		culture = black_dragon
@@ -271,7 +271,7 @@
 	}
 	600.1.1 = {
 		culture = dark_iron
-		religion = fire_cult
+		religion = ragnarism
 	}
 }
 
@@ -295,11 +295,11 @@
 ###c_dulbihr
 2555 = {	# Dulbihr
 	culture = dark_iron
-	religion = khazism
+	religion = khazic
 	holding = castle_holding
 
 	355.1.1 = {
-		religion = fire_cult
+		religion = ragnarism
 	}
 	589.11.1 = {
 		culture = black_dragon
@@ -329,11 +329,11 @@
 ###c_bhurdak
 115 = {	# Bhurdak
 	culture = dark_iron
-	religion = khazism
+	religion = khazic
 	holding = castle_holding
 
 	355.1.1 = {
-		religion = fire_cult
+		religion = ragnarism
 	}
 }
 
@@ -353,11 +353,11 @@
 ###c_rondagg
 117 = {	# Rondagg
 	culture = dark_iron
-	religion = khazism
+	religion = khazic
 	holding = castle_holding
 
 	355.1.1 = {
-		religion = fire_cult
+		religion = ragnarism
 	}
 }
 
@@ -373,11 +373,11 @@
 ###c_domdith
 119 = {	# Domdith
 	culture = dark_iron
-	religion = khazism
+	religion = khazic
 	holding = castle_holding
 
 	355.1.1 = {
-		religion = fire_cult
+		religion = ragnarism
 	}
 }
 
@@ -389,7 +389,7 @@
 ###c_brudarn
 120 = {	# Brudarn
 	culture = dark_iron
-	religion = khazism
+	religion = khazic
 	holding = castle_holding
 }
 
@@ -411,7 +411,7 @@
 ###c_drognur
 121 = {	# Drognur
 	culture = dark_iron
-	religion = khazism
+	religion = khazic
 	holding = castle_holding
 }
 
@@ -431,7 +431,7 @@
 ###c_brugodun
 123 = {	# Brugodun
 	culture = dark_iron
-	religion = khazism
+	religion = khazic
 	holding = castle_holding
 }
 
@@ -445,11 +445,11 @@
 ###c_ohuldum
 124 = {	# Ohuldum
 	culture = dark_iron
-	religion = khazism
+	religion = khazic
 	holding = castle_holding
 
 	355.1.1 = {
-		religion = fire_cult
+		religion = ragnarism
 	}
 }
 
@@ -469,11 +469,11 @@
 ###c_tyhmoger
 125 = {	# Tyhmoger
 	culture = dark_iron
-	religion = khazism
+	religion = khazic
 	holding = castle_holding
 
 	355.1.1 = {
-		religion = fire_cult
+		religion = ragnarism
 	}
 }
 
@@ -498,7 +498,7 @@
 
 	355.1.1 = {
 		culture = dark_iron
-		religion = fire_cult
+		religion = ragnarism
 		holding = castle_holding
 	}
 }
@@ -524,7 +524,7 @@
 
 	355.1.1 = {
 		culture = dark_iron
-		religion = fire_cult
+		religion = ragnarism
 		holding = castle_holding
 	}
 	600.1.1={
@@ -554,7 +554,7 @@
 ###c_black_coast
 953 = {	# Black Coast
 	culture = dark_iron
-	religion = khazism
+	religion = khazic
 	holding = castle_holding
 }
 
@@ -584,11 +584,11 @@
 ###c_dustwind
 128 = {	# Dustwind
 	culture = dark_iron
-	religion = khazism
+	religion = khazic
 	holding = castle_holding
 
 	588.1.1={
-		religion = fire_cult
+		religion = ragnarism
 	}
 	600.1.1={
 		culture = gnoll
@@ -597,7 +597,7 @@
 	}
 	604.8.12={
 		culture = dark_iron
-		religion = fire_cult
+		religion = ragnarism
 		holding = castle_holding
 	}
 }
@@ -664,6 +664,3 @@
 6376 = {	# Ehdrurragg
 	holding = none
 }
-
-
-
