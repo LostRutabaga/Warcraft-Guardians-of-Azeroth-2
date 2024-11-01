@@ -27,7 +27,9 @@ replace_path="common/religion/religion_families"
 replace_path="common/religion/holy_sites"
 replace_path="common/bookmark_portraits"
 replace_path="common/bookmarks"
-replace_path="gfx/interface/illustrations/loading_screens"
 supported_version="1.13.2"
 path="mod/Warcraft-Guardians-of-Azeroth-2"
+<<<<<<< HEAD
 remote_file_id="2949767945"
+=======
+>>>>>>> parent of 34e58be4d (Included correct descriptor and .mod)
