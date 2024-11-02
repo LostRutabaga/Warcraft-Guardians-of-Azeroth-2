@@ -42,6 +42,7 @@
         $TRIGGER$ = { SPELL = flag:rebuke }
         $TRIGGER$ = { SPELL = flag:divine_storm }
         $TRIGGER$ = { SPELL = flag:blessed_bastion }
+        $TRIGGER$ = { SPELL = flag:void_touch }
     }
 }
 
@@ -853,6 +854,14 @@ target_has_max_stacks_trigger = {
 				has_trait = ice_block
 			}
 		}
+        trigger_else_if = {
+			limit = {
+				$SPELL$ = flag:void_touch
+			}
+			$TARGET$ = {
+				has_trait = void_sickness
+			}
+		}
         trigger_else = {
             always = yes
         }
@@ -946,6 +955,7 @@ spell_target_is_character_trigger = { # One character
         AND = { $SPELL$ = flag:exorcism $RANK_VALUE$ = 1 }
         AND = { $SPELL$ = flag:salvation $RANK_VALUE$ = 0 }
         AND = { $SPELL$ = flag:expulsion $RANK_VALUE$ = 0 }
+        AND = { $SPELL$ = flag:void_touch $RANK_VALUE$ = 0 }
     }
 }
 
@@ -1100,6 +1110,7 @@ spell_is_harmful_trigger = { # To the recipient(s)
         $SPELL$ = flag:judgement
         $SPELL$ = flag:exorcism
         $SPELL$ = flag:rebuke
+        $SPELL$ = flag:void_touch
         $SPELL$ = flag:divine_storm
 	}
 }
@@ -1233,6 +1244,7 @@ satisfy_spell_triggers = {
                 $SPELL$ = flag:blessed_bastion
                 $SPELL$ = flag:exorcism
                 $SPELL$ = flag:bless
+                $SPELL$ = flag:void_touch
             }
         }
         always = yes
@@ -1318,6 +1330,7 @@ spell_can_be_dodged_trigger = {
         $SPELL$ = flag:scorch
         $SPELL$ = flag:pyroblast
         $SPELL$ = flag:frostbolt
+        $SPELL$ = flag:void_touch
     }
 }
 
@@ -1335,6 +1348,7 @@ spell_dodge_chance_normal_trigger = { # Should be most spells
         $SPELL$ = flag:flame_shock
         $SPELL$ = flag:rebuke
         $SPELL$ = flag:exorcism
+        $SPELL$ = flag:void_touch
         $SPELL$ = flag:pyroblast
     }
 }

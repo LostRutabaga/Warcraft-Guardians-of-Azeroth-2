@@ -24,6 +24,10 @@
 	}
 
 	effect = {
+		custom_tooltip = wc_learn_spell_void_touch
+		wc_learn_spell_effect = {
+			SPELL = void_touch
+		}
 		# Maintenance
 		wc_nonelemental_MAGIC_magic_lifestyle_rank_up_check_effect = { MAGIC = shadow }
 	}

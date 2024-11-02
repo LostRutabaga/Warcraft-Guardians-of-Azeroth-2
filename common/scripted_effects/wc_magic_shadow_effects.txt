@@ -1,0 +1,36 @@
+﻿init_shadow_spells_effect = {
+    add_to_global_variable_list = { name = shadow_spells target = flag:void_touch }
+}
+
+cast_void_touch_effect = {
+    if = {
+        limit = { exists = var:void_touch_recipient }
+        var:void_touch_recipient = {
+            save_scope_as = this_recipient
+        }
+    }
+    else_if = {
+        limit = {
+            exists = var:current_spell_name
+            var:current_spell_name = flag:void_touch
+            exists = var:spellbook_open
+            exists = var:spell_recipient
+        }
+        var:spell_recipient = {
+            save_scope_as = this_recipient
+        }
+    }
+
+    scope:this_recipient ?= {
+        add_trait = void_sickness
+        if = {
+            limit = {
+                NOT = { this = root }
+            }
+            add_opinion = {
+                modifier = wc_void_sickness_me
+                target = root
+            }
+        }
+    }
+}
