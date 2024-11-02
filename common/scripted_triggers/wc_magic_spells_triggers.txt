@@ -1324,26 +1324,35 @@ spell_can_be_dodged_trigger = {
         $SPELL$ = flag:judgement
         $SPELL$ = flag:rebuke
         $SPELL$ = flag:exorcism
+        $SPELL$ = flag:flame_shock
+        $SPELL$ = flag:polymorph
+        $SPELL$ = flag:scorch
+        $SPELL$ = flag:pyroblast
+        $SPELL$ = flag:frostbolt
     }
 }
 
-spell_dodge_chance_60_percent_trigger = {
+spell_dodge_chance_60_percent_trigger = { # Easier to dodge
     OR = {
         $SPELL$ = flag:judgement
+        $SPELL$ = flag:scorch
+        $SPELL$ = flag:frostbolt
     }
 }
 
-spell_dodge_chance_40_percent_trigger = {
+spell_dodge_chance_40_percent_trigger = { # Should be most spells
     OR = {
         $SPELL$ = flag:holy_fire
+        $SPELL$ = flag:flame_shock
         $SPELL$ = flag:rebuke
         $SPELL$ = flag:exorcism
+        $SPELL$ = flag:pyroblast
     }
 }
 
-spell_dodge_chance_20_percent_trigger = {
+spell_dodge_chance_20_percent_trigger = { # Harder to dodge
     OR = {
-
+        $SPELL$ = flag:polymorph
     }
 }
 
