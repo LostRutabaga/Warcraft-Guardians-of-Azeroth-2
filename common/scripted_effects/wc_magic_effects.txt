@@ -287,6 +287,7 @@ execute_scoped_spell_effect = {
 
         # Shadow
         flag:void_touch = { $EFFECT$ = { SPELL = void_touch RANK = var:current_spell_rank TYPE = shadow } }
+        flag:summon_void_leader = { $EFFECT$ = { SPELL = summon_void_leader RANK = var:current_spell_rank TYPE = shadow } }
     }
 }
 

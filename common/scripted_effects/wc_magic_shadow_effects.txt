@@ -1,5 +1,6 @@
 ﻿init_shadow_spells_effect = {
     add_to_global_variable_list = { name = shadow_spells target = flag:void_touch }
+    add_to_global_variable_list = { name = shadow_spells target = flag:summon_void_leader }
 }
 
 cast_void_touch_effect = {
@@ -31,6 +32,35 @@ cast_void_touch_effect = {
                 modifier = wc_void_sickness_me
                 target = root
             }
+        }
+    }
+}
+
+cast_summon_void_leader_effect = {
+    if = {
+        limit = { exists = var:summon_void_leader_recipient }
+        var:summon_void_leader_recipient = {
+            save_scope_as = this_recipient
+        }
+    }
+    else_if = {
+        limit = {
+            exists = var:current_spell_name
+            var:current_spell_name = flag:summon_void_leader
+            exists = var:spellbook_open
+            exists = var:spell_recipient
+        }
+        var:spell_recipient = {
+            save_scope_as = this_recipient
+        }
+    }
+
+
+    scope:this_recipient ?= {
+        custom_tooltip = void_leader_leave_tt
+        root = { save_scope_as = void_leader_caster }
+        trigger_event = {
+            id = wc_magic_spell_events.5000
         }
     }
 }

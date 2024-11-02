@@ -317,3 +317,7 @@ wc_spell_arcane_dome = {
 wc_spell_void_touch = {
 	parent = wc_spell_school_shadow
 }
+
+wc_spell_summon_void_leader = {
+	parent = wc_spell_school_shadow
+}

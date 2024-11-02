@@ -77,3 +77,16 @@
 
  wc_magic_spell_events.4005.desc:0 "I am left in awe as I envision [saved_character.GetNamePossessive] body transform, [saved_character.GetHerHis] flesh beginning to flow with blood and life once more, and the stench of death fading away.\n\n[saved_character.GetFirstName] is saved from the clutches of undeath, and I am left to wonder if it was my magic that saved [saved_character.GetHerHim], or if it was something else entirely."
  wc_magic_spell_events.4005.a:0 "[saved_character.GetFirstName] is unbound."
+
+ wc_magic_spell_events.5000.title:0 "The Void Leader"
+ wc_magic_spell_events.5000.desc:0 "My magic has worked! [void_leader.GetName] bows to me, ready to serve in my ranks. [void_leader.GetSheHe|U] is quite the skilled commander I needed, and is well versed in the realm of Shadow magic..."
+ wc_magic_spell_events.5000.desc_caster:0 "A [void_leader.GetWomanMan] enters my presence, saying that [void_leader.GetSheHe] was summoned to me at the behest of [void_leader_caster.GetName].\n\n[void_leader.GetSheHe|U] explains [void_leader.GetHerHis] affinity for shadow magic, and how [void_leader.GetSheHe] could possibly be of use to me..."
+ wc_magic_spell_events.5000.a:0 "Welcome, [void_leader.GetFirstNameNoTooltip]!"
+ wc_magic_spell_events.5000.b:0 "You shall not enter my realm..."
+ void_leader_rejected:0 "Void Leader Rejected"
+ void_leader_rejected_desc:0 "[void_recipient.GetName] has decided not to accept [void_recipient.GetHerHis] summoned Void Leader, [void_leader.GetName]."
+ void_leader_accepted:0 "Void Leader Accepted"
+ void_leader_accepted_desc:0 "[void_recipient.GetName] has accepted [void_recipient.GetHerHis] summoned Void Leader, [void_leader.GetName]."
+
+ wc_magic_spell_events.5010.desc:0 "Alas, the time of service for my void leader, [void_leader.GetName] has ended. [void_leader.GetSheHe|U] may now be free to return to the endless void, perhaps one day returning to Azeroth."
+ wc_magic_spell_events.5010.a:0 "Goodbye, [void_leader.GetFirstName]."

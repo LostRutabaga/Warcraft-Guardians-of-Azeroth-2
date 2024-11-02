@@ -630,3 +630,153 @@ wc_magic_spell_events.4010 = {
         remove_trait = incapable
     }
 }
+
+# You summon your void leader
+wc_magic_spell_events.5000 = {
+    title = wc_magic_spell_events.5000.title
+    desc = {
+        first_valid = {
+            triggered_desc = {
+                trigger = { NOT = { scope:void_leader_caster ?= root } }
+                desc = wc_magic_spell_events.5000.desc_caster
+            }
+            desc = wc_magic_spell_events.5000.desc
+        }
+    }
+    type = character_event
+    theme = shadow
+    content_source = dlc_GOA
+
+    left_portrait = {
+        character = root
+        animation = thinking
+    }
+
+    lower_center_portrait = {
+        character = scope:void_leader_caster
+        trigger = { exists = scope:void_leader_caster }
+        animation = idle
+    }
+
+    right_portrait = {
+        character = scope:void_leader
+        animation = war_defender
+    }
+
+    immediate = {
+        create_character = {
+            template = void_leader_character
+            save_scope_as = void_leader
+        }
+    }
+
+    # Yass
+    option = {
+        name = wc_magic_spell_events.5000.a
+        scope:void_leader = { add_character_modifier = wc_void_leader_modifier }
+        trigger_event = {
+            id = wc_magic_spell_events.5010 
+            days = wc_spell_summon_void_leader_duration_days_value
+        }
+        add_courtier = scope:void_leader
+        save_scope_as = void_recipient
+        hidden_effect = {
+            if = {
+                limit = {
+                    NOT = { scope:void_leader_caster ?= root }
+                }
+                scope:void_leader_caster = {
+                    send_interface_toast = {
+                        title = void_leader_accepted
+                        left_icon = root
+                        right_icon = scope:void_leader_caster
+                        custom_tooltip = void_leader_accepted_desc
+                        scope:void_recipient = {
+                            add_opinion = {
+                                target = scope:actor
+                                modifier = grateful_opinion
+                                opinion = 15
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        ai_chance = {
+            base = 150
+            opinion_modifier = {
+                opinion_target = scope:void_leader
+				multiplier = 1
+            }
+        }
+    }
+
+
+    # Nooo
+    option = {
+        name = wc_magic_spell_events.5000.b
+
+        save_scope_as = void_recipient
+
+        hidden_effect = {
+             if = {
+                limit = {
+                    NOT = { scope:void_leader_caster ?= root }
+                }
+                scope:void_leader_caster = {
+                    send_interface_toast = {
+                        title = void_leader_rejected
+                        left_icon = root
+                        right_icon = scope:void_leader_caster
+                        custom_tooltip = void_leader_rejected_desc
+                        scope:void_recipient = {
+                            add_opinion = {
+                                target = scope:actor
+                                modifier = insult_opinion
+                                opinion = -15
+                            }
+                        }
+                    }
+                }
+             }
+        }
+
+        ai_chance = {
+            base = 0
+            modifier = {
+                add = 50
+                NOT = { scope:void_leader_caster ?= root }
+            }
+        }
+    }
+}
+
+# Void leader leaves
+wc_magic_spell_events.5010 = {
+    title = wc_magic_spell_events.5000.title
+    desc = wc_magic_spell_events.5010.desc
+    type = character_event
+    theme = shadow
+    content_source = dlc_GOA
+
+    right_portrait = {
+        character = scope:void_leader
+        animation = war_defender
+    }
+
+    trigger = {
+        scope:void_leader = { is_alive = yes }
+    }
+
+
+    option = {
+        name = wc_magic_spell_events.5010.a
+
+        scope:void_leader = {
+            death = { 
+                death_reason = death_twisting_nether
+            }
+        }
+    }
+}

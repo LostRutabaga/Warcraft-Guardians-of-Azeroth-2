@@ -43,6 +43,7 @@
         $TRIGGER$ = { SPELL = flag:divine_storm }
         $TRIGGER$ = { SPELL = flag:blessed_bastion }
         $TRIGGER$ = { SPELL = flag:void_touch }
+        $TRIGGER$ = { SPELL = flag:void_leader }
     }
 }
 
@@ -529,6 +530,7 @@ target_has_max_stacks_trigger = {
                     $SPELL$ = flag:divine_storm
                     $SPELL$ = flag:judgement
                     $SPELL$ = flag:avenging_wrath 
+                    $SPELL$ = flag:summon_void_leader
                 }
 			} # No such thing as stacks
 			always = no
@@ -956,6 +958,7 @@ spell_target_is_character_trigger = { # One character
         AND = { $SPELL$ = flag:salvation $RANK_VALUE$ = 0 }
         AND = { $SPELL$ = flag:expulsion $RANK_VALUE$ = 0 }
         AND = { $SPELL$ = flag:void_touch $RANK_VALUE$ = 0 }
+        AND = { $SPELL$ = flag:summon_void_leader $RANK_VALUE$ = 0 }
     }
 }
 
@@ -1085,6 +1088,7 @@ spell_is_helpful_trigger = { # To the recipient(s)
         $SPELL$ = flag:bless
         $SPELL$ = flag:divine_shield
         $SPELL$ = flag:expulsion
+        $SPELL$ = flag:summon_void_leader
 	}
 }
 
@@ -1169,6 +1173,7 @@ spell_adds_opinion_trigger = {
         $SPELL$ = flag:bless
         $SPELL$ = flag:divine_shield
         $SPELL$ = flag:expulsion
+        $SPELL$ = flag:summon_void_leader
 	}
 }
 
@@ -1245,6 +1250,7 @@ satisfy_spell_triggers = {
                 $SPELL$ = flag:exorcism
                 $SPELL$ = flag:bless
                 $SPELL$ = flag:void_touch
+                $SPELL$ = flag:summon_void_leader
             }
         }
         always = yes

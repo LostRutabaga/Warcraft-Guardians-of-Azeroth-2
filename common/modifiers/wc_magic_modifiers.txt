@@ -669,3 +669,10 @@ wc_vengeance_aura_modifier_negative = {
 	# +10% cast time
 	# -1 mr
 }
+
+wc_void_leader_modifier = {
+	icon = magic_positive 
+
+	prowess = 1
+	# +25% cast time
+}
