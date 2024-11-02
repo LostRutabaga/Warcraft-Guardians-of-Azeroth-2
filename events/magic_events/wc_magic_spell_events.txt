@@ -1,5 +1,11 @@
 ﻿namespace = wc_magic_spell_events
 
+### 0001 - 3001 Random Order Magic Events
+### 4000 - 4005 Salvation events
+### 4010 -      Remove Incapable Event
+### 5000 - 5100 Void Leader Events
+### 5200 - 5300 Voidborne Events 
+
 wc_magic_spell_events.0001 = {
     title = wc_magic_spell_events.0001.title
     desc = wc_magic_spell_events.0001.desc
@@ -777,5 +783,202 @@ wc_magic_spell_events.5010 = {
                 death_reason = death_twisting_nether
             }
         }
+    }
+}
+
+# You become Voidborne, for the caster
+wc_magic_spell_events.5200 = {
+    title = wc_magic_spell_events.5200.title
+    desc = wc_magic_spell_events.5200.desc
+    type = character_event
+    theme = shadow
+    content_source = dlc_GOA
+
+    left_portrait = {
+        character = root
+        animation = personality_bold
+    }
+
+    lower_center_portrait = var:voidborne_person
+
+    immediate = {
+        add_character_modifier = wc_voidborne_modifier
+        show_as_tooltip = { var:voidborne_person = { add_trait = in_twisting_nether } } 
+    }
+
+    option = {
+        name = wc_magic_spell_events.5201.opt
+    }
+
+    after = {
+        var:voidborne_person = {
+            set_variable = { name = voidborne_tormentor value = root }
+            trigger_event = {
+                id = wc_magic_spell_events.5201
+                days = 2
+            }
+        }
+    }
+}
+
+# You are now in the twisting nether because of the voidborne
+wc_magic_spell_events.5201 = {
+    title = wc_magic_spell_events.5200.title
+    desc = wc_magic_spell_events.5201.desc
+    type = character_event
+    theme = shadow
+    content_source = dlc_GOA
+
+    left_portrait = {
+        character = var:voidborne_tormentor
+        animation = personality_bold
+    }
+
+    immediate = {
+        add_trait = in_twisting_nether
+    }
+
+    option = {
+        name = wc_magic_spell_events.5201.opt
+    }
+
+    after = {
+        trigger_event = {
+            id = wc_magic_spell_events.5202
+            days = { 28 30 }
+        }
+    }
+}
+
+# You get to make a choice to get a strong hook or the voidborne or make them your rival
+wc_magic_spell_events.5202 = {
+    title = wc_magic_spell_events.5202.title
+    desc = wc_magic_spell_events.5202.desc
+    type = character_event
+    theme = shadow
+    content_source = dlc_GOA
+
+    trigger = {
+        var:voidborne_tormentor = { is_alive = yes }
+    }
+
+    on_trigger_fail = {
+        var:voidborne_tormentor = { trigger_event = wc_magic_spell_events.5203 }
+    }
+
+    left_portrait = {
+        character = var:voidborne_tormentor
+        animation = personality_bold
+    }
+
+    right_portrait = {
+        character = root
+        animation = thinking
+    }
+
+    option = { # Strong Hook
+        name = wc_magic_spell_events.5202.a
+    }
+
+    option = { # Rivalry
+        name = wc_magic_spell_events.5202.b
+    }
+
+    after = {
+        trigger_event = {
+            id = wc_magic_spell_events.5203
+            days = { 90 95 }
+        }
+    }
+}
+
+# You are either let out of the twisting nether or not, naturally or tormentor died
+wc_magic_spell_events.5203 = {
+    title = wc_magic_spell_events.5203.title
+    desc = wc_magic_spell_events.5203.desc
+    type = character_event
+    theme = shadow
+    content_source = dlc_GOA
+
+    left_portrait = {
+        character = var:voidborne_tormentor
+        animation = personality_bold
+    }
+
+    trigger = {
+        is_alive = yes
+        has_trait = in_twisting_nether
+    }
+
+    on_trigger_fail = {
+        var:voidborne_tormentor = { trigger_event = wc_magic_spell_events.5204 }
+    }
+
+    immediate = {
+        if = {
+            limit = {
+                var:voidborne_tormentor = { is_alive = no }
+            }
+            add_character_flag = { flag = returning_from_nether days = 1 }
+        }
+        else = {
+            random_list = {
+                50 = {}
+                50 = { add_character_flag = { flag = returning_from_nether days = 1 } }
+            }
+        }
+    }
+
+    # Still stuck
+    option = {
+        name = wc_magic_spell_events.5203.a
+        trigger_event = {
+            id = wc_magic_spell_events.5203
+            days = { 90 95 }
+        }
+    }
+
+    # I'm free!
+    option = {
+        name = wc_magic_spell_events.5203.b
+        trigger = { has_character_flag = returning_from_nether }
+        remove_trait = in_twisting_nether 
+        if = {
+            limit = {
+                var:voidborne_tormentor = { is_alive = yes }
+            }
+            var:voidborne_tormentor = {
+                trigger_event = {
+                    id = wc_magic_spell_events.5204
+                }
+            }
+        }
+        remove_variable = voidborne_tormentor
+    }
+}
+
+# Your prisoner has been let free or died
+wc_magic_spell_events.5204 = {
+    title = wc_magic_spell_events.5204.title
+    desc = wc_magic_spell_events.5204.desc
+    type = character_event
+    theme = shadow
+    content_source = dlc_GOA
+
+    left_portrait = {
+        character = root
+        animation = stress
+    }
+
+    lower_center_portrait = var:voidborne_person
+
+    immediate = {
+        remove_character_modifier = wc_voidborne_modifier
+        remove_variable = voidborne_prowess
+        remove_variable = voidborne_person
+    }
+
+    option = {
+        name = wc_magic_spell_events.5204.opt
     }
 }
