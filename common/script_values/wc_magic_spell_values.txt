@@ -3428,12 +3428,48 @@ wc_shadow_magic_mana_cost_value = { # Use for changing Mana cost for ALL shadow 
 }
 wc_shadow_magic_cooldown_value = { # Use for changing Cooldown for ALL shadow spells (multiply this value)
 	value = 1
+
+	if = {
+		limit = { 
+			has_character_modifier = wc_voidborne_modifier
+		}
+		subtract = {
+			add = 0.25
+			desc = wc_voidborne_modifier
+			format = "WC_MAX_MANA_VALUE_FORMAT_PER"
+		}
+	}
 }
 wc_shadow_magic_cast_time_value = { # Use for changing Cast time for ALL shadow spells (multiply this value)
 	value = 1
+
+	if = {
+		limit = { 
+			has_character_modifier = wc_voidborne_modifier
+		}
+		multiply = {
+			value = 1
+			subtract = {
+				add = 0.25
+				desc = wc_voidborne_modifier
+				format = "WC_MAX_MANA_VALUE_FORMAT_PER"
+			}
+		}
+	}
 }
 wc_shadow_magic_duration_value = { # Use for changing Duration for ALL shadow spells (multiply this value)
 	value = 1
+
+	if = {
+		limit = { 
+			has_character_modifier = wc_voidborne_modifier
+		}
+		add = {
+			value = 0.25
+			desc = wc_voidborne_modifier
+			format = "WC_MAX_MANA_VALUE_FORMAT_PER"
+		}
+	}
 }
 ################################################ GENERAL VALUES ################################################
 ### VOID TOUCH ###
@@ -3533,3 +3569,55 @@ wc_spell_summon_void_leader_cooldown_value = {
 	round = yes
 }
 ### SUMMON VOID LEADER ###
+### VOIDBORNE ###
+wc_spell_voidborne_duration_days_value = 0
+wc_spell_voidborne_cost_mana_value = {
+	value = {
+		add = {
+			value = 40
+			desc = wc_mana_base_value_desc
+			format = "WC_MAX_MANA_VALUE_FORMAT"
+		}
+	}
+
+	multiply = wc_shadow_magic_mana_cost_value
+	multiply = wc_nonelemental_magic_mana_cost_value
+	multiply = wc_magic_mana_cost_value
+
+	round = yes
+}
+wc_spell_voidborne_cast_time_value = {
+	value = 0
+}
+wc_spell_voidborne_cooldown_value = {
+	min = 0
+	value = {
+		add = 530
+		desc = wc_mana_base_value_desc
+		format = "WC_MAX_MANA_VALUE_FORMAT"
+	}
+
+	multiply = wc_shadow_magic_cooldown_value
+	multiply = wc_magic_cooldown_value
+	round = yes
+}
+wc_spell_voidborne_scaling_value = {
+	add = 1
+	if = { # Tooltip
+		limit = {
+			var:current_spell_name = flag:voidborne
+            exists = var:spellbook_open
+			exists = scope:this_recipient.prowess
+		}
+		multiply = scope:this_recipient.prowess
+	}
+	else_if = {
+		limit = {
+			exists = var:voidborne_prowess
+		}
+		multiply = var:voidborne_prowess
+	}
+	divide = 2.5
+}
+
+### VOIDBORNE ###

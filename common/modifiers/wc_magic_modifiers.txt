@@ -676,3 +676,21 @@ wc_void_leader_modifier = {
 	prowess = 1
 	# +25% cast time
 }
+
+wc_voidborne_modifier = {
+	icon = magic_mixed
+
+	prowess = 1
+	monthly_lifestyle_xp_gain_mult = 0.01
+	dread_baseline_add = 2
+	owned_hostile_scheme_success_chance_add = 2
+
+	general_opinion = -1
+	diplomacy = -1
+	stress_loss_mult = -0.05
+
+	scale = {
+		value = wc_spell_voidborne_scaling_value
+		desc = wc_from_voidborne_target
+	}
+}

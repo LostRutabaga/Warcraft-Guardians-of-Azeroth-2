@@ -769,7 +769,6 @@ wc_magic_spell_events.5010 = {
         scope:void_leader = { is_alive = yes }
     }
 
-
     option = {
         name = wc_magic_spell_events.5010.a
 

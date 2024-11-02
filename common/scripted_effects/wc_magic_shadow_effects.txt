@@ -1,6 +1,7 @@
 ﻿init_shadow_spells_effect = {
     add_to_global_variable_list = { name = shadow_spells target = flag:void_touch }
     add_to_global_variable_list = { name = shadow_spells target = flag:summon_void_leader }
+    add_to_global_variable_list = { name = shadow_spells target = flag:voidborne }
 }
 
 cast_void_touch_effect = {
@@ -63,4 +64,47 @@ cast_summon_void_leader_effect = {
             id = wc_magic_spell_events.5000
         }
     }
+}
+
+cast_voidborne_effect = {
+    if = {
+        limit = { exists = var:voidborne_recipient }
+        var:voidborne_recipient = {
+            save_scope_as = this_recipient
+        }
+    }
+    else_if = {
+        limit = {
+            exists = var:current_spell_name
+            var:current_spell_name = flag:voidborne
+            exists = var:spellbook_open
+            exists = var:spell_recipient
+        }
+        var:spell_recipient = {
+            save_scope_as = this_recipient
+        }
+    }
+
+    scope:this_recipient ?= {
+        add_trait = in_twisting_nether
+        root = {
+            save_scope_value_as = {
+                name = voidborne_prowess
+                value = scope:this_recipient.prowess
+            }
+            set_variable = {
+                name = voidborne_prowess
+                value = scope:this_recipient.prowess
+            }
+            add_character_modifier = wc_voidborne_modifier
+        }
+        add_character_flag = {
+            flag = wc_voidborne_cooldown
+            years = 11
+        }
+        #todo event for caster
+        #todo event for target
+        #setup event chain
+    }
+    
 }

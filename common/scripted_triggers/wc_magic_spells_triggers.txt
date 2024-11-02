@@ -44,6 +44,7 @@
         $TRIGGER$ = { SPELL = flag:blessed_bastion }
         $TRIGGER$ = { SPELL = flag:void_touch }
         $TRIGGER$ = { SPELL = flag:void_leader }
+        $TRIGGER$ = { SPELL = flag:voidborne }
     }
 }
 
@@ -111,6 +112,7 @@ any_spell_modifier_trigger = {
         $TRIGGER$ = { MODIFIER = wc_rebuke SPELL = none TYPE = negative }
         # $TRIGGER$ = { MODIFIER = wc_divine_storm_character SPELL = divine_storm TYPE = negative } # Only applied when inside specific location
         $TRIGGER$ = { MODIFIER = wc_blessed_bastion SPELL = blessed_bastion TYPE = positive }
+        $TRIGGER$ = { MODIFIER = wc_void_leader_modifier SPELL = summon_void_leader TYPE = positive }
 	}
 }
 
@@ -864,6 +866,20 @@ target_has_max_stacks_trigger = {
 				has_trait = void_sickness
 			}
 		}
+        trigger_else_if = {
+			limit = {
+				$SPELL$ = flag:voidborne
+			}
+            OR = {
+                has_character_modifier = wc_voidborne_modifier
+                $TARGET$ = {
+                    OR = {
+                        is_in_twisting_nether_trigger = yes
+                        has_character_flag = wc_voidborne_cooldown
+                    }
+                }
+            }
+		}
         trigger_else = {
             always = yes
         }
@@ -959,6 +975,7 @@ spell_target_is_character_trigger = { # One character
         AND = { $SPELL$ = flag:expulsion $RANK_VALUE$ = 0 }
         AND = { $SPELL$ = flag:void_touch $RANK_VALUE$ = 0 }
         AND = { $SPELL$ = flag:summon_void_leader $RANK_VALUE$ = 0 }
+        AND = { $SPELL$ = flag:voidborne $RANK_VALUE$ = 0 }
     }
 }
 
@@ -1116,6 +1133,7 @@ spell_is_harmful_trigger = { # To the recipient(s)
         $SPELL$ = flag:rebuke
         $SPELL$ = flag:void_touch
         $SPELL$ = flag:divine_storm
+        $SPELL$ = flag:voidborne
 	}
 }
 
@@ -1264,7 +1282,7 @@ satisfy_spell_triggers = {
         }
         is_at_war = yes
     }
-    trigger_else_if = {
+    trigger_else_if = { # For spells that have special triggers pertaining to a character
         limit = {
             trigger_if = {
                 limit = { exists = var:spell_recipient }
@@ -1337,6 +1355,7 @@ spell_can_be_dodged_trigger = {
         $SPELL$ = flag:pyroblast
         $SPELL$ = flag:frostbolt
         $SPELL$ = flag:void_touch
+        $SPELL$ = flag:voidborne
     }
 }
 
@@ -1362,6 +1381,7 @@ spell_dodge_chance_normal_trigger = { # Should be most spells
 spell_dodge_chance_low_trigger = { # Harder to dodge
     OR = {
         $SPELL$ = flag:polymorph
+        $SPELL$ = flag:voidborne
     }
 }
 
@@ -1386,6 +1406,7 @@ satisfy_spell_triggers_character = {
 			OR = {
 			    $SPELL$ = flag:burnout
                 $SPELL$ = flag:divine_storm
+                $SPELL$ = flag:voidborne
 			}
 		}
 		custom_tooltip = {
