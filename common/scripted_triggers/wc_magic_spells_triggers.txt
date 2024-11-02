@@ -1332,7 +1332,7 @@ spell_can_be_dodged_trigger = {
     }
 }
 
-spell_dodge_chance_60_percent_trigger = { # Easier to dodge
+spell_dodge_chance_high_trigger = { # Easier to dodge
     OR = {
         $SPELL$ = flag:judgement
         $SPELL$ = flag:scorch
@@ -1340,7 +1340,7 @@ spell_dodge_chance_60_percent_trigger = { # Easier to dodge
     }
 }
 
-spell_dodge_chance_40_percent_trigger = { # Should be most spells
+spell_dodge_chance_normal_trigger = { # Should be most spells
     OR = {
         $SPELL$ = flag:holy_fire
         $SPELL$ = flag:flame_shock
@@ -1350,7 +1350,7 @@ spell_dodge_chance_40_percent_trigger = { # Should be most spells
     }
 }
 
-spell_dodge_chance_20_percent_trigger = { # Harder to dodge
+spell_dodge_chance_low_trigger = { # Harder to dodge
     OR = {
         $SPELL$ = flag:polymorph
     }
