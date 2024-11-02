@@ -1,4 +1,4 @@
-init_order_spells_effect = {
+﻿init_order_spells_effect = {
     add_to_global_variable_list = { name = order_spells target = flag:polymorph }
     add_to_global_variable_list = { name = order_spells target = flag:conjure_refreshment }
     add_to_global_variable_list = { name = order_spells target = flag:counterspell }
@@ -75,14 +75,6 @@ cast_polymorph_effect = {
             hidden_effect = {
                 add_prowess_skill = {
                     value = scope:polymorph_prowess
-                }
-                root = {
-                    send_interface_toast = {
-                        title = wc_spell_hit
-                        left_icon = scope:this_recipient
-                        right_icon = root
-                        custom_tooltip = wc_polymorph_hit_tt
-                    }
                 }
             }
         }
@@ -851,16 +843,6 @@ cast_scorch_effect = {
             modifier = wc_burned_me
             target = root
         }
-        hidden_effect = {
-            root = {
-                send_interface_toast = {
-                    title = wc_spell_hit
-                    left_icon = scope:this_recipient
-                    right_icon = root
-                    custom_tooltip = wc_scorch_hit_tt
-                }
-            }
-        }
     }
 }
 
@@ -954,16 +936,6 @@ cast_flamestrike_effect = {
             }
         }
         scope:this_recipient = {
-            hidden_effect = {
-                root = {
-                    send_interface_toast = {
-                        title = wc_spell_hit
-                        left_icon = scope:this_recipient.holder
-                        right_icon = root
-                        custom_tooltip = wc_flamestrike_hit_tt
-                    }
-                }
-            }
 
             custom_tooltip = {
                 text = wc_spell_flamestrike_counties_tt
@@ -1235,16 +1207,6 @@ cast_frostbolt_effect = {
             modifier = wc_frostbit_me
             target = root
         }
-        hidden_effect = {
-            root = {
-                send_interface_toast = {
-                    title = wc_spell_hit
-                    left_icon = scope:this_recipient
-                    right_icon = root
-                    custom_tooltip = wc_frostbolt_hit_tt
-                }
-            }
-        }
     }
 }
 
@@ -1366,16 +1328,6 @@ cast_blizzard_effect = {
                 save_temporary_scope_value_as = {
                     name = duration
                     value = wc_spell_blizzard_duration_days_value
-                }
-            }
-            hidden_effect = {
-                root = {
-                    send_interface_toast = {
-                        title = wc_spell_hit
-                        left_icon = scope:this_recipient.holder
-                        right_icon = root
-                        custom_tooltip = wc_blizzard_hit_tt
-                    }
                 }
             }
 
