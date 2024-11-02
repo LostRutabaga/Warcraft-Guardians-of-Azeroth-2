@@ -1317,6 +1317,36 @@ spell_is_dispel_type_trigger = {
     }
 }
 
+# SPELL DODGING
+spell_can_be_dodged_trigger = {
+    OR = {
+        $SPELL$ = flag:holy_fire
+        $SPELL$ = flag:judgement
+        $SPELL$ = flag:rebuke
+        $SPELL$ = flag:exorcism
+    }
+}
+
+spell_dodge_chance_60_percent_trigger = {
+    OR = {
+        $SPELL$ = flag:judgement
+    }
+}
+
+spell_dodge_chance_40_percent_trigger = {
+    OR = {
+        $SPELL$ = flag:holy_fire
+        $SPELL$ = flag:rebuke
+        $SPELL$ = flag:exorcism
+    }
+}
+
+spell_dodge_chance_20_percent_trigger = {
+    OR = {
+
+    }
+}
+
 satisfy_spell_triggers_character = {
 	trigger_if = { # The target must be landed
 		limit = {
