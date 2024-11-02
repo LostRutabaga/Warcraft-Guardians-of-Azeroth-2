@@ -2984,6 +2984,7 @@ wc_spell_rebuke_cast_time_value = {
 }
 ### Rebuke ###
 ### Avenging Wrath ###
+wc_spell_avenging_wrath_duration_days_value = 0
 wc_spell_avenging_wrath_cost_mana_value = {
 	value = {
 		add = {

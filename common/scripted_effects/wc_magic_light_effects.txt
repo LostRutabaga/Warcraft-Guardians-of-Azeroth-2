@@ -458,58 +458,82 @@ cast_avenging_wrath_effect = {
         }
     }
 
-    scope:this_recipient ?= {
-        if = {
-            limit = {
-                NOT = { this = root }
-            }
-            add_opinion = {
-                modifier = wc_wrathed_me
-                target = root
+    if = {
+        limit = {
+            exists = scope:this_recipient
+            OR = {
+                var:current_target_type ?= flag:character
+                var:avenging_wrath_target_type ?= flag:character
             }
         }
-        hidden_effect = {
-            root = {
-                send_interface_toast = {
-                    title = wc_spell_hit
-                    left_icon = scope:this_recipient
-                    right_icon = root
-                    custom_tooltip = wc_avenging_wrath_hit_tt
+
+        scope:this_recipient = {
+            avenging_wrath_character_effect = yes
+        }
+    }
+    if = {
+        limit = {
+            exists = scope:this_recipient
+            OR = {
+                var:current_target_type ?= flag:enemy_army
+                var:avenging_wrath_target_type ?= flag:enemy_army
+            }
+        }
+        scope:this_recipient.army_commander = {
+            avenging_wrath_character_effect = yes
+        }
+        scope:this_recipient = {
+            deplete_army_by_percentage = 0.2
+        }
+    }
+}
+
+avenging_wrath_character_effect = {
+    if = {
+        limit = {
+            NOT = { this = root }
+        }
+        add_opinion = {
+            modifier = wc_wrathed_me
+            target = root
+        }
+    }
+    add_trait = holy_wrath
+    hidden_effect = {
+        root = {
+            if = {
+                limit = {
+                    has_perk = light_magic_tree_2_perk_8
                 }
-                if = {
-                    limit = {
-                        has_perk = light_magic_tree_2_perk_8
+                random_list = {
+                    70 = {
+                        # nothing
                     }
-                    random_list = {
-                        70 = {
-                            # nothing
+                    30 = {
+                        trigger = {
+                            scope:this_recipient = { NOT = { has_trait = incapable } }
                         }
-                        30 = {
-                            trigger = {
-                                scope:this_recipient = { NOT = { has_trait = incapable } }
-                            }
-                            modifier = {
-                                add = 20
-                                scope:this_recipient = { has_trait = being_undead }
-                            }
-                            modifier = {
-                                add = 20
-                                scope:this_recipient = { has_trait = being_demon }
-                            }
-                            modifier = {
-                                add = 20
-                                scope:this_recipient = { has_trait = being_void }
-                            }
-                            send_interface_toast = {
-                                title = holy_retribution_title
-                                left_icon = scope:this_recipient
-                                right_icon = root
-                                scope:this_recipient = {
-                                    add_trait = incapable
-                                    trigger_event = {
-                                        id = wc_magic_spell_events.4010
-                                        days = { 90 180 }
-                                    }
+                        modifier = {
+                            add = 20
+                            scope:this_recipient = { has_trait = being_undead }
+                        }
+                        modifier = {
+                            add = 20
+                            scope:this_recipient = { has_trait = being_demon }
+                        }
+                        modifier = {
+                            add = 20
+                            scope:this_recipient = { has_trait = being_void }
+                        }
+                        send_interface_toast = {
+                            title = holy_retribution_title
+                            left_icon = scope:this_recipient
+                            right_icon = root
+                            scope:this_recipient = {
+                                add_trait = incapable
+                                trigger_event = {
+                                    id = wc_magic_spell_events.4010
+                                    days = { 90 180 }
                                 }
                             }
                         }
@@ -518,7 +542,7 @@ cast_avenging_wrath_effect = {
             }
         }
     }
-    }
+}
 
 cast_salvation_effect = {
     if = {
