@@ -1321,6 +1321,10 @@ spell_dodge_effect = {
                 add = { 75 90 }
                 spell_dodge_chance_low_trigger = { SPELL = flag:$SPELL$ }
             }
+            modifier = {
+                add = $TYPE$_magic_lifestyle_perks
+                always = yes
+            }
             spell_execute = { EFFECT = cast_$SPELL$_effect }
             hidden_effect = {
                 root = {
