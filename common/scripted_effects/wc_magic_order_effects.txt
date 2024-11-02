@@ -1,4 +1,4 @@
-﻿init_order_spells_effect = {
+init_order_spells_effect = {
     add_to_global_variable_list = { name = order_spells target = flag:polymorph }
     add_to_global_variable_list = { name = order_spells target = flag:conjure_refreshment }
     add_to_global_variable_list = { name = order_spells target = flag:counterspell }
@@ -845,24 +845,19 @@ cast_scorch_effect = {
     }
 
     scope:this_recipient ?= {
-        if = { 
-            limit = {
-                NOT = { has_trait = burned_3 }
-            }
-            burned_target_frostbite_modifier = { TARGET = this CHANGE = add }
-            add_or_increase_burned_effect = yes
-            add_opinion = {
-                modifier = wc_burned_me
-                target = root
-            }
-            hidden_effect = {
-                root = {
-                    send_interface_toast = {
-                        title = wc_spell_hit
-                        left_icon = scope:this_recipient
-                        right_icon = root
-                        custom_tooltip = wc_scorch_hit_tt
-                    }
+        burned_target_frostbite_modifier = { TARGET = this CHANGE = add }
+        add_or_increase_burned_effect = yes
+        add_opinion = {
+            modifier = wc_burned_me
+            target = root
+        }
+        hidden_effect = {
+            root = {
+                send_interface_toast = {
+                    title = wc_spell_hit
+                    left_icon = scope:this_recipient
+                    right_icon = root
+                    custom_tooltip = wc_scorch_hit_tt
                 }
             }
         }
@@ -900,18 +895,11 @@ cast_pyroblast_effect = {
             }
         }
         scope:this_recipient.army_commander = {
-            if = {
-                limit = {
-                    NOT = {
-                        has_trait = burned_3
-                    }
-                }
-                burned_target_frostbite_modifier = { TARGET = this CHANGE = add }
-                add_or_increase_burned_effect = yes
-                add_opinion = {
-                    modifier = wc_burned_me
-                    target = root
-                }
+            burned_target_frostbite_modifier = { TARGET = this CHANGE = add }
+            add_or_increase_burned_effect = yes
+            add_opinion = {
+                modifier = wc_burned_me
+                target = root
             }
         }
 
@@ -924,18 +912,11 @@ cast_pyroblast_effect = {
                         knight_army = scope:this_recipient
                     }
 
-                    if = {
-                        limit = {
-                            NOT = {
-                                has_trait = burned_3
-                            }
-                        }
-                        burned_target_frostbite_modifier = { TARGET = this CHANGE = add }
-                        add_or_increase_burned_effect = yes
-                        add_opinion = {
-                            modifier = wc_burned_me
-                            target = root
-                        }
+                    burned_target_frostbite_modifier = { TARGET = this CHANGE = add }
+                    add_or_increase_burned_effect = yes
+                    add_opinion = {
+                        modifier = wc_burned_me
+                        target = root
                     }
                 }
             }
@@ -1243,29 +1224,24 @@ cast_frostbolt_effect = {
             modifier = wc_frostbolt_modifier
             days = wc_current_spell_duration
         }
-        if = { 
-            limit = {
-                NOT = { has_trait = frostbite_3 }
-            }
-            frostbite_target_burned_modifier = { TARGET = this CHANGE = add }
-            modifier = {
-                has_character_modifier = wc_frost_nova_modifier
-                add = 80
-            }
-            custom_tooltip = wc_frostbolt_frost_nova_tt
-            add_or_increase_frostbite_effect = yes
-            add_opinion = {
-                modifier = wc_frostbit_me
-                target = root
-            }
-            hidden_effect = {
-                root = {
-                    send_interface_toast = {
-                        title = wc_spell_hit
-                        left_icon = scope:this_recipient
-                        right_icon = root
-                        custom_tooltip = wc_frostbolt_hit_tt
-                    }
+        frostbite_target_burned_modifier = { TARGET = this CHANGE = add }
+        modifier = {
+            has_character_modifier = wc_frost_nova_modifier
+            add = 80
+        }
+        custom_tooltip = wc_frostbolt_frost_nova_tt
+        add_or_increase_frostbite_effect = { CASTER = root }
+        add_opinion = {
+            modifier = wc_frostbit_me
+            target = root
+        }
+        hidden_effect = {
+            root = {
+                send_interface_toast = {
+                    title = wc_spell_hit
+                    left_icon = scope:this_recipient
+                    right_icon = root
+                    custom_tooltip = wc_frostbolt_hit_tt
                 }
             }
         }

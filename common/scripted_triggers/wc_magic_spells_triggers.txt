@@ -603,17 +603,11 @@ target_has_max_stacks_trigger = {
             limit = {
                 $SPELL$ = flag:pyroblast
             }
-            AND = {
-                $TARGET$.army_commander = { has_trait = burned_3 }
-                $TARGET$.army_owner = {
-                    NOT = {
-                        any_knight = {
-                            exists = knight_army
-                            knight_army = $TARGET$
-                            NOT = {
-                                has_trait = burned_3
-                            }
-                        }
+            $TARGET$.army_owner = {
+                NOT = {
+                    any_knight = {
+                        exists = knight_army
+                        knight_army = $TARGET$
                     }
                 }
             }
