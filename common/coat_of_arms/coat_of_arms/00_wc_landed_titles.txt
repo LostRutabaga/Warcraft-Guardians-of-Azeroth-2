@@ -6026,6 +6026,297 @@ e_kaldorei={
 	}
 }
 
+c_dordanil={
+	pattern="pattern_vertical_split_01.dds"
+	color1=rgb { 110 40 120 }
+	color2=rgb { 7 8 90 }
+	color3=red
+	colored_emblem={
+		color1=rgb { 181 181 191 }
+		color2=white
+		texture="ce_arrow.dds"
+		instance={
+			position={ 0.800000 0.500000 }
+			scale={ 0.760000 -1.000000 }
+			rotation=90
+		}
+
+		instance={
+			position={ 0.200000 0.500000 }
+			scale={ 0.760000 -1.000000 }
+			depth=1.010000
+			rotation=90
+		}
+
+	}
+
+	colored_emblem={
+		color1=rgb { 181 181 191 }
+		texture="ce_crescent_mask_02.dds"
+		instance={
+			position={ 0.500000 0.485000 }
+			scale={ -0.550000 0.550000 }
+			depth=2.010000
+		}
+
+		instance={
+			position={ 0.500000 0.815000 }
+			scale={ 0.550000 0.550000 }
+			depth=3.010000
+		}
+
+		instance={
+			position={ 0.500000 0.150001 }
+			scale={ 0.550000 0.550000 }
+			depth=4.010000
+		}
+
+	}
+
+	colored_emblem={
+		color1=rgb { 110 40 120 }
+		texture="ce_circle_mask.dds"
+		instance={
+			position={ 0.410000 0.820000 }
+			scale={ 0.420000 0.420000 }
+			depth=5.010000
+		}
+
+		instance={
+			position={ 0.455000 0.145000 }
+			scale={ 0.335000 0.335000 }
+			depth=6.010000
+		}
+
+	}
+
+	colored_emblem={
+		color1=rgb { 7 8 90 }
+		texture="ce_circle_mask.dds"
+		instance={
+			position={ 0.600000 0.480000 }
+			scale={ 0.390000 0.390000 }
+			depth=7.010000
+		}
+
+	}
+
+}
+
+k_winterspring={
+	pattern="pattern_branchy2.dds"
+	color1=rgb { 100 86 95 }
+	color2=rgb { 0 183 202 }
+	color3=black
+	colored_emblem={
+		color1=rgb { 191 186 183 }
+		texture="ce_crescent_mask.dds"
+		instance={
+			position={ 0.500000 0.780000 }
+			scale={ 0.365000 0.335000 }
+			depth=1.010000
+		}
+
+	}
+
+	colored_emblem={
+		color1=white
+		texture="ce_aegishjalmr.dds"
+		instance={
+			position={ 0.500000 0.670000 }
+			scale={ 0.310000 0.310000 }
+		}
+
+	}
+
+	colored_emblem={
+		color1=rgb { 178 173 170 }
+		texture="ce_nightelf3.dds"
+		instance={
+			position={ 0.500000 0.430000 }
+			scale={ 0.480000 0.540000 }
+			depth=2.010000
+		}
+
+	}
+
+}
+
+k_ashenvale={
+	pattern="pattern_elfish1.dds"
+	color1=rgb { 103 11 153 }
+	color2=rgb { 0 112 114 }
+	color3=blue
+	colored_emblem={
+		color1=rgb { 37 104 44 }
+		texture="ce_nightelf4.dds"
+		instance={
+			position={ 0.500000 0.330000 }
+			depth=1.010000
+			rotation=290
+		}
+
+	}
+
+	colored_emblem={
+		color1=rgb { 181 181 191 }
+		texture="ce_wings.dds"
+		instance={
+			position={ 0.500000 0.525000 }
+			scale={ -0.570000 -0.600000 }
+		}
+
+	}
+
+}
+
+d_silverwind={
+	pattern="pattern_solid.dds"
+	color1=rgb { 57 26 89 }
+	color2=yellow
+	color3=red
+	colored_emblem={
+		color1=white
+		texture="ce_ragged_staff.dds"
+		instance={
+			position={ 0.825000 0.760000 }
+			rotation=141
+		}
+
+		instance={
+			position={ 0.170000 0.765000 }
+			depth=1.010000
+			rotation=45
+		}
+
+		instance={
+			position={ 0.225000 0.015000 }
+			depth=2.010000
+			rotation=136
+		}
+
+		instance={
+			position={ 0.985000 0.240000 }
+			depth=3.010000
+			rotation=45
+		}
+
+	}
+
+	colored_emblem={
+		color1=rgb { 209 209 209 }
+		texture="ce_star_05.dds"
+		instance={
+			position={ 0.500000 0.420000 }
+			scale={ 0.405000 0.405000 }
+			depth=4.010000
+			rotation=36
+		}
+
+	}
+
+	colored_emblem={
+		color1=rgb { 57 26 89 }
+		texture="ce_circle_mask.dds"
+		instance={
+			position={ 0.500000 0.450000 }
+			scale={ 0.310000 0.310000 }
+			depth=5.010000
+		}
+
+	}
+
+	colored_emblem={
+		color1=grey
+		color2=white
+		color3=rgb { 22 189 40 }
+		texture="ce_derafsh_kaviani.dds"
+		instance={
+			position={ 0.500000 0.455000 }
+			scale={ 0.655000 0.655000 }
+			depth=6.010000
+			rotation=45
+		}
+
+	}
+
+}
+
+c_ordilaran={
+	pattern="pattern_checkers_02.dds"
+	color1=green
+	color2=green
+	color3=green
+	colored_emblem={
+		color1=blue_light
+		texture="ce_sun_india.dds"
+		instance={
+			position={ 0.500000 0.440000 }
+			depth=6.010000
+		}
+
+	}
+
+	colored_emblem={
+		color1=white
+		color2=white
+		mask={ 1 0 0 }
+		texture="ce_buddhist_moon.dds"
+		instance={
+			position={ 0.500000 0.440000 }
+			scale={ 0.770000 0.770000 }
+			depth=4.010000
+		}
+
+	}
+
+	colored_emblem={
+		color1=white
+		mask={ 1 0 0 }
+		texture="ce_buddhist_moon.dds"
+		instance={
+			position={ 0.500000 0.440000 }
+			scale={ 0.770000 0.770000 }
+			depth=5.010000
+		}
+
+	}
+
+	colored_emblem={
+		color1=white
+		mask={ 0 1 0 }
+		texture="ce_sun_india.dds"
+		instance={
+			position={ 0.500000 0.440000 }
+			depth=7.010000
+		}
+
+	}
+
+	colored_emblem={
+		color1=white
+		texture="ce_star_ishtar.dds"
+		instance={
+			position={ 0.870000 0.115000 }
+			scale={ 0.255000 0.255000 }
+		}
+
+		instance={
+			position={ 0.130000 0.115000 }
+			scale={ 0.255000 0.255000 }
+			depth=1.010000
+		}
+
+		instance={
+			position={ 0.500000 0.900000 }
+			scale={ 0.255000 0.255000 }
+			depth=2.010000
+		}
+
+	}
+
+}
+
 
 # Pandaria
 e_pandaria_empire = {
