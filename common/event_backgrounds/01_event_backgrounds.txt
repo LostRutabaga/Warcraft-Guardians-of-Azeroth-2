@@ -209,6 +209,15 @@ alley_night = {
 		environment = "environment_character_crucible_of_storms"
 		ambience = "event:/SFX/Events/Backgrounds/city_alley_night"
 	}
+	#suramar
+	background = {
+		trigger = {
+			has_suramar_illustration_trigger = yes
+		}
+		reference = "gfx/interface/illustrations/event_scenes/wc_suramar_alley.dds"
+		environment = "environment_character_suramar"
+		ambience = "event:/SFX/Events/Backgrounds/city_alley_night"
+	}
 	
 	background = {
 		reference = "gfx/interface/illustrations/event_scenes/alley.dds"
@@ -244,6 +253,15 @@ alley_day = {
 		}
 		reference = "gfx/interface/illustrations/character_view/crucible_of_storms.dds"
 		environment = "environment_character_crucible_of_storms"
+		ambience = "event:/SFX/Events/Backgrounds/city_alley_day_western"
+	}
+	#suramar
+	background = {
+		trigger = {
+			has_suramar_illustration_trigger = yes
+		}
+		reference = "gfx/interface/illustrations/event_scenes/wc_suramar_alley.dds"
+		environment = "environment_character_suramar"
 		ambience = "event:/SFX/Events/Backgrounds/city_alley_day_western"
 	}
 	
@@ -744,6 +762,15 @@ courtyard = {
 		}
 		reference = "gfx/interface/illustrations/character_view/nyalotha.dds"
 		environment = "environment_character_eldritch"
+		ambience = "event:/SFX/Events/Backgrounds/castle_courtyard_western"
+	}
+	#suramar
+	background = {
+		trigger = {
+			has_suramar_illustration_trigger = yes
+		}
+		reference = "gfx/interface/illustrations/event_scenes/wc_suramar_courtyard.dds"
+		environment = "environment_character_suramar"
 		ambience = "event:/SFX/Events/Backgrounds/castle_courtyard_western"
 	}
 	background = { # Happy Mediterranean courtyard 
@@ -2721,6 +2748,15 @@ garden = {
 		environment = "environment_character_crucible_of_storms"
 		ambience = "event:/SFX/Events/Backgrounds/dungeon"
 	}
+	#suramar
+	background = {
+		trigger = {
+			has_suramar_illustration_trigger = yes
+		}
+		reference = "gfx/interface/illustrations/event_scenes/wc_suramar_garden.dds"
+		environment = "environment_character_suramar"
+		ambience = "event:/SFX/Events/Backgrounds/dungeon"
+	}
 	
 	background = {
 		reference = "gfx/interface/illustrations/event_scenes/garden.dds"
@@ -3172,6 +3208,15 @@ study = {
 		environment = "environment_character_eldritch"
 		ambience = "event:/SFX/Events/Backgrounds/dungeon"
 	}
+	#suramar
+	background = {
+		trigger = {
+			has_suramar_illustration_trigger = yes
+		}
+		reference = "gfx/interface/illustrations/event_scenes/wc_suramar_study.dds"
+		environment = "environment_character_suramar"
+		ambience = "event:/SFX/Events/Backgrounds/dungeon"
+	}
 	
 	background = {	#Tribal Study
 		trigger = {
@@ -3521,6 +3566,15 @@ throne_room = {
 		environment = "environment_exodar_throne_room"
 		ambience = "event:/SFX/Events/Backgrounds/temple_generic"
 	}
+	# Suramar
+	background = {
+		trigger = {
+			has_suramar_illustration_trigger = yes
+		}
+		reference = "gfx/interface/illustrations/character_view/suramar.dds"
+		environment = "environment_character_suramar"
+		ambience = "event:/SFX/Events/Backgrounds/throneroom_western"
+	}
 	
 	background = {	#FP3
 		trigger = {
@@ -3703,6 +3757,15 @@ throne_room_scope = {
 		}
 		reference = "gfx/interface/illustrations/character_view/orgrimmar.dds"
 		environment = "environment_character_orgrimmar"
+		ambience = "event:/SFX/Events/Backgrounds/throneroom_western"
+	}
+	# Suramar
+	background = {
+		trigger = {
+			scope:background_throne_room_scope = { has_suramar_illustration_trigger = yes }
+		}
+		reference = "gfx/interface/illustrations/character_view/suramar.dds"
+		environment = "environment_character_suramar"
 		ambience = "event:/SFX/Events/Backgrounds/throneroom_western"
 	}
 	
