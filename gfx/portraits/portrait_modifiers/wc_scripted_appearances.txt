@@ -244,7 +244,7 @@
 		weight = {
 			base = 0
 			modifier = {
-				add = 100
+				add = 200
 				is_elisande_trigger = yes
 			}
 		}

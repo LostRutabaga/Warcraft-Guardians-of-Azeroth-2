@@ -11,7 +11,7 @@
             gene_eye_depth={ "eye_depth_neg" 157 "eye_depth_neg" 157 }
             gene_eye_height={ "eye_height_neg" 107 "eye_height_neg" 106 }
             gene_eye_distance={ "eye_distance_neg" 117 "eye_distance_neg" 111 }
-            gene_eye_shut={ "eye_shut_neg" 191 "eye_shut_neg" 122 }
+            gene_eye_shut={ "eye_shut_neg" 95 "eye_shut_neg" 122 }
             gene_forehead_angle={ "forehead_angle_neg" 88 "forehead_angle_neg" 88 }
             gene_forehead_brow_height={ "forehead_brow_height_neg" 138 "forehead_brow_height_neg" 138 }
             gene_forehead_roundness={ "forehead_roundness_neg" 141 "forehead_roundness_neg" 141 }
@@ -50,7 +50,7 @@
             gene_bs_eye_upper_lid_size={ "eye_upper_lid_size_pos" 81 "eye_upper_lid_size_pos" 71 }
             gene_bs_forehead_brow_curve={ "forehead_brow_curve_pos" 237 "forehead_brow_curve_pos" 237 }
             gene_bs_forehead_brow_forward={ "forehead_brow_forward_pos" 90 "forehead_brow_forward_pos" 90 }
-            gene_bs_forehead_brow_inner_height={ "forehead_brow_inner_height_neg" 59 "forehead_brow_inner_height_neg" 59 }
+            gene_bs_forehead_brow_inner_height={ "forehead_brow_inner_height_pos" 127 "forehead_brow_inner_height_neg" 59 }
             gene_bs_forehead_brow_outer_height={ "forehead_brow_outer_height_pos" 115 "forehead_brow_outer_height_pos" 115 }
             gene_bs_forehead_brow_width={ "forehead_brow_width_pos" 13 "forehead_brow_width_pos" 13 }
             gene_bs_jaw_def={ "jaw_def_neg" 19 "jaw_def_pos" 45 }
@@ -88,14 +88,14 @@
             face_detail_nose_tip_def={ "nose_tip_def" 87 "nose_tip_def" 87 }
             face_detail_temple_def={ "temple_def" 90 "temple_def" 90 }
             expression_brow_wrinkles={ "brow_wrinkles_04" 16 "brow_wrinkles_04" 16 }
-            expression_eye_wrinkles={ "eye_wrinkles_02" 227 "eye_wrinkles_02" 227 }
-            expression_forehead_wrinkles={ "forehead_wrinkles_01" 146 "forehead_wrinkles_01" 146 }
-            expression_other={ "cheek_wrinkles_both_01" 62 "cheek_wrinkles_both_01" 62 }
+            expression_eye_wrinkles={ "eye_wrinkles_02" 255 "eye_wrinkles_02" 227 }
+            expression_forehead_wrinkles={ "forehead_wrinkles_01" 248 "forehead_wrinkles_01" 146 }
+            expression_other={ "cheek_wrinkles_both_01" 91 "cheek_wrinkles_both_01" 62 }
             complexion={ "complexion_5" 77 "complexion_5" 77 }
             gene_height={ "normal_height" 172 "normal_height" 172 }
-            gene_bs_body_type={ "body_fat_head_fat_low" 99 "body_fat_head_fat_low" 99 }
-            gene_bs_body_shape={ "body_shape_triangle_full" 73 "body_shape_triangle_full" 48 }
-            gene_bs_bust={ "bust_clothes" 165 "bust_shape_3_full" 207 }
+            gene_bs_body_type={ "body_fat_head_fat_low" 119 "body_fat_head_fat_low" 99 }
+            gene_bs_body_shape={ "body_shape_triangle_full" 118 "body_shape_triangle_full" 48 }
+            gene_bs_bust={ "bust_clothes" 132 "bust_shape_3_full" 207 }
             gene_age={ "old_2" 219 "old_2" 219 }
             gene_eyebrows_shape={ "no_eyebrows" 191 "no_eyebrows" 191 }
             gene_eyebrows_fullness={ "no_eyebrows" 179 "no_eyebrows" 211 }
@@ -137,8 +137,10 @@
             tail={ "no_tail" 0 "no_tail" 0 }
             tendrils={ "no_tendrils" 0 "no_tendrils" 0 }
             wings={ "no_wings" 0 "no_wings" 0 }
-            hairstyles={ "no_hairstyles" 0 "all_hairstyles" 0 }
-            legwear={ "no_legwear" 110 "all_legwear" 0 }
+            beards={ "no_beard" 180 "no_beard" 0 }
+            cloaks={ "no_cloak" 255 "no_cloak" 0 }
+            hairstyles={ "no_hairstyles" 165 "all_hairstyles" 0 }
+            legwear={ "no_legwear" 255 "all_legwear" 0 }
             gene_shrink_body={ "shrink_all" 255 "" 0 }
             gene_bs_additive_headgears={ "additive_headgears" 255 "" 0 }
             gene_bs_cloak_offset={ "cloak_offset" 255 "" 0 }
@@ -146,7 +148,7 @@
             gene_bs_no_jaw={ "no_jaw" 255 "" 0 }
             clothes={ "elisande_robe" 255 "most_clothes" 0 }
             headgear={ "elisande_hat" 255 "no_headgear" 0 }
-            beards={ "no_beard" 255 "no_beard" 0 }
+            gene_balding_hair_effect={ "no_baldness" 255 "no_baldness" 0 }
         }
     }
     enabled=yes
