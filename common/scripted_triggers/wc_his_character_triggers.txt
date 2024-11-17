@@ -1211,7 +1211,7 @@ is_proenitus_trigger = {
 
 #Nightborne
 is_elisande_trigger = {
-	exists = this
+	exists = character:elisande
 	this = character:elisande
 }
 
