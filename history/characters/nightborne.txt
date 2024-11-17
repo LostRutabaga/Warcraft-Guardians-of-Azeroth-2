@@ -3,6 +3,7 @@
 elisande={
 	name = Elisande
     dynasty = nightwell
+	dna=elisande_dna
 	female = yes
 	culture=nightborne religion=cult_of_nightwell
 	sexuality = heterosexual

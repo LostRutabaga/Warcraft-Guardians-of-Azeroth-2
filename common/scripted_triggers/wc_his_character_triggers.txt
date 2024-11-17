@@ -1209,6 +1209,12 @@ is_proenitus_trigger = {
 	has_character_flag = proenitus_flag
 }
 
+#Nightborne
+is_elisande_trigger = {
+	exists = this
+	this = character:elisande
+}
+
 is_any_historical_character_trigger = {
 	OR = {
 		# Humans		
