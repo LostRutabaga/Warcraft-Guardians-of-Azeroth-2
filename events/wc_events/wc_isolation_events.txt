@@ -149,7 +149,13 @@ isolation.3 = {
 				first_valid = {
 					triggered_desc = {
 						trigger = {
-							culture = { has_elven_heritage_trigger = yes }
+							OR = {
+								culture = { has_elven_heritage_trigger = yes }
+								has_trait = creature_nightborne
+								has_trait = creature_high_elf
+								has_trait = creature_night_elf
+								has_trait = creature_highborne
+							}
 						}
 						desc = ISOLATION_3_OPT_C_ELVEN
 					}
@@ -161,7 +167,13 @@ isolation.3 = {
 			NOT = { is_in_suramar_trigger = yes }
 			OR = {
 				capital_province = { geographical_region = world_broken_isles }
-				culture = { has_elven_heritage_trigger = yes }
+				OR = {
+					culture = { has_elven_heritage_trigger = yes }
+					has_trait = creature_nightborne
+					has_trait = creature_high_elf
+					has_trait = creature_night_elf
+					has_trait = creature_highborne
+				}
 			}
 		}
 	}
