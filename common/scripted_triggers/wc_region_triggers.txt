@@ -576,7 +576,7 @@ is_isolated_from_trigger = {
 	OR = {
 		is_isolated_from_specific_trigger = { target = $target$ REGION = pandaria VAR = mists_of_pandaria_parted_variable }
 		is_isolated_from_specific_trigger = { target = $target$ REGION = uldum VAR = uldum_has_opened_variable }
-		is_isolated_from_specific_trigger = { target = $target$ REGION = suramar VAR = suramar_barrier_lowered }
+		is_isolated_from_specific_trigger = { target = $target$ REGION = suramar VAR = suramar_barrier_lowered_variable }
 		is_in_twisting_nether_trigger = yes
 		$target$ = { is_in_twisting_nether_trigger = yes }
 	}
