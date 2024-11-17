@@ -1,0 +1,14 @@
+﻿on_game_start_after_lobby = {
+	# Warcraft
+	on_actions = {
+		on_game_start_custom_suramar
+	}
+}
+
+on_game_start_custom_suramar = {
+    effect = {
+        title:k_suramar.holder ?= {
+            trigger_event = { id = wc_suramar_events.0001 }
+        }
+    }
+}

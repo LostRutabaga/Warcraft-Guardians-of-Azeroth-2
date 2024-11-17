@@ -331,3 +331,28 @@ wc_thorium_base_modifier = {
 	fort_level = 1
 	supply_limit_mult = 0.25
 }
+
+# Suramar modifiers
+
+wc_suramar_isolated_modifier = {
+	icon = county_modifier_development_positive
+	development_growth = 3
+	fort_level = 10
+	monthly_county_control_growth_factor = 0.5
+	county_opinion_add = 25
+}
+
+wc_suramar_city_modifier = {
+	icon = county_modifier_development_positive
+	development_growth_factor = 1
+	holding_build_speed = 0.5
+	build_gold_cost = -0.25
+}
+
+wc_suramar_ruler_modifier = {
+	icon = learning_positive
+	monthly_lifestyle_xp_gain_mult = 0.15
+	prowess = 2
+	learning = 2
+	#TODO_WARCRAFT - mana regen
+}

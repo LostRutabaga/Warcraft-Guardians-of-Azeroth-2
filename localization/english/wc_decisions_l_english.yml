@@ -213,3 +213,4 @@
  lower_suramar_barrier_decision_tooltip: "Lower the barrier surrounding the [GetTitleByKey('k_suramar').GetName]"
  lower_suramar_barrier_decision_confirm: "The barrier must fall."
  lower_suramar_barrier_decision_tt: "The barrier surrounding the [GetTitleByKey('k_suramar').GetName] will be removed, and you will be able to interact with other realms."
+ lower_suramar_barrier_decision_tt_modifier:0 "Every [county|E] in [GetTitleByKey('k_suramar').GetName] will lose [GetModifier('wc_suramar_isolated_modifier').GetNameWithTooltip]"

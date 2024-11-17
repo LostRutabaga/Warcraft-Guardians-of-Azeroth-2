@@ -1,0 +1,51 @@
+﻿namespace = wc_suramar_events
+
+# Opening event for the leader of Suramar if barrier is up
+wc_suramar_events.0001 = {
+    type = character_event
+	content_source = dlc_GOA
+    title = wc_suramar_events.0001.t
+	desc = wc_suramar_events.0001.d
+	theme = realm
+
+    trigger = {
+        root = { has_title = title:k_suramar }
+        NOT = { has_global_variable = suramar_barrier_lowered_variable }
+    }
+
+    left_portrait = {
+        character = root
+        animation = personality_honorable
+    }
+
+    immediate = {
+        custom_tooltip = {
+            text = wc_suramar_events.0001_tt
+            every_sub_realm_county = {
+                add_county_modifier = {
+                    modifier = wc_suramar_isolated_modifier
+                }
+            }
+        }
+    }
+
+    # Focus on building the region 
+    option = {
+        name = wc_suramar_events.001.a
+        capital_county = {
+            add_county_modifier = {
+                modifier = wc_suramar_city_modifier
+                years = 5
+            }
+        }
+    }
+
+    # Focus on my expanding my power
+    option = {
+        name = wc_suramar_events.001.b
+        add_character_modifier = {
+            modifier = wc_suramar_ruler_modifier
+            years = 5
+        }
+    }
+}

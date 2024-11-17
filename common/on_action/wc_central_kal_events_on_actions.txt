@@ -1,4 +1,4 @@
-﻿#Earth Mother Faith Blessing/Punishment Event Chain
+#Earth Mother Faith Blessing/Punishment Event Chain
 on_character_faith_change = {
 	on_actions = {
 		wc_earth_faith_on_character_faith_change

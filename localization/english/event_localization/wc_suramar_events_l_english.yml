@@ -1,0 +1,14 @@
+﻿
+l_english:
+ wc_suramar_events.0001.t:0 "The Elven City"
+ wc_suramar_events.0001.d:0 "As the chosen ruler of [GetTitleByKey('k_suramar').GetName], I have the power to shape the future of our people.\n\nThough the world has slept quiet for thousands of years, likely ravaged by the sundering, we may still thrive, even in this new age."
+ wc_suramar_events.0001_tt:0 "Every [county|E] in [GetTitleByKey('k_suramar').GetName]:\nGained [GetModifier('wc_suramar_isolated_modifier').GetNameWithTooltip]"
+
+ wc_suramar_isolated_modifier: "Isolated"
+ wc_suramar_isolated_modifier_desc: "The ancient elven civilization of Suramar is isolated, furthering the development of the elves."
+ wc_suramar_city_modifier: "City Renovations"
+ wc_suramar_city_modifier_desc: "This city is undergoing massive a massive development project, with new buildings and districts being constructed."
+ wc_suramar_ruler_modifier: "Anointed Ruler"
+ wc_suramar_ruler_modifier_desc: "This character is harnessing their wisdom in order to grow more powerful."
+ wc_suramar_events.001.a: "It's time to focus on building the city."
+ wc_suramar_events.001.b: "My power is all that matters."
