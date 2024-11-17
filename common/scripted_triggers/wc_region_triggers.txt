@@ -576,6 +576,7 @@ is_isolated_from_trigger = {
 	OR = {
 		is_isolated_from_specific_trigger = { target = $target$ REGION = pandaria VAR = mists_of_pandaria_parted_variable }
 		is_isolated_from_specific_trigger = { target = $target$ REGION = uldum VAR = uldum_has_opened_variable }
+		is_isolated_from_specific_trigger = { target = $target$ REGION = suramar VAR = suramar_barrier_lowered }
 		is_in_twisting_nether_trigger = yes
 		$target$ = { is_in_twisting_nether_trigger = yes }
 	}
@@ -638,6 +639,23 @@ is_in_uldum_trigger = {
 	trigger_else_if = {
 		limit = { exists = location }
 		location = { geographical_region = world_kalimdor_south_uldum }
+	}
+	trigger_else = {
+		always = no
+	}
+}
+is_in_suramar_trigger = {
+	trigger_if = {
+		limit = { exists = capital_province }
+		capital_province = { kingdom = title:k_suramar }
+	}
+	trigger_else_if = {
+		limit = { exists = liege.capital_province }
+		liege.capital_province = { kingdom = title:k_suramar }
+	}
+	trigger_else_if = {
+		limit = { exists = location }
+		location = { kingdom = title:k_suramar }
 	}
 	trigger_else = {
 		always = no
