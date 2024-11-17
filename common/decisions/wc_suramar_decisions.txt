@@ -1,0 +1,42 @@
+﻿lower_suramar_barrier_decision = {
+    # By Dione
+    ai_check_interval = 45
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/lift_suramar_barrier.dds"
+	}
+	decision_group_type = major
+
+    is_shown = {
+        NOT = { has_global_variable = suramar_barrier_lowered_variable }
+        has_title = title:k_suramar
+        is_independent_ruler = yes
+    }
+
+    is_valid = {
+       # legitimacy_level >= 3
+    }
+
+    is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_capable_adult = yes
+		is_at_war = no
+	}
+
+    effect = {
+        custom_tooltip = lower_suramar_barrier_decision_tt
+        trigger_event = isolation.3
+    }
+
+    ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 0
+        modifier = {
+            factor = 100
+            current_date >= 615.1.1
+            #TODO_WARCRAFT add more features for legion 3rd invasion
+        }
+	}
+}

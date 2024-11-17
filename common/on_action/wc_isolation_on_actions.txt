@@ -58,7 +58,6 @@ on_remove_isolation_suramar = {
 	}
 
 	effect = {
-		set_global_variable = suramar_barrier_lowered_variable
 		every_ruler = { trigger_event = { id = isolation.3 } }
 	}
 }

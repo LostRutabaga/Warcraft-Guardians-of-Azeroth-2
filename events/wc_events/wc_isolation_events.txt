@@ -102,3 +102,67 @@ isolation.2 = {
 		name = ISOLATION_2_OPT_C
 	}
 }
+
+### SURAMAR ###
+isolation.3 = {
+	type = character_event
+	window = fullscreen_event
+	title = EVTTITLE_isolation_3
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					is_in_suramar_trigger = yes 
+				}
+				desc = EVTDESC_isolation_3_suramar
+			}
+			desc = EVTDESC_isolation_3_azeroth
+		}
+	}
+	theme = diplomacy
+	content_source = dlc_GOA
+	
+	override_background = { reference = wc_suramar_fullscreen }
+
+	immediate = {
+		set_global_variable = suramar_barrier_lowered_variable
+	}
+	
+	# Okay
+	option = {
+		name = ISOLATION_3_OPT_A
+		trigger = {
+			NOT = { is_in_suramar_trigger = yes }
+		}
+	}
+	# We chiling
+	option = {
+		name = ISOLATION_3_OPT_B
+		trigger = {
+			is_in_suramar_trigger = yes
+		}
+	}
+	# Say hello to our elven brothers / new neighbors
+	option = {
+		name = {
+			text = {
+				first_valid = {
+					triggered_desc = {
+						trigger = {
+							culture = { has_elven_heritage_trigger = yes }
+						}
+						desc = ISOLATION_3_OPT_C_ELVEN
+					}
+					desc = ISOLATION_3_OPT_C_NEIGHBOR
+				}
+			}
+		}
+		trigger = {
+			NOT = { is_in_suramar_trigger = yes }
+			OR = {
+				capital_province = { geographical_region = world_broken_isles }
+				culture = { has_elven_heritage_trigger = yes }
+			}
+		}
+	}
+}

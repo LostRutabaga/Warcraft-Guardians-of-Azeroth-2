@@ -206,3 +206,10 @@
  thorium_invite_craftsmen_decision.tt:0 "Send a letter of invitation to the members of the crafting guild."
  thorium_invite_craftsmen_decision_effect.tt:0 "A member of the Thorium Brotherhood will arrive in your court, giving access to high quality artifacts and county modifier."
  thorium_invite_craftsmen_decision_confirm:0 "Send a messenger."
+
+ # Suramar
+ lower_suramar_barrier_decision: "Remove the Arcane Barrier"
+ lower_suramar_barrier_decision_desc: "For thousands of years, the [GetTitleByKey('k_suramar').GetName] has been sealed off from the rest of the world.\n\nThis was done to protect our people from the devastation of the Sundering. But now, we have seen that life survives beyond our borders. It is time to lower the barrier, and rejoin the rest of Azeroth."
+ lower_suramar_barrier_decision_tooltip: "Lower the barrier surrounding the [GetTitleByKey('k_suramar').GetName]"
+ lower_suramar_barrier_decision_confirm: "The barrier must fall."
+ lower_suramar_barrier_decision_tt: "The barrier surrounding the [GetTitleByKey('k_suramar').GetName] will be removed, and you will be able to interact with other realms."
