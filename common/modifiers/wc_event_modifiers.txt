@@ -345,7 +345,7 @@ wc_suramar_isolated_modifier = {
 wc_suramar_city_modifier = {
 	icon = county_modifier_development_positive
 	development_growth_factor = 1
-	holding_build_speed = 0.5
+	holding_build_speed = -0.5
 	build_gold_cost = -0.25
 }
 
