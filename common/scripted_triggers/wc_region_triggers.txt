@@ -646,16 +646,25 @@ is_in_uldum_trigger = {
 }
 is_in_suramar_trigger = {
 	trigger_if = {
-		limit = { exists = capital_province }
-		capital_province = { kingdom = title:k_suramar }
-	}
+		limit = { is_independent_ruler = yes is_landed = yes}
+		has_primary_title = title:k_suramar 
+	} 
 	trigger_else_if = {
-		limit = { exists = liege.capital_province }
-		liege.capital_province = { kingdom = title:k_suramar }
+		limit = { is_independent_ruler = no is_landed = yes }
+		OR = {
+			liege ?= { has_primary_title = title:k_suramar }
+			top_liege ?= { has_primary_title = title:k_suramar }
+		}
 	}
 	trigger_else_if = {
 		limit = { exists = location }
-		location = { kingdom = title:k_suramar }
+		location.holder = {
+			OR = {
+				has_primary_title = title:k_suramar 
+				liege ?= { has_primary_title = title:k_suramar }
+				top_liege ?= { has_primary_title = title:k_suramar }
+			}
+		}
 	}
 	trigger_else = {
 		always = no
