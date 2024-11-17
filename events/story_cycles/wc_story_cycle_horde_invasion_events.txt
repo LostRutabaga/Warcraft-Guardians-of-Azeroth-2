@@ -688,6 +688,7 @@ wc_horde_invasion.1502 = {
 
 		trigger = { title:e_horde.holder = { has_faith = faith:orcish_fel } }
 
+		#test commit
 		#set_character_faith_with_conversion = faith:orcish_fel
 	}
 }
