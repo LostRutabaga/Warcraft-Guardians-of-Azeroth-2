@@ -1,4 +1,4 @@
-namespace = wc_horde_invasion
+﻿namespace = wc_horde_invasion
 
 #########################################
 #
