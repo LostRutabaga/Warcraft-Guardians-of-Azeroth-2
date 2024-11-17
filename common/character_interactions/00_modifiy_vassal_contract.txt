@@ -26,6 +26,7 @@
 		scope:recipient = {
 			is_busy_in_events_localised = yes
 		}
+		scope:actor = { NOT = { is_isolated_from_trigger = { target = scope:recipient } } }	# Warcraft
 		NOT = { scope:actor = { is_at_war_with = scope:recipient } }
 	}
 
@@ -178,8 +179,9 @@ vassal_modify_vassal_contract_interaction = {
 	}
 
 	is_valid_showing_failures_only = {
-		scope:recipient = { is_busy_in_events_localised = yes }
-		NOT = { scope:actor = { is_at_war_with = scope:recipient } }
+		scope:actor = { is_busy_in_events_localised = yes }
+		scope:actor = { NOT = { is_isolated_from_trigger = { target = scope:recipient } } }	# Warcraft
+		NOT = { scope:recipient = { is_at_war_with = scope:actor } }
 	}
 
 	can_send = {
