@@ -363,3 +363,11 @@ wc_suramar_vaults_bad_modifier = {
 	epidemic_resistance = -5
 	monthly_county_control_growth_factor = -0.1
 }
+
+wc_suramar_studying_monsters_modifier = {
+	icon = learning_positive
+	monthly_prestige = 0.5
+	learning = 2
+
+	#TODO_WARCRAFT - magical prowess
+}

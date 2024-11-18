@@ -374,9 +374,8 @@ wc_suramar_events.0011 = {
             20 = {
                 set_variable = { name = suramar_disturbance value = flag:bandit }
             }
-            10 = {
-                modifier = {
-                    add = 5
+            15 = {
+                trigger = {
                     NOT = { has_character_flag = had_outsider_event }
                 }
                 set_variable = { name = suramar_disturbance value = flag:outsider }
@@ -391,7 +390,7 @@ wc_suramar_events.0011 = {
             NOT = { scope:investigator = root }
         }
         duel = {
-            skill = intrigue
+            skill = prowess
             value = decent_skill_rating
             80 = {
 				compare_modifier = {
@@ -840,6 +839,17 @@ wc_suramar_events.0012 = {
             var:suramar_disturbance = flag:monster
             scope:suramar_investigation_result = flag:won
         }
+        add_character_modifier = {
+            modifier = wc_suramar_studying_monsters_modifier
+            years = 3
+        }
+
+        ai_chance = {
+            base = 50
+            ai_value_modifier = {
+                ai_rationality = 1
+            }
+        }
     }
 
     # Show the body as a warning
@@ -848,6 +858,14 @@ wc_suramar_events.0012 = {
         trigger = {
             var:suramar_disturbance = flag:monster
             scope:suramar_investigation_result = flag:won
+        }
+        add_dread = minor_dread_gain
+
+        ai_chance = {
+            base = 50
+            ai_value_modifier = {
+                ai_compassion = -1
+            }
         }
     }
 
@@ -860,6 +878,23 @@ wc_suramar_events.0012 = {
             var:suramar_disturbance = flag:outsider
             scope:suramar_investigation_result = flag:won
         }
+        add_courtier = scope:secondary_character
+
+        stress_impact = {
+            compassionate = minor_stress_impact_loss
+            paranoid = minor_stress_impact_gain
+        }
+
+        ai_chance = {
+            base = 50
+            ai_value_modifier = {
+                ai_compassion = 1
+            }
+            modifier = {
+                factor = 0 
+                has_trait = paranoid
+            }
+        }
     }
 
     # Kill them
@@ -868,6 +903,31 @@ wc_suramar_events.0012 = {
         trigger = {
             var:suramar_disturbance = flag:outsider
             scope:suramar_investigation_result = flag:won
+        }
+        add_dread = minor_dread_gain
+
+        scope:secondary_character = {
+            override_death_killer_effect = {
+                death_reason = death_murder
+                killer = root
+            }
+        }
+
+        stress_impact = {
+            callous = minor_stress_impact_loss
+            compassionate = medium_stress_impact_gain
+            paranoid = minor_stress_impact_loss
+        }
+
+        ai_chance = {
+            base = 50
+            ai_value_modifier = {
+                ai_compassion = -1
+            }
+            modifier = {
+                factor = 0 
+                has_trait = compassionate
+            }
         }
     }
 
