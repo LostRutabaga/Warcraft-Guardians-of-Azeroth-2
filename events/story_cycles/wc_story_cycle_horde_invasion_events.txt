@@ -657,7 +657,7 @@ wc_horde_invasion.1502 = {
 		# Start a rivalry against Gul'dan
 		scope:guldan = {
 			if = {
-				NOT = { has_relation_rival = root }
+				limit = { NOT = { has_relation_rival = root } }
 				set_relation_rival = {
 					target = root
 					reason = rival_threat_for_the_world
