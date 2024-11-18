@@ -4,3 +4,29 @@
     is_available_adult = yes
     is_landed = yes
 }
+
+has_any_possible_wretched_elves_trigger = {
+    trigger_if = {
+        limit = {
+            has_variable_list = suramar_exiled_characters
+        }
+        any_in_list = {
+            variable = suramar_exiled_characters
+            is_alive = yes 
+            NOT = { has_trait = wretched }
+        }
+    }
+}
+
+has_any_wretched_elves_trigger = {
+    trigger_if = {
+        limit = {
+            has_variable_list = suramar_exiled_characters
+        }
+        any_in_list = {
+            variable = suramar_exiled_characters
+            is_alive = yes 
+            has_trait = wretched
+        }
+    }
+}

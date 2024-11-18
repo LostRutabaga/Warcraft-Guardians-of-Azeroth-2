@@ -96,6 +96,35 @@ wc_suramar_events.0002 = {
     }
 }
 
+# You learn about the nightfallen
+wc_suramar_events.0003 = {
+    type = character_event
+	content_source = dlc_GOA
+    title = wc_suramar_events.0003.t
+	desc = wc_suramar_events.0003.desc
+	theme = realm
+
+    override_background = { reference = study }
+
+    left_portrait = {
+        character = root
+        animation = stress
+    }
+
+    right_portrait = {
+        trigger = { exists = scope:secondary_character }
+        character = scope:secondary_character
+        animation = sick
+    }
+
+    # You gain the decision
+    option = {
+        name = wc_suramar_events.0003.a
+        add_character_flag = had_nightfallen_event
+        custom_tooltip = suramar_discover_nightfallen_effect_tt
+    }
+}
+
 wc_suramar_events.0010 = {
     type = character_event
 	content_source = dlc_GOA
@@ -315,28 +344,34 @@ wc_suramar_events.0011 = {
         }
         # Actually determine what the disturbance is
         random_list = {
-            5 = {
+            2 = {
                 trigger = {
                     NOT = { has_dog_trigger = yes }
                 }
                 set_variable = { name = suramar_disturbance value = flag:dog }
             }
-            5 = {
+            2 = {
                 trigger = {
                     NOT = { has_cat_trigger = yes }
                 }
                 set_variable = { name = suramar_disturbance value = flag:cat }
             }
-            20 = {
+            15 = {
                 set_variable = { name = suramar_disturbance value = flag:monster }
             }
-            # 20 = {
-            #     set_variable = { name = suramar_disturbance value = flag:nightfallen }
-            # }
+            20 = {
+                trigger = {
+                    OR = {
+                        has_any_possible_wretched_elves_trigger = yes
+                        has_any_wretched_elves_trigger = yes
+                    }
+                }
+                set_variable = { name = suramar_disturbance value = flag:nightfallen }
+            }
             20 = {
                 set_variable = { name = suramar_disturbance value = flag:bandit }
             }
-            15 = {
+            10 = {
                 trigger = {
                     NOT = { has_character_flag = had_outsider_event }
                 }
@@ -599,6 +634,13 @@ wc_suramar_events.0012 = {
                 desc = wc_suramar_events.0112.desc_lost
             }
         }
+        triggered_desc = {
+            trigger = {
+                var:suramar_disturbance = flag:nightfallen
+                NOT = { has_character_flag = had_nightfallen_event }
+            }
+            desc = wc_suramar_events.0112.desc_nightfallen_outro
+        }
     }
 	theme = martial
 
@@ -649,6 +691,21 @@ wc_suramar_events.0012 = {
         }
         switch = {
             trigger = var:suramar_disturbance
+            flag:nightfallen = {
+                hidden_effect = {
+                    random_in_list = {
+                        variable = suramar_exiled_characters
+                        limit = { is_alive = yes }
+                        if = {
+                            limit = {
+                                NOT = { has_trait = wretched }
+                            }
+                            add_trait = wretched
+                        }
+                        save_scope_as = secondary_character
+                    }
+                }
+            }
             flag:bandit = {
                 create_character = {
                     template = bandit_character
@@ -903,6 +960,24 @@ wc_suramar_events.0012 = {
             scope:suramar_investigation_result = flag:won
             has_character_flag = had_nightfallen_event 
         }
+
+        add_courtier = scope:secondary_character
+
+        stress_impact = {
+            compassionate = minor_stress_impact_loss
+            paranoid = minor_stress_impact_gain
+        }
+
+        ai_chance = {
+            base = 50
+            ai_value_modifier = {
+                ai_compassion = 1
+            }
+            modifier = {
+                factor = 0 
+                has_trait = paranoid
+            }
+        }
     }
 
     # Kill them
@@ -913,11 +988,37 @@ wc_suramar_events.0012 = {
             scope:suramar_investigation_result = flag:won
             has_character_flag = had_nightfallen_event 
         }
+
+        add_dread = minor_dread_gain
+
+        scope:secondary_character = {
+            override_death_killer_effect = {
+                death_reason = death_murder
+                killer = root
+            }
+        }
+
+        stress_impact = {
+            callous = minor_stress_impact_loss
+            compassionate = medium_stress_impact_gain
+            paranoid = minor_stress_impact_loss
+        }
+
+        ai_chance = {
+            base = 50
+            ai_value_modifier = {
+                ai_compassion = -1
+            }
+            modifier = {
+                factor = 0 
+                has_trait = compassionate
+            }
+        }
     }
 
     # Get the nightfallen event
     option = {
-        name = wc_suramar_events.0012.nightfallen_2
+        name = wc_suramar_events.0012.nightfallen_3
         trigger = {
             var:suramar_disturbance = flag:nightfallen
             NOT = { has_character_flag = had_nightfallen_event }
@@ -998,7 +1099,10 @@ wc_suramar_events.0012 = {
                     var:suramar_disturbance = flag:cat
                 }
             }
-            add_character_flag = suramar_vaults_cleared
+            add_character_flag = {
+                flag = suramar_vaults_cleared
+                years = 10
+            }
         }
         else = {
             custom_tooltip = wc_suramar_events.0012.lost_tt

@@ -17,7 +17,7 @@
         banish = yes 
     }
     add_to_variable_list = {
-        list = suramar_exiled_characters
+        name = suramar_exiled_characters
         target = scope:exiled_character
     }
 }
@@ -35,18 +35,18 @@ suramar_exile_character_effect_from_prison = {
     }
     scope:exiler = {
         add_to_variable_list = {
-            list = suramar_exiled_characters
+            name = suramar_exiled_characters
             target = scope:exiled_character
         }
     }
 }
 suramar_discover_nightfallen_effect = {
-    #custom_tooltip = suramar_discover_nightfallen_effect_tt
-    add_character_flag = had_nightfallen_event
-    # event 
+    trigger_event = {
+        id = wc_suramar_events.0003
+        days = { 1 10 }
+    }
 }
 suramar_discover_outside_world_effect = {
-
     trigger_event = {
         id = wc_suramar_events.0002
         days = { 1 10 }
