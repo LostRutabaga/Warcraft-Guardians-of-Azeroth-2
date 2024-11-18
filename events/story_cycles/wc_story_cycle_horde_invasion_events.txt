@@ -640,56 +640,63 @@ wc_horde_invasion.1502 = {
 	override_background = { reference = throne_room_tribal }
 	left_portrait = {
 		character = root
-		animation = disbelief
+		animation = anger
 	}
-	right_portrait = {
+	lower_right_portrait = {
 		character = scope:guldan
-		animation = personality_bold
 	}
 
 	option = { # Fuck you Guldan (canon)
 		name = wc_horde_invasion.1502.a
 		flavor = wc_horde_invasion.1502.a.flavor
 
-		trigger = { exists = scope:guldan }
+		stress_impact = {
+			base = minor_stress_impact_gain
+		}
 
+		# Start a rivalry against Gul'dan
 		scope:guldan = {
 			if = {
 				NOT = { has_relation_rival = root }
 				set_relation_rival = {
 					target = root
-					reason = rival_heresy
+					reason = rival_threat_for_the_world
 				}
 			}
 		}
+
+		# Orgrim thinks you are unreasonable
+		scope:orgrim = {
+			add_opinion = {
+				target = root
+				modifier = unreasonable_opinion
+			}
+		}
+
+		# TODO: Start the event who will start the Exodus of the Frostwolves here, like 6 months later
+
+		ai_chance = {
+			base = 200
+		}
 	}
 
-	option = { # Basic fallback if Gul'dan don't exist (semi-canon)
-		name = wc_horde_invasion.1502.a_fallback
-		name = wc_horde_invasion.1502.a_fallback.flavor
-
-		trigger = { NOT = { exists = scope:guldan } }
-
-		add_piety = medium_piety_gain
-	}
-
-	option = { # I should follow the other clans (not canon)
+	option = { # I should follow the other clans for now (not canon)
 		name = wc_horde_invasion.1502.b
 		flavor = wc_horde_invasion.1502.b.flavor
 
 		trigger = { title:e_horde.holder = { has_faith = faith:orcish_fel } }
 
+		stress_impact = {
+			base = medium_stress_impact_gain
+		}
+
 		set_character_faith_with_conversion = faith:orcish_fel
-	}
+		show_as_tooltip = { set_character_secret_faith = faith:orcish_shamanism }
+		make_character_crypto_religionist_effect = { CRYPTO_RELIGION = faith:orcish_shamanism }
 
-	option = { # Faking conversion (not canon)
-		name = wc_horde_invasion.1502.c
-		flavor = wc_horde_invasion.1502.c.flavor
-
-		trigger = { title:e_horde.holder = { has_faith = faith:orcish_fel } }
-
-		#test commit
-		#set_character_faith_with_conversion = faith:orcish_fel
+		ai_chance = {
+			base = 0
+		}
 	}
 }
 

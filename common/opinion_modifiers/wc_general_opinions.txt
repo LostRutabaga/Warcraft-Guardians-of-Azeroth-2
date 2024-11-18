@@ -1,0 +1,6 @@
+﻿unreasonable_opinion = {
+	opinion = -30
+	years = 1
+	decaying = yes
+	stacking = yes
+}
