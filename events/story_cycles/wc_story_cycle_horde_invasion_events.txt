@@ -634,7 +634,30 @@ wc_horde_invasion.1502 = {
 	type = character_event
 	content_source = dlc_GOA
 	title = wc_horde_invasion.1502.title
-	desc = wc_horde_invasion.1502.desc
+	desc = {
+        desc = wc_horde_invasion.1502.desc
+        first_valid = {
+            triggered_desc = {
+                trigger = {
+                    OR = {
+						NOT = { exists = scope:guldan }
+						scope:guldan = { is_alive = no }
+					}
+                }
+				desc = wc_horde_invasion.1502.desc_no_more_corruption_outro
+            }
+            triggered_desc = {
+                trigger = {
+                    OR = {
+						NOT = { exists = scope:orgrim }
+						scope:orgrim = { is_alive = no }
+					}
+                }
+                desc = wc_horde_invasion.1502.desc_no_ogrim_outro
+            }
+            desc = wc_horde_invasion.1502.desc_normal_outro
+        }
+    }
 	theme = war
 
 	override_background = { reference = throne_room_tribal }
@@ -649,6 +672,10 @@ wc_horde_invasion.1502 = {
 	option = { # Fuck you Guldan (canon)
 		name = wc_horde_invasion.1502.a
 		flavor = wc_horde_invasion.1502.a.flavor
+		trigger = {
+			exists = scope:guldan
+			scope:guldan = { is_alive = yes }
+		}
 
 		stress_impact = {
 			base = minor_stress_impact_gain
@@ -666,10 +693,16 @@ wc_horde_invasion.1502 = {
 		}
 
 		# Orgrim thinks you are unreasonable
-		scope:orgrim = {
-			add_opinion = {
-				target = root
-				modifier = unreasonable_opinion
+		if = {
+			limit = {
+				exists = scope:orgrim
+				scope:orgrim = { is_alive = yes }
+			}
+			scope:orgrim = {
+				add_opinion = {
+					target = root
+					modifier = unreasonable_opinion
+				}
 			}
 		}
 
@@ -680,19 +713,33 @@ wc_horde_invasion.1502 = {
 		}
 	}
 
+	option = { # If Gul'dan is not here, basic option (not canon)
+		name = wc_horde_invasion.1502.a_alternative
+		flavor = wc_horde_invasion.1502.a_alternative.flavor
+		trigger = {
+			OR = {
+				NOT = { exists = scope:guldan }
+				scope:guldan = { is_alive = no }
+			}
+		}
+
+		add_piety = medium_piety_gain
+	}
+
 	option = { # I should follow the other clans for now (not canon)
 		name = wc_horde_invasion.1502.b
 		flavor = wc_horde_invasion.1502.b.flavor
-
 		trigger = { title:e_horde.holder = { has_faith = faith:orcish_fel } }
 
 		stress_impact = {
 			base = medium_stress_impact_gain
 		}
 
-		set_character_faith_with_conversion = faith:orcish_fel
-		show_as_tooltip = { set_character_secret_faith = faith:orcish_shamanism }
-		make_character_crypto_religionist_effect = { CRYPTO_RELIGION = faith:orcish_shamanism }
+		# TODO: Need to find a better effect
+
+		#title:e_horde.holder = { save_temporary_scope_as = actor }
+		#root = { save_temporary_scope_as = recipient }
+		#demand_conversion_interaction_effect = yes
 
 		ai_chance = {
 			base = 0
