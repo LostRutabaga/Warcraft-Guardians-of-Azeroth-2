@@ -51,7 +51,7 @@
 		character:10019 = {
 			trigger_event = {
 				id = wc_horde_invasion.1502
-				days = 5
+				days = 7
 			}
 		}
 
