@@ -6,44 +6,6 @@
 # 0010 - Someone informs you of mysterious happenings in the aqeducts
 # 0011-0012 - Investigate the aqeducts
 
-
-scripted_trigger is_eligible_for_suramar_events_trigger = {
-    exists = title:k_suramar.holder
-    is_in_suramar_trigger = yes
-    is_available_adult = yes
-    is_landed = yes
-}
-
-scripted_effect suramar_exile_character_effect = {
-    $EXILED$ = { save_scope_as = exiled_character }
-    custom_tooltip = suramar_exile_character_effect_tt
-    scope:exiled_character = {
-        add_opinion = {
-            modifier = exiled_opinion
-            target = root
-        }
-        banish = yes 
-    }
-    add_to_variable_list = {
-        list = suramar_exiled_characters
-        target = scope:exiled_character
-    }
-}
-
-scripted_effect suramar_discover_outside_world_effect = {
-
-    trigger_event = {
-        id = wc_suramar_events.0002
-        days = { 1 10 }
-    }
-}
-
-scripted_effect suramar_discover_nightfallen_effect = {
-    #custom_tooltip = suramar_discover_nightfallen_effect_tt
-    add_character_flag = had_nightfallen_event
-    # event 
-}
-
 # Opening event for the leader of Suramar if barrier is up
 wc_suramar_events.0001 = {
     type = character_event

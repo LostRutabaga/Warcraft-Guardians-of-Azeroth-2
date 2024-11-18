@@ -1,0 +1,6 @@
+﻿is_eligible_for_suramar_events_trigger = {
+    exists = title:k_suramar.holder
+    is_in_suramar_trigger = yes
+    is_available_adult = yes
+    is_landed = yes
+}

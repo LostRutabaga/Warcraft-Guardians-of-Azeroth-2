@@ -3735,6 +3735,13 @@ release_from_prison_interaction = {
 						modifier = banished_me
 						target = scope:actor
 					}
+					if = { # Warcraft
+						limit = {
+							scope:actor = { is_eligible_for_suramar_events_trigger = yes }
+							scope:recipient = { has_trait = creature_nightborne }
+						}
+						scope:recipient = { suramar_exile_character_effect_from_prison = { EXILER = scope:actor } }
+					}
 				}
 				# Banish Unlanded Character
 				else_if = {
@@ -3794,6 +3801,13 @@ release_from_prison_interaction = {
 						modifier = banished_me
 						target = scope:actor
 					}
+					if = { # Warcraft
+						limit = {
+							scope:actor = { is_eligible_for_suramar_events_trigger = yes }
+							scope:recipient = { has_trait = creature_nightborne }
+						}
+						scope:recipient = { suramar_exile_character_effect_from_prison = { EXILER = scope:actor } }
+					}
 				}
 				# 'Banish' Pool Character
 				else_if = {
@@ -3815,6 +3829,13 @@ release_from_prison_interaction = {
 					add_opinion = {
 						modifier = banished_me
 						target = scope:actor
+					}
+					if = { # Warcraft
+						limit = {
+							scope:actor = { is_eligible_for_suramar_events_trigger = yes }
+							scope:recipient = { has_trait = creature_nightborne }
+						}
+						scope:recipient = { suramar_exile_character_effect_from_prison = { EXILER = scope:actor } }
 					}
 				}
 
