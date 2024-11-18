@@ -12,3 +12,17 @@ on_game_start_custom_suramar = {
         }
     }
 }
+
+suramar_events_pulse = {
+    trigger = {
+        exists = title:k_suramar.holder
+    }
+
+    random_events = {
+        chance_of_no_event = {
+			value = 50
+		}
+
+        100 = wc_suramar_events.0010 # Something in the vaults
+    }
+}

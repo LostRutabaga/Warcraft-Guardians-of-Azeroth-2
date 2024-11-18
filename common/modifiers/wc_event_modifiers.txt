@@ -356,3 +356,10 @@ wc_suramar_ruler_modifier = {
 	learning = 2
 	#TODO_WARCRAFT - mana regen
 }
+
+wc_suramar_vaults_bad_modifier = {
+	icon = county_modifier_development_negative
+	county_opinion_add = -10
+	epidemic_resistance = -5
+	monthly_county_control_growth_factor = -0.1
+}

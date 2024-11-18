@@ -140,6 +140,7 @@ yearly_global_pulse = {
 		# Warcraft
 		delay = { days = { 1 360 } }
 		draenor_events_pulse
+		suramar_events_pulse
 	}
 }
 
