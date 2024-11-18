@@ -647,15 +647,12 @@ is_in_uldum_trigger = {
 is_in_suramar_trigger = {
 	trigger_if = {
 		limit = { exists = capital_province }
-		has_primary_title = title:k_suramar 
-	} 
-	trigger_else_if = {
-		limit = { exists = capital_province }
 		OR = {
+			has_primary_title = title:k_suramar 
 			liege ?= { has_primary_title = title:k_suramar }
 			top_liege ?= { has_primary_title = title:k_suramar }
 		}
-	}
+	} 
 	trigger_else_if = {
 		limit = { exists = location }
 		location.county.holder = {
