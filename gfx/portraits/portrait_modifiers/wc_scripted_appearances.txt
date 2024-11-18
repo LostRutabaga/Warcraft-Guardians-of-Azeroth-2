@@ -1,7 +1,7 @@
 ﻿scripted_appearances = {
 	
 	usage = game
-	priority = 9
+	priority = 2
 	
 	old_lothar = {
 		dna_modifiers = {
