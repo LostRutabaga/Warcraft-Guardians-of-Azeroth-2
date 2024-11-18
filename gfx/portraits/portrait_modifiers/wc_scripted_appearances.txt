@@ -1,7 +1,7 @@
 ﻿scripted_appearances = {
 	
 	usage = game
-	priority = 2
+	priority = 9
 	
 	old_lothar = {
 		dna_modifiers = {
@@ -245,7 +245,10 @@
 			base = 0
 			modifier = {
 				add = 1000
-				is_elisande_trigger = yes
+				trigger_if = {
+					limit = { exists = this }
+					is_elisande_trigger = yes
+				}
 			}
 		}
 		
