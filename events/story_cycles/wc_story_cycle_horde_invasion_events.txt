@@ -733,13 +733,13 @@ wc_horde_invasion.1502 = {
 
 		stress_impact = {
 			base = medium_stress_impact_gain
+			cynical = minor_stress_impact_loss
+			zealous = minor_stress_impact_gain
 		}
 
-		# TODO: Need to find a better effect
-
-		#title:e_horde.holder = { save_temporary_scope_as = actor }
-		#root = { save_temporary_scope_as = recipient }
-		#demand_conversion_interaction_effect = yes
+		title:e_horde.holder = { save_scope_as = actor }
+		root = { save_scope_as = recipient }
+		demand_conversion_interaction_effect = yes
 
 		ai_chance = {
 			base = 0

@@ -689,9 +689,9 @@ neema={
 	father=kelkar
 	mother=zuura
 	martial=5 diplomacy=6 stewardship=4 intrigue=5 learning=6
-	trait=education_martial_2 trait=honest trait=brave trait=compassionate trait=patient trait=physique_bad_2
+	trait=education_martial_2 trait=honest trait=brave trait=zealous trait=vengeful trait=physique_bad_2
 	560.8.6={
-		birth=yes trait=creature_orc #trait=sickly
+		birth=yes trait=creature_orc
 		effect = { make_important_lore_character_effect = yes }
 	}
 	576.8.6={
@@ -701,7 +701,6 @@ neema={
 		}
 		# trait=physical_lifestyle_endurance_3
 		# trait=physical_lifestyle_strength_3
-		#remove_trait=sickly
 		remove_trait=physique_bad_2 #Events from "A Warrior Made"
 		add_trait=strong
 		trait=lifestyle_hunter
