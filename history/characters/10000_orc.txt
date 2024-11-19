@@ -1576,9 +1576,6 @@ golmash = {
 	martial=5 diplomacy=5 stewardship=6 intrigue=5 learning=6
 	trait=physique_good_1
 	580.5.26={ birth=yes trait=creature_orc }
-	584.1.1={
-		trait=curious
-	}
 	596.5.26={
 		trait=education_martial_3
 		trait=ambitious trait=diligent trait=brave trait=vengeful
@@ -2398,8 +2395,8 @@ samuro_blademaster={
 			}
 		}
 	}
-	596.1.9={ religion = orcish_shamanism }
-	602.4.1={
+	596.1.9={
+		religion = orcish_shamanism
 		effect={
 			add_trait_xp = {
 				trait = lifestyle_blademaster
