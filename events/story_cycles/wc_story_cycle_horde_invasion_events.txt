@@ -811,6 +811,9 @@ wc_horde_invasion.1504 = {
 			remove_trait = impatient
 			add_trait = ambitious
 		}
+		else = {
+			add_trait = disloyal
+		}
 
 		# You are strong and ambitious, and you want the warchief position, the Horde like that
 		title:e_horde.holder = {
