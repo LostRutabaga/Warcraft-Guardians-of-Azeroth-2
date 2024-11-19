@@ -177,8 +177,8 @@
 	martial=8 diplomacy=6 stewardship=7 intrigue=5 learning=7
 	trait=education_martial_4
 	trait=brave trait=impatient trait=stubborn trait=just
-	trait=one_eyed
-	trait=aggressive_attacker trait=flexible_leader trait=jungle_stalker
+	trait=one_eyed trait=lifestyle_mystic
+	trait=aggressive_attacker trait=jungle_stalker
 	disallow_random_traits = yes
 	516.1.15={ 
 		birth=yes trait=creature_orc 
@@ -195,7 +195,7 @@
 	591.6.18={
 		death = {
 			death_reason = death_battle
-			killer = 38004
+			killer = 38004 # Danath Trollbane
 		}
 	}
 }
@@ -1548,36 +1548,51 @@ golmash = {
 	martial=6 diplomacy=4 stewardship=5 intrigue=6 learning=5
 	trait=education_martial_3
 	trait=sadistic trait=cynical trait=deceitful trait=content
-	545.5.26={
+	trait=loyal # Loyal to the Dragonmaw clan
+	557.7.18 = {
 		birth=yes trait=creature_orc
 		effect = { make_important_lore_character_effect = yes } # Locked Alexstrasza away in his dungeon Grim Batol
 	}
-	561.5.26={
-		effect={ set_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_magic_trait_value } }
-		employer=10300
+	575.11.4 = { # Started to become apprentice of Zuluhed
+		employer=10300 # Zuluhed the Whacked
 	}
-	591.10.23={ death={ death_reason=death_battle } }
+	577.5.26 = { # Gul'dan form other warlocks, but Nekros never joined the Shadow Council
+		effect={ set_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_magic_trait_value } }
+	}
+	585.6.6 = { add_trait = one_legged } # Nekros peg leg
+	593.2.23 = { # Battle of Grim'batol
+		death = {
+			death_reason = death_battle
+			killer = 62400 # Alexstrasza
+		}
+	}
 }
 
 10251={
 	name=Nek'rosh
 	dynasty=2400
-	father=10250
+	father=10250 # Nekros
 	culture=dragonmaw religion=orcish_fel
 	martial=5 diplomacy=5 stewardship=6 intrigue=5 learning=6
-	trait=education_martial_3
-	trait=temperate trait=physique_good_1 trait=diligent trait=brave trait=arrogant
-	565.5.26={ birth=yes trait=creature_orc }
-	581.5.26={
-		effect={
-			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
-			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
-		}
-		# trait=physical_lifestyle_endurance_2
-		# trait=physical_lifestyle_strength_2
-		employer=10300
+	trait=physique_good_1
+	580.5.26={ birth=yes trait=creature_orc }
+	584.1.1={
+		trait=curious
 	}
-	608.1.23={ death=yes }
+	596.5.26={
+		trait=education_martial_3
+		trait=ambitious trait=diligent trait=brave trait=vengeful
+		trait=loyal
+
+		# Good warrior, and catapults
+		trait=education_martial_prowess_3 trait=military_engineer
+	}
+	608.1.23 = { # Killed by adventurers in WoW, sent by Stoutfist
+		death = {
+			death_reason = death_battle
+			killer = 23000 # Captain Stoutfist
+		}
+	}
 }
 
 # dynasty=2401
@@ -1587,21 +1602,26 @@ golmash = {
 	culture=dragonmaw religion=orcish_shamanism
 	martial=5 diplomacy=4 stewardship=4 intrigue=3 learning=6
 	trait=education_learning_3
-	trait=content trait=patient trait=cynical trait=deceitful
-	trait=loyal
-	545.4.8={
+	trait=content trait=patient trait=cynical trait=temperate
+	trait=physique_good_1 trait=shrewd trait=loyal # Horde strong loyalist
+	530.4.8 = {
 		birth=yes trait=creature_orc
 		effect = { make_important_lore_character_effect = yes }
 		give_nickname=nick_the_whacked
 	}
-	561.3.15={
+	551.3.15 = { # Become shaman
 		effect={
 			set_variable = { name = wc_elemental_fire_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
 			set_variable = { name = wc_elemental_air_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
 			set_variable = { name = wc_elemental_earth_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
 		}
 	}
-	609.1.6={ death={ death_reason=death_battle } }
+	609.1.6 = {
+		death = {
+			death_reason = death_battle
+			# Killer = Karynaku
+		}
+	}
 }
 
 # dynasty=2402
@@ -2359,12 +2379,15 @@ leoroxx={
 
 samuro_blademaster={
 	name=Samuro
-	dynasty = of_the_blade
+	dynasty=of_the_blade
 	culture=burning_blade religion=orcish_fel
 	martial=7 diplomacy=2 stewardship=3 intrigue=8 learning=2
 	trait=education_martial_2 trait=physique_good_3 trait=education_martial_prowess_4
-	trait=brave trait=just trait=vengeful trait=calm trait=lifestyle_blademaster
-	563.4.7={ birth=yes trait=creature_orc }
+	trait=brave trait=just trait=vengeful trait=diligent trait=lifestyle_blademaster
+	553.4.7={
+		birth=yes trait=creature_orc
+		effect = { make_important_lore_character_effect = yes }
+	}
 	580.9.14={
 		effect={
 			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }

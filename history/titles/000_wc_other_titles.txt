@@ -245,7 +245,7 @@ d_dragonmaw_clan = {
 		}
     	liege=e_horde
     }
-    573.6.28 = { holder=10300 } # Zuluhed[2401]
+    563.6.28 = { holder=10300 } # Zuluhed[2401]
     589.11.1={
 	    liege=0
 	    holder=10250 #Nekros
