@@ -777,17 +777,55 @@ wc_horde_invasion.1504 = {
 	desc = wc_horde_invasion.1504.desc
 	theme = war
 
+	override_background = { reference = throne_room_tribal }
 	left_portrait = {
 		character = root
-		animation = celebrate_axe
+		animation = personality_bold
 	}
 
 	option = { # Explore the lands (canon)
 		name = wc_horde_invasion.1504.a
+		flavor = wc_horde_invasion.1504.a_flavor
+
+		add_prestige = major_prestige_gain
+		add_trait = loyal # You are loyal to the Horde, to the Warchief and to your clan
+
+		# TODO: Start Invasion of Stranglethorn story cycle here
+		custom_tooltip = {
+			text = wc_horde_invasion.1504.a_tooltip
+		}
+
+		ai_chance = {
+			base = 200
+		}
 	}
 
 	option = { # Path to glory (not canon)
 		name = wc_horde_invasion.1504.b
+		flavor = wc_horde_invasion.1504.b_flavor
+
+		add_prestige = minor_prestige_gain
+
+		if = { # Your impatience is changed into ambition
+			limit = { has_trait = impatient }
+			remove_trait = impatient
+			add_trait = ambitious
+		}
+
+		# You are strong and ambitious, and you want the warchief position, the Horde like that
+		title:e_horde.holder = {
+			every_vassal = {
+				limit = { NOT = { this = root }}
+				add_opinion = {
+					target = root
+					modifier = path_to_glory_opinion
+				}
+			}
+		}
+
+		ai_chance = {
+			base = 0
+		}
 	}
 }
 

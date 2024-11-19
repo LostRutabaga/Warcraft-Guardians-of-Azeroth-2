@@ -74,9 +74,6 @@
  wc_horde_invasion.1502.a_alternative.flavor:0 "You take a deep breath, telling yourself that with Gul’dan gone, the corruption will fade in time. Yet a shadow of doubt lingers in your mind — you can still feel its grip on your people, no matter how hard you try to deny it."
  wc_horde_invasion.1502.b:0 "I have to follow the other clans for now."
  wc_horde_invasion.1502.b.flavor:0 "The taste of defeat is bitter on your tongue. The other clans have already chosen their path and refuse to listen — for now, you must follow, bowing to the will of the dae’mons. You need time — time to find the moment when you can save your people."
- 
- THRONE_OF_KILJAEDEN_GLOSS:0 "The Throne of Kil'Jaeden was once a sacred mountain of the Bonechewer Clan, located in the Hellfire Peninsula, formerly the Tanaan Jungle. Gul'dan renamed this site when he gathered all the orcish clans here for a dark ritual — drinking the blood of Mannoroth, sealing their pact with the Burning Legion, and forever altering the fate of the orcs."
- BLOOD_OF_MANNOROTH_GLOSS:0 "The Blood of Mannoroth, a vile substance, is the very essence of the pit lord Mannoroth. When consumed, it grants immense strength and bloodlust but at a terrible cost: eternal servitude to the Burning Legion. It was this cursed blood that Gul'dan used to corrupt the orcs, marking the beginning of their descent into darkness."
 
  wc_horde_invasion.1503.title:0 "The Path to Glory"
  wc_horde_invasion.1503.desc:0 "WIP"
@@ -84,9 +81,12 @@
  wc_horde_invasion.1503.b:0 "WIP"
 
  wc_horde_invasion.1504.title:0 "The Ancient"
- wc_horde_invasion.1504.desc:0 "WIP"
- wc_horde_invasion.1504.a:0 "WIP"
- wc_horde_invasion.1504.b:0 "WIP"
+ wc_horde_invasion.1504.desc:0 "Our [Glossary( 'ancestral lands', 'JUNGLE_OF_TANAAN_GLOSS' )] are lost, transformed into a barren wasteland as Draenor withers, abandoned by the elements. Yet the [ROOT.Char.GetCulture.GetName] refuse to bow to fate!\n\nAfter years of struggle, [guldan.GetFirstName] opened the Dark Portal, and [ROOT.Char.GetLiege.GetFirstName] commanded us to invade this new world. He promised fertile lands for our people, a chance to begin anew.\n\nBut I feel it now, the end drawing near. When I [Glossary( 'sacrificed my eye', 'EYE_RITUAL_GLOSS' )], I saw my own death: struck down by unknown enemies. Now I understand, they are the pink-skins of this world!\n\n[ROOT.Char.GetLiege.GetFirstNameNoTooltip] respects me and grants me a measure of freedom. But freedom means nothing without action: I must secure the future of my clan before my vision comes to pass… or prove that it can be defied."
+ wc_horde_invasion.1504.a:0 "The lands around us wait only for us to claim them."
+ wc_horde_invasion.1504.a_flavor:0 "You came here to offer your people a new home. The Black Morass echoes your ancestral Tanaan Jungle, and a lush jungle must be nearby. It is time to send Bleeding Hollow scouts to explore the surroundings."
+ wc_horde_invasion.1504.a_tooltip:0 "You send Bleeding Hollow scouts to explore the West in search of lands to conquer."
+ wc_horde_invasion.1504.b:0 "I will seize the Horde before my time comes!"
+ wc_horde_invasion.1504.b_flavor:0 "Your life has been defined by the struggle to ensure your clan’s survival. Seizing the title of Warchief before your death would be the pinnacle of your glory, carving your name into history. The other Warlords will surely admire your audacity."
 
  wc_horde_invasion.1505.title:0 "The Whispers"
  wc_horde_invasion.1505.desc:0 "WIP"
@@ -136,3 +136,12 @@
  wc_horde_invasion.2001.title: "WIP"
  wc_horde_invasion.2001.desc: "Draenor continues to slowly die. Now, none of the orcs have a desire to remain on a perishing world. Those who were left on Draenor are now hungry, sick and insane... but have crossed the line between the worlds. Among them are the most bloodthirsty bands of orcs, who inspire fear and respect in other, less virulent clans. The clans of the Burning Blade and the Dragonmaw will overwhelm anyone who stands in the way of the Horde."
  wc_horde_invasion.2001.a: "Lok'tar ogar!"
+
+ #################################
+ # Glossary
+ #################################
+
+ THRONE_OF_KILJAEDEN_GLOSS:0 "The Throne of Kil'Jaeden was once a sacred mountain of the Bonechewer Clan, located in the Hellfire Peninsula, formerly the Tanaan Jungle. Gul'dan renamed this site when he gathered all the orcish clans here for a dark ritual — drinking the blood of Mannoroth, sealing their pact with the Burning Legion, and forever altering the fate of the orcs."
+ BLOOD_OF_MANNOROTH_GLOSS:0 "The Blood of Mannoroth, a vile substance, is the very essence of the pit lord Mannoroth. When consumed, it grants immense strength and bloodlust but at a terrible cost: eternal servitude to the Burning Legion. It was this cursed blood that Gul'dan used to corrupt the orcs, marking the beginning of their descent into darkness."
+ JUNGLE_OF_TANAAN_GLOSS:0 "Once a lush and untamed jungle, Tanaan was home to some of the fiercest orc clans. But, as Draenor fell into decline, it withered at an alarming and unexplained pace. Today, it is nothing more than a barren wasteland, now known as the Hellfire Peninsula."
+ EYE_RITUAL_GLOSS:0 "When a new chieftain rises, every Bleeding Hollow lord must undergo the dark Eye Ritual. This rite demands they sacrifice one of their eyes in exchange for a prophetic vision of their own death. It is no trivial act: those who dare to perform the ritual emerge forever changed, freed from fear but haunted by the certainty of their fate."
