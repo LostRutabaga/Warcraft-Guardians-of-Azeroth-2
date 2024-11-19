@@ -371,3 +371,28 @@ wc_suramar_studying_monsters_modifier = {
 
 	#TODO_WARCRAFT - magical prowess
 }
+
+wc_suramar_beauty_queen_modifier = {
+	icon = fertility_positive
+	attraction_opinion = 15
+	fertility = 0.3
+	seduce_scheme_phase_duration_add = medium_scheme_phase_duration_bonus_value
+}
+
+wc_suramar_cunning_queen_modifier = {
+	icon = social_positive
+	general_opinion = 10
+	personal_scheme_phase_duration_add = medium_scheme_phase_duration_bonus_value
+}
+
+wc_suramar_elunic_influence_modifier = {
+	icon = piety_positive
+	kaldorei_religion_opinion = 10
+	health = 0.05
+	monthly_piety_gain_mult = 0.1
+}
+
+wc_suramar_persecuting_elunists_modifier = {
+	icon = piety_mixed
+	kaldorei_religion_opinion = -25
+}

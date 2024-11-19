@@ -5,6 +5,8 @@
 # 0003 - You learn about the nightfallen
 # 0010 - Someone informs you of mysterious happenings in the aqeducts
 # 0011-0012 - Investigate the aqeducts
+# 0020 - You remininsce on Ashara's rule
+# 0030 - Visted by an Elune priestess
 
 # Opening event for the leader of Suramar if barrier is up
 wc_suramar_events.0001 = {
@@ -1106,6 +1108,308 @@ wc_suramar_events.0012 = {
         }
         else = {
             custom_tooltip = wc_suramar_events.0012.lost_tt
+        }
+    }
+}
+
+wc_suramar_events.0020 = {
+    type = character_event
+	content_source = dlc_GOA
+    title = wc_suramar_events.0020.t
+	desc = wc_suramar_events.0020.d
+	theme = court
+
+    cooldown = { years = 10 }
+
+    trigger = {
+        is_eligible_for_suramar_events_trigger = yes
+    }
+
+    left_portrait = {
+        character = root
+        animation = thinking
+    }
+
+    option = {
+        name = wc_suramar_events.0020.a
+        add_character_modifier = {
+            modifier = wc_suramar_beauty_queen_modifier
+            years = 3
+        }
+    } 
+
+    option = {
+        name = wc_suramar_events.0020.b
+        add_character_modifier = {
+            modifier = wc_suramar_cunning_queen_modifier
+            years = 3
+        }
+    }
+}
+
+wc_suramar_events.0030 = {
+    type = character_event
+	content_source = dlc_GOA
+    title = wc_suramar_events.0030.t
+	desc = wc_suramar_events.0030.desc
+	theme = faith
+
+    cooldown = { years = 10 }
+    
+    immediate = {
+        create_character = {
+			template = priest_character_template
+            gender_female_chance = 75
+			location = root.location
+            faith = faith:kaldorei_religion
+			save_scope_as = priestess
+            after_creation = {
+                learn_language = language_darnassian
+            }
+		}
+    }
+
+    trigger = {
+        is_eligible_for_suramar_events_trigger = yes
+    }
+
+    left_portrait = {
+        character = root
+        triggered_animation = {
+            trigger = {
+                faith = faith:kaldorei_religion
+                NOT = { has_trait = cynical }
+            }
+            animation = personality_zealous
+        }
+        triggered_animation = {
+            trigger = {
+                has_trait = cynical 
+            }
+            animation = personality_cynical
+        }
+        triggered_animation = {
+            trigger = {
+                NOT = { faith = faith:kaldorei_religion }
+                has_trait = zealous 
+            }
+            animation = dismissal
+        }
+        animation = personality_rational
+    }
+
+    right_portrait = {
+        character = scope:priestess
+        animation = prayer
+        camera = camera_event_horse_right
+    }
+    
+    # Pray with the priest
+    option = {
+        name = wc_suramar_events.0030.a
+
+        if = {
+            limit = {
+                has_character_modifier = wc_suramar_persecuting_elunists_modifier 
+            }
+            remove_character_modifier = wc_suramar_persecuting_elunists_modifier
+        }
+
+        custom_tooltip = {
+            text = wc_suramar_events.0030.a_tt
+            every_vassal_or_below = {
+                limit = {
+                    faith = faith:kaldorei_religion
+                }
+                add_opinion = {
+                    modifier = respect_opinion
+                    target = root
+                    opinion = 20
+                }
+            }
+            every_courtier = {
+                limit = {
+                    faith = faith:kaldorei_religion
+                }
+                add_opinion = {
+                    modifier = pleased_opinion
+                    target = root
+                    opinion = 20
+                }
+            }
+        }
+
+        if = {
+            limit = {
+                faith = faith:kaldorei_religion
+            }
+            add_piety = medium_piety_gain
+            stress_impact = {
+                zealous = medium_stress_impact_loss
+                cynical = minor_stress_impact_gain
+            }
+        }
+        else = {
+            add_character_modifier = {
+                modifier = wc_suramar_elunic_influence_modifier
+                years = 5
+            }
+            stress_impact = {
+                cynical = minor_stress_impact_loss
+            }
+        }
+
+        scope:priestess = {
+            add_opinion = {
+                modifier = pleased_opinion
+                target = root
+                opinion = 20
+            }
+        }
+
+        ai_chance = {
+            base = 50
+            ai_value_modifier = {
+                ai_zeal = -1
+            }
+            modifier = {
+                add = 25
+                OR = {
+                    faith = {
+                        faith_hostility_level = {
+                            target = faith:kaldorei_religion
+                            value = faith_fully_accepted_level
+                        }
+                    }
+                    faith = faith:kaldorei_religion
+                }
+            }
+            modifier = {
+                add = 10
+                faith = {
+                    faith_hostility_level = {
+                        target = faith:kaldorei_religion
+                        value = faith_astray_level
+                    }
+                }
+            }
+            modifier = {
+                add = -10
+                faith = {
+                    faith_hostility_level = {
+                        target = faith:kaldorei_religion
+                        value = faith_hostile_level
+                    }
+                }
+            }
+            modifier = {
+                add = -25
+                faith = {
+                    faith_hostility_level = {
+                        target = faith:kaldorei_religion
+                        value = faith_evil_level
+                    }
+                }
+            }
+        }
+    } 
+
+    # No but cool
+    option = {
+        name = wc_suramar_events.0030.b           
+
+        if = {
+            limit = {
+                faith = faith:kaldorei_religion
+            }
+            add_piety = minor_piety_loss
+            stress_impact = {
+                zealous = medium_stress_impact_gain
+            }
+        }               
+
+        scope:priestess = {
+            add_opinion = {
+                modifier = disappointed_opinion
+                target = root
+                opinion = -10
+            }
+        }
+
+        ai_chance = {
+            base = 50
+            modifier = {
+                factor = 0
+                has_trait = zealous
+                faith = faith:kaldorei_religion
+            }
+            modifier = {
+                add = 25
+                has_trait = cynical
+            }
+        }
+    }
+
+    # Fuck elune # FOR REAL
+    option = {
+        name = wc_suramar_events.0030.c
+        trigger = {
+            NOT = { faith = faith:kaldorei_religion }
+            OR = {
+                has_character_modifier = wc_suramar_persecuting_elunists_modifier
+                is_elisande_trigger = yes
+                has_trait = irritable
+                has_trait_malicious_trigger = yes 
+            }
+        }
+
+        if = {
+            limit = {
+                NOT = { has_character_modifier = wc_suramar_persecuting_elunists_modifier }
+            }
+            rightfully_imprison_character_less_verbose_effect = {
+                TARGET = scope:priestess
+                IMPRISONER = root
+            }
+            add_character_modifier = {
+                modifier = wc_suramar_persecuting_elunists_modifier
+                years = 3
+            }
+        }
+        else = {
+            suramar_exile_character_effect = {
+                EXILED = scope:secondary_character
+            }
+        }
+
+        stress_impact = {
+            compassionate = major_stress_impact_gain
+            sadistic = medium_stress_impact_loss
+            callous = minor_stress_impact_loss
+            cynical = miniscule_stress_impact_loss
+        }
+
+        ai_chance = {
+            base = 75
+            ai_value_modifier = {
+                ai_compassion = -1
+            }
+        }
+    }
+
+
+    option = {
+        name = wc_suramar_events.0030.d
+        trigger = {
+            NOT = { knows_language = language_darnassian }
+            learning >= high_skill_rating
+        }
+        show_as_unavailable = { always = yes }
+
+        learn_language = language_darnassian
+
+        ai_chance = {
+            base = 50
         }
     }
 }

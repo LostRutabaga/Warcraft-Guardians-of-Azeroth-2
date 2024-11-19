@@ -103,3 +103,31 @@ l_english:
  wc_suramar_events.0012.nightfallen_3:0 "[secondary_character.GetSheHe|U] is no normal Nightborne..."
 
  exiled_opinion:0 "Exiled Me"
+ 
+ wc_suramar_events.0020.t:0 "The Eternal Queen"
+ wc_suramar_events.0020.d:0 "Azshara, our once beloved queen, still haunts my every thought, making her way into my dreams. Even after millennia, her magical presence is still felt in every corner of Suramar.\n\nHer betrayal continues to sting, but she had some redeeming qualities, didn't she?"
+ wc_suramar_events.0020.a:0 "Her beauty was definitely unmatched."
+ wc_suramar_events.0020.b:0 "I wish I could grasp onto others as she could."
+
+ wc_suramar_beauty_queen_modifier: "Beauty of the Queen"
+ wc_suramar_beauty_queen_modifier_desc: "The beauty of Queen Azshara is still remembered by this character."
+
+ wc_suramar_cunning_queen_modifier: "Voice of the Queen"
+ wc_suramar_cunning_queen_modifier_desc: "The cunning of Queen Azshara is still remembered by this character."
+
+ wc_suramar_events.0030.t:0 "Plea of the Moon"
+ wc_suramar_events.0030.desc:0 "One evening, as the moon hangs high, a robed priest prays near a well. #italic "Elune, alra, shu dallas na"#! [priestess.GetSheHe] whispers in the old tongue, [priestess.GetHerHis|U] voice echoing through the night.\n\n[priestess.GetSheHe|U] turns to me and says, "[ROOT.Char.GetTitleAsNameNoTooltip], join me in worship. Elune's light shines upon us all, and we must honor her.""
+ wc_suramar_events.0030.a:0 "Of course, may her light guide us."
+ wc_suramar_events.0030.a_tt:0 "Every [priestess.GetFaith.GetAdjective] [vassal|E] and [courtier|E]:\nGains #p 20#! [opinion|E] of #V you#! #weak (-1.20/year) (Respect)#!"
+ wc_suramar_events.0030.b:0 "No, I have other matters to attend to."
+ wc_suramar_elunic_influence_modifier: "Elunic Influence"
+ wc_suramar_elunic_influence_modifier_desc: "This character has been influenced by the worship of Elune, and is more likely to follow and respect the teachings of the Moon Goddess.\n[GetFaithByKey('kaldorei_religion').GetName] Conversion Cost: #p -25%#!"
+ MODIFIER_DESC_wc_suramar_elunic_influence_modifier:0 "[GetModifier('wc_suramar_elunic_influence_modifier').GetNameWithTooltip]"
+ wc_suramar_events.0030.c:0 "If she has not abdandoned us, then she will save you."
+ wc_suramar_events.0030.d:0 "Tell me, how do you speak the old tongue?"
+
+ kaldorei_religion_opinion:0 "[GetFaithByKey('kaldorei_religion').GetAdjective] [opinion|E]"
+
+ wc_suramar_persecuting_elunists_modifier: "Persecuting Elunists"
+ wc_suramar_persecuting_elunists_modifier_desc: "This character is persecuting followers of Elune, and can take more hostile actions against them.\n[purge_population|E] Progress in [GetFaithByKey('kaldorei_religion').GetAdjective] [counties|E]: #p +0.5#!"
+ MODIFIER_DESC_wc_suramar_persecuting_elunists_modifier:0 "[GetModifier('wc_suramar_persecuting_elunists_modifier').GetNameWithTooltip]"
