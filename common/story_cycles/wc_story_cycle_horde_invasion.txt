@@ -75,7 +75,7 @@
 		character:52000 = {
 			trigger_event = {
 				id = wc_horde_invasion.1505
-				days = 5
+				days = 45
 			}
 		}
 	}

@@ -747,7 +747,7 @@ wc_horde_invasion.1502 = {
 	}
 }
 
-# Orgrim Doomhammer Introduction - Part 1
+# Orgrim Doomhammer Introduction
 wc_horde_invasion.1503 = {
 	type = character_event
 	content_source = dlc_GOA
@@ -769,8 +769,6 @@ wc_horde_invasion.1503 = {
 		name = wc_horde_invasion.1503.b
 	}
 }
-
-# Orgrim Doomhammer Introduction - Part 2
 
 # Kilrogg Introduction
 wc_horde_invasion.1504 = {
@@ -849,14 +847,14 @@ wc_horde_invasion.1505 = {
 		animation = personality_zealous
 	}
 
-	option = { # The Hour of Twilight come! (canon)
+	option = { # Gall will see the truth (canon)
 		name = wc_horde_invasion.1505.a
 		flavor = wc_horde_invasion.1505.a.flavor
 
-		show_as_tooltip = { set_character_secret_faith = faith:twilights_hammer_cult }
-		make_character_crypto_religionist_effect = { CRYPTO_RELIGION = faith:twilights_hammer_cult }
+		#show_as_tooltip = { set_character_secret_faith = faith:twilights_hammer_cult }
+		#make_character_crypto_religionist_effect = { CRYPTO_RELIGION = faith:twilights_hammer_cult }
 
-		add_piety = 250
+		#add_piety = 250
 
 		ai_chance = {
 			base = 100
@@ -866,9 +864,14 @@ wc_horde_invasion.1505 = {
 		}
 	}
 
-	option = { # The Hour of Twilight is a scam (not canon)
+	option = { # Our masters are the demons (not canon)
 		name = wc_horde_invasion.1505.b
 		flavor = wc_horde_invasion.1505.b.flavor
+	}
+
+	option = { # Nobody can command us (no canon)
+		name = wc_horde_invasion.1505.c
+		flavor = wc_horde_invasion.1505.c.flavor
 	}
 }
 
