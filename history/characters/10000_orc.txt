@@ -1552,16 +1552,9 @@ golmash = {
 		birth=yes trait=creature_orc
 		effect = { make_important_lore_character_effect = yes } # Locked Alexstrasza away in his dungeon Grim Batol
 	}
-	545.5.26={
-		effect = {
-			if = {
-				limit = { NOT = { game_start_date >= 590.1.1 } }
-				purge_historical_character_effect = yes
-			}
-		}
-	}
 	561.5.26={
 		effect={ set_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_magic_trait_value } }
+		employer=10300
 	}
 	591.10.23={ death={ death_reason=death_battle } }
 }
@@ -1575,14 +1568,6 @@ golmash = {
 	trait=education_martial_3
 	trait=temperate trait=physique_good_1 trait=diligent trait=brave trait=arrogant
 	565.5.26={ birth=yes trait=creature_orc }
-	565.5.26={
-		effect = {
-			if = {
-				limit = { NOT = { game_start_date >= 590.1.1 } }
-				purge_historical_character_effect = yes
-			}
-		}
-	}
 	581.5.26={
 		effect={
 			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
@@ -1590,6 +1575,7 @@ golmash = {
 		}
 		# trait=physical_lifestyle_endurance_2
 		# trait=physical_lifestyle_strength_2
+		employer=10300
 	}
 	608.1.23={ death=yes }
 }
@@ -1598,33 +1584,21 @@ golmash = {
 10300={
 	name=Zuluhed
 	dynasty=2401
-	culture=dragonmaw religion=orcish_fel
+	culture=dragonmaw religion=orcish_shamanism
 	martial=5 diplomacy=4 stewardship=4 intrigue=3 learning=6
 	trait=education_learning_3
 	trait=content trait=patient trait=cynical trait=deceitful
+	trait=loyal
 	545.4.8={
 		birth=yes trait=creature_orc
 		effect = { make_important_lore_character_effect = yes }
 		give_nickname=nick_the_whacked
-	}
-	545.4.8={
-		effect = {
-			if = {
-				limit = { NOT = { game_start_date >= 590.1.1 } }
-				purge_historical_character_effect = yes
-			}
-		}
 	}
 	561.3.15={
 		effect={
 			set_variable = { name = wc_elemental_fire_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
 			set_variable = { name = wc_elemental_air_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
 			set_variable = { name = wc_elemental_earth_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
-		}
-	}
-	580.3.15={
-		effect={
-			set_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
 		}
 	}
 	609.1.6={ death={ death_reason=death_battle } }
@@ -1638,16 +1612,9 @@ golmash = {
 	martial=4 diplomacy=4 stewardship=4 intrigue=5 learning=8
 	trait=education_stewardship_1 trait=wrathful trait=brave trait=deceitful trait=patient 
 	579.12.6={ birth=yes trait=creature_orc }
-	579.12.6={
-		effect = {
-			if = {
-				limit = { NOT = { game_start_date >= 590.1.1 } }
-				purge_historical_character_effect = yes
-			}
-		}
-	}
 	625.5.15={ death=yes }
 }
+
 garneg_charskull={
 	name=Garneg
 	dynasty=charskull
@@ -1655,14 +1622,6 @@ garneg_charskull={
 	martial=4 diplomacy=4 stewardship=4 intrigue=5 learning=8
 	trait=education_stewardship_1 trait=education_martial_prowess_1 trait=brave
 	579.12.6={ birth=yes trait=creature_orc }
-	579.12.6={
-		effect = {
-			if = {
-				limit = { NOT = { game_start_date >= 590.1.1 } }
-				purge_historical_character_effect = yes
-			}
-		}
-	}
 	583.12.6={
 		effect = {
 			set_variable = { name = wc_elemental_fire_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_magic_trait_value }
@@ -1673,6 +1632,7 @@ garneg_charskull={
 	}
 	625.5.15={ death=yes }
 }
+
 # dynasty=2403
 10400={
 	name=Gozurmok
@@ -1682,16 +1642,9 @@ garneg_charskull={
 	trait=education_learning_1 trait=torturer trait=paranoid trait=wrathful 
 	trait=brave trait=lunatic_1 
 	580.5.25={ birth=yes trait=creature_orc }
-	580.5.25={
-		effect = {
-			if = {
-				limit = { NOT = { game_start_date >= 590.1.1 } }
-				purge_historical_character_effect = yes
-			}
-		}
-	}
 	626.7.31={ death=yes }
 }
+
 # dynasty=2404
 10450={
 	name=Somurrek
@@ -1700,16 +1653,9 @@ garneg_charskull={
 	martial=7 diplomacy=7 stewardship=8 intrigue=7 learning=6
 	trait=education_intrigue_2 trait=arbitrary trait=generous trait=brave trait=wounded_1 
 	580.6.10={ birth=yes trait=creature_orc }
-	580.6.10={
-		effect = {
-			if = {
-				limit = { NOT = { game_start_date >= 590.1.1 } }
-				purge_historical_character_effect = yes
-			}
-		}
-	}
 	675.6.26={ death=yes }
 }
+
 # dynasty=2405
 10500={
 	name=Ragnok
@@ -1718,16 +1664,9 @@ garneg_charskull={
 	martial=5 diplomacy=5 stewardship=6 intrigue=5 learning=4
 	trait=education_stewardship_2 trait=sadistic trait=lazy trait=paranoid trait=chaste 
 	579.8.10={ birth=yes trait=creature_orc }
-	579.8.10={
-		effect = {
-			if = {
-				limit = { NOT = { game_start_date >= 590.1.1 } }
-				purge_historical_character_effect = yes
-			}
-		}
-	}
 	665.7.29={ death=yes }
 }
+
 10550={
 	name=Jubei'thos
 	dynasty=2406
@@ -2173,6 +2112,7 @@ leoroxx={
 	}
 	615.11.12 ={ death=yes }
 }
+
 10652={ # Kohor
 	name=Kohor
 	dynasty=2751
@@ -2187,6 +2127,7 @@ leoroxx={
 	}
 	609.1.1 ={ death=yes }
 }
+
 10653={ # Jugkar Grim'rod
 	name=Jugkar
 	dynasty=2752
@@ -2201,6 +2142,7 @@ leoroxx={
 	}
 	609.1.1 ={ death=yes }
 }
+
 10654={ # Neeru Fireblade
 	name=Neeru
 	dynasty=2753
@@ -2224,6 +2166,7 @@ leoroxx={
 	}
 	613.9.21={ death=yes }
 }
+
 10655={ # Thork of Crossroads
 	name=Thork
 	dynasty=2754
@@ -2416,13 +2359,12 @@ leoroxx={
 
 samuro_blademaster={
 	name=Samuro
-	culture=burning_blade religion=orcish_shamanism
+	dynasty = of_the_blade
+	culture=burning_blade religion=orcish_fel
 	martial=7 diplomacy=2 stewardship=3 intrigue=8 learning=2
 	trait=education_martial_2 trait=physique_good_3 trait=education_martial_prowess_4
 	trait=brave trait=just trait=vengeful trait=calm trait=lifestyle_blademaster
-	563.4.7={
-		birth=yes trait=creature_orc
-	}
+	563.4.7={ birth=yes trait=creature_orc }
 	580.9.14={
 		effect={
 			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
@@ -2433,8 +2375,8 @@ samuro_blademaster={
 			}
 		}
 	}
+	596.1.9={ religion = orcish_shamanism }
 	602.4.1={
-		employer = 68001 #Voljin
 		effect={
 			add_trait_xp = {
 				trait = lifestyle_blademaster
@@ -3305,6 +3247,7 @@ gaz_soulripper={
 		}
 	}
 }
+
 xerash_fireblade={
 	name=Xerash
 	dynasty=2753
@@ -3326,6 +3269,7 @@ xerash_fireblade={
 	}
 	638.2.19={ death=yes }
 }
+
 rakmar_sharpfang={ #unofficial leader of the necrolytes
 	name=Rakmar
 	dynasty=sharpfang
@@ -3591,6 +3535,7 @@ mankrik={
 	}
 	638.2.19={ death=yes }
 }
+
 olgra={ #Mankrik's Wife
 	name=Olgra
 	female=yes
@@ -4104,6 +4049,7 @@ havoc_the_heartless={ #an especially cruel orc bandit
 		}
 	}
 }
+
 shive={ #an orc working with Havoc the Heartless
 	name=Shive
 	culture=burning_blade religion=orcish_shamanism

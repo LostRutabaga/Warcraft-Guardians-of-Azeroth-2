@@ -911,40 +911,6 @@ wc_horde_invasion.1506 = {
 }
 
 #################################
-# Dragonmaw-Burning Blade Events
-# 2000-2001
-#################################
-
-# Invites the Burning Blade and Dragonmaw clans - Delayer event
-wc_horde_invasion.2000 = {
-	type = character_event
-	hidden = yes
-	immediate = {
-		invite_burning_blade_effect = yes
-		invite_dragonmaw_effect = yes
-		trigger_event = wc_horde_invasion.2001
-	}
-}
-
-# Delayed event
-wc_horde_invasion.2001 = {
-	type = character_event
-	content_source = dlc_GOA
-	title = wc_horde_invasion.2001.title
-	desc = wc_horde_invasion.2001.desc
-	theme = war
-	override_background = { reference = wc_background_dark_portal }
-	left_portrait = scope:zuluhed
-	right_portrait = scope:dharl
-
-	option = {
-		name = LOKTAR_OGAR
-		spawn_horde_troops_effect = yes
-		spawn_horde_troops_effect = yes
-	}
-}
-
-#################################
 # Conquests of the Horde
 # 9000-9002
 #################################
