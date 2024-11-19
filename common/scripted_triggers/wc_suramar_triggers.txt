@@ -52,7 +52,10 @@ can_restore_arcandor_trigger = {
     OR = {
         custom_tooltip = {
             text = restore_arcandor_decision_trigger
-            has_character_flag = had_nightfallen_event
+            OR = {
+                has_character_flag = had_nightfallen_event
+                has_character_flag = had_faldorei_event
+            }
         }
         has_trait = wretched
         has_trait = creature_faldorei

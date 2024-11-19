@@ -23,8 +23,9 @@ suramar_events_pulse = {
 			value = 50
 		}
 
-        100 = wc_suramar_events.0010 # Something in the vaults
+        100 = wc_suramar_events.0010 
         100 = wc_suramar_events.0020 
         100 = wc_suramar_events.0030
+        100 = wc_suramar_events.0040
     }
 }

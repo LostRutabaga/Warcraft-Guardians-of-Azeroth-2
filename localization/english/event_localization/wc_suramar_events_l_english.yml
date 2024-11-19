@@ -131,3 +131,23 @@ l_english:
  wc_suramar_persecuting_elunists_modifier: "Persecuting Elunists"
  wc_suramar_persecuting_elunists_modifier_desc: "This character is persecuting followers of Elune, and can take more hostile actions against them.\n[purge_population|E] Progress in [GetFaithByKey('kaldorei_religion').GetAdjective] [counties|E]: #p +0.5#!"
  MODIFIER_DESC_wc_suramar_persecuting_elunists_modifier:0 "[GetModifier('wc_suramar_persecuting_elunists_modifier').GetNameWithTooltip]"
+ 
+ wc_suramar_events.0040.t:0 "Tunnels of Falanaar"
+ wc_suramar_events.0040.desc:0 "[informant.GetFirstName] has brought news of a hidden network of tunnels beneath [GetTitleByKey('c_meredil').GetName]. They are said to have powerful leyline connections, and could be of great use to us.\n\nThough they ley dormant, [informant.GetSheHe|U] implores me to take heed of the situation, and travel to the tunnels to see what they hold."
+ wc_suramar_events.0040.desc_repeat:0 "\n\nThis isn't the first time I've heard of such a thing, perhaps now is the time to act..."
+ wc_suramar_events.0040.a:0 "I'd like to see these tunnels for myself."
+ wc_suramar_events.0040.a_repeat:0 "I guess I have no choice."
+ wc_suramar_events.0040.b:0 "It wouldn't hurt to hire guards."
+ wc_suramar_events.0040.c:0 "I could care less about a burrow..."
+
+ wc_suramar_events.0041.desc:0 "I trot along the [ROOT.Char.GetCurrentLocation.Custom('GetTerrainTypePlural')] of [ROOT.Char.GetCurrentLocation.GetName], searching for the entrance to the tunnels as described by [informant.GetFirstName].\n\nAfter a few hours of looking, I realize I have lost sight of [informant.GetFirstNameNoTooltip], and am now lost in the wilderness as a result."
+ wc_suramar_events.0041.desc_guards:0 "Luckily, I have hired help, and perhaps [faldorei_guard.GetFirstName] can assist in the search."
+ wc_suramar_events.0041.a:0 "Ah, no worries, [informant.GetSheHe] will find me."
+ wc_suramar_events.0041.a_tt:0 "You continue your search for the tunnels"
+ wc_suramar_events.0041.b:0 "I guess I'll have to find [informant.GetHerHim] myself...."
+ wc_suramar_events.0041.c:0 "[faldorei_guard.GetFirstNameNoTooltip], let's split."
+
+ wc_suramar_events.0043.desc:0 "I find myself in a clearing, the entrance to the tunnels before me. The air is thick with magic, and I can feel the leyline connections pulsing beneath my feet.\n\nAs I step inside, I hear a piercing screech from afar, and I spot [informant.GetFirstName] in the distance. Next to [informant.GetHerHim], a creature with licorice skin snarls. The creature is so thin its almost skeletal, but its caricature is familiar to ours.\n\nIt sends a shiver down my bones, but [informant.GetFirstNameNoTooltip] depends on me."
+ wc_suramar_events.0043.a:0 "I am coming, [informant.GetFirstName]!"
+ wc_suramar_events.0043.success:0 "The creature is subdued"
+ wc_suramar_events.0043.failure:0 "The creature escapes"

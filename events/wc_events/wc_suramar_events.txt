@@ -7,14 +7,16 @@
 # 0011-0012 - Investigate the aqeducts
 # 0020 - You remininsce on Ashara's rule
 # 0030 - Visted by an Elune priestess
+# 0040 - Learn about the Fal'dorei, event chain
+# 0041  - Faldo'rei event chain
 
 # Opening event for the leader of Suramar if barrier is up
 wc_suramar_events.0001 = {
     type = character_event
-	content_source = dlc_GOA
+    content_source = dlc_GOA
     title = wc_suramar_events.0001.t
-	desc = wc_suramar_events.0001.d
-	theme = realm
+    desc = wc_suramar_events.0001.d
+    theme = suramar
 
     trigger = {
         root = { has_title = title:k_suramar }
@@ -37,7 +39,7 @@ wc_suramar_events.0001 = {
         }
     }
 
-    # Focus on building the region 
+    # Focus on building the region
     option = {
         name = wc_suramar_events.001.a
         capital_county = {
@@ -61,10 +63,10 @@ wc_suramar_events.0001 = {
 # You learn about the world outside of suramar
 wc_suramar_events.0002 = {
     type = character_event
-	content_source = dlc_GOA
+    content_source = dlc_GOA
     title = wc_suramar_events.0002.t
-	desc = wc_suramar_events.0002.desc
-	theme = realm
+    desc = wc_suramar_events.0002.desc
+    theme = suramar
 
     override_background = { reference = study }
 
@@ -90,7 +92,7 @@ wc_suramar_events.0002 = {
         trigger = {
             NOT = { has_title = title:k_suramar }
         }
-        title:k_suramar.holder = { 
+        title:k_suramar.holder = {
             save_scope_as = suramar_ruler
         }
         scope:suramar_ruler = { add_character_flag = had_outsider_event }
@@ -101,10 +103,10 @@ wc_suramar_events.0002 = {
 # You learn about the nightfallen
 wc_suramar_events.0003 = {
     type = character_event
-	content_source = dlc_GOA
+    content_source = dlc_GOA
     title = wc_suramar_events.0003.t
-	desc = wc_suramar_events.0003.desc
-	theme = realm
+    desc = wc_suramar_events.0003.desc
+    theme = suramar
 
     override_background = { reference = study }
 
@@ -122,16 +124,21 @@ wc_suramar_events.0003 = {
     # You gain the decision
     option = {
         name = wc_suramar_events.0003.a
-        add_character_flag = had_nightfallen_event
-        custom_tooltip = suramar_discover_nightfallen_effect_tt
+        if = {
+            limit = {
+                can_restore_arcandor_trigger = no
+            }
+            add_character_flag = had_nightfallen_event
+            custom_tooltip = suramar_discover_nightfallen_effect_tt
+        }
     }
 }
 
 wc_suramar_events.0010 = {
     type = character_event
-	content_source = dlc_GOA
+    content_source = dlc_GOA
     title = wc_suramar_events.0010.t
-	desc = {
+    desc = {
         desc = wc_suramar_events.0010.d
         first_valid = {
             triggered_desc = {
@@ -144,7 +151,7 @@ wc_suramar_events.0010 = {
             desc = wc_suramar_events.0010.desc_ruler
         }
     }
-	theme = realm
+    theme = suramar
 
     override_background = { reference = courtyard }
 
@@ -208,7 +215,7 @@ wc_suramar_events.0010 = {
         ordered_knight = {
             order_by = prowess
             save_scope_as = investigator
-            
+
             custom_tooltip = wc_suramar_events.0010.b_tt
         }
         pay_short_term_gold = {
@@ -257,10 +264,10 @@ wc_suramar_events.0010 = {
 
         scope:informant = {
             add_opinion = {
-				modifier = disappointed_opinion
-				target = root
-				opinion = -15
-			}  
+                modifier = disappointed_opinion
+                target = root
+                opinion = -15
+            }
         }
 
         ai_chance = {
@@ -278,9 +285,9 @@ wc_suramar_events.0010 = {
 
 wc_suramar_events.0011 = {
     type = character_event
-	content_source = dlc_GOA
+    content_source = dlc_GOA
     title = wc_suramar_events.0010.t
-	desc = {
+    desc = {
         first_valid = {
             triggered_desc = {
                 trigger = {
@@ -330,7 +337,7 @@ wc_suramar_events.0011 = {
             }
         }
     }
-	theme = martial
+    theme = suramar
 
     override_background = { reference = suramar_arcway }
 
@@ -392,18 +399,18 @@ wc_suramar_events.0011 = {
             skill = prowess
             value = decent_skill_rating
             80 = {
-				compare_modifier = {
-					value = scope:duel_value
-					multiplier = 3.5
-				}
+                compare_modifier = {
+                    value = scope:duel_value
+                    multiplier = 3.5
+                }
                 save_scope_value_as = { name = suramar_investigation_result value = flag:won }
                 custom_tooltip = wc_suramar_events.0011.knight_success
             }
             30 = {
-				compare_modifier = {
-					value = scope:duel_value
-					multiplier = -3.5
-				}
+                compare_modifier = {
+                    value = scope:duel_value
+                    multiplier = -3.5
+                }
                 save_scope_value_as = { name = suramar_investigation_result value = flag:lost }
                 custom_tooltip = wc_suramar_events.0011.knight_failure
             }
@@ -423,18 +430,18 @@ wc_suramar_events.0011 = {
             skill = intrigue
             value = decent_skill_rating
             70 = {
-				compare_modifier = {
-					value = scope:duel_value
-					multiplier = 3.5
-				}
+                compare_modifier = {
+                    value = scope:duel_value
+                    multiplier = 3.5
+                }
                 custom_tooltip = wc_suramar_events.0011.success
                 save_scope_value_as = { name = suramar_investigation_result value = flag:won }
             }
             35 = {
-				compare_modifier = {
-					value = scope:duel_value
-					multiplier = -3.5
-				}
+                compare_modifier = {
+                    value = scope:duel_value
+                    multiplier = -3.5
+                }
                 custom_tooltip = wc_suramar_events.0011.failure
                 save_scope_value_as = { name = suramar_investigation_result value = flag:lost }
             }
@@ -454,7 +461,7 @@ wc_suramar_events.0011 = {
         }
     }
 
-    # Bum rush whatever it is 
+    # Bum rush whatever it is
     option = {
         name = wc_suramar_events.0011.c
         trigger = {
@@ -465,18 +472,18 @@ wc_suramar_events.0011 = {
             skill = prowess
             value = decent_skill_rating
             70 = {
-				compare_modifier = {
-					value = scope:duel_value
-					multiplier = 3.5
-				}
+                compare_modifier = {
+                    value = scope:duel_value
+                    multiplier = 3.5
+                }
                 save_scope_value_as = { name = suramar_investigation_result value = flag:won }
                 custom_tooltip = wc_suramar_events.0011.success
             }
             35 = {
-				compare_modifier = {
-					value = scope:duel_value
-					multiplier = -3.5
-				}
+                compare_modifier = {
+                    value = scope:duel_value
+                    multiplier = -3.5
+                }
                 custom_tooltip = wc_suramar_events.0011.failure
                 save_scope_value_as = { name = suramar_investigation_result value = flag:lost }
             }
@@ -532,9 +539,9 @@ wc_suramar_events.0011 = {
 
 wc_suramar_events.0012 = {
     type = character_event
-	content_source = dlc_GOA
+    content_source = dlc_GOA
     title = wc_suramar_events.0010.t
-	desc = {
+    desc = {
         # Intro, using the method
         triggered_desc = {
             trigger = {
@@ -644,7 +651,7 @@ wc_suramar_events.0012 = {
             desc = wc_suramar_events.0112.desc_nightfallen_outro
         }
     }
-	theme = martial
+    theme = suramar
 
     override_background = { reference = suramar_arcway }
 
@@ -753,8 +760,8 @@ wc_suramar_events.0012 = {
                             random_list = {
                                 10 = { set_character_faith = faith:holy_light }
                                 10 = { set_character_faith = faith:kirin_torian }
-                                1 = { 
-                                    trigger = { exists = title:e_scourge } 
+                                1 = {
+                                    trigger = { exists = title:e_scourge }
                                     set_character_faith = faith:death_god set_culture = culture:scourge
                                     add_trait = being_undead
                                 }
@@ -766,8 +773,8 @@ wc_suramar_events.0012 = {
                             }
                             random_list = {
                                 10 = { set_character_faith = faith:odyn }
-                                1 = { 
-                                    trigger = { exists = title:e_scourge } 
+                                1 = {
+                                    trigger = { exists = title:e_scourge }
                                     set_character_faith = faith:helya set_culture = culture:kvaldir
                                     add_trait = being_undead remove_trait = creature_vrykul add_trait = creature_kvaldir
                                 }
@@ -806,7 +813,7 @@ wc_suramar_events.0012 = {
             var:suramar_disturbance = flag:bandit
             scope:suramar_investigation_result = flag:won
         }
-        
+
         suramar_exile_character_effect = {
             EXILED = scope:secondary_character
         }
@@ -853,7 +860,7 @@ wc_suramar_events.0012 = {
 
     # Monster Options #
 
-    # Study it 
+    # Study it
     option = {
         name = wc_suramar_events.0012.monster_1
         trigger = {
@@ -891,7 +898,7 @@ wc_suramar_events.0012 = {
     }
 
     # Outsider Options #
-     
+
     # Offer them a place in Suramar
     option = {
         name = wc_suramar_events.0012.outsider_1
@@ -912,7 +919,7 @@ wc_suramar_events.0012 = {
                 ai_compassion = 1
             }
             modifier = {
-                factor = 0 
+                factor = 0
                 has_trait = paranoid
             }
         }
@@ -946,7 +953,7 @@ wc_suramar_events.0012 = {
                 ai_compassion = -1
             }
             modifier = {
-                factor = 0 
+                factor = 0
                 has_trait = compassionate
             }
         }
@@ -960,7 +967,7 @@ wc_suramar_events.0012 = {
         trigger = {
             var:suramar_disturbance = flag:nightfallen
             scope:suramar_investigation_result = flag:won
-            has_character_flag = had_nightfallen_event 
+            has_character_flag = had_nightfallen_event
         }
 
         add_courtier = scope:secondary_character
@@ -976,7 +983,7 @@ wc_suramar_events.0012 = {
                 ai_compassion = 1
             }
             modifier = {
-                factor = 0 
+                factor = 0
                 has_trait = paranoid
             }
         }
@@ -988,7 +995,7 @@ wc_suramar_events.0012 = {
         trigger = {
             var:suramar_disturbance = flag:nightfallen
             scope:suramar_investigation_result = flag:won
-            has_character_flag = had_nightfallen_event 
+            has_character_flag = had_nightfallen_event
         }
 
         add_dread = minor_dread_gain
@@ -1012,7 +1019,7 @@ wc_suramar_events.0012 = {
                 ai_compassion = -1
             }
             modifier = {
-                factor = 0 
+                factor = 0
                 has_trait = compassionate
             }
         }
@@ -1053,7 +1060,7 @@ wc_suramar_events.0012 = {
         }
     }
 
-    # Let it be 
+    # Let it be
     option = {
         name = wc_suramar_events.0012.pet_2
         trigger = {
@@ -1114,10 +1121,10 @@ wc_suramar_events.0012 = {
 
 wc_suramar_events.0020 = {
     type = character_event
-	content_source = dlc_GOA
+    content_source = dlc_GOA
     title = wc_suramar_events.0020.t
-	desc = wc_suramar_events.0020.d
-	theme = court
+    desc = wc_suramar_events.0020.d
+    theme = suramar
 
     cooldown = { years = 10 }
 
@@ -1136,7 +1143,7 @@ wc_suramar_events.0020 = {
             modifier = wc_suramar_beauty_queen_modifier
             years = 3
         }
-    } 
+    }
 
     option = {
         name = wc_suramar_events.0020.b
@@ -1149,24 +1156,25 @@ wc_suramar_events.0020 = {
 
 wc_suramar_events.0030 = {
     type = character_event
-	content_source = dlc_GOA
+    content_source = dlc_GOA
     title = wc_suramar_events.0030.t
-	desc = wc_suramar_events.0030.desc
-	theme = faith
+    desc = wc_suramar_events.0030.desc
+    theme = faith
 
     cooldown = { years = 10 }
-    
+
     immediate = {
         create_character = {
-			template = priest_character_template
+            template = priest_character_template
             gender_female_chance = 75
-			location = root.location
+            location = root.location
             faith = faith:kaldorei_religion
-			save_scope_as = priestess
+            save_scope_as = priestess
             after_creation = {
+                trigger_race_giving_no_gene_effect = yes
                 learn_language = language_darnassian
             }
-		}
+        }
     }
 
     trigger = {
@@ -1184,14 +1192,14 @@ wc_suramar_events.0030 = {
         }
         triggered_animation = {
             trigger = {
-                has_trait = cynical 
+                has_trait = cynical
             }
             animation = personality_cynical
         }
         triggered_animation = {
             trigger = {
                 NOT = { faith = faith:kaldorei_religion }
-                has_trait = zealous 
+                has_trait = zealous
             }
             animation = dismissal
         }
@@ -1203,14 +1211,14 @@ wc_suramar_events.0030 = {
         animation = prayer
         camera = camera_event_horse_right
     }
-    
+
     # Pray with the priest
     option = {
         name = wc_suramar_events.0030.a
 
         if = {
             limit = {
-                has_character_modifier = wc_suramar_persecuting_elunists_modifier 
+                has_character_modifier = wc_suramar_persecuting_elunists_modifier
             }
             remove_character_modifier = wc_suramar_persecuting_elunists_modifier
         }
@@ -1312,11 +1320,11 @@ wc_suramar_events.0030 = {
                 }
             }
         }
-    } 
+    }
 
     # No but cool
     option = {
-        name = wc_suramar_events.0030.b           
+        name = wc_suramar_events.0030.b
 
         if = {
             limit = {
@@ -1326,7 +1334,7 @@ wc_suramar_events.0030 = {
             stress_impact = {
                 zealous = medium_stress_impact_gain
             }
-        }               
+        }
 
         scope:priestess = {
             add_opinion = {
@@ -1359,7 +1367,7 @@ wc_suramar_events.0030 = {
                 has_character_modifier = wc_suramar_persecuting_elunists_modifier
                 is_elisande_trigger = yes
                 has_trait = irritable
-                has_trait_malicious_trigger = yes 
+                has_trait_malicious_trigger = yes
             }
         }
 
@@ -1411,5 +1419,465 @@ wc_suramar_events.0030 = {
         ai_chance = {
             base = 50
         }
+    }
+}
+
+wc_suramar_events.0040 = {
+    type = character_event
+    content_source = dlc_GOA
+    title = wc_suramar_events.0040.t
+    desc = {
+        desc = wc_suramar_events.0040.desc
+        triggered_desc = {
+            trigger = {
+                has_character_flag = had_pre_faldorei_event
+            }
+            desc = wc_suramar_events.0040.desc_repeat
+        }
+    }
+    theme = suramar
+
+    override_background = { reference = study }
+
+    left_portrait = {
+        character = root
+        animation = thinking
+    }
+
+    right_portrait = {
+        character = scope:informant
+        animation = storyteller
+    }
+
+    cooldown = { years = 2 }
+
+    immediate = {
+        if = {
+            limit = {
+                exists = cp:councillor_spymaster
+            }
+            cp:councillor_spymaster = {
+                save_scope_as = informant
+            }
+        }
+        else = {
+            title:c_meredil.holder = {
+                save_scope_as = informant
+            }
+        }
+    }
+
+    trigger = {
+        NOT = { has_character_flag = had_faldorei_event }
+        is_eligible_for_suramar_events_trigger = yes
+        OR = {
+            exists = cp:councillor_spymaster
+            NOT = { title:c_meredil.holder = root }
+        }
+    }
+
+    option = {
+        name = {
+            text = {
+                first_valid = {
+                    triggered_desc = {
+                        trigger = {
+                            has_character_flag = had_pre_faldorei_event
+                        }
+                        desc = wc_suramar_events.0040.a_repeat
+                    }
+                    desc = wc_suramar_events.0040.a
+                }
+
+            }
+        }
+
+        start_travel_plan = {
+            destination = title:b_meredil.title_province
+            companion = scope:informant
+            on_arrival_event = wc_suramar_events.0041
+        }
+
+        stress_impact = {
+            brave = minor_stress_impact_gain
+        }
+
+        ai_chance = {
+            base = 75
+        }
+    }
+
+    option = {
+        name = wc_suramar_events.0040.b
+        trigger = {
+            short_term_gold >= minor_gold_value
+            any_knight = { is_available_ai_adult = yes NOT = { this = scope:informant }}
+        }
+        show_as_unavailable = { always = yes }
+
+        remove_short_term_gold = minor_gold_value
+
+        ordered_knight = {
+            limit = {
+                is_available_ai_adult = yes
+                NOT = { this = scope:informant }
+            }
+            order_by = prowess
+            save_scope_as = faldorei_guard
+        }
+
+        stress_impact = {
+            greedy = minor_stress_impact_gain
+            craven = minor_stress_impact_loss
+        }
+
+        start_travel_plan = {
+            destination = title:b_meredil.title_province
+            companion = scope:informant
+            on_arrival_event = wc_suramar_events.0041
+        }
+
+        current_travel_plan = {
+            add_companion = scope:faldorei_guard
+        }
+
+        ai_chance = {
+            base = 50
+            ai_value_modifier = {
+                ai_greed = -1
+            }
+            modifier = {
+                add = 25
+                has_trait = craven
+            }
+            modifier = {
+                add = -25
+                OR = {
+                    has_trait = brave
+                    has_trait = arrogant
+                }
+            }
+        }
+    }
+
+    option = {
+        name = wc_suramar_events.0040.c
+        trigger = { NOT = { has_character_flag = had_pre_faldorei_event } }
+
+        add_character_flag = had_pre_faldorei_event
+
+        scope:informant = {
+            add_opinion = {
+                modifier = disappointed_opinion
+                target = root
+                opinion = -10
+            }
+        }
+
+        stress_impact = {
+            brave = minor_stress_impact_loss
+        }
+
+        ai_chance = {
+            base = 75
+        }
+    }
+}
+
+wc_suramar_events.0041 = {
+    type = character_event
+    content_source = dlc_GOA
+    title = wc_suramar_events.0040.t
+    desc = {
+        desc = wc_suramar_events.0041.desc
+        triggered_desc = {
+            trigger = {
+                exists = scope:faldorei_guard
+            }
+            desc = wc_suramar_events.0041.desc_guards
+        }
+    }
+    theme = suramar
+
+    override_effect_2d = {
+		reference = fog	
+	}
+
+    override_background = { reference = terrain }
+
+    immediate = {
+        add_character_flag = had_faldorei_event
+    }
+
+    left_portrait = {
+        character = root
+        animation = worry
+    }
+    right_portrait = {
+        trigger = { exists = scope:faldorei_guard }
+        character = scope:faldorei_guard
+        animation = personality_honorable
+    }
+
+    option = {
+        name = wc_suramar_events.0041.a
+        custom_tooltip = wc_suramar_events.0041.a_tt
+
+        hidden_effect = {
+            random_list = {
+                50 = { # Find artifact
+                    trigger_event = {
+                        id = wc_suramar_events.0042
+                        days = { 1 8 }
+                    }
+                }
+                50 = {
+                    trigger_event = {
+                        id = wc_suramar_events.0043
+                        days = { 1 8 }
+                    }
+                }
+            }
+        }
+
+        current_travel_plan = {
+            delay_travel_plan = { days = 10 }
+        }
+    }
+
+    option = {
+        name = wc_suramar_events.0041.b
+        trigger = {
+            NOT = { exists = scope:faldorei_guard }
+        }
+
+        trigger_event = {
+            id = wc_suramar_events.0043
+            days = { 1 8 }
+        }
+
+        current_travel_plan = {
+            delay_travel_plan = { days = 20 }
+        }
+    }
+
+    option = {
+        name = wc_suramar_events.0041.c
+        trigger = {
+            exists = scope:faldorei_guard
+        }
+
+        hidden_effect = {
+            random_list = {
+                75 = { # Find artifact
+                    trigger_event = {
+                        id = wc_suramar_events.0042
+                        days = { 1 8 }
+                    }
+                }
+                25 = {
+                    trigger_event = {
+                        id = wc_suramar_events.0043
+                        days = { 1 8 }
+                    }
+                }
+            }
+        }
+
+        current_travel_plan = {
+            delay_travel_plan = { days = 5 }
+        }
+    }
+}
+
+# You find a relic
+wc_suramar_events.0042 = {
+    type = character_event
+    content_source = dlc_GOA
+    title = wc_suramar_events.0040.t
+    desc = wc_suramar_events.0042.desc
+    theme = suramar
+
+    override_effect_2d = {
+		reference = fog	
+	}
+
+    override_background = { reference = terrain }
+
+    immediate = {
+        random_list = {
+            50 = {
+                generate_trinket_effect = {
+                    TRINKET_RECEIVER = root
+                    TRINKET_GIVER = root
+                    GRAB_ALL_TRINKETS = yes
+                    HISTORY_TYPE = discovered
+                }
+                scope:new_trinket = { save_scope_as = newly_created_artifact }
+            }
+            75 = {
+                modifier = {
+                    add = 25
+                    is_ai = no 
+                }
+                modifier = {
+                    add = 25
+                    exists = scope:faldorei_guard
+                }
+                trigger = {
+                    NOT = {
+                        any_artifact = {
+                            has_variable = arcandor_seed
+                        }
+                    }
+                }
+                create_artifact_arcandor_seed_effect = { OWNER = root }
+            }
+        }
+    }
+
+    artifact = {
+        target = scope:newly_created_artifact
+        position = lower_left_portrait
+        trigger = { exists = scope:newly_created_artifact }
+    }
+
+    left_portrait = {
+        character = root
+        animation = admiration
+    }
+
+    option = {
+        name = wc_suramar_events.0042.a
+        trigger_event = {
+            id = wc_suramar_events.0043
+            days = { 1 3 }
+        }
+        current_travel_plan = {
+            delay_travel_plan = { days = 5 }
+        }
+    }
+}
+
+wc_suramar_events.0043 = {
+    type = character_event
+    content_source = dlc_GOA
+    title = wc_suramar_events.0040.t
+    desc = wc_suramar_events.0043.desc
+    theme = suramar
+
+    override_background = { reference = terrain }
+
+    immediate = {
+        create_character = {
+            gender_female_chance = 50
+            location = root.location
+            age = { 18 35 }
+            random_traits_list = {
+                count = 1
+                education_martial_2 = {}
+                education_martial_3 = {}
+                education_martial_4 = {}
+            }
+            random_traits = yes
+            culture = culture:faldorei
+            faith = faith:moonweaver_religion
+            martial = {
+                min_template_decent_skill
+                max_template_decent_skill
+            }
+            prowess = {
+                min_template_decent_skill
+                min_template_decent_skill
+            }
+            save_scope_as = attacker
+            after_creation = {
+                # Warcraft
+                trigger_race_giving_no_gene_effect = yes
+            }
+        }
+    }
+
+    left_portrait = {
+        character = scope:informant
+        animation = fear
+    }
+
+    right_portrait = {
+        character = scope:attacker
+        animation = aggressive_axe
+    }
+
+    # Attack the beast
+    option = {
+        name = wc_suramar_events.0043.a
+
+        duel = {
+            skill = prowess
+            target = scope:attacker
+            80 = {
+                compare_modifier = {
+                    value = scope:duel_value
+                    multiplier = 3.5
+                }
+                desc = wc_suramar_events.0043.success
+                save_scope_value_as = { name = falanaar_duel value = flag:won }
+                random = {
+                    chance = 20
+                    scope:attacker = { increase_wounds_effect = { REASON = duel } }
+                }
+            }
+            30 = {
+                compare_modifier = {
+                    value = scope:duel_value
+                    multiplier = -3.5
+                }
+                desc = wc_suramar_events.0043.failure
+                save_scope_value_as = { name = falanaar_duel value = flag:lost }
+                random = {
+                    chance = 20
+                    scope:attacker = { increase_wounds_effect = { REASON = duel } }
+                }
+            }
+        }
+
+        stress_impact = {
+            brave = minor_stress_impact_loss
+            craven = minor_stress_impact_gain
+        }
+
+        ai_chance = {
+            base = 50
+            ai_value_modifier = {
+                ai_energy = 1
+            }
+            modifier = {
+                factor = 2
+                highest_skill_including_prowess = prowess
+            }
+            modifier = {
+                factor = 0
+                has_trait = craven
+            }
+            opinion_modifier = {
+                opinion_target = scope:informant
+				multiplier = 1
+            }
+        }
+    }
+
+    # Try and calm the beast
+    option = {
+
+    }
+
+    # Send your guard
+    option = {
+
+    }
+
+    # Leave them to die
+    option = {
+
     }
 }
