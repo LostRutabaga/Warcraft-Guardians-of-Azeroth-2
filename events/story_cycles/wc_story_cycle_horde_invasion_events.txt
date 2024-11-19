@@ -747,7 +747,7 @@ wc_horde_invasion.1502 = {
 	}
 }
 
-# Orgrim Doomhammer Introduction
+# Orgrim Doomhammer Introduction - Part 1
 wc_horde_invasion.1503 = {
 	type = character_event
 	content_source = dlc_GOA
@@ -755,9 +755,10 @@ wc_horde_invasion.1503 = {
 	desc = wc_horde_invasion.1503.desc
 	theme = war
 
+	override_background = { reference = wilderness_scope }
 	left_portrait = {
 		character = root
-		animation = celebrate_axe
+		animation = personality_honorable
 	}
 
 	option = { # Path to glory (canon)
@@ -768,6 +769,8 @@ wc_horde_invasion.1503 = {
 		name = wc_horde_invasion.1503.b
 	}
 }
+
+# Orgrim Doomhammer Introduction - Part 2
 
 # Kilrogg Introduction
 wc_horde_invasion.1504 = {
