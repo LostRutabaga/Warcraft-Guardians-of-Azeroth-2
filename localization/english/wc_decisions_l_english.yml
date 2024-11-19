@@ -214,3 +214,11 @@
  lower_suramar_barrier_decision_confirm: "The barrier must fall."
  lower_suramar_barrier_decision_tt: "The barrier surrounding the [GetTitleByKey('k_suramar').GetName] will be removed, and you will be able to interact with other realms."
  lower_suramar_barrier_decision_tt_modifier:0 "Every [county|E] in [GetTitleByKey('k_suramar').GetName] will lose [GetModifier('wc_suramar_isolated_modifier').GetNameWithTooltip]"
+ lower_suramar_barrier_decision_trigger:0 "You must have a reason to lower the barrier"
+
+ restore_arcandor_decision:0 "Restore the Arcan'dor Tree"
+ restore_arcandor_decision_desc:0 "A mana tree known as the Arcan'dor once stood in the heart of Falanaar. It was a source of great power, freeing some elves from the grasp of the Nightwell, but it did not last forever.\n\nElves twisted by the explosion of the tree became the [GetTrait('creature_faldorei').GetName(ROOT.Char)]. And now, elves known as the [GetTrait('wretched').GetName(ROOT.Char)] suffer from the lack of mana, cured only by the fruit of the Arcan'dor."
+ restore_arcandor_decision_trigger:0 "You have a reason to restore the Arcan'dor"
+ restore_arcandor_decision_tooltip:0 "Restore the Arcan'dor tree in Falanaar"
+ restore_arcandor_decision_confirm:0 "The Arcan'dor will rise again."
+ decision_group_type_suramar:0 "Suramar Decisions"
