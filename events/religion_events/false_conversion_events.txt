@@ -857,7 +857,7 @@ false_conversion.1010 = {
 		first_valid = {
 			triggered_desc = { # Warcraft
 				trigger = {
-					has_cultural_pillar = heritage_orcish
+					scope:spouse.culture = { has_cultural_pillar = heritage_orcish }
 					exists = scope:spouse_wants_secret_faith
 				}
 				desc = false_conversion.1010.desc_spouse_advises_secrecy_orcish
@@ -938,7 +938,7 @@ false_conversion.1010 = {
 			text = {
 				first_valid = {
 					triggered_desc = { # Warcraft 
-						trigger = { has_cultural_pillar = heritage_orcish }
+						trigger = { scope:spouse.culture = { has_cultural_pillar = heritage_orcish } }
 						desc = false_conversion.1000.a_orcish
 					} # End of Warcraf
 					desc = false_conversion.1000.a
@@ -974,7 +974,7 @@ false_conversion.1010 = {
 			text = {
 				first_valid = {
 					triggered_desc = { # Warcraft 
-						trigger = { has_cultural_pillar = heritage_orcish }
+						trigger = { scope:spouse.culture = { has_cultural_pillar = heritage_orcish } }
 						desc = false_conversion.1000.b_plural_orcish
 					} # End of Warcraf
 					triggered_desc = {
