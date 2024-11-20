@@ -1549,6 +1549,7 @@ golmash = {
 	trait=education_martial_3
 	trait=sadistic trait=cynical trait=deceitful trait=content
 	trait=loyal # Loyal to the Dragonmaw clan
+	disallow_random_traits = yes
 	557.7.18 = {
 		birth=yes trait=creature_orc
 		effect = { make_important_lore_character_effect = yes } # Locked Alexstrasza away in his dungeon Grim Batol
@@ -1601,6 +1602,7 @@ golmash = {
 	trait=education_learning_3
 	trait=content trait=patient trait=cynical trait=temperate
 	trait=physique_good_1 trait=shrewd trait=loyal # Horde strong loyalist
+	disallow_random_traits = yes
 	530.4.8 = {
 		birth=yes trait=creature_orc
 		effect = { make_important_lore_character_effect = yes }
@@ -1629,6 +1631,7 @@ golmash = {
 	martial=4 diplomacy=4 stewardship=4 intrigue=5 learning=8
 	trait=education_stewardship_1 trait=wrathful trait=brave trait=deceitful trait=patient 
 	579.12.6={ birth=yes trait=creature_orc }
+	583.1.1 = { employer=10300 } # First War
 	625.5.15={ death=yes }
 }
 
@@ -1639,6 +1642,7 @@ garneg_charskull={
 	martial=4 diplomacy=4 stewardship=4 intrigue=5 learning=8
 	trait=education_stewardship_1 trait=education_martial_prowess_1 trait=brave
 	579.12.6={ birth=yes trait=creature_orc }
+	583.1.1 = { employer=10300 } # First War
 	583.12.6={
 		effect = {
 			set_variable = { name = wc_elemental_fire_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_magic_trait_value }
@@ -1659,6 +1663,7 @@ garneg_charskull={
 	trait=education_learning_1 trait=torturer trait=paranoid trait=wrathful 
 	trait=brave trait=lunatic_1 
 	580.5.25={ birth=yes trait=creature_orc }
+	583.1.1 = { employer=10300 } # First War
 	626.7.31={ death=yes }
 }
 
@@ -1670,6 +1675,7 @@ garneg_charskull={
 	martial=7 diplomacy=7 stewardship=8 intrigue=7 learning=6
 	trait=education_intrigue_2 trait=arbitrary trait=generous trait=brave trait=wounded_1 
 	580.6.10={ birth=yes trait=creature_orc }
+	583.1.1 = { employer=10300 } # First War
 	675.6.26={ death=yes }
 }
 
@@ -1681,6 +1687,7 @@ garneg_charskull={
 	martial=5 diplomacy=5 stewardship=6 intrigue=5 learning=4
 	trait=education_stewardship_2 trait=sadistic trait=lazy trait=paranoid trait=chaste 
 	579.8.10={ birth=yes trait=creature_orc }
+	583.1.1 = { employer=10300 } # First War
 	665.7.29={ death=yes }
 }
 
@@ -2171,6 +2178,7 @@ leoroxx={
 	trait = charming
 	disallow_random_traits = yes
 	575.1.5={ birth=yes trait=creature_orc }
+	583.1.1 = { employer = samuro_blademaster } # First War
 	596.1.9={
 		effect={ 
 			set_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value }
@@ -2374,13 +2382,66 @@ leoroxx={
 	560.1.28={ death=yes }
 }
 
-samuro_blademaster={
+arnak_blademaster = {
+	name=Arnak
+	dynasty=of_the_blade
+	culture=burning_blade religion=orcish_fel
+	martial=8 diplomacy=2 stewardship=3 intrigue=4 learning=2
+	trait=education_martial_3 trait=physique_good_1 trait=education_martial_prowess_3
+	trait=brave trait=arrogant trait=vengeful trait=diligent trait=lifestyle_blademaster
+	522.3.10 = { birth=yes trait=creature_orc }
+	576.7.1 = {
+		add_trait_xp = {
+			trait = lifestyle_blademaster
+			value = 50
+		}
+	}
+	582.4.15 = { # Injured and let Samuro rule
+		add_trait = disfigured
+		add_trait = maimed
+		add_trait_xp = {
+			trait = lifestyle_blademaster
+			value = 50
+		}
+	}
+	583.1.1 = { employer = samuro_blademaster } # First War
+	586.6.4 = { death = yes }
+}
+
+kamgak_blademaster = {
+	name=Kamgak
+	dynasty=of_the_blade
+	culture=burning_blade religion=orcish_fel
+	martial=9 diplomacy=1 stewardship=2 intrigue=6 learning=1
+	trait=education_martial_1 trait=physique_good_1 trait=education_martial_prowess_2
+	trait=lustful trait=wrathful trait=callous trait=diligent trait=lifestyle_blademaster
+	trait=loyal
+	father=arnak_blademaster
+	542.6.12 = { birth=yes trait=creature_orc }
+	564.6.6 = { # Raid on draenei village
+		add_trait_xp = {
+			trait = lifestyle_blademaster
+			value = 50
+		}
+	}
+	583.1.1 = { employer = samuro_blademaster } # First War
+	586.10.3 = { # Killed during the siege of Stormwind
+		death = {
+			death_reason = death_battle
+			killer = 1008 # Anduin Lothar
+		}
+	}
+}
+
+samuro_blademaster = {
 	name=Samuro
 	dynasty=of_the_blade
 	culture=burning_blade religion=orcish_fel
 	martial=7 diplomacy=2 stewardship=3 intrigue=8 learning=2
 	trait=education_martial_2 trait=physique_good_3 trait=education_martial_prowess_4
 	trait=brave trait=just trait=vengeful trait=diligent trait=lifestyle_blademaster
+	father=arnak_blademaster
+	disallow_random_traits = yes
 	553.4.7={
 		birth=yes trait=creature_orc
 		effect = { make_important_lore_character_effect = yes }
@@ -2407,7 +2468,33 @@ samuro_blademaster={
 	606.4.22={
 		set_relation_friend = character:68001 #Voljin
 	}
-	670.6.9 = { death = yes }
+	615.6.9 = { death = yes }
+}
+
+lantresor_blademaster = {
+	name=Lantresor
+	dynasty=of_the_blade
+	culture=burning_blade religion=orcish_fel
+	martial=7 diplomacy=4 stewardship=3 intrigue=6 learning=3
+	trait=education_martial_3 trait=physique_good_1 trait=education_martial_prowess_4
+	trait=brave trait=just trait=cynical trait=temperate trait=lifestyle_blademaster
+	trait=disloyal
+	father=kamgak_blademaster
+	disallow_random_traits = yes
+	565.1.2 = {
+		birth=yes trait=creature_orc
+		#trait = blood_draenei
+		effect = { make_important_lore_character_effect = yes }
+	}
+	580.6.15 = {
+		add_trait_xp = {
+			trait = lifestyle_blademaster
+			value = 50
+		}
+	}
+	583.1.1 = { employer = samuro_blademaster } # First War
+	596.1.9 = { religion = orcish_shamanism }
+	670.1.1 = { death = yes }
 }
 
 blondy={
@@ -3532,6 +3619,7 @@ mankrik={
 			set_relation_friend = character:olgra
 		}
 	}
+	583.1.1 = { employer = samuro_blademaster } # First War
 	586.1.1={
 		effect = {
 			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
@@ -3644,6 +3732,7 @@ mokvar={ #former member of the Veiled Blade
 	568.1.12={
 		birth=yes trait=creature_orc
 	}
+	583.1.1 = { employer=10300 } # First War
 	605.6.6={
 		employer=anthion_harmon
 	}
@@ -4035,6 +4124,7 @@ samuro_singer={ #Lead singer of the Elite Tauren Chieftains
 	573.4.7={
 		birth=yes trait=creature_orc
 	}
+	583.1.1 = { employer = samuro_blademaster } # First War
 	603.1.1={
 		culture = durotaric
 	}
@@ -4049,6 +4139,7 @@ havoc_the_heartless={ #an especially cruel orc bandit
 	trait=arrogant trait=sadistic trait=impatient trait=viking trait=gallowsbait
 	give_nickname=nick_the_heartless
 	573.4.7={ birth=yes trait=creature_orc }
+	583.1.1 = { employer = samuro_blademaster } # First War
 	590.1.2={
 		effect={
 			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
@@ -4076,6 +4167,7 @@ shive={ #an orc working with Havoc the Heartless
 	trait=education_martial_1
 	trait=greedy trait=sadistic trait=impatient trait=gallowsbait
 	573.4.7={ birth=yes trait=creature_orc }
+	583.1.1 = { employer = samuro_blademaster } # First War
 	604.6.14 = {
 		death = {
 			death_reason = death_battle
@@ -4155,6 +4247,7 @@ burning_blade1 = { #Generated
 	religion = orcish_shamanism
 	culture = burning_blade
 	550.10.13 = { birth = yes trait = creature_orc }
+	583.1.1 = { employer = samuro_blademaster } # First War
 	603.1.1={
 		culture = durotaric
 	}
