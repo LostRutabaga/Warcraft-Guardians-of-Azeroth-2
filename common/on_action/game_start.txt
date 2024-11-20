@@ -1599,6 +1599,16 @@ on_game_start_after_lobby = {
 					add_realm_law_skip_effects = camp_purpose_explorers
 				}
 			}
+			## Samuro of the Blade
+			character:samuro_blademaster ?= {
+				if = {
+					limit = {
+						is_alive = yes
+						is_landless_adventurer = yes
+					}
+					add_realm_law_skip_effects = camp_purpose_mercenaries
+				}
+			}
 			## Markus Wilder - patreon
 			character:310280 ?= {
 				if = {
