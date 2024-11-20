@@ -915,7 +915,7 @@ wc_horde_invasion.1506 = {
 # 9000-9002
 #################################
 
-# Conquering of Northshire # TODO: Change this to fullscreen event
+# Conquering of Northshire
 wc_horde_invasion.9000 = {
 	content_source = dlc_GOA
 	title = wc_horde_invasion.9000.title
@@ -954,7 +954,7 @@ wc_horde_invasion.9000 = {
 	}
 }
 
-# Conquering of Northshire - Northshire side # TODO: Change this to fullscreen event
+# Conquering of Northshire - Northshire side
 wc_horde_invasion.9001 = {
 	content_source = dlc_GOA
 	title = wc_horde_invasion.9001.title
