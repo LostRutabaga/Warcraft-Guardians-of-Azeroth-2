@@ -370,6 +370,7 @@ wc_suramar_events.0011 = {
             }
             20 = {
                 trigger = {
+                    NOT = { has_global_variable = arcandor_restored_global_variable }
                     OR = {
                         has_any_possible_wretched_elves_trigger = yes
                         has_any_wretched_elves_trigger = yes
@@ -707,7 +708,7 @@ wc_suramar_events.0012 = {
                         limit = { is_alive = yes }
                         if = {
                             limit = {
-                                NOT = { has_trait = wretched }
+                                can_become_wretched_trigger = yes
                             }
                             add_trait = wretched
                         }
@@ -1610,10 +1611,6 @@ wc_suramar_events.0041 = {
 
     override_background = { reference = terrain }
 
-    immediate = {
-        add_character_flag = had_faldorei_event
-    }
-
     left_portrait = {
         character = root
         animation = worry
@@ -2116,6 +2113,7 @@ wc_suramar_events.0043 = {
         }
     }
 }
+
 wc_suramar_events.0044 = {
     type = character_event
     content_source = dlc_GOA
@@ -2220,13 +2218,26 @@ wc_suramar_events.0044 = {
 
     # Ok, time to go home
     option = {
-        name = wc_suramar_events.0044.a
-        trigger = {
-            has_arcandor_seed_trigger = yes 
+        name = {
+            text = {
+                first_valid = {
+                    triggered_desc = {
+                        trigger = {
+                            has_arcandor_seed_trigger = yes 
+                        }
+                        desc = wc_suramar_events.0044.a
+                    }
+                    desc = wc_suramar_events.0044.a_alt
+                }
+            }
         }
-        flavor = wc_suramar_events.0044.a_tt
-        add_prestige = minor_prestige_gain
-
+        if = {
+            limit = {
+                has_arcandor_seed_trigger = yes 
+            }
+            custom_tooltip = wc_suramar_events.0044.a_tt
+            add_prestige = minor_prestige_gain
+        }
         ai_chance = {
             base = 100
         }
@@ -2281,6 +2292,7 @@ wc_suramar_events.0044 = {
 				has_trait = lunatic
 				has_trait = possessed
                 has_trait = sadistic
+                has_trait = eccentric
                 has_trait = callous
                 any_secret = { secret_type = secret_cannibal }
 				has_trait = cannibal
@@ -2326,5 +2338,6 @@ wc_suramar_events.0044 = {
             }
             custom_tooltip = suramar_discover_nightfallen_effect_tt
         }
+        add_character_flag = had_faldorei_event
     }
 }

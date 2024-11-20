@@ -222,3 +222,6 @@
  restore_arcandor_decision_tooltip:0 "Restore the Arcan'dor tree in Falanaar"
  restore_arcandor_decision_confirm:0 "The Arcan'dor will rise again."
  decision_group_type_suramar:0 "Suramar Decisions"
+ has_arcandor_seed_trigger_tt:0 "You have [arcandor_seed|E]"
+ game_concept_arcandor_seed:0 "$arcandor_seed_name$"
+ game_concept_arcandor_seed_desc:0 "$arcandor_seed_desc$"
