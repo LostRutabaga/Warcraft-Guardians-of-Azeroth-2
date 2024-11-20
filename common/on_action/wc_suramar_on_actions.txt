@@ -1,11 +1,11 @@
 ﻿on_game_start_after_lobby = {
 	# Warcraft
 	on_actions = {
-		on_game_start_custom_suramar
+		on_game_start_suramar
 	}
 }
 
-on_game_start_custom_suramar = {
+on_game_start_suramar = {
     effect = {
         title:k_suramar.holder ?= {
             trigger_event = { id = wc_suramar_events.0001 }
@@ -27,5 +27,6 @@ suramar_events_pulse = {
         100 = wc_suramar_events.0020 
         100 = wc_suramar_events.0030
         100 = wc_suramar_events.0040
+        10 = wc_suramar_events.0050
     }
 }

@@ -8,7 +8,17 @@ namespace = wc_suramar_events
 # 0020 - You remininsce on Ashara's rule
 # 0030 - Visted by an Elune priestess
 # 0040 - Learn about the Fal'dorei, event chain
-# 0041  - Faldo'rei event chain
+# 0041-0044 Faldo'rei event chain
+# 0050 - Vision from Sargeras
+# 0060 - Someone brings you some tasty arcwine
+# 0070 - You spot murlocs accross the bay
+# 0080 - A wretched or Fal'dorei seeks asylum
+# 0090 - You find an ancient titan artifact
+# 0100 - Someone brings you the seed of arcandor
+# 0110 - The neighboring fal'dorei ruler seeks an alliance
+# 0120 - You spot a naga ship off the coast
+# 0130 - You find a strange portal in the city
+# 0140 - An adventurer is in your realm
 
 # Opening event for the leader of Suramar if barrier is up
 wc_suramar_events.0001 = {
@@ -95,8 +105,13 @@ wc_suramar_events.0002 = {
         title:k_suramar.holder = {
             save_scope_as = suramar_ruler
         }
-        scope:suramar_ruler = { add_character_flag = had_outsider_event }
-        custom_tooltip = suramar_discover_outside_world_effect_tt
+        if = {
+            limit = {
+                scope:suramar_ruler = { can_lower_suramar_barrier_trigger = no }
+            }
+            scope:suramar_ruler = { add_character_flag = had_outsider_event }
+            custom_tooltip = suramar_discover_outside_world_effect_tt
+        }
     }
 }
 
@@ -2339,5 +2354,246 @@ wc_suramar_events.0044 = {
             custom_tooltip = suramar_discover_nightfallen_effect_tt
         }
         add_character_flag = had_faldorei_event
+    }
+}
+
+wc_suramar_events.0050 = {
+    type = character_event
+    content_source = dlc_GOA
+    title = wc_suramar_events.0050.t
+    desc = wc_suramar_events.0050.desc
+    theme = faith
+
+    cooldown = { years = 50 }
+
+    immediate = {
+        add_stress = minor_stress_gain
+    }
+
+    trigger = {
+        is_eligible_for_suramar_events_trigger = yes
+    }
+
+    override_background = { reference = study }
+
+    left_portrait = {
+        character = root
+        triggered_animation = {
+            trigger = {
+                faith = faith:burning_legion_religion
+                NOT = { has_trait = cynical }
+            }
+            animation = personality_zealous
+        }
+        triggered_animation = {
+            trigger = {
+                has_trait = cynical
+            }
+            animation = personality_cynical
+        }
+        triggered_animation = {
+            trigger = {
+                NOT = { faith = faith:burning_legion_religion }
+                has_trait = zealous
+            }
+            animation = dismissal
+        }
+        animation = fear
+    }
+
+    # Decide to convert
+    option = {
+        name = wc_suramar_events.0050.a
+        if = {
+            limit = {
+                NOT = { faith = faith:burning_legion_religion }
+            }
+            set_character_faith_with_conversion = faith:burning_legion_religion
+            stress_impact = {
+                base = medium_stress_impact_loss
+                zealous = minor_stress_impact_gain
+            }
+        }
+        else = {
+            add_piety = minor_piety_gain
+            stress_impact = {
+                base = medium_stress_impact_loss
+                zealous = minor_stress_impact_loss
+            }
+        }
+
+        add_character_modifier = {
+            modifier = wc_suramar_dark_titan_modifier
+            years = 10
+        }
+        
+        if = {
+            limit = {
+                has_title = title:k_suramar
+            }
+            custom_tooltip = {
+                text = wc_suramar_events.0050.a_tt
+            }
+            if = {
+                limit = {
+                    can_lower_suramar_barrier_trigger = no 
+                }
+                add_character_flag = had_suramar_legion_event
+                custom_tooltip = suramar_legion_barrier_tt
+            }
+        }
+        ai_chance = {
+            base = 50
+            modifier = {
+                add = 25
+                OR = {
+                    faith = {
+                        faith_hostility_level = {
+                            target = faith:burning_legion_religion
+                            value = faith_fully_accepted_level
+                        }
+                    }
+                    faith = faith:burning_legion_religion
+                }
+            }
+            modifier = {
+                add = 10
+                faith = {
+                    faith_hostility_level = {
+                        target = faith:burning_legion_religion
+                        value = faith_astray_level
+                    }
+                }
+            }
+            modifier = {
+                add = -10
+                faith = {
+                    faith_hostility_level = {
+                        target = faith:burning_legion_religion
+                        value = faith_hostile_level
+                    }
+                }
+            }
+            modifier = {
+                add = -25
+                faith = {
+                    faith_hostility_level = {
+                        target = faith:burning_legion_religion
+                        value = faith_evil_level
+                    }
+                }
+            }
+        }
+    }
+    option = {
+        name = wc_suramar_events.0050.b
+        trigger = {
+            NOR = { 
+                any_secret = { secret_type = secret_crypto_religionist }
+				exists = secret_faith
+                faith = faith:burning_legion_religion
+            }
+            OR = {
+                intrigue >= high_skill_rating
+                has_trait = schemer
+                has_trait = fickle
+                has_trait = deceitful
+            } 
+        }
+        add_prestige = medium_prestige_gain
+        custom_tooltip = wc_suramar_events.0050.b_tt
+        make_character_crypto_religionist_effect = { CRYPTO_RELIGION = faith:burning_legion_religion }
+        stress_impact = {
+            base = medium_stress_impact_loss
+            zealous = minor_stress_impact_gain
+        }
+        if = {
+            limit = {
+                has_title = title:k_suramar
+                can_lower_suramar_barrier_trigger = no 
+            }
+            add_character_flag = had_suramar_legion_event
+            custom_tooltip = suramar_legion_barrier_tt
+        }
+        ai_chance = {
+            base = 65
+            modifier = {
+                add = 25
+                OR = {
+                    faith = {
+                        faith_hostility_level = {
+                            target = faith:burning_legion_religion
+                            value = faith_fully_accepted_level
+                        }
+                    }
+                    faith = faith:burning_legion_religion
+                }
+            }
+            modifier = {
+                add = 10
+                faith = {
+                    faith_hostility_level = {
+                        target = faith:burning_legion_religion
+                        value = faith_astray_level
+                    }
+                }
+            }
+            modifier = {
+                add = -10
+                faith = {
+                    faith_hostility_level = {
+                        target = faith:burning_legion_religion
+                        value = faith_hostile_level
+                    }
+                }
+            }
+            modifier = {
+                add = -25
+                faith = {
+                    faith_hostility_level = {
+                        target = faith:burning_legion_religion
+                        value = faith_evil_level
+                    }
+                }
+            }
+        }
+    }
+    option = {
+        name = {
+            text = {
+                first_valid = {
+                    triggered_desc = {
+                        trigger = {
+                            faith = faith:burning_legion_religion
+                        }
+                        desc = wc_suramar_events.0050.c_alt
+                    }
+                    desc = wc_suramar_events.0050.c
+                }
+            }
+        }
+
+        add_character_modifier = {
+			modifier = foreboding_visions_modifier 
+			years = 10 
+		}
+
+        if = {
+            limit = {
+                faith = faith:burning_legion_religion 
+            }
+            set_character_faith_with_conversion = faith:cult_of_nightwell
+            stress_impact = {
+                zealous = minor_stress_impact_gain
+            }
+        }
+
+        ai_chance = {
+            base = 100
+            modifier = {
+                factor = 0
+                faith = faith:burning_legion_religion
+            }
+        }
     }
 }

@@ -402,3 +402,12 @@ wc_suramar_mana_crystals_modifier = {
 	diplomacy = 3
 	#TODO_WARCRAFT - max mana
 }
+
+wc_suramar_dark_titan_modifier = {
+	icon = magic_positive
+	
+	martial = 3
+	enemy_hostile_scheme_success_chance_add = -10
+	prowess_no_portrait = 3
+	rf_disorder_opinion = 10
+}

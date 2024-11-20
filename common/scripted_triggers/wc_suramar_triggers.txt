@@ -34,7 +34,10 @@ has_any_wretched_elves_trigger = {
 can_lower_suramar_barrier_trigger = {
     custom_tooltip = {
         text = lower_suramar_barrier_decision_trigger
-        has_character_flag = had_outsider_event
+        OR = {
+            has_character_flag = had_outsider_event
+            has_character_flag = had_suramar_legion_event
+        }
     }
     #TODO_WARCRAFT add more features for legion 3rd invasion
     #TODO_WARCRAFT hook in for scourge nearby?
