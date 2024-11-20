@@ -45,7 +45,7 @@ can_lower_suramar_barrier_trigger = {
         current_date >= 615.1.1
     }
     trigger_else = {
-        always = no 
+        always = yes 
     }
 }
 can_restore_arcandor_trigger = {
@@ -60,5 +60,12 @@ can_restore_arcandor_trigger = {
         has_trait = wretched
         has_trait = creature_faldorei
     }
+    has_arcandor_seed_trigger = yes 
     completely_controls = title:c_meredil
+}
+has_arcandor_seed_trigger = {
+    any_artifact = {
+        artifact_owner = root 
+        has_variable = arcandor_seed
+    }
 }

@@ -4406,7 +4406,10 @@ release_from_prison_interaction = {
 							is_ruler = no
 							gold > 0
 							scope:actor = {
-								has_banish_reason = scope:recipient
+								OR = { # Warcraft
+									has_banish_reason = scope:recipient
+									is_in_isolated_suramar_trigger = yes
+								}
 							}
 						}
 						AND = {
@@ -4417,7 +4420,10 @@ release_from_prison_interaction = {
 						}
 						AND = {
 							scope:actor = {
-								has_banish_reason = scope:recipient
+								OR = { # Warcraft
+									has_banish_reason = scope:recipient
+									is_in_isolated_suramar_trigger = yes
+								}
 							}
 							scope:actor = {
 								opinion = {

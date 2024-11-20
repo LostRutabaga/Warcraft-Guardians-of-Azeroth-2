@@ -1,4 +1,4 @@
-﻿namespace = wc_suramar_events
+namespace = wc_suramar_events
 ### SURAMAR EVENTS ###
 # 0001 - Opening event
 # 0002 - You learn about the world beyond Suramar
@@ -1165,6 +1165,7 @@ wc_suramar_events.0030 = {
 
     immediate = {
         create_character = {
+            dynasty = none
             template = priest_character_template
             gender_female_chance = 75
             location = root.location
@@ -1468,7 +1469,11 @@ wc_suramar_events.0040 = {
     }
 
     trigger = {
-        NOT = { has_character_flag = had_faldorei_event }
+        NOR = { 
+            has_trait = wretched
+            has_trait = creature_faldorei
+            has_character_flag = had_faldorei_event
+        }
         is_eligible_for_suramar_events_trigger = yes
         OR = {
             exists = cp:councillor_spymaster
@@ -1600,8 +1605,8 @@ wc_suramar_events.0041 = {
     theme = suramar
 
     override_effect_2d = {
-		reference = fog	
-	}
+        reference = fog
+    }
 
     override_background = { reference = terrain }
 
@@ -1697,11 +1702,6 @@ wc_suramar_events.0042 = {
     title = wc_suramar_events.0040.t
     desc = wc_suramar_events.0042.desc
     theme = suramar
-
-    override_effect_2d = {
-		reference = fog	
-	}
-
     override_background = { reference = terrain }
 
     immediate = {
@@ -1718,7 +1718,7 @@ wc_suramar_events.0042 = {
             75 = {
                 modifier = {
                     add = 25
-                    is_ai = no 
+                    is_ai = no
                 }
                 modifier = {
                     add = 25
@@ -1770,6 +1770,7 @@ wc_suramar_events.0043 = {
 
     immediate = {
         create_character = {
+            dynasty = none
             gender_female_chance = 50
             location = root.location
             age = { 18 35 }
@@ -1813,7 +1814,7 @@ wc_suramar_events.0043 = {
         name = wc_suramar_events.0043.a
 
         duel = {
-            skill = prowess
+            skills = { prowess martial }
             target = scope:attacker
             80 = {
                 compare_modifier = {
@@ -1822,9 +1823,17 @@ wc_suramar_events.0043 = {
                 }
                 desc = wc_suramar_events.0043.success
                 save_scope_value_as = { name = falanaar_duel value = flag:won }
-                random = {
-                    chance = 20
-                    scope:attacker = { increase_wounds_effect = { REASON = duel } }
+                scope:attacker = { override_death_killer_effect = { death_reason = death_duel killer = root } }
+                scope:informant = {
+                    add_opinion = {
+                        target = root
+                        modifier = saved_my_life_opinion
+                        opinion = 40
+                    }
+                }
+                add_hook = {
+                    target = scope:informant
+                    type = saved_my_life_hook
                 }
             }
             30 = {
@@ -1836,7 +1845,17 @@ wc_suramar_events.0043 = {
                 save_scope_value_as = { name = falanaar_duel value = flag:lost }
                 random = {
                     chance = 20
-                    scope:attacker = { increase_wounds_effect = { REASON = duel } }
+                    increase_wounds_effect = { REASON = duel }
+                }
+                scope:informant = {
+                    random_list = {
+                        20 = {
+                            increase_wounds_effect = { REASON = duel }
+                        }
+                        5 = {
+                            override_death_killer_effect = { death_reason = death_duel killer = scope:attacker }
+                        }
+                    }
                 }
             }
         }
@@ -1853,7 +1872,10 @@ wc_suramar_events.0043 = {
             }
             modifier = {
                 factor = 2
-                highest_skill_including_prowess = prowess
+                OR = {
+                    highest_skill_including_prowess = martial
+                    highest_skill_including_prowess = prowess
+                }
             }
             modifier = {
                 factor = 0
@@ -1861,23 +1883,448 @@ wc_suramar_events.0043 = {
             }
             opinion_modifier = {
                 opinion_target = scope:informant
-				multiplier = 1
+                multiplier = 1
             }
         }
     }
 
     # Try and calm the beast
     option = {
+        name = wc_suramar_events.0043.b
+        trigger = {
+            OR = {
+                learning >= high_skill_rating
+                intrigue >= high_skill_rating
+            }
+        }
+        show_as_unavailable = { always = yes }
 
+        duel = {
+            skills = { intrigue learning }
+            target = scope:attacker
+            30 = {
+                compare_modifier = {
+                    value = scope:duel_value
+                    multiplier = 3.5
+                }
+                desc = wc_suramar_events.0043.success
+                save_scope_value_as = { name = falanaar_duel value = flag:won }
+                scope:informant = {
+                    add_opinion = {
+                        target = root
+                        modifier = saved_my_life_opinion
+                        opinion = 40
+                    }
+                }
+                add_hook = {
+                    target = scope:informant
+                    type = saved_my_life_hook
+                }
+            }
+           60 = {
+                compare_modifier = {
+                    value = scope:duel_value
+                    multiplier = -3.5
+                }
+                desc = wc_suramar_events.0043.failure
+                save_scope_value_as = { name = falanaar_duel value = flag:lost }
+                random = {
+                    chance = 20
+                    increase_wounds_effect = { REASON = duel }
+                }
+                scope:informant = {
+                    random_list = {
+                        20 = {
+                            increase_wounds_effect = { REASON = duel }
+                        }
+                        5 = {
+                            override_death_killer_effect = { death_reason = death_duel killer = scope:attacker }
+                        }
+                    }
+                }
+            }
+        }
+
+        stress_impact = {
+            brave = minor_stress_impact_loss
+            craven = minor_stress_impact_gain
+        }
+
+        ai_chance = {
+            base = 50
+            ai_value_modifier = {
+                ai_energy = 1
+            }
+            modifier = {
+                factor = 2
+                OR = {
+                    highest_skill_including_prowess = learning
+                    highest_skill_including_prowess = intrigue
+                }
+            }
+            modifier = {
+                factor = 0
+                has_trait = craven
+            }
+            opinion_modifier = {
+                opinion_target = scope:informant
+                multiplier = 1
+            }
+        }
     }
 
     # Send your guard
     option = {
+        name = wc_suramar_events.0043.c
+        trigger = {
+            exists = scope:faldorei_guard
+        }
+        scope:faldorei_guard = {
+            duel = {
+                skills = { martial prowess }
+                target = scope:attacker
+                40 = {
+                    compare_modifier = {
+                        value = scope:duel_value
+                        multiplier = 3.5
+                    }
+                    desc = wc_suramar_events.0043.success
+                    root = { save_scope_value_as = { name = falanaar_duel value = flag:won } }
+                    scope:attacker = { override_death_killer_effect = { death_reason = death_duel killer = scope:faldorei_guard } }
+                    scope:informant = {
+                        add_opinion = {
+                            target = root
+                            modifier = grateful_opinion
+                            opinion = 40
+                        }
+                        add_opinion = {
+                            target = scope:faldorei_guard
+                            modifier = saved_my_life_opinion
+                            opinion = 40
+                        }
+                    }
+                    add_hook = {
+                        target = scope:informant
+                        type = saved_my_life_hook
+                    }
+                }
+                50 = {
+                    compare_modifier = {
+                        value = scope:duel_value
+                        multiplier = -3.5
+                    }
+                    desc = wc_suramar_events.0043.failure
+                    root = { save_scope_value_as = { name = falanaar_duel value = flag:lost } }
+                    random = {
+                        chance = 20
+                        increase_wounds_effect = { REASON = duel }
+                    }
+                    random = {
+                        chance = 5
+                        override_death_killer_effect = { death_reason = death_duel killer = scope:attacker }
+                    }
+                    scope:informant = {
+                        random_list = {
+                            70 = {}
+                            20 = {
+                                increase_wounds_effect = { REASON = duel }
+                            }
+                            5 = {
+                                override_death_killer_effect = { death_reason = death_duel killer = scope:attacker }
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
+        stress_impact = {
+            compassionate = minor_stress_impact_loss
+        }
+
+        ai_chance = {
+            base = 100
+            ai_value_modifier = {
+                ai_energy = 1
+            }
+            opinion_modifier = {
+                opinion_target = scope:informant
+                multiplier = 1
+            }
+        }
     }
 
     # Leave them to die
     option = {
+        name = wc_suramar_events.0043.d
 
+        save_scope_value_as = { name = falanaar_duel value = flag:left }
+
+        scope:informant = {
+            add_opinion = {
+                modifier = angry_opinion
+                target = root
+                opinion = -30
+            }
+            random = {
+                chance = 50
+                increase_wounds_effect = { REASON = duel }
+            }
+            random = {
+                chance = 10
+                override_death_killer_effect = { death_reason = death_duel killer = scope:attacker }
+            }
+        }
+
+        stress_impact = {
+            callous = medium_stress_impact_loss
+            compassionate = major_stress_impact_gain
+            sadistic = medium_stress_impact_loss
+        }
+
+        if = {
+            limit =  {
+                exists = scope:faldorei_guard
+            }
+            scope:faldorei_guard = {
+                add_opinion = {
+                    target = root
+                    modifier = disappointed_opinion
+                    opinion = -15
+                }
+            }
+        }
+
+        ai_chance = {
+            base = 10
+            ai_value_modifier = {
+                ai_compassion = -1
+            }
+            opinion_modifier = {
+                opinion_target = scope:informant
+                multiplier = -1
+            }
+        }
+    }
+
+    after = {
+        trigger_event = {
+            id = wc_suramar_events.0044
+        }
+        current_travel_plan = {
+            delay_travel_plan = { days = 5 }
+        }
+    }
+}
+wc_suramar_events.0044 = {
+    type = character_event
+    content_source = dlc_GOA
+    title = wc_suramar_events.0040.t
+    desc = {
+        # Duel outcome
+        first_valid = {
+            triggered_desc = {
+                trigger = {
+                    scope:falanaar_duel = flag:lost
+                }
+                desc = wc_suramar_events.0044.desc_lost
+            }
+            triggered_desc = {
+                trigger = {
+                    scope:falanaar_duel = flag:won
+                }
+                desc = wc_suramar_events.0044.desc_won
+            }
+            triggered_desc = {
+                trigger = {
+                    scope:falanaar_duel = flag:left
+                }
+                desc = wc_suramar_events.0044.desc_left
+            }
+        }
+        desc = wc_suramar_events.0044.desc
+        triggered_desc = {
+            trigger = {
+                scope:informant = { is_alive = no }
+            }
+            desc = wc_suramar_events.0044.desc_died
+        }
+        triggered_desc = {
+            trigger = {
+                scope:attacker = { is_alive = no }
+            }
+            desc = wc_suramar_events.0044.desc_died_attacker
+        }
+        first_valid = {
+            triggered_desc = {
+                trigger = {
+                    scope:informant = { is_alive = yes }
+                }
+                desc = wc_suramar_events.0044.desc_outro
+            }
+            triggered_desc = {
+                trigger = {
+                    scope:informant = { is_alive = no }
+                }
+                desc = wc_suramar_events.0044.desc_outro_solo
+            }
+        }
+        first_valid = {
+            triggered_desc = {
+                trigger = {
+                    has_arcandor_seed_trigger = yes 
+                    scope:informant = { is_alive = yes }
+                }
+                desc = wc_suramar_events.0044.desc_seed
+            }
+            triggered_desc = {
+                trigger = {
+                    has_arcandor_seed_trigger = yes 
+                    scope:informant = { is_alive = no }
+                }
+                desc = wc_suramar_events.0044.desc_seed_solo
+            }
+        }
+    }
+    theme = suramar
+
+    override_background = { reference = dungeon }
+
+    left_portrait = {
+        character = root 
+        animation = worry
+    }
+
+    right_portrait = {
+        character = scope:informant
+        animation = stress
+    }
+
+    lower_right_portrait = {
+        character = scope:attacker
+    }
+
+    immediate = {
+        if = {
+            limit = {
+                scope:informant = is_alive = no
+                NOT = { scope:falanaar_duel = flag:left }
+            }
+            stress_impact = {
+                base = medium_stress_impact_gain
+                sadistic = minor_stress_impact_loss
+                callous = minor_stress_impact_loss
+            }
+        }
+    }
+
+    # Ok, time to go home
+    option = {
+        name = wc_suramar_events.0044.a
+        trigger = {
+            has_arcandor_seed_trigger = yes 
+        }
+        flavor = wc_suramar_events.0044.a_tt
+        add_prestige = minor_prestige_gain
+
+        ai_chance = {
+            base = 100
+        }
+    }
+
+    # Look for something
+    option = {
+        name = wc_suramar_events.0044.b
+
+        random_list = {
+            desc = wc_suramar_events.0044.b_tt
+            50 = {
+                send_interface_toast = {
+                    type = event_toast_effect_good
+                    left_icon = root
+                    title = wc_suramar_events.0044.b_success
+                    add_character_modifier = {
+                        modifier = wc_suramar_mana_crystals_modifier
+                        years = 2
+                    }
+                }
+            }
+            50 = {
+                send_interface_toast = {
+                    type = event_toast_effect_bad
+                    left_icon = root
+                    title = wc_suramar_events.0044.b_fail
+                    add_stress = minor_stress_gain
+                    random = {
+                        chance = 25
+                        increase_wounds_effect = { REASON = fire }
+                    }
+                }
+                
+            }
+        }
+        ai_chance = {
+            base = 50
+        }
+    }
+
+    # Take the corpse back for research
+    option = {
+        name = wc_suramar_events.0044.c
+        trigger = {
+            OR = {
+                scope:informant = { is_alive = no }
+                scope:attacker = { is_alive = no }
+            }
+            OR = {
+				has_trait = gluttonous
+				has_trait = lunatic
+				has_trait = possessed
+                has_trait = sadistic
+                has_trait = callous
+                any_secret = { secret_type = secret_cannibal }
+				has_trait = cannibal
+			}
+        }
+
+        if = {
+            limit = {
+                scope:informant = { is_alive = no }
+            }
+            scope:informant = { save_scope_as = corpse }
+        }
+        else = {
+            scope:attacker = { save_scope_as = corpse }
+        }
+
+        custom_tooltip = wc_suramar_events.0044.c_tt
+
+        give_cannibal_secret_or_trait_effect = yes
+		add_character_modifier = {
+			modifier = ate_good_meal
+			days = 365
+		}
+
+        stress_impact = {
+			base = medium_stress_impact_loss
+			gluttonous = minor_stress_impact_loss
+			compassionate = major_stress_impact_gain
+            just = minor_stress_impact_gain
+            sadistic = minor_stress_impact_loss
+            callous = minor_stress_impact_loss
+		}
+
+        ai_chance = {
+            base = 5
+        }
+    }
+
+    after = {
+        if = {
+            limit = {
+                can_restore_arcandor_trigger = no
+            }
+            custom_tooltip = suramar_discover_nightfallen_effect_tt
+        }
     }
 }

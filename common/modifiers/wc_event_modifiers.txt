@@ -396,3 +396,9 @@ wc_suramar_persecuting_elunists_modifier = {
 	icon = piety_mixed
 	kaldorei_religion_opinion = -25
 }
+
+wc_suramar_mana_crystals_modifier = {
+	icon = magic_positive
+	diplomacy = 3
+	#TODO_WARCRAFT - max mana
+}
