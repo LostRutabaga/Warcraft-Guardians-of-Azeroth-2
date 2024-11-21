@@ -907,10 +907,31 @@ wc_horde_invasion.1506 = {
 		character = root
 		animation = prayer
 	}
+	lower_right_portrait = {
+		character = scope:devoted
+	}
 
 	immediate = {
 		show_as_tooltip = { set_character_secret_faith = faith:twilights_hammer_cult }
 		make_character_crypto_religionist_effect = { CRYPTO_RELIGION = faith:twilights_hammer_cult }
+
+		create_character = {
+			location = root.location
+			template = preacher_template
+			faith = faith:orcish_fel
+			culture = culture:twilights_hammer
+			save_scope_as = devoted
+			after_creation = { # Warcraft
+				trigger_race_giving_no_gene_effect = yes
+			}
+		}
+
+		scope:devoted = {
+			death = {
+				killer = root
+				death_reason = death_viciously_dismembered
+			}
+		}
 	}
 
 	option = { # The Hour of Twilight come!
