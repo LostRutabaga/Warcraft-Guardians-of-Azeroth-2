@@ -175,7 +175,7 @@
 	culture=bleeding_hollow religion=orcish_fel
 	sexuality = heterosexual
 	martial=8 diplomacy=6 stewardship=4 intrigue=5 learning=7
-	trait=education_martial_3
+	trait=education_martial_4
 	trait=brave trait=impatient trait=stubborn trait=just
 	trait=one_eyed trait=lifestyle_mystic trait=shrewd
 	trait=aggressive_attacker trait=jungle_stalker

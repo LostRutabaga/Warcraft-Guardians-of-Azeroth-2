@@ -93,7 +93,7 @@
  wc_horde_invasion.1505.a_flavor:0 "#EMP "Now everything is clear. The Legion wages its petty crusade out of fear of these gods, but it is doomed to fail, for the inevitable fate of the universe is the Twilight Hour.\nThe Horde, these visions, my encounter with the pale orcs — all of this cannot always be mere coincidence. Gall respects only strength, and so he must be made to see that this is the true path forward."#!"
  convert_to_twilights_hammer_effect_tt:0 "You will attempt to convince Gall to embrace Their will:\nThis can lead to your secret conversion to the [new_faith.GetName|V]"
  wc_horde_invasion.1505.b:0 "We can't betray the Burning Legion."
- wc_horde_invasion.1505.b_flavor:0 "When you strike a pact with the Legion, there is no turning back. To think we could outwit the devil himself would invite horrors beyond imagining. You cannot betray the Shadow Council."
+ wc_horde_invasion.1505.b_flavor:0 "When you strike a pact with the Legion, there is no turning back. To think we could outwit the highest demonic powers would invite horrors beyond imagining. You cannot betray the Shadow Council."
  wc_horde_invasion.1505.c:0 "No one can tell us what to do."
  wc_horde_invasion.1505.c_flavor:0 "#EMP "We are not slaves to demons, nor to whispers in the dark. Gall was right — we are the masters of our fate, and strength is ours to command. These voices… I will silence them myself!"#!"
 
