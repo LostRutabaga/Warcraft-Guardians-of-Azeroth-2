@@ -872,7 +872,13 @@ wc_horde_invasion.1505 = {
 		flavor = wc_horde_invasion.1505.b_flavor
 
 		add_trait = loyal
-		add_piety = medium_piety_gain
+		root = { set_relation_friend = { reason = friend_show_loyalty target = scope:guldan } } # Enforce your loyalty
+
+		# TODO: Start Whispers of the Old Gods here
+
+		ai_chance = {
+			base = 0
+		}
 	}
 
 	option = { # Nobody can command us (no canon)
@@ -880,6 +886,11 @@ wc_horde_invasion.1505 = {
 		flavor = wc_horde_invasion.1505.c_flavor
 
 		# TODO: Secret conversion to Dark Shamanism
+		# TODO: Start Whispers of the Old Gods here
+
+		ai_chance = {
+			base = 0
+		}
 	}
 }
 
@@ -907,6 +918,7 @@ wc_horde_invasion.1506 = {
 		flavor = wc_horde_invasion.1506.a_flavor
 
 		add_piety = minor_piety_gain
+		#TODO: Twilight Canticle artifact
 	}
 }
 
