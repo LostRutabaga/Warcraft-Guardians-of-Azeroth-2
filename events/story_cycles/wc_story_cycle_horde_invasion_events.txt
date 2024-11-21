@@ -660,7 +660,6 @@ wc_horde_invasion.1502 = {
     }
 	theme = horde
 
-	override_background = { reference = throne_room_tribal }
 	left_portrait = {
 		character = root
 		animation = anger
@@ -778,7 +777,6 @@ wc_horde_invasion.1504 = {
 	desc = wc_horde_invasion.1504.desc
 	theme = horde
 
-	override_background = { reference = throne_room_tribal }
 	left_portrait = {
 		character = root
 		animation = personality_bold
@@ -841,7 +839,6 @@ wc_horde_invasion.1505 = {
 	desc = wc_horde_invasion.1505.desc
 	theme = horde
 
-	override_background = { reference = throne_room_tribal }
 	left_portrait = {
 		character = root
 		animation = disbelief
@@ -902,7 +899,6 @@ wc_horde_invasion.1506 = {
 	desc = wc_horde_invasion.1506.desc
 	theme = horde
 
-	override_background = { reference = throne_room_tribal }
 	left_portrait = {
 		character = root
 		animation = prayer
