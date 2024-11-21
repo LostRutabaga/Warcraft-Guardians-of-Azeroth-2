@@ -911,14 +911,17 @@ wc_horde_invasion.1506 = {
 		character = scope:devoted
 	}
 	artifact = {
-		target = scope:twilight_canticle
+		target = scope:newly_created_artifact
 		position = lower_center_portrait
 	}
 
 	immediate = {
 		faith:twilights_hammer_cult = { save_scope_as = new_faith }
 
-		# Secret convert to Twilight's Hammer
+		# Create the Twilight Canticle
+		create_artifact_twilight_canticle_effect = { OWNER = root }
+
+		# Secret conversion to Twilight's Hammer
 		show_as_tooltip = { set_character_secret_faith = faith:twilights_hammer_cult }
 		make_character_crypto_religionist_effect = { CRYPTO_RELIGION = faith:twilights_hammer_cult }
 
@@ -939,9 +942,6 @@ wc_horde_invasion.1506 = {
 				death_reason = death_viciously_dismembered
 			}
 		}
-
-		# Create the Twilight Canticle
-		create_artifact_twilight_canticle_effect = { OWNER = root }
 	}
 
 	option = { # The Hour of Twilight come!
