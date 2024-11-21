@@ -844,17 +844,20 @@ wc_horde_invasion.1505 = {
 	override_background = { reference = throne_room_tribal }
 	left_portrait = {
 		character = root
-		animation = personality_zealous
+		animation = disbelief
 	}
 
 	option = { # Gall will see the truth (canon)
 		name = wc_horde_invasion.1505.a
-		flavor = wc_horde_invasion.1505.a.flavor
+		flavor = wc_horde_invasion.1505.a_flavor
 
-		#show_as_tooltip = { set_character_secret_faith = faith:twilights_hammer_cult }
-		#make_character_crypto_religionist_effect = { CRYPTO_RELIGION = faith:twilights_hammer_cult }
+		trigger_event = {
+			id = wc_horde_invasion.1506
+			days = 66
+		}
 
-		#add_piety = 250
+		faith:twilights_hammer_cult = { save_temporary_scope_as = new_faith }
+		custom_tooltip = convert_to_twilights_hammer_effect_tt
 
 		ai_chance = {
 			base = 100
@@ -866,16 +869,21 @@ wc_horde_invasion.1505 = {
 
 	option = { # Our masters are the demons (not canon)
 		name = wc_horde_invasion.1505.b
-		flavor = wc_horde_invasion.1505.b.flavor
+		flavor = wc_horde_invasion.1505.b_flavor
+
+		add_trait = loyal
+		add_piety = medium_piety_gain
 	}
 
 	option = { # Nobody can command us (no canon)
 		name = wc_horde_invasion.1505.c
-		flavor = wc_horde_invasion.1505.c.flavor
+		flavor = wc_horde_invasion.1505.c_flavor
+
+		# TODO: Secret conversion to Dark Shamanism
 	}
 }
 
-# Conversion of the other Twilight's Hammer
+# Cho'gall conversion
 wc_horde_invasion.1506 = {
 	type = character_event
 	content_source = dlc_GOA
@@ -886,27 +894,19 @@ wc_horde_invasion.1506 = {
 	override_background = { reference = throne_room_tribal }
 	left_portrait = {
 		character = root
-		animation = lunatic
+		animation = prayer
+	}
+
+	immediate = {
+		show_as_tooltip = { set_character_secret_faith = faith:twilights_hammer_cult }
+		make_character_crypto_religionist_effect = { CRYPTO_RELIGION = faith:twilights_hammer_cult }
 	}
 
 	option = { # The Hour of Twilight come!
 		name = wc_horde_invasion.1506.a
+		flavor = wc_horde_invasion.1506.a_flavor
 
-		show_as_tooltip = { set_character_secret_faith = faith:twilights_hammer_cult }
-		make_character_crypto_religionist_effect = { CRYPTO_RELIGION = faith:twilights_hammer_cult }
-
-		add_piety = 100
-
-		ai_chance = {
-			base = 100
-			ai_value_modifier = {
-				ai_zeal = -1
-			}
-		}
-	}
-
-	option = { # I have new masters
-		name = wc_horde_invasion.1506.b
+		add_piety = minor_piety_gain
 	}
 }
 

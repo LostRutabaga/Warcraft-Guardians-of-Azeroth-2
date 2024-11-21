@@ -87,22 +87,20 @@
  wc_horde_invasion.1504.a_tooltip:0 "You send Bleeding Hollow scouts to explore the West in search of lands to conquer."
  wc_horde_invasion.1504.b:0 "I will seize the Horde before my time comes!"
  wc_horde_invasion.1504.b_flavor:0 "Your life has been defined by the struggle to ensure your clan’s survival. Seizing the title of Warchief before your death would be the pinnacle of your glory, carving your name into history. The other Warlords will surely admire your audacity."
-
  wc_horde_invasion.1505.title:0 "The Whispers"
- wc_horde_invasion.1505.desc:0 "WIP"
- wc_horde_invasion.1505.a:0 " @twilights_hammer_cult_icon!"
- wc_horde_invasion.1505.a.flavor:0 "AAAAAAAAAH"
+ wc_horde_invasion.1505.desc:0 "The moment #EMP we#! crossed the Dark Portal, visions and whispers besieged #EMP our#! minds. At first, I thought it was yet another manifestation of the demons [guldan.GetFirstName] had [Glossary( 'taught us about', 'CHOGALL_FORMATION_GLOSS' )]. But over time, as I led [ROOT.Char.GetPrimaryTitle.GetName|l], I came to understand. These visions do not come from demons but from their forgotten gods, forces far older and more powerful than the Legion itself.\n\n#EMP Gall#! remains strangely silent. #EMP He#!, so prone to impulsiveness, seems untouched by these voices. But I hear them, growing ever stronger… And #EMP our#! [Glossary( 'pale orcs', 'PALE_ORCS_GLOSS' )] — once the most unruly of all the clans — now obey #EMP us#! without question, as if guided by a superior will. They call #EMP us#! the Twilight Prophets…"
+ wc_horde_invasion.1505.a:0 "What if they were right? I must convince Gall. @twilights_hammer_cult_icon!"
+ wc_horde_invasion.1505.a_flavor:0 "#EMP "Now everything is clear. The Legion wages its petty crusade out of fear of these gods, but it is doomed to fail, for the inevitable fate of the universe is the Twilight Hour.\nThe Horde, these visions, my encounter with the pale orcs — all of this cannot always be mere coincidence. Gall respects only strength, and so he must be made to see that this is the true path forward."#!"
+ convert_to_twilights_hammer_effect_tt:0 "You will attempt to convince Gall to embrace Their will:\nThis can lead to your secret conversion to the [new_faith.GetName|V]"
  wc_horde_invasion.1505.b:0 "We can't betray the Burning Legion."
- wc_horde_invasion.1505.b.flavor:0 "AAAAAAAAAAAAAAH"
+ wc_horde_invasion.1505.b_flavor:0 "When you strike a pact with the Legion, there is no turning back. To think we could outwit the devil himself would invite horrors beyond imagining. You cannot betray the Shadow Council."
  wc_horde_invasion.1505.c:0 "No one can tell us what to do."
- wc_horde_invasion.1505.c.flavor:0 "AAAAAAAAAAAAAAH"
+ wc_horde_invasion.1505.c_flavor:0 "#EMP "We are not slaves to demons, nor to whispers in the dark. Gall was right — we are the masters of our fate, and strength is ours to command. These voices… I will silence them myself!"#!"
 
- # The hour of Twilight is upon us
-
- wc_horde_invasion.1506.title:0 "$wc_horde_invasion.1505.title$"
+ wc_horde_invasion.1506.title:0 "The Hour of Twilight"
  wc_horde_invasion.1506.desc:0 "WIP"
- wc_horde_invasion.1506.a:0 "Glory to [twilights_hammer_cult.PantheonTerm]!"
- wc_horde_invasion.1506.b:0 "The demons are my new masters."
+ wc_horde_invasion.1506.a:0 "The Hour of Twilight is upon us!"
+ wc_horde_invasion.1505.a_flavor:0 "AAAAAAAAAH"
 
  #################################
  # Conquests of the Horde
@@ -145,3 +143,5 @@
  BLOOD_OF_MANNOROTH_GLOSS:0 "The Blood of Mannoroth, a vile substance, is the very essence of the pit lord Mannoroth. When consumed, it grants immense strength and bloodlust but at a terrible cost: eternal servitude to the Burning Legion. It was this cursed blood that Gul'dan used to corrupt the orcs, marking the beginning of their descent into darkness."
  JUNGLE_OF_TANAAN_GLOSS:0 "Once a lush and untamed jungle, Tanaan was home to some of the fiercest orc clans. But, as Draenor fell into decline, it withered at an alarming and unexplained pace. Today, it is nothing more than a barren wasteland, now known as the Hellfire Peninsula."
  EYE_RITUAL_GLOSS:0 "When a new chieftain rises, every Bleeding Hollow lord must undergo the dark Eye Ritual. This rite demands they sacrifice one of their eyes in exchange for a prophetic vision of their own death. It is no trivial act: those who dare to perform the ritual emerge forever changed, freed from fear but haunted by the certainty of their fate."
+ CHOGALL_FORMATION_GLOSS:0 ""
+ PALE_ORCS_GLOSS:0 ""
