@@ -938,7 +938,6 @@ wc_horde_invasion.1506 = {
 		name = wc_horde_invasion.1506.a
 		flavor = wc_horde_invasion.1506.a_flavor
 
-		add_piety = minor_piety_gain
 		#TODO: Twilight Canticle artifact
 	}
 }
