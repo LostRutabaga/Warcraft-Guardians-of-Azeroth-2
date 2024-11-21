@@ -24,3 +24,18 @@ horde = {
 		reference = throne_room_tribal
 	}
 }
+
+twilights_hammer = {
+	icon = {
+		reference = "gfx/interface/icons/event_types/type_horde.dds"
+	}
+	header_background = {
+		reference = "gfx/interface/window_event/event_header_purple.dds"
+	}
+	sound = {
+		reference = "event:/SFX/Events/Themes/sfx_event_theme_type_prison"
+	}
+	background = {
+		reference = wc_twilights_hammer
+	}
+}

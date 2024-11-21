@@ -837,7 +837,7 @@ wc_horde_invasion.1505 = {
 	content_source = dlc_GOA
 	title = wc_horde_invasion.1505.title
 	desc = wc_horde_invasion.1505.desc
-	theme = horde
+	theme = twilights_hammer
 
 	left_portrait = {
 		character = root
@@ -897,7 +897,7 @@ wc_horde_invasion.1506 = {
 	content_source = dlc_GOA
 	title = wc_horde_invasion.1506.title
 	desc = wc_horde_invasion.1506.desc
-	theme = horde
+	theme = twilights_hammer
 
 	left_portrait = {
 		character = root
