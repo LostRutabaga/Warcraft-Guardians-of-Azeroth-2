@@ -910,11 +910,19 @@ wc_horde_invasion.1506 = {
 	lower_right_portrait = {
 		character = scope:devoted
 	}
+	artifact = {
+		target = scope:twilight_canticle
+		position = lower_center_portrait
+	}
 
 	immediate = {
+		faith:twilights_hammer_cult = { save_scope_as = new_faith }
+
+		# Secret convert to Twilight's Hammer
 		show_as_tooltip = { set_character_secret_faith = faith:twilights_hammer_cult }
 		make_character_crypto_religionist_effect = { CRYPTO_RELIGION = faith:twilights_hammer_cult }
 
+		# Create a devoted sacrificed during the event
 		create_character = {
 			location = root.location
 			template = preacher_template
@@ -925,7 +933,6 @@ wc_horde_invasion.1506 = {
 				trigger_race_giving_no_gene_effect = yes
 			}
 		}
-
 		scope:devoted = {
 			death = {
 				killer = root
@@ -933,14 +940,15 @@ wc_horde_invasion.1506 = {
 			}
 		}
 
-		faith:twilights_hammer_cult = { save_scope_as = new_faith }
+		# Create the Twilight Canticle
+		create_artifact_twilight_canticle_effect = { OWNER = root }
 	}
 
 	option = { # The Hour of Twilight come!
 		name = wc_horde_invasion.1506.a
 		flavor = wc_horde_invasion.1506.a_flavor
 
-		#TODO: Twilight Canticle artifact
+		show_as_tooltip = { create_artifact_twilight_canticle_effect = { OWNER = root } }
 	}
 }
 
