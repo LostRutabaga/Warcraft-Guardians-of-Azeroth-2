@@ -843,7 +843,7 @@ wc_horde_invasion.1503 = {
 			scope:durotan = {
 				add_opinion = {
 					target = root
-					modifier = unreasonable_opinion
+					modifier = trusted_judgement_opinion
 				}
 			}
 		}
