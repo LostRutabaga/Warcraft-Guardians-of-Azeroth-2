@@ -878,17 +878,18 @@ wc_horde_invasion.1505 = {
 		}
 	}
 
-	option = { # Nobody can command us (no canon)
-		name = wc_horde_invasion.1505.c
-		flavor = wc_horde_invasion.1505.c_flavor
+	# TODO: Readd when Dark Shamanism is in game
+	#option = { # Nobody can command us (no canon)
+	#	name = wc_horde_invasion.1505.c
+	#	flavor = wc_horde_invasion.1505.c_flavor
 
 		# TODO: Secret conversion to Dark Shamanism
 		# TODO: Start Whispers of the Old Gods here
 
-		ai_chance = {
-			base = 0
-		}
-	}
+	#	ai_chance = {
+	#		base = 0
+	#	}
+	#}
 }
 
 # Cho'gall conversion
