@@ -14,3 +14,10 @@ brought_discipline_horde_modifier = {
 	general_opinion = -10
 	levy_size = -0.1
 }
+
+path_to_glory_modifier = {
+	icon = prestige_positive
+
+	monthly_prestige = 0.5
+	
+}

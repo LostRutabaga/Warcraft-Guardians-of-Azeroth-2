@@ -775,7 +775,11 @@ wc_horde_invasion.1503 = {
 		name = wc_horde_invasion.1503.a
 		flavor = wc_horde_invasion.1503.a_flavor
 
-		add_prestige = medium_prestige_gain
+		# Path to glory modifier
+		add_character_modifier = {
+			modifier = path_to_glory_modifier
+			years = 5
+		}
 
 		# You are strong and ambitious, and you want the warchief position, the Horde like that
 		title:e_horde.holder = {
@@ -867,7 +871,7 @@ wc_horde_invasion.1504 = {
 		name = wc_horde_invasion.1504.a
 		flavor = wc_horde_invasion.1504.a_flavor
 
-		add_prestige = major_prestige_gain
+		add_prestige = medium_prestige_gain
 		add_trait = loyal # You are loyal to the Horde, to the Warchief and to your clan
 
 		# TODO: Start Invasion of Stranglethorn story cycle here
@@ -884,7 +888,11 @@ wc_horde_invasion.1504 = {
 		name = wc_horde_invasion.1504.b
 		flavor = wc_horde_invasion.1504.b_flavor
 
-		add_prestige = minor_prestige_gain
+		# Path to glory modifier
+		add_character_modifier = {
+			modifier = path_to_glory_modifier
+			years = 5
+		}
 
 		if = { # Your impatience is changed into ambition
 			limit = { has_trait = impatient }
