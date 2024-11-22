@@ -773,10 +773,80 @@ wc_horde_invasion.1503 = {
 
 	option = { # Path to glory (canon)
 		name = wc_horde_invasion.1503.a
+		flavor = wc_horde_invasion.1503.a_flavor
+
+		add_prestige = medium_prestige_gain
+
+		# You are strong and ambitious, and you want the warchief position, the Horde like that
+		title:e_horde.holder = {
+			every_vassal = {
+				limit = { NOT = { this = root }}
+				add_opinion = {
+					target = root
+					modifier = path_to_glory_opinion
+				}
+			}
+		}
+
+		# Durotan think you're wrong
+		if = {
+			limit = {
+				exists = scope:durotan
+				scope:durotan = { is_alive = yes }
+			}
+			scope:durotan = {
+				add_opinion = {
+					target = root
+					modifier = unreasonable_opinion
+				}
+			}
+		}
+
+		ai_chance = {
+			base = 200
+		}
 	}
 
 	option = { # Durotan was right (not canon)
 		name = wc_horde_invasion.1503.b
+		flavor = wc_horde_invasion.1503.b_flavor
+		trigger = {
+			exists = scope:guldan
+			scope:guldan = { is_alive = yes }
+		}
+
+		stress_impact = {
+			base = minor_stress_impact_gain
+			ambitious = medium_stress_impact_gain # You miss your ambitions
+		}
+
+		scope:guldan = {
+			if = {
+				limit = { NOT = { has_relation_rival = root } }
+				set_relation_rival = {
+					target = root
+					reason = rival_threat_for_the_world
+				}
+			}
+		}
+
+		# Durotan is happy that you saw the truth at this state
+		if = {
+			limit = {
+				exists = scope:durotan
+				scope:durotan = { is_alive = yes }
+			}
+			scope:durotan = {
+				add_opinion = {
+					target = root
+					modifier = unreasonable_opinion
+				}
+			}
+		}
+
+		ai_chance = {
+			base = 0
+		}
 	}
 }
 
