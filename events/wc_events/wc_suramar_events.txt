@@ -164,6 +164,7 @@ wc_suramar_events.0004 = {
                         has_trait = wretched
                         has_trait = creature_faldorei
                     }
+                    exists = scope:teller
                 }
                 desc = wc_suramar_events.0004.desc_unknown
             }

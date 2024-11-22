@@ -32,3 +32,50 @@ suramar_events_pulse = {
         150 = wc_suramar_events.0070
     }
 }
+
+on_travel_plan_complete = {
+    on_actions = {
+        on_travel_plan_complete_suramar
+    }
+}
+
+on_travel_plan_complete_suramar = {
+    effect = {
+        current_travel_plan = {
+			every_entourage_character = {
+                limit = {
+                    has_trait = creature_nightborne
+                    can_become_wretched_trigger = yes
+                    NOT = { is_in_suramar_trigger = yes } # Traveled outside of Suramar
+                    # Is a Suramar resident
+                    OR = {
+                        AND = {
+                            is_landed_or_landless_administrative = yes 
+                            OR = {
+                                has_primary_title = title:k_suramar 
+                                liege ?= { has_primary_title = title:k_suramar }
+                                top_liege ?= { has_primary_title = title:k_suramar }
+                            }
+                        }
+                        AND = {
+                            is_landed = no 
+                            is_landless_adventurer = no 
+                            OR = {
+                                employer ?= { has_primary_title = title:k_suramar }
+                                employer ?= { liege ?= { has_primary_title = title:k_suramar } }
+                                employer ?= { top_liege ?= { has_primary_title = title:k_suramar } }
+                            }
+                        }
+                    }
+                }
+                random_list = {
+                    50 = {
+                        trigger_event = { id = wc_suramar_events.0004 } # BECOME WRETCHED
+                    }
+                    50 = {
+                    }
+                }
+            }
+        }
+    }
+}
