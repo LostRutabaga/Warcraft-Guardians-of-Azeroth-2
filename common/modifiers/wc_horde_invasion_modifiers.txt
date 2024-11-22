@@ -19,5 +19,6 @@ path_to_glory_modifier = {
 	icon = prestige_positive
 
 	monthly_prestige = 0.5
-	
+	shamanism_group_opinion = 10
+	doombringer_opinion = 10
 }
