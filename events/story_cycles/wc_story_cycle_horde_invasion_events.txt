@@ -82,6 +82,17 @@ wc_horde_invasion.1000 = {
 				desc = wc_horde_invasion.medivh.1000.title
 			}
 			triggered_desc = {
+				trigger = {
+					is_from_draenor_trigger = yes
+					OR = {
+						has_title = title:d_twilights_hammer
+						has_culture = culture:twilights_hammer
+						religion = { is_in_family = rf_shadow }
+					}
+				}
+				desc = wc_horde_invasion.pale_orcish.1000.title
+			}
+			triggered_desc = {
 				trigger = { is_from_draenor_trigger = yes }
 				desc = wc_horde_invasion.orcish.1000.title
 			}
