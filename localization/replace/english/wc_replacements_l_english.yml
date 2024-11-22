@@ -166,3 +166,10 @@
 
  artifact_sassanian_sword_name: "Ancient Elven Sword"
  artifact_sassanian_sword_description: "Said to be a remnant of the ancient era, this sword $sassanian_sword_description_base$, making it a magnificent sight to behold. Though nowadays it is too fragile to be taken into battle, perhaps this sword was once held by a hero now lost to time?"
+
+ court_brewmaster_court_position: "[GetPlayer.MakeScope.Char.Custom('GetCourtBrewmaster')]"
+ court_brewmaster_court_position_desc: "[GetPlayer.MakeScope.Char.Custom('GetCourtBrewmasterDesc')]"
+ court_brewmaster_generic: "Court Brewmaster"
+ court_brewmaster_suramar: "Court Arcwinist"
+ court_brewmaster_court_position_generic_desc: "The $court_brewmaster_court_position$ is a representative chosen to interact directly with the brewers of the realm, to ensure the liege can get their hands on the best of brews."
+ court_brewmaster_suramar_desc: "The $court_brewmaster_court_position$ is in charge of the realm's arcane and normal brews, such as arcwine and other magical concoctions. They are responsible for ensuring the liege has access to the best of brews."
