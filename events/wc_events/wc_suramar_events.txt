@@ -3,12 +3,10 @@ namespace = wc_suramar_events
 # 0001 - Opening event
 # 0002 - You learn about the world beyond Suramar
 # 0003 - You learn about the nightfallen
-# 0010 - Someone informs you of mysterious happenings in the aqeducts
-# 0011-0012 - Investigate the aqeducts
+# 0010-0012 - Investigate the aqeducts event chain
 # 0020 - You remininsce on Ashara's rule
 # 0030 - Visted by an Elune priestess
-# 0040 - Learn about the Fal'dorei, event chain
-# 0041-0044 Faldo'rei event chain
+# 0040-0044 Faldo'rei event chain
 # 0050 - Vision from Sargeras
 # 0060 - Someone brings you some tasty arcwine
 # 0070 - You spot murlocs accross the bay
@@ -2593,6 +2591,218 @@ wc_suramar_events.0050 = {
             modifier = {
                 factor = 0
                 faith = faith:burning_legion_religion
+            }
+        }
+    }
+}
+
+wc_suramar_events.0060 = {
+    type = character_event
+    content_source = dlc_GOA
+    title = wc_suramar_events.0060.t
+    desc = wc_suramar_events.0060.desc
+    theme = suramar
+
+    cooldown = { years = 10 }
+
+    immediate = {
+        create_character = {
+            template = monk_brewer_template
+            location = root.location
+            save_scope_as = arcwinist
+        }
+    }
+
+    trigger = {
+        is_eligible_for_suramar_events_trigger = yes
+    }
+
+    left_portrait = {
+        character = root
+        animation = drink_goblet
+    }
+
+    right_portrait = {
+        character = scope:arcwinist
+        animation = toast_goblet
+    }
+
+    # We'll serve this at the next feast
+    option = {
+        name = wc_suramar_events.0060.a
+        trigger = {
+            NOR = { 
+                has_character_modifier = wc_suramar_supporting_arcwinists_modifier
+                has_character_flag = wc_feast_cooldown 
+            } # Must be able to actually host a feast
+        }
+
+        add_character_modifier = {
+            modifier = wc_suramar_supporting_arcwinists_modifier
+            years = 5
+        }
+
+        scope:arcwinist = {
+            add_opinion = {
+                target = root
+                modifier = flattered_opinion
+                opinion = 20
+            }
+        }
+
+        ai_chance = {
+            base = 100
+        }
+    }
+
+    # Wow ur good
+    option = {
+        name = wc_suramar_events.0060.b
+        trigger = {
+            any_sub_realm_barony = {
+                title_province = {
+                    OR = {
+                        building_breweries_requirement = { NUMBER = 01 }
+                        has_building_or_higher = breweries_01
+                    }
+                }
+            }
+        }
+
+        if = {
+            limit = {
+                any_sub_realm_barony = {
+                    title_province = {
+                        building_breweries_requirement = { NUMBER = 01 }
+                        NOT = { has_building_or_higher = breweries_01 }
+                    }
+                }
+            }
+            random_sub_realm_barony = {
+                limit = {
+                    title_province = {
+                        building_breweries_requirement = { NUMBER = 01 }
+                    }
+                }
+                title_province = {
+                    add_building = breweries_01
+                }
+            }
+        }
+        add_courtier = scope:arcwinist
+
+		show_as_tooltip = {
+			appoint_court_position = {
+				recipient = scope:arcwinist
+				court_position = court_brewmaster_court_position
+			}
+			custom_tooltip = will_have_excellent_aptitude
+		}
+        
+        scope:arcwinist = {
+            add_opinion = {
+                target = root
+                modifier = grateful_opinion
+                opinion = 15
+            }
+        }
+
+		hidden_effect = {
+			if = {
+				limit = {
+					is_valid_to_hire_court_position_type = court_brewmaster_court_position
+					NOT = { employs_court_position = court_brewmaster_court_position }
+				}
+				appoint_court_position = {
+					recipient = scope:arcwinist
+					court_position = court_brewmaster_court_position
+				}
+			}
+			else_if = {
+				limit = {
+					is_valid_to_hire_court_position_type = court_brewmaster_court_position
+					employs_court_position = court_brewmaster_court_position
+				}
+				add_character_flag = temporary_court_position_cost_removal
+				replace_court_position = {
+					recipient = scope:arcwinist
+					holder = court_position:court_brewmaster_court_position
+					court_position = court_brewmaster_court_position
+				}
+				remove_character_flag = temporary_court_position_cost_removal
+			}
+		}
+
+        ai_chance = {
+            base = 50
+            modifier = {
+                add = 25
+                NOT = { employs_court_position = court_brewmaster_court_position }
+            }
+        }
+    }
+
+    # Give me more!
+    option = {
+        name = wc_suramar_events.0060.c
+        trigger = {
+            NOT = {
+                has_trait = temperate
+            }
+        }
+
+        stress_impact = {
+            base = medium_stress_impact_loss
+            drunkard = minor_stress_impact_loss
+            lifestyle_reveler = minor_stress_impact_loss
+            gregarious = minor_stress_impact_loss
+        }
+
+        add_character_modifier = {
+            modifier = wc_suramar_good_drink_modifier
+            years = 10
+        }
+
+        random = {
+            chance = 5
+            add_trait = drunkard
+        }
+
+        scope:arcwinist = {
+            add_opinion = {
+                target = root
+                modifier = grateful_opinion
+                opinion = 10
+            }
+        }
+
+        ai_chance = {
+            base = 25
+            modifier = {
+                add = 25
+                has_trait = drunkard 
+            }
+        }
+    }
+
+    option = {
+        name = wc_suramar_events.0060.d
+        trigger = {
+            has_trait = paranoid
+        }
+        stress_impact = {
+            base = medium_stress_impact_loss
+            callous = minor_stress_impact_loss
+            compassionate = minor_stress_impact_gain
+        }
+        rightfully_imprison_character_less_verbose_effect = {
+            TARGET = scope:arcwinist
+            IMPRISONER = root
+        }
+        ai_chance = {
+            base = 25
+            ai_value_modifier = {
+                ai_compassion = -1
             }
         }
     }

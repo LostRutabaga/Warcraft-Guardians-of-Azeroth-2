@@ -411,3 +411,17 @@ wc_suramar_dark_titan_modifier = {
 	prowess_no_portrait = 3
 	rf_disorder_opinion = 10
 }
+
+wc_suramar_good_drink_modifier = {
+	icon = stress_positive
+
+	negate_health_penalty_add = 0.25
+	stress_gain_mult = -0.25
+	diplomacy = 1
+}
+
+wc_suramar_supporting_arcwinists_modifier = {
+	icon = social_positive
+
+	general_opinion = 10
+}

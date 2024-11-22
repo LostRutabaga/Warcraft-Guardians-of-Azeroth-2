@@ -28,5 +28,6 @@ suramar_events_pulse = {
         100 = wc_suramar_events.0030
         100 = wc_suramar_events.0040
         10 = wc_suramar_events.0050
+        100 = wc_suramar_events.0060
     }
 }

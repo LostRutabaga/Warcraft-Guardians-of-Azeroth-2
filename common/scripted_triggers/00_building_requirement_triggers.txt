@@ -734,18 +734,16 @@ building_murex_farm_requirement_terrain = {
 }
 
 building_breweries_requirement = {
-	OR = {
-		AND = {
-			has_building_or_higher = temple_$NUMBER$
-			OR = {
-				like_catholic_faith_trigger = yes
-				religion = religion:pandaren_religion_group
-				faith = { has_doctrine_parameter = allows_brewery }
-			}
-		}
-		AND = {
-			has_building_or_higher = city_$NUMBER$
-			culture = { has_cultural_parameter = allows_brewery }
-		}
-	}
+    OR = {
+        OR = {
+            like_catholic_faith_trigger = yes
+            religion = religion:pandaren_religion_group
+            faith = faith:cult_of_nightwell
+            faith = { has_doctrine_parameter = allows_brewery }
+        }
+        AND = {
+            has_building_or_higher = city_$NUMBER$
+            culture = { has_cultural_parameter = allows_brewery }
+        }
+    }
 }
