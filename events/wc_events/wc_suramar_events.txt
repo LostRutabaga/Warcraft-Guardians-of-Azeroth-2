@@ -3,13 +3,14 @@ namespace = wc_suramar_events
 # 0001 - Opening event
 # 0002 - You learn about the world beyond Suramar
 # 0003 - You learn about the nightfallen
+# 0004 - You become wretched
 # 0010-0012 - Investigate the aqeducts event chain
 # 0020 - You remininsce on Ashara's rule
 # 0030 - Visted by an Elune priestess
 # 0040-0044 Faldo'rei event chain
 # 0050 - Vision from Sargeras
 # 0060 - Someone brings you some tasty arcwine
-# 0070 - You spot murlocs accross the bay
+# 0070-0073 - You spot murlocs accross the bay, short chain
 # 0080 - A wretched or Fal'dorei seeks asylum
 # 0090 - You find an ancient titan artifact
 # 0100 - Someone brings you the seed of arcandor
@@ -2604,6 +2605,7 @@ wc_suramar_events.0060 = {
     theme = suramar
 
     cooldown = { years = 10 }
+    override_background = { reference = garden }
 
     immediate = {
         create_character = {
@@ -2686,7 +2688,7 @@ wc_suramar_events.0060 = {
         scope:target_barony.title_province = {
             add_building = breweries_01
         }
-        
+
         scope:arcwinist = {
             add_to_court_and_entourage_effect = yes
         }
@@ -2805,5 +2807,461 @@ wc_suramar_events.0060 = {
                 ai_compassion = -1
             }
         }
+    }
+}
+
+wc_suramar_events.0070 = {
+    type = character_event
+    content_source = dlc_GOA
+    title = wc_suramar_events.0070.t
+    desc = wc_suramar_events.0070.desc
+    theme = suramar
+
+    cooldown = { years = 10 }
+    override_background = { reference = bp3_coast }
+
+    immediate = {
+        random_neighboring_and_across_water_top_liege_realm_owner = {
+            limit = {
+                any_sub_realm_county = {
+                    title_province = { is_coastal = yes }
+                    holder = { has_trait = creature_murloc }
+                    culture = { has_cultural_pillar = heritage_amphibian }
+                }
+            }
+            random_sub_realm_county = {
+                limit = {
+                    title_province = { is_coastal = yes }
+                    holder = { has_trait = creature_murloc }
+                    culture = { has_cultural_pillar = heritage_amphibian }
+                }
+                title_province = { save_scope_as = target_barony }
+            }
+        }
+        create_character = {
+            template = generic_peasant_character
+            location = scope:target_barony
+            culture = scope:target_barony.county.culture
+            faith = scope:target_barony.county.faith
+            save_scope_as = murloc_guy
+            random_traits = yes
+            after_creation = {
+                # Warcraft
+                trigger_race_giving_no_gene_effect = yes
+            }
+        }
+    }
+
+    trigger = {
+        NOR = { 
+            has_trait = creature_murloc
+            has_global_variable = suramar_barrier_lowered_variable 
+        }
+        is_eligible_for_suramar_events_trigger = yes
+        any_neighboring_and_across_water_top_liege_realm_owner = {
+            any_sub_realm_county = {
+                holder = { has_trait = creature_murloc }
+                title_province = { is_coastal = yes }
+                culture = { has_cultural_pillar = heritage_amphibian }
+            }
+        }
+        location = {
+            is_coastal = yes
+        }
+    }
+
+    left_portrait = {
+        character = root
+        animation = interested
+    }
+
+    right_portrait = {
+        character = scope:murloc_guy
+        animation = personality_honorable
+    }
+
+    # Try and catch fish
+    option = {
+        name = wc_suramar_events.0070.a
+
+        duel = {
+            skill = prowess
+            value = decent_skill_rating
+            50 = {
+                compare_modifier = {
+                    value = scope:duel_value
+                    multiplier = 3.5
+                }
+                desc = wc_suramar_events.0070.a_good
+                send_interface_toast = {
+                    title = wc_suramar_events.0070.a_good
+                    type = event_toast_effect_good
+                    left_icon = root
+                    right_icon = scope:murloc_guy
+                    add_prestige = minor_prestige_gain
+                    add_character_modifier = {
+                        modifier = ate_good_meal
+                        days = 365
+                    }
+                    random = {
+                        chance = 10
+                        give_cannibal_secret_or_trait_effect = yes
+                    }
+                    scope:murloc_guy = { override_death_killer_effect = { death_reason = death_duel killer = root } }
+                }
+                stress_impact = {
+                    greedy = minor_stress_impact_loss
+                    gluttonous = minor_stress_impact_loss
+                }
+            }
+            50 = {
+                compare_modifier = {
+                    value = scope:duel_value
+                    multiplier = -3.5
+                }
+                desc = wc_suramar_events.0070.a_bad
+                send_interface_toast = {
+                    title = wc_suramar_events.0070.a_bad
+                    type = event_toast_effect_bad
+                    left_icon = root
+                    right_icon = scope:murloc_guy
+                    add_stress = minor_stress_gain
+                    random = {
+                        chance = 10
+                        increase_wounds_effect = { REASON = fight }
+                    }
+                }
+            }
+        }
+
+
+        ai_chance = {
+            base = 75
+            modifier = {
+                add = 25
+                OR = {
+                    has_trait = greedy
+                    has_trait = gluttonous
+                }
+            }
+        }
+    }
+
+    # Take me to your leader
+    option = {
+        name = wc_suramar_events.0070.b
+        custom_tooltip = wc_suramar_events.0070.b_tt
+
+        start_travel_plan = {
+            destination = scope:target_barony
+            on_arrival_event = wc_suramar_events.0071
+        }
+
+        ai_chance = {
+            base = 50
+            ai_value_modifier = {
+                ai_energy = 1
+            }
+            modifier = {
+                add = 25
+                has_trait = brave
+            }
+        }
+    }
+
+    # Wtf?
+    option = {
+        name = wc_suramar_events.0070.c
+
+        stress_impact = {
+            base = minor_stress_impact_gain
+            paranoid = minor_stress_impact_gain
+            craven = medium_stress_impact_loss
+        }    
+
+        ai_chance = {
+            base = 50
+            modifier = {
+                factor = 2
+                has_trait = craven
+            }
+        }
+    }
+}
+
+wc_suramar_events.0071 = {
+    type = character_event
+    content_source = dlc_GOA
+    title = wc_suramar_events.0070.t
+    desc = wc_suramar_events.0071.desc
+    theme = suramar
+
+    override_background = { reference = terrain }
+
+    left_portrait = {
+        character = root
+        animation = interested
+    }
+
+    right_portrait = {
+        character = scope:murloc_leader
+        animation = personality_honorable
+    }
+
+    lower_center_portrait = {
+        character = scope:murloc_guy
+    }
+
+    immediate = {
+        location.barony.holder = { save_scope_as = murloc_leader }
+    }
+
+    # Offer some gold
+    option = {
+        name = wc_suramar_events.0071.a
+        trigger = {
+            short_term_gold >= minor_gold_value
+        }
+        
+        pay_short_term_gold = { gold = minor_gold_value target = scope:murloc_leader }
+
+        stress_impact = {
+            greedy = minor_stress_impact_gain
+            generous = minor_stress_impact_loss
+        }
+        random_list = {
+            desc = wc_suramar_events.0071.a_tt
+            60 = {
+                desc = wc_suramar_events.0071.a_good
+                show_chance = no
+                modifier = {
+                    add = 25
+                    scope:murloc_leader = { has_trait = compassionate }
+                }
+                modifier = {
+                    add = 10
+                    scope:murloc_leader = {
+                        OR = {
+                            has_trait = greedy
+                            has_trait = avaricious
+                        }
+                    }
+                }
+                scope:murloc_leader = {
+                    add_opinion = {
+                        target = root
+                        modifier = grateful_opinion
+                        opinion = 15
+                    }
+                }
+                save_scope_value_as = { name = murloc_result value = flag:won }
+                save_scope_value_as = { name = murloc_duel value = flag:gift }
+            }
+            50 = {
+                show_chance = no
+                desc = wc_suramar_events.0071.a_bad
+                custom_tooltip = wc_suramar_events.0071.bad_tt
+                save_scope_value_as = { name = murloc_result value = flag:lost }
+                save_scope_value_as = { name = murloc_duel value = flag:gift }
+            }
+        }
+
+        ai_chance = {
+            base = 50
+            ai_value_modifier = {
+                ai_greed = -1
+            }
+        }
+    }
+
+    # Try and communicate   
+    option = {
+        name = wc_suramar_events.0071.b
+        trigger = {
+            NOT = { knows_language_of_culture = scope:murloc_guy.culture }
+        }
+        duel = {
+            skill = learning
+            value = high_skill_rating
+            desc = wc_suramar_events.0071.b_tt
+            50 = {
+                compare_modifier = {
+                    value = scope:duel_value
+                    multiplier = 3.5
+                }
+                modifier = {
+                    add = 25
+                    has_same_culture_heritage = scope:murloc_guy
+                }
+                scope:murloc_leader = {
+                    add_opinion = {
+                        target = root
+                        modifier = impressed_opinion
+                        opinion = 15
+                    }
+                }
+                desc = wc_suramar_events.0071.b_good
+                save_scope_value_as = { name = murloc_result value = flag:won }
+                save_scope_value_as = { name = murloc_duel value = flag:talk }
+                random = {
+                    chance = 25
+                    learn_language_of_culture = scope:murloc_guy.culture
+                }
+            }
+            50 = {
+                compare_modifier = {
+                    value = scope:duel_value
+                    multiplier = -3.5
+                }
+                desc = wc_suramar_events.0071.b_bad
+                custom_tooltip = wc_suramar_events.0071.bad_tt
+                save_scope_value_as = { name = murloc_result value = flag:lost }
+                save_scope_value_as = { name = murloc_duel value = flag:talk }
+            }
+        }
+
+        stress_impact = {
+            arrogant = minor_stress_impact_loss
+        }
+
+        ai_chance = {
+            base = 50
+            modifier = {
+                add = 25
+                learning >= high_skill_rating
+            }
+        }
+    }
+
+    # Attack them
+    option = {
+        name = wc_suramar_events.0071.c
+
+        duel = {
+            skill = martial
+            value = decent_skill_rating
+            desc = wc_suramar_events.0071.c_tt
+            50 = {
+                compare_modifier = {
+                    value = scope:duel_value
+                    multiplier = 3.5
+                }
+                desc = wc_suramar_events.0071.c_good
+                save_scope_value_as = { name = murloc_result value = flag:won }
+                save_scope_value_as = { name = murloc_duel value = flag:fight }
+                random = {
+                    chance = 25
+                    scope:murloc_guy = { increase_wounds_effect = { REASON = duel } }
+                }
+            }
+            50 = {
+                compare_modifier = {
+                    value = scope:duel_value
+                    multiplier = -3.5
+                }
+                desc = wc_suramar_events.0071.c_bad
+                custom_tooltip = wc_suramar_events.0071.bad_tt
+                save_scope_value_as = { name = murloc_result value = flag:lost }
+                save_scope_value_as = { name = murloc_duel value = flag:fight }
+                random = {
+                    chance = 25
+                    increase_wounds_effect = { REASON = duel }
+                }
+            }
+        }
+
+        stress_impact = {
+            craven = minor_stress_impact_gain
+            wrathful = minor_stress_impact_loss
+            brave = minor_stress_impact_loss
+        }
+
+        ai_chance = {
+            base = 50
+            modifier = {
+                add = 25
+                martial >= high_skill_rating
+            }
+        }
+    }
+
+    option = {
+        
+    }
+
+}
+
+wc_suramar_events.0072 = {
+    type = character_event
+    content_source = dlc_GOA
+    title = wc_suramar_events.0070.t
+    desc = {
+        first_valid = {
+            triggered_desc = {
+                trigger = {
+                    scope:murloc_result = flag:won
+                    scope:murloc_duel = flag:gift
+                }
+                desc = wc_suramar_events.0072.desc_won_gift
+            }
+            triggered_desc = {
+                trigger = {
+                    scope:murloc_result = flag:lost
+                    scope:murloc_duel = flag:gift
+                }
+                desc = wc_suramar_events.0072.desc_lost_gift
+            }
+            triggered_desc = {
+                trigger = {
+                    scope:murloc_result = flag:won
+                    scope:murloc_duel = flag:talk
+                }
+                desc = wc_suramar_events.0072.desc_won_talk
+            }
+            triggered_desc = {
+                trigger = {
+                    scope:murloc_result = flag:lost
+                    scope:murloc_duel = flag:talk
+                }
+                desc = wc_suramar_events.0072.desc_lost_talk
+            }
+            triggered_desc = {
+                trigger = {
+                    scope:murloc_result = flag:won
+                    scope:murloc_duel = flag:fight
+                }
+                desc = wc_suramar_events.0072.desc_won_fight
+            }
+            triggered_desc = {
+                trigger = {
+                    scope:murloc_result = flag:lost
+                    scope:murloc_duel = flag:fight
+                }
+                desc = wc_suramar_events.0072.desc_lost_fight
+            }
+            triggered_desc = {
+                trigger = {
+                    scope:murloc_duel = flag:love
+                }
+                desc = wc_suramar_events.0072.desc_love
+            }
+        }
+    }
+    theme = suramar
+
+    override_background = { reference = terrain }
+
+    left_portrait = {
+        character = root
+        animation = interested
+    }
+
+    right_portrait = {
+        character = scope:murloc_leader
+        animation = personality_honorable
+    }
+
+    option = {
+
     }
 }
