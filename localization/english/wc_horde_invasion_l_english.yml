@@ -131,7 +131,6 @@
  horde_bloodshed.t:0 "Rampage on [bloodshed_location.GetName] Complete"
  horde_bloodshed.d:0 "Enslaved [GetPlayer.MakeScope.Var('victims_enslaved').GetValue] people, and killed [GetPlayer.MakeScope.Var('victims_killed').GetValue]."
  horde_bloodshed.residents:0 "Residents of [bloodshed_location.GetName] will die under the wrath of the Horde, but some will be captured or manage to escape."
-
  activity.war_dangerous:0 "It's too dangerous to travel here right now."
 
  #################################
@@ -142,5 +141,5 @@
  BLOOD_OF_MANNOROTH_GLOSS:0 "The Blood of Mannoroth, a vile substance, is the very essence of the pit lord Mannoroth. When consumed, it grants immense strength and bloodlust but at a terrible cost: eternal servitude to the Burning Legion. It was this cursed blood that Gul'dan used to corrupt the orcs, marking the beginning of their descent into darkness."
  JUNGLE_OF_TANAAN_GLOSS:0 "Once a lush and untamed jungle, Tanaan was home to some of the fiercest orc clans. But, as Draenor fell into decline, it withered at an alarming and unexplained pace. Today, it is nothing more than a barren wasteland, now known as the Hellfire Peninsula."
  EYE_RITUAL_GLOSS:0 "When a new chieftain rises, every Bleeding Hollow lord must undergo the dark Eye Ritual. This rite demands they sacrifice one of their eyes in exchange for a prophetic vision of their own death. It is no trivial act: those who dare to perform the ritual emerge forever changed, freed from fear but haunted by the certainty of their fate."
- CHOGALL_FORMATION_GLOSS:0 ""
- PALE_ORCS_GLOSS:0 ""
+ CHOGALL_FORMATION_GLOSS:0 "The arrogance and thirst for power of Cho and Gall led to their exile from Highmaul, their birthplace. When Gul’dan created the Shadow Council, he took Cho’gall under his wing, teaching him the demonic arts. Thus, Cho’gall became one of the first ogre mages bound to the Horde and a devoted servant of the Shadow Council."
+ PALE_ORCS_GLOSS:0 "The pale orcs, Void-corrupted outcasts beneath Nagrand, worshipped the Void and its prophecy of the Hour of Twilight — when darkness consumes the cosmos. Once savage and uncontrollable, they embraced Cho’gall as the herald of their dark gods when he came to annihilate them. He returned to the Horde with these fanatics fully under his control."
