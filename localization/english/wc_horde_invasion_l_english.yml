@@ -76,10 +76,12 @@
  wc_horde_invasion.1502.b:0 "I have to follow the other clans for now."
  wc_horde_invasion.1502.b.flavor:0 "The taste of defeat is bitter on your tongue. The other clans have already chosen their path and refuse to listen — for now, you must follow, bowing to the will of the dae’mons. You need time — time to find the moment when you can save your people."
 
- wc_horde_invasion.1503.title:0 "WIP"
+ wc_horde_invasion.1503.title:0 "The Path to Glory"
  wc_horde_invasion.1503.desc:0 "WIP"
  wc_horde_invasion.1503.a:0 "WIP"
+ wc_horde_invasion.1503.a_flavor:0 "AAAAAAAAAAAAAAAAH"
  wc_horde_invasion.1503.b:0 "WIP"
+ wc_horde_invasion.1503.b_flavor:0 "AAAAAAAAAAAAAAAAAAAAAAAAH"
 
  wc_horde_invasion.1504.title:0 "The Ancient"
  wc_horde_invasion.1504.desc:0 "Our [Glossary( 'ancestral lands', 'JUNGLE_OF_TANAAN_GLOSS' )] are lost, transformed into a barren wasteland as Draenor withers, abandoned by the elements. Yet the [ROOT.Char.GetCulture.GetName] refuse to bow to fate!\n\nAfter years of struggle, [guldan.GetFirstName] opened the Dark Portal, and [ROOT.Char.GetLiege.GetFirstName] commanded us to invade this new world. He promised fertile lands for our people, a chance to begin anew.\n\nBut I feel it now, the end drawing near. When I [Glossary( 'sacrificed my eye', 'EYE_RITUAL_GLOSS' )], I saw my own death: struck down by unknown enemies. Now I understand, they are the pink-skins of this world!\n\n[ROOT.Char.GetLiege.GetFirstNameNoTooltip] respects me and grants me a measure of freedom. But freedom means nothing without action: I must secure the future of my clan before my vision comes to pass… or prove that it can be defied."

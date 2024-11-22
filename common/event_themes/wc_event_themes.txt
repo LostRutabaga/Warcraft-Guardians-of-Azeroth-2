@@ -27,7 +27,7 @@ horde = {
 
 twilights_hammer = {
 	icon = {
-		reference = "gfx/interface/icons/event_types/type_horde.dds"
+		reference = "gfx/interface/icons/event_types/type_twilights_hammer.dds"
 	}
 	header_background = {
 		reference = "gfx/interface/window_event/event_header_purple.dds"
