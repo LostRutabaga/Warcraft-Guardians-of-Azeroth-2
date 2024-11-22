@@ -206,7 +206,7 @@ l_english:
  MODIFIER_DESC_wc_suramar_supporting_arcwinists_modifier:0 "[GetModifier('wc_suramar_supporting_arcwinists_modifier').GetNameWithTooltip]"
 
  wc_suramar_events.0070.t:0 "Strange Fish"
- wc_suramar_events.0070.desc:0 "Peering across the water, I spot some rather interesting looking creatures. They are unlike anything I've ever seen, with scales that shimmer in the sunlight, and fins that seem to glow. They have short legs, adn are running around on the shore, their arms flailing about.\n\nI can't help be curious, but they could possibly be dangerous.\n\nOne runs up to me, staring at me with its piercing big eyes. "Mrghl!" It yells."
+ wc_suramar_events.0070.desc:0 "Peering across the water, I spot some rather interesting looking creatures. They are unlike anything I've ever seen, with scales that shimmer in the sunlight, and fins that seem to glow. They have short legs, and are running around on the shore, their arms flailing about.\n\nI can't help be curious, but they could possibly be dangerous.\n\nOne runs up to me, staring at me with its piercing big eyes. "Mrghl!" It yells."
  wc_suramar_events.0070.a:0 "I wonder if you'd make a good meal..."
  wc_suramar_events.0070.a_good:0 "You catch and eat the strange 'fish'"
  wc_suramar_events.0070.a_bad:0 "The 'fish' hops away"

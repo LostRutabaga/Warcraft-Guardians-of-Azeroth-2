@@ -1,4 +1,4 @@
-namespace = wc_suramar_events
+﻿namespace = wc_suramar_events
 ### SURAMAR EVENTS ###
 # 0001 - Opening event
 # 0002 - You learn about the world beyond Suramar
@@ -364,6 +364,11 @@ wc_suramar_events.0011 = {
         set_variable = {
             name = investigator_var
             value = scope:investigator
+        }
+        if = {
+            limit = {
+                has_variable = investigator_var # Error prevention
+            }
         }
         # Actually determine what the disturbance is
         random_list = {
@@ -2219,7 +2224,7 @@ wc_suramar_events.0044 = {
     immediate = {
         if = {
             limit = {
-                scope:informant = is_alive = no
+                scope:informant = { is_alive = no }
                 NOT = { scope:falanaar_duel = flag:left }
             }
             stress_impact = {
@@ -3186,7 +3191,7 @@ wc_suramar_events.0071 = {
     }
 
     option = {
-        
+
     }
 
 }

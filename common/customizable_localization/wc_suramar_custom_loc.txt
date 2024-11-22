@@ -63,7 +63,7 @@ GetSuramarLoseDisturbanceDesc = {
 }
 
 GetCourtBrewmaster = {
-    type = character
+    type = none
 
     text = {
         trigger = {
@@ -77,7 +77,7 @@ GetCourtBrewmaster = {
 }
 
 GetCourtBrewmasterDesc = {
-	type = character
+	type = none
 	parent = GetCourtBrewmaster
 	suffix = _desc
 }
