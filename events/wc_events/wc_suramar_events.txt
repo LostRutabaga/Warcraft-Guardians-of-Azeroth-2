@@ -2611,6 +2611,21 @@ wc_suramar_events.0060 = {
             location = root.location
             save_scope_as = arcwinist
         }
+        if = {
+			limit = {
+				can_build_any_brewery_trigger = yes
+			}
+			random_sub_realm_barony = {
+				limit = {
+					county.holder = root
+					title_province = { 
+						has_holding_type = city_holding 
+						NOT = { has_building_or_higher = breweries_01 }
+					}
+				}
+				save_scope_as = target_barony
+			}
+		}
     }
 
     trigger = {
@@ -2659,46 +2674,31 @@ wc_suramar_events.0060 = {
     option = {
         name = wc_suramar_events.0060.b
         trigger = {
-            any_sub_realm_barony = {
-                title_province = {
-                    OR = {
-                        building_breweries_requirement = { NUMBER = 01 }
-                        has_building_or_higher = breweries_01
-                    }
+            OR = {
+                has_brewery_trigger = yes
+                AND = {
+                    can_build_any_brewery_trigger = yes
+                    exists = scope:target_barony
                 }
             }
         }
 
-        if = {
-            limit = {
-                any_sub_realm_barony = {
-                    title_province = {
-                        building_breweries_requirement = { NUMBER = 01 }
-                        NOT = { has_building_or_higher = breweries_01 }
-                    }
-                }
-            }
-            random_sub_realm_barony = {
-                limit = {
-                    title_province = {
-                        building_breweries_requirement = { NUMBER = 01 }
-                    }
-                }
-                title_province = {
-                    add_building = breweries_01
-                }
-            }
+        scope:target_barony.title_province = {
+            add_building = breweries_01
         }
-        add_courtier = scope:arcwinist
-
-		show_as_tooltip = {
-			appoint_court_position = {
-				recipient = scope:arcwinist
-				court_position = court_brewmaster_court_position
-			}
-			custom_tooltip = will_have_excellent_aptitude
-		}
         
+        scope:arcwinist = {
+            add_to_court_and_entourage_effect = yes
+        }
+
+        show_as_tooltip = {
+            appoint_court_position = {
+                recipient = scope:arcwinist
+                court_position = court_brewmaster_court_position
+            }
+            custom_tooltip = will_have_excellent_aptitude
+        }
+
         scope:arcwinist = {
             add_opinion = {
                 target = root
