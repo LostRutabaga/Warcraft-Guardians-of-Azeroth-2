@@ -64,7 +64,6 @@ restore_arcandor_decision = {
 
     is_shown = {
         NOT = { has_global_variable = arcandor_restored_global_variable }
-        is_landed = yes
         OR = {
             is_in_suramar_trigger = yes
             has_trait = wretched
@@ -78,6 +77,9 @@ restore_arcandor_decision = {
 
     is_valid = {
         can_restore_arcandor_trigger = yes
+        NOT = {
+            has_character_modifier = wc_suramar_drained_mana_modifier
+        }
     }
 
     is_valid_showing_failures_only = {

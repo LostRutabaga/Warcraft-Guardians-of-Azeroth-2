@@ -46,9 +46,16 @@ on_travel_plan_complete_suramar = {
                 limit = {
                     has_trait = creature_nightborne
                     can_become_wretched_trigger = yes
-                    NOT = { is_in_suramar_trigger = yes } # Traveled outside of Suramar
-                    # Is a Suramar resident
-                    OR = {
+                    NOT = { 
+                        location.county.holder = { # Traveled outside of Suramar
+                            OR = {
+                                has_primary_title = title:k_suramar 
+                                liege ?= { has_primary_title = title:k_suramar }
+                                top_liege ?= { has_primary_title = title:k_suramar }
+                            }
+                        }
+                    } 
+                    OR = { # Is a Suramar resident
                         AND = {
                             is_landed_or_landless_administrative = yes 
                             OR = {
@@ -70,9 +77,17 @@ on_travel_plan_complete_suramar = {
                 }
                 random_list = {
                     50 = {
+                        modifier = {
+                            add = 75
+                            is_ai = no 
+                        }
                         trigger_event = { id = wc_suramar_events.0004 } # BECOME WRETCHED
                     }
                     50 = {
+                        modifier = {
+                            add = 25
+                            is_ai = no 
+                        }
                     }
                 }
             }

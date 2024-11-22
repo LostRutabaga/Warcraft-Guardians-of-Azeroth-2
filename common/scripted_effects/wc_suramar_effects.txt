@@ -1,14 +1,5 @@
 ﻿suramar_exile_character_effect = {
     $EXILED$ = { save_scope_as = exiled_character }
-    if = {
-        limit = {
-           has_character_flag = had_nightfallen_event 
-        }
-        custom_tooltip = suramar_exile_character_effect_tt_wretched
-    }
-    else = {
-        custom_tooltip = suramar_exile_character_effect_tt
-    }
     scope:exiled_character = {
         add_opinion = {
             modifier = exiled_opinion
@@ -20,15 +11,66 @@
         name = suramar_exiled_characters
         target = scope:exiled_character
     }
+    if = {
+        limit = {
+            OR = {
+                OR = {
+                    has_character_flag = had_nightfallen_event
+                    is_landless_adventurer = yes
+                }
+                has_trait = wretched
+                has_trait = creature_faldorei
+            }
+            scope:exiled_character = { NOT = { has_trait = wretched } }
+        }
+        custom_tooltip = suramar_exile_character_effect_tt_wretched
+    }
+    else_if = {
+        limit = {
+            scope:exiled_character = { has_trait = wretched }
+        }
+        custom_tooltip = suramar_exile_character_effect_tt_wretched_dead
+        hidden = {
+            random = {
+                chance = 50
+                scope:exiled_character = { override_death_effect = { death_reason = death_reason_mana_starved } }
+            }
+        }
+    }
+    else = {
+        custom_tooltip = suramar_exile_character_effect_tt
+    }
 }
 suramar_exile_character_effect_from_prison = {
     save_scope_as = exiled_character
     $EXILER$ = { save_scope_as = exiler }
     if = {
         limit = {
-            scope:exiler = { has_character_flag = had_nightfallen_event }
+            scope:exiler = { 
+                has_character_flag = had_nightfallen_event
+                OR = {
+                    OR = {
+                        has_character_flag = had_nightfallen_event
+                        is_landless_adventurer = yes
+                    }
+                    has_trait = wretched
+                    has_trait = creature_faldorei
+                }
+            }
         }
         custom_tooltip = suramar_exile_character_effect_tt_wretched
+    }
+    else_if = {
+        limit = {
+            scope:exiled_character = { has_trait = wretched }
+        }
+        custom_tooltip = suramar_exile_character_effect_tt_wretched_dead
+        hidden = {
+            random = {
+                chance = 50
+                scope:exiled_character = { override_death_effect = { death_reason = death_reason_mana_starved } }
+            }
+        }
     }
     else = {
         custom_tooltip = suramar_exile_character_effect_tt

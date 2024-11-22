@@ -21,6 +21,7 @@ l_english:
 
  wc_suramar_events.0003.t:0 "In Void of Power"
  wc_suramar_events.0003.desc:0 "Our Nightwell sustains us, it is the very life of a Nightborne, our essence, our power.\n\nUntil now, it wasn't known what life would be like for one without it, but alas, I am made aware. I've seen an elf, withered and desperate, weak and begging for mercy.\n\nPerhaps I can help them, or maybe they deserve their fate..."
+ wc_suramar_events.0003.desc_non_nightborne:0 "The Nightwell sustains any Nightborne, it is their very life, their essence, their power.\n\nUntil now, it wasn't known what life would be like for one without it, but alas, I am made aware. I've seen an elf, withered and desperate, weak and begging for mercy.\n\nPerhaps I can help them, or maybe they deserve their fate..."
  suramar_discover_nightfallen_effect_tt:0 "You unlock the [GetDecisionWithKey('restore_arcandor_decision').GetName] [decision|E]"
  wc_suramar_events.0003.a:0 "Only time can tell..."
 
@@ -257,3 +258,16 @@ l_english:
  wc_suramar_events.0004.desc_known:0 "This curse, this hunger, I know of it. It is the same that plagues the Nightfallen, and the Fal'dorei. Arcan'dor must be restored, or I will suffer a grim fate."
  wc_suramar_events.0004.desc_unknown:0 "In my struggle, [teller.GetName] notices. "[ROOT.Char.GetTitleAsNameNoTooltip]! You look pale." Upon further inspection, [teller.GetHerHis] eyes widen. "By the Nightwell! You are mana-starved!"\n\n[teller.GetSheHe|U] explains the curse of the Nightfallen, and the Fal'dorei, and how they become twisted and lost without the Nightwell's power, and how they must seek the Arcan'dor tree to survive."
  wc_suramar_events.0004.a:0 "Will I ever be cured?"
+
+ wc_suramar_events.0080.t:0 "To Wither Away"
+ wc_suramar_events.0080.desc:0 "In my courtyard, stumbles a foul-looking elf. [wretched_elf.GetSheHe|U] is wretched, and [wretched_elf.GetHerHis] eyes are sunken. [wretched_elf.GetSheHe|U] looks at me with a mixture of fear and hope, and [wretched_elf.GetHerHis] voice is weak.\n\n"[ROOT.Char.GetTitleAsNameNoTooltip], please, I beg of you. Let me under the shield of Suramar once more. I will die without the Nightwell." [wretched_elf.GetSheHe|U] pleads.\n\nTo allow such a creature back into the city could have unknown consequences, but to leave them to die would be cruel."
+ wc_suramar_events.0080.desc_laaamp:0 "In my camp, stumbles a foul-looking elf. [wretched_elf.GetSheHe|U] is wretched, and [wretched_elf.GetHerHis] eyes are sunken. [wretched_elf.GetSheHe|U] looks at me with a mixture of fear and hope, and [wretched_elf.GetHerHis] voice is weak.\n\n"[ROOT.Char.GetTitleAsNameNoTooltip], please, I beg of you. Let me stay here." [wretched_elf.GetSheHe|U] pleads.\n\nTo allow such a creature into my realm could have unknown consequences, but to leave them to die would be cruel."
+ wc_suramar_events.0080.a_nice:0 "Of course, I could never let my people suffer."
+ wc_suramar_events.0080.a:0 "I will allow you back in, but you must be careful."
+ wc_suramar_events.0080.a_laamp:0 "You may join our band, but you must work for your keep."
+ wc_suramar_events.0080.b:0 "Begone, crooked elf!"
+ wc_suramar_events.0080.c:0 "Yes, I will let you back in, for a price..."
+
+ wc_suramar_drained_mana_modifier:0 "Siphoned Wretched"
+ wc_suramar_drained_mana_modifier_desc:0 "This character has taken the small amount of energy remaining in a wretched elf, and is benefiting from it.\n\n#bold Blocks#! the [GetDecisionWithKey('restore_arcandor_decision').GetName] [decision|E]"
+ suramar_exile_character_effect_tt_wretched_dead:0 "Exiling a wretched elf could cause their demise..."

@@ -418,6 +418,7 @@ wc_suramar_good_drink_modifier = {
 	negate_health_penalty_add = 0.25
 	stress_gain_mult = -0.25
 	diplomacy = 1
+	#mana conductivity
 }
 
 wc_suramar_supporting_arcwinists_modifier = {
@@ -441,4 +442,12 @@ wc_suramar_enemy_murlocs_modifier = {
 	murloc_opinion = -10
 	sea_travel_danger = 10
 	coastal_sea_travel_danger = 10
+}
+
+wc_suramar_drained_mana_modifier = {
+	icon = magic_positive
+
+	monthly_prestige = 0.3
+	monthly_piety = 0.3
+	#TODO_WARCRAFT - mana regen
 }

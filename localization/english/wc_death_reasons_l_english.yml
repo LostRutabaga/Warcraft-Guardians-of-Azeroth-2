@@ -16,3 +16,5 @@
  
  death_merge:0 "was merged"
  death_merge_killer:0 "was merged with [TARGET_CHARACTER.GetUIName]"
+
+ death_mana_starved:0 "died of mana starvation"

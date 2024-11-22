@@ -31,6 +31,28 @@ has_any_wretched_elves_trigger = {
     }
 }
 
+has_any_wretched_or_possible_elves_wandering_trigger = {
+    trigger_if = {
+        limit = {
+            has_variable_list = suramar_exiled_characters
+        }
+        any_in_list = {
+            variable = suramar_exiled_characters
+            is_alive = yes 
+            OR = {
+                can_become_wretched_trigger = yes
+                has_trait = wretched
+            }
+            NOR = { 
+                exists = employer
+                has_character_flag = suramar_refugee
+            }
+            is_landed = no
+            is_landless_adventurer = no
+        }
+    }
+}
+
 can_lower_suramar_barrier_trigger = {
     custom_tooltip = {
         text = lower_suramar_barrier_decision_trigger
