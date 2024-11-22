@@ -669,7 +669,7 @@ wc_horde_invasion.1502 = {
             desc = wc_horde_invasion.1502.desc_normal_outro
         }
     }
-	theme = horde
+	theme = frostwolf
 
 	left_portrait = {
 		character = root
@@ -786,7 +786,7 @@ wc_horde_invasion.1504 = {
 	content_source = dlc_GOA
 	title = wc_horde_invasion.1504.title
 	desc = wc_horde_invasion.1504.desc
-	theme = horde
+	theme = bleeding_hollow
 
 	left_portrait = {
 		character = root
