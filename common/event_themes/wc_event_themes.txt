@@ -18,7 +18,7 @@ horde = {
 		reference = "gfx/interface/window_event/event_header_red.dds"
 	}
 	sound = {
-		reference = "event:/SFX/Events/Themes/sfx_event_theme_type_war"
+		reference = "event:/SFX/Events/Themes/sfx_event_theme_type_court"
 	}
 	background = {
 		reference = throne_room_tribal
@@ -48,7 +48,7 @@ frostwolf = {
 		reference = "gfx/interface/window_event/event_header_blue.dds"
 	}
 	sound = {
-		reference = "event:/SFX/Events/Themes/sfx_event_theme_type_war"
+		reference = "event:/SFX/Events/Themes/sfx_event_theme_type_court"
 	}
 	background = {
 		reference = throne_room_tribal
@@ -63,7 +63,7 @@ bleeding_hollow = {
 		reference = "gfx/interface/window_event/event_header_green.dds"
 	}
 	sound = {
-		reference = "event:/SFX/Events/Themes/sfx_event_theme_type_war"
+		reference = "event:/SFX/Events/Themes/sfx_event_theme_type_court"
 	}
 	background = {
 		reference = throne_room_tribal
