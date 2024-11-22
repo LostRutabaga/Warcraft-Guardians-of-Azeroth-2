@@ -425,3 +425,20 @@ wc_suramar_supporting_arcwinists_modifier = {
 
 	general_opinion = 10
 }
+
+wc_suramar_friend_murlocs_modifier = {
+	icon = social_positive
+
+	murloc_opinion = 20
+	sea_travel_danger = low_sea_danger_reduction
+	coastal_sea_travel_danger = low_sea_danger_reduction
+	stress_loss_mult = 0.1
+}
+
+wc_suramar_enemy_murlocs_modifier = {
+	icon = social_negative
+
+	murloc_opinion = -10
+	sea_travel_danger = 10
+	coastal_sea_travel_danger = 10
+}

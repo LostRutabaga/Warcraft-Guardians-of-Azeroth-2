@@ -148,6 +148,73 @@ wc_suramar_events.0003 = {
     }
 }
 
+# You become wretched 
+wc_suramar_events.0004 = {
+    type = character_event
+    content_source = dlc_GOA
+    title = wc_suramar_events.0004.t
+    desc = {
+        desc = wc_suramar_events.0004.desc
+        first_valid = {
+            triggered_desc = {
+                trigger = {
+                    NOR = {
+                        has_character_flag = had_nightfallen_event
+                        has_character_flag = had_faldorei_event
+                        has_trait = wretched
+                        has_trait = creature_faldorei
+                    }
+                }
+                desc = wc_suramar_events.0004.desc_unknown
+            }
+            desc = wc_suramar_events.0004.desc_known
+        }
+    }
+    theme = suramar
+
+    override_background = { reference = study }
+
+    trigger = {
+        can_become_wretched_trigger = yes
+    }
+
+    left_portrait = {
+        character = root
+        animation = stress
+    }
+
+    right_portrait = {
+        trigger = { exists = scope:teller }
+        character = scope:teller
+        animation = worry
+    }
+
+    immediate = {
+        ordered_courtier = {
+            order_by = learning
+            save_scope_as = teller
+        }
+    }
+
+    # You gain the decision
+    option = {
+        name = wc_suramar_events.0004.a
+        if = {
+            limit = {
+                NOR = {
+                    has_character_flag = had_nightfallen_event
+                    has_character_flag = had_faldorei_event
+                    has_trait = wretched
+                    has_trait = creature_faldorei
+                }
+            }
+            custom_tooltip = suramar_discover_nightfallen_effect_tt
+        }
+        add_stress = minor_stress_impact_gain
+
+        add_trait = wretched
+    }
+}
 wc_suramar_events.0010 = {
     type = character_event
     content_source = dlc_GOA
@@ -3191,9 +3258,43 @@ wc_suramar_events.0071 = {
     }
 
     option = {
+        name = wc_suramar_events.0071.d
+        trigger = {
+            OR = {
+                has_trait = lustful
+                has_trait = seducer
+                has_trait = deviant
+            }
+            is_adult = yes
+            is_attracted_to_gender_of = scope:murloc_leader
+            scope:murloc_leader = { 
+                is_adult = yes
+                is_ai = yes
+                is_attracted_to_gender_of = root
+            }
+        }
 
+        save_scope_value_as = { name = murloc_duel value = flag:love }
+
+	    had_sex_with_effect = { CHARACTER = scope:murloc_leader PREGNANCY_CHANCE = 25 }
+
+        give_deviant_secret_or_trait_effect = yes
+
+        ai_chance = {
+            base = 0
+        }
     }
 
+    after = {
+        hidden_effect = {
+            current_travel_plan = {
+                delay_travel_plan = { days = 3 }
+            }
+        }
+        trigger_event = {
+            id = wc_suramar_events.0072
+        }
+    }
 }
 
 wc_suramar_events.0072 = {
@@ -3201,45 +3302,57 @@ wc_suramar_events.0072 = {
     content_source = dlc_GOA
     title = wc_suramar_events.0070.t
     desc = {
+        triggered_desc = {
+            trigger = {
+                scope:murloc_duel = flag:gift
+            }
+            desc = wc_suramar_events.0072.desc_gift
+        }
+        triggered_desc = {
+            trigger = {
+                scope:murloc_duel = flag:talk
+            }
+            desc = wc_suramar_events.0072.desc_talk
+        }
         first_valid = {
             triggered_desc = {
                 trigger = {
-                    scope:murloc_result = flag:won
+                    scope:murloc_result ?= flag:won
                     scope:murloc_duel = flag:gift
                 }
                 desc = wc_suramar_events.0072.desc_won_gift
             }
             triggered_desc = {
                 trigger = {
-                    scope:murloc_result = flag:lost
+                    scope:murloc_result ?= flag:lost
                     scope:murloc_duel = flag:gift
                 }
                 desc = wc_suramar_events.0072.desc_lost_gift
             }
             triggered_desc = {
                 trigger = {
-                    scope:murloc_result = flag:won
+                    scope:murloc_result ?= flag:won
                     scope:murloc_duel = flag:talk
                 }
                 desc = wc_suramar_events.0072.desc_won_talk
             }
             triggered_desc = {
                 trigger = {
-                    scope:murloc_result = flag:lost
+                    scope:murloc_result ?= flag:lost
                     scope:murloc_duel = flag:talk
                 }
                 desc = wc_suramar_events.0072.desc_lost_talk
             }
             triggered_desc = {
                 trigger = {
-                    scope:murloc_result = flag:won
+                    scope:murloc_result ?= flag:won
                     scope:murloc_duel = flag:fight
                 }
                 desc = wc_suramar_events.0072.desc_won_fight
             }
             triggered_desc = {
                 trigger = {
-                    scope:murloc_result = flag:lost
+                    scope:murloc_result ?= flag:lost
                     scope:murloc_duel = flag:fight
                 }
                 desc = wc_suramar_events.0072.desc_lost_fight
@@ -3266,7 +3379,83 @@ wc_suramar_events.0072 = {
         animation = personality_honorable
     }
 
-    option = {
+    immediate = {
+        if = {
+            limit = {
+                scope:murloc_duel ?= flag:fight
+            }
+            add_prestige = minor_prestige_gain
+        }
+    }
 
+    # Yay
+    option = {
+        name = wc_suramar_events.0072.a
+        trigger = {
+            OR = {
+                scope:murloc_result ?= flag:won
+                scope:murloc_duel ?= flag:love
+            }
+            NOT = { scope:murloc_duel ?= flag:fight }
+        }
+
+        add_character_modifier = {
+            modifier = wc_suramar_friend_murlocs_modifier
+            years = 10
+        }
+
+        ai_chance = {
+            base = 50
+        }
+    }
+
+    # Nay
+    option = {
+        name = wc_suramar_events.0072.b
+        trigger = {
+            OR = {
+                scope:murloc_result ?= flag:lost
+                scope:murloc_duel ?= flag:fight
+            }
+        }
+
+        add_character_modifier = {
+            modifier = wc_suramar_enemy_murlocs_modifier
+            years = 10
+        }
+
+        ai_chance = {
+            base = 50
+        }
+    }
+
+    # Lover
+    option = {
+        name = wc_suramar_events.0072.c
+        trigger = {
+            scope:murloc_duel ?= flag:love
+        }
+        set_relation_lover = { reason = lover_first_sight target = scope:murloc_leader }
+    }
+
+    after = {
+        if = {
+            limit = {
+                NOT = { has_character_flag = had_outsider_event }
+            }
+            add_character_flag = had_outsider_event
+            suramar_discover_outside_world_effect = yes
+        }
+        hidden_effect = {
+            random_list = { # You become wretched from ur travel
+                25 = { 
+                    trigger_event = {
+                        id = wc_suramar_events.0004
+                        days = { 15 30 }
+                    }
+                }
+                75 = { }
+            }
+        }
     }
 }
