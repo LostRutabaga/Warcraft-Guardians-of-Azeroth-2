@@ -765,7 +765,7 @@ wc_horde_invasion.1503 = {
 	desc = wc_horde_invasion.1503.desc
 	theme = horde
 
-	override_background = { reference = wilderness_scope }
+	override_background = { reference = bp1_bonfire }
 	left_portrait = {
 		character = root
 		animation = personality_honorable
