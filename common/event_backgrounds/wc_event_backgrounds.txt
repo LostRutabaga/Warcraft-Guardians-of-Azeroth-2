@@ -212,3 +212,19 @@ wc_death_tree = {
 		ambience = "event:/SFX/Events/Backgrounds/dungeon"
 	}
 }
+
+wc_jade_forest_fullscreen = { 
+	background = {
+		reference = "gfx/interface/illustrations/event_scenes/wc_jade_forest_fullscreen.dds"
+		environment = "environment_indian_feast"
+		ambience = "event:/SFX/Events/Backgrounds/deciduous_forest_day"
+	}
+}
+
+wc_uldum_fullscreen = { 
+	background = {
+		reference = "gfx/interface/illustrations/event_scenes/wc_uldum_fullscreen.dds"
+		environment = "environment_event_bp1_bonfire"
+		ambience = "event:/SFX/Events/Backgrounds/desert_day"
+	}
+}
