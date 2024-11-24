@@ -12,12 +12,12 @@
 # 0060 - Someone brings you some tasty arcwine
 # 0070-0073 - You spot murlocs accross the bay, short chain
 # 0080 - A wretched seeks asylum
-# 0090 - You find an ancient titan artifact
+# 0090 - You find an ancient titan artifact - TODO 
 # 0100 - Someone brings you the seed of arcandor
 # 0110 - The neighboring fal'dorei ruler asks you to restore the arcandor tree
 # 0120 - You spot a naga ship off the coast
-# 0130 - You find a strange portal in the city
-# 0140 - An adventurer is in your realm
+# 0130 - You find a strange portal in the city - TODO 
+# 0140 - An adventurer is in your realm - TODO 
 
 # Opening event for the leader of Suramar if barrier is up
 wc_suramar_events.0001 = {
@@ -226,6 +226,7 @@ wc_suramar_events.0004 = {
         add_trait = wretched
     }
 }
+
 wc_suramar_events.0010 = {
     type = character_event
     content_source = dlc_GOA
@@ -1792,7 +1793,6 @@ wc_suramar_events.0041 = {
     }
 }
 
-# You find a relic
 wc_suramar_events.0042 = {
     type = character_event
     content_source = dlc_GOA
@@ -3413,6 +3413,14 @@ wc_suramar_events.0072 = {
             NOT = { scope:murloc_duel ?= flag:fight }
         }
 
+        culture = {
+            change_cultural_acceptance = {
+				target = scope:murloc_leader.culture
+				value = 10
+				desc = cultural_acceptance_gain_event
+			}
+        }
+
         add_character_modifier = {
             modifier = wc_suramar_friend_murlocs_modifier
             years = 10
@@ -3766,13 +3774,14 @@ wc_suramar_events.0080 = {
     }
 }
 
-# Someone brings you the Seed of Arcandor
 wc_suramar_events.0100 = {
     type = character_event
     content_source = dlc_GOA
     title = wc_suramar_events.0100.t
     desc = wc_suramar_events.0100.desc
     theme = suramar
+
+    cooldown = { years = 30 }
 
     immediate = {
         hidden_effect = {
@@ -3916,7 +3925,6 @@ wc_suramar_events.0110 = {
 		desc = wc_suramar_events.0110.opening
 	}
     desc = wc_suramar_events.0110.desc
-    theme = suramar
 
     sender = scope:faldorei_leader
 
@@ -3957,6 +3965,8 @@ wc_suramar_events.0110 = {
             }
         }
     }
+
+    cooldown = { years = 15 }
 
     option = { # Ok I will if you give me some money
         name = wc_suramar_events.0110.a
@@ -4154,6 +4164,11 @@ wc_suramar_events.0111 = {
     option = {
         name = wc_suramar_events.0111.a
 
+        add_character_modifier = {
+            modifier = wc_suramar_faldorei_raided_modifier
+            years = 3
+        }
+
         scope:faldorei_leader = {
             progress_towards_rival_effect = {
                 CHARACTER = root
@@ -4232,6 +4247,252 @@ wc_suramar_events.0111 = {
 
         ai_chance = {
             base = 50
+        }
+    }
+}
+
+wc_suramar_events.0120 = {
+    type = character_event
+    content_source = dlc_GOA
+    title = wc_suramar_events.0120.t
+    desc = wc_suramar_events.0120.desc
+    theme = suramar
+
+    override_background = { reference = study }
+
+    trigger = {
+        NOR = { 
+            has_trait = creature_naga
+            has_character_flag = had_naga_event
+        }
+        is_eligible_for_suramar_events_trigger = yes
+        any_neighboring_and_across_water_top_liege_realm_owner = {
+            any_sub_realm_county = {
+                holder = { has_trait = creature_naga }
+            }
+        }
+    }
+
+    immediate = {
+        add_character_flag = had_naga_event
+        random_neighboring_and_across_water_top_liege_realm_owner = {
+            limit = {
+                any_sub_realm_county = {
+                    holder = { has_trait = creature_naga }
+                }
+            }
+            random_sub_realm_county = {
+                limit = {
+                    holder = { has_trait = creature_naga }
+                }
+                title_province = { save_scope_as = target_barony }
+                holder = { save_scope_as = naga_leader }
+            }
+        }
+    }
+
+    left_portrait = {
+        character = scope:naga_leader
+        animation = personality_honorable
+    }
+
+    option = {
+        name = wc_suramar_events.0120.a 
+        trigger_event = {
+            id = wc_suramar_events.0121
+        }   
+    }
+}
+
+wc_suramar_events.0121 = {
+    type = character_event
+    content_source = dlc_GOA
+    title = wc_suramar_events.0120.t
+    desc = wc_suramar_events.0121.desc
+    theme = suramar
+
+    left_portrait = {
+        character = scope:naga_leader
+        animation = personality_honorable
+    }
+
+    option = {
+        name = wc_suramar_events.0121.a 
+
+        add_character_modifier = {
+            modifier = wc_suramar_friend_naga_modifier
+            years = 5
+        }
+
+        culture = {
+            change_cultural_acceptance = {
+				target = scope:naga_leader.culture
+				value = 10
+				desc = cultural_acceptance_gain_event
+			}
+        }
+
+        ai_chance = {
+            base = 50
+        }
+    }
+
+    option = {
+        name = wc_suramar_events.0121.b
+        trigger = {
+            NOR = { faith = faith:nzoth_worship has_trait = zealous }
+        }
+        set_character_faith_with_conversion = faith:nzoth_worship
+
+        ai_chance = {
+            base = 50
+        }
+    }
+
+    option = {
+        name = wc_suramar_events.0121.c
+
+        culture = {
+            change_cultural_acceptance = {
+				target = scope:naga_leader.culture
+				value = -10
+				desc = cultural_acceptance_gain_event
+			}
+        }
+
+        ai_chance = {
+            base = 50
+        }
+    }
+
+    option = {
+        name = wc_suramar_events.0121.d
+        trigger = {
+            has_global_variable = suramar_barrier_lowered_variable 
+        }
+
+        start_war = {
+            target = scope:naga_leader
+            casus_belli = county_conquest_cb
+        }
+
+        ai_chance = {
+            base = 50
+        }
+    }
+
+    after = {
+        if = {
+            limit = {
+                NOT = { has_global_variable = suramar_barrier_lowered_variable }
+                NOT = { has_character_flag = had_outsider_event }
+            }
+            suramar_discover_outside_world_effect = yes
+        }
+    }
+}
+
+wc_suramar_events.0130 = {
+    type = character_event
+    content_source = dlc_GOA
+    title = wc_suramar_events.0130.t
+    desc = {
+        desc = wc_suramar_events.0130.desc
+        triggered_desc = {
+            trigger = {
+                has_global_variable = suramar_barrier_lowered_variable 
+            }
+            desc = wc_suramar_events.0130.desc_barrier
+        }
+    }
+    theme = suramar
+
+    cooldown = { months = 6 }
+
+    trigger = {
+        is_eligible_for_suramar_events_trigger = yes
+        any_ruler = {
+            is_landless_adventurer = yes
+            NOR = { 
+                has_character_flag = suramar_laamp_flag
+                has_trait = creature_nightborne
+            }
+            domicile.domicile_location = {
+                county = { 
+                    OR = {
+                        holder ?= root
+                        holder.liege ?= root
+                        holder.top_liege ?= root
+                    }
+                }
+            }
+        }
+    }
+
+    immediate = {
+        random_ruler = {
+            limit = {
+                is_landless_adventurer = yes
+                NOT = { has_trait = creature_nightborne }
+                NOT = { has_character_flag = suramar_laamp_flag }
+                domicile.domicile_location = {
+                    county = { 
+                        OR = {
+                            holder ?= root
+                            holder.liege ?= root
+                            holder.top_liege ?= root
+                        }
+                    }
+                }
+            }
+            save_scope_as = suramar_laamp
+        }
+    }
+
+    left_portrait = {
+        character = scope:suramar_laamp
+        animation = personality_honorable
+    }
+
+    option = {
+        name = wc_suramar_events.0130.a
+        imprison = {
+			target = scope:suramar_laamp
+			type = dungeon
+		}
+
+        stress_impact = {
+            just = minor_stress_impact_gain
+            vengeful = minor_stress_impact_loss
+        }
+
+        ai_chance = {
+            base = 50
+            modifier = {
+                add = -40
+                scope:suramar_laamp = { is_ai = no }
+            }
+            ai_value_modifier = {
+                ai_vengefulness = 1
+            }
+        }
+    }
+
+    option = {
+        name = wc_suramar_events.0130.b
+
+        ai_chance = {
+            base = 50
+        }
+    }
+
+    after = {
+        if = {
+            limit = {
+                NOT = { has_global_variable = suramar_barrier_lowered_variable }
+                NOT = { has_character_flag = had_outsider_event }
+            }
+            suramar_discover_outside_world_effect = yes
         }
     }
 }

@@ -298,3 +298,26 @@ l_english:
 
  wc_suramar_faldorei_anger_modifier:0 "Betrayed"
  wc_suramar_faldorei_anger_modifier_desc:0 "This character has been betrayed, and will seek our their vengeance."
+
+ wc_suramar_faldorei_raided_modifier:0 "Fal'dorei Aggression"
+ wc_suramar_faldorei_raided_modifier_desc:0 "This character has betrayed the Fal'dorei, and they have retaliated."
+
+ wc_suramar_events.0120.t:0 "The Fate of Azshara"
+ wc_suramar_events.0120.desc:0 "Many in Suramar gossip about the fate of Queen Azshara, and what has become of her. Some say she is dead, others say she is still alive, but the most intrigue theory has been that she had been transformed into a creature that rules the depths of the ocean.\n\nI have not given in to any particular theory, but I spot an interesting figure upon the sands of [target_barony.GetName]. They resemble us, ever so slightly, but seem to be more... aquatic."
+ wc_suramar_events.0120.a:0 "Hmm... how interesting."
+
+ wc_suramar_events.0121.desc:0 "As I approach the figure, [naga_leader.GetHerHis] body coils and slithers. [naga_leader.GetSheHe|U] turns to me, wide-eyed. [naga_leader.GetSheHe|U] hisses something in a broken, twisted dialect of [ROOT.Char.GetCulture.GetLanguage.GetName], yet it is enough for me to understand.\n\nI sit in the sands with the surprisingly [naga_leader.Custom('ComplimentAdjective')] figure, and [naga_leader.GetSheHe] tells me of [naga_leader.GetHerHis] people, and how they were once Nightborne, but had been transformed into the Naga after Suramar fell.\n\nAfter all this time, Aszhara could still live. But considering her betrayal, can these Naga be trusted?"
+ wc_suramar_events.0121.a:0 "You are welcomed, kin of Azshara."
+ wc_suramar_events.0121.b:0 "Tell me more of this... N'Zoth."
+ wc_suramar_events.0121.c:0 "Your people are not to be trusted."
+ wc_suramar_events.0121.d:0 "The lands of the Naga belong to us!"
+
+ wc_suramar_friend_naga_modifier:0 "Friend of the Naga"
+ wc_suramar_friend_naga_modifier_desc:0 "This character has made contact with the Naga, and it was quite the experience!"
+
+ wc_suramar_events.0130.t:0 "A Foreigner's Arrival"
+ wc_suramar_events.0130.desc:0 "Talks have been circulating about a camp, settled in the [suramar_laamp.GetDomicile.GetLocation.Custom('GetTerrainTypePlural')] of [suramar_laamp.GetDomicile.GetLocation.GetName]. It's inhabitants are not of Suramar, and they come and go, attempting to make contact with the locals.\n\nMany look to me for my next move, as they reside within my realm..."
+ wc_suramar_events.0130.desc_barrier:0 "\n\nNow that we are open to the world, it is only natural that foreigners would come to our lands. But what do they want?"
+
+ wc_suramar_events.0130.a:0 "[suramar_laamp.GetSheHe|U] should be in my dungeon!"
+ wc_suramar_events.0130.c:0 "Ah, best to leave [suramar_laamp.GetHerHim] be."

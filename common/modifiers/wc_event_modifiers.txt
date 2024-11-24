@@ -458,3 +458,19 @@ wc_suramar_faldorei_anger_modifier = {
 	owned_hostile_scheme_success_chance_add = 25
 	hostile_scheme_phase_duration_add = medium_scheme_phase_duration_bonus_value
 }
+
+wc_suramar_faldorei_raided_modifier = {
+	icon = intrigue_negative
+
+	enemy_hostile_scheme_success_chance_add = 10
+	travel_danger = 15
+	faldorei_opinion = -15
+}
+
+wc_suramar_friend_naga_modifier = {
+	icon = social_positive
+
+	naga_opinion = 20
+	sea_travel_danger = low_sea_danger_reduction
+	coastal_sea_travel_danger = low_sea_danger_reduction
+}
