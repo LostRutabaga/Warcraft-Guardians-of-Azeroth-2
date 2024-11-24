@@ -278,3 +278,23 @@ l_english:
  wc_suramar_events.0100.b:0 "You could be useful to me, too..."
  wc_suramar_events.0100.c:0 "I'm sorry but, I cannot justifiably pay that price."
  wc_suramar_events.0100.c_tt:0 "[newly_created_artifact.GetName] is returned to its original location"
+
+ wc_suramar_events.0110.opening:0 "To the great [ROOT.Char.GetTitleAsNameNoTooltip],"
+ wc_suramar_events.0110.desc:0 "For some time, the Fal'dorei of my realm, [faldorei_leader.GetPrimaryTitle.GetName], have been restless.\n\nThe Arcan'dor tree, the source of our power, was destroyed a millenia ago. Though it cannot compare to the power of your Nightwell, we ask for your aid in growing it once more. You are but one of few who have the ability to do so, and we will be ever so grateful.\n\nPlease, [ROOT.Char.GetTitleAsNameNoTooltip], help us."
+ wc_suramar_events.0110.a:0 "Empty your treasury, and I will."
+ wc_suramar_events.0110.b:0 "Only if you swear fealty to me."
+ wc_suramar_events.0110.c:0 "Of course, [faldorei_leader.GetFirstName]!"
+ wc_suramar_events.0110.d:0 "I cannot help in this endeavor."
+ wc_suramar_events.0110.good:0 "[faldorei_leader.GetSheHe|U] agrees to your terms"
+ wc_suramar_events.0110.bad:0 "[faldorei_leader.GetSheHe|U] refuses to bow to you"
+ wc_suramar_events.0110.tt:0 "#warning You will have #V 2#! years to grow the Arcan'dor tree, using the [GetDecisionWithKey('restore_arcandor_decision').GetName] [decision|E], or [faldorei_leader.GetFirstName] and other [GetTrait('creature_faldorei').GetName( GetPlayer )] could wage [war|E] or start a hostile [scheme|E] against you.#!"
+
+ wc_suramar_events.0111.t:0 "Forsaker of the [GetTrait('creature_faldorei').GetName( GetPlayer )]"
+ wc_suramar_events.0111.desc:0 "Years ago, I promised [faldorei_leader.GetName] that I would grow the Arcan'dor tree, but I have failed to do so.\n\nFaldorei have begun to terrorize my realm, at the behest of [current_leader.GetName]. Because of my failures, my people are in danger. Who knows what else they'll do..."
+ wc_suramar_events.0111.a:0 "If I could rescind my promise..."
+
+ rival_went_back_on_promise:0 "[TARGET_CHARACTER.GetShortUIName|U] did not do what they promised to [CHARACTER.GetShortUIName]."
+ rival_went_back_on_promise_corresponding:0 "[CHARACTER.GetShortUIName|U] did not do what they promised to [TARGET_CHARACTER.GetShortUIName]."
+
+ wc_suramar_faldorei_anger_modifier:0 "Betrayed"
+ wc_suramar_faldorei_anger_modifier_desc:0 "This character has been betrayed, and will seek our their vengeance."

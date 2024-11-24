@@ -14,7 +14,7 @@
 # 0080 - A wretched seeks asylum
 # 0090 - You find an ancient titan artifact
 # 0100 - Someone brings you the seed of arcandor
-# 0110 - The neighboring fal'dorei ruler seeks an alliance
+# 0110 - The neighboring fal'dorei ruler asks you to restore the arcandor tree
 # 0120 - You spot a naga ship off the coast
 # 0130 - You find a strange portal in the city
 # 0140 - An adventurer is in your realm
@@ -3846,6 +3846,18 @@ wc_suramar_events.0100 = {
         else = {
             pay_short_term_gold = { gold = major_gold_value target = scope:explorer }
         }
+
+        stress_impact = {
+            greedy = minor_stress_impact_gain
+            generous = medium_stress_impact_loss
+        }    
+
+        ai_chance = {
+            base = 50
+            ai_value_modifier = {
+                ai_greed = -1
+            }
+        }
     }
 
     option = { # Pay for it and hire him
@@ -3856,7 +3868,19 @@ wc_suramar_events.0100 = {
 
         pay_short_term_gold = { gold = medium_gold_value target = scope:explorer }
 
-		court_position_grant_effect = { POS = antiquarian CANDIDATE = scope:explorer EMPLOYER =root }
+		court_position_grant_effect = { POS = antiquarian CANDIDATE = scope:explorer EMPLOYER = root }
+
+        stress_impact = {
+            greedy = minor_stress_impact_gain
+            generous = medium_stress_impact_loss
+        }    
+
+        ai_chance = {
+            base = 50
+            ai_value_modifier = {
+                ai_greed = -1
+            }
+        }
     }
 
     option = { # No
@@ -3873,6 +3897,341 @@ wc_suramar_events.0100 = {
         custom_tooltip = {
             text = wc_suramar_events.0100.c_tt
             destroy_artifact = scope:newly_created_artifact
+        }
+
+        stress_impact = {
+            greedy = medium_stress_impact_loss
+        }    
+
+        ai_chance = {
+            base = 10
+        }
+    }
+}
+
+wc_suramar_events.0110 = {
+    content_source = dlc_GOA
+    type = letter_event
+	opening = {
+		desc = wc_suramar_events.0110.opening
+	}
+    desc = wc_suramar_events.0110.desc
+    theme = suramar
+
+    sender = scope:faldorei_leader
+
+    immediate = {
+        random_sub_realm_county = { 
+            limit = {
+                any_neighboring_county = {
+                    holder ?= {
+                        has_trait = creature_faldorei
+                        is_available_ai_adult = yes
+                    }
+                }
+            }
+            random_neighboring_county = {
+                limit = {
+                    holder ?= {
+                        has_trait = creature_faldorei
+                        is_available_ai_adult = yes
+                       
+                    }
+                }
+                holder = { save_scope_as = faldorei_leader }
+            }
+        }
+    }
+
+    trigger = {
+        has_global_variable = suramar_barrier_lowered_variable
+        has_title = title:k_suramar
+        can_restore_arcandor_trigger = yes
+        any_sub_realm_county = {
+            any_neighboring_county = {
+                holder ?= {
+                    has_trait = creature_faldorei
+                    is_available_ai_adult = yes
+                    NOT = { is_vassal_or_below_of = root }
+                }
+            }
+        }
+    }
+
+    option = { # Ok I will if you give me some money
+        name = wc_suramar_events.0110.a
+
+        scope:faldorei_leader = {
+            pay_short_term_gold = { gold = massive_gold_value target = root }
+        }
+
+        stress_impact = {
+            greedy = minor_stress_impact_loss
+            content = minor_stress_impact_gain
+        }    
+
+        custom_tooltip = {
+            text = wc_suramar_events.0110.tt
+            trigger_event = {
+                id = wc_suramar_events.0111
+                years = 2
+            }
+        }
+
+        ai_chance = {
+            base = 50
+            ai_value_modifier = {
+                ai_greed = 1
+            }
+        }
+    }
+
+    option = { # Ok I will if you swear fealty to me
+        name = wc_suramar_events.0110.b
+        trigger = {
+            scope:faldorei_leader = { is_independent_ruler = yes }
+        }
+
+        duel = {
+            skill = diplomacy
+            target = scope:faldorei_leader
+            60 = {
+                compare_modifier = {
+                    value = scope:duel_value
+                    multiplier = 3.5
+                }
+                desc = wc_suramar_events.0110.good
+                send_interface_toast = {
+                    title = wc_suramar_events.0110.good
+                    type = event_toast_effect_good
+                    left_icon = root
+                    right_icon = scope:faldorei_leader
+                    create_title_and_vassal_change = {
+                        type = swear_fealty
+                        save_scope_as = swear_fealty
+                        add_claim_on_loss = no
+                    }
+                    scope:faldorei_leader =  {
+                        change_liege = {
+                            liege = root
+                            change = scope:swear_fealty
+                        }
+                        resolve_title_and_vassal_change = scope:swear_fealty
+                    }
+                }
+                custom_tooltip = {
+                    text = wc_suramar_events.0110.tt
+                    trigger_event = {
+                        id = wc_suramar_events.0111
+                        years = 2
+                    }
+                }
+            }
+            40 = {
+                compare_modifier = {
+                    value = scope:duel_value
+                    multiplier = -3.5
+                }
+                desc = wc_suramar_events.0110.bad
+                send_interface_toast = {
+                    title = wc_suramar_events.0110.bad
+                    type = event_toast_effect_bad
+                    left_icon = root
+                    right_icon = scope:faldorei_leader
+                    add_stress = minor_stress_gain
+                }
+            }
+        }
+
+        ai_chance = {
+            base = 50
+        }
+    }
+
+
+    option = { # Yes, for free
+        name = wc_suramar_events.0110.c
+
+        scope:faldorei_leader = {
+            add_opinion = {
+                target = root
+                modifier = grateful_opinion
+                opinion = 30
+            }
+        }
+
+        custom_tooltip = {
+            text = wc_suramar_events.0110.tt
+            trigger_event = {
+                id = wc_suramar_events.0111
+                years = 2
+            }
+        }
+
+        stress_impact = {
+            generous = minor_stress_impact_loss
+            compassionate = minor_stress_impact_loss
+            creature_faldorei = minor_stress_impact_loss
+            wretched = minor_stress_impact_loss
+        }
+
+        ai_chance = {
+            base = 50
+        }
+    }
+    option = { # No fuck off
+        name = wc_suramar_events.0110.d
+        scope:faldorei_leader = {
+            add_opinion = {
+                target = root
+                modifier = disappointed_opinion
+                opinion = -30
+            }
+        }
+
+        ai_chance = {
+            base = 50
+        }
+    }
+}
+
+wc_suramar_events.0111 = {
+    type = character_event
+    content_source = dlc_GOA
+    title = wc_suramar_events.0111.t
+    desc = wc_suramar_events.0111.desc
+    theme = suramar
+
+    immediate = {
+        if = {
+            limit = {
+                scope:faldorei_leader = { is_alive = no }
+            }
+            random_ruler = {
+                limit = {
+                    is_ai = yes 
+                    has_trait = creature_faldorei
+                    capital_province = { region = world_broken_isles_suramar }
+                }
+                save_scope_as = current_leader
+            }
+        }
+        else = {
+            scope:faldorei_leader = { save_scope_as = current_leader }
+        }
+    }
+
+    trigger = {
+        NOT = { has_global_variable = arcandor_restored_global_variable }
+        OR = {
+            scope:faldorei_leader = { is_alive = yes }
+            any_ruler = {
+                is_ai = yes 
+                has_trait = creature_faldorei
+                capital_province = { region = world_broken_isles_suramar }
+            }
+        }
+    }
+
+    left_portrait = {
+        character = root
+        animation = worry
+    }
+
+    right_portrait = {
+        trigger = {
+            NOT = { scope:current_leader = scope:faldorei_leader }
+        }
+        character = scope:current_leader
+        animation = personality_honorable
+    }
+
+    lower_center_portrait = {
+        character = scope:faldorei_leader
+    }
+
+
+    option = {
+        name = wc_suramar_events.0111.a
+
+        scope:faldorei_leader = {
+            progress_towards_rival_effect = {
+                CHARACTER = root
+                REASON = rival_went_back_on_promise
+                OPINION = -60
+            }
+            add_character_modifier = {
+                modifier = wc_suramar_faldorei_anger_modifier
+                years = 3
+            }
+            hidden_effect = {
+                random_list = {
+                    50 = {
+                        start_scheme = {
+                            type = murder
+                            target_character = root
+                        }
+                    }
+                    50 = {
+                        start_scheme = {
+                            type = abduct
+                            target_character = root
+                        }
+                    }
+                    50 = {
+                        trigger = {
+                            can_join_or_create_faction_against = {
+                                who = root
+                                faction = independence_faction
+                            }
+                        }
+                        root = {
+                            random_targeting_faction = {
+                                limit = {
+                                    faction_is_type = independence_faction
+                                }
+                                save_scope_as = faction_target
+                            }
+                        }
+                        if = {
+                            limit = {
+                                exists = scope:faction_target
+                            }
+                            join_faction = scope:faction_target
+                        }
+                        else = {
+                            create_faction = {
+                                type = independence_faction
+                                target = root
+                            }
+                        }
+                    }
+                    50 = {
+                        trigger = {
+                            root = {
+                                any_child = {
+                                    count >= 1
+                                }
+                            }
+                        }
+                        root = {
+                            random_child = {
+                                save_scope_as = target_kid
+                            }
+                        }
+                        start_scheme = {
+                            type = abduct
+                            target_character = scope:target_kid
+                        }
+                    }
+                }
+            }
+        }
+
+        add_tyranny = 15
+
+        ai_chance = {
+            base = 50
         }
     }
 }

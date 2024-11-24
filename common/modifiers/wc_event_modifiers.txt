@@ -451,3 +451,10 @@ wc_suramar_drained_mana_modifier = {
 	monthly_piety = 0.3
 	#TODO_WARCRAFT - mana regen
 }
+
+wc_suramar_faldorei_anger_modifier = {
+	icon = intrigue_positive
+
+	owned_hostile_scheme_success_chance_add = 25
+	hostile_scheme_phase_duration_add = medium_scheme_phase_duration_bonus_value
+}
