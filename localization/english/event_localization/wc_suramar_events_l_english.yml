@@ -271,3 +271,10 @@ l_english:
  wc_suramar_drained_mana_modifier:0 "Siphoned Wretched"
  wc_suramar_drained_mana_modifier_desc:0 "This character has taken the small amount of energy remaining in a wretched elf, and is benefiting from it.\n\n#bold Blocks#! the [GetDecisionWithKey('restore_arcandor_decision').GetName] [decision|E]"
  suramar_exile_character_effect_tt_wretched_dead:0 "Exiling a wretched elf could cause their demise..."
+
+ wc_suramar_events.0100.t:0 "The Arcan'dor"
+ wc_suramar_events.0100.desc:0 "With my knowledge of the Fal'dorei, I have come to understand the importance of the Arcan'dor tree. It is the source of their power, and without it, they will wither and die.\n\nThe location of the seed, however, is unbeknownst to me. After pondering this for some time, my [ROOT.Char.Custom2('RelationToMeShort', explorer)], [explorer.GetFirstName], has brought me a seed [explorer.GetHerHim]self! [explorer.GetSheHe|U] is willing to hand it over, at a price..."
+ wc_suramar_events.0100.a:0 "I will take it, [explorer.GetFirstNameNoTooltip]!"
+ wc_suramar_events.0100.b:0 "You could be useful to me, too..."
+ wc_suramar_events.0100.c:0 "I'm sorry but, I cannot justifiably pay that price."
+ wc_suramar_events.0100.c_tt:0 "[newly_created_artifact.GetName] is returned to its original location"

@@ -3462,6 +3462,7 @@ wc_suramar_events.0072 = {
         }
     }
 }
+
 wc_suramar_events.0080 = {
     type = character_event
     content_source = dlc_GOA
@@ -3761,6 +3762,117 @@ wc_suramar_events.0080 = {
                 NOT = { has_character_flag = had_nightfallen_event }
             }
             suramar_discover_nightfallen_effect = yes
+        }
+    }
+}
+
+# Someone brings you the Seed of Arcandor
+wc_suramar_events.0100 = {
+    type = character_event
+    content_source = dlc_GOA
+    title = wc_suramar_events.0100.t
+    desc = wc_suramar_events.0100.desc
+    theme = suramar
+
+    immediate = {
+        hidden_effect = {
+            create_artifact_arcandor_seed_effect = { OWNER = scope:explorer }
+            scope:newly_created_artifact = {
+                set_owner = scope:explorer
+            }
+        }
+        if = {
+            limit = {
+                NOT = { employs_court_position = antiquarian_court_position }
+            }
+            ordered_courtier = {
+                order_by = {
+                    add = learning
+                    add = {
+                        value = this.aptitude:antiquarian_court_position
+                        multiply = 5
+                    }
+                }
+                limit = {
+                    root = { can_appoint_char_to_court_position = { CHAR = prev COURT_POS = antiquarian_court_position } }
+                }
+                save_scope_as = explorer
+            }
+        }
+        else = {
+            random_court_position_holder = {
+				type = antiquarian_court_position
+				save_scope_as = explorer
+			}
+        }
+    }
+
+    trigger = {
+        has_character_flag = had_faldorei_event
+        has_arcandor_seed_trigger = no 
+        OR = {
+            employs_court_position = antiquarian_court_position
+            any_courtier = {
+                root = { can_appoint_char_to_court_position = { CHAR = prev COURT_POS = antiquarian_court_position } }
+            }
+        }
+    }
+
+    artifact = {
+        target = scope:newly_created_artifact
+        position = lower_left_portrait
+        trigger = { exists = scope:newly_created_artifact }
+    }
+
+    left_portrait = {
+        character = root
+        animation = admiration
+    }
+
+    right_portrait = {
+        character = scope:explorer
+        animation = personality_honorable
+    }
+
+    option = { # Pay for it 
+        name = wc_suramar_events.0100.a
+
+        if = {
+            limit = {
+                scope:explorer = { has_court_position = antiquarian_court_position }
+            }
+            pay_short_term_gold = { gold = medium_gold_value target = scope:explorer }
+        }
+        else = {
+            pay_short_term_gold = { gold = major_gold_value target = scope:explorer }
+        }
+    }
+
+    option = { # Pay for it and hire him
+        name = wc_suramar_events.0100.b
+        trigger = {
+            NOT = { scope:explorer = { has_court_position = antiquarian_court_position } }
+        }
+
+        pay_short_term_gold = { gold = medium_gold_value target = scope:explorer }
+
+		court_position_grant_effect = { POS = antiquarian CANDIDATE = scope:explorer EMPLOYER =root }
+    }
+
+    option = { # No
+        name = wc_suramar_events.0100.c
+
+        scope:explorer = {
+            add_opinion = {
+                target = root
+                modifier = disappointed_opinion
+                opinion = -15
+            }
+        }
+
+        custom_tooltip = {
+            text = wc_suramar_events.0100.c_tt
+            destroy_artifact = scope:newly_created_artifact
         }
     }
 }
