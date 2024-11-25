@@ -320,4 +320,4 @@ l_english:
  wc_suramar_events.0130.desc_barrier:0 "\n\nNow that we are open to the world, it is only natural that foreigners would come to our lands. But what do they want?"
 
  wc_suramar_events.0130.a:0 "[suramar_laamp.GetSheHe|U] should be in my dungeon!"
- wc_suramar_events.0130.c:0 "Ah, best to leave [suramar_laamp.GetHerHim] be."
+ wc_suramar_events.0130.b:0 "Ah, best to leave [suramar_laamp.GetHerHim] be."

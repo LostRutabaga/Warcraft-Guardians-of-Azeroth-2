@@ -4121,7 +4121,7 @@ wc_suramar_events.0111 = {
                 limit = {
                     is_ai = yes 
                     has_trait = creature_faldorei
-                    capital_province = { region = world_broken_isles_suramar }
+                    capital_province = { geographical_region = world_broken_isles_suramar }
                 }
                 save_scope_as = current_leader
             }
@@ -4138,7 +4138,7 @@ wc_suramar_events.0111 = {
             any_ruler = {
                 is_ai = yes 
                 has_trait = creature_faldorei
-                capital_province = { region = world_broken_isles_suramar }
+                capital_province = { geographical_region = world_broken_isles_suramar }
             }
         }
     }
@@ -4445,6 +4445,7 @@ wc_suramar_events.0130 = {
                     }
                 }
             }
+            add_character_flag = suramar_laamp_flag
             save_scope_as = suramar_laamp
         }
     }

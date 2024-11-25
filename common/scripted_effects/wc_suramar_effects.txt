@@ -30,7 +30,7 @@
             scope:exiled_character = { has_trait = wretched }
         }
         custom_tooltip = suramar_exile_character_effect_tt_wretched_dead
-        hidden = {
+        hidden_effect = {
             random = {
                 chance = 50
                 scope:exiled_character = { override_death_effect = { death_reason = death_reason_mana_starved } }
@@ -65,7 +65,7 @@ suramar_exile_character_effect_from_prison = {
             scope:exiled_character = { has_trait = wretched }
         }
         custom_tooltip = suramar_exile_character_effect_tt_wretched_dead
-        hidden = {
+        hidden_effect = {
             random = {
                 chance = 50
                 scope:exiled_character = { override_death_effect = { death_reason = death_reason_mana_starved } }

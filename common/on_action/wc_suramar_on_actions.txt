@@ -34,6 +34,7 @@ suramar_events_pulse = {
         10 = wc_suramar_events.0100
         100 = wc_suramar_events.0110
         100 = wc_suramar_events.0120
+        100 = wc_suramar_events.0130
     }
 }
 
@@ -80,18 +81,18 @@ on_travel_plan_complete_suramar = {
                     }
                 }
                 random_list = {
-                    50 = {
-                        modifier = {
-                            add = 75
-                            is_ai = no 
-                        }
+                    100 = {
+                        # modifier = {
+                        #     add = 75
+                        #     is_ai = no 
+                        # }
                         trigger_event = { id = wc_suramar_events.0004 } # BECOME WRETCHED
                     }
-                    50 = {
-                        modifier = {
-                            add = 25
-                            is_ai = no 
-                        }
+                    0 = {
+                        # modifier = {
+                        #     add = 25
+                        #     is_ai = no 
+                        # }
                     }
                 }
             }
