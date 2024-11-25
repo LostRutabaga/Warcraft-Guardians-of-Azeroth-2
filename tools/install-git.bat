@@ -1,1 +1,2 @@
 powershell.exe -command "winget install --id Git.Git -e --source winget"
+pause
