@@ -523,51 +523,145 @@ wc_horde_invasion.1004 = {
 	desc = wc_horde_invasion.1004.desc
 	theme = horde
 
-	override_background = { reference = wc_background_dark_portal }
+	override_background = { reference = bp1_bonfire }
 	left_portrait = {
 		character = root
 		animation = celebrate_axe
+	}
+
+	immediate = {
+		title:k_stormwind.holder = { save_scope_as = king_of_stormwind }
+		title:e_horde.holder = { save_scope_as = warchief }
 	}
 
 	option = { # Lok'tar Ogar!
 		name = wc_horde_invasion.1004.a
+		flavor = wc_horde_invasion.1004.a.flavor
 		declare_war_on_stormwind_effect = yes
 
-		every_player = {
+		# Trigger Blackhand introduction, if the Warchief is Blackhand
+		if = {
+			limit = { root = scope:blackhand }
+			trigger_event = {
+				id = wc_horde_invasion.1500
+				days = 1
+			}
+		}
+
+		every_player = { # At location notification
 			limit = {
-				is_landless_adventurer = no
 				NOT = { has_title = title:e_horde }
-				OR = {
-					is_medivh_trigger = yes
-					has_title = title:k_stormwind
-					AND = {
-						exists = title:k_stormwind.holder
-						is_in_same_realm_as_target = { CHARACTER = title:k_stormwind.holder }
-					}
-					is_from_the_horde_trigger = yes
-				}
+				is_at_same_location = title:e_horde.holder
 			}
 			trigger_event = wc_horde_invasion.1005
 		}
+
+		#every_player = {
+		#	limit = {
+		#		NOT = { has_title = title:e_horde }
+		#		OR = {
+		#			is_medivh_trigger = yes
+		#			has_title = title:k_stormwind
+		#			AND = {
+		#				exists = title:k_stormwind.holder
+		#				is_in_same_realm_as_target = { CHARACTER = title:k_stormwind.holder }
+		#			}
+		#			is_from_the_horde_trigger = yes
+		#		}
+		#	}
+		#	trigger_event = wc_horde_invasion.1005
+		#}
 	}
 }
 
-# Assault on Stormwind - Notification
+# Assault on Stormwind - At location notification
 wc_horde_invasion.1005 = {
 	type = character_event
 	content_source = dlc_GOA
-	title = wc_horde_invasion.1005.title
-	desc = wc_horde_invasion.1005.desc
+	title = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { is_from_draenor_trigger = no }
+				desc = wc_horde_invasion.other.1005.title
+			}
+			desc = wc_horde_invasion.1005.title
+		}
+	}
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { is_from_draenor_trigger = no }
+				desc = wc_horde_invasion.other.1005.desc
+			}
+			triggered_desc = {
+				trigger = { has_faith = faith:orcish_shamanism }
+				desc = wc_horde_invasion.orcish_shamanism.1005.desc
+			}
+			desc = wc_horde_invasion.1005.desc
+		}
+	}
 	theme = horde
 
-	override_background = { reference = wc_background_dark_portal }
+	override_background = { reference = bp1_bonfire }
+	left_portrait = {
+		character = scope:warchief
+		animation = celebrate_axe
+	}
+	lower_right_portrait = {
+		character = root
+	}
+
+	option = {
+		name = {
+			text = wc_horde_invasion.1005.a
+		}
+		name = {
+			trigger = { has_faith = faith:orcish_shamanism }
+			text = wc_horde_invasion.orcish_shamanism.1005.a
+		}
+		name = {
+			trigger = { is_from_draenor_trigger = no }
+			text = wc_horde_invasion.other.1005.a
+		}
+		show_as_tooltip = { declare_war_on_stormwind_effect = yes }
+	}
+}
+
+# Assault on Stormwind - Horde notification
+wc_horde_invasion.1006 = {
+	type = character_event
+	content_source = dlc_GOA
+	title = wc_horde_invasion.1006.title
+	desc = wc_horde_invasion.1006.desc
+	theme = horde
+
+	override_background = { reference = throne_room_scope }
 	left_portrait = {
 		character = root
-		animation = celebrate_axe
+		animation = stress
 	}
 
 	option = { # Lok'tar Ogar!
-		name = wc_horde_invasion.1005.a
+		name = wc_horde_invasion.1006.a
+		show_as_tooltip = { declare_war_on_stormwind_effect = yes }
+	}
+}
+
+# Assault on Stormwind - Stormwind notification
+wc_horde_invasion.1007 = {
+	type = character_event
+	content_source = dlc_GOA
+	title = wc_horde_invasion.1007.title
+	desc = wc_horde_invasion.1007.desc
+	theme = horde
+	
+	right_portrait = {
+		character = root
+		animation = stress
+	}
+
+	option = { # Damn
+		name = wc_horde_invasion.1007.a
 		show_as_tooltip = { declare_war_on_stormwind_effect = yes }
 	}
 }
@@ -585,7 +679,6 @@ wc_horde_invasion.1500 = {
 	desc = wc_horde_invasion.1500.desc
 	theme = horde
 
-	override_background = { reference = wc_background_dark_portal }
 	left_portrait = {
 		character = root
 		animation = personality_bold

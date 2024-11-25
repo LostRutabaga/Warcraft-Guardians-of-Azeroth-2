@@ -26,16 +26,8 @@
 			title:e_horde.holder = {
 				trigger_event = {
 					id = wc_horde_invasion.1004
-					days = 7
+					days = 30
 				}
-			}
-		}
-
-		# Blackhand Introduction
-		character:10000 = {
-			trigger_event = {
-				id = wc_horde_invasion.1500
-				days = 5
 			}
 		}
 
