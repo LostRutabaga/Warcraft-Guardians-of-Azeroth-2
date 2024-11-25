@@ -26,16 +26,14 @@
  wc_horde_invasion.1001.desc:0 "It is time to stop this carnage. The Horde has conquered enough land to start a new life in Azeroth. Many orcs are returning to their families, burying their axes in the ground. They have vowed to forget the horrors of war that they had to go through. The warlords of the Horde still pose a threat to some parts of Azeroth, but the bloodiest wars are behind us since the clans no longer see the point in keeping the Horde united."
  wc_horde_invasion.1001.a:0 "The orcs need their warchief!"
  wc_horde_invasion.1001.b:0 "We will go our own way."
-
- wc_horde_invasion.1002.title:0 "WIP"
- wc_horde_invasion.1002.desc:0 "WIP"
+ wc_horde_invasion.1002.title:0 "$wc_horde_invasion.1001.title$"
+ wc_horde_invasion.1002.desc:0 "$wc_horde_invasion.1001.desc$"
  wc_horde_invasion.1002.orcish.a:0 "The orcs need their warchief!"
  wc_horde_invasion.1002.a:0 "We need our warchief!"
- wc_horde_invasion.1002.orcish.b:0 "WIP"
+ wc_horde_invasion.1002.orcish.b:0 "$wc_horde_invasion.1001.b$"
  wc_horde_invasion.1002.b:0 "It's over..."
-
- wc_horde_invasion.1003.title:0 "WIP"
- wc_horde_invasion.1003.desc:0 "WIP"
+ wc_horde_invasion.1003.title:0 "$wc_horde_invasion.1001.title$"
+ wc_horde_invasion.1003.desc:0 "$wc_horde_invasion.1001.desc$"
  wc_horde_invasion.1003.a:0 "We need our warchief!"
  wc_horde_invasion.1003.b:0 "It's over..."
 
@@ -53,9 +51,9 @@
  wc_horde_invasion.orcish_shamanism.1005.a:0 "I will fight too."
  wc_horde_invasion.other.1005.a:0 "I’d better leave."
  warchief_speech_stormwind:0 ""The weakling humans have spotted our raids. Instead of standing their ground and defending their lands, those cowards ran to grovel before their [king_of_stormwind.GetTitleAsNameNoTooltip|l]. Our scouts report that he has sent spies into the Black Morass to uncover our plans. But that changes nothing! Some among their council already tremble at the reports of our strength; they speak of crawling north, begging for aid. We cannot allow that to happen!\n\nWarriors of the [warchief.GetPrimaryTitle.GetBaseNameNoTooltip], this cursed swamp is no place to forge our destiny. [king_of_stormwind.GetPrimaryTitle.GetBaseNameNoTierNoTooltip] must fall, and we will leave behind nothing but ashes and despair to crush their pathetic kingdoms!""
-
  wc_horde_invasion.1006.title:0 "$wc_horde_invasion.1004.title$"
- wc_horde_invasion.1006.desc:0 "WIP"
+ wc_horde_invasion.1006.desc:0 "[warchief.GetTitleAsNameNoTooltip] [warchief.GetDynastyHouseName] has declared war on the humans. Thousands of grunts are already marching across the Borderlands to strike at the lands of [king_of_stormwind.GetPrimaryTitle.GetBaseNameNoTierNoTooltip]. For weeks, small bands of orcs have been ravaging human frontiers, destroying villages and setting their pathetic temples ablaze. This growing threat has drawn the attention of their [king_of_stormwind.GetTitleAsNameNoTooltip|l], and rumors are spreading that they may seek aid from the north.\n\n[warchief.GetDynastyHouseNameNoTooltip] has promised us rich and fertile lands if the [warchief.GetPrimaryTitle.GetBaseNameNoTooltip] can annihilate its enemies and subjugate the inferior races that inhabit this world. Lok’tar Ogar, warriors: death to the humans!"
+ wc_horde_invasion.orcish_shamanism.1006.desc:0 "[warchief.GetTitleAsNameNoTooltip] [warchief.GetDynastyHouseName] has declared war on the humans. Thousands of grunts march across the Borderlands, seeking to claim the lands of [king_of_stormwind.GetPrimaryTitle.GetBaseNameNoTierNoTooltip]. For weeks, small bands of orcs, unable to contain their thirst for violence, have been raiding the human frontier, disrupting their villages and toppling their fragile temples. This has not gone unnoticed, and whispers say their [king_of_stormwind.GetTitleAsNameNoTooltip|l] may call for aid from the north.\n\n[warchief.GetDynastyHouseNameNoTooltip] speaks of fertile lands and a future for our people—a chance to rebuild what we lost on Draenor. Yet, the path forward is fraught with conflict. Lok’tar Ogar, I will fight too!"
  wc_horde_invasion.1006.a:0 "$wc_horde_invasion.1005.a$"
  wc_horde_invasion.orcish_shamanism.1006.a:0 "$wc_horde_invasion.orcish_shamanism.1005.a$"
 

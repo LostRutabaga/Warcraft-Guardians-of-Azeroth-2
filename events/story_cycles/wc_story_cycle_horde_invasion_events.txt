@@ -629,15 +629,19 @@ wc_horde_invasion.1005 = {
 
 	option = {
 		name = {
-			text = wc_horde_invasion.1005.a
-		}
-		name = {
-			trigger = { has_faith = faith:orcish_shamanism }
-			text = wc_horde_invasion.orcish_shamanism.1005.a
-		}
-		name = {
-			trigger = { is_from_draenor_trigger = no }
-			text = wc_horde_invasion.other.1005.a
+			text = {
+				first_valid = {
+					triggered_desc = {
+						trigger = { is_from_draenor_trigger = no }
+						desc = wc_horde_invasion.other.1005.a
+					}
+					triggered_desc = {
+						trigger = { has_faith = faith:orcish_shamanism }
+						text = wc_horde_invasion.orcish_shamanism.1005.a
+					}
+					desc = wc_horde_invasion.1005.a
+				}
+			}
 		}
 		show_as_tooltip = { declare_war_on_stormwind_effect = yes }
 	}
@@ -648,7 +652,15 @@ wc_horde_invasion.1006 = {
 	type = character_event
 	content_source = dlc_GOA
 	title = wc_horde_invasion.1006.title
-	desc = wc_horde_invasion.1006.desc
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { has_faith = faith:orcish_shamanism }
+				desc = wc_horde_invasion.orcish_shamanism.1006.desc
+			}
+			desc = wc_horde_invasion.1006.desc
+		}
+	}
 	theme = horde
 
 	left_portrait = {
@@ -658,11 +670,15 @@ wc_horde_invasion.1006 = {
 
 	option = {
 		name = {
-			text = wc_horde_invasion.1006.a
-		}
-		name = {
-			trigger = { has_faith = faith:orcish_shamanism }
-			text = wc_horde_invasion.orcish_shamanism.1006.a
+			text = {
+				first_valid = {
+					triggered_desc = {
+						trigger = { has_faith = faith:orcish_shamanism }
+						desc = wc_horde_invasion.orcish_shamanism.1006.a
+					}
+					desc = wc_horde_invasion.1006.a
+				}
+			}
 		}
 		show_as_tooltip = { declare_war_on_stormwind_effect = yes }
 	}
