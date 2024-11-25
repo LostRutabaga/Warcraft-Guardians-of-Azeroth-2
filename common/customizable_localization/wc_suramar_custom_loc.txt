@@ -61,23 +61,3 @@ GetSuramarLoseDisturbanceDesc = {
         localization_key = suramar_lose_disturbance_nightfallen
     }
 }
-
-GetCourtBrewmaster = {
-    type = character
-
-    text = {
-        trigger = {
-            faith = faith:cult_of_nightwell
-        }
-        localization_key = court_brewmaster_suramar
-    }
-    text = {
-        localization_key = court_brewmaster_generic 
-    }
-}
-
-GetCourtBrewmasterDesc = {
-	type = character
-	parent = GetCourtBrewmaster
-	suffix = _desc
-}

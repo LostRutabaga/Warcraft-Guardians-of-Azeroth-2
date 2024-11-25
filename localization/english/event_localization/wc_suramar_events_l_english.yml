@@ -319,5 +319,5 @@ l_english:
  wc_suramar_events.0130.desc:0 "Talks have been circulating about a camp, settled in the [suramar_laamp.GetDomicile.GetLocation.Custom('GetTerrainTypePlural')] of [suramar_laamp.GetDomicile.GetLocation.GetName]. It's inhabitants are not of Suramar, and they come and go, attempting to make contact with the locals.\n\nMany look to me for my next move, as they reside within my realm..."
  wc_suramar_events.0130.desc_barrier:0 "\n\nNow that we are open to the world, it is only natural that foreigners would come to our lands. But what do they want?"
 
- wc_suramar_events.0130.a:0 "[suramar_laamp.GetSheHe|U] should be in my dungeon!"
+ wc_suramar_events.0130.a:0 "[suramar_laamp.GetSheHe|U] should not be here!"
  wc_suramar_events.0130.b:0 "Ah, best to leave [suramar_laamp.GetHerHim] be."

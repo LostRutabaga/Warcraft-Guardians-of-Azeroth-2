@@ -33,7 +33,7 @@
         hidden_effect = {
             random = {
                 chance = 50
-                scope:exiled_character = { override_death_effect = { death_reason = death_reason_mana_starved } }
+                scope:exiled_character = { override_death_effect = { death_reason = death_mana_starved } }
             }
         }
     }
@@ -68,7 +68,7 @@ suramar_exile_character_effect_from_prison = {
         hidden_effect = {
             random = {
                 chance = 50
-                scope:exiled_character = { override_death_effect = { death_reason = death_reason_mana_starved } }
+                scope:exiled_character = { override_death_effect = { death_reason = death_mana_starved } }
             }
         }
     }

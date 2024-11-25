@@ -201,9 +201,17 @@ wc_suramar_events.0004 = {
     }
 
     immediate = {
-        ordered_courtier = {
-            order_by = learning
-            save_scope_as = teller
+        if = {
+            limit = {
+                OR = {
+                    is_landed = yes
+                    is_landless_adventurer = yes
+                }
+            }
+            ordered_courtier = {
+                order_by = learning
+                save_scope_as = teller
+            }
         }
     }
 
@@ -1603,6 +1611,7 @@ wc_suramar_events.0040 = {
             destination = title:b_meredil.title_province
             companion = scope:informant
             on_arrival_event = wc_suramar_events.0041
+            on_arrival_on_action = on_travel_plan_arrival_suramar
         }
 
         stress_impact = {
@@ -1642,6 +1651,7 @@ wc_suramar_events.0040 = {
             destination = title:b_meredil.title_province
             companion = scope:informant
             on_arrival_event = wc_suramar_events.0041
+            on_arrival_on_action = on_travel_plan_arrival_suramar
         }
 
         current_travel_plan = {
@@ -3041,6 +3051,7 @@ wc_suramar_events.0070 = {
         start_travel_plan = {
             destination = scope:target_barony
             on_arrival_event = wc_suramar_events.0071
+            on_arrival_on_action = on_travel_plan_arrival_suramar
         }
 
         ai_chance = {
@@ -3177,7 +3188,7 @@ wc_suramar_events.0071 = {
                 }
                 modifier = {
                     add = 25
-                    has_same_culture_heritage = scope:murloc_guy
+                    culture = { has_same_culture_heritage = scope:murloc_guy.culture }
                 }
                 scope:murloc_leader = {
                     add_opinion = {
@@ -4457,14 +4468,49 @@ wc_suramar_events.0130 = {
 
     option = {
         name = wc_suramar_events.0130.a
-        imprison = {
-			target = scope:suramar_laamp
-			type = dungeon
+        save_scope_as = expeller
+        save_scope_as = actor
+        scope:suramar_laamp = { save_scope_as = recipient }
+		scope:suramar_laamp = {
+			save_scope_as = adventurer
+			add_opinion = {
+				target = root
+				modifier = demanded_eviction_opinion
+			}
+			custom_tooltip = evict_adventurer_contracts_tt
+		}
+		scope:expeller = {
+			custom_description_no_bullet = {
+				text = evict_adventurer_consequences_tt
+				object = scope:suramar_laamp
+				subject = scope:expeller
+			}
+			custom_tooltip = evict_adventurer_casus_belli_tt
+			show_as_tooltip = {
+				add_opinion = {
+					target = scope:suramar_laamp
+					modifier = eviction_ignored_opinion
+				}
+			}
+		}
+		scope:suramar_laamp = {
+			set_variable = {
+				name = adventurer_expeller
+				value = scope:expeller
+				months = 4
+			}
+			trigger_event = {
+				id = ep3_interactions_events.0500
+				days = 1 
+			}
+			trigger_event = {
+				id = ep3_interactions_events.0501
+				months = 3
+			}
 		}
 
         stress_impact = {
-            just = minor_stress_impact_gain
-            vengeful = minor_stress_impact_loss
+            paranoid = minor_stress_impact_loss
         }
 
         ai_chance = {
