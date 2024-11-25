@@ -67,7 +67,7 @@ wc_horde_invasion.0004 = {
 
 ##################
 # Base Events
-# 1000-1005
+# 1000-1007
 ##################
 
 # Starts the Horde Invasion
@@ -85,7 +85,7 @@ wc_horde_invasion.1000 = {
 				trigger = {
 					is_from_draenor_trigger = yes
 					OR = {
-						has_title = title:d_twilights_hammer
+						has_title = title:d_twilights_hammer_clan
 						has_culture = culture:twilights_hammer
 						religion = { is_in_family = rf_shadow }
 					}
@@ -549,11 +549,27 @@ wc_horde_invasion.1004 = {
 		}
 
 		every_player = { # At location notification
-			limit = {
-				NOT = { has_title = title:e_horde }
-				is_at_same_location = title:e_horde.holder
+			if = {
+				limit = {
+					NOT = { has_title = title:e_horde }
+					is_at_same_location = title:e_horde.holder
+				}
+				trigger_event = wc_horde_invasion.1005
 			}
-			trigger_event = wc_horde_invasion.1005
+			else_if = {
+				limit = { is_from_draenor_trigger = yes }
+				trigger_event = wc_horde_invasion.1006
+			}
+			else_if = {
+				limit = {
+					OR = {
+						is_medivh_trigger = yes
+						has_title = title:k_stormwind
+						is_vassal_or_below_of = title:k_stormwind.holder
+					}
+				}
+				trigger_event = wc_horde_invasion.1007
+			}
 		}
 
 		#every_player = {
@@ -627,7 +643,7 @@ wc_horde_invasion.1005 = {
 	}
 }
 
-# Assault on Stormwind - Horde notification
+# Assault on Stormwind - Draenor notification
 wc_horde_invasion.1006 = {
 	type = character_event
 	content_source = dlc_GOA
@@ -635,14 +651,19 @@ wc_horde_invasion.1006 = {
 	desc = wc_horde_invasion.1006.desc
 	theme = horde
 
-	override_background = { reference = throne_room_scope }
 	left_portrait = {
 		character = root
-		animation = stress
+		animation = personality_honorable
 	}
 
-	option = { # Lok'tar Ogar!
-		name = wc_horde_invasion.1006.a
+	option = {
+		name = {
+			text = wc_horde_invasion.1006.a
+		}
+		name = {
+			trigger = { has_faith = faith:orcish_shamanism }
+			text = wc_horde_invasion.orcish_shamanism.1006.a
+		}
 		show_as_tooltip = { declare_war_on_stormwind_effect = yes }
 	}
 }
@@ -655,6 +676,7 @@ wc_horde_invasion.1007 = {
 	desc = wc_horde_invasion.1007.desc
 	theme = horde
 	
+	override_background = { reference = throne_room_scope }
 	right_portrait = {
 		character = root
 		animation = stress

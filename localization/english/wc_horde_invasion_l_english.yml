@@ -54,6 +54,11 @@
  wc_horde_invasion.other.1005.a:0 "I’d better leave."
  warchief_speech_stormwind:0 ""The weakling humans have spotted our raids. Instead of standing their ground and defending their lands, those cowards ran to grovel before their [king_of_stormwind.GetTitleAsNameNoTooltip|l]. Our scouts report that he has sent spies into the Black Morass to uncover our plans. But that changes nothing! Some among their council already tremble at the reports of our strength; they speak of crawling north, begging for aid. We cannot allow that to happen!\n\nWarriors of the [warchief.GetPrimaryTitle.GetBaseNameNoTooltip], this cursed swamp is no place to forge our destiny. [king_of_stormwind.GetPrimaryTitle.GetBaseNameNoTierNoTooltip] must fall, and we will leave behind nothing but ashes and despair to crush their pathetic kingdoms!""
 
+ wc_horde_invasion.1006.title:0 "$wc_horde_invasion.1004.title$"
+ wc_horde_invasion.1006.desc:0 "WIP"
+ wc_horde_invasion.1006.a:0 "$wc_horde_invasion.1005.a$"
+ wc_horde_invasion.orcish_shamanism.1006.a:0 "$wc_horde_invasion.orcish_shamanism.1005.a$"
+
  #################################
  # Introduction Events
  #################################
