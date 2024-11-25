@@ -557,7 +557,10 @@ wc_horde_invasion.1004 = {
 				trigger_event = wc_horde_invasion.1005
 			}
 			else_if = {
-				limit = { is_from_draenor_trigger = yes }
+				limit = {
+					is_from_draenor_trigger = yes
+					is_guldan_trigger = no 
+				}
 				trigger_event = wc_horde_invasion.1006
 			}
 			else_if = {
@@ -571,22 +574,6 @@ wc_horde_invasion.1004 = {
 				trigger_event = wc_horde_invasion.1007
 			}
 		}
-
-		#every_player = {
-		#	limit = {
-		#		NOT = { has_title = title:e_horde }
-		#		OR = {
-		#			is_medivh_trigger = yes
-		#			has_title = title:k_stormwind
-		#			AND = {
-		#				exists = title:k_stormwind.holder
-		#				is_in_same_realm_as_target = { CHARACTER = title:k_stormwind.holder }
-		#			}
-		#			is_from_the_horde_trigger = yes
-		#		}
-		#	}
-		#	trigger_event = wc_horde_invasion.1005
-		#}
 	}
 }
 
