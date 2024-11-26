@@ -59,10 +59,8 @@
  wc_horde_invasion.1007.title:0 "$wc_horde_invasion.1004.title$"
  wc_horde_invasion.1007.desc:0 ""[ROOT.Char.GetLadyLord|U]!" cried one of my servants as he ran towards me, breathless, while I went about my duties. Leaning close to my ear, he whispered troubling news.\n\nThe [warchief.GetPrimaryTitle.GetBaseName] has crossed the Borderlands and launched a massive assault on our lands. Already, hundreds of terrified refugees are fleeing inward, their cries of despair and fear begging us to come to their aid.\n\nTime is running out. I must decide, and quickly, before those enraged green-skins reach our gates and reduce everything to ashes."
  wc_horde_invasion.king.1007.desc:0 "The scouts sent to the Black Morass have returned, their numbers reduced and their bodies battered. Their leader, his face etched with fatigue, stands before me.\n\n"[ROOT.Char.GetLadyLord|U], the situation is worse than we had imagined. These green-skins are not trolls. And they are far more numerous than we ever anticipated!"\n\nHe continues his report, describing their unmatched brutality, their strange ritualistic practices and their mysterious origins. A courtier casts me a worried glance: the threat is far greater than we had believed, yet some members of the House of Nobles still refuse to take it seriously.\n\nWhat is truly happening? Could this be the prophesied [Glossary( 'Apocalypse', 'APOCALYPSE_RENILASH_GLOSS' )]? Whatever they are, and whatever comes, it will be decided on the battlefield."
- wc_horde_invasion.medivh.1007.desc:0 "WIP"
  wc_horde_invasion.1007.a:0 "May [ROOT.Char.GetFaith.WarGodName] protect us..."
  wc_horde_invasion.king.1007:0 "To arms!"
- wc_horde_invasion.medivh.1007:0 "Excellent!"
 
  #################################
  # Introduction Events

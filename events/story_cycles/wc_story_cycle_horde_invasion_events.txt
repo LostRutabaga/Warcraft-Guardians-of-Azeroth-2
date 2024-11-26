@@ -559,7 +559,7 @@ wc_horde_invasion.1004 = {
 			else_if = {
 				limit = {
 					is_from_draenor_trigger = yes
-					is_guldan_trigger = no 
+					is_guldan_trigger = no
 				}
 				trigger_event = wc_horde_invasion.1006
 			}
@@ -679,10 +679,6 @@ wc_horde_invasion.1007 = {
 	desc = {
 		first_valid = {
 			triggered_desc = {
-				trigger = { is_medivh_trigger = yes }
-				desc = wc_horde_invasion.medivh.1007.desc
-			}
-			triggered_desc = {
 				trigger = { has_title = title:k_stormwind }
 				desc = wc_horde_invasion.king.1007.desc
 			}
@@ -691,7 +687,14 @@ wc_horde_invasion.1007 = {
 	}
 	theme = horde
 	
-	override_background = { reference = throne_room_scope }
+	override_background = {
+		trigger = { is_travelling = no }
+		reference = throne_room_scope
+	}
+	override_background = {
+		trigger = { is_travelling = yes }
+		reference = terrain_travel
+	}
 	right_portrait = {
 		character = root
 		animation = stress
@@ -701,10 +704,6 @@ wc_horde_invasion.1007 = {
 		name = {
 			text = {
 				first_valid = {
-					triggered_desc = {
-						trigger = { is_medivh_trigger = yes }
-						desc = wc_horde_invasion.medivh.1007.a
-					}
 					triggered_desc = {
 						trigger = { has_title = title:k_stormwind }
 						desc = wc_horde_invasion.king.1007
