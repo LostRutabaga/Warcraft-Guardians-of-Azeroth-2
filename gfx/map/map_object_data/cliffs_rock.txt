@@ -2,7 +2,7 @@
 	name="cliff big 01"
 	render_pass=Map
 	clamp_to_water_level=no
-		generated_content=no
+	generated_content=no
 	layer="temp_layer"
 	pdxmesh="cliff_big_01_mesh"
 	count=0
