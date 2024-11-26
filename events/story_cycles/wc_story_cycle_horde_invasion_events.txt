@@ -201,11 +201,11 @@ wc_horde_invasion.1000 = {
 	# Horde option
 	option = {
 		trigger = {
+			is_landed = yes
 			NOT = { has_title = title:e_horde }
 			OR = {
 				has_title = title:k_shadow_council
 				is_vassal_or_below_of = title:e_horde.holder
-				is_landed = yes
 			}
 		}
 		name = {
