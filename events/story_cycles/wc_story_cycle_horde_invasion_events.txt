@@ -676,7 +676,19 @@ wc_horde_invasion.1007 = {
 	type = character_event
 	content_source = dlc_GOA
 	title = wc_horde_invasion.1007.title
-	desc = wc_horde_invasion.1007.desc
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { is_medivh_trigger = yes }
+				desc = wc_horde_invasion.medivh.1007.desc
+			}
+			triggered_desc = {
+				trigger = { has_title = title:k_stormwind }
+				desc = wc_horde_invasion.king.1007.desc
+			}
+			desc = wc_horde_invasion.1007.desc
+		}
+	}
 	theme = horde
 	
 	override_background = { reference = throne_room_scope }
@@ -685,8 +697,22 @@ wc_horde_invasion.1007 = {
 		animation = stress
 	}
 
-	option = { # Damn
-		name = wc_horde_invasion.1007.a
+	option = {
+		name = {
+			text = {
+				first_valid = {
+					triggered_desc = {
+						trigger = { is_medivh_trigger = yes }
+						desc = wc_horde_invasion.medivh.1007.a
+					}
+					triggered_desc = {
+						trigger = { has_title = title:k_stormwind }
+						desc = wc_horde_invasion.king.1007
+					}
+					desc = wc_horde_invasion.1007.a
+				}
+			}
+		}
 		show_as_tooltip = { declare_war_on_stormwind_effect = yes }
 	}
 }

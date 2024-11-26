@@ -56,6 +56,13 @@
  wc_horde_invasion.orcish_shamanism.1006.desc:0 "[warchief.GetTitleAsNameNoTooltip] [warchief.GetDynastyHouseName] has declared war on the humans. Thousands of grunts march across the Borderlands, seeking to claim the lands of [king_of_stormwind.GetPrimaryTitle.GetBaseNameNoTierNoTooltip]. For weeks, small bands of orcs, unable to contain their thirst for violence, have been raiding the human frontier, disrupting their villages and toppling their fragile temples. This has not gone unnoticed, and whispers say their [king_of_stormwind.GetTitleAsNameNoTooltip|l] may call for aid from the north.\n\n[warchief.GetDynastyHouseNameNoTooltip] speaks of fertile lands and a future for our people—a chance to rebuild what we lost on Draenor. Yet, the path forward is fraught with conflict. Lok’tar Ogar, I will fight too!"
  wc_horde_invasion.1006.a:0 "$wc_horde_invasion.1005.a$"
  wc_horde_invasion.orcish_shamanism.1006.a:0 "$wc_horde_invasion.orcish_shamanism.1005.a$"
+ wc_horde_invasion.1007.title:0 "$wc_horde_invasion.1004.title$"
+ wc_horde_invasion.1007.desc:0 ""[ROOT.Char.GetLadyLord|U]!" cried one of my servants as he ran towards me, breathless, while I went about my duties. Leaning close to my ear, he whispered troubling news.\n\nThe [warchief.GetPrimaryTitle.GetBaseName] has crossed the Borderlands and launched a massive assault on our lands. Already, hundreds of terrified refugees are fleeing inward, their cries of despair and fear begging us to come to their aid.\n\nTime is running out. I must decide, and quickly, before those enraged green-skins reach our gates and reduce everything to ashes."
+ wc_horde_invasion.king.1007.desc:0 "The scouts sent to the Black Morass have returned, their numbers reduced and their bodies battered. Their leader, his face etched with fatigue, stands before me.\n\n"[ROOT.Char.GetLadyLord|U], the situation is worse than we had imagined. These green-skins are not trolls. And they are far more numerous than we ever anticipated!"\n\nHe continues his report, describing their unmatched brutality, their strange ritualistic practices and their mysterious origins. A courtier casts me a worried glance: the threat is far greater than we had believed, yet some members of the House of Nobles still refuse to take it seriously.\n\nWhat is truly happening? Could this be the prophesied [Glossary( 'Apocalypse', 'APOCALYPSE_RENILASH_GLOSS' )]? Whatever they are, and whatever comes, it will be decided on the battlefield."
+ wc_horde_invasion.medivh.1007.desc:0 "WIP"
+ wc_horde_invasion.1007.a:0 "May [ROOT.Char.GetFaith.WarGodName] protect us..."
+ wc_horde_invasion.king.1007:0 "To arms!"
+ wc_horde_invasion.medivh.1007:0 "Excellent!"
 
  #################################
  # Introduction Events
@@ -148,6 +155,8 @@
  #################################
  # Glossary
  #################################
+
+ APOCALYPSE_RENILASH_GLOSS:0 "The Apocalypse, or Renilash in the ancient common tongue, prophesied by Mereldar, refers to the final conflict between the forces of good and evil. This event, seen as an ultimate judgment, will seal the world’s fate, bringing both destruction and renewal."
 
  THRONE_OF_KILJAEDEN_GLOSS:0 "The Throne of Kil'Jaeden was once a sacred mountain of the Bonechewer Clan, located in the Hellfire Peninsula, formerly the Tanaan Jungle. Gul'dan renamed this site when he gathered all the orcish clans here for a dark ritual — drinking the blood of Mannoroth, sealing their pact with the Burning Legion, and forever altering the fate of the orcs."
  BLOOD_OF_MANNOROTH_GLOSS:0 "The Blood of Mannoroth, a vile substance, is the very essence of the pit lord Mannoroth. When consumed, it grants immense strength and bloodlust but at a terrible cost: eternal servitude to the Burning Legion. It was this cursed blood that Gul'dan used to corrupt the orcs, marking the beginning of their descent into darkness."
