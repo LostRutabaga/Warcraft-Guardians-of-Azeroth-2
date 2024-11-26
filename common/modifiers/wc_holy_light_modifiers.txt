@@ -1,4 +1,11 @@
-﻿### Enforce the Brotherhood of Northshire ###
+﻿pray_war_god_modifier = {
+	icon = learning_positive
+
+	learning = 2
+	martial = 1
+}
+
+### Enforce the Brotherhood of Northshire ###
 # King
 spy_the_brotherhood_modifier = {
 	icon = intrigue_positive

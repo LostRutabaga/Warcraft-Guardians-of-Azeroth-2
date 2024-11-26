@@ -563,14 +563,12 @@ wc_horde_invasion.1004 = {
 				}
 				trigger_event = wc_horde_invasion.1006
 			}
-			else_if = {
-				limit = {
-					OR = {
-						is_medivh_trigger = yes
-						has_title = title:k_stormwind
-						is_vassal_or_below_of = title:k_stormwind.holder
-					}
-				}
+		}
+
+		# Stormwind notification
+		scope:king_of_stormwind = {
+			trigger_event = wc_horde_invasion.1007
+			every_vassal_or_below = {
 				trigger_event = wc_horde_invasion.1007
 			}
 		}
@@ -700,19 +698,141 @@ wc_horde_invasion.1007 = {
 		animation = stress
 	}
 
-	option = {
-		name = {
-			text = {
-				first_valid = {
-					triggered_desc = {
-						trigger = { has_title = title:k_stormwind }
-						desc = wc_horde_invasion.king.1007
-					}
-					desc = wc_horde_invasion.1007.a
-				}
+	immediate = { show_as_tooltip = { declare_war_on_stormwind_effect = yes } }
+
+	option = { # General - Praise your War God
+		name = wc_horde_invasion.1007.a
+		trigger = { NOT = { has_title = title:k_stormwind } }
+
+		add_character_modifier = {
+			modifier = pray_war_god_modifier
+			years = 5
+		}
+
+		ai_chance = {
+			base = 100
+			modifier = {
+				has_trait = zealous
+				add = 35
+			}
+			modifier = {
+				has_trait = brave
+				add = 15
 			}
 		}
-		show_as_tooltip = { declare_war_on_stormwind_effect = yes }
+	}
+
+	option = { # General - Prepare defenses
+		name = wc_horde_invasion.1007.b
+		trigger = { NOT = { has_title = title:k_stormwind } }
+
+		root.capital_province = {
+			add_province_modifier = {
+				modifier = temporary_fort_province_modifier
+				years = 5
+			}
+		}
+
+		ai_chance = {
+			base = 100
+			modifier = {
+				has_trait = brave
+				add = -15
+			}
+			modifier = {
+				has_trait = craven
+				add = 15
+			}
+			modifier = {
+				has_trait = patient
+				add = 35
+			}
+		}
+	}
+
+	option = { # General - Try to assassinate the king
+		name = wc_horde_invasion.1007.c
+		trigger = {
+			NOT = { has_title = title:k_stormwind }
+			can_start_scheme = {
+				type = murder
+				target_character = scope:king_of_stormwind
+			}
+			has_trait = deceitful
+			has_trait = disloyal
+		}
+
+		start_scheme = {
+			type = murder
+			target_character = scope:king_of_stormwind
+		}
+
+		every_scheme = {
+			limit = {
+				scheme_type = murder
+				scheme_target_character = scope:king_of_stormwind
+			}
+			add_scheme_modifier = {
+				type = extra_success_chance_modifier
+			}
+		}
+
+		ai_chance = {
+			base = 100
+			modifier = {
+				opinion = {
+					value <= -25
+					target = scope:king_of_stormwind
+				}
+				add = 50
+			}
+		}
+	}
+
+	option = { # King - ATTACK
+		name = wc_horde_invasion.king.1007.a
+		trigger = { has_title = title:k_stormwind }
+
+		custom_tooltip = horsemen_brotherhood_of_the_horse_effect_tt
+		hidden_effect = {
+			spawn_army = {
+				uses_supply = no
+				inheritable = yes
+				name = brotherhood_of_the_horse
+				men_at_arms = {
+					type = armored_horsemen
+					stacks = 6
+				}
+				location = capital_province
+			}
+		}
+
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	option = { # King - DEFEND
+		name = wc_horde_invasion.king.1007.b
+		trigger = { has_title = title:k_stormwind }
+
+		custom_tooltip = pikemen_brotherhood_of_the_horse_effect_tt
+		hidden_effect = {
+			spawn_army = {
+				uses_supply = no
+				inheritable = yes
+				name = brotherhood_of_the_horse
+				men_at_arms = {
+					type = pikemen
+					stacks = 8
+				}
+				location = capital_province
+			}
+		}
+
+		ai_chance = {
+			base = 20
+		}
 	}
 }
 
