@@ -362,6 +362,9 @@
 
 		# FP1: note the victory for future memorialisation via stele (if applicable).
 		scope:attacker = { fp1_remember_recent_conquest_victory_effect = yes }
+
+		# EP3: note gold gained from military assistance/join war contracts and their war contribution threshold
+		laamp_as_mercenary_payout_tooltip_effect = yes
 	}
 
 	on_white_peace_desc = {
@@ -396,6 +399,9 @@
 				arrogant = medium_stress_impact_gain
 			}
 		}
+
+		# EP3: note gold gained from military assistance/join war contracts and their war contribution threshold
+		laamp_as_mercenary_payout_tooltip_effect = yes
 	}
 
 	on_defeat_desc = {
@@ -475,6 +481,9 @@
 			save_temporary_scope_as = loser
 		}
 		on_lost_aggression_war_discontent_loss = yes
+
+		# EP3: note gold gained from military assistance/join war contracts and their war contribution threshold
+		laamp_as_mercenary_payout_tooltip_effect = yes
 	}
 
 	on_primary_attacker_death = inherit
@@ -899,6 +908,9 @@ religious_war = {
 
 		# FP1: note the victory for future memorialisation via stele (if applicable).
 		scope:attacker = { fp1_remember_recent_conquest_victory_effect = yes }
+
+		# EP3: note gold gained from military assistance/join war contracts and their war contribution threshold
+		laamp_as_mercenary_payout_tooltip_effect = yes
 	}
 
 	on_white_peace_desc = {
@@ -936,6 +948,9 @@ religious_war = {
 				arrogant = medium_stress_impact_gain
 			}
 		}
+
+		# EP3: note gold gained from military assistance/join war contracts and their war contribution threshold
+		laamp_as_mercenary_payout_tooltip_effect = yes
 	}
 
 	on_defeat_desc = {
@@ -1015,6 +1030,9 @@ religious_war = {
 			save_temporary_scope_as = loser
 		}
 		on_lost_aggression_war_discontent_loss = yes
+
+		# EP3: note gold gained from military assistance/join war contracts and their war contribution threshold
+		laamp_as_mercenary_payout_tooltip_effect = yes
 	}
 
 	on_primary_attacker_death = inherit
@@ -1463,6 +1481,9 @@ major_religious_war = {
 
 		# FP1: note the victory for future memorialisation via stele (if applicable).
 		scope:attacker = { fp1_remember_recent_conquest_victory_effect = yes }
+
+		# EP3: note gold gained from military assistance/join war contracts and their war contribution threshold
+		laamp_as_mercenary_payout_tooltip_effect = yes
 	}
 
 	on_white_peace_desc = {
@@ -1501,6 +1522,9 @@ major_religious_war = {
 
 		# Truce
 		add_truce_white_peace_effect = yes
+
+		# EP3: note gold gained from military assistance/join war contracts and their war contribution threshold
+		laamp_as_mercenary_payout_tooltip_effect = yes
 	}
 
 	on_defeat_desc = {
@@ -1580,6 +1604,9 @@ major_religious_war = {
 			save_temporary_scope_as = loser
 		}
 		on_lost_aggression_war_discontent_loss = yes
+
+		# EP3: note gold gained from military assistance/join war contracts and their war contribution threshold
+		laamp_as_mercenary_payout_tooltip_effect = yes
 	}
 
 	on_primary_attacker_death = inherit
@@ -1729,6 +1756,9 @@ excommunication_war = {
 
 		# Truce
 		add_truce_attacker_victory_effect = yes
+
+		# EP3: note gold gained from military assistance/join war contracts and their war contribution threshold
+		laamp_as_mercenary_payout_tooltip_effect = yes
 	}
 
 	on_white_peace_desc = {
@@ -1765,6 +1795,9 @@ excommunication_war = {
 
 		# Truce
 		add_truce_white_peace_effect = yes
+
+		# EP3: note gold gained from military assistance/join war contracts and their war contribution threshold
+		laamp_as_mercenary_payout_tooltip_effect = yes
 	}
 
 	on_defeat_desc = {
@@ -1818,6 +1851,9 @@ excommunication_war = {
 
 		# Truce
 		add_truce_attacker_defeat_effect = yes
+
+		# EP3: note gold gained from military assistance/join war contracts and their war contribution threshold
+		laamp_as_mercenary_payout_tooltip_effect = yes
 	}
 	
 	should_invalidate = {
@@ -2422,6 +2458,9 @@ flowery_war_cb = {
 		# Truce
 		add_truce_attacker_victory_effect = yes
 
+		# EP3: note gold gained from military assistance/join war contracts and their war contribution threshold
+		laamp_as_mercenary_payout_tooltip_effect = yes
+
 	}
 
 	on_white_peace_desc = {
@@ -2470,6 +2509,8 @@ flowery_war_cb = {
 		# Truce
 		add_truce_attacker_victory_effect = yes
 
+		# EP3: note gold gained from military assistance/join war contracts and their war contribution threshold
+		laamp_as_mercenary_payout_tooltip_effect = yes
 	}
 
 	on_defeat_desc = {
@@ -2917,6 +2958,9 @@ flowery_war_cb = {
 
 		scope:attacker = { save_temporary_scope_as = loser }
 		on_lost_aggression_war_discontent_loss = yes
+
+		# EP3: note gold gained from military assistance/join war contracts and their war contribution threshold
+		laamp_as_mercenary_payout_tooltip_effect = yes
 	}
 
 	on_primary_attacker_death = inherit
@@ -3163,12 +3207,17 @@ undirected_great_holy_war = {
 			save_scope_as = the_ghw
 		}
 
-		# scope:defender.faith = {		#needed for hold_court.6150
-		# 	set_variable = {
-		# 		name = 6150_lost_ghw_recently		
-		# 		years = 5
-		# 	}
-		# }
+		scope:attacker = {	#Achievement setup.
+			every_character_war = {
+				limit = {
+					is_attacker = scope:attacker
+					is_defender = scope:defender
+				}
+				every_war_attacker = {
+					add_achievement_flag_effect = { FLAG = achievement_for_the_faith_flag }
+				}
+			}
+		}
 
 		hidden_effect = {
 			if = { #Recipient is going to be the Papal's chosen Recipient or, if the main contributor is overriding the Papal will, his Beneficiary.
@@ -3625,10 +3674,18 @@ undirected_great_holy_war = {
 					value = -15
 					desc = fervor_loss_lost_great_holy_war
 				}
-				# set_variable = {			#needed for hold_court.6150
-				# 	name = 6150_lost_ghw_recently
-				# 	years = 5
-				# }
+			}
+		}
+
+		scope:defender = {	#Achievement setup.
+			every_character_war = {
+				limit = {
+					is_attacker = scope:attacker
+					is_defender = scope:defender
+				}
+				every_war_defender = {
+					add_achievement_flag_effect = { FLAG = achievement_for_the_faith_flag }
+				}
 			}
 		}
 
@@ -3922,6 +3979,18 @@ directed_great_holy_war = {
 			save_scope_as = the_ghw
 		}
 
+		scope:attacker = {	#Achievement setup.
+			every_character_war = {
+				limit = {
+					is_attacker = scope:attacker
+					is_defender = scope:defender
+				}
+				every_war_attacker = {
+					add_achievement_flag_effect = { FLAG = achievement_for_the_faith_flag }
+				}
+			}
+		}
+
 		if = {
 			limit = { exists = scope:attacker.faith.great_holy_war.ghw_title_recipient }
 			scope:attacker.faith.great_holy_war.ghw_title_recipient = {
@@ -4103,6 +4172,18 @@ directed_great_holy_war = {
 		}
 		scope:attacker.faith.great_holy_war = {
 			save_scope_as = the_ghw
+		}
+
+		scope:defender = {	#Achievement setup.
+			every_character_war = {
+				limit = {
+					is_attacker = scope:attacker
+					is_defender = scope:defender
+				}
+				every_war_defender = {
+					add_achievement_flag_effect = { FLAG = achievement_for_the_faith_flag }
+				}
+			}
 		}
 
 		every_player = { #Fluff for players
