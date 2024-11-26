@@ -766,6 +766,7 @@ wc_horde_invasion.1007 = {
 			type = murder
 			target_character = scope:king_of_stormwind
 		}
+		custom_tooltip = try_to_assassine_the_king_effect_tt
 
 		every_scheme = {
 			limit = {

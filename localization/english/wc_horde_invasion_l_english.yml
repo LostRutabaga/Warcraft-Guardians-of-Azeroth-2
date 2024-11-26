@@ -63,6 +63,7 @@
  wc_horde_invasion.1007.b:0 "Prepare the defense!"
  wc_horde_invasion.1007.c:0 "Maybe they'll spare me if I bring them [king_of_stormwind.GetFirstNamePossessive] head."
  wc_horde_invasion.king.1007.a:0 "Our Brothers of the Horse will lead the charge."
+ try_to_assassine_the_king_effect_tt: "Your scheme start with an extra chance of success"
  wc_horde_invasion.king.1007.b:0 "Let them come."
  horsemen_brotherhood_of_the_horse_effect_tt:0 "300 armored horsemen will immediately be raised and join your ranks."
  pikemen_brotherhood_of_the_horse_effect_tt:0 "You will arm 800 men of the Brotherhood of the Horse with polearms."
