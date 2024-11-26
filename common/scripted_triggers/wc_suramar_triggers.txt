@@ -88,6 +88,7 @@ can_restore_arcandor_trigger = {
     OR = {
         has_arcandor_seed_trigger = yes 
         learning >= very_high_skill_rating
+        prestige_level >= 3
         OR = {
             has_trait = magic_good_1
             has_trait = magic_good_2

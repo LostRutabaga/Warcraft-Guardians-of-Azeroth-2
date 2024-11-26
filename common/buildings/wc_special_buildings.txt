@@ -2774,6 +2774,7 @@ arcandor_tree = {
 	is_enabled = {
 		scope:holder = {
 			OR = {
+				has_trait_with_flag = elven_family
 				culture = { has_cultural_pillar = heritage_highborne }
 				culture = { has_cultural_pillar = heritage_xavic }
 				culture = { has_cultural_pillar = heritage_darnassian }

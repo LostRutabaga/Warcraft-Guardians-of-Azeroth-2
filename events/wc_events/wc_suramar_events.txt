@@ -16,8 +16,16 @@
 # 0100 - Someone brings you the seed of arcandor
 # 0110 - The neighboring fal'dorei ruler asks you to restore the arcandor tree
 # 0120 - You spot a naga ship off the coast
-# 0130 - You find a strange portal in the city - TODO 
-# 0140 - An adventurer is in your realm - TODO 
+# 0130 - An adventurer is in your realm 
+# 0140 - You find a strange portal in the city - TODO 
+
+### DECISIONS EVENTS ###
+# 1000 - The Arcandor is restored
+# 1001 - The Arcandor is restored, for others
+# 1002 - You visit the Arcandor
+
+# 1100 - An elven ruler sends their regards, letter
+# 1101 - An elven ruler sends their regards, in-person
 
 # Opening event for the leader of Suramar if barrier is up
 wc_suramar_events.0001 = {
@@ -4540,6 +4548,241 @@ wc_suramar_events.0130 = {
                 NOT = { has_character_flag = had_outsider_event }
             }
             suramar_discover_outside_world_effect = yes
+        }
+    }
+}
+
+
+wc_suramar_events.1000 = {
+    type = character_event
+    content_source = dlc_GOA
+    title = wc_suramar_events.1000.t
+    desc = wc_suramar_events.1000.desc
+    theme = suramar
+
+    left_portrait = {
+        character = root
+        animation = personality_honorable
+    }
+
+    immediate = {
+        title:c_meredil.title_province = {
+            add_special_building_slot = arcandor_tree
+            add_special_building = arcandor_tree
+        }
+        set_global_variable = arcandor_restored_global_variable
+        every_living_character = {
+            limit = {
+                NOT = { this = root }
+                OR = {
+                    has_trait = creature_faldorei
+                    has_trait = wretched
+                    is_in_suramar_trigger = yes
+                }
+            }
+            trigger_event = { id = wc_suramar_events.1001 days = { 1 10 } } # To not cause a big lag
+        }
+    }
+
+    # Ok
+    option = {
+        name = wc_suramar_events.1000.a
+        if = {
+            limit = {
+                OR = {
+                    has_trait = creature_faldorei
+                    has_trait = wretched
+                }
+            }
+            custom_tooltip = wc_suramar_events.1000.a_tt
+        }
+
+        ai_chance = {
+            base = 50
+        }
+    }
+
+    # Visit 
+    option = {
+        name = wc_suramar_events.1000.b
+        custom_tooltip = wc_suramar_events.1000.b_tt
+
+        start_travel_plan = {
+            destination = title:b_meredil.title_province
+            on_arrival_event = wc_suramar_events.1002
+        }
+
+        ai_chance = {
+            base = 50
+            modifier = {
+                add = 50
+                OR = {
+                    has_trait = creature_faldorei
+                    has_trait = wretched
+                }
+            }
+        }
+    }
+}
+
+wc_suramar_events.1001 = {
+    type = character_event
+    content_source = dlc_GOA
+    title = wc_suramar_events.1000.t
+    desc = wc_suramar_events.1000.desc
+    theme = suramar
+
+    left_portrait = {
+        character = root
+        animation = personality_honorable
+    }
+
+    # Ok
+    option = {
+        name = wc_suramar_events.1000.a
+        if = {
+            limit = {
+                OR = {
+                    has_trait = creature_faldorei
+                    has_trait = wretched
+                }
+            }
+            custom_tooltip = wc_suramar_events.1000.a_tt
+        }
+
+        ai_chance = {
+            base = 50
+        }
+    }
+
+    # Visit 
+    option = {
+        name = wc_suramar_events.1000.b
+        custom_tooltip = wc_suramar_events.1000.b_tt
+
+        start_travel_plan = {
+            destination = title:b_meredil.title_province
+            on_arrival_event = wc_suramar_events.1002
+        }
+
+        ai_chance = {
+            base = 50
+            modifier = {
+                add = 50
+                OR = {
+                    has_trait = creature_faldorei
+                    has_trait = wretched
+                }
+            }
+        }
+    }
+    
+
+    # Visit with domicile   
+    option = {
+        name = wc_suramar_events.1000.b
+        trigger = { exists = domicile }
+        custom_tooltip = wc_suramar_events.1000.b_tt_dom
+
+        start_travel_plan = {
+            destination = title:b_meredil.title_province
+            travel_with_domicile = yes
+            on_arrival_event = wc_suramar_events.1002
+        }
+
+        ai_chance = {
+            base = 50
+            modifier = {
+                add = 50
+                OR = {
+                    has_trait = creature_faldorei
+                    has_trait = wretched
+                }
+            }
+        }
+    }
+}
+
+wc_suramar_events.1002 = {
+    type = character_event
+    content_source = dlc_GOA
+    title = wc_suramar_events.1002.t
+    desc = {
+        desc = wc_suramar_events.1002.desc
+        triggered_desc = {
+            trigger = {
+                has_trait = wretched
+            }
+            desc = wc_suramar_events.1002.desc_wretched
+        }
+        triggered_desc = {
+            trigger = {
+                has_trait = creature_faldorei
+            }
+            desc = wc_suramar_events.1002.desc_faldorei
+        }
+    }
+    theme = suramar
+
+    override_background = { reference = wc_suramar_arcandor }
+
+    left_portrait = {
+        character = root
+        animation = personality_honorable
+    }
+
+    immediate = {
+        add_character_flag = visited_arcandor_tree
+    }
+
+    # Ok
+    option = {
+        name = wc_suramar_events.1000.a
+    }
+
+    # Special option for seedholders
+    option = {
+        name = wc_suramar_events.1000.b
+        trigger = {
+            has_arcandor_seed_trigger = yes 
+        }
+
+        every_artifact = {
+            limit = {
+                artifact_owner = root
+                has_variable = arcandor_seed
+            }
+            destroy_artifact = this
+        }
+
+        add_prestige = major_prestige_gain
+        add_piety = major_piety_gain
+
+        add_character_modifier = {
+            modifier = wc_suramar_sacrifice_arcandor_modifier
+            years = 25
+        }
+
+        ai_chance = {
+            base = 50
+        }
+    }
+
+    after = {
+        if = {
+            limit = { 
+                has_trait = wretched
+            }
+            remove_trait = wretched
+        }
+        if = {
+            limit = {
+                has_trait = creature_faldorei
+            }
+            add_character_modifier = {
+                modifier = wc_suramar_blessing_arcandor_modifier
+                years = 50
+            }
         }
     }
 }

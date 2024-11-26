@@ -89,7 +89,10 @@ restore_arcandor_decision = {
 	}
 
     effect = {
-        
+        custom_tooltip = restore_arcandor_decision_wretched_tt
+        trigger_event = {
+            id = wc_suramar_events.1000
+        }
     }
 
     ai_potential = {
@@ -98,5 +101,12 @@ restore_arcandor_decision = {
 
 	ai_will_do = {
 		base = 100
+        modifier = {
+            add = 100
+            OR = {
+                has_trait = wretched
+                has_trait = creature_faldorei
+            }
+        }
 	}
 }
