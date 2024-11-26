@@ -558,6 +558,7 @@ wc_horde_invasion.1004 = {
 			}
 			else_if = {
 				limit = {
+					NOT = { has_title = title:e_horde }
 					is_from_draenor_trigger = yes
 					is_guldan_trigger = no
 				}
