@@ -38,7 +38,7 @@
  wc_horde_invasion.1003.b:0 "It's over..."
 
  # Assault on Stormwind
- wc_horde_invasion.1004.title:0 "Assault on Stormwind"
+ wc_horde_invasion.1004.title:0 "Assault on [king_of_stormwind.GetPrimaryTitle.GetBaseNameNoTierNoTooltip]"
  wc_horde_invasion.1004.desc:0 "As I step out of my tent, the crackling flames of torches cast their light on the determined faces of my warriors. Their eyes turn to me as I raise my weapon high to command their attention. I roar:\n\n$warchief_speech_stormwind$"
  wc_horde_invasion.1004.a:0 "Victory or death! Burn their homes to the ground!"
  wc_horde_invasion.1004.a.flavor:0 "The grunts roar with fervent cheers! The war machine begins to move, and you can already feel the weight of destiny shifting in your favor. Stormwind’s walls will crumble!"
