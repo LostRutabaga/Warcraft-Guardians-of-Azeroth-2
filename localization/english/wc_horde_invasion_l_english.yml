@@ -67,7 +67,7 @@
  wc_horde_invasion.king.1007.b:0 "Let them come."
  horsemen_brotherhood_of_the_horse_effect_tt:0 "300 armored horsemen will immediately be raised and join your ranks."
  pikemen_brotherhood_of_the_horse_effect_tt:0 "You will arm 800 men of the Brotherhood of the Horse with polearms."
- brotherhood_of_the_horse:0 "Brotherhood of the Horse"
+ brotherhood_of_the_horse_army:0 "Brotherhood of the Horse"
 
  #################################
  # Introduction Events
