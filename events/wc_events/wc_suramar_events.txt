@@ -24,9 +24,6 @@
 # 1001 - The Arcandor is restored, for others
 # 1002 - You visit the Arcandor
 
-# 1100 - An elven ruler sends their regards, letter
-# 1101 - An elven ruler sends their regards, in-person
-
 # Opening event for the leader of Suramar if barrier is up
 wc_suramar_events.0001 = {
     type = character_event
@@ -4786,3 +4783,4 @@ wc_suramar_events.1002 = {
         }
     }
 }
+

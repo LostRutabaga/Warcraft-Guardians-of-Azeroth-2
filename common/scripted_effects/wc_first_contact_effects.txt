@@ -1,0 +1,52 @@
+﻿first_contact_procedure_effect = {
+    switch = {
+        trigger = flag:$NATION$
+        flag:suramar = {
+            title:k_suramar.holder = { save_scope_as = reciever }
+        }
+    }
+
+    switch = {
+        trigger = flag:$METHOD$
+        flag:letter = {
+            custom_tooltip = first_contact_letter_method
+            root = { save_scope_as = sender }
+            save_scope_value_as = { name = first_contact_nation = flag:suramar }
+            save_scope_value_as = { name = first_contact_stance = flag:$STANCE$ }
+            scope:reciever = {
+                trigger_event = {
+                    id = wc_first_contact_events.0001 
+                    days = { 5 20 }
+                }
+            }
+        }
+        flag:letter = {
+            custom_tooltip = first_contact_self_method
+        }
+    }
+
+    switch = {
+        trigger = flag:$STANCE$
+        flag:friendly = {
+            send_friendly_stance_effect = { TARGET = scope:reciever ORDER = first }
+        }
+    }
+}
+
+send_friendly_stance_effect = {
+    $TARGET$ = { save_scope_as = sender }
+    custom_tooltip = first_contact_friendly_effects_sender
+    if = {
+        limit = {
+            flag:$ORDER$ = flag:first
+            NOT = {
+                first_contact_friendly_stance_of_reverse_trigger = { target = scope:sender }
+            }
+        }
+        custom_tooltip = first_contact_friendly_effects_reciever
+    }
+    add_opinion = {
+        target = scope:sender
+        modifier = good_first_contact_opinion
+    }
+}

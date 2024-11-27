@@ -1,0 +1,568 @@
+﻿wc_friendly_first_contact_modifier = {
+    opinion_modifier = {
+        opinion_target = $CHARACTER$
+        multiplier = 1
+    }
+    # Personality
+    modifier = {
+        factor = 2
+        has_personality_benevolent_trigger = yes
+    }
+    modifier = {
+        factor = 1.5
+        has_personality_extroverted_trigger = yes
+    }
+    modifier = {
+        factor = 0.75
+        probably_superstitious = yes
+    }
+    modifier = {
+        factor = 0.5
+        opposing_ai_values_trigger = { VALUE = honor TARGET = $CHARACTER$ }
+    }
+    modifier = {
+        factor = -2
+        OR = {
+            ai_has_warlike_personality = yes
+            ai_has_conqueror_personality = yes
+        }
+    }
+    # Faith compatibility
+    modifier = { 
+        $CHARACTER$.faith = {
+            faith_hostility_level = {
+                target = root.faith
+                value > faith_fully_accepted_level
+            }
+        }
+        NOT = {
+            $CHARACTER$.ai_zeal <= -50
+        }
+        add = {
+            value = 0
+            if = {
+                limit = {
+                    $CHARACTER$.faith = {
+                        faith_hostility_level = {
+                            target = root.faith
+                            value >= faith_astray_level
+                        }
+                    }
+                }
+                subtract = 20
+            }
+            if = {
+                limit = {
+                    $CHARACTER$.faith = {
+                        faith_hostility_level = {
+                            target = root.faith
+                            value >= faith_hostile_level
+                        }
+                    }
+                }
+                subtract = 40
+            }
+            if = {
+                limit = {
+                    $CHARACTER$.faith = {
+                        faith_hostility_level = {
+                            target = root.faith
+                            value >= faith_evil_level
+                        }
+                    }
+                }
+                subtract = 60
+            }
+            if = {
+                limit = {
+                    $CHARACTER$.ai_zeal <= -25
+                }
+                divide = 2
+            }
+        }
+    }
+    # Tier Differences
+	modifier = {
+		root = {
+			tier_difference = {
+				target = $CHARACTER$
+				value >= 1
+			}
+		}
+		add = {
+			value = 0
+			if = {
+				limit = {
+					tier_difference = {
+						target = $CHARACTER$
+						value = 2
+					}
+				}
+				subtract = 5
+			}
+			if = {
+				limit = {
+					tier_difference = {
+						target = $CHARACTER$
+						value = 3
+					}
+				}
+				subtract = 10
+			}
+			if = {
+				limit = {
+					tier_difference = {
+						target = $CHARACTER$
+						value = 4
+					}
+				}
+				subtract = 15
+			}
+			if = {
+				limit = {
+					tier_difference = {
+						target = $CHARACTER$
+						value = 5
+					}
+				}
+				subtract = 20
+			}
+		}
+	}
+    # Distance, less likely to care if farther away
+    modifier = {
+        $CHARACTER$ = { is_landed = yes }
+        add = {
+            value = 5
+            if = {
+                limit = {
+                    capital_province = {
+                        squared_distance = {
+                            target = $CHARACTER$.capital_province
+                            value <= squared_distance_small
+                        }
+                    }
+                }
+                add = 20
+            }
+            if = {
+                limit = {
+                    capital_province = {
+                        squared_distance = {
+                            target = $CHARACTER$.capital_province
+                            value > squared_distance_small
+                        }
+                    }
+                    capital_province = {
+                        squared_distance = {
+                            target = $CHARACTER$.capital_province
+                            value <= squared_distance_medium
+                        }
+                    }
+                }
+                add = 10
+            }
+            if = {
+                limit = {
+                    capital_province = {
+                        squared_distance = {
+                            target = $CHARACTER$.capital_province
+                            value > squared_distance_medium
+                        }
+                    }
+                    capital_province = {
+                        squared_distance = {
+                            target = $CHARACTER$.capital_province
+                            value <= squared_distance_large
+                        }
+                    }
+                }
+                subtract = -5
+            }
+            if = {
+                limit = {
+                    capital_province = {
+                        squared_distance = {
+                            target = $CHARACTER$.capital_province
+                            value > squared_distance_large
+                        }
+                    }
+                    capital_province = {
+                        squared_distance = {
+                            target = $CHARACTER$.capital_province
+                            value <= squared_distance_huge
+                        }
+                    }
+                }
+                subtract = -10
+            }
+            if = {
+                limit = {
+                    capital_province = {
+                        squared_distance = {
+                            target = $CHARACTER$.capital_province
+                            value > squared_distance_huge
+                        }
+                    }
+                    capital_province = {
+                        squared_distance = {
+                            target = $CHARACTER$.capital_province
+                            value <= squared_distance_almost_massive
+                        }
+                    }
+                }
+                subtract = -20
+            }
+            else = {
+                subtract = -30
+            }
+        }
+    }
+}
+
+wc_hostile_first_contact_modifier = {
+    opinion_modifier = {
+        opinion_target = $CHARACTER$
+        multiplier = 1
+    }
+    # Personality
+    modifier = {
+        factor = 2
+        has_personality_malicious_trigger = yes
+    }
+    modifier = {
+        factor = 2
+        has_personality_dominant_trigger = yes
+    }
+    modifier = {
+        factor = 2
+        opposing_ai_values_trigger = { VALUE = honor TARGET = $CHARACTER$ }
+    }
+    modifier = {
+        factor = 2
+        is_ai = yes
+        OR = {
+            ai_has_warlike_personality = yes
+            ai_has_conqueror_personality = yes
+        }
+    }
+    # Faith compatibility
+    modifier = { 
+        $CHARACTER$.faith = {
+            faith_hostility_level = {
+                target = root.faith
+                value > faith_fully_accepted_level
+            }
+        }
+        NOT = {
+            $CHARACTER$.ai_zeal <= -50
+        }
+        add = {
+            value = 10
+            if = {
+                limit = {
+                    $CHARACTER$.faith = {
+                        faith_hostility_level = {
+                            target = root.faith
+                            value >= faith_astray_level
+                        }
+                    }
+                }
+                add = 20
+            }
+            if = {
+                limit = {
+                    $CHARACTER$.faith = {
+                        faith_hostility_level = {
+                            target = root.faith
+                            value >= faith_hostile_level
+                        }
+                    }
+                }
+                add = 40
+            }
+            if = {
+                limit = {
+                    $CHARACTER$.faith = {
+                        faith_hostility_level = {
+                            target = root.faith
+                            value >= faith_evil_level
+                        }
+                    }
+                }
+                add = 60
+            }
+            if = {
+                limit = {
+                    $CHARACTER$.ai_zeal <= -25
+                }
+                divide = 2
+            }
+        }
+    }
+    # Tier Differences
+	modifier = {
+		root = {
+			tier_difference = {
+				target = $CHARACTER$
+				value >= 1
+			}
+		}
+		add = {
+			value = 0
+			if = {
+				limit = {
+					tier_difference = {
+						target = $CHARACTER$
+						value = 2
+					}
+				}
+				add = 5
+			}
+			if = {
+				limit = {
+					tier_difference = {
+						target = $CHARACTER$
+						value = 3
+					}
+				}
+				add = 10
+			}
+			if = {
+				limit = {
+					tier_difference = {
+						target = $CHARACTER$
+						value = 4
+					}
+				}
+				add = 15
+			}
+			if = {
+				limit = {
+					tier_difference = {
+						target = $CHARACTER$
+						value = 5
+					}
+				}
+				add = 20
+			}
+		}
+	}
+    # Distance, less likely to care if farther away
+    modifier = {
+        $CHARACTER$ = { is_landed = yes }
+        add = {
+            value = 5
+            if = {
+                limit = {
+                    capital_province = {
+                        squared_distance = {
+                            target = $CHARACTER$.capital_province
+                            value <= squared_distance_small
+                        }
+                    }
+                }
+                add = 20
+            }
+            if = {
+                limit = {
+                    capital_province = {
+                        squared_distance = {
+                            target = $CHARACTER$.capital_province
+                            value > squared_distance_small
+                        }
+                    }
+                    capital_province = {
+                        squared_distance = {
+                            target = $CHARACTER$.capital_province
+                            value <= squared_distance_medium
+                        }
+                    }
+                }
+                add = 10
+            }
+            if = {
+                limit = {
+                    capital_province = {
+                        squared_distance = {
+                            target = $CHARACTER$.capital_province
+                            value > squared_distance_medium
+                        }
+                    }
+                    capital_province = {
+                        squared_distance = {
+                            target = $CHARACTER$.capital_province
+                            value <= squared_distance_large
+                        }
+                    }
+                }
+                subtract = -5
+            }
+            if = {
+                limit = {
+                    capital_province = {
+                        squared_distance = {
+                            target = $CHARACTER$.capital_province
+                            value > squared_distance_large
+                        }
+                    }
+                    capital_province = {
+                        squared_distance = {
+                            target = $CHARACTER$.capital_province
+                            value <= squared_distance_huge
+                        }
+                    }
+                }
+                subtract = -10
+            }
+            if = {
+                limit = {
+                    capital_province = {
+                        squared_distance = {
+                            target = $CHARACTER$.capital_province
+                            value > squared_distance_huge
+                        }
+                    }
+                    capital_province = {
+                        squared_distance = {
+                            target = $CHARACTER$.capital_province
+                            value <= squared_distance_almost_massive
+                        }
+                    }
+                }
+                subtract = -20
+            }
+            else = {
+                subtract = -30
+            }
+        }
+    }
+}
+
+wc_neutral_first_contact_modifier = {
+    ai_value_modifier = {
+        ai_rationality = 2
+    }
+    modifier = {
+        factor = 2
+        probably_superstitious = yes
+    }
+    modifier = {
+        factor = 2
+        ai_has_cautious_personality = yes
+    }
+    modifier = {
+        factor = 2
+        has_trait_levelheaded_trigger = yes 
+    }
+    modifier = {
+        factor = 1.5
+        has_personality_introverted_trigger = yes
+    }
+    modifier = {
+        factor = 0.5
+        opposing_ai_values_trigger = { VALUE = boldness TARGET = $CHARACTER$ }
+    }
+}
+
+wc_first_contact_travel_modifier = {
+    modifier = {
+        factor = 2
+        has_trait = lifestyle_traveler
+    }
+    modifier = {
+        factor = 0.75
+        OR = {
+            has_trait = shy
+            has_trait = lazy
+        }
+    }
+    modifier = {
+        $CHARACTER$ = { is_landed = yes }
+        add = {
+            value = 5
+            if = {
+                limit = {
+                    capital_province = {
+                        squared_distance = {
+                            target = $CHARACTER$.capital_province
+                            value <= squared_distance_small
+                        }
+                    }
+                }
+                add = 20
+            }
+            if = {
+                limit = {
+                    capital_province = {
+                        squared_distance = {
+                            target = $CHARACTER$.capital_province
+                            value > squared_distance_small
+                        }
+                    }
+                    capital_province = {
+                        squared_distance = {
+                            target = $CHARACTER$.capital_province
+                            value <= squared_distance_medium
+                        }
+                    }
+                }
+                add = 10
+            }
+            if = {
+                limit = {
+                    capital_province = {
+                        squared_distance = {
+                            target = $CHARACTER$.capital_province
+                            value > squared_distance_medium
+                        }
+                    }
+                    capital_province = {
+                        squared_distance = {
+                            target = $CHARACTER$.capital_province
+                            value <= squared_distance_large
+                        }
+                    }
+                }
+                subtract = -5
+            }
+            if = {
+                limit = {
+                    capital_province = {
+                        squared_distance = {
+                            target = $CHARACTER$.capital_province
+                            value > squared_distance_large
+                        }
+                    }
+                    capital_province = {
+                        squared_distance = {
+                            target = $CHARACTER$.capital_province
+                            value <= squared_distance_huge
+                        }
+                    }
+                }
+                subtract = -10
+            }
+            if = {
+                limit = {
+                    capital_province = {
+                        squared_distance = {
+                            target = $CHARACTER$.capital_province
+                            value > squared_distance_huge
+                        }
+                    }
+                    capital_province = {
+                        squared_distance = {
+                            target = $CHARACTER$.capital_province
+                            value <= squared_distance_almost_massive
+                        }
+                    }
+                }
+                subtract = -20
+            }
+            else = {
+                subtract = -30
+            }
+        }
+    }
+}

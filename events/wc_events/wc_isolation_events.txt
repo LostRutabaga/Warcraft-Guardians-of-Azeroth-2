@@ -103,6 +103,22 @@ isolation.2 = {
 	}
 }
 
+scripted_trigger can_diplomacy_suramar_trigger = {
+	NOT = { is_in_suramar_trigger = yes }
+    OR = {
+		capital_province = { geographical_region = world_broken_isles }
+        culture = { has_elven_heritage_trigger = yes }
+        has_trait = creature_nightborne
+        has_trait = creature_high_elf
+        has_trait = creature_night_elf
+        has_trait = creature_highborne
+    }
+	OR = {
+		is_ai = no 
+		highest_held_title_tier >= tier_duchy
+	}
+}
+
 ### SURAMAR ###
 isolation.3 = {
 	type = character_event
@@ -134,6 +150,14 @@ isolation.3 = {
 		trigger = {
 			NOT = { is_in_suramar_trigger = yes }
 		}
+
+		ai_chance = {
+			base = 100
+			modifier = {
+				factor = 0.25
+				can_diplomacy_suramar_trigger = yes 
+			}
+		}
 	}
 	# We chiling
 	option = {
@@ -141,8 +165,12 @@ isolation.3 = {
 		trigger = {
 			is_in_suramar_trigger = yes
 		}
+
+		ai_chance = {
+			base = 50
+		}
 	}
-	# Say hello to our elven brothers / new neighbors
+	# Say hello to our elven brothers / new neighbors, with a letter
 	option = {
 		name = {
 			text = {
@@ -164,17 +192,97 @@ isolation.3 = {
 			}
 		}
 		trigger = {
-			NOT = { is_in_suramar_trigger = yes }
-			OR = {
-				capital_province = { geographical_region = world_broken_isles }
-				OR = {
-					culture = { has_elven_heritage_trigger = yes }
-					has_trait = creature_nightborne
-					has_trait = creature_high_elf
-					has_trait = creature_night_elf
-					has_trait = creature_highborne
+			can_diplomacy_suramar_trigger = yes 
+			is_available = yes
+		}
+
+		first_contact_procedure_effect = {
+			NATION = suramar METHOD = self STANCE = none
+		}
+
+		stress_impact = {
+			paranoid = minor_stress_impact_gain
+			shy = minor_stress_impact_gain
+		}
+
+		ai_chance = {
+			base = 125
+			wc_first_contact_travel_modifier = {
+				CHARACTER = title:k_suramar.holder
+			}
+			
+		}
+	}
+
+	option = {
+		name = {
+			text = {
+				first_valid = {
+					triggered_desc = {
+						trigger = {
+							OR = {
+								culture = { has_elven_heritage_trigger = yes }
+								has_trait = creature_nightborne
+								has_trait = creature_high_elf
+								has_trait = creature_night_elf
+								has_trait = creature_highborne
+							}
+						}
+						desc = ISOLATION_3_OPT_D_ELVEN
+					}
+					desc = ISOLATION_3_OPT_D_NEIGHBOR
 				}
 			}
 		}
+		trigger = {
+			can_diplomacy_suramar_trigger = yes 
+		}
+
+		first_contact_procedure_effect = {
+			NATION = suramar METHOD = letter STANCE = friendly
+		}
+	
+		ai_chance = {
+			base = 150
+			wc_friendly_first_contact_modifier = {
+				CHARACTER = title:k_suramar.holder
+			}
+		}
 	}
+
+	# option = {
+	# 	name = {
+	# 		text = {
+	# 			first_valid = {
+	# 				triggered_desc = {
+	# 					trigger = {
+	# 						OR = {
+	# 							culture = { has_elven_heritage_trigger = yes }
+	# 							has_trait = creature_nightborne
+	# 							has_trait = creature_high_elf
+	# 							has_trait = creature_night_elf
+	# 							has_trait = creature_highborne
+	# 						}
+	# 					}
+	# 					desc = ISOLATION_3_OPT_E_ELVEN
+	# 				}
+	# 				desc = ISOLATION_3_OPT_E_NEIGHBOR
+	# 			}
+	# 		}
+	# 	}
+	# 	trigger = {
+	# 		can_diplomacy_suramar_trigger = yes 
+	# 	}
+
+	# 	first_contact_procedure_effect = {
+	# 		NATION = suramar METHOD = letter STANCE = neutral
+	# 	}
+	
+	# 	ai_chance = {
+	# 		base = 150
+	# 		wc_neutral_first_contact_modifier = {
+	# 			CHARACTER = title:k_suramar.holder
+	# 		}
+	# 	}
+	# }
 }

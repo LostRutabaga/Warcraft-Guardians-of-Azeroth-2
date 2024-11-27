@@ -94,3 +94,4 @@ suramar_discover_outside_world_effect = {
         days = { 1 10 }
     }
 }
+

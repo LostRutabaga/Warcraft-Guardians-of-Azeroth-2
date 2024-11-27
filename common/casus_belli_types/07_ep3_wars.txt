@@ -2909,7 +2909,7 @@ ep3_laamp_raid_contract_cb = {
 # 	}
 
 # 	should_invalidate = {
-		scope:attacker = { is_isolated_from_trigger = { target = scope:defender } } # Warcraft
+#		scope:attacker = { is_isolated_from_trigger = { target = scope:defender } } # Warcraft
 	
 # 		OR = {
 # 			NOT = {
@@ -4666,7 +4666,7 @@ ep3_pillaging_foray = {
 # 	}
 
 # 	should_invalidate = {
-		scope:attacker = { is_isolated_from_trigger = { target = scope:defender } } # Warcraft
+#		scope:attacker = { is_isolated_from_trigger = { target = scope:defender } } # Warcraft
 	
 # 		NOT = {
 # 			any_in_list = {
@@ -5368,7 +5368,7 @@ ep3_laamp_apprehend_adventurer_cb = {
 # 	}
 
 # 	should_invalidate = {
-		scope:attacker = { is_isolated_from_trigger = { target = scope:defender } } # Warcraft
+#		scope:attacker = { is_isolated_from_trigger = { target = scope:defender } } # Warcraft
 	
 # 		NOT = {
 # 			any_in_list = {

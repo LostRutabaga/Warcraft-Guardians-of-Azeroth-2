@@ -1,4 +1,4 @@
-# Triggers as a result of the Independence Faction demand
+﻿# Triggers as a result of the Independence Faction demand
 # Note: Wars for Independence started by individual characters is a separate CB
 independence_faction_war = {
 	icon = independence_faction_war

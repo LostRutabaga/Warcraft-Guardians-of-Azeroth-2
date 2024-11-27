@@ -28,7 +28,7 @@
 
     effect = {
         custom_tooltip = lower_suramar_barrier_decision_tt
-        trigger_event = isolation.3
+        every_ruler = { trigger_event = { id = isolation.3 } }
         custom_tooltip = {
             text = lower_suramar_barrier_decision_tt_modifier
             every_sub_realm_county = {
