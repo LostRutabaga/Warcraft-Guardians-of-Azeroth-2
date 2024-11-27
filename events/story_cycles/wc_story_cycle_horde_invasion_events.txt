@@ -623,7 +623,7 @@ wc_horde_invasion.1005 = {
 					}
 					triggered_desc = {
 						trigger = { has_faith = faith:orcish_shamanism }
-						text = wc_horde_invasion.orcish_shamanism.1005.a
+						desc = wc_horde_invasion.orcish_shamanism.1005.a
 					}
 					desc = wc_horde_invasion.1005.a
 				}
