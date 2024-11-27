@@ -58,6 +58,6 @@ on_remove_isolation_suramar = {
 	}
 
 	effect = {
-		every_ruler = { trigger_event = { id = isolation.3 } }
+		reveal_suramar_unisolation_effect = yes 
 	}
 }

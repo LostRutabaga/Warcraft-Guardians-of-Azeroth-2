@@ -38,3 +38,28 @@ first_contact_friendly_stance_of_reverse_trigger = {
         modifier = good_first_contact_opinion
     }
 }
+
+first_contact_neutral_stance_of_trigger = {
+    has_opinion_modifier = {
+        target = $target$
+        modifier = neutral_first_contact_opinion
+    }
+}
+
+first_contact_neutral_stance_of_reverse_trigger = {
+    reverse_has_opinion_modifier = {
+        target = $target$
+        modifier = neutral_first_contact_opinion
+    }
+}
+
+first_contact_mutual_neutral_stance_trigger = {
+    has_opinion_modifier = {
+        target = $target$
+        modifier = neutral_first_contact_opinion
+    }
+    reverse_has_opinion_modifier = {
+        target = $target$
+        modifier = neutral_first_contact_opinion
+    }
+}

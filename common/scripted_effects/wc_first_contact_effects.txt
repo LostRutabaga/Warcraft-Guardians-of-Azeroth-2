@@ -30,6 +30,9 @@
         flag:friendly = {
             send_friendly_stance_effect = { TARGET = scope:reciever ORDER = first }
         }
+        flag:neutral = {
+            send_neutral_stance_effect = { TARGET = scope:reciever ORDER = first }
+        }
     }
 }
 
@@ -48,5 +51,40 @@ send_friendly_stance_effect = {
     add_opinion = {
         target = scope:sender
         modifier = good_first_contact_opinion
+    }
+}
+
+send_neutral_stance_effect = {
+    $TARGET$ = { save_scope_as = sender }
+    custom_tooltip = first_contact_neutral_effects_sender
+    if = {
+        limit = {
+            flag:$ORDER$ = flag:first
+            NOT = {
+                first_contact_neutral_stance_of_reverse_trigger = { target = scope:sender }
+            }
+        }
+        custom_tooltip = first_contact_neutral_effects_reciever
+    }
+    add_opinion = {
+        target = scope:sender
+        modifier = neutral_first_contact_opinion
+    }
+}
+
+reveal_suramar_unisolation_effect = {
+    set_global_variable = suramar_barrier_lowered_variable
+    title:k_suramar.holder = { 
+        trigger_event = { 
+            id = isolation.3 
+        }
+    }
+    every_ruler = { 
+        limit = {
+            NOT = { this = title:k_suramar.holder }
+        }
+        trigger_event = { 
+            id = isolation.3 days = { 1 60 }
+        }
     }
 }

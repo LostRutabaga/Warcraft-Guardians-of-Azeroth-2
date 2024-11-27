@@ -83,19 +83,19 @@ wc_first_contact_events.0001 = {
             # Neighbors
             triggered_desc = {
                 trigger = {
-                    is_in_same_region_trigger = { TARGET = scope:sender }
+                    ruler_realm_is_on_same_continent_trigger = { CHARACTER = scope:sender }
                 }
                 desc = wc_first_contact_events.0001.desc_region_neighbor_1
             }
             triggered_desc = {
                 trigger = {
-                    is_in_same_region_trigger = { TARGET = scope:sender }
+                    ruler_realm_is_on_same_continent_trigger = { CHARACTER = scope:sender }
                 }
                 desc = wc_first_contact_events.0001.desc_region_neighbor_2
             }
             triggered_desc = {
                 trigger = {
-                    is_in_same_region_trigger = { TARGET = scope:sender }
+                    ruler_realm_is_on_same_continent_trigger = { CHARACTER = scope:sender }
                 }
                 desc = wc_first_contact_events.0001.desc_region_neighbor_3
             }
@@ -197,22 +197,73 @@ wc_first_contact_events.0001 = {
             desc = wc_first_contact_events.0001.desc_region_1
             triggered_desc = {
                 trigger = {
-                    NOT = { is_in_same_region_trigger = { TARGET = scope:sender } }
+                    NOT = { ruler_realm_is_on_same_continent_trigger = { CHARACTER = scope:sender } }
                 }
                 desc = wc_first_contact_events.0001.desc_region_2
             }
             triggered_desc = {
                 trigger = {
-                    NOT = { is_in_same_region_trigger = { TARGET = scope:sender } }
+                    NOT = { ruler_realm_is_on_same_continent_trigger = { CHARACTER = scope:sender } }
                 }
                 desc = wc_first_contact_events.0001.desc_region_3
             }
         }
         random_valid = {
-            desc = wc_first_contact_events.0001.desc_outro_friendly_1
-            desc = wc_first_contact_events.0001.desc_outro_friendly_2
-            desc = wc_first_contact_events.0001.desc_outro_friendly_3
-            desc = wc_first_contact_events.0001.desc_outro_friendly_4
+            triggered_desc = {
+                trigger = {
+                    first_contact_friendly_stance_of_reverse_trigger = { target = scope:sender }
+                }
+                desc = wc_first_contact_events.0001.desc_outro_friendly_1
+            }
+            triggered_desc = {
+                trigger = {
+                    first_contact_friendly_stance_of_reverse_trigger = { target = scope:sender }
+                }
+                desc = wc_first_contact_events.0001.desc_outro_friendly_2
+            }
+            triggered_desc = {
+                trigger = {
+                    first_contact_friendly_stance_of_reverse_trigger = { target = scope:sender }
+                }
+                desc = wc_first_contact_events.0001.desc_outro_friendly_3
+            }
+            triggered_desc = {
+                trigger = {
+                    first_contact_friendly_stance_of_reverse_trigger = { target = scope:sender }
+                }
+                desc = wc_first_contact_events.0001.desc_outro_friendly_4
+            }
+            triggered_desc = {
+                trigger = {
+                    scope:sender = { first_contact_de_isolation_trigger = yes }
+                    first_contact_neutral_stance_of_reverse_trigger = { target = scope:sender }
+                }
+                desc = wc_first_contact_events.0001.desc_outro_neutral_1
+            }
+            triggered_desc = {
+                trigger = {
+                    first_contact_neutral_stance_of_reverse_trigger = { target = scope:sender }
+                }
+                desc = wc_first_contact_events.0001.desc_outro_neutral_2
+            }
+            triggered_desc = {
+                trigger = {
+                    first_contact_neutral_stance_of_reverse_trigger = { target = scope:sender }
+                }
+                desc = wc_first_contact_events.0001.desc_outro_neutral_3
+            }
+            triggered_desc = {
+                trigger = {
+                    first_contact_neutral_stance_of_reverse_trigger = { target = scope:sender }
+                }
+                desc = wc_first_contact_events.0001.desc_outro_neutral_4
+            }
+            triggered_desc = {
+                trigger = {
+                    first_contact_neutral_stance_of_reverse_trigger = { target = scope:sender }
+                }
+                desc = wc_first_contact_events.0001.desc_outro_neutral_5
+            }
             triggered_desc = {
                 trigger = {
                     first_contact_friendly_stance_of_reverse_trigger = { target = scope:sender }
@@ -231,12 +282,19 @@ wc_first_contact_events.0001 = {
     }
 
     immediate = {
-        add_prestige = miniscule_prestige_gain
+        save_scope_as = reciever
+        add_prestige = 10
         if = {
             limit = {
                 first_contact_friendly_stance_of_reverse_trigger = { target = scope:sender }
             }
             custom_tooltip = first_contact_friendly_effects
+        }
+        if = {
+            limit = {
+                first_contact_neutral_stance_of_reverse_trigger = { target = scope:sender }
+            }
+            custom_tooltip = first_contact_neutral_effects_tt_2
         }
     }
 
@@ -255,7 +313,9 @@ wc_first_contact_events.0001 = {
     
         custom_tooltip = wc_first_contact_events.0001.friendly_tt
 
-        send_friendly_stance_effect = { TARGET = scope:sender ORDER = none }
+        hidden_effect = {
+            send_friendly_stance_effect = { TARGET = scope:sender ORDER = none }
+        }
 
         if = {
             limit = {
@@ -306,49 +366,67 @@ wc_first_contact_events.0001 = {
         }
 
         ai_chance = {
-            base = 50
+            base = 100
             wc_friendly_first_contact_modifier = {
                 CHARACTER = scope:sender
             }
         }
     }
 
-    # option = { # Okay 
-    #     name = {
-    #         text = {
-    #             random_valid = {
-    #                 desc = wc_first_contact_events.0001.neutral
-    #                 desc = wc_first_contact_events.0001.neutral_2
-    #                 desc = wc_first_contact_events.0001.neutral_3
-    #                 desc = wc_first_contact_events.0001.neutral_4
-    #             }
-    #         }
-    #     }
+    option = { # Okay 
+        name = {
+            text = {
+                random_valid = {
+                    desc = wc_first_contact_events.0001.neutral
+                    desc = wc_first_contact_events.0001.neutral_2
+                    desc = wc_first_contact_events.0001.neutral_3
+                    desc = wc_first_contact_events.0001.neutral_4
+                }
+            }
+        }
 
-    #     custom_tooltip = wc_first_contact_events.0001.neutral_tt
+        custom_tooltip = wc_first_contact_events.0001.neutral_tt
+
+        hidden_effect = {
+            send_neutral_stance_effect = { TARGET = scope:sender ORDER = none }
+        }
+
+        if = {
+            limit = {
+                first_contact_neutral_stance_of_reverse_trigger = { target = scope:sender }
+            }
+            custom_tooltip = neutral_both_tt
+        }
         
+        scope:sender = {
+            send_interface_toast = {
+                title = wc_first_contact_events.0001.neutral_toast
+                type = event_toast_effect_neutral
+                left_icon = root
+                right_icon = scope:sender
+                show_as_tooltip = {
+                    root = {
+                        add_opinion = {
+                            target = scope:sender
+                            modifier = neutral_first_contact_opinion
+                        }
+                    }
+                }
+            }
+        }
 
-    #     scope:sender = {
-    #         send_interface_toast = {
-    #             title = wc_first_contact_events.0001.neutral_toast
-    #             type = event_toast_effect_neutral
-    #             left_icon = root
-    #             right_icon = scope:sender
-    #         }
-    #     }
-
-    #     stress_impact = {
-    #         paranoid = minor_stress_impact_loss
-    #         shy = minor_stress_impact_loss
-    #     }
+        stress_impact = {
+            paranoid = minor_stress_impact_loss
+            shy = minor_stress_impact_loss
+        }
         
-    #     ai_chance = {
-    #         base = 75
-    #         wc_neutral_first_contact_modifier = {
-    #             CHARACTER = scope:sender
-    #         }
-    #     }
-    # }
+        ai_chance = {
+            base = 100
+            wc_neutral_first_contact_modifier = {
+                CHARACTER = scope:sender
+            }
+        }
+    }
 
     # option = { # Fuck u 
     #     name = wc_first_contact_events.0001.c
