@@ -235,6 +235,24 @@ wc_first_contact_events.0001 = {
             }
             triggered_desc = {
                 trigger = {
+                    first_contact_friendly_stance_of_reverse_trigger = { target = scope:sender }
+                }
+                desc = wc_first_contact_events.0001.desc_outro_friendly_5
+            }
+            triggered_desc = {
+                trigger = {
+                    first_contact_friendly_stance_of_reverse_trigger = { target = scope:sender }
+                }
+                desc = wc_first_contact_events.0001.desc_outro_friendly_6
+            }
+            triggered_desc = {
+                trigger = {
+                    first_contact_friendly_stance_of_reverse_trigger = { target = scope:sender }
+                }
+                desc = wc_first_contact_events.0001.desc_outro_friendly_7
+            }
+            triggered_desc = {
+                trigger = {
                     scope:sender = { first_contact_de_isolation_trigger = yes }
                     first_contact_neutral_stance_of_reverse_trigger = { target = scope:sender }
                 }
@@ -263,6 +281,12 @@ wc_first_contact_events.0001 = {
                     first_contact_neutral_stance_of_reverse_trigger = { target = scope:sender }
                 }
                 desc = wc_first_contact_events.0001.desc_outro_neutral_5
+            }
+            triggered_desc = {
+                trigger = {
+                    first_contact_neutral_stance_of_reverse_trigger = { target = scope:sender }
+                }
+                desc = wc_first_contact_events.0001.desc_outro_neutral_6
             }
             triggered_desc = {
                 trigger = {
@@ -356,6 +380,12 @@ wc_first_contact_events.0001 = {
         name = {
             text = {
                 random_valid = {
+                    triggered_desc = {
+                        trigger = {
+                            first_contact_friendly_stance_of_reverse_trigger = { target = scope:sender }
+                        }
+                        desc = wc_first_contact_events.0001.friendly_mutual
+                    }
                     desc = wc_first_contact_events.0001.friendly
                     desc = wc_first_contact_events.0001.friendly_2
                     desc = wc_first_contact_events.0001.friendly_3
@@ -429,6 +459,12 @@ wc_first_contact_events.0001 = {
         name = {
             text = {
                 random_valid = {
+                    triggered_desc = {
+                        trigger = {
+                            first_contact_neutral_stance_of_reverse_trigger = { target = scope:sender }
+                        }
+                        desc = wc_first_contact_events.0001.neutral_mutual
+                    }
                     desc = wc_first_contact_events.0001.neutral
                     desc = wc_first_contact_events.0001.neutral_2
                     desc = wc_first_contact_events.0001.neutral_3
@@ -484,10 +520,17 @@ wc_first_contact_events.0001 = {
         name = {
             text = {
                 random_valid = {
+                    triggered_desc = {
+                        trigger = {
+                            first_contact_hostile_stance_of_reverse_trigger = { target = scope:sender }
+                        }
+                        desc = wc_first_contact_events.0001.hostile_mutual
+                    }
                     desc = wc_first_contact_events.0001.hostile
                     desc = wc_first_contact_events.0001.hostile_2
                     desc = wc_first_contact_events.0001.hostile_3
                     desc = wc_first_contact_events.0001.hostile_4
+                    desc = wc_first_contact_events.0001.hostile_5
                 }
             }
         }

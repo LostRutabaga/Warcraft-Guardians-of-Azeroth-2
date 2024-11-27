@@ -280,6 +280,10 @@ wc_suramar_events.0010 = {
     }
 
     immediate = {
+        add_character_flag = {
+            flag = suramar_events_cd
+            months = 4
+        }
         location = {
             save_scope_as = location_scope
         }
@@ -1244,6 +1248,13 @@ wc_suramar_events.0020 = {
         is_eligible_for_suramar_events_trigger = yes
     }
 
+    immediate = {
+        add_character_flag = {
+            flag = suramar_events_cd
+            months = 4
+        }
+    }
+
     left_portrait = {
         character = root
         animation = thinking
@@ -1276,6 +1287,10 @@ wc_suramar_events.0030 = {
     cooldown = { years = 10 }
 
     immediate = {
+        add_character_flag = {
+            flag = suramar_events_cd
+            months = 4
+        }
         create_character = {
             dynasty = none
             template = priest_character_template
@@ -1568,6 +1583,10 @@ wc_suramar_events.0040 = {
     cooldown = { years = 2 }
 
     immediate = {
+        add_character_flag = {
+            flag = suramar_events_cd
+            months = 4
+        }
         if = {
             limit = {
                 exists = cp:councillor_spymaster
@@ -2467,6 +2486,10 @@ wc_suramar_events.0050 = {
     cooldown = { years = 50 }
 
     immediate = {
+        add_character_flag = {
+            flag = suramar_events_cd
+            months = 4
+        }
         add_stress = minor_stress_gain
     }
 
@@ -2709,6 +2732,10 @@ wc_suramar_events.0060 = {
     override_background = { reference = garden }
 
     immediate = {
+        add_character_flag = {
+            flag = suramar_events_cd
+            months = 4
+        }
         create_character = {
             template = monk_brewer_template
             location = root.location
@@ -2922,6 +2949,10 @@ wc_suramar_events.0070 = {
     override_background = { reference = bp3_coast }
 
     immediate = {
+        add_character_flag = {
+            flag = suramar_events_cd
+            months = 4
+        }
         random_neighboring_and_across_water_top_liege_realm_owner = {
             limit = {
                 any_sub_realm_county = {
@@ -3543,6 +3574,10 @@ wc_suramar_events.0080 = {
     override_background = { reference = courtyard }
 
     immediate = {
+        add_character_flag = {
+            flag = suramar_events_cd
+            months = 4
+        }
         title:k_suramar.holder = { # Try to find one wandering first
             random_sub_realm_barony = {
                 limit = {
@@ -3800,6 +3835,10 @@ wc_suramar_events.0100 = {
     cooldown = { years = 30 }
 
     immediate = {
+        add_character_flag = {
+            flag = suramar_events_cd
+            months = 4
+        }
         hidden_effect = {
             create_artifact_arcandor_seed_effect = { OWNER = scope:explorer }
             scope:newly_created_artifact = {
@@ -3945,6 +3984,10 @@ wc_suramar_events.0110 = {
     sender = scope:faldorei_leader
 
     immediate = {
+        add_character_flag = {
+            flag = suramar_events_cd
+            months = 4
+        }
         random_sub_realm_county = { 
             limit = {
                 any_neighboring_county = {
@@ -4290,6 +4333,10 @@ wc_suramar_events.0120 = {
     }
 
     immediate = {
+        add_character_flag = {
+            flag = suramar_events_cd
+            months = 4
+        }
         add_character_flag = had_naga_event
         random_neighboring_and_across_water_top_liege_realm_owner = {
             limit = {
@@ -4426,6 +4473,10 @@ wc_suramar_events.0130 = {
     cooldown = { months = 6 }
 
     trigger = {
+        add_character_flag = {
+            flag = suramar_events_cd
+            months = 4
+        }
         is_eligible_for_suramar_events_trigger = yes
         any_ruler = {
             is_landless_adventurer = yes

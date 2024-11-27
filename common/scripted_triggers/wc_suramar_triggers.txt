@@ -3,6 +3,7 @@
     is_in_suramar_trigger = yes
     is_available_adult = yes
     is_landed = yes
+    NOT = { has_character_flag = suramar_events_cd }
 }
 
 has_any_possible_wretched_elves_trigger = {
