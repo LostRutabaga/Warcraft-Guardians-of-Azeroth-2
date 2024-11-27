@@ -1,6 +1,7 @@
 ﻿l_english:
- TRUCE_DIPLOMATIC:0 "\nTruce signed because of diplomatic relations."`
+ TRUCE_DIPLOMATIC:0 "\nTruce signed because of diplomatic relations."
  first_contact_letter_method:0 "#EMP You send a letter to [reciever.GetName], declaring your stance.#!"
+ first_contact_self_method:0 "#EMP You travel to [sender.GetPrimaryTitle.GetName], declaring their stance, or perhaps exploring the area.#!"
  first_contact_self_method_suramar:0 "You travel to [GetTitleByKey('k_suramar').GetName] to meet with their ruler, [GetTitleByKey('k_suramar').GetHolder.GetName].\n$BULLET$Declare your diplomatic relations with Suramar to be #p friendly#!, #color_yellow belligerent#!, or #n hostile#!."
 
  wc_first_contact_events.0001.opening_flirty:0 "To the [ROOT.Char.Custom('RomanticComplimentAdjective')] [ROOT.Char.GetFirstNameNoTooltip],"
@@ -46,16 +47,28 @@
  wc_first_contact_events.0001.desc_outro_friendly_4:0 "Our people will stand as brothers and sisters, and face any challenge that comes our way."
  wc_first_contact_events.0001.desc_outro_friendly_flirty:0 "I wish to see your people's success, and perhaps you in my bedchambers one day."
  wc_first_contact_events.0001.desc_outro_friendly_extroverted:0 "I hope to see your realm flourish, and perhaps the people of [sender.GetPrimaryTitle.GetNameNoTier] feasting in your halls."
+ wc_first_contact_events.0001.desc_outro_friendly_5:0 "I pray that our paths align, whether it be in my realm or yours"
+ wc_first_contact_events.0001.desc_outro_friendly_6:0 "I wish to have good relations with you, [sender.GetFirstNameNoTooltip]."
+ wc_first_contact_events.0001.desc_outro_friendly_7:0 "I am eager to see what the future holds for us, [sender.GetFirstNameNoTooltip]."
 
  wc_first_contact_events.0001.desc_outro_neutral_1:0 "Your unearthing has bothered some of my people, but I am willing to see where this goes."
  wc_first_contact_events.0001.desc_outro_neutral_2:0 "let it be known that I will keep my eye on you, and any wrongdoings will not go unnoticed."
  wc_first_contact_events.0001.desc_outro_neutral_3:0 "I am not weak, but I am not quick to anger. Stay in your lane, and we will have no quarrel."
  wc_first_contact_events.0001.desc_outro_neutral_4:0 "I will not be quick to trust you, but I do not wish harm upon you."
  wc_first_contact_events.0001.desc_outro_neutral_5:0 "Your rise to power is questionable, but not unwelcome."
+ wc_first_contact_events.0001.desc_outro_neutral_6:0 "I am always suspicious of new faces, including yours."
 
- wc_first_contact_events.0001.friendly:0 "I welcome your people, [sender.GetFirstName]!"
+ wc_first_contact_events.0001.desc_outro_hostile_1:0 "I do not take kindly to the likes of you, and I will not hesitate to act against you."
+ wc_first_contact_events.0001.desc_outro_hostile_2:0 "I wish nothing but ill will upon your people, and I will not rest until you are no more."
+ wc_first_contact_events.0001.desc_outro_hostile_3:0 "our world will heed the day I crust you under my boot, and your people will know only suffering."
+ wc_first_contact_events.0001.desc_outro_hostile_4:0 "your presence is an affront to the very meaning of existence, and you are not welcome here."
+ wc_first_contact_events.0001.desc_outro_hostile_5:0 "my thoughts of you are similar to those of my enemies, and I will treat you as such."
+
+ wc_first_contact_events.0001.friendly:0 "I welcome you, [sender.GetFirstName]!"
  wc_first_contact_events.0001.friendly_2:0 "Thank you for your message, [sender.GetTitleAsNameNoTooltip]!"
- wc_first_contact_events.0001.friendly_3:0 "I hope we can be friends [sender.GetFirstNameNoTooltip]."
+ wc_first_contact_events.0001.friendly_3:0 "I hope we can be friends, [sender.GetFirstNameNoTooltip]."
+ wc_first_contact_events.0001.friendly_mutual:0 "I'm glad you're friendly, [sender.GetFirstNameNoTooltip]."
+
  wc_first_contact_events.0001.friendly_tt:0 "You send a message back to [sender.GetFirstName], accepting a #p friendly#! diplomatic relationship:$first_contact_friendly_effects_tt_sender$"
 
  first_contact_friendly_effects_sender:0 "You have a positive impression of [sender.GetFirstName], accepting a #p friendly#! diplomatic relationship:$first_contact_friendly_effects_tt_sender$"
@@ -71,6 +84,7 @@
  wc_first_contact_events.0001.neutral_4:0 "Don't get too comfortable, [sender.GetTitleAsNameNoTooltip]."
  wc_first_contact_events.0001.neutral_tt:0 "You send a message back to [sender.GetFirstName], suggesting a #color_yellow wary#! diplomatic relationship.\n$first_contact_neutral_effects_tt_sender$"
  wc_first_contact_events.0001.neutral_toast:0 "[reciever.GetFirstName] is #color_yellow wary#! of you"
+ wc_first_contact_events.0001.neutral_mutual:0 "Don't worry, I'm cautious too."
 
  first_contact_neutral_effects_sender:0 "You are wary of [sender.GetFirstName]:\n$first_contact_neutral_effects_tt_sender$"
  first_contact_neutral_effects_reciever:0 "If [sender.GetFirstName] is also wary of you:\n$first_contact_neutral_effects_tt$"
@@ -86,6 +100,14 @@
  first_contact_hostile_effects_tt:0 "$BULLET_WITH_TAB$[sender.GetSheHe|U] will be #bold more likely#! to start or join a hostile [scheme|E] against you\n$BULLET_WITH_TAB$Hostile [schemes|E] against [sender.GetHerHim] will have #bold increased#! success chance\n$BULLET_WITH_TAB$[sender.GetSheHe|U] will be #bold less#! likely to join your [union|E] or accept a [marriage|E] proposal"
  first_contact_hostile_effects_tt_sender:0 "\n$BULLET_WITH_TAB$Any hostile [scheme|E] against [sender.GetHerHim] will start with #bold increased#! [secrecy|E]\n$BULLET_WITH_TAB$Hostile [schemes|E] against [sender.GetHerHim] will have #bold increased#! success chance"
  wc_first_contact_events.0001.hostile_toast:0 "[reciever.GetFirstName] is #n hostile#! towards you"
+
+ wc_first_contact_events.0001.hostile_tt:0 "You send a message back to [sender.GetFirstName], showing a #n hostile#! diplomatic relationship:$first_contact_hostile_effects_tt_sender$"
+ wc_first_contact_events.0001.hostile:0 "Curse you, [sender.GetFirstName]!"
+ wc_first_contact_events.0001.hostile_2:0 "I will not stand for you, [sender.GetTitleAsNameNoTooltip]!"
+ wc_first_contact_events.0001.hostile_3:0 "Your message is unwelcome, [sender.GetFirstNameNoTooltip]."
+ wc_first_contact_events.0001.hostile_4:0 "Your diplomacy does not hide your vile nature..."
+ wc_first_contact_events.0001.hostile_5:0 "I will not be swayed by your words, [sender.GetFirstNameNoTooltip]."
+ wc_first_contact_events.0001.hostile_mutual:0 "Another enemy, how delightful."
 
  good_first_contact_opinion:0 "Good First Impression"
  first_contact_opinion_desc:0 "Their first impression of you: $VALUE|+=0$"

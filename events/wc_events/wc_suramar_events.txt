@@ -4473,10 +4473,6 @@ wc_suramar_events.0130 = {
     cooldown = { months = 6 }
 
     trigger = {
-        add_character_flag = {
-            flag = suramar_events_cd
-            months = 4
-        }
         is_eligible_for_suramar_events_trigger = yes
         any_ruler = {
             is_landless_adventurer = yes
@@ -4497,6 +4493,10 @@ wc_suramar_events.0130 = {
     }
 
     immediate = {
+        add_character_flag = {
+            flag = suramar_events_cd
+            months = 4
+        }
         random_ruler = {
             limit = {
                 is_landless_adventurer = yes

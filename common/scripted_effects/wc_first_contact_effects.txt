@@ -11,7 +11,7 @@
         flag:letter = {
             custom_tooltip = first_contact_letter_method
             root = { save_scope_as = sender }
-            save_scope_value_as = { name = first_contact_nation = flag:suramar }
+            save_scope_value_as = { name = first_contact_nation value = flag:suramar }
             scope:reciever = {
                 trigger_event = {
                     id = wc_first_contact_events.0001 
@@ -19,7 +19,7 @@
                 }
             }
         }
-        flag:letter = {
+        flag:self = {
             custom_tooltip = first_contact_self_method
         }
     }

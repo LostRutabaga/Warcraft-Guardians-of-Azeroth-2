@@ -320,9 +320,9 @@ isolation.3 = {
 								has_trait = creature_highborne
 							}
 						}
-						desc = ISOLATION_3_OPT_F_ELVEN
+						desc = ISOLATION_3_OPT_E_ELVEN
 					}
-					desc = ISOLATION_3_OPT_F_NEIGHBOR
+					desc = ISOLATION_3_OPT_E_NEIGHBOR
 				}
 			}
 		}
@@ -334,12 +334,12 @@ isolation.3 = {
 		}
 
 		first_contact_procedure_effect = {
-			NATION = suramar METHOD = letter STANCE = hostile
+			NATION = suramar METHOD = letter STANCE = neutral
 		}
 	
 		ai_chance = {
 			base = 150
-			wc_hostile_first_contact_modifier = {
+			wc_neutral_first_contact_modifier = {
 				CHARACTER = title:k_suramar.holder
 			}
 		}

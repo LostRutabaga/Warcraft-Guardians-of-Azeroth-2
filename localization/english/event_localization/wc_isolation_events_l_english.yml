@@ -24,3 +24,6 @@
  ISOLATION_3_OPT_D_UNAVAILABLE:0 "You are no Elf, nor can you reach the Broken Isles."
  ISOLATION_3_OPT_E_NEIGHBOR:0 "Warn the elves not to interfere with our affairs."
  ISOLATION_3_OPT_E_ELVEN:0 "Send a message to Suramar, but stay wary."
+
+ ISOLATION_3_OPT_F_ELVEN:0 "Let those elves know of their deploreable nature!"
+ ISOLATION_3_OPT_F_NEIGHBOR:0 "Tell the elves to stay away from us!"
