@@ -825,7 +825,7 @@ wc_horde_invasion.1007 = {
 				inheritable = yes
 				name = brotherhood_of_the_horse_army
 				men_at_arms = {
-					type = pikemen
+					type = pikemen_unit
 					stacks = 8
 				}
 				location = capital_province
