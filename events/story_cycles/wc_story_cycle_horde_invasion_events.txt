@@ -947,10 +947,7 @@ wc_horde_invasion.1502 = {
 	option = { # Fuck you Guldan (canon)
 		name = wc_horde_invasion.1502.a
 		flavor = wc_horde_invasion.1502.a.flavor
-		trigger = {
-			exists = scope:guldan
-			scope:guldan = { is_alive = yes }
-		}
+		trigger = { scope:guldan ?= { is_alive = yes } }
 
 		stress_impact = {
 			base = minor_stress_impact_gain
@@ -969,10 +966,7 @@ wc_horde_invasion.1502 = {
 
 		# Orgrim thinks you are unreasonable
 		if = {
-			limit = {
-				exists = scope:orgrim
-				scope:orgrim = { is_alive = yes }
-			}
+			limit = { scope:orgrim ?= { is_alive = yes } }
 			scope:orgrim = {
 				add_opinion = {
 					target = root
@@ -1059,10 +1053,7 @@ wc_horde_invasion.1503 = {
 
 		# Durotan think you're wrong
 		if = {
-			limit = {
-				exists = scope:durotan
-				scope:durotan = { is_alive = yes }
-			}
+			limit = { scope:durotan ?= { is_alive = yes } }
 			scope:durotan = {
 				add_opinion = {
 					target = root
@@ -1079,10 +1070,7 @@ wc_horde_invasion.1503 = {
 	option = { # Durotan was right (not canon)
 		name = wc_horde_invasion.1503.b
 		flavor = wc_horde_invasion.1503.b_flavor
-		trigger = {
-			exists = scope:guldan
-			scope:guldan = { is_alive = yes }
-		}
+		trigger = { scope:guldan ?= { is_alive = yes } }
 
 		stress_impact = {
 			base = minor_stress_impact_gain
@@ -1101,10 +1089,7 @@ wc_horde_invasion.1503 = {
 
 		# Durotan is happy that you saw the truth at this state
 		if = {
-			limit = {
-				exists = scope:durotan
-				scope:durotan = { is_alive = yes }
-			}
+			limit = { scope:durotan ?= { is_alive = yes } }
 			scope:durotan = {
 				add_opinion = {
 					target = root
