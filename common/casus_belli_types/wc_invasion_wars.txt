@@ -4,7 +4,6 @@
 	ai_only_against_neighbors = yes
 
 	allowed_for_character = {
-		scope:attacker = { NOT = { is_isolated_from_trigger = { target = scope:defender } } } # Warcraft
 		always = yes
 	}
 	

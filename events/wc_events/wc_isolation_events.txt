@@ -182,51 +182,51 @@ isolation.3 = {
 			base = 50
 		}
 	}
-	# Say hello to our elven brothers / new neighbors, with a letter
-	option = {
-		name = {
-			text = {
-				first_valid = {
-					triggered_desc = {
-						trigger = {
-							OR = {
-								culture = { has_elven_heritage_trigger = yes }
-								has_trait = creature_nightborne
-								has_trait = creature_high_elf
-								has_trait = creature_night_elf
-								has_trait = creature_highborne
-							}
-						}
-						desc = ISOLATION_3_OPT_C_ELVEN
-					}
-					desc = ISOLATION_3_OPT_C_NEIGHBOR
-				}
-			}
-		}
-		trigger = {
-			can_diplomacy_suramar_trigger = yes 
-			is_available = yes
-		}
-		show_as_unavailable = {
-			NOT = { is_in_suramar_trigger = yes }
-		}
+	# # Say hello to our elven brothers / new neighbors, with a letter
+	# option = {
+	# 	name = {
+	# 		text = {
+	# 			first_valid = {
+	# 				triggered_desc = {
+	# 					trigger = {
+	# 						OR = {
+	# 							culture = { has_elven_heritage_trigger = yes }
+	# 							has_trait = creature_nightborne
+	# 							has_trait = creature_high_elf
+	# 							has_trait = creature_night_elf
+	# 							has_trait = creature_highborne
+	# 						}
+	# 					}
+	# 					desc = ISOLATION_3_OPT_C_ELVEN
+	# 				}
+	# 				desc = ISOLATION_3_OPT_C_NEIGHBOR
+	# 			}
+	# 		}
+	# 	}
+	# 	trigger = {
+	# 		can_diplomacy_suramar_trigger = yes 
+	# 		is_available = yes
+	# 	}
+	# 	show_as_unavailable = {
+	# 		NOT = { is_in_suramar_trigger = yes }
+	# 	}
 
-		first_contact_procedure_effect = {
-			NATION = suramar METHOD = self STANCE = none
-		}
+	# 	first_contact_procedure_effect = {
+	# 		NATION = suramar METHOD = self STANCE = none
+	# 	}
 
-		stress_impact = {
-			paranoid = minor_stress_impact_gain
-			shy = minor_stress_impact_gain
-		}
+	# 	stress_impact = {
+	# 		paranoid = minor_stress_impact_gain
+	# 		shy = minor_stress_impact_gain
+	# 	}
 
-		ai_chance = {
-			base = 200
-			wc_first_contact_travel_modifier = {
-				CHARACTER = title:k_suramar.holder
-			}
-		}
-	}
+	# 	ai_chance = {
+	# 		base = 200
+	# 		wc_first_contact_travel_modifier = {
+	# 			CHARACTER = title:k_suramar.holder
+	# 		}
+	# 	}
+	# }
 
 	option = {
 		name = {
@@ -320,9 +320,9 @@ isolation.3 = {
 								has_trait = creature_highborne
 							}
 						}
-						desc = ISOLATION_3_OPT_E_ELVEN
+						desc = ISOLATION_3_OPT_F_ELVEN
 					}
-					desc = ISOLATION_3_OPT_E_NEIGHBOR
+					desc = ISOLATION_3_OPT_F_NEIGHBOR
 				}
 			}
 		}

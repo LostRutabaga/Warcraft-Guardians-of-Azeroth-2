@@ -1,4 +1,6 @@
 ﻿first_contact_procedure_effect = {
+    save_scope_value_as = { name = stance value = flag:$STANCE$ } 
+    save_scope_value_as = { name = method value = flag:$METHOD$ }   
     switch = {
         trigger = flag:$NATION$
         flag:suramar = {
@@ -7,7 +9,7 @@
     }
 
     switch = {
-        trigger = flag:$METHOD$
+        trigger = scope:method
         flag:letter = {
             custom_tooltip = first_contact_letter_method
             root = { save_scope_as = sender }
@@ -19,13 +21,13 @@
                 }
             }
         }
-        flag:self = {
-            custom_tooltip = first_contact_self_method
-        }
+        # flag:self = {
+        #     custom_tooltip = first_contact_self_method
+        # }
     }
 
     switch = {
-        trigger = flag:$STANCE$
+        trigger = scope:stance
         flag:friendly = {
             send_friendly_stance_effect = { TARGET = scope:reciever ORDER = first }
         }
