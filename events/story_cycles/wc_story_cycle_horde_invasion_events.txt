@@ -1288,6 +1288,75 @@ wc_horde_invasion.1506 = {
 	}
 }
 
+# Regular Twilight's Hammer Conversion
+wc_horde_invasion.1507 = {
+	type = character_event
+	content_source = dlc_GOA
+	title = wc_horde_invasion.1507.title
+	desc = wc_horde_invasion.1507.desc
+	theme = twilights_hammer
+
+	left_portrait = {
+		character = root
+		animation = lunatic
+	}
+
+	option = { # Glory to the Old Gods!
+		name = wc_horde_invasion.1507.a
+		flavor = wc_horde_invasion.1507.a_flavor
+
+		stress_impact = {
+			base = minor_stress_impact_loss
+			cynical = minor_stress_impact_gain
+			zealous = minor_stress_impact_loss
+		}
+
+		random = {
+			chance = 15
+			random_list = {
+				100 = {
+					random_list = {
+						100 = { add_trait = depressed_genetic }
+						100 = { add_trait = depressed_1 }
+					}
+				}
+				# Schizophrenia.
+				100 = {
+					random_list = {
+						100 = { add_trait = lunatic_genetic }
+						100 = { add_trait = lunatic_1 }
+					}
+				}
+				100 = {
+					random_list = {
+						100 = { add_trait = possessed_genetic }
+						100 = { add_trait = possessed_1 }
+					}
+				}
+			}
+		}
+
+		# Secret conversion to Twilight's Hammer
+		show_as_tooltip = { set_character_secret_faith = faith:twilights_hammer_cult }
+		make_character_crypto_religionist_effect = { CRYPTO_RELIGION = faith:twilights_hammer_cult }
+	}
+
+	option = { # Our masters are the demons now
+		name = wc_horde_invasion.1507.b
+		flavor = wc_horde_invasion.1507.b_flavor
+
+		stress_impact = {
+			base = minor_stress_impact_gain
+			cynical = minor_stress_impact_loss
+			zealous = minor_stress_impact_gain
+		}
+		add_trait = loyal
+		add_piety = medium_piety_gain
+
+		# TODO: Start Whispers of the Old Gods here
+	}
+}
+
 #################################
 # Conquests of the Horde
 # 9000-9002

@@ -124,6 +124,12 @@
  wc_horde_invasion.1506.desc:0 ""#EMP (KILL [devoted.GetHerHim]!)#!" growled Gall when I tore [devoted.GetNamePossessive] soul from [devoted.GetHerHis] body, sending it to [new_faith.PositiveAfterLife].\n\n"Do you see, Gall? Their essence completes the circle. [new_faith.PantheonTerm|U] approve of this offering. #EMP (Hah! POWER… YES! Show me MORE!)#!"\n\nI exhaled over the book in #EMP our#! hands, imbuing its pages — already soaked with the blood of the [new_faith.GetAdjective] faithful — with the essence of [devoted.GetName]. Gall is jubilant, tonight, dozens of dismembered bodies allowed me to forge this book. [new_faith.PantheonTerm|U] have revealed the truth that will be inscribed within: the Titans, the Black Empire, the Legion, the Void...\n\nOver the past few weeks, Gall has opened himself to the whispers. He finally understands. Every decision #EMP we#! have made has brought #EMP us#! to this very moment. #EMP We#! are their prophets. Twilight falls!"
  wc_horde_invasion.1506.a:0 "The Hour of Twilight is upon us!"
  wc_horde_invasion.1506.a_flavor:0 "You are now the will of the Old Gods. The stars grow dim, the heavens tremble, and the earth shudders. The Horde will likely usher in the Hour of Twilight, but you must be one of its architects. Their whispers demand it: #EMP fight for the Horde!#!"
+ wc_horde_invasion.1507.title:0 "$wc_horde_invasion.1505.title$"
+ wc_horde_invasion.1507.desc:0 "WIP"
+ wc_horde_invasion.1507.a:0 "WIP"
+ wc_horde_invasion.1507.a_flavor:0 "WIP"
+ wc_horde_invasion.1507.b:0 "WIP"
+ wc_horde_invasion.1507.b_flavor:0 "WIP"
 
  #################################
  # Conquests of the Horde
