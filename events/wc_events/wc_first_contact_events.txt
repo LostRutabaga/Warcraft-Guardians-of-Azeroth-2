@@ -266,6 +266,36 @@ wc_first_contact_events.0001 = {
             }
             triggered_desc = {
                 trigger = {
+                    first_contact_hostile_stance_of_reverse_trigger = { target = scope:sender }
+                }
+                desc = wc_first_contact_events.0001.desc_outro_hostile_1
+            }
+            triggered_desc = {
+                trigger = {
+                    first_contact_hostile_stance_of_reverse_trigger = { target = scope:sender }
+                }
+                desc = wc_first_contact_events.0001.desc_outro_hostile_2
+            }
+            triggered_desc = {
+                trigger = {
+                    first_contact_hostile_stance_of_reverse_trigger = { target = scope:sender }
+                }
+                desc = wc_first_contact_events.0001.desc_outro_hostile_3
+            }
+            triggered_desc = {
+                trigger = {
+                    first_contact_hostile_stance_of_reverse_trigger = { target = scope:sender }
+                }
+                desc = wc_first_contact_events.0001.desc_outro_hostile_4
+            }
+            triggered_desc = {
+                trigger = {
+                    first_contact_hostile_stance_of_reverse_trigger = { target = scope:sender }
+                }
+                desc = wc_first_contact_events.0001.desc_outro_hostile_5
+            }
+            triggered_desc = {
+                trigger = {
                     first_contact_friendly_stance_of_reverse_trigger = { target = scope:sender }
                     scope:sender = { first_contact_letter_flirty_trigger = yes }
                 }
@@ -295,6 +325,28 @@ wc_first_contact_events.0001 = {
                 first_contact_neutral_stance_of_reverse_trigger = { target = scope:sender }
             }
             custom_tooltip = first_contact_neutral_effects_tt_2
+        }
+        if = {
+            limit = {
+                first_contact_hostile_stance_of_reverse_trigger = { target = scope:sender }
+            }
+            custom_tooltip = first_contact_hostile_effects
+            scope:sender = {
+                random_held_title = {
+                    limit = {
+                        tier = tier_county
+                        root = { NOT = { has_claim_on = prev } }
+                    }
+                    save_scope_as = target_county
+                }
+            }
+            random_held_title = {
+                limit = {
+                    tier = tier_county
+                    scope:sender = { NOT = { has_claim_on = prev } }
+                }
+                save_scope_as = my_county
+            }
         }
     }
 
@@ -428,22 +480,58 @@ wc_first_contact_events.0001 = {
         }
     }
 
-    # option = { # Fuck u 
-    #     name = wc_first_contact_events.0001.c
+    option = { # NAUURR
+        name = {
+            text = {
+                random_valid = {
+                    desc = wc_first_contact_events.0001.hostile
+                    desc = wc_first_contact_events.0001.hostile_2
+                    desc = wc_first_contact_events.0001.hostile_3
+                    desc = wc_first_contact_events.0001.hostile_4
+                }
+            }
+        }
 
-    #     save_scope_value_as = { name = suramar_ruler_response value = flag:hostile }
+        custom_tooltip = wc_first_contact_events.0001.hostile_tt
 
-    #     stress_impact = {
-    #         callous = minor_stress_impact_loss
-    #         shy = minor_stress_impact_gain
-    #         fickle = minor_stress_impact_loss
-    #     }
+        hidden_effect = {
+            send_hostile_stance_effect = { TARGET = scope:sender ORDER = none }
+        }
+
+        if = {
+            limit = {
+                first_contact_hostile_stance_of_reverse_trigger = { target = scope:sender }
+                exists = scope:my_county
+                exists = scope:target_county
+            }
+            scope:sender = {
+                add_unpressed_claim = scope:my_county
+            } 
+            add_unpressed_claim = scope:target_county
+        }
+
+        scope:sender = {
+            send_interface_toast = {
+                title = wc_first_contact_events.0001.hostile_toast
+                type = event_toast_effect_bad
+                left_icon = root
+                right_icon = scope:sender
+                show_as_tooltip = {
+                    root = {
+                        add_opinion = {
+                            target = scope:sender
+                            modifier = bad_first_contact_opinion
+                        }
+                    }
+                }
+            }
+        }
         
-    #     ai_chance = {
-    #         base = 50
-    #         wc_hostile_first_contact_modifier = {
-    #             CHARACTER = scope:sender
-    #         }
-    #     }
-    # }
+        ai_chance = {
+            base = 100
+            wc_hostile_first_contact_modifier = {
+                CHARACTER = scope:sender
+            }
+        }
+    }
 }

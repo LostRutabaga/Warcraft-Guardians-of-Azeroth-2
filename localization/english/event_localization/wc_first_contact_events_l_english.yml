@@ -55,13 +55,13 @@
 
  wc_first_contact_events.0001.friendly:0 "I welcome your people, [sender.GetFirstName]!"
  wc_first_contact_events.0001.friendly_2:0 "Thank you for your message, [sender.GetTitleAsNameNoTooltip]!"
- wc_first_contact_events.0001.friendly_3:0 "I hope we can be friends [sender.GetPrimaryTitle.GetNameNoTier]."
+ wc_first_contact_events.0001.friendly_3:0 "I hope we can be friends [sender.GetFirstNameNoTooltip]."
  wc_first_contact_events.0001.friendly_tt:0 "You send a message back to [sender.GetFirstName], accepting a #p friendly#! diplomatic relationship:$first_contact_friendly_effects_tt_sender$"
 
  first_contact_friendly_effects_sender:0 "You have a positive impression of [sender.GetFirstName], accepting a #p friendly#! diplomatic relationship:$first_contact_friendly_effects_tt_sender$"
  first_contact_friendly_effects_reciever:0 "If [sender.GetFirstName] also has a positive impression of you:\n$first_contact_friendly_effects_tt$\n$BULLET_WITH_TAB$You both gain a truce for #V 1#! year"
  first_contact_friendly_effects:0 "Because of [sender.GetFirstNamePossessive] #p positive#! impression of you:\n$first_contact_friendly_effects_tt$"
- first_contact_friendly_effects_tt:0 "$BULLET_WITH_TAB$[sender.GetSheHe|U] will be #bold less likely#! to start or join a [war|E] or hostile [scheme|E] against you\n$BULLET_WITH_TAB$Personal [schemes|E] against [sender.GetHerHim] will have #bold increased#! success chance\n$BULLET_WITH_TAB$[sender.GetSheHe|U] will be #bold more#! likely to join your [union|E] or accept a [marriage|E] proposal\n$BULLET_WITH_TAB$Any hostile [scheme|E] against [sender.GetHerHim] will start with #bold decreased#! [secrecy|E]
+ first_contact_friendly_effects_tt:0 "$BULLET_WITH_TAB$[sender.GetSheHe|U] will be #bold less likely#! to start or join a [war|E] or hostile [scheme|E] against you\n$BULLET_WITH_TAB$Personal [schemes|E] against [sender.GetHerHim] will have #bold increased#! success chance\n$BULLET_WITH_TAB$[sender.GetSheHe|U] will be #bold more#! likely to join your [union|E] or accept a [marriage|E] proposal\n$BULLET_WITH_TAB$Any hostile [scheme|E] against [sender.GetHerHim] will start with #bold decreased#! [secrecy|E]"
  first_contact_friendly_effects_tt_sender:0 "\n$BULLET_WITH_TAB$Any hostile [scheme|E] against [sender.GetHerHim] will start with #bold decreased#! [secrecy|E]\n$BULLET_WITH_TAB$Personal [schemes|E] against [sender.GetHerHim] will have #bold increased#! success chance"
  wc_first_contact_events.0001.friendly_toast:0 "[reciever.GetFirstName] is open to #p friendly#! relations"
 
@@ -79,6 +79,13 @@
  first_contact_neutral_effects_tt:0 "$BULLET_WITH_TAB$Hostile [schemes|E] targeting [sender.GetHerHim] will have #bold decreased#! secrecy"
  first_contact_neutral_effects_tt_2:0 "Because of [sender.GetFirstName]'s #color_yellow wary#! impression of you:\n$first_contact_neutral_effects_tt$"
  neutral_both_tt:0 "Hostile [schemes|E] from and targeting [sender.GetHerHim] will have #bold decreased#! success chance"
+
+ first_contact_hostile_effects_sender:0 "You have a negative impression of [sender.GetFirstName], accepting a #n hostile#! diplomatic relationship:$first_contact_hostile_effects_tt_sender$"
+ first_contact_hostile_effects_reciever:0 "If [sender.GetFirstName] also has a negative impression of you:\n$first_contact_hostile_effects_tt$\n$BULLET_WITH_TAB$You both gain a [claim|E] in your realm"
+ first_contact_hostile_effects:0 "Because of [sender.GetFirstNamePossessive] #n negative#! impression of you:\n$first_contact_hostile_effects_tt$"
+ first_contact_hostile_effects_tt:0 "$BULLET_WITH_TAB$[sender.GetSheHe|U] will be #bold more likely#! to start or join a [war|E] or hostile [scheme|E] against you\n$BULLET_WITH_TAB$Hostile [schemes|E] against [sender.GetHerHim] will have #bold increased#! success chance\n$BULLET_WITH_TAB$[sender.GetSheHe|U] will be #bold less#! likely to join your [union|E] or accept a [marriage|E] proposal"
+ first_contact_hostile_effects_tt_sender:0 "\n$BULLET_WITH_TAB$Any hostile [scheme|E] against [sender.GetHerHim] will start with #bold increased#! [secrecy|E]\n$BULLET_WITH_TAB$Hostile [schemes|E] against [sender.GetHerHim] will have #bold increased#! success chance"
+ wc_first_contact_events.0001.hostile_toast:0 "[reciever.GetFirstName] is #n hostile#! towards you"
 
  good_first_contact_opinion:0 "Good First Impression"
  bad_first_contact_opinion:0 "Hostile Diplomacy"

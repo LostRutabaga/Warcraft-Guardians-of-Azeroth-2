@@ -305,4 +305,43 @@ isolation.3 = {
 			}
 		}
 	}
+
+	option = {
+		name = {
+			text = {
+				first_valid = {
+					triggered_desc = {
+						trigger = {
+							OR = {
+								culture = { has_elven_heritage_trigger = yes }
+								has_trait = creature_nightborne
+								has_trait = creature_high_elf
+								has_trait = creature_night_elf
+								has_trait = creature_highborne
+							}
+						}
+						desc = ISOLATION_3_OPT_F_ELVEN
+					}
+					desc = ISOLATION_3_OPT_F_NEIGHBOR
+				}
+			}
+		}
+		trigger = {
+			can_diplomacy_suramar_trigger = yes 
+		}
+		show_as_unavailable = {
+			NOT = { is_in_suramar_trigger = yes }
+		}
+
+		first_contact_procedure_effect = {
+			NATION = suramar METHOD = letter STANCE = hostile
+		}
+	
+		ai_chance = {
+			base = 150
+			wc_hostile_first_contact_modifier = {
+				CHARACTER = title:k_suramar.holder
+			}
+		}
+	}
 }

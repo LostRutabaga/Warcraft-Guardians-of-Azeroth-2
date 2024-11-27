@@ -6,13 +6,21 @@
     compatibility_modifier = {
         who = $CHARACTER$
         compatibility_target = root
-        min = -1
+        min = -50
         max = 50
         multiplier = 2
     }
     modifier = {
-        factor = 2.5
+        factor = 1.5
         ruler_realm_is_on_same_continent_trigger = { CHARACTER = $CHARACTER$ }
+    }
+    modifier = {
+        factor = 1.5
+        first_contact_friendly_stance_of_reverse_trigger = { target = $CHARACTER$  }
+    }
+    modifier = {
+        factor = 0.5
+        first_contact_hostile_stance_of_reverse_trigger = { target = $CHARACTER$  }
     }
 }
 
@@ -25,12 +33,20 @@ wc_hostile_first_contact_modifier = {
         who = $CHARACTER$
         compatibility_target = root
         min = -50
-        max = 1
-        multiplier = 2
+        max = 50
+        multiplier = -2
     }
     modifier = {
+        ai_has_warlike_personality = yes
         factor = 2.5
-        ruler_realm_is_on_same_continent_trigger = { CHARACTER = $CHARACTER$ }
+    }
+    modifier = {
+        factor = 1.5
+        first_contact_hostile_stance_of_reverse_trigger = { target = $CHARACTER$  }
+    }
+    modifier = {
+        factor = 0.5
+        first_contact_friendly_stance_of_reverse_trigger = { target = $CHARACTER$  }
     }
 }
 
@@ -48,6 +64,10 @@ wc_neutral_first_contact_modifier = {
             ai_has_cautious_personality = yes
             probably_superstitious = yes
         }
+    }
+    modifier = {
+        factor = 3
+        first_contact_neutral_stance_of_reverse_trigger = { target = $CHARACTER$  }
     }
     # Distance, less likely to care if farther away
     modifier = {
@@ -153,6 +173,7 @@ wc_first_contact_travel_modifier = {
             has_trait = lazy
         }
     }
+    
     modifier = {
         $CHARACTER$ = { is_landed = yes }
         add = {

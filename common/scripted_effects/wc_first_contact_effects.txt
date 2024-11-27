@@ -12,7 +12,6 @@
             custom_tooltip = first_contact_letter_method
             root = { save_scope_as = sender }
             save_scope_value_as = { name = first_contact_nation = flag:suramar }
-            save_scope_value_as = { name = first_contact_stance = flag:$STANCE$ }
             scope:reciever = {
                 trigger_event = {
                     id = wc_first_contact_events.0001 
@@ -32,6 +31,9 @@
         }
         flag:neutral = {
             send_neutral_stance_effect = { TARGET = scope:reciever ORDER = first }
+        }
+        flag:hostile = {
+            send_hostile_stance_effect = { TARGET = scope:reciever ORDER = first }
         }
     }
 }
@@ -69,6 +71,24 @@ send_neutral_stance_effect = {
     add_opinion = {
         target = scope:sender
         modifier = neutral_first_contact_opinion
+    }
+}
+
+send_hostile_stance_effect = {
+    $TARGET$ = { save_scope_as = sender }
+    custom_tooltip = first_contact_hostile_effects_sender
+    if = {
+        limit = {
+            flag:$ORDER$ = flag:first
+            NOT = {
+                first_contact_hostile_stance_of_reverse_trigger = { target = scope:sender }
+            }
+        }
+        custom_tooltip = first_contact_hostile_effects_reciever
+    }
+    add_opinion = {
+        target = scope:sender
+        modifier = bad_first_contact_opinion
     }
 }
 

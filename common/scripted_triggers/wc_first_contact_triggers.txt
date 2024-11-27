@@ -63,3 +63,17 @@ first_contact_mutual_neutral_stance_trigger = {
         modifier = neutral_first_contact_opinion
     }
 }
+
+first_contact_hostile_stance_of_trigger = {
+    has_opinion_modifier = {
+        target = $target$
+        modifier = bad_first_contact_opinion
+    }
+}
+
+first_contact_hostile_stance_of_reverse_trigger = {
+    reverse_has_opinion_modifier = {
+        target = $target$
+        modifier = bad_first_contact_opinion
+    }
+}
