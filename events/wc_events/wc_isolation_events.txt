@@ -334,12 +334,12 @@ isolation.3 = {
 		}
 
 		first_contact_procedure_effect = {
-			NATION = suramar METHOD = letter STANCE = neutral
+			NATION = suramar METHOD = letter STANCE = hostile
 		}
 	
 		ai_chance = {
 			base = 150
-			wc_neutral_first_contact_modifier = {
+			wc_hostile_first_contact_modifier = {
 				CHARACTER = title:k_suramar.holder
 			}
 		}

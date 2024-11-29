@@ -5,7 +5,12 @@
             modifier = exiled_opinion
             target = root
         }
-        banish = yes 
+        if = {
+            limit = {
+                exists = liege
+            }
+            banish = yes 
+        }
     }
     add_to_variable_list = {
         name = suramar_exiled_characters
