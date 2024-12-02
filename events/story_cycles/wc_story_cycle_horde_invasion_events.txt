@@ -965,14 +965,15 @@ wc_horde_invasion.1501 = {
 		name = wc_horde_invasion.1501.a
 		flavor = wc_horde_invasion.1501.a.flavor
 		trigger = {
-			any_hooked_character = {
-                count > 0
-                root = {
-                    has_hook_of_type = {
-                        target = this
-                        type = loyalty_hook
-                    }
-                }
+			NOT = {
+				any_hooked_character = {
+					root = {
+						has_hook_of_type = {
+							target = this
+							type = loyalty_hook
+						}
+					}
+				}
 			}
 		}
 
@@ -1013,13 +1014,12 @@ wc_horde_invasion.1501 = {
 		flavor = wc_horde_invasion.1501.a_alternative.flavor
 		trigger = {
 			any_hooked_character = {
-                count > 0
-                root = {
-                    has_hook_of_type = {
-                        target = this
-                        type = loyalty_hook
-                    }
-                }
+				root = {
+					has_hook_of_type = {
+						target = this
+						type = loyalty_hook
+					}
+				}
 			}
 		}
 
