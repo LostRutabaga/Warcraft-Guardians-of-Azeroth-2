@@ -50,6 +50,8 @@ aquelism_religion_opinion = { decimals = 0 }
 
 kaldorei_religion_opinion = { decimals = 0 }
 
+mrligion_religion_opinion = { decimals = 0 }
+
 
 rf_eastern_opinion = { decimals = 0 }
 
