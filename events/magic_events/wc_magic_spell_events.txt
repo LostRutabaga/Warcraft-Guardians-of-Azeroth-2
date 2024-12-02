@@ -1,11 +1,19 @@
 ﻿namespace = wc_magic_spell_events
 
-### 0001 - 3001 Random Order Magic Events
-### 4000 - 4005 Salvation events
-### 4010 -      Remove Incapable Event
-### 5000 - 5100 Void Leader Events
-### 5200 - 5300 Voidborne Events 
+########## 0001 - 0999 Order Magic Events
+########## 1000 - 1999 Light Magic Events
+### 1000 - 1100 Salvation Events
+########### 2000 - 2999 Shadow Magic Events
+### 2000 - 2100 Void Leader Events
+### 2200 - 2300 Voidborne Events 
+########### 3000 - 3999 Death Magic Events
+########### 4000 - 4999 Life Magic Events
+########### 5000 - 5999 Fel Magic Events
+########### 6000 - 8999 Elemental Magic Events
+########### 9000 - 9999 Random Magic Events
+### 9000 - Remove Incapable Event
 
+# Add Ice Block
 wc_magic_spell_events.0001 = {
     title = wc_magic_spell_events.0001.title
     desc = wc_magic_spell_events.0001.desc
@@ -35,6 +43,7 @@ wc_magic_spell_events.0001 = {
     }
 }
 
+# Remove Ice Block
 wc_magic_spell_events.0002 = {
     hidden = yes
     immediate = {
@@ -42,7 +51,8 @@ wc_magic_spell_events.0002 = {
     }
 }
 
-wc_magic_spell_events.1001 = {
+# Remove Polymorph
+wc_magic_spell_events.0100 = {
     hidden = yes
     immediate = {
         remove_trait = polymorph
@@ -53,10 +63,11 @@ wc_magic_spell_events.1001 = {
     }
 }
 
-wc_magic_spell_events.2001 = {
+# Conjure Refreshment Events
+wc_magic_spell_events.0200 = {
     type = character_event
-    title = wc_magic_spell_events.2001.title
-    desc = wc_magic_spell_events.2001.desc
+    title = wc_magic_spell_events.0200.title
+    desc = wc_magic_spell_events.0200.desc
     theme = order
 
     left_portrait = {
@@ -65,9 +76,9 @@ wc_magic_spell_events.2001 = {
     }
 
     option = {
-        name = wc_magic_spell_events.2001.a
+        name = wc_magic_spell_events.0200.a
 
-        custom_tooltip = wc_magic_spell_events.2001.a.tt
+        custom_tooltip = wc_magic_spell_events.0200.a.tt
         set_variable = {
             name = selected_refreshment
             value = flag:food
@@ -75,9 +86,9 @@ wc_magic_spell_events.2001 = {
     }
 
     option = {
-        name = wc_magic_spell_events.2001.b
+        name = wc_magic_spell_events.0200.b
 
-        custom_tooltip = wc_magic_spell_events.2001.b.tt
+        custom_tooltip = wc_magic_spell_events.0200.b.tt
         set_variable = {
             name = selected_refreshment
             value = flag:drink
@@ -85,10 +96,10 @@ wc_magic_spell_events.2001 = {
     }
 }
 
-wc_magic_spell_events.2101 = {
+wc_magic_spell_events.0300 = {
     type = activity_event
-    title = wc_magic_spell_events.2101.title
-    desc = wc_magic_spell_events.2101.desc
+    title = wc_magic_spell_events.0300.title
+    desc = wc_magic_spell_events.0300.desc
     theme = feast_activity
     override_icon = {
         reference = "gfx/interface/icons/icon_order_magic.dds"
@@ -125,9 +136,9 @@ wc_magic_spell_events.2101 = {
     }
 
     option = {
-        name = wc_magic_spell_events.2101.a
+        name = wc_magic_spell_events.0300.a
 
-        custom_tooltip = wc_magic_spell_events.2101.a.tt
+        custom_tooltip = wc_magic_spell_events.0300.a.tt
         scope:activity = {
             set_variable = {
                 name = selected_refreshment
@@ -145,9 +156,9 @@ wc_magic_spell_events.2101 = {
     }
 
     option = {
-        name = wc_magic_spell_events.2101.b
+        name = wc_magic_spell_events.0300.b
 
-        custom_tooltip = wc_magic_spell_events.2101.b.tt
+        custom_tooltip = wc_magic_spell_events.0300.b.tt
         scope:activity = {
             set_variable = {
                 name = selected_refreshment
@@ -169,7 +180,8 @@ wc_magic_spell_events.2101 = {
     }
 }
 
-wc_magic_spell_events.3001 = {
+# Chronomancy Event
+wc_magic_spell_events.0400 = {
     hidden = yes
 
     trigger = {
@@ -243,54 +255,53 @@ wc_magic_spell_events.3001 = {
     }
 }
 
-# Salvation Events by Dione
-
+# Salvation Events
 # You are saved by Salvation
-wc_magic_spell_events.4000 = {
+wc_magic_spell_events.1000 = {
     type = character_event
     theme = light
     override_background = {
 		reference = bp1_bonfire
 	}
-    title = wc_magic_spell_events.4000.title
+    title = wc_magic_spell_events.1000.title
     desc = {
-        desc = wc_magic_spell_events.4000.desc
+        desc = wc_magic_spell_events.1000.desc
         first_valid = { # How did I die?
             triggered_desc = {
                 trigger = {
                     scope:death_reason = flag:death_childbirth
                 }
-                desc = wc_magic_spell_events.4000.desc.death_childbirth
+                desc = wc_magic_spell_events.1000.desc.death_childbirth
             }
             triggered_desc = {
                 trigger = {
                     scope:death_reason = flag:death_duel
                 }
-                desc = wc_magic_spell_events.4000.desc.death_duel
+                desc = wc_magic_spell_events.1000.desc.death_duel
             }
             triggered_desc = {
                 trigger = {
                     scope:death_reason = flag:death_execution
                 }
-                desc = wc_magic_spell_events.4000.desc.death_execution
+                desc = wc_magic_spell_events.1000.desc.death_execution
             }
             triggered_desc = {
                 trigger = {
                     scope:death_reason = flag:death_dungeon
                 }
-                desc = wc_magic_spell_events.4000.desc.death_dungeon
+                desc = wc_magic_spell_events.1000.desc.death_dungeon
             }
             triggered_desc = {
                 trigger = {
                     scope:death_reason = flag:death_battle
                 }
-                desc = wc_magic_spell_events.4000.desc.death_battle
+                desc = wc_magic_spell_events.1000.desc.death_battle
             }
             triggered_desc = {
                 trigger = {
                     scope:death_reason = flag:death_stress
                 }
-                desc = wc_magic_spell_events.4000.desc.death_stress
+                desc = wc_magic_spell_events.1000.desc.death_stress
             }
             triggered_desc = {
                 trigger = {
@@ -304,9 +315,9 @@ wc_magic_spell_events.4000 = {
                         scope:death_reason = flag:death_wounds
                     }
                 }
-                desc = wc_magic_spell_events.4000.desc.death_illness
+                desc = wc_magic_spell_events.1000.desc.death_illness
             }
-            desc = wc_magic_spell_events.4000.desc.death_none
+            desc = wc_magic_spell_events.1000.desc.death_none
         }
         first_valid = { # Acknowledge the caster if they are alive
             triggered_desc = {
@@ -315,29 +326,29 @@ wc_magic_spell_events.4000 = {
                         is_alive = yes 
                     }
                 }
-                desc = wc_magic_spell_events.4000.desc.caster_alive
+                desc = wc_magic_spell_events.1000.desc.caster_alive
             }
-            desc = wc_magic_spell_events.4000.desc.caster_dead
+            desc = wc_magic_spell_events.1000.desc.caster_dead
         }
-        desc = wc_magic_spell_events.4000.desc.middle
+        desc = wc_magic_spell_events.1000.desc.middle
         first_valid = { # Do you believe in the light or not?
             triggered_desc = {
                 trigger = {
                     faith = { has_doctrine = doctrine_light_magic_approved }
                 }
-                desc = wc_magic_spell_events.4000.desc.light_idolised
+                desc = wc_magic_spell_events.1000.desc.light_idolised
             }
             triggered_desc = {
                 trigger = {
                     faith = { has_doctrine = doctrine_light_magic_accepted }
                 }
-                desc = wc_magic_spell_events.4000.desc.light_ok
+                desc = wc_magic_spell_events.1000.desc.light_ok
             }
             triggered_desc = {
                 trigger = {
                     faith = { has_doctrine = doctrine_light_magic_ignored }
                 }
-                desc = wc_magic_spell_events.4000.desc.nonbeliever
+                desc = wc_magic_spell_events.1000.desc.nonbeliever
             }
             triggered_desc = {
                 trigger = {
@@ -346,9 +357,9 @@ wc_magic_spell_events.4000 = {
                         faith = { has_doctrine = doctrine_light_magic_crime }
                     }
                 }
-                desc = wc_magic_spell_events.4000.desc.bad
+                desc = wc_magic_spell_events.1000.desc.bad
             }
-            desc = wc_magic_spell_events.4000.desc.none
+            desc = wc_magic_spell_events.1000.desc.none
         }
     }
 
@@ -369,7 +380,7 @@ wc_magic_spell_events.4000 = {
     }
 
     option = {
-        name = wc_magic_spell_events.4000.a
+        name = wc_magic_spell_events.1000.a
         proc_salvation_effect = yes
 
         if = {
@@ -380,7 +391,7 @@ wc_magic_spell_events.4000 = {
             scope:killer = {
                 root = { save_scope_as = saved_character }
                 trigger_event = {
-                    id = wc_magic_spell_events.4002
+                    id = wc_magic_spell_events.1002
                     days = { 2 5 }
                 }
             }
@@ -393,7 +404,7 @@ wc_magic_spell_events.4000 = {
             scope:salvation_caster = {
                 root = { save_scope_as = saved_character }
                 trigger_event = {
-                    id = wc_magic_spell_events.4001
+                    id = wc_magic_spell_events.1001
                     days = { 2 5 }
                 }
             }
@@ -405,7 +416,7 @@ wc_magic_spell_events.4000 = {
     }
 
     option = {
-        name = wc_magic_spell_events.4000.b
+        name = wc_magic_spell_events.1000.b
         if = {
 			limit = { exists = scope:killer }
 			death = { death_reason = death_salvation_killer killer = scope:killer }
@@ -421,7 +432,7 @@ wc_magic_spell_events.4000 = {
             scope:salvation_caster = {
                 root = { save_scope_as = saved_character }
                 trigger_event = {
-                    id = wc_magic_spell_events.4003
+                    id = wc_magic_spell_events.1003
                     days = { 2 5 }
                 }
             }
@@ -434,9 +445,9 @@ wc_magic_spell_events.4000 = {
 }
 
 # You saved someone with Salvation
-wc_magic_spell_events.4001 = {
-    title = wc_magic_spell_events.4000.title
-    desc = wc_magic_spell_events.4001.desc
+wc_magic_spell_events.1001 = {
+    title = wc_magic_spell_events.1000.title
+    desc = wc_magic_spell_events.1001.desc
     type = character_event
     theme = light
 
@@ -460,14 +471,14 @@ wc_magic_spell_events.4001 = {
     }
 
     option = {
-        name = wc_magic_spell_events.4001.a
+        name = wc_magic_spell_events.1001.a
     }
 }
 
 # Someone you tried to kill was saved by Salvation
-wc_magic_spell_events.4002 = {
-    title = wc_magic_spell_events.4000.title
-    desc = wc_magic_spell_events.4002.desc
+wc_magic_spell_events.1002 = {
+    title = wc_magic_spell_events.1000.title
+    desc = wc_magic_spell_events.1002.desc
     type = character_event
     theme = light
 
@@ -494,14 +505,14 @@ wc_magic_spell_events.4002 = {
     }
 
     option = {
-        name = wc_magic_spell_events.4002.a
+        name = wc_magic_spell_events.1002.a
     }
 }
 
 # You saved someone with Salvation, but they chose to die anyways
-wc_magic_spell_events.4003 = {
-    title = wc_magic_spell_events.4000.title
-    desc = wc_magic_spell_events.4003.desc
+wc_magic_spell_events.1003 = {
+    title = wc_magic_spell_events.1000.title
+    desc = wc_magic_spell_events.1003.desc
     type = character_event
     theme = light
 
@@ -533,14 +544,14 @@ wc_magic_spell_events.4003 = {
     }
 
     option = {
-        name = wc_magic_spell_events.4003.a
+        name = wc_magic_spell_events.1003.a
     }
 }
 
 # You are saved by Salvation, but you were undead
-wc_magic_spell_events.4004 = {
-    title = wc_magic_spell_events.4000.title
-    desc = wc_magic_spell_events.4004.desc
+wc_magic_spell_events.1004 = {
+    title = wc_magic_spell_events.1000.title
+    desc = wc_magic_spell_events.1004.desc
     type = character_event
     theme = light
 
@@ -572,9 +583,9 @@ wc_magic_spell_events.4004 = {
                                 culture = { has_same_culture_heritage = culture:scourge }
                             }
                         }
-                        desc = wc_magic_spell_events.4004.a_sus
+                        desc = wc_magic_spell_events.1004.a_sus
                     }
-                    desc = wc_magic_spell_events.4004.a
+                    desc = wc_magic_spell_events.1004.a
                 }
             }
         }
@@ -596,9 +607,9 @@ wc_magic_spell_events.4004 = {
 }
 
 # You saved someone with Salvation, but they were undead
-wc_magic_spell_events.4005 = {
-    title = wc_magic_spell_events.4000.title
-    desc = wc_magic_spell_events.4005.desc
+wc_magic_spell_events.1005 = {
+    title = wc_magic_spell_events.1000.title
+    desc = wc_magic_spell_events.1005.desc
     type = character_event
     theme = light
 
@@ -623,30 +634,20 @@ wc_magic_spell_events.4005 = {
     }
 
     option = {
-        name = wc_magic_spell_events.4005.a
-    }
-}
-
-wc_magic_spell_events.4010 = {
-    hidden = yes
-    trigger = {
-        has_trait = incapable
-    }
-    immediate = {
-        remove_trait = incapable
+        name = wc_magic_spell_events.1005.a
     }
 }
 
 # You summon your void leader
-wc_magic_spell_events.5000 = {
-    title = wc_magic_spell_events.5000.title
+wc_magic_spell_events.2000 = {
+    title = wc_magic_spell_events.2000.title
     desc = {
         first_valid = {
             triggered_desc = {
                 trigger = { NOT = { scope:void_leader_caster ?= root } }
-                desc = wc_magic_spell_events.5000.desc_caster
+                desc = wc_magic_spell_events.2000.desc_caster
             }
-            desc = wc_magic_spell_events.5000.desc
+            desc = wc_magic_spell_events.2000.desc
         }
     }
     type = character_event
@@ -678,10 +679,10 @@ wc_magic_spell_events.5000 = {
 
     # Yass
     option = {
-        name = wc_magic_spell_events.5000.a
+        name = wc_magic_spell_events.2000.a
         scope:void_leader = { add_character_modifier = wc_void_leader_modifier }
         trigger_event = {
-            id = wc_magic_spell_events.5010 
+            id = wc_magic_spell_events.2100 
             days = wc_spell_summon_void_leader_duration_days_value
         }
         add_courtier = scope:void_leader
@@ -721,7 +722,7 @@ wc_magic_spell_events.5000 = {
 
     # Nooo
     option = {
-        name = wc_magic_spell_events.5000.b
+        name = wc_magic_spell_events.2000.b
 
         save_scope_as = void_recipient
 
@@ -759,9 +760,9 @@ wc_magic_spell_events.5000 = {
 }
 
 # Void leader leaves
-wc_magic_spell_events.5010 = {
-    title = wc_magic_spell_events.5000.title
-    desc = wc_magic_spell_events.5010.desc
+wc_magic_spell_events.2100 = {
+    title = wc_magic_spell_events.2000.title
+    desc = wc_magic_spell_events.2100.desc
     type = character_event
     theme = shadow
     content_source = dlc_GOA
@@ -776,7 +777,7 @@ wc_magic_spell_events.5010 = {
     }
 
     option = {
-        name = wc_magic_spell_events.5010.a
+        name = wc_magic_spell_events.2100.a
 
         scope:void_leader = {
             death = { 
@@ -787,9 +788,9 @@ wc_magic_spell_events.5010 = {
 }
 
 # You become Voidborne, for the caster
-wc_magic_spell_events.5200 = {
-    title = wc_magic_spell_events.5200.title
-    desc = wc_magic_spell_events.5200.desc
+wc_magic_spell_events.2200 = {
+    title = wc_magic_spell_events.2200.title
+    desc = wc_magic_spell_events.2200.desc
     type = character_event
     theme = shadow
     content_source = dlc_GOA
@@ -807,14 +808,14 @@ wc_magic_spell_events.5200 = {
     }
 
     option = {
-        name = wc_magic_spell_events.5201.opt
+        name = wc_magic_spell_events.2201.opt
     }
 
     after = {
         var:voidborne_person = {
             set_variable = { name = voidborne_tormentor value = root }
             trigger_event = {
-                id = wc_magic_spell_events.5201
+                id = wc_magic_spell_events.2201
                 days = 2
             }
         }
@@ -822,9 +823,9 @@ wc_magic_spell_events.5200 = {
 }
 
 # You are now in the twisting nether because of the voidborne
-wc_magic_spell_events.5201 = {
-    title = wc_magic_spell_events.5200.title
-    desc = wc_magic_spell_events.5201.desc
+wc_magic_spell_events.2201 = {
+    title = wc_magic_spell_events.2200.title
+    desc = wc_magic_spell_events.2201.desc
     type = character_event
     theme = shadow
     content_source = dlc_GOA
@@ -839,21 +840,21 @@ wc_magic_spell_events.5201 = {
     }
 
     option = {
-        name = wc_magic_spell_events.5201.opt
+        name = wc_magic_spell_events.2201.opt
     }
 
     after = {
         trigger_event = {
-            id = wc_magic_spell_events.5202
+            id = wc_magic_spell_events.2202
             days = { 28 30 }
         }
     }
 }
 
 # You get to make a choice to get a strong hook or the voidborne or make them your rival
-wc_magic_spell_events.5202 = {
-    title = wc_magic_spell_events.5202.title
-    desc = wc_magic_spell_events.5202.desc
+wc_magic_spell_events.2202 = {
+    title = wc_magic_spell_events.2202.title
+    desc = wc_magic_spell_events.2202.desc
     type = character_event
     theme = shadow
     content_source = dlc_GOA
@@ -863,7 +864,7 @@ wc_magic_spell_events.5202 = {
     }
 
     on_trigger_fail = {
-        var:voidborne_tormentor = { trigger_event = wc_magic_spell_events.5203 }
+        var:voidborne_tormentor = { trigger_event = wc_magic_spell_events.2203 }
     }
 
     left_portrait = {
@@ -877,25 +878,25 @@ wc_magic_spell_events.5202 = {
     }
 
     option = { # Strong Hook
-        name = wc_magic_spell_events.5202.a
+        name = wc_magic_spell_events.2202.a
     }
 
     option = { # Rivalry
-        name = wc_magic_spell_events.5202.b
+        name = wc_magic_spell_events.2202.b
     }
 
     after = {
         trigger_event = {
-            id = wc_magic_spell_events.5203
+            id = wc_magic_spell_events.2203
             days = { 90 95 }
         }
     }
 }
 
 # You are either let out of the twisting nether or not, naturally or tormentor died
-wc_magic_spell_events.5203 = {
-    title = wc_magic_spell_events.5203.title
-    desc = wc_magic_spell_events.5203.desc
+wc_magic_spell_events.2203 = {
+    title = wc_magic_spell_events.2203.title
+    desc = wc_magic_spell_events.2203.desc
     type = character_event
     theme = shadow
     content_source = dlc_GOA
@@ -911,7 +912,7 @@ wc_magic_spell_events.5203 = {
     }
 
     on_trigger_fail = {
-        var:voidborne_tormentor = { trigger_event = wc_magic_spell_events.5204 }
+        var:voidborne_tormentor = { trigger_event = wc_magic_spell_events.2204 }
     }
 
     immediate = {
@@ -931,16 +932,16 @@ wc_magic_spell_events.5203 = {
 
     # Still stuck
     option = {
-        name = wc_magic_spell_events.5203.a
+        name = wc_magic_spell_events.2203.a
         trigger_event = {
-            id = wc_magic_spell_events.5203
+            id = wc_magic_spell_events.2203
             days = { 90 95 }
         }
     }
 
     # I'm free!
     option = {
-        name = wc_magic_spell_events.5203.b
+        name = wc_magic_spell_events.2203.b
         trigger = { has_character_flag = returning_from_nether }
         remove_trait = in_twisting_nether 
         if = {
@@ -949,7 +950,7 @@ wc_magic_spell_events.5203 = {
             }
             var:voidborne_tormentor = {
                 trigger_event = {
-                    id = wc_magic_spell_events.5204
+                    id = wc_magic_spell_events.2204
                 }
             }
         }
@@ -958,9 +959,9 @@ wc_magic_spell_events.5203 = {
 }
 
 # Your prisoner has been let free or died
-wc_magic_spell_events.5204 = {
-    title = wc_magic_spell_events.5204.title
-    desc = wc_magic_spell_events.5204.desc
+wc_magic_spell_events.2204 = {
+    title = wc_magic_spell_events.2204.title
+    desc = wc_magic_spell_events.2204.desc
     type = character_event
     theme = shadow
     content_source = dlc_GOA
@@ -979,6 +980,16 @@ wc_magic_spell_events.5204 = {
     }
 
     option = {
-        name = wc_magic_spell_events.5204.opt
+        name = wc_magic_spell_events.2204.opt
+    }
+}
+
+wc_magic_spell_events.9000 = {
+    hidden = yes
+    trigger = {
+        has_trait = incapable
+    }
+    immediate = {
+        remove_trait = incapable
     }
 }
