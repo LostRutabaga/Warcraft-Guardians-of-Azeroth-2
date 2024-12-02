@@ -72,6 +72,7 @@
 			text = cannot_take_overt_hostile_actions_against_diarch.tt
 			NOT = { scope:recipient ?= scope:actor.diarch }
 		}
+		scope:actor = { NOT = { is_isolated_from_trigger = { target = scope:recipient } } }	# Warcraft
 	}
 
 	can_send = {
@@ -1191,6 +1192,7 @@ move_to_dungeon_interaction = {
 				NOT = { has_character_flag = is_being_tortured }
 			}
 		}
+		scope:actor = { NOT = { is_isolated_from_trigger = { target = scope:recipient } } }	# Warcraft
 	}
 
 	on_accept = {
@@ -1323,6 +1325,7 @@ move_to_house_arrest_interaction = {
 				NOT = { has_character_flag = is_being_tortured }
 			}
 		}
+		scope:actor = { NOT = { is_isolated_from_trigger = { target = scope:recipient } } }	# Warcraft
 	}
 
 	on_accept = {
@@ -1426,6 +1429,7 @@ ransom_interaction = {
 			always = no
 		}
 
+		scope:actor = { NOT = { is_isolated_from_trigger = { target = scope:recipient } } }	# Warcraft
 		scope:recipient = { is_busy_in_events_localised = yes } #Payer
 		scope:secondary_recipient = { is_busy_in_events_localised = yes } #Prisoner
 		scope:secondary_recipient = {
@@ -2070,6 +2074,7 @@ pay_ransom_interaction = {
 	}
 
 	is_valid_showing_failures_only = {
+		scope:actor = { NOT = { is_isolated_from_trigger = { target = scope:recipient } } }	# Warcraft
 		scope:recipient = { is_busy_in_events_localised = yes } #Imprisoner
 		scope:secondary_recipient = { is_busy_in_events_localised = yes } #Prisoner
 		scope:recipient = {
@@ -3048,6 +3053,7 @@ ransom_me_interaction = {
 	}
 
 	is_valid_showing_failures_only = {
+		scope:actor = { NOT = { is_isolated_from_trigger = { target = scope:recipient } } }	# Warcraft
 		scope:recipient = { is_busy_in_events_localised = yes } #Imprisoner
 		scope:actor = { is_busy_in_events_localised = yes } #Prisoner
 		scope:recipient = {
@@ -3673,6 +3679,7 @@ release_from_prison_interaction = {
 	}
 
 	is_valid_showing_failures_only = {
+		scope:actor = { NOT = { is_isolated_from_trigger = { target = scope:recipient } } }	# Warcraft
 		scope:recipient = { is_busy_in_events_localised = yes } #Prisoner
 		scope:recipient = {
 			custom_description = {
@@ -5638,6 +5645,7 @@ execute_prisoner_interaction = {
 	}
 
 	is_valid_showing_failures_only = {
+		scope:actor = { NOT = { is_isolated_from_trigger = { target = scope:recipient } } }	# Warcraft
 		scope:recipient = { is_busy_in_events_localised = yes } #Prisoner
 		scope:recipient = { NOT = { has_strong_hook = scope:actor } }
 		scope:recipient = {
@@ -6223,6 +6231,7 @@ torture_interaction = {
 				}
 			}
 		}
+		scope:actor = { NOT = { is_isolated_from_trigger = { target = scope:recipient } } }	# Warcraft
 		scope:recipient = {
 			custom_description = {
 				text = "currently_being_tortured"
@@ -6286,6 +6295,17 @@ torture_interaction = {
 						value = flag:poetry
 					}
 				}
+				# Warcraft
+				14 = {
+					trigger = {
+						scope:actor = { has_perk = death_magic_tree_1_perk_6 }
+					}
+					save_scope_value_as = {
+						name = torture_method
+						value = flag:magic
+					}
+				}
+				# End Warcraft
 			}
 
 			#They have a secret I want to know about
@@ -6430,6 +6450,7 @@ castrate_interaction = {
 	}
 
 	is_valid_showing_failures_only = {
+		scope:actor = { NOT = { is_isolated_from_trigger = { target = scope:recipient } } }	# Warcraft
 		scope:recipient = {
 			custom_description = {
 				text = "currently_being_tortured"
@@ -6591,6 +6612,7 @@ blind_interaction = {
 	}
 
 	is_valid_showing_failures_only = {
+		scope:actor = { NOT = { is_isolated_from_trigger = { target = scope:recipient } } }	# Warcraft
 		scope:recipient = {
 			custom_description = {
 				text = "currently_being_tortured"

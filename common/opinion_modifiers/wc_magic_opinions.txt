@@ -60,6 +60,13 @@ wc_saved_me_salvation = {
 	opinion = 50
 }
 
+wc_plagued_me = {
+	opinion = -20
+	decaying = yes
+	years = 5
+	stacking = yes
+}
+
 wc_void_sickness_me = {
 	opinion = -20
 	decaying = yes
