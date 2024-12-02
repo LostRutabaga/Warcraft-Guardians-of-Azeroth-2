@@ -480,7 +480,7 @@ neema={
 		}
 		give_nickname = nick_darkness_incarnate
 	}
-	583.1.1 = {
+	577.6.6 = {
 		effect = { # Shadow Council relations
 			add_hook_no_toast = {
 				target = character:10016 # Nagaz
