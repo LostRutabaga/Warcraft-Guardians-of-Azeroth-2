@@ -77,6 +77,8 @@
  wc_horde_invasion.1500.desc:0 "WIP"
  wc_horde_invasion.1500.a:0 "WIP"
  wc_horde_invasion.1500.a.flavor:0 "AAAAAAAAAAH"
+ wc_horde_invasion.1500.a_alternative:0 "AAAAH"
+ wc_horde_invasion.1500.a_alternative.flavor:0 "RAAAAAAAAAAAAAAH"
  wc_horde_invasion.1500.b:0 "WIP"
  wc_horde_invasion.1500.b.flavor:0 "AAAAAAAAAAAAAAAAAAAAH"
 
@@ -84,6 +86,8 @@
  wc_horde_invasion.1501.desc:0 "WIP"
  wc_horde_invasion.1501.a:0 "WIP"
  wc_horde_invasion.1501.a.flavor:0 "AAAAAAAAAAH"
+ wc_horde_invasion.1501.a_alternative:0 "AAAAH"
+ wc_horde_invasion.1501.a_alternative.flavor:0 "RAAAAAAAAAAAAAAH"
  wc_horde_invasion.1501.b:0 "WIP"
  wc_horde_invasion.1501.b.flavor:0 "AAAAAAAAAAAAAAAAAAAAH"
 

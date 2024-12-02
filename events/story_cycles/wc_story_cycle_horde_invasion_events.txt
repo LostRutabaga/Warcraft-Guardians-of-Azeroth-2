@@ -859,14 +859,43 @@ wc_horde_invasion.1500 = {
 	option = { # We are going to destroy the world (canon)
 		name = wc_horde_invasion.1500.a
 		flavor = wc_horde_invasion.1500.a.flavor
+		trigger = { scope:guldan ?= { is_alive = yes } }
 
-		add_dread = medium_dread_gain
-		add_prestige = medium_prestige_gain
+		# Ruthless Warchief
+		add_dread = minor_dread_gain
 
+		# Full of loyalty to Gul'dan
+		add_opinion = { modifier = loyal_servant target = scope:guldan }
+		scope:guldan = {
+			add_hook_no_toast = {
+				target = root
+				type = loyalty_hook
+			}
+		}
+
+		# Leader of the conquests
 		add_character_modifier = {
 			modifier = horde_conqueror_modifier
 			years = 5
 		}
+
+		ai_chance = {
+			base = 200
+		}
+	}
+
+	option = { # Fallback if Gul'dan is dead (not canon)
+		name = wc_horde_invasion.1500.a_alternative
+		flavor = wc_horde_invasion.1500.a_alternative.flavor
+		trigger = {
+			OR = {
+				NOT = { exists = scope:guldan }
+				scope:guldan = { is_alive = no }
+			}
+		}
+
+		add_dread = medium_dread_gain
+		add_prestige = medium_prestige_gain
 
 		ai_chance = {
 			base = 200
@@ -926,9 +955,75 @@ wc_horde_invasion.1501 = {
 	option = { # We are going to destroy the world (canon)
 		name = wc_horde_invasion.1501.a
 		flavor = wc_horde_invasion.1501.a.flavor
+		trigger = {
+			any_hooked_character = {
+                count > 0
+                root = {
+                    has_hook_of_type = {
+                        target = this
+                        type = loyalty_hook
+                    }
+                }
+			}
+		}
 
-		add_dread = minor_dread_gain
-		add_piety = medium_piety_gain
+		# Guide of the Horde
+		add_piety = minor_piety_gain
+
+		every_hooked_character = { # Has allies
+			limit = {
+				root = {
+					has_hook_of_type = {
+						target = this
+						type = loyalty_hook
+					}
+				}
+			}
+			root = {
+				add_opinion = {
+					modifier = loyalty_opinion
+					target = this
+				}
+			}
+		}
+
+		if = {
+			limit = { NOT = { title:e_horde.holder = { has_religion = religion:doombringer } } }
+			stress_impact = { # Don't fully control the Horde anymore
+				base = minor_stress_impact_gain
+			}
+		}
+
+		ai_chance = {
+			base = 200
+		}
+	}
+
+	option = { # Fallback if no friends (not canon) :(
+		name = wc_horde_invasion.1501.a_alternative
+		flavor = wc_horde_invasion.1501.a_alternative.flavor
+		trigger = {
+			any_hooked_character = {
+                count <= 0
+                root = {
+                    has_hook_of_type = {
+                        target = this
+                        type = loyalty_hook
+                    }
+                }
+			}
+		}
+
+		add_piety = minor_piety_gain
+		stress_impact = { # Fuck I'm in trouble
+			base = medium_stress_impact_gain	
+		}
+		if = {
+			limit = { NOT = { title:e_horde.holder = { has_religion = religion:doombringer } } }
+			stress_impact = { # Don't fully control the Horde anymore
+				base = minor_stress_impact_gain
+			}
+		}
 
 		ai_chance = {
 			base = 200

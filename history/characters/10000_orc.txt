@@ -31,7 +31,6 @@
 			# type = blackhand
 		# }
 		effect = {
-			add_opinion = { modifier = loyal_servant target = character:10015 }
 			# join_society_shadow_council_effect = yes
 			fire_councillor = cp:councillor_spymaster
 			assign_councillor_type = {
@@ -481,22 +480,57 @@ neema={
 		}
 		give_nickname = nick_darkness_incarnate
 	}
-	583.1.1={
-		effect={
+	583.1.1 = {
+		effect = { # Shadow Council relations
 			add_hook_no_toast = {
-				target = character:10000
+				target = character:10016 # Nagaz
 				type = loyalty_hook
 			}
-			# join_society_shadow_council_effect = yes
-			# set_society_grandmaster = yes
-			# add_society_currency_massive_effect = yes
+			add_hook_no_toast = {
+				target = character:10017 # Teron'gor
+				type = loyalty_hook
+			}
+			add_hook_no_toast = {
+				target = character:10018 # Fel'dan
+				type = loyalty_hook
+			}
+			add_hook_no_toast = {
+				target = character:10022 # Ragnok
+				type = loyalty_hook
+			}
+			add_hook_no_toast = {
+				target = character:10023 # Drak'thul
+				type = loyalty_hook
+			}
+			add_hook_no_toast = {
+				target = character:urdan # Urdan
+				type = loyalty_hook
+			}
+			add_hook_no_toast = {
+				target = character:ilkrud_magthrull # Ilkrud
+				type = loyalty_hook
+			}
+			add_hook_no_toast = {
+				target = character:ulathek # Ulathek
+				type = loyalty_hook
+			}
+			add_hook_no_toast = {
+				target = character:gaz_soulripper # Gaz
+				type = loyalty_hook
+			}
+			add_hook_no_toast = {
+				target = character:ras_splinterspine # Ras
+				type = loyalty_hook
+			}
+			add_hook_no_toast = {
+				target = character:rage_winterchill # RAGE
+				type = loyalty_hook
+			}
 		}
-		give_council_position = councillor_chancellor
+		give_council_position = councillor_court_chaplain
 	}
-	587.6.1={
-		culture = stormreaver
-	} 
-	590.2.19={ death=yes }
+	587.6.1 = { culture = stormreaver } 
+	590.2.19 = { death=yes }
 }
 
 #dynasty=none
