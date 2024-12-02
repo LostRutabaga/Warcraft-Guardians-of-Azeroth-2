@@ -937,11 +937,14 @@ wc_horde_invasion.1500 = {
 			}
 		}
 
-		random = {
-			chance = 10
-			add_trait = disloyal
+		if = {
+			limit = { NOT = { has_trait = disloyal } }
+			random = {
+				chance = 10
+				add_trait = disloyal
+			}
 		}
-
+		
 		ai_chance = {
 			base = 0
 		}
@@ -958,54 +961,45 @@ wc_horde_invasion.1501 = {
 
 	left_portrait = {
 		character = root
-		animation = celebrate_axe
+		animation = scheme
 	}
 
-	option = { # We are going to destroy the world (canon)
-		name = wc_horde_invasion.1501.a
-		flavor = wc_horde_invasion.1501.a.flavor
-		trigger = {
-			any_hooked_character = {
-				root = {
-					has_hook_of_type = {
-						target = this
-						type = loyalty_hook
-					}
-				}
-			}
-		}
+	#option = { # We are going to destroy the world (canon)
+	#	name = wc_horde_invasion.1501.a
+	#	flavor = wc_horde_invasion.1501.a.flavor
+	#	trigger = { any_hooked_character = { root = { has_hook = this } } }
 
 		# Guide of the Horde
-		add_piety = minor_piety_gain
-
-		every_hooked_character = { # Has allies
-			limit = {
-				root = {
-					has_hook_of_type = {
-						target = this
-						type = loyalty_hook
-					}
-				}
-			}
-			root = {
-				add_opinion = {
-					modifier = loyalty_opinion
-					target = this
-				}
-			}
-		}
-
-		if = {
-			limit = { NOT = { title:e_horde.holder = { has_religion = religion:doombringer } } }
-			stress_impact = { # Don't fully control the Horde anymore
-				base = minor_stress_impact_gain
-			}
-		}
-
-		ai_chance = {
-			base = 200
-		}
-	}
+	#	add_piety = minor_piety_gain
+#
+#		every_hooked_character = { # Has allies
+#			limit = {
+#				root = {
+#					has_hook_of_type = {
+#						target = this
+#						type = loyalty_hook
+#					}
+#				}
+#			}
+#			root = {
+#				add_opinion = {
+#					modifier = loyalty_opinion
+#					target = this
+#				}
+#			}
+#		}
+#
+#		if = {
+#			limit = { NOT = { title:e_horde.holder = { has_religion = religion:doombringer } } }
+#			stress_impact = { # Don't fully control the Horde anymore
+#				base = minor_stress_impact_gain
+#			}
+#		}
+#
+#		ai_chance = {
+#			base = 200
+#		}
+#	}
 
 	#option = { # Fallback if no friends (not canon) :(
 	#	name = wc_horde_invasion.1501.a_alternative
@@ -1042,7 +1036,10 @@ wc_horde_invasion.1501 = {
 		flavor = wc_horde_invasion.1501.b.flavor
 
 		trigger = {
-			scope:blackhand ?= { is_alive = yes }
+			scope:blackhand ?= {
+				has_title = title:e_horde
+				is_alive = yes
+			}
 			can_start_scheme = {
 				type = murder
 				target_character = scope:blackhand
@@ -1064,9 +1061,12 @@ wc_horde_invasion.1501 = {
 			}
 		}
 
-		random = {
-			chance = 10
-			add_trait = disloyal
+		if = {
+			limit = { NOT = { has_trait = disloyal } }
+			random = {
+				chance = 10
+				add_trait = disloyal
+			}
 		}
 
 		ai_chance = {
