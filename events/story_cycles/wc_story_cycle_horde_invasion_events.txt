@@ -544,7 +544,6 @@ wc_horde_invasion.1004 = {
 			limit = { root = scope:blackhand }
 			trigger_event = wc_horde_invasion.1500
 		}
-
 		# Trigger Gul'dan
 		if = {
 			limit = { scope:guldan ?= { is_alive = yes } }
