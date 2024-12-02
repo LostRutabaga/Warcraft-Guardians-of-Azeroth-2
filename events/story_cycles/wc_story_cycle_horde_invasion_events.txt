@@ -767,7 +767,7 @@ wc_horde_invasion.1007 = {
 			type = murder
 			target_character = scope:king_of_stormwind
 		}
-		custom_tooltip = try_to_assassine_the_king_effect_tt
+		custom_tooltip = more_chance_to_success_scheme_effect_tt
 
 		every_scheme = {
 			limit = {
@@ -862,7 +862,15 @@ wc_horde_invasion.1500 = {
 
 		add_dread = medium_dread_gain
 		add_prestige = medium_prestige_gain
-		spawn_base_troops_new_warchief_effect = yes
+
+		add_character_modifier = {
+			modifier = horde_conqueror_modifier
+			years = 5
+		}
+
+		ai_chance = {
+			base = 200
+		}
 	}
 
 	option = { # Gul'dan has outlived his usefulness (not canon)
@@ -875,10 +883,29 @@ wc_horde_invasion.1500 = {
 				target_character = scope:guldan
 			}
 		}
-
 		start_scheme = {
 			type = murder
 			target_character = scope:guldan
+		}
+		custom_tooltip = more_chance_to_success_scheme_effect_tt
+
+		every_scheme = {
+			limit = {
+				scheme_type = murder
+				scheme_target_character = scope:guldan
+			}
+			add_scheme_modifier = {
+				type = extra_success_chance_modifier
+			}
+		}
+
+		random = {
+			chance = 10
+			add_trait = disloyal
+		}
+
+		ai_chance = {
+			base = 0
 		}
 	}
 }
@@ -898,10 +925,50 @@ wc_horde_invasion.1501 = {
 
 	option = { # We are going to destroy the world (canon)
 		name = wc_horde_invasion.1501.a
+		flavor = wc_horde_invasion.1501.a.flavor
+
+		add_dread = minor_dread_gain
+		add_piety = medium_piety_gain
+
+		ai_chance = {
+			base = 200
+		}
 	}
 
 	option = { # Blackhand will betray me (not canon)
 		name = wc_horde_invasion.1501.b
+		flavor = wc_horde_invasion.1501.b.flavor
+
+		trigger = {
+			can_start_scheme = {
+				type = murder
+				target_character = scope:blackhand
+			}
+		}
+		start_scheme = {
+			type = murder
+			target_character = scope:blackhand
+		}
+		custom_tooltip = more_chance_to_success_scheme_effect_tt
+
+		every_scheme = {
+			limit = {
+				scheme_type = murder
+				scheme_target_character = scope:blackhand
+			}
+			add_scheme_modifier = {
+				type = extra_success_chance_modifier
+			}
+		}
+
+		random = {
+			chance = 10
+			add_trait = disloyal
+		}
+
+		ai_chance = {
+			base = 0
+		}
 	}
 }
 
