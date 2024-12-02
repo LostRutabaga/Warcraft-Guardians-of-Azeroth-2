@@ -762,6 +762,7 @@ wc_horde_invasion.1007 = {
 		name = wc_horde_invasion.1007.c
 		trigger = {
 			NOT = { has_title = title:k_stormwind }
+			scope:king_of_stormwind ?= { is_alive = yes }
 			can_start_scheme = {
 				type = murder
 				target_character = scope:king_of_stormwind
@@ -914,6 +915,7 @@ wc_horde_invasion.1500 = {
 		flavor = wc_horde_invasion.1500.b.flavor
 
 		trigger = {
+			scope:guldan ?= { is_alive = yes }
 			can_start_scheme = {
 				type = murder
 				target_character = scope:guldan
@@ -1011,7 +1013,7 @@ wc_horde_invasion.1501 = {
 		flavor = wc_horde_invasion.1501.a_alternative.flavor
 		trigger = {
 			any_hooked_character = {
-                count <= 0
+                count > 0
                 root = {
                     has_hook_of_type = {
                         target = this
@@ -1042,6 +1044,7 @@ wc_horde_invasion.1501 = {
 		flavor = wc_horde_invasion.1501.b.flavor
 
 		trigger = {
+			scope:blackhand ?= { is_alive = yes }
 			can_start_scheme = {
 				type = murder
 				target_character = scope:blackhand
