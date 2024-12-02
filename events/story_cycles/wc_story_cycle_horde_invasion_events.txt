@@ -965,13 +965,11 @@ wc_horde_invasion.1501 = {
 		name = wc_horde_invasion.1501.a
 		flavor = wc_horde_invasion.1501.a.flavor
 		trigger = {
-			NOT = {
-				any_hooked_character = {
-					root = {
-						has_hook_of_type = {
-							target = this
-							type = loyalty_hook
-						}
+			any_hooked_character = {
+				root = {
+					has_hook_of_type = {
+						target = this
+						type = loyalty_hook
 					}
 				}
 			}
@@ -1009,35 +1007,35 @@ wc_horde_invasion.1501 = {
 		}
 	}
 
-	option = { # Fallback if no friends (not canon) :(
-		name = wc_horde_invasion.1501.a_alternative
-		flavor = wc_horde_invasion.1501.a_alternative.flavor
-		trigger = {
-			any_hooked_character = {
-				root = {
-					has_hook_of_type = {
-						target = this
-						type = loyalty_hook
-					}
-				}
-			}
-		}
+	#option = { # Fallback if no friends (not canon) :(
+	#	name = wc_horde_invasion.1501.a_alternative
+	#	flavor = wc_horde_invasion.1501.a_alternative.flavor
+	#	trigger = {
+	#		any_hooked_character = {
+	#			root = {
+	#				has_hook_of_type = {
+	#					target = this
+	#					type = loyalty_hook
+	#				}
+	#			}
+	#		}
+	#	}
 
-		add_piety = minor_piety_gain
-		stress_impact = { # Fuck I'm in trouble
-			base = medium_stress_impact_gain	
-		}
-		if = {
-			limit = { NOT = { title:e_horde.holder = { has_religion = religion:doombringer } } }
-			stress_impact = { # Don't fully control the Horde anymore
-				base = minor_stress_impact_gain
-			}
-		}
+	#	add_piety = minor_piety_gain
+	#	stress_impact = { # Fuck I'm in trouble
+	#		base = medium_stress_impact_gain	
+	#	}
+	#	if = {
+	#		limit = { NOT = { title:e_horde.holder = { has_religion = religion:doombringer } } }
+	#		stress_impact = { # Don't fully control the Horde anymore
+	#			base = minor_stress_impact_gain
+	#		}
+	#	}
 
-		ai_chance = {
-			base = 200
-		}
-	}
+	#	ai_chance = {
+	#		base = 200
+	#	}
+	#}
 
 	option = { # Blackhand will betray me (not canon)
 		name = wc_horde_invasion.1501.b

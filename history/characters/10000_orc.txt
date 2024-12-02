@@ -527,7 +527,7 @@ neema={
 				type = loyalty_hook
 			}
 		}
-		give_council_position = councillor_court_chaplain
+		#give_council_position = councillor_court_chaplain
 	}
 	587.6.1 = { culture = stormreaver } 
 	590.2.19 = { death=yes }
