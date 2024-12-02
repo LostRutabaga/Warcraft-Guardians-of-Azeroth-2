@@ -542,9 +542,17 @@ wc_horde_invasion.1004 = {
 		# Trigger Blackhand introduction, if the Warchief is Blackhand
 		if = {
 			limit = { root = scope:blackhand }
-			trigger_event = {
-				id = wc_horde_invasion.1500
-				days = 1
+			trigger_event = wc_horde_invasion.1500
+		}
+
+		# Trigger Gul'dan
+		if = {
+			limit = { scope:guldan ?= { is_alive = yes } }
+			scope:guldan = {
+				trigger_event = {
+					id = wc_horde_invasion.1501
+					days = 7
+				}
 			}
 		}
 
