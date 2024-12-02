@@ -63,7 +63,6 @@
  wc_horde_invasion.1007.b:0 "Prepare the defense!"
  wc_horde_invasion.1007.c:0 "Maybe they'll spare me if I bring them [king_of_stormwind.GetFirstNamePossessive] head."
  wc_horde_invasion.king.1007.a:0 "Our Brothers of the Horse will lead the charge."
- more_chance_to_success_scheme_effect_tt: "Your scheme start with an extra chance of success"
  wc_horde_invasion.king.1007.b:0 "Let them come."
  horsemen_brotherhood_of_the_horse_effect_tt:0 "300 armored horsemen will immediately be raised and join your ranks."
  pikemen_brotherhood_of_the_horse_effect_tt:0 "You will arm 800 men of the Brotherhood of the Horse with polearms."
@@ -164,11 +163,6 @@
  # TODO: Moonbrook/Goldshire
  # TODO: Stormwind City - Should end the war in all case probably ?
 
- horde_bloodshed.t:0 "Rampage on [bloodshed_location.GetName] Complete"
- horde_bloodshed.d:0 "Enslaved [GetPlayer.MakeScope.Var('victims_enslaved').GetValue] people, and killed [GetPlayer.MakeScope.Var('victims_killed').GetValue]."
- horde_bloodshed.residents:0 "Residents of [bloodshed_location.GetName] will die under the wrath of the Horde, but some will be captured or manage to escape."
- activity.war_dangerous:0 "It's too dangerous to travel here right now."
-
  #################################
  # Glossary
  #################################
@@ -181,3 +175,12 @@
  EYE_RITUAL_GLOSS:0 "When a new chieftain rises, every Bleeding Hollow lord must undergo the dark Eye Ritual. This rite demands they sacrifice one of their eyes in exchange for a prophetic vision of their own death. It is no trivial act: those who dare to perform the ritual emerge forever changed, freed from fear but haunted by the certainty of their fate."
  CHOGALL_FORMATION_GLOSS:0 "The arrogance and thirst for power of Cho and Gall led to their exile from Highmaul, their birthplace. When Gul’dan created the Shadow Council, he took Cho’gall under his wing, teaching him the demonic arts. Thus, Cho’gall became one of the first ogre mages bound to the Horde and a devoted servant of the Shadow Council."
  PALE_ORCS_GLOSS:0 "The pale orcs, Void-corrupted outcasts beneath Nagrand, worshipped the Void and its prophecy of the Hour of Twilight — when darkness consumes the cosmos. Once savage and uncontrollable, they embraced Cho’gall as the herald of their dark gods when he came to annihilate them. He returned to the Horde with these fanatics fully under his control."
+
+ #################################
+ # Effects
+ #################################
+ more_chance_to_success_scheme_effect_tt: "Your scheme start with an extra chance of success"
+ horde_bloodshed.t:0 "Rampage on [bloodshed_location.GetName] Complete"
+ horde_bloodshed.d:0 "Enslaved [GetPlayer.MakeScope.Var('victims_enslaved').GetValue] people, and killed [GetPlayer.MakeScope.Var('victims_killed').GetValue]."
+ horde_bloodshed.residents:0 "Residents of [bloodshed_location.GetName] will die under the wrath of the Horde, but some will be captured or manage to escape."
+ activity.war_dangerous:0 "It's too dangerous to travel here right now."
