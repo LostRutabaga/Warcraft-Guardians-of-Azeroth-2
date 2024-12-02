@@ -432,25 +432,6 @@ great_invader_target_evaluation_and_declaration_effect = {
 			target = scope:next_invasion_target
 			target_title = scope:next_invasion_title_target
 		}
-		if = {
-			limit = {
-				has_title = title:e_horde
-				scope:next_invasion_title_target = title:k_ironforge
-				title:k_wetlands = {
-					any_de_jure_county_holder = {
-						OR = {
-							this = scope:next_invasion_target
-							this.top_liege = scope:next_invasion_target
-						}
-					}
-				}
-			}
-			start_war = {
-				cb = mongol_invasion_war
-				target = scope:next_invasion_target
-				target_title = title:k_wetlands
-			}
-		}
 	}
 }
 
