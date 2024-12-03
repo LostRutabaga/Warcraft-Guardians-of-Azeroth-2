@@ -63,6 +63,6 @@ good_magic_fel_disturbance_trigger = {
 }
 
 elemental_magic_fel_disturbance_trigger = {
-	religion = rf_elemental
+	religion = { is_in_family = rf_elemental }
 	# TODO: Replace this with "magic" trigger
 }
