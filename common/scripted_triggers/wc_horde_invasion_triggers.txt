@@ -41,6 +41,28 @@ feel_the_magic_in_world_trigger = {
 		has_trait = magic_good_2
 		has_trait = magic_good_3
 		has_trait = creature_blue_dragon
-		has_trait = being_order
 	}
+}
+
+evil_magic_fel_disturbance_trigger = {
+	OR = {
+		has_trait = being_demon
+		has_trait = being_undead
+		has_trait = being_void
+		# TODO: Should add "magic" triggers here, with corresponding magic
+	}
+}
+
+good_magic_fel_disturbance_trigger = {
+	OR = {
+		has_trait = being_order
+		has_trait = being_life
+		has_trait = being_light
+		# TODO: Should add "magic" triggers here, with corresponding magic
+	}
+}
+
+elemental_magic_fel_disturbance_trigger = {
+	religion = rf_elemental
+	# TODO: Replace this with "magic" trigger
 }

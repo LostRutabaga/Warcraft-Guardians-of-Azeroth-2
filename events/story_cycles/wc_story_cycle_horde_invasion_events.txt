@@ -97,7 +97,9 @@ wc_horde_invasion.1000 = {
 				desc = wc_horde_invasion.orcish.1000.title
 			}
 			triggered_desc = {
-				trigger = { feel_the_magic_in_world_trigger = yes }
+				trigger = {
+					feel_the_magic_in_world_trigger = yes
+				}
 				desc = wc_horde_invasion.magic.1000.title
 			}
 			desc = wc_horde_invasion.generic_close.1000.title
@@ -113,9 +115,30 @@ wc_horde_invasion.1000 = {
 				trigger = { is_from_draenor_trigger = yes }
 				desc = wc_horde_invasion.draenor.1000.desc
 			}
-			triggered_desc = { # Creature attuned to magic feeling
+			triggered_desc = { # Creature attuned to magic feeling - Evil Magic
+				trigger = {
+					feel_the_magic_in_world_trigger = yes
+					evil_magic_fel_disturbance_trigger = yes
+				}
+				desc = wc_horde_invasion.evil_magic.1000.desc
+			}
+			triggered_desc = { # Creature attuned to magic feeling - Good Magic
+				trigger = {
+					feel_the_magic_in_world_trigger = yes
+					good_magic_fel_disturbance_trigger = yes
+				}
+				desc = wc_horde_invasion.good_magic.1000.desc
+			}
+			triggered_desc = { # Creature attuned to magic feeling - Elemental Magic
+				trigger = {
+					feel_the_magic_in_world_trigger = yes
+					elemental_magic_fel_disturbance_trigger = yes
+				}
+				desc = wc_horde_invasion.elemental_magic.1000.desc
+			}
+			triggered_desc = { # Creature attuned to magic feeling - Fallback Magic
 				trigger = { feel_the_magic_in_world_trigger = yes }
-				desc = wc_horde_invasion.magic.1000.desc
+				desc = wc_horde_invasion.fallback_magic.1000.desc
 			}
 			desc = wc_horde_invasion.generic_close.1000.desc # Basic fallback
 		}
@@ -982,7 +1005,8 @@ wc_horde_invasion.1501 = {
 		# Guide of the Horde
 		add_piety = minor_piety_gain
 
-		every_hooked_character = { # Has allies
+		# Has allies
+		every_hooked_character = {
 			limit = {
 				root = {
 					has_hook_of_type = {
