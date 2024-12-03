@@ -27,6 +27,7 @@
  wc_horde_invasion.1000.stormwind_king:0 "We had to investigate."
  wc_horde_invasion.1000.generic_close:0 "Looks like there's going to be a storm soon."
 
+ # Horde Fatigue
  wc_horde_invasion.1001.title:0 "Horde Fatigue"
  wc_horde_invasion.1001.desc:0 "It is time to stop this carnage. The Horde has conquered enough land to start a new life in Azeroth. Many orcs are returning to their families, burying their axes in the ground. They have vowed to forget the horrors of war that they had to go through. The warlords of the Horde still pose a threat to some parts of Azeroth, but the bloodiest wars are behind us since the clans no longer see the point in keeping the Horde united."
  wc_horde_invasion.1001.a:0 "The orcs need their warchief!"
@@ -76,7 +77,6 @@
  #################################
  # Introduction Events
  #################################
-
  wc_horde_invasion.1500.title:0 "The Greatest of Warlords"
  wc_horde_invasion.1500.desc:0 "WIP"
  wc_horde_invasion.1500.a:0 "WIP"
@@ -144,7 +144,6 @@
  #################################
  # Conquests of the Horde
  #################################
-
  # First War
  ### Northshire ###
  wc_horde_invasion.9000.title:0 "The Fall of $c_northshire$"
@@ -171,9 +170,7 @@
  #################################
  # Glossary
  #################################
-
  APOCALYPSE_RENILASH_GLOSS:0 "The Apocalypse, or Renilash in the ancient common tongue, prophesied by Mereldar, refers to the final conflict between the forces of good and evil. This event, seen as an ultimate judgment, will seal the world’s fate, bringing both destruction and renewal."
-
  THRONE_OF_KILJAEDEN_GLOSS:0 "The Throne of Kil'Jaeden was once a sacred mountain of the Bonechewer Clan, located in the Hellfire Peninsula, formerly the Tanaan Jungle. Gul'dan renamed this site when he gathered all the orcish clans here for a dark ritual — drinking the blood of Mannoroth, sealing their pact with the Burning Legion, and forever altering the fate of the orcs."
  BLOOD_OF_MANNOROTH_GLOSS:0 "The Blood of Mannoroth, a vile substance, is the very essence of the pit lord Mannoroth. When consumed, it grants immense strength and bloodlust but at a terrible cost: eternal servitude to the Burning Legion. It was this cursed blood that Gul'dan used to corrupt the orcs, marking the beginning of their descent into darkness."
  JUNGLE_OF_TANAAN_GLOSS:0 "Once a lush and untamed jungle, Tanaan was home to some of the fiercest orc clans. But, as Draenor fell into decline, it withered at an alarming and unexplained pace. Today, it is nothing more than a barren wasteland, now known as the Hellfire Peninsula."
