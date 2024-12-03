@@ -1575,7 +1575,7 @@ wc_horde_invasion.1507 = {
 
 #################################
 # Conquests of the Horde
-# 9000-9002
+# 9000-9001
 #################################
 
 # Conquering of Northshire
