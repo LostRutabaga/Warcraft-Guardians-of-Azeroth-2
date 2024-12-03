@@ -1581,21 +1581,51 @@ wc_horde_invasion.1507 = {
 # Conquering of Northshire
 wc_horde_invasion.9000 = {
 	content_source = dlc_GOA
-	title = wc_horde_invasion.9000.title
-	desc = wc_horde_invasion.9000.desc
+	title = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { is_from_the_horde_trigger = yes }
+				desc = wc_horde_invasion.9000.title
+			}
+			desc = wc_horde_invasion.northshire.9000.title
+		}
+	}
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { is_from_the_horde_trigger = yes }
+				desc = wc_horde_invasion.9000.desc
+			}
+			desc = wc_horde_invasion.northshire.9000.desc
+		}
+	}
 	type = character_event
 	theme = horde
 	
-	override_background = { reference = burning_building }
+	override_background = {
+		trigger = { is_from_the_horde_trigger = yes }
+		reference = burning_building
+	}
+	override_background = {
+		trigger = { is_from_the_horde_trigger = no }
+		reference = temple_church
+	}
 	
 	left_portrait = {
 		character = root
-		animation = celebrate_axe
+		triggered_animation = {
+			trigger = { is_from_the_horde_trigger = yes }
+			animation = { celebrate_axe }
+		}
+		animation = fear
 	}
 	
 	#Kill them all!
 	option = {
-		trigger = { root = title:b_northshire.barony_controller }
+		trigger = {
+			root = title:b_northshire.barony_controller
+			is_from_the_horde_trigger = yes
+		}
 		name = wc_horde_invasion.9000.a
 		
 		horde_bloodshed_effect = { LOCATION = scope:county }
@@ -1609,33 +1639,20 @@ wc_horde_invasion.9000 = {
 	
 	# Kill them all! - Notification
 	option = {
-		trigger = { NOT = { root = title:b_northshire.barony_controller } }
+		trigger = {
+			NOT = { root = title:b_northshire.barony_controller }
+			is_from_the_horde_trigger = yes
+		}
 		name = wc_horde_invasion.9000.a
 		show_as_tooltip = {
 			horde_bloodshed_effect = { LOCATION = scope:county }
 		}
 	}
-}
 
-# Conquering of Northshire - Northshire side
-wc_horde_invasion.9001 = {
-	content_source = dlc_GOA
-	title = wc_horde_invasion.9001.title
-	desc = wc_horde_invasion.9001.desc
-	type = character_event
-	theme = horde
-	
-	override_background = { reference = temple_church }
-	
-	right_portrait = {
-		character = root
-		animation = fear
-	}
-	
-	#For Azeroth!
 	option = {
-		name = wc_horde_invasion.9001.a
-		custom_tooltip = wc_horde_invasion.9001.tooltip.a
+		name = wc_horde_invasion.9000.b
+		custom_tooltip = wc_horde_invasion.9000.tooltip.b
+		trigger = { is_from_the_horde_trigger = no }
 		
 		show_as_tooltip = {
 			horde_bloodshed_effect = { LOCATION = scope:county }
@@ -1644,10 +1661,10 @@ wc_horde_invasion.9001 = {
 }
 
 # Sacking of Northshire - Duchy
-wc_horde_invasion.9002 = {
+wc_horde_invasion.9001 = {
 	content_source = dlc_GOA
-	title = wc_horde_invasion.9002.title
-	desc = wc_horde_invasion.9002.desc
+	title = wc_horde_invasion.9001.title
+	desc = wc_horde_invasion.9001.desc
 	type = character_event
 	theme = horde
 	
@@ -1660,8 +1677,8 @@ wc_horde_invasion.9002 = {
 	
 	# Sack everything and capture the remnants
 	option = {
-		name = wc_horde_invasion.9002.a
-		custom_tooltip = wc_horde_invasion.9002.tooltip.a
+		name = wc_horde_invasion.9001.a
+		custom_tooltip = wc_horde_invasion.9001.tooltip.a
 		
 		sack_area_effect = { TITLE = title:d_northwoods }
 		change_culture_and_faith_horde_area_effect = {
@@ -1676,8 +1693,8 @@ wc_horde_invasion.9002 = {
 	
 	# Keep this untouched
 	option = {
-		name = wc_horde_invasion.9002.b
-		custom_tooltip = wc_horde_invasion.9002.tooltip.b
+		name = wc_horde_invasion.9001.b
+		custom_tooltip = wc_horde_invasion.9001.tooltip.b
 		
 		add_character_modifier = {
 			modifier = brought_discipline_horde_modifier
