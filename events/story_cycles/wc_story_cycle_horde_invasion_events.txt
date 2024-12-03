@@ -146,7 +146,18 @@ wc_horde_invasion.1000 = {
 	theme = horde
 	override_background = { # Medivh background
 		trigger = { is_medivh_trigger = yes }
-		reference = wc_fullscreen_dark_portal
+		reference = wc_fullscreen_opening_dark_portal
+	}
+	override_background = { # Twilight's Hammer background
+		trigger = {
+			is_from_draenor_trigger = yes
+			OR = {
+				has_title = title:d_twilights_hammer_clan
+				has_culture = culture:twilights_hammer
+				religion = { is_in_family = rf_shadow }
+			}
+		}
+		reference = wc_fullscreen_dark_gods
 	}
 	override_background = { # Draenor background
 		trigger = { is_from_draenor_trigger = yes }
@@ -158,7 +169,7 @@ wc_horde_invasion.1000 = {
 			is_from_draenor_trigger = no
 			feel_the_magic_in_world_trigger = yes
 		}
-		reference = wc_fullscreen_dark_portal
+		reference = wc_fullscreen_fel_disturbance
 	}
 	override_background = { # Black Morass background
 		trigger = { 
@@ -166,7 +177,7 @@ wc_horde_invasion.1000 = {
 			is_from_draenor_trigger = no
 			feel_the_magic_in_world_trigger = no
 		}
-		reference = wc_fullscreen_dark_portal
+		reference = wc_fullscreen_black_morass
 	}
 
 	# Base
