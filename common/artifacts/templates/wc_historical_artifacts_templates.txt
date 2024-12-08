@@ -167,7 +167,7 @@ book_of_medivh_template = {
 
 twilight_canticle_template = {
 	can_equip = {
-		faith.religion = religion:shathgral
+		faith.religion = religion:shathgral_religion
 	}
 
 	# can this character benefit from the full modifiers of the artifact?
