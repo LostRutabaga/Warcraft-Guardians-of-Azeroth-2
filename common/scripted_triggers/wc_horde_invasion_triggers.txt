@@ -56,6 +56,7 @@ evil_magic_fel_disturbance_trigger = {
 good_magic_fel_disturbance_trigger = {
 	OR = {
 		has_trait = being_order
+		has_trait = creature_blue_dragon
 		has_trait = being_life
 		has_trait = being_light
 		# TODO: Should add "magic" triggers here, with corresponding magic

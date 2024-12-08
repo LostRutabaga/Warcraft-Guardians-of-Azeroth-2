@@ -11,15 +11,15 @@
 
  wc_horde_invasion.draenor.1000.desc:0 "WIP DRAENOR"
 
- wc_horde_invasion.evil_magic.1000.desc:0 "WIP"
- wc_horde_invasion.good_magic.1000.desc:0 "WIP"
- wc_horde_invasion.elemental_magic.1000.desc:0 "WIP"
- wc_horde_invasion.fallback_magic.1000.desc:0 "WIP"
+ wc_horde_invasion.evil_magic.1000.desc:0 "My concentration is shattered by a wave of fel magic with a purity and intensity I have never felt before. Unable to resist it, I reach out to tap into this colossal source of energy, but I can only grasp a fraction of its power. The sheer magnitude leaves me breathless—a taste of something beyond comprehension.\n\nBut what is happening?\n\nI peer outside and spot an aurora of fel energy—a towering glow piercing the sky, pointing to the source of the shockwave in the southeast. The air hums with lingering vibrations as if the world itself struggles to contain this force. Lesser beings likely haven’t sensed it, but spellcasters across the world surely have.\n\nAs the shockwave passes, a vision strikes me. A massive portal has been torn open—a gateway to a land drenched in Fel and Necrotic powers. The mark of the Burning Legion is clear. Could it truly be them?"
+ wc_horde_invasion.good_magic.1000.desc:0 "My concentration is suddenly disturbed by a wave of fel magic with a purity and intensity I have never felt before. The magic around me vibrates, dissonant with the natural order of the planet. The air grows heavy, almost suffocating, saturated with this unknown energy. Instinctively, I harness my innate powers and immediately begin purifying myself and my surroundings from this insidious corruption.\n\nWhat is happening?\n\nLooking to the distance, I spot a radiant aurora of fel magic—a towering glow piercing the sky, pointing toward the source of the shockwave, somewhere to the southeast of the planet. The air still vibrates, haunted by oppressive resonances as if the world itself struggles to contain this crushing force. Beings outside likely haven’t even sensed it, but this tremendous surge of power must have been felt by spellcasters across the world.\n\nI feel it deep within me: this is no mere magical imbalance. This is a sign of a greater evil to come."
+ wc_horde_invasion.elemental_magic.1000.desc:0 "The elements suddenly begin to scream around me, their voices filled with pain as a wave of black energy of unprecedented intensity sweeps across the planet. My senses are overwhelmed by their cries, and I fall to my knees.\n\nWhat is happening ?\n\nI glance around, my heart pounding, and spot an aurora of demonic energy streaking across the sky, its glow radiating from somewhere in the southeast of the planet. The elements still tremble around me, vibrating in defiance as if they are trying to contain this force. This was no ordinary disturbance. I am certain that many around the world must have felt this demonic assault.\n\nThe spirits seem uneasy. They whisper that something terrible has happened to the planet."
+ wc_horde_invasion.fallback_magic.1000.desc:0 "A sudden shift in the world’s energy halts me in my tracks. An overwhelming force surges through the air, unseen but unmistakable. It clings to everything—heavy, suffocating, oppressive. I can feel it coursing through the very ground beneath me.\n\nWhat is happening?\n\nI glance toward the sky and spot a glow of fel energy piercing the heavens, its ominous light emanating from somewhere in the southeast of the planet. The ground vibrates beneath my feet, resonating with a power that feels ancient and unyielding. I do not know what this is, but I am certain of one thing: I am not the only one who felt it.\n\nSomething has changed. And it will not be undone."
 
  wc_horde_invasion.generic_close.1000.desc:0 "WIP GENERAL"
 
  wc_horde_invasion.1000.medivh:0 "So it begins... The end of the world."
- wc_horde_invasion.1000.magic:0 "This bodes ill."
+ wc_horde_invasion.1000.magic:0 "This cannot end well."
  wc_horde_invasion.1000.orcish_warchief_and_shadowlord:0 "The Horde will crush the world!"
  wc_horde_invasion.1000.orcish_shamanic:0 "I should save my people."
  wc_horde_invasion.1000.orcish:0 "Victory or Death!"
@@ -125,7 +125,6 @@
  wc_horde_invasion.1505.desc:0 "The moment #EMP we#! crossed the Dark Portal, visions and whispers besieged #EMP our#! minds. At first, I thought it was yet another manifestation of the demons [guldan.GetFirstName] had [Glossary( 'taught us about', 'CHOGALL_FORMATION_GLOSS' )]. But over time, as I led [ROOT.Char.GetPrimaryTitle.GetName|l], I came to understand. These visions do not come from demons but from their forgotten gods, forces far older and more powerful than the Legion itself.\n\n#EMP Gall#! remains strangely silent. #EMP He#!, so prone to impulsiveness, seems untouched by these voices. But I hear them, growing ever stronger… And #EMP our#! [Glossary( 'pale orcs', 'PALE_ORCS_GLOSS' )] — once the most unruly of all the clans — now obey #EMP us#! without question, as if guided by a superior will. They call #EMP us#! the Twilight Prophets…"
  wc_horde_invasion.1505.a:0 "What if they were right? I must convince Gall. @twilights_hammer_cult_icon!"
  wc_horde_invasion.1505.a_flavor:0 "#EMP "Now everything is clear. The Legion wages its petty crusade out of fear of these gods, but it is doomed to fail, for the inevitable fate of the universe is the Twilight Hour.\nThe Horde, these visions, my encounter with the pale orcs — all of this cannot always be mere coincidence. Gall respects only strength, and so he must be made to see that this is the true path forward."#!"
- convert_to_twilights_hammer_effect_tt:0 "You will attempt to convince Gall to embrace Their will:\nThis can lead to your secret conversion to the [new_faith.GetName|V]"
  wc_horde_invasion.1505.b:0 "We can't betray the Burning Legion."
  wc_horde_invasion.1505.b_flavor:0 "When you strike a pact with the Legion, there is no turning back. To think we could outwit the highest demonic powers would invite horrors beyond imagining. You cannot betray the Shadow Council."
  wc_horde_invasion.1505.c:0 "No one can tell us what to do."
@@ -140,6 +139,7 @@
  wc_horde_invasion.1507.a_flavor:0 "WIP"
  wc_horde_invasion.1507.b:0 "WIP"
  wc_horde_invasion.1507.b_flavor:0 "WIP"
+ convert_to_twilights_hammer_effect_tt:0 "You will attempt to convince Gall to embrace Their will:\nThis can lead to your secret conversion to the [new_faith.GetName|V]"
 
  #################################
  # Conquests of the Horde
