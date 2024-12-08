@@ -714,12 +714,9 @@ populist_war = {
 	target_top_liege_if_outside_realm = no
 
 	valid_to_start = {
-		scope:attacker = { NOT = { is_isolated_from_trigger = { target = scope:defender } } } # Warcraft
 	}
 
-	should_invalidate = {
-		scope:attacker = { is_isolated_from_trigger = { target = scope:defender } } # Warcraft
-	
+	should_invalidate = {	
 		NOT = {
 			scope:attacker = {
 				has_variable = rebel_leader_peasants

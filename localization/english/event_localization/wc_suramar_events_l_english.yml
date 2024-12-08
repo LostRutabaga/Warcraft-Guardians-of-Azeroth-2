@@ -252,6 +252,7 @@ l_english:
  wc_suramar_enemy_murlocs_modifier:0 "Enemy of the Murlocs"
  wc_suramar_enemy_murlocs_modifier_desc:0 "This character has made contact with a murloc tribe, and it was quite the experience!"
  murloc_opinion:0 "$murloc$ [opinion|E]"
+ naga_opinion:0 "$naga$ [opinion|E]"
 
  wc_suramar_events.0004.t:0 "In Absence of the Nightwell"
  wc_suramar_events.0004.desc:0 "My travels have brought me outside of the confines of our Arcane barrier, and I began to expierence a hunger deep within me. The Nightwell, our source of power, was no longer within reach, and I can feel the effects of its absence.\n\n"
