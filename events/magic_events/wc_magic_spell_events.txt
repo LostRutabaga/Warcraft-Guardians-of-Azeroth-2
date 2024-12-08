@@ -805,6 +805,7 @@ wc_magic_spell_events.2200 = {
     immediate = {
         add_character_modifier = wc_voidborne_modifier
         show_as_tooltip = { var:voidborne_person = { add_trait = in_twisting_nether } } 
+        var:voidborne_person = { save_scope_as = voidborne_person }
     }
 
     option = {
@@ -853,7 +854,7 @@ wc_magic_spell_events.2201 = {
 
 # You get to make a choice to get a strong hook or the voidborne or make them your rival
 wc_magic_spell_events.2202 = {
-    title = wc_magic_spell_events.2202.title
+    title = wc_magic_spell_events.2200.title
     desc = wc_magic_spell_events.2202.desc
     type = character_event
     theme = shadow
@@ -864,7 +865,11 @@ wc_magic_spell_events.2202 = {
     }
 
     on_trigger_fail = {
-        var:voidborne_tormentor = { trigger_event = wc_magic_spell_events.2203 }
+        trigger_event = wc_magic_spell_events.2203
+    }
+
+    immediate = {
+        var:voidborne_tormentor = { save_scope_as = voidborne_tormentor }
     }
 
     left_portrait = {
@@ -879,16 +884,88 @@ wc_magic_spell_events.2202 = {
 
     option = { # Strong Hook
         name = wc_magic_spell_events.2202.a
+        trigger = {
+            NOT = { has_strong_hook = var:voidborne_tormentor }
+        }
+
+        add_hook = {
+            type = voidborne_hook
+            target = var:voidborne_tormentor
+        }
     }
 
-    option = { # Rivalry
+    option = { # Give stress
         name = wc_magic_spell_events.2202.b
+
+        scope:voidborne_tormentor = {
+            add_stress = major_stress_gain
+        }
+    }
+
+    option = { # Try and escape earlier
+        name = wc_magic_spell_events.2202.c
+        trigger = {
+            wc_mp_value >= 25
+        }
+        show_as_unavailable = {
+            always = yes 
+        }
+        custom_tooltip = wc_magic_spell_events.2202.c.tt
+
+        random_list = {
+            50 = {
+                desc = wc_magic_spell_events.2202.c.a
+                send_interface_toast = {
+                    title = wc_magic_spell_events.2202.c.a
+                    type = event_toast_effect_bad
+                    left_icon = root
+                }
+            }
+            30 = {
+                desc = wc_magic_spell_events.2202.c.a
+                send_interface_toast = {
+                    title = wc_magic_spell_events.2202.c.a
+                    type = event_toast_effect_bad
+                    left_icon = root
+                    increase_wounds_effect = { REASON = magic }
+                }
+            }
+            20 = {  
+                desc = wc_magic_spell_events.2202.c.b
+                send_interface_toast = {
+                    title = wc_magic_spell_events.2202.c.b
+                    type = event_toast_effect_good
+                    left_icon = root
+                    custom_tooltip = wc_magic_spell_events.2202.c.b.tt
+                    add_character_flag = { flag = returning_from_nether_higher days = 100 }
+                }
+            }
+            1 = { 
+                send_interface_toast = {
+                    title = wc_magic_spell_events.2202.c.d
+                    type = event_toast_effect_good
+                    left_icon = root
+                    custom_tooltip = wc_magic_spell_events.2202.c.d.tt
+                    add_character_flag = { flag = returning_from_nether days = 10 }
+                    trigger_event = {
+                        id = wc_magic_spell_events.2203
+                        days = { 90 95 }
+                    }
+                }
+            }
+        }
     }
 
     after = {
-        trigger_event = {
-            id = wc_magic_spell_events.2203
-            days = { 90 95 }
+        if = {
+            limit = {
+                NOT = { has_character_flag = returning_from_nether }
+            }
+            custom_tooltip = wc_magic_spell_events.2202.tt
+            trigger_event = {
+                id = wc_magic_spell_events.2203
+                days = { 90 95 }
+            }
         }
     }
 }
@@ -896,7 +973,24 @@ wc_magic_spell_events.2202 = {
 # You are either let out of the twisting nether or not, naturally or tormentor died
 wc_magic_spell_events.2203 = {
     title = wc_magic_spell_events.2203.title
-    desc = wc_magic_spell_events.2203.desc
+    desc = {
+        first_valid = {
+            triggered_desc = {
+                trigger = {
+                    var:voidborne_tormentor = { is_alive = no }
+                    has_character_flag = returning_from_nether
+                }
+                desc = wc_magic_spell_events.2203.desc_return_dead
+            }
+            triggered_desc = {
+                trigger = {
+                    has_character_flag = returning_from_nether
+                }
+                desc = wc_magic_spell_events.2203.desc_return
+            }
+            desc = wc_magic_spell_events.2203.desc_stuck
+        }
+    }
     type = character_event
     theme = shadow
     content_source = dlc_GOA
@@ -924,7 +1018,12 @@ wc_magic_spell_events.2203 = {
         }
         else = {
             random_list = {
-                50 = {}
+                50 = {
+                    modifier = {
+                        add = -25
+                        has_character_flag = returning_from_nether_higher
+                    }
+                }
                 50 = { add_character_flag = { flag = returning_from_nether days = 1 } }
             }
         }
@@ -933,6 +1032,11 @@ wc_magic_spell_events.2203 = {
     # Still stuck
     option = {
         name = wc_magic_spell_events.2203.a
+        trigger = {
+            NOT = { has_character_flag = returning_from_nether }
+        }
+        custom_tooltip = wc_magic_spell_events.2202.tt
+        add_stress = miniscule_stress_gain
         trigger_event = {
             id = wc_magic_spell_events.2203
             days = { 90 95 }
@@ -983,6 +1087,7 @@ wc_magic_spell_events.2204 = {
         name = wc_magic_spell_events.2204.opt
     }
 }
+
 
 wc_magic_spell_events.9000 = {
     hidden = yes

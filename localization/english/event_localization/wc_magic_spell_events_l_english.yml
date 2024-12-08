@@ -90,3 +90,21 @@
 
  wc_magic_spell_events.2100.desc:0 "Alas, the time of service for my void leader, [void_leader.GetName] has ended. [void_leader.GetSheHe|U] may now be free to return to the endless void, perhaps one day returning to Azeroth."
  wc_magic_spell_events.2100.a:0 "Goodbye, [void_leader.GetFirstName]."
+
+ wc_magic_spell_events.2200.title:0 "Voidborne"
+ wc_magic_spell_events.2200.desc:0 "The void energy beckons within me, and I hear [voidborne_person.GetFirstNamePossessive] screams as [voidborne_person.GetSheHe] is pulled into the Nether which grants me my power. In a way, [voidborne_person.GetSheHe] is now a part of me,yet I siphon [voidborne_person.GetHerHis] essence to fuel my magic."
+ wc_magic_spell_events.2201.opt:0 "Into the darkness [voidborne_person.GetSheHe] goes."
+
+ wc_magic_spell_events.2202.desc:0 "I am sent into a dark plane of existence, where I see [voidborne_tormentor.GetFirstNamePossessive] face, twisted with shadows. [voidborne_tormentor.GetSheHe|U] whispers to me, and it seems like [voidborne_tormentor.GetHerHis] voice is coming from all directions.\n\nI find myself in a trance, and when I awake, I am far from home. Above me is a sea of endless stars, a bountiful void waiting to be explored. But alas, I am paralyzed, unable to move, and I can only watch as the void consumes me. Though I know I have not faced death, the feeling is almost tantalizing.\n\nA vision of [voidborne_tormentor.GetFirstName] appears before me, and [voidborne_tormentor.GetSheHe] speaks to me, saying that [voidborne_tormentor.GetSheHe] has granted me a gift, and that [voidborne_tormentor.GetSheHe] destroys my very essence for power."
+ wc_magic_spell_events.2202.a:0 "You will rue this day, [voidborne_tormentor.GetFirstName]."
+ wc_magic_spell_events.2202.b:0 "Curse you, [voidborne_tormentor.GetFirstName]!"
+ wc_magic_spell_events.2202.c:0 "This prison cannot hold me!"
+ wc_magic_spell_events.2202.c.tt:0 "You try to escape earlier."
+ wc_magic_spell_events.2202.c.a:0 "You fail to break free."
+ wc_magic_spell_events.2202.c.b:0 "Your attempt helps a bit"
+ wc_magic_spell_events.2202.c.b.tt:0 "You have a 75% chance to escape in #V 3#! months instead of #V 3#!."
+ wc_magic_spell_events.2202.c.d:0 "You break free!"
+ wc_magic_spell_events.2202.c.d.tt:0 "You escape the void."
+ wc_magic_spell_events.2202.tt:0 "You have a 50% chance to escape in #V 3#! months."
+
+ wc_magic_spell_events.2203.title:0 "Void Prison"
