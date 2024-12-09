@@ -111,7 +111,69 @@ wc_horde_invasion.1000 = {
 				trigger = { is_medivh_trigger = yes }
 				desc = wc_horde_invasion.medivh.1000.desc
 			}
-			triggered_desc = { # People from Draenor
+			triggered_desc = { # People from Draenor - Warchief - Not in the Shadow Council
+				trigger = {
+					is_from_draenor_trigger = yes
+					has_title = title:e_horde
+				}
+				desc = wc_horde_invasion.warchief_draenor.1000.desc
+			}
+			triggered_desc = { # People from Draenor - Warchief - In the Shadow Council
+				trigger = {
+					is_from_draenor_trigger = yes
+					has_title = title:e_horde
+					has_religion = religion:doombringer
+				}
+				desc = wc_horde_invasion.warchief_shadow_council_draenor.1000.desc
+			}
+			triggered_desc = { # People from Draenor - Gul'dan
+				trigger = { is_guldan_trigger = yes }
+				desc = wc_horde_invasion.guldan_draenor.1000.desc
+			}
+			triggered_desc = { # People from Draenor - Cho'gall
+				trigger = {
+					is_chogall_trigger = yes
+					has_title = title:d_twilights_hammer_clan
+					NOT = { has_religion = religion:shathgral_religion }
+				}
+				desc = wc_horde_invasion.chogall.1000.desc
+			}
+			triggered_desc = { # People from Draenor - Twilight's Hammer
+				trigger = {
+					is_from_draenor_trigger = yes
+					OR = {
+						has_culture = culture:twilights_hammer
+						has_religion = religion:shathgral_religion
+					}
+				}
+				desc = wc_horde_invasion.twilights_hammer.1000.desc
+			}
+			triggered_desc = { # People from Draenor - Shadow Council
+				trigger = {
+					is_from_draenor_trigger = yes
+					OR = {
+						AND = {
+							is_chogall_trigger = yes
+							NOT = { has_title = title:d_twilights_hammer_clan }
+						}
+						scope:guldan = {
+							has_hook_of_type = {
+								target = prev
+								type = loyalty_hook
+							}
+						}
+					}
+				}
+				desc = wc_horde_invasion.shadow_council.1000.desc
+			}
+			triggered_desc = { # People from Draenor - Orcish Shamanism
+				trigger = {
+					is_from_draenor_trigger = yes
+					has_faith = faith:orcish_shamanism
+				}
+				desc = wc_horde_invasion.orcish_shamanism.1000.desc
+			}
+			triggered_desc = { # People from Draenor - General
 				trigger = { is_from_draenor_trigger = yes }
 				desc = wc_horde_invasion.draenor.1000.desc
 			}
