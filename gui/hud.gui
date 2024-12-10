@@ -436,7 +436,6 @@ widget = {
 						
 						onclick = "[GetVariableSystem.Set( 'right_window_open', Select_CString( GetVariableSystem.HasValue( 'right_window_open', 'crises' ), 'none', 'crises' ) )]"
 						down = "[GetVariableSystem.HasValue( 'right_window_open', 'crises' )]"
-                        onclick = "[GetVariableSystem.Set( 'right_window_open', Select_CString( GetVariableSystem.HasValue( 'right_window_open', 'crises' ), 'none', 'crises' ) )]"
                         onclick = "[CloseGameView('activity_list_window')]"
                         onclick = "[CloseGameView('decisions')]"
                         onclick = "[CloseGameView('factions_window')]"
