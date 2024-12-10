@@ -115,6 +115,7 @@ wc_horde_invasion.1000 = {
 				trigger = {
 					is_from_draenor_trigger = yes
 					has_title = title:e_horde
+					NOT = { has_religion = religion:doombringer }
 				}
 				desc = wc_horde_invasion.warchief_draenor.1000.desc
 			}
@@ -134,7 +135,7 @@ wc_horde_invasion.1000 = {
 				trigger = {
 					is_chogall_trigger = yes
 					has_title = title:d_twilights_hammer_clan
-					NOT = { has_religion = religion:shathgral_religion }
+					NOT = { religion = { is_in_family = rf_shadow } }
 				}
 				desc = wc_horde_invasion.chogall.1000.desc
 			}
@@ -143,7 +144,7 @@ wc_horde_invasion.1000 = {
 					is_from_draenor_trigger = yes
 					OR = {
 						has_culture = culture:twilights_hammer
-						has_religion = religion:shathgral_religion
+						religion = { is_in_family = rf_shadow }
 					}
 				}
 				desc = wc_horde_invasion.twilights_hammer.1000.desc
