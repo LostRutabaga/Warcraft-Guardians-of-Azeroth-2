@@ -38,11 +38,17 @@ councillor_spouse_diplomacy.1001 = {
 			any_close_or_extended_family_member = {
 				NOT = { this = scope:councillor }
 				target_is_liege_or_above = root
+				#We need one of these to be true to match the triggers in immediate
+				OR = {
+					is_landed = yes
+					is_adult = yes
+				}
 			}
 			AND = {
 				exists = dynasty
 				dynasty = {
 					any_dynasty_member = {
+						is_adult = yes
 						NOT = { this = scope:councillor }
 						target_is_liege_or_above = root
 						OR = {
@@ -66,7 +72,7 @@ councillor_spouse_diplomacy.1001 = {
 
 	immediate = {
 		cp:councillor_spouse = {
-			save_scope_as = active_councillor
+			save_scope_as = councillor
 		}
 		add_character_flag = {
 			flag = had_event_councillor_spouse_diplomacy_1001
@@ -82,12 +88,11 @@ councillor_spouse_diplomacy.1001 = {
 		}
 		if = {
 			limit = {
-				NOT = {
-					exists = scope:close_kin
-				}
+				NOT = { exists = scope:close_kin }
 				exists = dynasty
 				dynasty = {
 					any_dynasty_member = {
+						is_adult = yes
 						NOT = { this = scope:councillor }
 						target_is_liege_or_above = root
 						OR = {
@@ -100,18 +105,21 @@ councillor_spouse_diplomacy.1001 = {
 			dynasty = {
 				random_dynasty_member = {
 					limit = {
+						is_adult = yes
 						NOT = { this = scope:councillor }
 						target_is_liege_or_above = root
-						is_landed = yes
 						is_of_major_interest_to_root_trigger = yes
+						is_landed = yes
 					}
 					alternative_limit = {
+						is_adult = yes
 						NOT = { this = scope:councillor }
 						target_is_liege_or_above = root
 						is_of_minor_interest_to_root_trigger = yes
 						is_landed = yes
 					}
 					alternative_limit = {
+						is_adult = yes
 						NOT = { this = scope:councillor }
 						target_is_liege_or_above = root
 						OR = {
@@ -125,50 +133,52 @@ councillor_spouse_diplomacy.1001 = {
 		}
 		if = {
 			limit = {
-				NOT = {
-					exists = scope:close_kin
-				}
+				NOT = { exists = scope:close_kin }
 			}
 			random_close_or_extended_family_member = {
 				limit = {
+					is_adult = yes
 					NOT = { this = scope:councillor }
 					target_is_liege_or_above = root
 				}
 				save_scope_as = close_kin
 			}
 		}
-		send_interface_message = {
-			type = event_spouse_task_good
-			title = councillor_spouse_diplomacy.1001.desc
-			desc = {
-				triggered_desc = {
-					trigger = {
-						scope:active_councillor = { diplomacy < average_skill_level }
+		if = {
+			limit = { exists = scope:close_kin }
+			send_interface_message = {
+				type = msg_spouse_task_good
+				title = councillor_spouse_diplomacy.1001.desc
+				desc = {
+					triggered_desc = {
+						trigger = {
+							scope:councillor = { diplomacy < average_skill_level }
+						}
+						desc = spouse_task_diplomacy_good_unskilled_notification_tooltip
 					}
-					desc = task_diplomacy_good_unskilled_notification_tooltip
-				}
-				triggered_desc = {
-					trigger = {
-						scope:active_councillor = { diplomacy >= average_skill_level }
+					triggered_desc = {
+						trigger = {
+							scope:councillor = { diplomacy >= average_skill_level }
+						}
+						desc = spouse_task_diplomacy_good_skilled_notification_tooltip
 					}
-					desc = task_diplomacy_good_skilled_notification_tooltip
 				}
-			}
 
-			left_icon = scope:close_kin
-			right_icon = scope:councillor
-			
-			scope:close_kin = {
-				add_opinion = {
-					target = root
-					modifier = respect_opinion
-					opinion = 20
-				}
-				hidden_effect = {
+				left_icon = scope:close_kin
+				right_icon = scope:councillor
+				
+				scope:close_kin = {
 					add_opinion = {
-						target = scope:councillor
+						target = root
 						modifier = respect_opinion
 						opinion = 20
+					}
+					hidden_effect = {
+						add_opinion = {
+							target = scope:councillor
+							modifier = respect_opinion
+							opinion = 20
+						}
 					}
 				}
 			}
@@ -188,10 +198,10 @@ councillor_spouse_diplomacy.1002 = {
 			has_character_flag = had_event_councillor_spouse_diplomacy_1002
 		}
 		any_child = {
-			NOT = { this = scope:councillor }
+			NOT = { this = root.cp:councillor_spouse }
 			any_relation = {
 				type = rival
-				NOT = { this = scope:councillor }
+				NOT = { this = root.cp:councillor_spouse }
 				is_child_of = root
 			}
 		}
@@ -208,7 +218,7 @@ councillor_spouse_diplomacy.1002 = {
 
 	immediate = {
 		cp:councillor_spouse = {
-			save_scope_as = active_councillor
+			save_scope_as = councillor
 		}
 		add_character_flag = {
 			flag = had_event_councillor_spouse_diplomacy_1002
@@ -235,20 +245,20 @@ councillor_spouse_diplomacy.1002 = {
 			save_scope_as = child_2
 		}
 		send_interface_message = {
-			type = event_spouse_task_good
+			type = msg_spouse_task_good
 			title = councillor_spouse_diplomacy.1002.desc
 			desc = {
 				triggered_desc = {
 					trigger = {
-						scope:active_councillor = { diplomacy < average_skill_level }
+						scope:councillor = { diplomacy < average_skill_level }
 					}
-					desc = task_diplomacy_good_unskilled_notification_tooltip
+					desc = spouse_task_diplomacy_good_unskilled_notification_tooltip
 				}
 				triggered_desc = {
 					trigger = {
-						scope:active_councillor = { diplomacy >= average_skill_level }
+						scope:councillor = { diplomacy >= average_skill_level }
 					}
-					desc = task_diplomacy_good_skilled_notification_tooltip
+					desc = spouse_task_diplomacy_good_skilled_notification_tooltip
 				}
 			}
 			
@@ -284,12 +294,13 @@ councillor_spouse_diplomacy.1002 = {
 
 scripted_trigger councillor_spouse_diplomacy_1003_child_trigger = {
 	NOR = {
-		this = scope:councillor
-		is_player_heir_of_trigger = { CHARACTER = root }
+		this = root.cp:councillor_spouse
+		is_player_heir_of = root
 		has_relation_rival = root.player_heir
 		has_relation_potential_rival = root.player_heir
 		has_relation_friend = root.player_heir
 	}
+	top_liege = root.top_liege
 	opinion = {
 		target = root.player_heir
 		value <= 10
@@ -311,7 +322,7 @@ councillor_spouse_diplomacy.1003 = {
 			has_character_flag = had_event_councillor_spouse_diplomacy_1003
 		}
 		NOT = {
-			scope:councillor = { is_player_heir_of_trigger = { CHARACTER = root } }
+			cp:councillor_spouse = { is_player_heir_of = root }
 		}
 		any_child = {
 			councillor_spouse_diplomacy_1003_child_trigger = yes
@@ -329,7 +340,7 @@ councillor_spouse_diplomacy.1003 = {
 
 	immediate = {
 		cp:councillor_spouse = {
-			save_scope_as = active_councillor
+			save_scope_as = councillor
 		}
 		add_character_flag = {
 			flag = had_event_councillor_spouse_diplomacy_1003
@@ -342,7 +353,7 @@ councillor_spouse_diplomacy.1003 = {
 				save_temporary_scope_as = current_character
 				root = {
 					player_heir_position = {
-						position = 1
+						value = 1
 						target = scope:current_character
 					}
 				}
@@ -352,7 +363,7 @@ councillor_spouse_diplomacy.1003 = {
 				save_temporary_scope_as = current_character
 				root = {
 					player_heir_position = {
-						position = 2
+						value = 2
 						target = scope:current_character
 					}
 				}
@@ -362,7 +373,7 @@ councillor_spouse_diplomacy.1003 = {
 				save_temporary_scope_as = current_character
 				root = {
 					player_heir_position = {
-						position = 3
+						value = 3
 						target = scope:current_character
 					}
 				}
@@ -372,7 +383,7 @@ councillor_spouse_diplomacy.1003 = {
 				save_temporary_scope_as = current_character
 				root = {
 					player_heir_position = {
-						position = 4
+						value = 4
 						target = scope:current_character
 					}
 				}
@@ -382,7 +393,7 @@ councillor_spouse_diplomacy.1003 = {
 				save_temporary_scope_as = current_character
 				root = {
 					player_heir_position = {
-						position = 5
+						value = 5
 						target = scope:current_character
 					}
 				}
@@ -391,20 +402,20 @@ councillor_spouse_diplomacy.1003 = {
 			save_scope_as = child_1
 		}
 		send_interface_message = {
-			type = event_spouse_task_good
+			type = msg_spouse_task_good
 			title = councillor_spouse_diplomacy.1003.desc
 			desc = {
 				triggered_desc = {
 					trigger = {
-						scope:active_councillor = { diplomacy < average_skill_level }
+						scope:councillor = { diplomacy < average_skill_level }
 					}
-					desc = task_diplomacy_good_unskilled_notification_tooltip
+					desc = spouse_task_diplomacy_good_unskilled_notification_tooltip
 				}
 				triggered_desc = {
 					trigger = {
-						scope:active_councillor = { diplomacy >= average_skill_level }
+						scope:councillor = { diplomacy >= average_skill_level }
 					}
-					desc = task_diplomacy_good_skilled_notification_tooltip
+					desc = spouse_task_diplomacy_good_skilled_notification_tooltip
 				}
 			}
 			
@@ -412,7 +423,7 @@ councillor_spouse_diplomacy.1003 = {
 			right_icon = scope:child_1
 			
 			scope:child_1 = {
-				set_relation_friend = scope:heir
+				set_relation_friend = { reason = friend_cultivated_friendship target = scope:heir }
 				hidden_effect = {
 					add_opinion = {
 						target = scope:councillor
@@ -444,7 +455,7 @@ councillor_spouse_diplomacy.1004 = {
 		NOT = {
 			has_character_flag = had_event_councillor_spouse_diplomacy_1004
 		}
-		scope:councillor = {
+		cp:councillor_spouse = {
 			diplomacy > mediocre_skill_rating
 		}
 
@@ -476,7 +487,7 @@ councillor_spouse_diplomacy.1004 = {
 
 	immediate = {
 		cp:councillor_spouse = {
-			save_scope_as = active_councillor
+			save_scope_as = councillor
 		}
 		add_character_flag = {
 			flag = had_event_councillor_spouse_diplomacy_1004
@@ -492,20 +503,20 @@ councillor_spouse_diplomacy.1004 = {
 			save_scope_as = diplo_councillor
 		}
 		send_interface_message = {
-			type = event_spouse_task_good
+			type = msg_spouse_task_good
 			title = councillor_spouse_diplomacy.1004.desc
 			desc = {
 				triggered_desc = {
 					trigger = {
-						scope:active_councillor = { diplomacy < average_skill_level }
+						scope:councillor = { diplomacy < average_skill_level }
 					}
-					desc = task_diplomacy_good_unskilled_notification_tooltip
+					desc = spouse_task_diplomacy_good_unskilled_notification_tooltip
 				}
 				triggered_desc = {
 					trigger = {
-						scope:active_councillor = { diplomacy >= average_skill_level }
+						scope:councillor = { diplomacy >= average_skill_level }
 					}
-					desc = task_diplomacy_good_skilled_notification_tooltip
+					desc = spouse_task_diplomacy_good_skilled_notification_tooltip
 				}
 			}
 			
@@ -527,18 +538,18 @@ councillor_spouse_diplomacy.1004 = {
 		}
 		scope:diplo_councillor = {
 			send_interface_message = {
-				type = event_spouse_task_good
+				type = msg_spouse_task_good
 				title = councillor_spouse_diplomacy.1004.desc_diplo_councillor
 				desc = {
 					triggered_desc = {
 						trigger = {
-							scope:active_councillor = { diplomacy < average_skill_level }
+							scope:councillor = { diplomacy < average_skill_level }
 						}
 						desc = task_diplomacy_good_unskilled_notification_tooltip
 					}
 					triggered_desc = {
 						trigger = {
-							scope:active_councillor = { diplomacy >= average_skill_level }
+							scope:councillor = { diplomacy >= average_skill_level }
 						}
 						desc = task_diplomacy_good_skilled_notification_tooltip
 					}
@@ -560,7 +571,7 @@ councillor_spouse_diplomacy.1005 = {
 	trigger = {
 		valid_spouse_councillor_trigger = yes
 		spouse_diplomacy_tier_2_trigger = yes
-		scope:councillor = {
+		cp:councillor_spouse = {
 			has_diplomacy_lifestyle_trait_trigger = yes
 			has_trait = shy
 			NOT = { has_trait = gregarious }
@@ -577,13 +588,13 @@ councillor_spouse_diplomacy.1005 = {
 		}
 		modifier = {
 			add = 0.5
-			scope:councillor = {
+			cp:councillor_spouse = {
 				number_of_personality_traits = 4
 			}
 		}
 		modifier = {
 			add = 0.25
-			scope:councillor = {
+			cp:councillor_spouse = {
 				has_diplomacy_lifestyle_trait_trigger = yes
 			}
 		}
@@ -591,23 +602,23 @@ councillor_spouse_diplomacy.1005 = {
 
 	immediate = {
 		cp:councillor_spouse = {
-			save_scope_as = active_councillor
+			save_scope_as = councillor
 		}
 		send_interface_message = {
-			type = event_spouse_task_good
+			type = msg_spouse_task_good
 			title = councillor_spouse_diplomacy.1005.desc
 			desc = {
 				triggered_desc = {
 					trigger = {
-						scope:active_councillor = { diplomacy < average_skill_level }
+						scope:councillor = { diplomacy < average_skill_level }
 					}
-					desc = task_diplomacy_good_unskilled_notification_tooltip
+					desc = spouse_task_diplomacy_good_unskilled_notification_tooltip
 				}
 				triggered_desc = {
 					trigger = {
-						scope:active_councillor = { diplomacy >= average_skill_level }
+						scope:councillor = { diplomacy >= average_skill_level }
 					}
-					desc = task_diplomacy_good_skilled_notification_tooltip
+					desc = spouse_task_diplomacy_good_skilled_notification_tooltip
 				}
 			}
 
@@ -626,7 +637,7 @@ councillor_spouse_diplomacy.1006 = {
 	trigger = {
 		valid_spouse_councillor_trigger = yes
 		spouse_diplomacy_tier_2_trigger = yes
-		scope:councillor = {
+		cp:councillor_spouse = {
 			has_diplomacy_lifestyle_trait_trigger = yes
 			NOR = {
 				has_trait = shy
@@ -645,13 +656,13 @@ councillor_spouse_diplomacy.1006 = {
 		}
 		modifier = {
 			add = 0.5
-			scope:councillor = {
+			cp:councillor_spouse = {
 				number_of_personality_traits <= 2
 			}
 		}
 		modifier = {
 			add = 0.25
-			scope:councillor = {
+			cp:councillor_spouse = {
 				has_diplomacy_lifestyle_trait_trigger = yes
 			}
 		}
@@ -659,23 +670,23 @@ councillor_spouse_diplomacy.1006 = {
 
 	immediate = {
 		cp:councillor_spouse = {
-			save_scope_as = active_councillor
+			save_scope_as = councillor
 		}
 		send_interface_message = {
-			type = event_spouse_task_good
+			type = msg_spouse_task_good
 			title = councillor_spouse_diplomacy.1005.desc
 			desc = {
 				triggered_desc = {
 					trigger = {
-						scope:active_councillor = { diplomacy < average_skill_level }
+						scope:councillor = { diplomacy < average_skill_level }
 					}
-					desc = task_diplomacy_good_unskilled_notification_tooltip
+					desc = spouse_task_diplomacy_good_unskilled_notification_tooltip
 				}
 				triggered_desc = {
 					trigger = {
-						scope:active_councillor = { diplomacy >= average_skill_level }
+						scope:councillor = { diplomacy >= average_skill_level }
 					}
-					desc = task_diplomacy_good_skilled_notification_tooltip
+					desc = spouse_task_diplomacy_good_skilled_notification_tooltip
 				}
 			}
 			
@@ -701,7 +712,7 @@ councillor_spouse_diplomacy.1007 = {
 		}
 		NOT = { has_character_flag = had_event_councillor_spouse_diplomacy_1007 }
 		any_close_or_extended_family_member = {
-			NOT = { this = scope:councillor }
+			NOT = { this = root.cp:councillor_spouse }
 			has_any_bad_relationship_with_root_trigger = no
 			opinion = {
 				target = root
@@ -721,7 +732,7 @@ councillor_spouse_diplomacy.1007 = {
 
 	immediate = {
 		cp:councillor_spouse = {
-			save_scope_as = active_councillor
+			save_scope_as = councillor
 		}
 		add_character_flag = {
 			flag = had_event_councillor_spouse_diplomacy_1007
@@ -748,20 +759,20 @@ councillor_spouse_diplomacy.1007 = {
 			save_scope_as = close_kin
 		}
 		send_interface_message = {
-			type = event_spouse_task_good
+			type = msg_spouse_task_good
 			title = councillor_spouse_diplomacy.1007.desc
 			desc = {
 				triggered_desc = {
 					trigger = {
-						scope:active_councillor = { diplomacy < average_skill_level }
+						scope:councillor = { diplomacy < average_skill_level }
 					}
-					desc = task_diplomacy_good_unskilled_notification_tooltip
+					desc = spouse_task_diplomacy_good_unskilled_notification_tooltip
 				}
 				triggered_desc = {
 					trigger = {
-						scope:active_councillor = { diplomacy >= average_skill_level }
+						scope:councillor = { diplomacy >= average_skill_level }
 					}
-					desc = task_diplomacy_good_skilled_notification_tooltip
+					desc = spouse_task_diplomacy_good_skilled_notification_tooltip
 				}
 			}
 			
@@ -801,7 +812,7 @@ councillor_spouse_diplomacy.1008 = {
 		exists = dynasty
 		dynasty = {
 			any_dynasty_member = {
-				NOT = { this = scope:councillor }
+				NOT = { this = root.cp:councillor_spouse }
 				is_house_head = no
 				has_any_bad_relationship_with_root_trigger = no
 				opinion = {
@@ -827,7 +838,7 @@ councillor_spouse_diplomacy.1008 = {
 
 	immediate = {
 		cp:councillor_spouse = {
-			save_scope_as = active_councillor
+			save_scope_as = councillor
 		}
 		add_character_flag = {
 			flag = had_event_councillor_spouse_diplomacy_1008
@@ -866,20 +877,20 @@ councillor_spouse_diplomacy.1008 = {
 			}
 		}
 		send_interface_message = {
-			type = event_spouse_task_good
+			type = msg_spouse_task_good
 			title = councillor_spouse_diplomacy.1007.desc
 			desc = {
 				triggered_desc = {
 					trigger = {
-						scope:active_councillor = { diplomacy < average_skill_level }
+						scope:councillor = { diplomacy < average_skill_level }
 					}
-					desc = task_diplomacy_good_unskilled_notification_tooltip
+					desc = spouse_task_diplomacy_good_unskilled_notification_tooltip
 				}
 				triggered_desc = {
 					trigger = {
-						scope:active_councillor = { diplomacy >= average_skill_level }
+						scope:councillor = { diplomacy >= average_skill_level }
 					}
-					desc = task_diplomacy_good_skilled_notification_tooltip
+					desc = spouse_task_diplomacy_good_skilled_notification_tooltip
 				}
 			}
 			
@@ -916,6 +927,7 @@ councillor_spouse_diplomacy.1009 = {
 		house = {
 			house_head = {
 				NOT = { this = scope:councillor }
+				NOT = { this = root }
 				has_any_bad_relationship_with_root_trigger = no
 				opinion = {
 					target = root
@@ -936,7 +948,7 @@ councillor_spouse_diplomacy.1009 = {
 
 	immediate = {
 		cp:councillor_spouse = {
-			save_scope_as = active_councillor
+			save_scope_as = councillor
 		}
 		add_character_flag = {
 			flag = had_event_councillor_spouse_diplomacy_1009
@@ -948,20 +960,20 @@ councillor_spouse_diplomacy.1009 = {
 			}
 		}
 		send_interface_message = {
-			type = event_spouse_task_good
+			type = msg_spouse_task_good
 			title = councillor_spouse_diplomacy.1007.desc
 			desc = {
 				triggered_desc = {
 					trigger = {
-						scope:active_councillor = { diplomacy < average_skill_level }
+						scope:councillor = { diplomacy < average_skill_level }
 					}
-					desc = task_diplomacy_good_unskilled_notification_tooltip
+					desc = spouse_task_diplomacy_good_unskilled_notification_tooltip
 				}
 				triggered_desc = {
 					trigger = {
-						scope:active_councillor = { diplomacy >= average_skill_level }
+						scope:councillor = { diplomacy >= average_skill_level }
 					}
-					desc = task_diplomacy_good_skilled_notification_tooltip
+					desc = spouse_task_diplomacy_good_skilled_notification_tooltip
 				}
 			}
 			
@@ -1050,7 +1062,7 @@ councillor_spouse_diplomacy.2001 = {
 		}
 		any_child = {
 			NOT = { this = scope:councillor }
-			NOT = { is_player_heir_of_trigger = { CHARACTER = root } }
+			NOT = { is_player_heir_of = root }
 			is_married = no
 			exists = liege
 			liege = root
@@ -1201,36 +1213,29 @@ councillor_spouse_diplomacy.2002 = {
 		NOT = {
 			has_character_flag = had_event_councillor_spouse_diplomacy_2002
 		}
-		exists = player_heir
-		player_heir = {
+		player_heir ?= {
 			NOT = { this = scope:councillor }
 			is_child_of = root
+			age < age_16_value # Warcraft
+		}
+		any_powerful_vassal = {
+			player_heir ?= {
+				councillor_spouse_diplomacy_2002_child_trigger = yes
+				save_temporary_scope_as = heir_temp
+			}
 		}
 		OR = {
-			#2 vassal children
-			any_vassal = {
-				is_powerful_vassal_of = root
-				exists = player_heir
-				player_heir = {
+			any_powerful_vassal = {
+				player_heir ?= {
+					NOT = { this = scope:heir_temp }
 					councillor_spouse_diplomacy_2002_child_trigger = yes
 				}
-				count >= 2
 			}
-			AND = {
-				any_vassal = {
-					is_powerful_vassal_of = root
-					exists = player_heir
-					player_heir = {
-						councillor_spouse_diplomacy_2002_child_trigger = yes
-					}
-				}
-				exists = liege
-				liege = {
-					NOT = { this = root }
-					exists = player_heir
-					player_heir = {
-						councillor_spouse_diplomacy_2002_child_trigger = yes
-					}
+			liege ?= {
+				NOT = { this = root }
+				player_heir ?= {
+					NOT = { this = scope:heir_temp }
+					councillor_spouse_diplomacy_2002_child_trigger = yes
 				}
 			}
 		}
@@ -1253,33 +1258,33 @@ councillor_spouse_diplomacy.2002 = {
 		player_heir = {
 			save_scope_as = child_heir
 		}
-
-		every_vassal = {
-			limit = {
-				is_powerful_vassal_of = root
-				exists = player_heir
-				player_heir = { councillor_spouse_diplomacy_2002_child_trigger = yes }
-			}
-			player_heir = {
-				add_to_list = vassal_heir_list
-			}		
-		}
-		if = {
-			limit = {
-				exists = liege
-				liege = {
-					NOT = { this = root }
-					exists = player_heir
-					player_heir = { councillor_spouse_diplomacy_2002_child_trigger = yes}
+		every_powerful_vassal = {
+			player_heir ?= {
+				if = {
+					limit = {
+						NOT = { is_in_list = vassal_heir_list }
+						councillor_spouse_diplomacy_2002_child_trigger = yes
+					}
+					add_to_list = vassal_heir_list
 				}
 			}
-			liege = {
-				player_heir = {
-					add_to_list = vassal_heir_list
-				}	
+		}
+		liege ?= {
+			if = {
+				limit = {
+					NOT = { this = root }
+				}
+				player_heir ?= {
+					if = {
+						limit = {
+							NOT = { is_in_list = vassal_heir_list }
+							councillor_spouse_diplomacy_2002_child_trigger = yes
+						}
+						add_to_list = vassal_heir_list
+					}
+				}
 			}
 		}
-
 		random_in_list = {
 			list = vassal_heir_list
 			save_scope_as = vassal_heir_1
@@ -1297,33 +1302,23 @@ councillor_spouse_diplomacy.2002 = {
 			}
 			save_scope_as = vassal_heir_2
 		}
-		if = { #Are there more than 2? There doesn't have to be one, but if there is we save that scope as well and add one more option!
+		#Are there more than 2? There doesn't have to be one, but if there is we save that scope as well and add one more option!
+		random_in_list = {
+			list = vassal_heir_list
 			limit = {
-				any_in_list = {
-					list = vassal_heir_list
-					NOR = {
-						this = scope:vassal_heir_1
-						this = scope:vassal_heir_2
-					}
+				NOR = {
+					this = scope:vassal_heir_1
+					this = scope:vassal_heir_2
 				}
 			}
-			random_in_list = {
-				list = vassal_heir_list
-				limit = {
-					NOR = {
-						this = scope:vassal_heir_1
-						this = scope:vassal_heir_2
-					}
-				}
-				save_scope_as = vassal_heir_3
-			}
+			save_scope_as = vassal_heir_3
 		}
 	}
 
 	option = { #vassal_heir_1
 		name = councillor_spouse_diplomacy.2002.a
 		scope:child_heir = {
-			set_relation_friend = scope:vassal_heir_1
+			set_relation_friend = { reason = friend_vassal_childhood target = scope:vassal_heir_1 }
 			hidden_effect = {
 				if = {
 					limit = {
@@ -1338,7 +1333,19 @@ councillor_spouse_diplomacy.2002 = {
 							}
 							AND = {
 								is_adult = no
-								scope:vassal_heir_1 = { is_adult = no }
+								OR = {
+									has_sexuality = heterosexual
+									has_sexuality = bisexual
+									has_sexuality = homosexual
+								}
+								scope:vassal_heir_1 = {
+									is_adult = no
+									OR = {
+										has_sexuality = heterosexual
+										has_sexuality = bisexual
+										has_sexuality = homosexual
+									}
+								}
 							}
 						}
 					}
@@ -1362,8 +1369,7 @@ councillor_spouse_diplomacy.2002 = {
 							set_relation_potential_lover = scope:vassal_heir_1
 						}
 						else = { #The heir gets a crush if they're not an adult
-							scope:vassal_heir_1 = { save_scope_as = crush }
-							trigger_event = childhood.0002
+							set_relation_crush = scope:vassal_heir_1
 						}
 					}
 				}
@@ -1381,7 +1387,7 @@ councillor_spouse_diplomacy.2002 = {
 	option = { #vassal_heir_2
 		name = councillor_spouse_diplomacy.2002.b
 		scope:child_heir = {
-			set_relation_friend = scope:vassal_heir_2
+			set_relation_friend = { reason = friend_vassal_childhood target = scope:vassal_heir_2 }
 			hidden_effect = {
 				if = {
 					limit = {
@@ -1396,7 +1402,19 @@ councillor_spouse_diplomacy.2002 = {
 							}
 							AND = {
 								is_adult = no
-								scope:vassal_heir_2 = { is_adult = no }
+								OR = {
+									has_sexuality = heterosexual
+									has_sexuality = bisexual
+									has_sexuality = homosexual
+								}
+								scope:vassal_heir_2 = {
+									is_adult = no
+									OR = {
+										has_sexuality = heterosexual
+										has_sexuality = bisexual
+										has_sexuality = homosexual
+									}
+								}
 							}
 						}
 					}
@@ -1420,8 +1438,7 @@ councillor_spouse_diplomacy.2002 = {
 							set_relation_potential_lover = scope:vassal_heir_2
 						}
 						else = { #The heir gets a crush if they're not an adult
-							scope:vassal_heir_2 = { save_scope_as = crush }
-							trigger_event = childhood.0002
+							set_relation_crush = scope:vassal_heir_2
 						}
 					}
 				}
@@ -1442,7 +1459,7 @@ councillor_spouse_diplomacy.2002 = {
 			exists = scope:vassal_heir_3
 		}
 		scope:child_heir = {
-			set_relation_friend = scope:vassal_heir_3
+			set_relation_friend = { reason = friend_vassal_childhood target = scope:vassal_heir_3 }
 			hidden_effect = {
 				if = {
 					limit = {
@@ -1457,7 +1474,19 @@ councillor_spouse_diplomacy.2002 = {
 							}
 							AND = {
 								is_adult = no
-								scope:vassal_heir_3 = { is_adult = no }
+								OR = {
+									has_sexuality = heterosexual
+									has_sexuality = bisexual
+									has_sexuality = homosexual
+								}
+								scope:vassal_heir_3 = {
+									is_adult = no
+									OR = {
+										has_sexuality = heterosexual
+										has_sexuality = bisexual
+										has_sexuality = homosexual
+									}
+								}
 							}
 						}
 					}
@@ -1481,8 +1510,7 @@ councillor_spouse_diplomacy.2002 = {
 							set_relation_potential_lover = scope:vassal_heir_3
 						}
 						else = { #The heir gets a crush if they're not an adult
-							scope:vassal_heir_3 = { save_scope_as = crush }
-							trigger_event = childhood.0002
+							set_relation_crush = scope:vassal_heir_3
 						}
 					}
 				}

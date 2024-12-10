@@ -1,13 +1,9 @@
 ﻿
-#####################################################################
+#######################################################################
 # EFFECT LIST
-#####################################################################
+#######################################################################
 # !!! Remember to add all new effects with a short description here !!!
-
-#####################################################################
-# EFFECTS
-#####################################################################
-
+#######################################################################
 
 blackmail_interaction_effect = {
 	scope:actor = {
@@ -18,6 +14,22 @@ blackmail_interaction_effect = {
 				modifier = blackmailing_me_opinion
 				target = scope:recipient
 			}
+		}
+		if = {
+			limit = { has_government = administrative_government }
+			if = {
+				limit = {
+					scope:target = { is_criminal_for = scope:recipient }
+				}
+				change_influence = medium_influence_gain
+			}
+			else_if = {
+				limit = {
+					scope:target = { is_shunned_for = scope:recipient }
+				}
+				change_influence = minor_influence_gain
+			}
+			else = { change_influence = miniscule_influence_gain  }
 		}
 		stress_impact = {
 			compassionate = medium_stress_impact_gain
@@ -54,7 +66,7 @@ blackmail_interaction_effect = {
 	}
 }
 
-torture_blind_castrate_opinion_effect = {
+torture_blind_castrate_disfigure_opinion_effect = {
 	scope:recipient = {
 		add_opinion = {
 			modifier = $VERB$_me
@@ -118,17 +130,17 @@ torture_interaction_actor_effect = {
 
 		###STRESS###
 
-		#Stress if they are my rival I hate them
+		#Stress loss if they are my rival I hate them
 		if = {
 			limit = { has_relation_rival = scope:recipient }
 
 			if = {
 				limit = {
 					NOR = {
-						has_trait = sadistic #Extra stress
-						has_trait = vengeful #Extra stress
-						has_trait = compassionate #Lessened impact
-						has_trait = forgiving #Lessened impact
+						has_trait = sadistic
+						has_trait = vengeful
+						has_trait = compassionate
+						has_trait = forgiving
 					}
 				}
 				add_stress = medium_stress_loss
@@ -136,17 +148,65 @@ torture_interaction_actor_effect = {
 			else = {
 				stress_impact = {
 					sadistic = major_stress_impact_loss
-					vengeful = major_stress_impact_loss
+					vengeful = massive_stress_impact_loss
 					compassionate = minor_stress_impact_gain
 					forgiving = minor_stress_impact_gain
 				}
 			}
 		}
-		#Regular stress
+		else_if = { # Torturing infidels is relaxing
+			limit = {
+				has_trait = zealous
+				NOT = { scope:actor.faith = scope:recipient.faith }
+			}
+
+			if = {
+				limit = {
+					NOR = {
+						has_trait = sadistic
+						has_trait = compassionate
+						has_trait = forgiving
+					}
+				}
+				add_stress = medium_stress_loss
+			}
+			else = {
+				stress_impact = {
+					sadistic = major_stress_impact_loss
+					compassionate = minor_stress_impact_gain
+					forgiving = minor_stress_impact_gain
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				NOT = {
+					has_trait = sadistic
+				}
+				scope:recipient = {
+					OR = {
+						is_child_of = scope:actor
+						is_grandchild_of = scope:actor
+						is_great_grandchild_of = scope:actor
+					}
+				}
+			}
+			stress_impact = {
+				base = medium_stress_impact_loss
+				compassionate = massive_stress_impact_gain
+				craven = major_stress_impact_gain
+				just = medium_stress_impact_gain
+				forgiving = major_stress_impact_gain
+				generous = medium_stress_impact_gain
+				trusting = minor_stress_impact_gain
+				content = minor_stress_impact_gain
+				family_first = minor_stress_impact_gain
+			}
+		}
 		else = {
 			stress_impact = {
-				sadistic = minor_stress_impact_loss
-				compassionate = massive_stress_impact_gain
+				sadistic = medium_stress_impact_loss
+				compassionate = major_stress_impact_gain
 				craven = major_stress_impact_gain
 				just = medium_stress_impact_gain
 				forgiving = medium_stress_impact_gain
@@ -162,10 +222,11 @@ torture_interaction_actor_effect = {
 				scope:recipient = {
 					OR = {
 						is_powerful_vassal_of = scope:actor # Is your powerful vassal
-
-						# Warcraft
-						tier_or_related_liege_tier_greater_or_equal_trigger = { TIER = tier_empire }
-
+						AND = { 
+							exists = primary_title
+							# Warcraft
+							tier_or_related_liege_tier_greater_or_equal_trigger = { TIER = tier_empire }
+						}
 						target_is_vassal_or_below = scope:actor # Your liege/s
 						scope:actor.faith.religious_head = scope:recipient # Your head of faith
 					}
@@ -187,9 +248,11 @@ torture_interaction_actor_effect = {
 							is_vassal_of = scope:actor
 							primary_title.tier > tier_barony
 						}
-
-						# Warcraft
-						tier_or_related_liege_tier_greater_or_equal_trigger = { TIER = tier_kingdom }
+						AND = { # Is a King
+							exists = primary_title
+							# Warcraft
+							tier_or_related_liege_tier_greater_or_equal_trigger = { TIER = tier_kingdom }
+						}
 					}
 				}
 			}
@@ -221,9 +284,12 @@ torture_interaction_actor_effect = {
 							exists = liege
 							liege = scope:actor.liege
 						}
-
-						# Warcraft
-						tier_or_related_liege_tier_greater_or_equal_trigger = { TIER = tier_duchy }
+						
+						AND = { # Is a Duke
+							exists = primary_title
+							# Warcraft
+							tier_or_related_liege_tier_greater_or_equal_trigger = { TIER = tier_duchy }
+						}
 					}
 				}
 			}
@@ -241,10 +307,11 @@ torture_interaction_actor_effect = {
 					OR = {
 						is_spouse_of = scope:actor # Your own spouse
 						is_close_or_extended_family_of = scope:actor # Your own family
-						
-						# Warcraft
-						tier_or_related_liege_tier_greater_or_equal_trigger = { TIER = tier_county }
-
+						AND = {
+							exists = primary_title
+							# Warcraft
+							tier_or_related_liege_tier_greater_or_equal_trigger = { TIER = tier_county }
+						}
 						scope:actor = { # Torturing extended family of your vassals is dreadful...
 							any_vassal = {
 								is_extended_family_of = scope:recipient
@@ -269,7 +336,7 @@ torture_interaction_actor_effect = {
 
 
 		###OPINIONS###
-		torture_blind_castrate_opinion_effect = { VERB = tortured }
+		torture_blind_castrate_disfigure_opinion_effect = { VERB = tortured }
 
 		###CHURCH OPINION & PIETY###
 		if = {
@@ -347,7 +414,7 @@ torturer_interaction_recipient_effect = {
 				brave = medium_stress_impact_gain
 			}
 		}
-		
+
 		if = { # Remove the flag blocking other prison interactions
 			limit = { has_character_flag = is_being_tortured }
 			remove_character_flag = is_being_tortured
@@ -387,7 +454,7 @@ illegal_imprisonment_dread_effect = {
 	}
 }
 
-blind_and_castrate_actor_effect = {
+blind_castrate_and_disfigure_effect = {
 	###STRESS##
 	scope:actor = {
 		if = {
@@ -563,6 +630,41 @@ blind_and_castrated_recipient_support_effect = { #To be used in other effects
 	}
 }
 
+blind_castrated_disfigured_recipient_support_effect = { #To be used in other effects
+	random = {
+		chance = 5
+		add_trait = lunatic_1
+	}
+
+	if = {
+		limit = {
+			NOR = {
+				has_trait = craven
+				has_trait = brave
+			}
+		}
+		add_stress = major_stress_impact_gain
+	}
+	else = {
+		stress_impact = {
+			craven = massive_stress_gain
+			brave = medium_stress_impact_gain
+		}
+	}
+	add_character_flag = { #TO make sure that they don't get spammed about the release
+		flag = block_for_prison_release_notification
+		days = 2
+	}
+
+	release_from_prison = yes
+
+	if = { # Remove the flag blocking other prison interactions
+		limit = { has_character_flag = is_being_tortured }
+		remove_character_flag = is_being_tortured
+	}
+}
+
+
 blind_recipient_effect = {
 	scope:recipient = {
 		if = {
@@ -577,21 +679,71 @@ blind_recipient_effect = {
 			modifier = recently_blinded
 			years = 1
 		}
-
-		blind_and_castrated_recipient_support_effect = yes
+		blind_castrated_disfigured_recipient_support_effect = yes
 	}
 }
 
 castrate_recipient_effect = {
 	scope:recipient = {
-		add_trait = eunuch
-
-		add_character_modifier = {
-			modifier = recently_castrated
-			years = 1
+		if = {
+			limit = {
+				age < 12
+			}
+			ep3_child_castration_effect = yes
+		}
+		else = {
+			ep3_youth_castration_effect = yes
 		}
 
-		blind_and_castrated_recipient_support_effect = yes
+
+		blind_castrated_disfigured_recipient_support_effect = yes
+	}
+}
+
+disfigure_recipient_effect = {
+	scope:recipient = {
+		if = {
+			limit = { scope:actor = { is_ai = no } }
+			#This is because we want to show a blinded portrait it prison.1030 for players, then we add the trait in the immediate but we still want a tooltip
+			add_trait_force_tooltip = disfigured
+		}
+		else = {
+			add_trait = disfigured
+		}
+
+		add_character_modifier = {
+			modifier = recently_disfigured
+			years = 1
+		}
+		blind_castrated_disfigured_recipient_support_effect = yes
+	}
+}
+
+maimed_recipient_effect = {
+	scope:recipient = {
+		if = {
+			limit = { scope:maim_type = flag:arm }
+			if = {
+				limit = { scope:actor = { is_ai = no } }
+				#This is because we want to show a blinded portrait it prison.1030 for players, then we add the trait in the immediate but we still want a tooltip
+				apply_maimed_trait_and_modifier_effect = yes
+			}
+			else = { apply_maimed_trait_and_modifier_effect = yes }
+		}
+		else_if = {
+			limit = { scope:maim_type = flag:leg }
+			if = {
+				limit = { scope:actor = { is_ai = no } }
+				#This is because we want to show a blinded portrait it prison.1030 for players, then we add the trait in the immediate but we still want a tooltip
+				add_trait_force_tooltip = one_legged
+			}
+			else = { add_trait = one_legged }
+			add_character_modifier = {
+				modifier = recently_maimed_modifier
+				years = 1
+			}
+		}
+		blind_castrated_disfigured_recipient_support_effect = yes
 	}
 }
 
@@ -667,6 +819,10 @@ war_for_imprison_effect = {
 						}
 					}
 				}
+				add_to_list = joining_vassals
+			}
+			every_in_list = {
+				list = joining_vassals
 				save_scope_as = joining_vassal
 				custom_tooltip = tooltip_fellow_vassal_joins_war #The war has not started when viewing the interaction screen.
 				hidden_effect = {
@@ -720,12 +876,48 @@ war_for_imprison_effect = {
 	}
 }
 
-vassal_revocation_tyranny_effect = {
+vassal_revocation_tyranny_effect = { #Despite its name this is referenced when _retracting_ vassals.
 	if = {
-		limit = {
-			vassal_revocation_is_tyrannical_trigger = yes
+		limit = { exists = scope:use_strife_not_tyranny }
+		# If you have revocation reason, we allow that.
+		if = {
+			limit = { has_revoke_title_reason = scope:recipient }
+			consume_revoke_title_reason = scope:recipient
 		}
-		add_tyranny = revoke_vassal_tyranny_gain
+		else_if = { #Admin liege revoking from admin vassal
+			limit = {
+				government_allows = administrative
+				scope:recipient = {
+				 	government_allows = administrative
+				}
+			}
+		}
+		else = { change_strife_opinion = major_strife_gain }
+	}
+	else_if = {
+		limit = {
+			vassal_revocation_is_tyrannical_trigger = { VASSAL = scope:recipient }
+		}
+		# Special Legitimacy loss if you're revoking without a reason
+		if = {
+			limit = { has_legitimacy = yes }
+			add_legitimacy = minor_legitimacy_loss
+		}
+		add_tyranny = {
+			value = revoke_vassal_tyranny_gain
+			if = {
+				limit = {
+					scope:recipient = {
+						is_imprisoned = yes
+						NOT = { is_imprisoned_by = scope:actor }
+					}
+					NOT = {
+						scope:actor = { has_revoke_title_reason = scope:recipient }
+					}
+				}
+				multiply = 2
+			}
+		}
 	}
 	else_if = {
 		limit = {
@@ -749,7 +941,7 @@ vassal_revocation_tyranny_effect = {
 		if = {
 			limit = {
 				faith = {
-					has_doctrine_parameter = pluralism_fundamentalist_revocation_tyranny_minimal 								
+					has_doctrine_parameter = pluralism_fundamentalist_revocation_tyranny_minimal
 					faith_hostility_level = {
 						target = scope:recipient.faith
 						value = faith_hostile_level
@@ -760,7 +952,7 @@ vassal_revocation_tyranny_effect = {
 		}
 		else = {
 			custom_tooltip = IS_ALLOWED_TO_REVOKE_EVIL_INFIDEL_VASSAL
-		}						
+		}
 		every_vassal = {
 			limit = {
 				faith = scope:recipient.faith
@@ -775,19 +967,66 @@ vassal_revocation_tyranny_effect = {
 				}
 			}
 		}
-	}	
+	}
 }
 
 revocation_tyranny_effect = {
+	save_scope_as = liege_temp_scope
 	if = {
+		limit = { exists = scope:use_strife_not_tyranny }
+		# If you have revocation reason, we allow that.
+		if = {
+			limit = { has_revoke_title_reason = $VASSAL$ }
+			consume_revoke_title_reason = $VASSAL$
+		}
+		else = { change_strife_opinion = major_strife_gain }
+	}
+	else_if = {
 		limit = {
-			title_revocation_is_tyrannical_trigger = yes
+			title_revocation_is_tyrannical_trigger = { VASSAL = $VASSAL$ }
 		}
 		add_tyranny = revoke_title_tyranny_gain
+# Special Legitimacy loss if you're revoking without a reason
+		if = {
+			limit = {
+				has_legitimacy = yes
+				NOT = {
+					scope:landed_title ?= {
+						duchy = scope:liege_temp_scope.capital_county.duchy
+					}
+				}
+			}
+			add_legitimacy = medium_legitimacy_loss
+		}
+
+		#If my culture is different from the recipients
+		if = {
+			limit = {
+				NOT = { culture = $VASSAL$.culture }
+			}
+			$VASSAL$.culture = {
+				change_cultural_acceptance = {
+					target = scope:liege_temp_scope.culture
+					value = revoke_title_culture_acceptance_impact
+					desc = cultural_acceptance_loss_revokation
+				}
+			}
+		}
 	}
 	else = {
 		if = {
 			limit = {
+				title_revocation_is_admin_governor_trigger = { VASSAL = $VASSAL$ }
+			}
+			custom_description = {
+				text = IS_ALLOWED_TO_REVOKE_ADMIN_GOVERNMENT
+				subject = scope:liege_temp_scope
+				object = $VASSAL$
+			}
+		}
+		else_if = {
+			limit = {
+				exists = scope:landed_title
 				has_claim_on = scope:landed_title
 			}
 			custom_tooltip = IS_ALLOWED_TO_REVOKE_TITLE_FOR_CLAIM_DESC
@@ -814,7 +1053,7 @@ revocation_tyranny_effect = {
 			if = {
 				limit = {
 					faith = {
-						has_doctrine_parameter = pluralism_fundamentalist_revocation_tyranny_minimal 								
+						has_doctrine_parameter = pluralism_fundamentalist_revocation_tyranny_minimal
 						faith_hostility_level = {
 							target = scope:recipient.faith
 							value = faith_hostile_level
@@ -825,7 +1064,7 @@ revocation_tyranny_effect = {
 			}
 			else = {
 				custom_tooltip = IS_ALLOWED_TO_REVOKE_EVIL_INFIDEL_TITLE
-			}						
+			}
 			every_vassal = {
 				limit = {
 					faith = scope:recipient.faith
@@ -841,98 +1080,110 @@ revocation_tyranny_effect = {
 				}
 			}
 		}
-	}	
+	}
 }
 
 war_for_revoke_effect = {
-	scope:recipient = {
+	$REBEL$ = {
 		save_scope_value_as = {
 			name = war_for_revocation_flavour
 			value = yes
 		}
 		start_war = {
 			casus_belli = refused_liege_demand_war
-			target = scope:actor
+			target = $LIEGE$
 		}
 	}
-	if = {
-		limit = {
-			scope:actor = { NOT = { has_revoke_title_reason = scope:recipient } }
-		}
-		scope:actor = {
+	$LIEGE$ = {
+		if = {
+			limit = {
+				NOT = { has_revoke_title_reason = $REBEL$ }
+			}
 			every_vassal = { #Vassals joining the rebel.
+				custom = vassals_joining_war_tt
 				limit = {
 					NOR = {
-						this = scope:recipient
+						this = $REBEL$
 						is_ai = no
 						is_incapable_trigger = yes
 						is_imprisoned = yes
 						dread_modified_ai_boldness = { #Too scared to do anything.
-							dreaded_character = scope:actor
+							dreaded_character = $LIEGE$
 							value <= -50
 						}
-						is_at_war_with = scope:recipient
-						is_at_war_with = scope:actor
+						is_at_war_with = $REBEL$
+						is_at_war_with = $LIEGE$
 					}
 					highest_held_title_tier > tier_barony
 					OR = {
 						#Lovers and friends always back rebel (unless also lovers/friends of the liege)
 						AND = {
 							OR = {
-								has_relation_lover = scope:recipient
-								has_relation_friend = scope:recipient
+								has_relation_lover = $REBEL$
+								has_relation_friend = $REBEL$
 							}
 							NOR = {
-								has_relation_lover = scope:actor
-								has_relation_friend = scope:actor
+								has_relation_lover = $LIEGE$
+								has_relation_friend = $LIEGE$
 							}
 						}
 						#Vassals that either like recipient or have high honor will rally if the liege is being tyrannical.
 						AND = {
 							# If they can't join a faction against the liege they should not revolt
 							NOR = {
-								has_relation_lover = scope:actor
-								has_relation_friend = scope:actor
-								is_allied_to = scope:actor
-								is_primary_heir_of = scope:actor
-								scope:actor = { has_strong_hook = prev }
+								has_relation_lover = $LIEGE$
+								has_relation_friend = $LIEGE$
+								is_allied_to = $LIEGE$
+								is_primary_heir_of = $LIEGE$
+								$LIEGE$ = { has_strong_hook = prev }
 								has_dread_level_towards = {
-									target = scope:actor
+									target = $LIEGE$
 									level = 2
-								}								
-							}						
+								}
+							}
 							OR = {
 								ai_honor >= 25
 								opinion = {
-									target = scope:recipient
+									target = $REBEL$
 									value >= 40
 								}
 							}
 							NOR = {
-								scope:actor = {
-									has_revoke_title_reason = scope:recipient
+								$LIEGE$ = { has_revoke_title_reason = $REBEL$ }
+								trigger_if = {
+									limit = { exists = scope:landed_title }
+									$LIEGE$ = { has_claim_on = scope:landed_title }
 								}
-								scope:actor = {
-									has_claim_on = scope:landed_title
-								}
-								faith = {								
+								faith = {
 									faith_hostility_level = {
-										target = scope:recipient.faith
+										target = $REBEL$.faith
 										value >= faith_hostile_level
 									}
 								}
 							}
-
 						}
 						#And finally, vassals that really hate their liege will join regardless (provided that they also do not hate recipient).
 						AND = {
 							opinion = {
-								target = scope:recipient
+								target = $REBEL$
 								value >= -25
 							}
-							opinion = {
-								target = scope:actor
-								value <= -50
+							OR = {
+								#default threshold
+								opinion = {
+									target = $LIEGE$
+									value <= -50
+								}
+								#If tyrannical, the default threshold will be reached if at this level
+								AND = {
+									$LIEGE$ = {
+										title_revocation_is_tyrannical_trigger = { VASSAL = $REBEL$ }
+									}
+									opinion = {
+										target = $LIEGE$
+										value <= -30 #revoke_title_tyranny_gain adds -20
+									}
+								}
 							}
 						}
 					}
@@ -940,16 +1191,16 @@ war_for_revoke_effect = {
 				save_scope_as = joining_vassal
 				custom_tooltip = tooltip_fellow_vassal_joins_war #The war has not started when viewing the interaction screen.
 				hidden_effect = {
-					scope:recipient = {
+					$REBEL$ = {
 						every_character_war = {
 							limit = {
 								using_cb = refused_liege_demand_war
 								casus_belli = {
-									primary_attacker = scope:recipient
-									primary_defender = scope:actor
+									primary_attacker = $REBEL$
+									primary_defender = $LIEGE$
 								}
 							}
-								add_to_list = war_to_join
+							add_to_list = war_to_join
 						}
 					}
 					every_in_list = {
@@ -964,7 +1215,7 @@ war_for_revoke_effect = {
 					}
 				}
 				hidden_effect = {
-					scope:actor = {
+					$LIEGE$ = {
 						add_opinion = {
 							target = prev
 							modifier = rebellious_vassal_opinion
@@ -975,16 +1226,18 @@ war_for_revoke_effect = {
 			every_vassal = {
 				limit = {
 					is_ai = no
-					NOT = { this = scope:recipient }
+					NOT = { this = $REBEL$ }
 					is_imprisoned = no
 				}
+				$REBEL$ = { save_scope_as = recipient }
+				$LIEGE$ = { save_scope_as = actor }
 				trigger_event = char_interaction.0232
 			}
 		}
 	}
-	scope:recipient = {
+	$REBEL$ = {
 		add_opinion = {
-			target = scope:actor
+			target = $LIEGE$
 			modifier = attempted_arrest_opinion
 		}
 	}
@@ -1147,14 +1400,19 @@ kick_from_court_interaction_warning_tooltip_effect = {
 		custom_tooltip = kick_from_court_knight_warning_tt
 	}
 	if = {
-		limit = { scope:actor = { has_relation_court_physician = scope:kicked } }
-		custom_tooltip = kick_from_court_physician_warning_tt
+		limit = {
+			scope:kicked = {
+				has_any_court_position = yes
+				any_court_position_employer = { this = scope:actor }
+			}
+		}
+		custom_tooltip = kick_from_court_holds_court_title_warning_tt
 	}
 }
 
 kick_from_court_interaction_effect = {
 	select_and_move_to_pool_effect = yes
-	
+
 	add_opinion = {
 		modifier = kicked_me_from_court
 		target = scope:actor
@@ -1162,13 +1420,71 @@ kick_from_court_interaction_effect = {
 	kick_from_court_interaction_warning_tooltip_effect = yes
 
 	every_close_family_member = {
-		#TODO not part of the travellers
 		limit = { NOT = { any_in_list = { list = kicked_relatives_list this = prev } } }
 		add_to_list = kicked_relatives_list
+	}
+
+	scope:actor = {
+		if = {
+			limit = { is_landless_adventurer = yes }
+			every_courtier = {
+				limit = {
+					is_adult = yes
+					NOR = {
+						is_close_family_of = scope:recipient
+						has_any_moderate_bad_relationship_with_character_trigger = { CHARACTER = scope:recipient }
+					}
+				}
+				custom = custom.every_adult_follower
+				add_opinion = {
+					target = scope:actor
+					modifier = kicked_follower_from_camp_opinion
+					opinion = -5
+				}
+			}
+			scope:recipient = {
+				every_relation = {
+					type = rival
+					limit = { is_courtier_of = scope:actor }
+					add_opinion = {
+						target = scope:actor
+						modifier = kicked_rival_from_camp_opinion
+						opinion = 30
+					}
+				}
+			}
+		}
 	}
 }
 
 disinherit_effect = {
+	if = {
+		limit = {
+			is_heir_of = $DISINHERITOR$
+			NOT = {
+				has_trait = disputed_heritage
+			}
+			$DISINHERITOR$ = {
+				any_vassal = {
+					has_vassal_stance = courtly
+				}
+			}
+		}
+		$DISINHERITOR$ = {
+			custom_tooltip = courtly_vassal_disapproves_disinheriting
+			hidden_effect = {
+				every_vassal = {
+					limit = {
+						has_vassal_stance = courtly
+					}
+					add_opinion = {
+						target = $DISINHERITOR$
+						modifier = courtly_disinherit_opinion
+					}
+				}
+			}
+		}
+	}
 	add_trait = disinherited
 	add_opinion = {
 		modifier = disinherited_opinion
@@ -1183,6 +1499,19 @@ disinherit_effect = {
 			add_opinion = {
 				modifier = disinherited_house_member_opinion
 				target = $DISINHERITOR$
+			}
+		}
+	}
+	if = {
+		limit = {
+			exists = dynasty
+			NOT = { $DISINHERITOR$ = dynasty.dynast }
+		}
+		$DISINHERITOR$.dynasty.dynast = {
+			add_opinion = {
+				target = $DISINHERITOR$
+				modifier = fp1_usurped_my_authority_opinion
+				years = 20
 			}
 		}
 	}
@@ -1237,13 +1566,21 @@ restore_inheritance_effect = {
 		}
 	}
 	else = {
-		add_opinion = {
-			modifier = restored_inheritance_opinion
-			target = scope:actor
+		if = {
+			limit = {
+				NOT = { this = scope:actor }
+			}
+			add_opinion = {
+				modifier = restored_inheritance_opinion
+				target = scope:actor
+			}
 		}
 		house = {
 			every_house_member = {
-				limit = { NOT = { this = scope:recipient } }
+				limit = {
+					NOT = { this = scope:recipient }
+					NOT = { this = scope:actor }
+				}
 				custom = all_house_members
 				add_opinion = {
 					modifier = restored_house_member_inheritance_opinion
@@ -1265,16 +1602,16 @@ denounce_effect = {
 	add_trait = denounced
 	if = {
 		limit = {
-			scope:actor = {
+			$ACTOR$ = {
 				has_hook_of_type = {
-					target = scope:recipient
+					target = $RECIPIENT$
 					type = house_head_hook
 				}
 			}
 		}
-		scope:actor = {	
+		$ACTOR$ = {
 			remove_hook = {
-				target = scope:recipient
+				target = $RECIPIENT$
 				type = house_head_hook
 			}
 		}
@@ -1282,45 +1619,45 @@ denounce_effect = {
 	if = {
 		limit = {
 			has_opinion_modifier = {
-				target = scope:actor
+				target = $ACTOR$
 				modifier = forgave_denounced_opinion
 			}
 		}
 		custom_tooltip = forgiven_changed_to_denounced
 		hidden_effect = {
 			remove_opinion = {
-				target = scope:actor
+				target = $ACTOR$
 				modifier = forgave_denounced_opinion
 			}
 			add_opinion = {
 				modifier = denounced_opinion
-				target = scope:actor
+				target = $ACTOR$
 			}
 		}
 	}
 	else = {
 		add_opinion = {
 			modifier = denounced_opinion
-			target = scope:actor
+			target = $ACTOR$
 		}
 	}
 	if = {
 		limit = {
-			NOT = { is_close_family_of = scope:actor }
+			NOT = { is_close_family_of = $ACTOR$ }
 		}
 		house = {
 			every_house_member = {
 				limit = {
-					NOT = { house = scope:actor.house }
+					NOT = { house = $ACTOR$.house }
 				}
 				custom = all_house_members
 				add_opinion = {
 					modifier = denounced_house_member_opinion
-					target = scope:actor
+					target = $ACTOR$
 				}
 			}
 		}
-		
+
 	}
 }
 
@@ -1354,7 +1691,7 @@ forgive_effect = {
 				}
 			}
 		}
-		
+
 	}
 }
 
@@ -1397,265 +1734,33 @@ dynast_end_dynasty_wars_effect = {
 
 educate_child_interaction_effect = {
 	scope:ward = {
-		#Set relation and move character
-		set_relation_guardian = scope:guardian
-
-		if = {
-			limit = {
-				scope:guardian = { is_landed = yes }
-				scope:ward = { is_landed = no }
-				NOT = {
-					scope:guardian = scope:ward.host
-				}
-			}
-			visit_court_of = scope:guardian
-		}
-		else_if = {
-			limit = {
-				scope:guardian = { is_landed = no }
-				scope:ward = { is_landed = yes }
-				NOT = {
-					scope:ward = scope:guardian.host
-				}
-			}
-			scope:guardian = {
-				visit_court_of = scope:ward
-			}
-		}
-		else_if = {
-			limit = {
-				scope:guardian = { is_landed = no }
-				scope:ward = { is_landed = no }
-				exists = scope:guardian.host
-				NOT = {
-					scope:guardian.host = scope:ward.host
-				}
-			}
-			visit_court_of = scope:guardian.host
-		}
-
-		#Convert culture
-		if = {
-			limit = {
-				always = scope:convert_culture
-
-				# Warcraft
-				scope:ward.age < age_11_value
-			}
-			custom_description = {
-				text = "educate_child_option_convert_culture_effect"
-				subject = scope:ward
-				object = scope:guardian.culture
-
-				scope:guardian = {
-					add_relation_flag = {
-						relation = ward
-						target = scope:ward
-						flag = convert_culture
-					}
-				}
-			}
-		}
-		else_if = {
-			limit = {
-				always = scope:convert_culture
-
-				# Warcraft
-				scope:ward.age >= age_11_value
-				scope:ward.age < age_14_value
-			}
-			custom_description = {
-				text = "educate_child_option_convert_culture_likely_effect"
-				subject = scope:ward
-				object = scope:guardian.culture
-
-				scope:guardian = {
-					add_relation_flag = {
-						relation = ward
-						target = scope:ward
-						flag = convert_culture
-					}
-				}
-			}
-		}
-		else_if = {
-			limit = {
-				always = scope:convert_culture
-
-				# Warcraft
-				scope:ward.age >= age_14_value
-			}
-			custom_description = {
-				text = "educate_child_option_convert_culture_unlikely_effect"
-				subject = scope:ward
-				object = scope:guardian.culture
-
-				scope:guardian = {
-					add_relation_flag = {
-						relation = ward
-						target = scope:ward
-						flag = convert_culture
-					}
-				}
-			}
-		}
-
-		#Convert faith
-		if = {
-			limit = {
-				always = scope:convert_faith
-
-				# Warcraft
-				scope:ward.age < age_11_value
-			}
-			custom_description = {
-				text = "educate_child_option_convert_faith_effect"
-				subject = scope:ward
-				object = scope:guardian.faith
-
-				scope:guardian = {
-					add_relation_flag = {
-						relation = ward
-						target = scope:ward
-						flag = convert_faith
-					}
-				}
-			}
-		}
-		else_if = {
-			limit = {
-				always = scope:convert_faith
-
-				# Warcraft
-				scope:ward.age >= age_11_value
-				scope:ward.age < age_14_value
-			}
-			custom_description = {
-				text = "educate_child_option_convert_faith_likely_effect"
-				subject = scope:ward
-				object = scope:guardian.faith
-
-				scope:guardian = {
-					add_relation_flag = {
-						relation = ward
-						target = scope:ward
-						flag = convert_faith
-					}
-				}
-			}
-		}
-		else_if = {
-			limit = {
-				always = scope:convert_faith
-
-				# Warcraft
-				scope:ward.age >= age_14_value
-			}
-			custom_description = {
-				text = "educate_child_option_convert_faith_unlikely_effect"
-				subject = scope:ward
-				object = scope:guardian.faith
-
-				scope:guardian = {
-					add_relation_flag = {
-						relation = ward
-						target = scope:ward
-						flag = convert_faith
-					}
-				}
-			}
-		}
+		# Culture/faith conversion + university gold/tooltips
+		education_flags_tooltips_effect = yes
 	}
-
-	if = {
-		limit = {
-			scope:recipient = {
-				any_realm_province = {
-					has_university_building_trigger = yes
-				}
-			}
-			always = scope:send_to_university
-		}
-		scope:actor = {
-			remove_short_term_gold = monumental_gold_value
-		}
-		scope:ward = {
-			custom_tooltip = is_sent_to_university
-			add_character_flag = {
-				flag = studying_at_university
-				years = 17
-			}
-		}
-	}
-
-	#Opinions
-	guardian_add_opinion_effect = { GUARDIAN = scope:guardian WARD_LIEGE = scope:ward_liege WARD = scope:ward }
+	# Travel setup
+	ward_depart_effect = yes
 }
 
-offer_ward_interaction_effect = {
-	scope:ward = {
-		#Set relation and move character
-		set_relation_guardian = scope:guardian
-
+education_flags_tooltips_effect = {
+	#Convert culture
+	if = {
+		limit = { always = scope:convert_culture }
+		scope:ward = {
+			add_character_flag = {
+				flag = convert_culture
+				years = 10
+			}
+		}
 		if = {
-			limit = {
-				scope:guardian = { is_landed = yes }
-				scope:ward = { is_landed = no }
-				NOT = {
-					scope:guardian = scope:ward.host
-				}
-			}
-			visit_court_of = scope:guardian
-		}
-		else_if = {
-			limit = {
-				scope:guardian = { is_landed = no }
-				scope:ward = { is_landed = yes }
-				NOT = {
-					scope:ward = scope:guardian.host
-				}
-			}
-			scope:guardian = {
-				visit_court_of = scope:ward
-			}
-		}
-		else_if = {
-			limit = {
-				scope:guardian = { is_landed = no }
-				scope:ward = { is_landed = no }
-				NOT = {
-					scope:guardian.host = scope:ward.host
-				}
-			}
-			visit_court_of = scope:guardian.host
-		}
-
-		#Convert culture
-		if = {
-			limit = {
-				always = scope:convert_culture
-
-				# Warcraft
-				scope:ward.age < age_11_value
-			}
+			limit = { scope:ward.age < age_11_value }
 			custom_description = {
 				text = "educate_child_option_convert_culture_effect"
 				subject = scope:ward
 				object = scope:guardian.culture
-
-				scope:guardian = {
-					add_relation_flag = {
-						relation = ward
-						target = scope:ward
-						flag = convert_culture
-					}
-				}
 			}
 		}
 		else_if = {
 			limit = {
-				always = scope:convert_culture
-
 				# Warcraft
 				scope:ward.age >= age_11_value
 				scope:ward.age < age_14_value
@@ -1664,20 +1769,10 @@ offer_ward_interaction_effect = {
 				text = "educate_child_option_convert_culture_likely_effect"
 				subject = scope:ward
 				object = scope:guardian.culture
-
-				scope:guardian = {
-					add_relation_flag = {
-						relation = ward
-						target = scope:ward
-						flag = convert_culture
-					}
-				}
 			}
 		}
 		else_if = {
 			limit = {
-				always = scope:convert_culture
-
 				# Warcraft
 				scope:ward.age >= age_14_value
 			}
@@ -1685,43 +1780,28 @@ offer_ward_interaction_effect = {
 				text = "educate_child_option_convert_culture_unlikely_effect"
 				subject = scope:ward
 				object = scope:guardian.culture
-
-				scope:guardian = {
-					add_relation_flag = {
-						relation = ward
-						target = scope:ward
-						flag = convert_culture
-					}
-				}
 			}
 		}
-
-		#Convert faith
-		if = {
-			limit = {
-				always = scope:convert_faith
-
-				# Warcraft
-				scope:ward.age < age_11_value
+	}
+	#Convert faith
+	if = {
+		limit = { always = scope:convert_faith }
+		scope:ward = {
+			add_character_flag = {
+				flag = convert_faith
+				years = 10
 			}
+		}
+		if = {
+			limit = { scope:ward.age < age_11_value }
 			custom_description = {
 				text = "educate_child_option_convert_faith_effect"
 				subject = scope:ward
 				object = scope:guardian.faith
-
-				scope:guardian = {
-					add_relation_flag = {
-						relation = ward
-						target = scope:ward
-						flag = convert_faith
-					}
-				}
 			}
 		}
 		else_if = {
 			limit = {
-				always = scope:convert_faith
-
 				# Warcraft
 				scope:ward.age >= age_11_value
 				scope:ward.age < age_14_value
@@ -1730,20 +1810,10 @@ offer_ward_interaction_effect = {
 				text = "educate_child_option_convert_faith_likely_effect"
 				subject = scope:ward
 				object = scope:guardian.faith
-
-				scope:guardian = {
-					add_relation_flag = {
-						relation = ward
-						target = scope:ward
-						flag = convert_faith
-					}
-				}
 			}
 		}
 		else_if = {
 			limit = {
-				always = scope:convert_faith
-
 				# Warcraft
 				scope:ward.age >= age_14_value
 			}
@@ -1751,24 +1821,24 @@ offer_ward_interaction_effect = {
 				text = "educate_child_option_convert_faith_unlikely_effect"
 				subject = scope:ward
 				object = scope:guardian.faith
-
-				scope:guardian = {
-					add_relation_flag = {
-						relation = ward
-						target = scope:ward
-						flag = convert_faith
-					}
-				}
 			}
 		}
 	}
+
+	# Knowledge
 	if = {
 		limit = {
+			always = scope:send_to_university
 			OR = {
-				scope:recipient = {
-					any_realm_province = {
-						has_university_building_trigger = yes
-					}
+				scope:recipient = { # Warcraft - remove bp3 modifier
+					#OR = {
+						any_realm_province = {
+							has_university_building_trigger = yes
+						}
+					#	any_realm_county = {
+					#		has_county_modifier = pandidakterion_university_modifier
+					#	}
+					#}
 				}
 				scope:actor = {
 					this = scope:secondary_actor
@@ -1777,71 +1847,25 @@ offer_ward_interaction_effect = {
 					}
 				}
 			}
-			always = scope:send_to_university
 		}
-		scope:actor = {
-			remove_short_term_gold = monumental_gold_value
-		}
-		scope:ward = {
-			custom_tooltip = is_sent_to_university
-			add_character_flag = {
-				flag = studying_at_university
-				years = 17
-			}
-		}
-	}
-
-	#Opinions
-	guardian_add_opinion_effect = { GUARDIAN = scope:guardian WARD_LIEGE = scope:ward_liege WARD = scope:ward }
-	
-
-	scope:actor = {
-		if = {
-			limit = { scope:education_hook = yes }
-			use_hook = scope:recipient
-		}
-
-		stress_impact = {
-			paranoid = minor_stress_impact_gain
+		scope:actor = { remove_short_term_gold = monumental_gold_value }
+		custom_tooltip = is_sent_to_university
+		add_character_flag = {
+			flag = studying_at_university
+			years = 17
 		}
 	}
 }
 
-offer_guardianship_interaction = {
+educate_child_event_effect = {
 	scope:ward = {
 		#Set relation and move character
-		
-		if = {
-			limit = {
-				NOT = { exists = scope:offer_guardianship_interaction }
-				any_relation = {
-					type = guardian
-				}
-			}
-			every_relation = {
-				type = guardian
-				save_scope_as = guardian_to_remove
-			}
-			remove_relation_guardian = scope:guardian_to_remove
-		}
-		
 		set_relation_guardian = scope:guardian
 
-		set_variable = {
-			name = character_requested_as_educator
-			value = scope:guardian
-			years = 10
-		}
-		set_variable = {
-			name = character_making_education_request
-			value = scope:actor
-			years = 10
-		}
-
 		if = {
 			limit = {
-				scope:guardian = { is_landed = yes }
-				scope:ward = { is_landed = no }
+				scope:guardian = { is_playable_character = yes }
+				scope:ward = { is_playable_character = no }
 				NOT = {
 					scope:guardian = scope:ward.host
 				}
@@ -1850,8 +1874,8 @@ offer_guardianship_interaction = {
 		}
 		else_if = {
 			limit = {
-				scope:guardian = { is_landed = no }
-				scope:ward = { is_landed = yes }
+				scope:guardian = { is_playable_character = no }
+				scope:ward = { is_playable_character = yes }
 				NOT = {
 					scope:ward = scope:guardian.host
 				}
@@ -1862,189 +1886,19 @@ offer_guardianship_interaction = {
 		}
 		else_if = {
 			limit = {
-				scope:guardian = { is_landed = no }
-				scope:ward = { is_landed = no }
+				scope:guardian = { is_playable_character = no }
+				scope:ward = { is_playable_character = no }
+				exists = scope:guardian.host
 				NOT = {
 					scope:guardian.host = scope:ward.host
 				}
 			}
 			visit_court_of = scope:guardian.host
 		}
-
-		#Convert culture
-		if = {
-			limit = {
-				always = scope:convert_culture
-
-				# Warcraft
-				scope:ward.age < age_11_value
-			}
-			custom_description = {
-				text = "educate_child_option_convert_culture_effect"
-				subject = scope:ward
-				object = scope:guardian.culture
-
-				scope:guardian = {
-					add_relation_flag = {
-						relation = ward
-						target = scope:ward
-						flag = convert_culture
-					}
-				}
-			}
-		}
-		else_if = {
-			limit = {
-				always = scope:convert_culture
-
-				# Warcraft
-				scope:ward.age >= age_11_value
-				scope:ward.age < age_14_value
-			}
-			custom_description = {
-				text = "educate_child_option_convert_culture_likely_effect"
-				subject = scope:ward
-				object = scope:guardian.culture
-
-				scope:guardian = {
-					add_relation_flag = {
-						relation = ward
-						target = scope:ward
-						flag = convert_culture
-					}
-				}
-			}
-		}
-		else_if = {
-			limit = {
-				always = scope:convert_culture
-
-				# Warcraft
-				scope:ward.age >= age_14_value
-			}
-			custom_description = {
-				text = "educate_child_option_convert_culture_unlikely_effect"
-				subject = scope:ward
-				object = scope:guardian.culture
-
-				scope:guardian = {
-					add_relation_flag = {
-						relation = ward
-						target = scope:ward
-						flag = convert_culture
-					}
-				}
-			}
-		}
-
-		#Convert faith
-		if = {
-			limit = {
-				always = scope:convert_faith
-
-				# Warcraft
-				scope:ward.age < age_11_value
-			}
-			custom_description = {
-				text = "educate_child_option_convert_faith_effect"
-				subject = scope:ward
-				object = scope:guardian.faith
-
-				scope:guardian = {
-					add_relation_flag = {
-						relation = ward
-						target = scope:ward
-						flag = convert_faith
-					}
-				}
-			}
-		}
-		else_if = {
-			limit = {
-				always = scope:convert_faith
-
-				# Warcraft
-				scope:ward.age >= age_11_value
-				scope:ward.age < age_14_value
-			}
-			custom_description = {
-				text = "educate_child_option_convert_faith_likely_effect"
-				subject = scope:ward
-				object = scope:guardian.faith
-
-				scope:guardian = {
-					add_relation_flag = {
-						relation = ward
-						target = scope:ward
-						flag = convert_faith
-					}
-				}
-			}
-		}
-		else_if = {
-			limit = {
-				always = scope:convert_faith
-
-				# Warcraft
-				scope:ward.age >= age_14_value
-			}
-			custom_description = {
-				text = "educate_child_option_convert_faith_unlikely_effect"
-				subject = scope:ward
-				object = scope:guardian.faith
-
-				scope:guardian = {
-					add_relation_flag = {
-						relation = ward
-						target = scope:ward
-						flag = convert_faith
-					}
-				}
-			}
-		}
-	}
-	if = {
-		limit = {
-			scope:recipient = {
-				any_realm_province = {
-					has_university_building_trigger = yes
-				}
-			}
-			always = scope:send_to_university
-		}
-		scope:actor = {
-			remove_short_term_gold = monumental_gold_value
-		}
-		scope:ward = {
-			custom_tooltip = is_sent_to_university
-			add_character_flag = {
-				flag = studying_at_university
-				years = 17
-			}
-		}
 	}
 
 	#Opinions
 	guardian_add_opinion_effect = { GUARDIAN = scope:guardian WARD_LIEGE = scope:ward_liege WARD = scope:ward }
-
-	scope:actor = {
-		if = {
-			limit = {
-				scope:education_hook = yes
-				has_hook = scope:recipient
-			}
-			use_hook = scope:recipient
-		}
-
-		if = {
-			limit = {
-				this = scope:secondary_actor
-			}
-			stress_impact = {
-				shy = minor_stress_impact_gain
-			}
-		}
-	}
 }
 
 call_dynasty_member_to_war_interaction_effect = {
@@ -2052,7 +1906,7 @@ call_dynasty_member_to_war_interaction_effect = {
 		limit = {
 			exists = scope:target
 		}
-		
+
 		scope:target = {
 			hidden_effect = {
 				set_called_to = scope:recipient
@@ -2090,12 +1944,17 @@ offer_vassalization_interaction_effect = {
 		# Warcraft
 		if = {
 			limit = { scope:turns_undead = yes }
-			raise_undead_by_vassal_effect = { MASTER = scope:actor CHANGE = scope:change }
+			raise_undead_by_vassal_effect = { MASTER = scope:actor CHANGE = scope:change FROSTMOURNE = yes }
 		}
 		else = {
 			change_liege = {
 				liege = scope:actor
 				change = scope:change
+			}
+			add_opinion = {
+				modifier = became_vassal
+				target = scope:actor
+				opinion = 10
 			}
 		}
 	}
@@ -2105,16 +1964,16 @@ offer_vassalization_interaction_effect = {
 	scope:recipient = {
 		if = {
 			limit = {
-				has_government = feudal_government
+				government_has_flag = government_is_feudal
 			}
 			if = {
 				limit = { scope:high_obligations = yes }
 				hidden_effect = {
 					if = {
-						limit = { is_independent_ruler = no} # To avoid errors during tooltip generation (prior to the contract being generated)
+						limit = { is_independent_ruler = no } # To avoid errors during tooltip generation (prior to the contract being generated)
 						vassal_contract_set_obligation_level = { type = feudal_government_taxes level = 3 }
 						vassal_contract_set_obligation_level = { type = feudal_government_levies level = 3 }
-					}	
+					}
 				}
 				custom_tooltip = high_obligations_taxes
 				custom_tooltip = high_obligations_levies
@@ -2123,23 +1982,23 @@ offer_vassalization_interaction_effect = {
 				limit = { scope:low_obligations = yes }
 				hidden_effect = {
 					if = {
-						limit = { is_independent_ruler = no} # To avoid errors during tooltip generation (prior to the contract being generated)
+						limit = { is_independent_ruler = no } # To avoid errors during tooltip generation (prior to the contract being generated)
 						vassal_contract_set_obligation_level = { type = feudal_government_taxes level = 1 }
 						vassal_contract_set_obligation_level = { type = feudal_government_levies level = 1 }
-					}			
+					}
 				}
 				custom_tooltip = low_obligations_taxes
 				custom_tooltip = low_obligations_levies
 			}
 			else_if = {
-				limit = { scope:religious_exemption = yes}
+				limit = { scope:religious_exemption = yes }
 				hidden_effect = {
 					if = {
-						limit = { is_independent_ruler = no} # To avoid errors during tooltip generation (prior to the contract being generated)
+						limit = { is_independent_ruler = no } # To avoid errors during tooltip generation (prior to the contract being generated)
 						vassal_contract_set_obligation_level = { type = feudal_government_taxes level = 2 }
 						vassal_contract_set_obligation_level = { type = feudal_government_levies level = 1 }
 						vassal_contract_set_obligation_level = { type = religious_rights level = 1 }
-					}		
+					}
 				}
 				custom_tooltip = normal_obligations_taxes
 				custom_tooltip = low_obligations_levies
@@ -2148,16 +2007,31 @@ offer_vassalization_interaction_effect = {
 			else = {
 				hidden_effect = {
 					if = {
-						limit = { is_independent_ruler = no} # To avoid errors during tooltip generation (prior to the contract being generated)
+						limit = { is_independent_ruler = no } # To avoid errors during tooltip generation (prior to the contract being generated)
 						vassal_contract_set_obligation_level = { type = feudal_government_taxes level = 2 }
 						vassal_contract_set_obligation_level = { type = feudal_government_levies level = 2 }
-					}			
+					}
 				}
 				custom_tooltip = normal_obligations_taxes
 				custom_tooltip = normal_obligations_levies
-			}		
+			}
+		}
+		else_if = {
+			limit = {
+				government_has_flag = government_is_clan
+				scope:religious_exemption_clan = yes
+			}
+			hidden_effect = {
+				if = {
+					limit = { is_independent_ruler = no } # To avoid errors during tooltip generation (prior to the contract being generated)
+					vassal_contract_set_obligation_level = { type = religious_rights level = 1 }
+				}
+			}
+			custom_tooltip = religious_protection_tt
 		}
 	}
+
+	# Struggle catalysts. ( Warcraft: removed)
 }
 
 offer_fealty_interaction_effect = {
@@ -2169,7 +2043,7 @@ offer_fealty_interaction_effect = {
 		# Warcraft
 		if = {
 			limit = { scope:turns_undead = yes }
-			raise_undead_by_vassal_effect = { MASTER = scope:recipient CHANGE = scope:change }
+			raise_undead_by_vassal_effect = { MASTER = scope:recipient CHANGE = scope:change FROSTMOURNE = yes }
 		}
 		else = {
 			change_liege = {
@@ -2189,7 +2063,7 @@ offer_fealty_interaction_effect = {
 		# Special terms for feudal contracts
 		if = {
 			limit = {
-				has_government = feudal_government
+				government_has_flag = government_is_feudal
 			}
 			if = {
 				limit = { scope:high_obligations = yes }
@@ -2216,7 +2090,7 @@ offer_fealty_interaction_effect = {
 				custom_tooltip = low_obligations_levies
 			}
 			else_if = {
-				limit = { scope:religious_taxation = yes}
+				limit = { scope:religious_taxation = yes }
 				hidden_effect = {
 					if = {
 						limit = { is_independent_ruler = no } # To avoid errors during tooltip generation (prior to the contract being generated)
@@ -2227,6 +2101,7 @@ offer_fealty_interaction_effect = {
 				}
 				custom_tooltip = high_obligations_taxes
 				custom_tooltip = normal_obligations_levies
+				# Warcraft				
 				custom_tooltip = religious_protection_tt
 			}
 			else = {
@@ -2235,13 +2110,28 @@ offer_fealty_interaction_effect = {
 						limit = { is_independent_ruler = no } # To avoid errors during tooltip generation (prior to the contract being generated)
 						vassal_contract_set_obligation_level = { type = feudal_government_taxes level = 2 }
 						vassal_contract_set_obligation_level = { type = feudal_government_levies level = 2 }
-					}		
+					}
 				}
 				custom_tooltip = normal_obligations_taxes
 				custom_tooltip = normal_obligations_levies
-			}		
+			}
+		}
+		else_if = {
+			limit = {
+				government_has_flag = government_is_clan
+				scope:religious_exemption_clan = yes
+			}
+			hidden_effect = {
+				if = {
+					limit = { is_independent_ruler = no } # To avoid errors during tooltip generation (prior to the contract being generated)
+					vassal_contract_set_obligation_level = { type = religious_rights level = 1 }
+				}
+			}
+			custom_tooltip = religious_protection_tt
 		}
 	}
+
+	# Struggle catalysts. (Warcraft - removed)
 }
 
 call_ally_interaction_effect = {
@@ -2256,7 +2146,7 @@ call_ally_interaction_effect = {
 			}
 		}
 		call_ally_interaction_event_effect = yes
-		
+
 	}
 }
 
@@ -2274,6 +2164,12 @@ call_ally_interaction_event_effect = {
 			scope:actor = {
 				if = {
 					limit = {
+						scope:recipient.primary_title.tier = tier_barony
+					}
+					add_prestige = -10
+				}
+				else_if = {
+					limit = {
 						scope:recipient.primary_title.tier = tier_county
 					}
 					add_prestige = minor_prestige_loss
@@ -2290,7 +2186,10 @@ call_ally_interaction_event_effect = {
 					}
 					add_prestige = major_prestige_loss
 				}
-				else = {
+				else_if = {
+					limit = {
+						scope:recipient.primary_title.tier = tier_empire
+					}
 					add_prestige = massive_prestige_loss
 				}
 			}
@@ -2320,7 +2219,7 @@ seduce_interaction_stress_effect = {
 				}
 			}
 		}
-		scope:actor = {		
+		scope:actor = {
 			stress_impact = {
 				chaste = medium_stress_impact_gain
 				zealous = minor_stress_impact_gain
@@ -2330,7 +2229,7 @@ seduce_interaction_stress_effect = {
 		}
 	}
 	else = {
-		scope:actor = {		
+		scope:actor = {
 			stress_impact = {
 				chaste = medium_stress_impact_gain
 			}
@@ -2343,7 +2242,7 @@ retract_vassal_interaction_effect = {
 		vassal_revocation_tyranny_effect = yes
 		if = {
 			limit = {
-				vassal_revocation_is_tyrannical_trigger = yes
+				vassal_revocation_is_tyrannical_trigger = { VASSAL = scope:recipient }
 			}
 			stress_impact = {
 				generous = medium_stress_impact_gain
@@ -2372,7 +2271,7 @@ retract_vassal_interaction_effect = {
 	}
 
 	resolve_title_and_vassal_change = scope:change
-	
+
 	scope:recipient = {
 		add_opinion = {
 			target = scope:actor
@@ -2380,10 +2279,11 @@ retract_vassal_interaction_effect = {
 		}
 	}
 	if = {
-		limit = { always = scope:hook }
-		scope:actor = {
-			use_hook = scope:recipient
+		limit = { 
+			always = scope:hook
+			scope:actor ?= { has_hook = scope:recipient }
 		}
+		scope:actor = { use_hook = scope:recipient }
 	}
 }
 
@@ -2445,8 +2345,9 @@ revoke_title_interaction_effect = {
 		limit = {
 			scope:recipient = {
 				faith = scope:actor.faith
-				has_government = theocracy_government
+				government_has_flag = government_is_theocracy
 			}
+			NOT = { scope:actor = scope:actor.faith.religious_head } #No loss if actor is head of faith themselves
 		}
 		scope:actor = {
 			add_piety = major_piety_loss
@@ -2478,12 +2379,18 @@ revoke_title_interaction_effect = {
 			scope:landed_title.tier != tier_barony
 		}
 		scope:actor = {
-			revocation_tyranny_effect = yes
-			title_revocation_stress_effect = yes
+			revocation_tyranny_effect = { VASSAL = scope:recipient }
+			title_revocation_stress_effect = { VASSAL = scope:recipient }
 			consume_revoke_title_reason = scope:recipient
 		}
 		scope:recipient = {
-			add_pressed_claim = scope:landed_title
+			if = {
+				limit = {
+					NOT = { exists = scope:administrative_revocation }
+					is_landed_or_landless_administrative = no
+				}
+				add_pressed_claim = scope:landed_title
+			}
 			if = {
 				limit = {
 					is_a_faction_member = yes
@@ -2491,7 +2398,7 @@ revoke_title_interaction_effect = {
 				add_joined_faction_discontent = 25
 			}
 		}
-		
+
 		if = {
 			limit = { scope:landed_title.tier = tier_county }
 			scope:landed_title = {
@@ -2514,6 +2421,177 @@ revoke_title_interaction_effect = {
 				}
 			}
 		}
+
+		if = {
+			limit = {
+				scope:actor.culture = { has_cultural_parameter = penalty_for_revoking_titles_from_house_members }
+				exists = scope:actor.house
+				exists = scope:recipient.house
+				scope:actor.house = scope:recipient.house
+			}
+			if = {
+				limit = {
+					scope:landed_title.tier = tier_county
+				}
+				scope:actor = {
+					add_prestige = medium_prestige_loss
+				}
+			}
+			else_if = {
+				limit = {
+					scope:landed_title.tier = tier_duchy
+				}
+				scope:actor = {
+					add_prestige = major_prestige_loss
+				}
+			}
+			else_if = { #Empire
+				limit = {
+					scope:landed_title.tier = tier_kingdom
+				}
+				scope:actor = {
+					add_prestige = massive_prestige_loss
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				scope:actor.culture = { has_cultural_parameter = penalty_for_revoking_titles_from_close_family }
+				exists = scope:actor
+				exists = scope:recipient
+				scope:actor = {
+					is_close_family_of = scope:recipient
+				}
+			}
+			if = {
+				limit = {
+					scope:landed_title.tier = tier_county
+				}
+				scope:actor = {
+					add_prestige = medium_prestige_loss
+				}
+			}
+			else_if = {
+				limit = {
+					scope:landed_title.tier = tier_duchy
+				}
+				scope:actor = {
+					add_prestige = major_prestige_loss
+				}
+			}
+			else_if = { #Empire
+				limit = {
+					scope:landed_title.tier = tier_kingdom
+				}
+				scope:actor = {
+					add_prestige = massive_prestige_loss
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				scope:actor.culture = { has_cultural_parameter = piety_penalty_for_revoking_titles_from_house_members }
+				exists = scope:actor.house
+				exists = scope:recipient.house
+				scope:actor.house = scope:recipient.house
+			}
+			if = {
+				limit = {
+					scope:landed_title.tier = tier_county
+				}
+				scope:actor = {
+					add_piety = medium_piety_loss
+				}
+			}
+			else_if = {
+				limit = {
+					scope:landed_title.tier = tier_duchy
+				}
+				scope:actor = {
+					add_piety = major_piety_loss
+				}
+			}
+			else = { #Can't revoke empire titles anyway
+				limit = {
+					scope:landed_title.tier = tier_kingdom
+				}
+				scope:actor = {
+					add_piety = massive_piety_loss
+				}
+			}
+		}
+		
+		# If we're a clan this interaction affects unity
+		if = {
+			limit = {
+				scope:actor = { government_has_flag = government_is_clan }
+				scope:recipient = { government_has_flag = government_is_clan }
+				exists = scope:actor.house
+				exists = scope:recipient.house
+				scope:actor.house = scope:recipient.house
+				scope:landed_title.tier >= tier_county
+			}
+			scope:actor.house = {
+				if = {
+					limit = {
+						scope:landed_title.tier = tier_county
+					}
+					save_scope_value_as = {
+						name = revoke_title_unity_loss
+						value = minor_unity_loss
+					}
+				}
+				if = {
+					limit = {
+						scope:landed_title.tier = tier_duchy
+					}
+					save_scope_value_as = {
+						name = revoke_title_unity_loss
+						value = medium_unity_loss
+					}
+				}
+				else_if = {
+					limit = {
+						scope:landed_title.tier = tier_kingdom
+					}
+					save_scope_value_as = {
+						name = revoke_title_unity_loss
+						value = major_unity_loss
+					}
+				}
+				if = {
+					limit = { exists = scope:revoke_title_unity_loss }
+					add_clan_unity_interaction_effect = {
+						CHARACTER = scope:actor
+						TARGET = scope:recipient
+						VALUE = scope:revoke_title_unity_loss
+						DESC = clan_unity_title_revoked.desc
+						REVERSE_NON_HOUSE_TARGET = no
+					}
+				}
+			}
+		}
+		
+		# EP3 - Become Adventurer - Revocation
+		scope:recipient = {
+			if = {
+				limit = {
+					has_ep3_dlc_trigger = yes
+					is_valid_for_laampdom = yes
+				}
+				# Plus for our memory variable.
+				primary_title = { save_scope_as = lost_primary_title }
+				custom_tooltip = {
+					text = laamp_may_become_adventurer_tt
+					trigger_event = {
+						id = ep3_laamps.0041
+						delayed = yes
+					}
+				}
+			}
+		}
 	}
 	else = {
 		if = {
@@ -2521,14 +2599,45 @@ revoke_title_interaction_effect = {
 				NOT = { exists = scope:revoke_title_interaction }
 			}
 			custom_tooltip = IS_ALLOWED_TO_REVOKE_TITLE_BARONY_DESC
+			scope:actor = {
+				if = {
+					limit = {
+						any_vassal = {
+							has_vassal_stance = barons_and_minor_landholders
+						}
+					}
+					custom_tooltip = barons_and_minor_landholders_disapproves_baron_revocations
+					hidden_effect = {
+						every_vassal = {
+							limit = {
+								has_vassal_stance = barons_and_minor_landholders
+							}
+							add_opinion = {
+								target = scope:actor
+								modifier = barons_and_minor_landholders_disapproves_baron_revocations_opinion
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 
 
 	scope:actor = {
 		if = {
-			limit = { scope:hook = yes }
+			limit = {
+				scope:hook = yes
+				scope:recipient = { is_alive = yes }
+			}
 			use_hook = scope:recipient
+		}
+		if = {
+			limit = {
+				scope:hook_liege ?= yes
+				scope:intermediary = { is_alive = yes }
+			}
+			use_hook = scope:intermediary
 		}
 	}
 	scope:recipient = {
@@ -2547,6 +2656,11 @@ revoke_title_interaction_effect = {
 						exists = var:requested_my_excommunication
 						var:requested_my_excommunication = scope:actor
 					}
+					# Warcraft
+					AND = {
+						exists = var:requested_my_scarlet_mark
+						var:requested_my_scarlet_mark = scope:actor
+					}
 				}
 				NOT = {
 					has_relation_rival = scope:actor
@@ -2558,12 +2672,16 @@ revoke_title_interaction_effect = {
 				}
 				remove_relation_potential_rival = scope:actor
 			}
-			set_relation_rival = scope:actor
+			set_relation_rival = {
+				target = scope:actor
+				reason = rival_revoked_title_reversed
+			}
 		}
 		else = {
 			progress_towards_rival_effect = {
 				CHARACTER = scope:actor
-				OPINION = no
+				REASON = rival_revoked_title_progress
+				OPINION = 0
 			}
 		}
 	}
@@ -2600,7 +2718,7 @@ call_house_member_to_war_interaction_effect = {
 		limit = {
 			exists = scope:target
 		}
-		
+
 		scope:target = {
 			hidden_effect = {
 				set_called_to = scope:recipient
@@ -2661,14 +2779,14 @@ declaration_of_repentance_interaction_effect = {
 			add_prestige = massive_prestige_loss
 			add_prestige_level = -1
 		}
-		
+
 		#Character cannot be excommunicated again for 10 years.
 		remove_trait = excommunicated
 		add_character_modifier = {
 			modifier = excommunication_recently_lifted
 			years = 10
 		}
-		
+
 		stress_impact = {
 			cynical = minor_stress_impact_gain
 		}
@@ -2845,12 +2963,90 @@ seek_indulgences_interaction_effect = {
 				days = 30
 			}
 		}
+		else_if = {
+			limit = { has_trait = gallowsbait }
+			pay_short_term_gold = {
+				target = scope:recipient
+				gold = seek_indulgences_minor_criminal_trait_value
+			}
+			if = {
+				limit = {
+					has_trait_xp = {
+						trait = gallowsbait
+						track = bandit
+						value >= wipe_slate_min_xp_to_remove_trait_value
+					}
+				}
+				add_trait_xp = {
+					trait = gallowsbait
+					track = bandit
+					value = -40
+				}
+			}
+			else_if = {
+				limit = {
+					has_trait_xp = {
+						trait = gallowsbait
+						track = trickster
+						value >= wipe_slate_min_xp_to_remove_trait_value
+					}
+				}
+				add_trait_xp = {
+					trait = gallowsbait
+					track = trickster
+					value = -40
+				}
+			}
+			else_if = {
+				limit = {
+					has_trait_xp = {
+						trait = gallowsbait
+						track = thief
+						value >= wipe_slate_min_xp_to_remove_trait_value
+					}
+				}
+				add_trait_xp = {
+					trait = gallowsbait
+					track = thief
+					value = -40
+				}
+			}
+			else_if = {
+				limit = {
+					has_trait_xp = {
+						trait = gallowsbait
+						track = poacher
+						value >= wipe_slate_min_xp_to_remove_trait_value
+					}
+				}
+				add_trait_xp = {
+					trait = gallowsbait
+					track = poacher
+					value = -40
+				}
+			}
+			else_if = {
+				limit = {
+					has_trait_xp = {
+						trait = gallowsbait
+						track = marauder
+						value >= wipe_slate_min_xp_to_remove_trait_value
+					}
+				}
+				add_trait_xp = {
+					trait = gallowsbait
+					track = marauder
+					value = -40
+				}
+			}
+			else = { remove_trait = gallowsbait }
+		}
 		else = {
 			pay_short_term_gold = {
 				target = scope:recipient
 				gold = seek_indulgences_buy_piety_value
 			}
-			add_piety = medium_piety_gain			
+			add_piety = medium_piety_gain
 		}
 
 		reverse_add_opinion = {
@@ -2888,6 +3084,25 @@ hof_ask_for_gold_interaction_effect = {
 			limit = { always = scope:hook }
 			use_hook = scope:recipient
 		}
+		if = {
+			limit = {
+				any_vassal = {
+					has_vassal_stance = zealot
+				}
+			}
+			custom_tooltip = zealot_vassal_disapproves_asking_hof_for_gold
+			hidden_effect = {
+				every_vassal = {
+					limit = {
+						has_vassal_stance = zealot
+					}
+					add_opinion = {
+						target = scope:actor
+						modifier = zealot_disapproves_of_asking_hof_for_gold_opinion
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -2909,6 +3124,19 @@ hof_ask_for_claim_interaction_effect = {
 			use_hook = scope:recipient
 		}
 		add_pressed_claim = scope:target
+	}
+}
+
+vassal_claim_liege_title_interaction_effect = {
+	scope:actor = {
+		add_unpressed_claim = scope:target
+	}
+	scope:recipient = {
+		add_opinion = {
+			target = scope:actor
+			modifier = claimed_my_title_opinion
+			opinion = -50
+		}
 	}
 }
 
@@ -2960,7 +3188,7 @@ demand_conversion_vassal_ruler_interaction_effect = {
 	if = {
 		limit = {
 			scope:hook = yes
-			scope:actor = { has_hook = scope:recipient }
+			scope:actor = { has_usable_hook = scope:recipient }
 		}
 		scope:actor = {
 			use_hook = scope:recipient
@@ -2996,7 +3224,7 @@ demand_conversion_player_ruler_interaction_effect = {
 title_revocation_stress_effect = {
 	if = {
 		limit = {
-			title_revocation_is_tyrannical_trigger = yes
+			title_revocation_is_tyrannical_trigger = { VASSAL = $VASSAL$ }
 		}
 		stress_impact = {
 			generous = medium_stress_impact_gain
@@ -3005,8 +3233,489 @@ title_revocation_stress_effect = {
 	}
 	else = {
 		stress_impact = {
-			generous = medium_stress_impact_gain
+			generous = minor_stress_impact_gain
 			forgiving = minor_stress_impact_gain
+		}
+	}
+}
+
+revoke_holy_order_lease_effect = {
+	if = {
+		limit = {
+			$TARGET$.faith = {
+				any_faith_holy_order = {
+					num_leased_titles = 1
+					title = $BARONY$.lessee_title
+				}
+			}
+		}
+		custom_tooltip = destroy_holy_order_warning
+	}
+
+	$TARGET$ = {
+		hidden_effect = { #Nudge towards rivalry
+			if = {
+				limit = {
+					NOR = {
+						has_relation_rival = $CHARACTER$
+						has_relation_potential_rival = $CHARACTER$
+					}
+				}
+				set_relation_potential_rival = $CHARACTER$
+			}
+		}
+
+		if = {
+				limit = {
+					NOT = { this = $CHARACTER$ }
+				}
+			add_opinion = {
+				target = $CHARACTER$
+				modifier = angry_opinion
+				opinion = -40
+			}
+		}
+
+		faith = {
+			if = {
+				limit = {
+					exists = religious_head
+					NOT = { religious_head = $CHARACTER$ }
+				}
+				religious_head = {
+					add_opinion = {
+						modifier = angry_opinion
+						target = $CHARACTER$
+						opinion = -20
+					}
+					if = {
+						limit = {
+							has_opinion_modifier = {
+								target = $CHARACTER$
+								modifier = founded_holy_order_opinion
+							}
+						}
+						remove_opinion = {
+							target = $CHARACTER$
+							modifier = founded_holy_order_opinion
+						}
+					}
+				}
+			}
+		}
+	}
+
+	$CHARACTER$ = {
+		send_interface_message = {
+			type = holy_order_lease_revoked_message
+			title = revoke_leased_title_interaction_notification
+			right_icon = $TARGET$
+
+			# Zealous costs stress if same-faith.
+			if = {
+				limit = { $CHARACTER$.faith = $TARGET$.faith }
+				stress_impact = {
+					zealous = massive_stress_impact_gain
+					generous = medium_stress_impact_gain
+					order_member = minor_stress_impact_gain
+				}
+
+				add_piety = {
+					value = 0
+					subtract = cancel_holy_order_piety_cost
+				}
+			}
+			else_if = {
+				# Bit less but still some if you view the other faith as astray.
+				limit = {
+					$CHARACTER$.faith = {
+						faith_hostility_level = {
+							target = $TARGET$.faith
+							value <= faith_astray_level
+						}
+					}
+				}
+				stress_impact = {
+					zealous = major_stress_impact_gain
+					generous = medium_stress_impact_gain
+				}
+
+				add_piety = {
+					value = -100
+				}
+			}
+			else = {
+
+				if = {
+					limit = { exists =  $CHARACTER$.faith.religious_head  }
+					$CHARACTER$.faith.religious_head = {
+						add_opinion = {
+							modifier = pleased_opinion
+							target = $CHARACTER$
+							opinion = 20
+						}
+					}
+				}
+
+				add_piety = {
+					value = 250
+				}
+
+				$TARGET$.faith = {
+					# Fervor impact: big as it's rare
+					change_fervor = {
+						value = 10
+						desc = fervor_gain_holy_order_expelled_by_force
+					}
+				}
+
+				# If the county has the same faith than the HO, locals are unhappy
+				$BARONY$ = {
+					if = {
+						limit = { title_province.county.faith = $TARGET$.faith }
+						title_province.county = {
+							add_county_modifier = {
+								modifier = lost_holy_order_modifier
+								years = 10
+							}
+						}
+					}
+				}
+			}
+
+			$BARONY$ = {
+				revoke_lease = yes
+			}
+		}
+	}
+}
+
+revoke_holy_order_duel_victor_apply_effects_effect = {
+	scope:sc_victor = {
+		add_stress = major_stress_loss
+		add_prestige = major_prestige_gain
+	}
+}
+
+add_clan_unity_interaction_effect = {
+	if = {
+		limit = { # Check if unity is relevant
+			$CHARACTER$ = { government_has_flag = government_is_clan }
+			$TARGET$ = { government_has_flag = government_is_clan }
+			exists = $CHARACTER$.house
+			exists = $TARGET$.house
+			$CHARACTER$.house = $TARGET$.house
+			trigger_if = {
+				limit = {
+					exists = scope:actor
+					exists = scope:recipient
+					NOT = { scope:actor = scope:recipient }
+				}
+				NOT = { $CHARACTER$ = $TARGET$ } # As a safety, let's make sure that we are not interacting with ourselves
+			}
+		}
+		
+		apply_clan_unity_interaction_effect = {
+			CHARACTER = $CHARACTER$
+			TARGET = $TARGET$
+			DESC = $DESC$
+			VALUE = $VALUE$
+			VALUE_REVERSED = no
+		}
+	}
+	else_if = {
+		limit = { # Only apply reversed effect for the house head to keep the gauge in check
+			$REVERSE_NON_HOUSE_TARGET$ = yes
+
+			$CHARACTER$ = { government_has_flag = government_is_clan }
+			$CHARACTER$.house ?= {
+				house_head = $CHARACTER$
+			}
+			OR = {
+				AND = {
+					exists = $TARGET$.house
+					NOT = { $CHARACTER$.house = $TARGET$.house }
+				}
+				$TARGET$ = { is_lowborn = yes }
+			}
+		}
+		apply_clan_unity_interaction_effect = {
+			CHARACTER = $CHARACTER$
+			TARGET = $TARGET$
+			DESC = $DESC$
+			VALUE = $VALUE$
+			VALUE_REVERSED = yes
+		}
+	}
+}
+
+apply_clan_unity_interaction_effect = {
+	# Save scopes for localisation
+	$CHARACTER$ = { save_scope_as = unity_character }
+	$TARGET$ = { save_scope_as = unity_target }
+
+	$CHARACTER$.house = {
+		save_scope_as = character_house
+
+		add_unity_value = {
+			value = {
+				value = $VALUE$
+				if = { # House heads have a larger impact on unity
+					limit = { house_head = $CHARACTER$ }
+					multiply = unity_house_head_multiplier_value
+				}
+				if = {
+					limit = { $VALUE_REVERSED$ = yes }
+					multiply = -1
+				}
+			}
+			character = $CHARACTER$
+			desc = $DESC$
+		}
+	}
+
+	# Notify human players if they are not involved!
+	if = {
+		limit = {
+			trigger_if = {
+				limit = { $VALUE$ >= 0 }
+				$VALUE$ >= major_unity_value
+			}
+			trigger_else = {
+				$VALUE$ <= major_unity_value
+			}
+		}
+		# Notify human players if they are not involved!
+		notify_players_about_unity_change_effect = {
+			CHARACTER = $CHARACTER$
+			TARGET = $TARGET$
+			DESC = $DESC$
+		}
+	}
+}
+
+diarch_declare_recipient_criminal_effect = {
+	scope:actor = {
+		# First we process the diarch.
+		## Players get a different tooltip, since they don't want to see opinion.
+		if = {
+			limit = { is_ai = no }
+			custom_tooltip = diarch_imprison_reason_for_player.tt
+			hidden_effect = {
+				add_opinion = {
+					target = scope:recipient
+					modifier = treasonous_disobeyed_diarch
+				}
+			}
+		}
+		## AI use the standard opinion flow.
+		else = {
+			add_opinion = {
+				target = scope:recipient
+				modifier = treasonous_disobeyed_diarch
+			}
+		}
+		# Then their liege.
+		liege = {
+			# Same flow: players get a different tooltip so that they don't see opinion.
+			if = {
+				limit = { is_ai = no }
+				custom_tooltip = ADD_OPINION_EFFECT_I_HAVE_IMPRISONMENT_REASON_UNUSABLE
+				hidden_effect = {
+					add_opinion = {
+						target = scope:recipient
+						modifier = treasonous_disobeyed_diarch
+					}
+				}
+			}
+			# But AI just get opinion.
+			else = {
+				add_opinion = {
+					target = scope:recipient
+					modifier = treasonous_disobeyed_diarch
+				}
+			}
+		}
+	}
+}
+
+diarch_declare_claim_war_effect = {
+	start_war = {
+		casus_belli = claim_cb
+		target = scope:recipient
+		claimant = scope:actor
+		target_title = scope:landed_title
+	}
+}
+
+diarch_declare_vassalisation_war_effect = {
+	start_war = {
+		casus_belli = diarch_vassalisation_cb
+		target = scope:recipient
+		target_title = scope:secondary_recipient.primary_title
+	}
+}
+
+make_criminal_effect = {
+	random_list = {
+		10 = {
+			trigger = {
+				trait_is_criminal_in_faith_trigger = {
+					TRAIT = adulterer
+					GENDER_CHARACTER = root
+					FAITH = root.faith
+				}
+				NOT = { has_trait = adulterer }
+			}
+			add_trait = adulterer
+		}
+		10 = {
+			trigger = {
+				trait_is_criminal_in_faith_trigger = {
+					TRAIT = kinslayer_3
+					GENDER_CHARACTER = root
+					FAITH = root.faith
+				}
+				NOT = { has_trait = kinslayer_3 }
+			}
+			add_trait = kinslayer_3
+		}
+		10 = {
+			trigger = {
+				trait_is_criminal_in_faith_trigger = {
+					TRAIT = witch
+					GENDER_CHARACTER = root
+					FAITH = root.faith
+				}
+				NOT = { has_trait = witch }
+			}
+			add_trait = witch
+		}
+		10 = {
+			trigger = {
+				trait_is_criminal_in_faith_trigger = {
+					TRAIT = cannibal
+					GENDER_CHARACTER = root
+					FAITH = root.faith
+				}
+				NOT = { has_trait = cannibal }
+			}
+			add_trait = cannibal
+		}
+		10 = {
+			trigger = {
+				trait_is_criminal_in_faith_trigger = {
+					TRAIT = deviant
+					GENDER_CHARACTER = root
+					FAITH = root.faith
+				}
+				NOT = { has_trait = deviant }
+			}
+			add_trait = deviant
+		}
+		10 = {
+			trigger = {
+				trait_is_criminal_in_faith_trigger = {
+					TRAIT = fornicator
+					GENDER_CHARACTER = root
+					FAITH = root.faith
+				}
+				NOT = { has_trait = fornicator }
+			}
+			add_trait = fornicator
+		}
+	}
+}
+
+clear_hostile_actions_lock_flag_effect = {
+	if = {
+		limit = { has_character_flag = flag_hostile_actions_disabled_delay }
+		remove_character_flag = flag_hostile_actions_disabled_delay
+	}
+}
+
+ep3_hof_ask_for_influence_interaction_effect = {
+	scope:actor = {
+		if = {
+			limit = {
+				domicile ?= {
+					has_domicile_parameter = influence_gain_from_hof_support_6
+				}
+			}
+			change_influence = ep3_requested_faith_support_6_value
+			custom_tooltip = requested_faith_support_domicile_tt
+		}
+		else_if = {
+			limit = {
+				domicile ?= {
+					has_domicile_parameter = influence_gain_from_hof_support_5
+				}
+			}
+			change_influence = ep3_requested_faith_support_5_value
+			custom_tooltip = requested_faith_support_domicile_tt
+		}
+		else_if = {
+			limit = {
+				domicile ?= {
+					has_domicile_parameter = influence_gain_from_hof_support_4
+				}
+			}
+			change_influence = ep3_requested_faith_support_4_value
+			custom_tooltip = requested_faith_support_domicile_tt
+		}
+		else_if = {
+			limit = {
+				domicile ?= {
+					has_domicile_parameter = influence_gain_from_hof_support_3
+				}
+			}
+			change_influence = ep3_requested_faith_support_3_value
+			custom_tooltip = requested_faith_support_domicile_tt
+		}
+		else_if = {
+			limit = {
+				domicile ?= {
+					has_domicile_parameter = influence_gain_from_hof_support_2
+				}
+			}
+			change_influence = ep3_requested_faith_support_2_value
+			custom_tooltip = requested_faith_support_domicile_tt
+		}
+		else_if = {
+			limit = {
+				domicile ?= {
+					has_domicile_parameter = influence_gain_from_hof_support_1
+				}
+			}
+			change_influence = ep3_requested_faith_support_1_value
+			custom_tooltip = requested_faith_support_domicile_tt
+		}
+		else = {
+			change_influence = ep3_requested_faith_support_0_value
+		}
+		house = {
+			add_house_modifier = {
+				modifier = ep3_requested_faith_support_modifier
+				years = 10
+			}
+		}
+		
+		reverse_add_opinion = {
+			target = scope:recipient
+			modifier = requested_influence_opinion
+			opinion = -30
+		}
+	}
+	scope:actor = {
+		if = {
+			limit = {
+				scope:hook = no
+			}
+			add_piety = massive_piety_loss
+		}
+		if = {
+			limit = { always = scope:hook }
+			use_hook = scope:recipient
 		}
 	}
 }

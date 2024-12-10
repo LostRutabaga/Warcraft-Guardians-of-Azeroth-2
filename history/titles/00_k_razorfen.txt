@@ -1,4 +1,6 @@
 ﻿k_razorfen = {
+	1.1.1 = {
+	}
 }
 d_razorfen = {
 	# d_razorfen
@@ -21,6 +23,7 @@ d_razorfen = {
 	536.07.08={holder=160180} #Hegg[112001]
 	562.06.02={holder=160182} #Snokh[112001]
 	588.10.10={holder=160185} #Zaljazk[112001]
+	600.1.1={holder=charlga_razorflank} #Charlga[razorflank]
 }
 c_razorfen = {
 	# d_razorfen
@@ -46,6 +49,7 @@ c_razorfen = {
 	536.07.08={holder=160180} #Hegg[112001]
 	562.06.02={holder=160182} #Snokh[112001]
 	588.10.10={holder=160185} #Zaljazk[112001]
+	600.1.1={holder=charlga_razorflank} #Charlga[razorflank]
 }
 c_blackthorn = {
 	# d_razorfen
@@ -94,6 +98,7 @@ c_agamagar = {
 	536.07.08={holder=160180} #Hegg[112001]
 	562.06.02={holder=160182} #Snokh[112001]
 	588.10.10={holder=160185} #Zaljazk[112001]
+	600.1.1={holder=charlga_razorflank} #Charlga[razorflank]
 }
 c_brambleblade = {
 	1.1.1={
@@ -119,7 +124,8 @@ c_brambleblade = {
 	461.12.29={holder=160066} #Grozz[112000]
 	507.12.27={holder=160075} #Nintorg[112000]
 	557.03.13={holder=160078} #Gezz[112000]
-	595.09.13={holder=160085} #Brikk[112000]
+	595.09.13={holder=160085} #Sharptusk[house_thornmantle]
+	607.7.7={holder=160089} #Squealer[house_thornmantle]
 }
 c_shartask = {
 	1.1.1={
@@ -144,6 +150,7 @@ c_shartask = {
 	536.07.08={holder=160180} #Hegg[112001]
 	562.06.02={holder=160182} #Snokh[112001]
 	588.10.10={holder=160185} #Zaljazk[112001]
+	600.1.1={holder=charlga_razorflank} #Charlga[razorflank]
 }
 d_downs = {
 	800.1.1={
@@ -176,6 +183,11 @@ c_bael_modan = {
 	605.5.19={
 		liege = d_theramore
 		holder = 23001
+	}
+}
+b_boatmurder = {
+	605.5.19={
+		holder = haggis_boatmurder
 	}
 }
 c_spearhead = {
@@ -219,6 +231,10 @@ c_downs = {
 	522.3.19 = { holder = quilboar85 } #Gudjig[quilboar6]
 	560.6.18 = { holder = quilboar86 } #Druc[quilboar6]
 	606.3.21 = { holder = quilboar87 } #Lo[quilboar6]
+	608.1.1 = { 
+		liege = d_deaths_head
+		holder = death_speaker_blackthorn #Blackthorn
+	}
 }
 c_quildown = {
 	1.1.1={
@@ -237,6 +253,10 @@ c_quildown = {
 	522.3.19 = { holder = quilboar85 } #Gudjig[quilboar6]
 	560.6.18 = { holder = quilboar86 } #Druc[quilboar6]
 	606.3.21 = { holder = quilboar87 } #Lo[quilboar6]
+	608.1.1 = { 
+		liege = d_deaths_head
+		holder = death_speaker_blackthorn #Blackthorn
+	}
 }
 d_taurajo = {
 	25.1.1={holder=210050} #Murdoko[116000]
@@ -271,7 +291,7 @@ c_taurajo = {
 	427.07.10={holder=210083} #Yovahet[116000]
 	451.04.18={holder=210086} #Dzhounok[116000]
 	550.1.1={holder=210000} #Cairne[116000]
-	#Taurens from Dustwallow
+	#Tauren from Dustwallow
 	604.1.12={holder=210015} #Aska[116003]
 }
 c_mulgores_gate = {
@@ -290,7 +310,7 @@ c_mulgores_gate = {
 	427.07.10={holder=210083} #Yovahet[116000]
 	451.04.18={holder=210086} #Dzhounok[116000]
 	550.1.1={holder=210000} #Cairne[116000]
-	#Taurens from Dustwallow
+	#Tauren from Dustwallow
 	604.1.12={holder=210020} #Marn[116004]
 }
 c_wudotta = {
@@ -339,6 +359,8 @@ c_battlescar = {
 	595.07.31={holder=160475} #Drazg[112004]
 }
 d_agamagor = {
+	1.1.1 = {
+	}
 }
 c_agamagor = {
 	1.1.1={
@@ -390,7 +412,7 @@ c_peace_point = {
 	427.07.10={holder=210083} #Yovahet[116000]
 	451.04.18={holder=210086} #Dzhounok[116000]
 	550.1.1={holder=210000} #Cairne[116000]
-	#Taurens from Dustwallow
+	#Tauren from Dustwallow
 	604.1.12={holder=210020} #Marn[116004]
 }
 d_bramblescar = {
@@ -414,7 +436,8 @@ d_bramblescar = {
 	461.12.29={holder=160066} #Grozz[112000]
 	507.12.27={holder=160075} #Nintorg[112000]
 	557.03.13={holder=160078} #Gezz[112000]
-	595.09.13={holder=160085} #Brikk[112000]
+	595.09.13={holder=160085} #Sharptusk[house_thornmantle]
+	607.7.7={holder=160089} #Squealer[house_thornmantle]
 }
 c_bramblescar = {
 	1.1.1={
@@ -466,7 +489,7 @@ c_karaneer = {
 	427.07.10={holder=210083} #Yovahet[116000]
 	451.04.18={holder=210086} #Dzhounok[116000]
 	550.1.1={holder=210000} #Cairne[116000]
-	#Taurens from Dustwallow
+	#Tauren from Dustwallow
 	604.1.12={holder=210015} #Aska[116003]
 }
 c_fort_mane = {

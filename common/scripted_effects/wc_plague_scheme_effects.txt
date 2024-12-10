@@ -91,7 +91,10 @@ plague_success_option_effect = {
 }
 plague_success_victim_immediate_effect = {
 	if = {
-		limit = { this = scope:target }
+		limit = {
+			exists = scope:target
+			this = scope:target
+		}
 		add_character_modifier = { modifier = plague_watchful_modifier days = watchful_modifier_duration }
 	}
 	if = {
@@ -112,6 +115,17 @@ plague_success_victim_immediate_effect = {
 	}
 }
 known_or_unknown_plague_effect = {
+	scope:owner = {
+		if = {
+			limit = { scope:plagued_county = title:c_wintergarde }
+			set_variable = { name = wintergarde_plague_fired value = yes }
+		}
+		else_if = {
+			limit = { scope:plagued_county = title:c_andorhal }
+			set_variable = { name = andorhal_plague_fired value = yes }
+		}
+	}
+	
 	if = {
 		limit = { exists = scope:scheme_discovered }
 		known_plague_effect = {
@@ -218,13 +232,13 @@ recruit_cultists_critical_failure_effect = {
 start_plague_scheme_effect = {
 	start_scheme = {
 		type = plague
-		target = $TARGET$
+		target_character = $TARGET$
 	}
 
 	random_scheme = {
 		limit = {
 			scheme_type = plague
-			scheme_target = $TARGET$
+			scheme_target_character = $TARGET$
 		}
 		set_variable = {
 			name = plague_center

@@ -25,6 +25,9 @@
 				has_trait = saint
 			}
 		}
+
+		# No charioteers
+		has_any_charioteer_trait = no 
 	}
 	
 	character_score = {
@@ -35,9 +38,18 @@
 			has_same_culture_as = scope:base
 		}
 		modifier = {
-			add = 10
-			has_same_culture_group_as = scope:base
+			add = 15
+			culture = { has_same_culture_heritage = scope:base.culture }
 		}
+		modifier = {
+			add = 10
+			culture = { has_same_culture_language = scope:base.culture }
+		}
+		modifier = {
+			add = 5
+			culture = { has_same_culture_ethos = scope:base.culture }
+		}
+
 		modifier = {
 			factor = 1.5
 			# Warcraft
@@ -60,6 +72,8 @@
 	gender = clergy
 }
 
+
+# Referenced in code for granting titles to clergy
 pool_theocratic_succession = {
 	valid_character = {
 		is_capable_adult = yes
@@ -78,9 +92,18 @@ pool_theocratic_succession = {
 			has_same_culture_as = scope:base
 		}
 		modifier = {
-			add = 10
-			has_same_culture_group_as = scope:base
+			add = 15
+			culture = { has_same_culture_heritage = scope:base.culture }
 		}
+		modifier = {
+			add = 10
+			culture = { has_same_culture_language = scope:base.culture }
+		}
+		modifier = {
+			add = 5
+			culture = { has_same_culture_ethos = scope:base.culture }
+		}
+
 		modifier = {
 			factor = 1.5
 			age_in_relation_to_humans_more_than_trigger = { age = 40 }

@@ -10,3 +10,18 @@ attempted_to_kill_me = {
 	execute_reason = yes
 	banish_reason = yes
 }
+stole_my_animal_comp = {
+	opinion = -50
+	imprisonment_reason = yes
+	banish_reason = yes
+}
+sent_to_inquisition_opinion = {
+	opinion = -50
+	decaying = yes
+	years = 5
+}
+sent_a_heretic_opinion = {
+	opinion = 25
+	decaying = yes
+	years = 5
+}

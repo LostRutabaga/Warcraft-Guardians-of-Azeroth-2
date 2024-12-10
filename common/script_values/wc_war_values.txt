@@ -6,7 +6,7 @@ horde_invasion_target_character_weight = {
 		limit = {
 			OR = {
 				this = title:k_stormwind
-				this = title:k_blackrock
+				this = title:k_shadowforge
 				this = title:k_ironforge
 				this = title:k_wildhammer
 			}
@@ -145,6 +145,21 @@ prestige_cost_multiply_value = {
 		multiply = {
 			value = warfare_legacy_2_discount
 			desc = CB_ATTACKER_DYNASTY_WARFARE
+		}
+	}
+
+	# Culture
+	if = {
+		limit = {
+			scope:attacker = {
+				culture = {
+					has_cultural_parameter = cheaper_cbs
+				}
+			}
+		}
+		multiply = {
+			value = 0.8
+			desc = "CB_ATTACKER_CULTURE"
 		}
 	}
 

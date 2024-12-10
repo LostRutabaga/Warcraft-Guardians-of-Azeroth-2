@@ -162,7 +162,7 @@ scripted_trigger sell_titles_0002_friend_trigger = {
 
 sell_titles.0002 = {
 	type = letter_event
-	opening = sell_titles.0001.opening
+	opening = sell_titles.0002.opening
 	desc = sell_titles.0002.desc
 	sender = {
 		character = scope:friend
@@ -604,8 +604,9 @@ sell_titles.0005 = {
 			}
 		}
 		progress_towards_rival_effect = {
+			REASON = rival_sold_titles
 			CHARACTER = scope:vassal
-			OPINION = no
+			OPINION = 0
 		}
 	}
 }
@@ -700,8 +701,9 @@ sell_titles.0006 = {
 			years = 5
 		}
 		progress_towards_rival_effect = {
+			REASON = rival_shamed_sell_titles
 			CHARACTER = scope:vassal
-			OPINION = no
+			OPINION = 0
 		}
 	}
 }
@@ -726,20 +728,7 @@ sell_titles.1001 = {
 		is_ai = no
 		is_landed = yes
 
-		# TODO_CD: Add back in when set_mother effect is done
 		exists = father
-		#OR = {
-		#	AND = {
-		#		exists = father
-		#		exists = father.dynasty
-		#		dynasty = father.dynasty
-		#	}
-		#	AND = {
-		#		exists = mother
-		#		exists = mother.dynasty
-		#		dynasty = mother.dynasty
-		#	}
-		#}
 	}
 
 	weight_multiplier = {
@@ -756,26 +745,6 @@ sell_titles.1001 = {
 
 	immediate = {
 		add_character_flag = had_sell_titles_merchant_event
-
-
-		# TODO_CD: Add back in when set_mother effect is done
-		#if = {
-		#	limit = {
-		#		exists = father
-		#		exists = father.dynasty
-		#		dynasty = father.dynasty
-		#	}
-		#	save_scope_value_as = {
-		#		name = parent
-		#		value = flag:father
-		#	}
-		#}
-		#else = {
-		#	save_scope_value_as = {
-		#		name = parent
-		#		value = flag:mother
-		#	}
-		#}
 
 		create_character = {
 			template = merchant_template
@@ -798,6 +767,10 @@ sell_titles.1002 = {
 	desc = sell_titles.1002.desc
 	theme = stewardship
 	left_portrait = {
+		character = root
+		animation = stunned
+	}
+	right_portrait = {
 		character = scope:merchant
 		animation = personality_bold
 	}
@@ -827,22 +800,7 @@ sell_titles.1002 = {
 			}
 			set_house = root.house
 			hidden_effect = {
-				# TODO_CD: Add back in when set_mother effect is done
-				#if = {
-				#	limit = {
-				#		scope:parent = flag:father			
-				#	}
-					set_father = root.father
-				#}
-				#else_if = {
-				#	limit = {
-				#		scope:parent = flag:mother			
-				#	}
-				#	set_mother = root.mother
-				#}
-				#else = {
-				#	debug_log = "Could not set father or mother for Merchant in sell_titles.1002"
-				#}
+				set_father = root.father
 			}
 		}
 		hidden_effect = {
@@ -910,8 +868,12 @@ sell_titles.1004 = {
 	desc = sell_titles.1004.desc
 	theme = stewardship
 	left_portrait = {
+		character = root
+		animation = happiness
+	}
+	right_portrait = {
 		character = scope:merchant
-		animation = personality_bold
+		animation = marshal_random_weapon
 	}
 
 	option = {
@@ -942,6 +904,10 @@ sell_titles.1005 = {
 	desc = sell_titles.1005.desc
 	theme = stewardship
 	left_portrait = {
+		character = root
+		animation = happiness
+	}
+	right_portrait = {
 		character = scope:merchant
 		animation = personality_rational
 	}
@@ -977,6 +943,10 @@ sell_titles.1006 = {
 	desc = sell_titles.1006.desc
 	theme = stewardship
 	left_portrait = {
+		character = root
+		animation = happiness
+	}
+	right_portrait = {
 		character = scope:merchant
 		animation = personality_rational
 	}
@@ -1012,8 +982,12 @@ sell_titles.1007 = {
 	desc = sell_titles.1007.desc
 	theme = stewardship
 	left_portrait = {
+		character = root
+		animation = worry
+	}
+	right_portrait = {
 		character = scope:merchant
-		animation = personality_coward
+		animation = schadenfreude
 	}
 
 	immediate = {

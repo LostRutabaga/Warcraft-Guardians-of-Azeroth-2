@@ -6,11 +6,28 @@
 #	Religion Head       #
 #########################
 
-### air_group ###
-# alakir_worship
-d_alakir_worship = {
+### Doombringer ###
+k_shadow_council = {
+	color = rgb { 100 43 106 }
+	definite_form = yes
+	ruler_uses_title_name = no
+	landless = yes
+	
+	capital = c_blackrock_spire
+	
+	ai_primary_priority = {
+		add = @always_primary_score
+	}
+	
+	destroy_if_invalid_heir = yes
+	no_automatic_claims = yes
+	always_follows_primary_heir = yes
+	de_jure_drift_disabled = yes
+}
+
+### Auranism ###
+k_conclave_of_wind = {
 	color={ 125 125 125 }
-	color2={ 255 255 255 }
 	definite_form = yes
 	ruler_uses_title_name = no
 	landless = yes
@@ -27,16 +44,52 @@ d_alakir_worship = {
 	de_jure_drift_disabled = yes
 }
 
-### light_group ###
-# holy_light
-d_church_of_the_holy_light = {
-	color = { 255 255 200 }
-	color2 = { 220 220 0 }
+### Ignism ###
+k_cult_of_the_living_flame = {
+	color={ 255 45 0 }
 	definite_form = yes
 	ruler_uses_title_name = no
 	landless = yes
+
+	capital = c_blackrock_depths
 	
-	capital = c_lordaeron
+	ai_primary_priority = {
+		add = @always_primary_score
+	}
+	
+	destroy_if_invalid_heir = yes
+	no_automatic_claims = yes
+	always_follows_primary_heir = yes
+	de_jure_drift_disabled = yes
+}
+
+### Aquelism ###
+k_tribunal_of_the_tides = {
+	color = { 0 100 255 }
+	definite_form = yes
+	ruler_uses_title_name = no
+	landless = yes
+
+	capital = c_storm_isle
+	
+	ai_primary_priority = {
+		add = @always_primary_score
+	}
+	
+	destroy_if_invalid_heir = yes
+	no_automatic_claims = yes
+	always_follows_primary_heir = yes
+	de_jure_drift_disabled = yes
+}
+
+### Terranism ###
+k_council_of_stone = {
+	color = { 130 85 45 }
+	definite_form = yes
+	ruler_uses_title_name = no
+	landless = yes
+
+	capital = c_maraudon
 	
 	ai_primary_priority = {
 		add = @always_primary_score
@@ -46,19 +99,17 @@ d_church_of_the_holy_light = {
 	no_automatic_claims = yes
 	always_follows_primary_heir = yes
 	de_jure_drift_disabled = yes
-
-	male_names = { Alexander Anastasius Benedictus Caelestinus Callistus Clemens Eugenius Leo Gregorius Hadrianus Honorius Innocentius Ioannes Lucius Marinus Martinus Nicolaus Sergius Silvester Stephanus Urbanus Victor Alonsus }
 }
-# scarlet_light
-d_church_scarlet_light = {
-	color={ 255 36 0 }
-	color2={ 255 255 255 }
+
+### Tyrism ###
+k_holy_light_church = {
+	color = { 255 249 198 }
 	definite_form = yes
 	ruler_uses_title_name = no
 	landless = yes
 
 	capital = c_tyrs_hand
-	
+
 	ai_primary_priority = {
 		add = @always_primary_score
 	}
@@ -67,13 +118,46 @@ d_church_scarlet_light = {
 	no_automatic_claims = yes
 	always_follows_primary_heir = yes
 	de_jure_drift_disabled = yes
+
+	male_names = { Alexander Anastasius Benedictus Caelestinus Callistus Clemens Eugenius Leo Gregorius Hadrianus Honorius Innocentius Ioannes Lucius Marinus Martinus Nicolaus Sergius Silvester Stephanus Urbanus Victor Alonsus }
+}
+
+k_scarlet_monastery = {
+	color = { 255 36 0 }
+	landless = yes
+	capital = c_tyrs_hand
+	definite_form = yes
+	ruler_uses_title_name = no
+
+	ai_primary_priority = {
+		add = @always_primary_score
+	}
+
+	no_automatic_claims = yes
+	always_follows_primary_heir = yes
+	destroy_if_invalid_heir = yes
 	
 	male_names = { Alexander Anastasius Benedictus Caelestinus Callistus Clemens Eugenius Leo Gregorius Hadrianus Honorius Innocentius Ioannes Lucius Marinus Martinus Nicolaus Sergius Silvester Stephanus Urbanus Victor Alonsus }
 }
-# kirin_tor
+
+e_argent_dawn = {
+	color = rgb { 120 120 120 }
+	landless = yes
+	capital = c_tyrs_hand
+	definite_form = yes
+	ruler_uses_title_name = no
+
+	ai_primary_priority = {
+		add = @always_primary_score
+	}
+
+	no_automatic_claims = yes
+	always_follows_primary_heir = yes
+	destroy_if_invalid_heir = yes
+}
+
 d_kirin_tor = {
-	color={ 179 48 220 }
-	color2={ 255 255 255 }
+	color = { 179 48 220 }
 	definite_form = yes
 	ruler_uses_title_name = no
 	landless = yes
@@ -83,16 +167,12 @@ d_kirin_tor = {
 	ai_primary_priority = {
 		add = @always_primary_score
 	}
-
-	destroy_if_invalid_heir = yes
-	no_automatic_claims = yes
-	always_follows_primary_heir = yes
-	de_jure_drift_disabled = yes
 }
-# naaru
-d_naaru = {
+
+### Naarism ###
+# Velenei
+d_faithful_of_naaru = {
 	color={ 255 0 180 }
-	color2={ 255 255 255 }
 	definite_form = yes
 	ruler_uses_title_name = no
 	landless = yes
@@ -108,16 +188,247 @@ d_naaru = {
 	always_follows_primary_heir = yes
 	de_jure_drift_disabled = yes
 }
-# lightbound
-d_lightbound = {
+# Lightbound
+d_council_of_exarchs = {
 	color={ 255 165 110 }
-	color2={ 255 255 255 }
 	definite_form = yes
 	ruler_uses_title_name = no
 	landless = yes
 
 	capital = c_valaar
 	
+	ai_primary_priority = {
+		add = @always_primary_score
+	}
+
+	destroy_if_invalid_heir = yes
+	no_automatic_claims = yes
+	always_follows_primary_heir = yes
+	de_jure_drift_disabled = yes
+}
+
+### Mrligion ###
+# Arkkoroc
+d_temple_of_arkkoran = {
+	color = { 40 145 138 }
+	definite_form = no
+	ruler_uses_title_name = no
+
+	capital = c_arkkoran
+	
+	ai_primary_priority = {
+		add = @always_primary_score
+	}
+	
+	destroy_if_invalid_heir = yes
+	no_automatic_claims = yes
+	always_follows_primary_heir = yes
+	de_jure_drift_disabled = yes
+	
+	male_names = { Arkkoroc }
+}
+
+### Draconism ###
+# Red Dragonflight
+d_red_wyrmcult = {
+	color={ 255 59 59 }
+	
+	capital = c_vermillion
+	
+	ai_primary_priority = {
+		add = @always_primary_score
+	}
+	
+	destroy_if_invalid_heir = yes
+	no_automatic_claims = yes
+	always_follows_primary_heir = yes
+	de_jure_drift_disabled = yes
+	definite_form = yes
+	ruler_uses_title_name = no
+	landless = yes
+}
+
+# Green Dragonflight
+d_green_wyrmcult = {
+	color={ 59 158 79 }
+
+	capital = c_bough_shadow
+	
+	ai_primary_priority = {
+		add = @always_primary_score
+	}
+	
+	destroy_if_invalid_heir = yes
+	no_automatic_claims = yes
+	always_follows_primary_heir = yes
+	de_jure_drift_disabled = yes
+	definite_form = yes
+	ruler_uses_title_name = no
+	landless = yes
+}
+
+# Black Dragonflight
+d_the_uncorrupted = {
+	color={ 48 0 0 }
+
+	# Need Neltharion's lair later
+	capital = c_blackrock_spire
+	
+	ai_primary_priority = {
+		add = @always_primary_score
+	}
+	
+	destroy_if_invalid_heir = yes
+	no_automatic_claims = yes
+	always_follows_primary_heir = yes
+	de_jure_drift_disabled = yes
+	definite_form = yes
+	ruler_uses_title_name = no
+	landless = yes
+}
+
+# Blue Dragonflight
+d_blue_wyrmcult = {
+	color={ 0 176 240 }
+
+	capital = c_coldarra
+	
+	ai_primary_priority = {
+		add = @always_primary_score
+	}
+	
+	destroy_if_invalid_heir = yes
+	no_automatic_claims = yes
+	always_follows_primary_heir = yes
+	de_jure_drift_disabled = yes
+	definite_form = yes
+	ruler_uses_title_name = no
+	landless = yes
+}
+
+# Bronze Dragonflight
+d_bronze_wyrmcult = {
+	color={ 246 187 0 }
+
+	capital = c_caverns_of_time
+	
+	ai_primary_priority = {
+		add = @always_primary_score
+	}
+	
+	destroy_if_invalid_heir = yes
+	no_automatic_claims = yes
+	always_follows_primary_heir = yes
+	de_jure_drift_disabled = yes
+	definite_form = yes
+	ruler_uses_title_name = no
+	landless = yes
+}
+
+### Shatgral ###
+# C'Thuni
+d_temple_of_ahn_qiraj = {
+	color = { 75 45 100 }
+	definite_form = yes
+	ruler_uses_title_name = no
+	landless = yes
+
+	capital = c_ahnqiraj
+	
+	ai_primary_priority = {
+		add = @always_primary_score
+	}
+	
+	destroy_if_invalid_heir = yes
+	no_automatic_claims = yes
+	always_follows_primary_heir = yes
+	de_jure_drift_disabled = yes
+}
+
+# Yogg-Saroni
+d_fallen_temple = {
+	color = { 15 45 35 }
+	definite_form = yes
+	ruler_uses_title_name = no
+	landless = yes
+
+	capital = c_ulduar
+	
+	ai_primary_priority = {
+		add = @always_primary_score
+	}
+	
+	destroy_if_invalid_heir = yes
+	no_automatic_claims = yes
+	always_follows_primary_heir = yes
+	de_jure_drift_disabled = yes
+}
+
+# N'Zothi
+d_eye_of_the_deep = {
+	color = { 30 15 30 }
+	definite_form = yes
+	ruler_uses_title_name = no
+	landless = yes
+
+	capital = c_storm_isle
+	
+	ai_primary_priority = {
+		add = @always_primary_score
+	}
+	
+	destroy_if_invalid_heir = yes
+	no_automatic_claims = yes
+	always_follows_primary_heir = yes
+	de_jure_drift_disabled = yes
+}
+# Y'Shaarji
+d_seven_prophets = {
+	color = { 40 40 5 }
+	definite_form = yes
+	ruler_uses_title_name = no
+	landless = yes
+
+	capital = c_mantivess
+	
+	ai_primary_priority = {
+		add = @always_primary_score
+	}
+	
+	destroy_if_invalid_heir = yes
+	no_automatic_claims = yes
+	always_follows_primary_heir = yes
+	de_jure_drift_disabled = yes
+}
+
+# G'huuni
+d_voice_of_ghuun = {
+	color = { 60 10 10 }
+	definite_form = yes
+	ruler_uses_title_name = no
+	landless = yes
+
+	capital = c_zulnazman
+	
+	ai_primary_priority = {
+		add = @always_primary_score
+	}
+	
+	destroy_if_invalid_heir = yes
+	no_automatic_claims = yes
+	always_follows_primary_heir = yes
+	de_jure_drift_disabled = yes
+}
+
+# Twilight's Hammer cult
+k_twilights_hammer_cult = {
+	color = { 70 40 105 }
+	definite_form = yes
+	ruler_uses_title_name = no
+	landless = yes
+
+	capital = c_obsidian_hills
+
 	ai_primary_priority = {
 		add = @always_primary_score
 	}
@@ -132,7 +443,6 @@ d_lightbound = {
 # death_god
 d_death_god = {
 	color={ 95 75 100 }
-	color2={ 255 255 255 }
 	definite_form = yes
 	ruler_uses_title_name = no
 	landless = yes
@@ -153,7 +463,6 @@ d_death_god = {
 # burning_legion_religion
 d_burning_legion_religion = {
 	color={ 100 200 0 }
-	color2={ 255 255 255 }
 	definite_form = yes
 	ruler_uses_title_name = no
 	landless = yes
@@ -174,7 +483,6 @@ d_burning_legion_religion = {
 # elunism
 d_kaldorei_religion = {
 	color = { 155 194 230 }
-	color2={ 255 255 255 }
 	definite_form = yes
 	ruler_uses_title_name = no
 	landless = yes
@@ -194,7 +502,6 @@ d_kaldorei_religion = {
 # # old_ways
 # d_old_ways = {
 	# color = { 30 150 73 }
-	# color2={ 255 255 255 }
 	# definite_form = no
 	# ruler_uses_title_name = no
 	# landless = yes
@@ -214,7 +521,6 @@ d_kaldorei_religion = {
 # # wolf_cult_religion
 # d_wolf_cult_religion = {
 	# color = { 51 63 79 }
-	# color2={ 255 255 255 }
 	# definite_form = yes
 	# ruler_uses_title_name = no
 	# landless = yes
@@ -234,7 +540,6 @@ d_kaldorei_religion = {
 # # ursine
 # d_ursine = {
 	# color = { 150 62 8 }
-	# color2={ 255 255 255 }
 	# definite_form = no
 	# ruler_uses_title_name = no
 	# landless = yes
@@ -254,7 +559,6 @@ d_kaldorei_religion = {
 # # agamaggan_worship
 # d_agamaggan_worship = {
 	# color = { 198 89 17 }
-	# color2={ 255 255 255 }
 	# definite_form = no
 	# ruler_uses_title_name = no
 	# landless = yes
@@ -271,30 +575,9 @@ d_kaldorei_religion = {
 	# de_jure_drift_disabled = yes
 # }
 
-### earth_group ###
-# therazane_worship
-d_therazane_worship = {
-	color = { 130 85 45 }
-	color2={ 255 255 255 }
-	definite_form = yes
-	ruler_uses_title_name = no
-	landless = yes
-
-	capital = c_maraudon
-	
-	ai_primary_priority = {
-		add = @always_primary_score
-	}
-
-	destroy_if_invalid_heir = yes
-	no_automatic_claims = yes
-	always_follows_primary_heir = yes
-	de_jure_drift_disabled = yes
-}
 # gorgog_worship
 d_gorgog_worship = {
 	color = { 255 153 51 }
-	color2={ 255 255 255 }
 	definite_form = yes
 	ruler_uses_title_name = no
 	landless = yes
@@ -310,31 +593,11 @@ d_gorgog_worship = {
 	always_follows_primary_heir = yes
 	de_jure_drift_disabled = yes
 }
-# # theradras
-# d_theradras_worship = {
-	# color = { 131 60 12 }
-	# color2={ 255 255 255 }
-	# definite_form = yes
-	# ruler_uses_title_name = no
-	# landless = yes
-
-	# capital = c_maraudon
-	
-	# ai_primary_priority = {
-		# add = @always_primary_score
-	# }
-	
-	# destroy_if_invalid_heir = yes
-	# no_automatic_claims = yes
-	# always_follows_primary_heir = yes
-	# de_jure_drift_disabled = yes
-# }
 
 ### shamanism_group ###
 # # orcish_shamanism
 # d_orcish_shamanism = {
 	# color={ 99 171 222 }
-	# color2={ 255 255 255 }
 	# definite_form = yes
 	# ruler_uses_title_name = no
 	# landless = yes
@@ -353,7 +616,6 @@ d_gorgog_worship = {
 # tidemother
 d_tidemother = {
 	color = { 0 220 183 }
-	color2={ 255 255 255 }
 	definite_form = yes
 	ruler_uses_title_name = no
 
@@ -372,7 +634,6 @@ d_tidemother = {
 # # earth_mother_worship
 # d_earth_mother_worship = {
 	# color = { 82 128 51 }
-	# color2={ 255 255 255 }
 	# definite_form = non
 	# ruler_uses_title_name = no
 	# landless = yes
@@ -392,7 +653,6 @@ d_tidemother = {
 # # dwarf shamanism
 # d_shamanism = {
 	# color = { 41 135 199 }
-	# color2={ 255 255 255 }
 	# definite_form = non
 	# ruler_uses_title_name = no
 	# landless = yes
@@ -412,7 +672,6 @@ d_tidemother = {
 # # primitive_shamanism
 # d_primitive_shamanism = {
 	# color = { 31 166 181 }
-	# color2={ 255 255 255 }
 
 	# capital = 832 # Njord
 # }
@@ -420,7 +679,6 @@ d_tidemother = {
 # # cult_of_the_candle
 # d_cult_of_the_candle = {
 	# color = { 247 255 125 }
-	# color2={ 255 255 255 }
 
 	# capital = 1796 # Lesturrom
 # }
@@ -429,7 +687,6 @@ d_tidemother = {
 # cult_of_sunwell
 d_cult_of_sunwell = {
 	color = { 224 186 74 }
-	color2={ 255 255 255 }
 	definite_form = yes
 	ruler_uses_title_name = yes
 	landless = yes
@@ -450,7 +707,6 @@ d_cult_of_sunwell = {
 # zandalari
 d_zanchuli_loa_council = {
 	color= { 82 128 51 }
-	color2={ 255 255 255 }
 	definite_form = yes
 	ruler_uses_title_name = no
 	landless = yes
@@ -469,7 +725,6 @@ d_zanchuli_loa_council = {
 # amani
 d_amatali_council = {
 	color={ 0 108 0 }
-	color2={ 255 255 20 }
 	definite_form = yes
 	ruler_uses_title_name = no
 	landless = yes
@@ -488,7 +743,6 @@ d_amatali_council = {
 # gurubashi
 d_guratali_council = {
 	color={ 123 180 20 }
-	color2={ 255 255 20 }
 	definite_form = yes
 	ruler_uses_title_name = no
 	landless = yes
@@ -507,7 +761,6 @@ d_guratali_council = {
 # drakkari
 d_drakatali_council = {
 	color={ 0 155 190 }
-	color2={ 255 255 20 }
 	definite_form = yes
 	ruler_uses_title_name = no
 	landless = yes
@@ -526,7 +779,6 @@ d_drakatali_council = {
 # farraki
 d_faratali_council = {
 	color={ 236 163 32 }
-	color2={ 255 255 20 }
 	definite_form = yes
 	ruler_uses_title_name = no
 	landless = yes
@@ -545,7 +797,6 @@ d_faratali_council = {
 # cult_of_hakkar
 k_atalai = {
 	color={ 177 197 155 }
-	color2={ 255 255 255 }
 	definite_form = yes
 	ruler_uses_title_name = no
 	landless = yes
@@ -564,7 +815,6 @@ k_atalai = {
 # cult_of_sethraliss
 d_cult_of_sethraliss = {
 	color={ 75 215 195 }
-	color2={ 255 255 255 }
 	definite_form = yes
 	ruler_uses_title_name = no
 	landless = yes
@@ -583,7 +833,6 @@ d_cult_of_sethraliss = {
 # cult_of_ariwo
 d_cult_of_ariwo = {
 	color={ 225 165 125 }
-	color2={ 255 255 255 }
 	definite_form = yes
 	ruler_uses_title_name = no
 	landless = yes
@@ -602,7 +851,6 @@ d_cult_of_ariwo = {
 # cult_of_torga
 d_cult_of_torga = {
 	color={ 210 173 93 }
-	color2={ 255 255 255 }
 	definite_form = yes
 	ruler_uses_title_name = no
 	landless = yes
@@ -619,59 +867,10 @@ d_cult_of_torga = {
 	de_jure_drift_disabled = yes
 }
 
-### fire_group ###
-# fire_cult
-k_firelands = {
-	color={ 255 45 0 }
-	color2={ 255 255 255 }
-	definite_form = yes
-	ruler_uses_title_name = no
-	landless = yes
-
-	capital = c_blackrock_depths
-	
-	ai_primary_priority = {
-		add = @always_primary_score
-	}
-	
-	destroy_if_invalid_heir = yes
-	no_automatic_claims = yes
-	always_follows_primary_heir = yes
-	de_jure_drift_disabled = yes
-}
-
-### water_group ###
-# neptulon_worship
-d_neptulon_worship = {
-	color = { 0 100 255 }
-	color2={ 255 255 255 }
-	definite_form = no
-	ruler_uses_title_name = no
-	landless = yes
-
-	capital = c_storm_isle
-	
-	ai_primary_priority = {
-		add = @always_primary_score
-	}
-	
-	destroy_if_invalid_heir = yes
-	no_automatic_claims = yes
-	always_follows_primary_heir = yes
-	de_jure_drift_disabled = yes
-}
-# d_water_deities = {
-	# color = { 217 224 240 }
-	# color2={ 255 255 255 }
-
-	# capital = 2239 # Atalgral
-# }
-
 ### necromancy_group ###
 # maldraxxi
 d_maldraxxi= {
 	color = { 25 70 50 }
-	color2={ 255 255 255 }
 	definite_form = yes
 	ruler_uses_title_name = no
 	landless = yes
@@ -690,7 +889,6 @@ d_maldraxxi= {
 # throsic
 d_throsic = {
 	color = { 0 75 100 }
-	color2={ 255 255 255 }
 	definite_form = yes
 	ruler_uses_title_name = no
 	landless = yes
@@ -709,7 +907,6 @@ d_throsic = {
 # helya
 d_helya= {
 	color = { 30 40 35 }
-	color2={ 255 255 255 }
 	definite_form = yes
 	ruler_uses_title_name = no
 	landless = yes
@@ -730,7 +927,6 @@ d_helya= {
 # spider_philosophy
 d_spider_philosophy = {
 	color = { 74 0 153 }
-	color2={ 255 255 255 }
 	definite_form = yes
 	ruler_uses_title_name = no
 	landless = yes
@@ -747,129 +943,10 @@ d_spider_philosophy = {
 	de_jure_drift_disabled = yes
 }
 
-### shatgral ###
-# cthun_worship
-d_cthun_worship = {
-	color = { 75 45 100 }
-	color2={ 255 255 255 }
-	definite_form = yes
-	ruler_uses_title_name = no
-	landless = yes
-
-	capital = c_ahnqiraj
-	
-	ai_primary_priority = {
-		add = @always_primary_score
-	}
-	
-	destroy_if_invalid_heir = yes
-	no_automatic_claims = yes
-	always_follows_primary_heir = yes
-	de_jure_drift_disabled = yes
-}
-# yoggsaron_worship
-d_yoggsaron_worship = {
-	color = { 15 45 35 }
-	color2={ 255 255 255 }
-	definite_form = yes
-	ruler_uses_title_name = no
-	landless = yes
-
-	capital = c_ulduar
-	
-	ai_primary_priority = {
-		add = @always_primary_score
-	}
-	
-	destroy_if_invalid_heir = yes
-	no_automatic_claims = yes
-	always_follows_primary_heir = yes
-	de_jure_drift_disabled = yes
-}
-# nzoth_worship
-d_nzoth_worship = {
-	color = { 30 15 30 }
-	color2={ 255 255 255 }
-	definite_form = yes
-	ruler_uses_title_name = no
-	landless = yes
-
-	capital = c_storm_isle
-	
-	ai_primary_priority = {
-		add = @always_primary_score
-	}
-	
-	destroy_if_invalid_heir = yes
-	no_automatic_claims = yes
-	always_follows_primary_heir = yes
-	de_jure_drift_disabled = yes
-}
-# yshaarj_worship
-d_yshaarj_worship = {
-	color = { 40 40 5 }
-	color2={ 255 255 255 }
-	definite_form = yes
-	ruler_uses_title_name = no
-	landless = yes
-
-	capital = c_mantivess
-	
-	ai_primary_priority = {
-		add = @always_primary_score
-	}
-	
-	destroy_if_invalid_heir = yes
-	no_automatic_claims = yes
-	always_follows_primary_heir = yes
-	de_jure_drift_disabled = yes
-}
-# ghuun_worship
-d_ghuun_worship = {
-	color = { 60 10 10 }
-	color2={ 255 255 255 }
-	definite_form = yes
-	ruler_uses_title_name = no
-	landless = yes
-
-	capital = c_zulnazman
-	
-	ai_primary_priority = {
-		add = @always_primary_score
-	}
-	
-	destroy_if_invalid_heir = yes
-	no_automatic_claims = yes
-	always_follows_primary_heir = yes
-	de_jure_drift_disabled = yes
-}
-
-### titanic_group ###
-# sect_of_the_dragons
-d_sect_of_the_dragons = {
-	color = { 255 165 165 }
-	color2={ 255 255 255 }
-	definite_form = yes
-	ruler_uses_title_name = no
-	landless = yes
-
-	capital = c_wyrmrest
-	
-	ai_primary_priority = {
-		add = @always_primary_score
-	}
-	
-	destroy_if_invalid_heir = yes
-	no_automatic_claims = yes
-	always_follows_primary_heir = yes
-	de_jure_drift_disabled = yes
-}
-
 ### void_group ###
-# voidfarer
+# void religion
 d_voidfarer = {
 	color = { 163 102 209 }
-	color2={ 255 255 255 }
 	definite_form = no
 	ruler_uses_title_name = no
 	landless = yes
@@ -885,10 +962,11 @@ d_voidfarer = {
 	always_follows_primary_heir = yes
 	de_jure_drift_disabled = yes
 }
+
 # forsaken_cult
-d_forsaken_cult = {
+# shadow religion
+k_forsaken_cult = {
 	color = { 189 148 222 }
-	color2={ 255 255 255 }
 	definite_form = yes
 	ruler_uses_title_name = no
 	landless = yes
@@ -904,3 +982,58 @@ d_forsaken_cult = {
 	always_follows_primary_heir = yes
 	de_jure_drift_disabled = yes
 }
+
+d_forgotten_shadow = {
+	color = { 88 73 107 }
+	definite_form = yes
+	ruler_uses_title_name = no
+	landless = yes
+
+	capital = c_lordaeron
+	
+	ai_primary_priority = {
+		add = @always_primary_score
+	}
+	
+	destroy_if_invalid_heir = yes
+	no_automatic_claims = yes
+	always_follows_primary_heir = yes
+	de_jure_drift_disabled = yes
+}
+
+d_alchemical_materialism = {
+	color = { 94 255 0 } 
+	definite_form = yes
+	ruler_uses_title_name = no
+	landless = yes
+
+	capital = c_lordaeron
+	
+	ai_primary_priority = {
+		add = @always_primary_score
+	}
+	
+	destroy_if_invalid_heir = yes
+	no_automatic_claims = yes
+	always_follows_primary_heir = yes
+	de_jure_drift_disabled = yes
+}
+
+### titanic_group ##
+#d_thunder_king = {
+#	# Juke Note: Originally planned for Shenism to get a head of faith only if the Thunder King returns, and to then remove it again once he dies. Unfortunately, I cant get it to display him as "of the Mogu Empire" - despite adding 'ruler_uses_title_name = no' to the landed title it didnt work. 
+#	color = { 90 42 235 }
+#	definite_form = yes
+#	ruler_uses_title_name = no
+#	landless = yes
+#
+#	capital = c_lei_gong
+#	
+#	destroy_if_invalid_heir = yes
+#	no_automatic_claims = yes
+#	always_follows_primary_heir = yes
+#	de_jure_drift_disabled = yes
+#	definite_form = yes
+#	ruler_uses_title_name = no
+#	landless = yes
+#}

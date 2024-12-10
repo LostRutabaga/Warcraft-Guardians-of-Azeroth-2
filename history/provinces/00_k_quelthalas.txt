@@ -376,7 +376,7 @@
 ###c_golden_strand
 374 = {	# Golden Strand
 	culture = murloc
-	religion = water_deities
+	religion = frghlaith
 	holding = tribal_holding
 }
 
@@ -416,6 +416,12 @@
 	culture = high_elf
 	religion = cult_of_sunwell
 	holding = castle_holding
+	100.1.1 = {
+		special_building_slot = falthrien_academy
+	}
+	120.1.1 = {
+		special_building = falthrien_academy
+	}
 
 	603.10.1 = {
 		culture = blood_elf
@@ -438,6 +444,7 @@
 	culture = high_elf
 	religion = cult_of_sunwell
 	holding = castle_holding
+	special_building = sunwell_01
 
 	603.8.7 = {
 		culture = scourge
@@ -517,7 +524,7 @@
 ###c_greengill
 398 = {	# Greengill
 	culture = murloc
-	religion = water_deities
+	religion = frghlaith
 	holding = tribal_holding
 }
 
@@ -529,7 +536,7 @@
 ###c_sattheas
 399 = {	# Sat'theas
 	culture = murloc
-	religion = water_deities
+	religion = frghlaith
 	holding = tribal_holding
 
 	603.8.7 = {
@@ -539,7 +546,7 @@
 }
 
 3279 = {	# Ryfa Asari
-	holding = none
+	holding = castle_holding
 }
 
 3280 = {	# Eshalenora

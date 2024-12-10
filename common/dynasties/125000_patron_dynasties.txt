@@ -15,8 +15,8 @@
 	culture = lordaeronian 
 }
 125004 = {
-	name = "dynn_Black" 
-	culture = murloc 
+	name = "dynn_Morarenko" 
+	culture = gilnean 
 }
 125005 = {
 	name = "dynn_Irongate"
@@ -150,10 +150,10 @@
 	name = "dynn_Sea_Reaper"
 	culture = murloc 
 }
-125038 = {
-	name = "dynn_Autumnshade"
-	culture = night_elf 
-}
+#125038 = {
+#	name = "dynn_Autumnshade"
+#	culture = night_elf 
+#}
 125039 = {
 	name = "dynn_Gresham" 
 	culture = lordaeronian 
@@ -241,4 +241,347 @@
 125060 = {
 	name = "dynn_Ordersong"
 	culture = high_elf 
+}
+125061 = {
+	name = "dynn_Shadyneth"
+	culture = high_elf 
+}
+
+125062 = {
+	name = "dynn_Shadowglyph"
+	culture = stormreaver
+}
+
+125063 = {
+	name = "dynn_Longhorn"
+	culture = tauren
+}
+
+125064 = {
+	name = "dynn_Redcap"
+	culture = gilnean
+}
+
+125065 = {
+	name = "dynn_Mushdough"
+	culture = goblin
+}
+
+125066 = {
+	name = "dynn_Ironbane"
+	culture = high_elf
+}
+
+125067 = {
+	name = "dynn_ShadowmoonPatreon"
+	culture = night_elf
+}
+
+125068 = {
+	name = "dynn_Shan"
+	culture = high_elf
+}
+
+125069 = {
+	name = "dynn_Brainwave"
+	culture = forsaken
+}
+
+125070 = {
+	name = "dynn_Arnoldian"
+	culture = high_elf
+}
+125071 = {
+	name = "dynn_Hellebron"
+	culture = vrykul
+}
+125072 = {
+	name = "dynn_Darkcore"
+	culture = scourge
+}
+125073 = {
+	name = "dynn_Icemane"
+	culture = bronzebeard
+}
+125074 = {
+	name = "dynn_Eldaren"
+	culture = azerothian
+}
+125075 = {
+	name = "dynn_Snowleaf"
+	culture = night_elf
+}
+125076 = {
+	name = "dynn_Timberpaw"
+	culture = gnoll
+}
+125077 = {
+	name = "dynn_Corpserot"
+	culture = scourge
+}
+125078 = {
+	name = "dynn_Forcythe"
+	culture = eredar
+}
+125079 = {
+	name = "dynn_Anarath"
+	culture = night_elf
+}
+125080 = {
+	name = "dynn_Locke"
+	culture = forsaken
+}
+125081 = {
+	name = "dynn_Weihbart"
+	culture = bronzebeard
+}
+125082 = {
+	name = "dynn_Blacksun"
+	culture = high_elf
+}
+125083 = {
+	name = "dynn_Silvermist"
+	culture = high_elf
+}
+125084 = {
+	name = "dynn_Broomford"
+	culture = lordaeronian
+}
+125085 = {
+	name = "dynn_Radiantblade"
+	culture = high_elf
+}
+125086 = {
+	name = "dynn_Varlas"
+	culture = bronzebeard
+}
+125087 = {
+	name = "dynn_Dawnstrike"
+	culture = high_elf
+}
+125088 = {
+	name = "dynn_Aastran"
+	culture = highborne
+}
+125089 = {
+	name = "dynn_Riverhine"
+	culture = azerothian
+}
+125090 = {
+	name = "dynn_Forsaken"
+	culture = forsaken
+}
+125091 = {
+	name = "dynn_Kerlf"
+	culture = gilnean
+}
+125092 = {
+	name = "dynn_Murlochiavelli"
+	culture = murloc
+}
+125093 = {
+	name = "dynn_Windsong"
+	culture = night_elf
+}
+125094 = {
+	name = "dynn_Runeguard"
+	culture = high_elf
+}
+125095 = {
+	name = "dynn_Nightshade"
+	culture = azerothian
+}
+125096 = {
+	name = "dynn_Silver"
+	culture = azerothian
+}
+125097 = {
+	name = "dynn_Seraphis"
+	culture = azerothian
+}
+125098 = {
+	name = "dynn_Sundream"
+	culture = high_elf
+}
+125099 = {
+	name = "dynn_Grace"
+	culture = night_elf
+}
+125100 = {
+	name = "dynn_LeFleur"
+	culture = night_elf
+}
+125101 = {
+	name = "dynn_Steelbender"
+	culture = tauren
+}
+125102 = {
+	name = "dynn_Lionheart"
+	culture = lordaeronian
+}
+125103 = {
+	name = "dynn_Aigle"
+	culture = arathorian
+}
+125104 = {
+	name = "dynn_Hellfire"
+	culture = warsong
+}
+125105 = {
+	name = "dynn_Leodegar"
+	culture = lordaeronian
+}
+125106 = {
+	name = "dynn_Aurion"
+	culture = high_elf
+}
+125107 = {
+	name = "dynn_Mognaur"
+	culture = high_elf
+}
+miresong = {
+	name = "dynn_Miresong"
+	culture = high_elf 
+}
+sunwalker = {
+	name = "dynn_Sunwalker"
+	culture = high_elf 
+}
+slabmaw = {
+	name = "dynn_Slabmaw"
+	culture = gnoll
+}
+konifitz = {
+	name = "dynn_Konifitz"
+	culture = azerothian
+}
+marrowsong = {
+	name = "dynn_Marrowsong"
+	culture = night_elf
+}
+zakehan = {
+	name = "dynn_Zakehan"
+	culture=dark_iron
+}
+firestorm = {
+	name = "dynn_Firestorm" 
+	culture = frostwolf 
+}
+pendraigpatreon = {
+	name = "dynn_Pendraig"
+	culture = azerothian
+}
+sillendis = {
+	name = "dynn_Sillendis"
+	culture = dalaranian
+}
+valargent = {
+	name = "dynn_Valargent"
+	culture = vulpera
+}
+125108 = {
+	name = "dynn_Forestsong"
+	culture = night_elf
+}
+treefell = {
+	name = "dynn_Treefell"
+	culture = blackwater
+}
+lightrender={
+	name = "dynn_Lightrender"
+	culture=high_elf
+}
+gryz = {
+	name = "dynn_Gryz"
+	culture=high_elf
+}
+silverswell = {
+	name = "dynn_Silverswell"
+	culture=high_elf
+}
+silversun = {
+	name = "dynn_Silversun"
+	culture=high_elf
+}
+bloodsinger = {
+	name = "dynn_Bloodsinger"
+	culture=high_elf
+}
+starleader = {
+	name = "dynn_Starleader"
+	culture=highborne
+}
+wildthorn = {
+	name = "dynn_Wildthorn"
+	culture=gilnean
+}
+blackwood = {
+	name = "dynn_Blackwood"
+	culture=alteraci
+}
+agios = {
+	name = "dynn_Agios"
+	culture=lordaeronian
+}
+westhall = {
+	name = "dynn_Westhall"
+	culture=arathorian
+}
+felborn = {
+	name = "dynn_Felborn"
+	culture=lordaeronian
+}
+stillblade = {
+	name = "dynn_Stillblade"
+	culture=night_elf
+}
+angliofin = {
+	name = "dynn_Angliofin"
+	culture=lordaeronian
+}
+bluff = {
+	name = "dynn_Bluff"
+	culture=tauren
+}
+rodek = {
+	name = "dynn_Rodek"
+	culture=lordaeronian
+}
+quintillus = {
+	name = "dynn_Quintillus"
+	culture=northsea
+}
+monarchwing = {
+	name = "dynn_Monarchwing"
+	culture=night_elf
+	motto = monarchwing_motto
+}
+swiftfang = {
+	name = "dynn_Swiftfang"
+	culture=night_elf
+	motto = swiftfang_motto
+}
+nrazji = {
+	name = "dynn_Nrazji"
+	culture=naga
+}
+toli = {
+	name = "dynn_Toli"
+	culture=draenei
+}
+dawnbringer = {
+	name = "dynn_Dawnbringer"
+	culture=lordaeronian
+}
+griffin = {
+	name = "dynn_Griffin"
+	culture=gurubashi
+}
+zmijozel = {
+	name = "dynn_Zmijozel"
+	culture=gurubashi
+}
+bloodtide = {
+	name = "dynn_Bloodtide"
+	culture=murloc
 }

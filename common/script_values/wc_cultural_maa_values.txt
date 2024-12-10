@@ -6,6 +6,14 @@
 # Costs #
 #########
 
+### GOLD TO PROVISONS CALCULATOR: ####
+# Warcraft
+# 54-90 - Cheap
+# 95-120 - Moderate
+# 125-155 - Expensive
+# 160-200 - Bankrupting
+# 240+ - Giga
+
 @recr_to_maint_factor = 0.004
 @high_maint_mult = 3
 
@@ -20,6 +28,10 @@
 @cost_55_recruitment_cost = 55
 @cost_55_low_maint_cost = @[cost_55_recruitment_cost * recr_to_maint_factor]
 @cost_55_high_maint_cost = @[cost_55_low_maint_cost * high_maint_mult]
+
+@cost_75_recruitment_cost = 75
+@cost_75_low_maint_cost = @[cost_75_recruitment_cost * recr_to_maint_factor]
+@cost_75_high_maint_cost = @[cost_75_low_maint_cost * high_maint_mult]
 
 @cost_80_recruitment_cost = 80
 @cost_80_low_maint_cost = @[cost_80_recruitment_cost * recr_to_maint_factor]
@@ -118,6 +130,10 @@ cost_54_high_maint_cost = @[cost_54_high_maint_cost]
 cost_55_recruitment_cost = @[cost_55_recruitment_cost]
 cost_55_low_maint_cost = @[cost_55_low_maint_cost]
 cost_55_high_maint_cost = @[cost_55_high_maint_cost]
+
+cost_75_recruitment_cost =  @[cost_75_recruitment_cost]
+cost_75_low_maint_cost = @[cost_75_low_maint_cost]
+cost_75_high_maint_cost = @[cost_75_high_maint_cost]
 
 cost_80_recruitment_cost = @[cost_80_recruitment_cost]
 cost_80_low_maint_cost = @[cost_80_low_maint_cost]

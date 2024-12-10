@@ -1,15 +1,30 @@
 ﻿k_darkshore = {
+	1.1.1 = {
+	}
 }
 d_darkshore = {
 	1.7.13={
 		holder=340012
-		liege=e_kaldorei
+		liege = "e_kaldorei"
+		government = administrative_government
+		succession_laws = {
+			acclamation_succession_law
+		}
+		effect = {
+			rtp_government_check_effect = yes
+		}
+	}
+	603.1.1 = {
+		holder = patron310687 #patreon
 	}
 }
 c_auberdine = {
 	1.7.13={
 		holder=340012
 		liege=d_darkshore
+	}
+	603.1.1 = {
+		holder = patron310687 #patreon
 	}
 }
 c_long_wash = {
@@ -41,35 +56,46 @@ c_the_vortex = {
 	1.1.1={
 		liege=d_darkshore
 	}
-	10.1.1={holder=340260} #Welir[0]
+	10.1.1={
+		holder=340260
+		government = administrative_government
+		effect = {
+			rtp_government_check_effect = yes
+		}
+	}
+	480.5.16= { holder = night_elf72 } # 80's plot seems to have backfired on him
 }
 c_moontouched = {
 	1.1.1={
 		liege=d_darkshore
 	}
-	10.1.1={holder=340260} #Welir[0]
+	10.1.1={
+		holder=340260
+		government = administrative_government
+		effect = {
+			rtp_government_check_effect = yes
+		}
+	} 
+	480.5.16 = { holder = night_elf73 } # 80's plot seems to have backfired on him
 }
 c_bashalaran = {
-	10.1.1={
-		liege=d_darkshore
-	}
-	10.7.27 = { holder = night_elf30 } #Femoth[night_elf7]
+	10.11.21 = { holder = satyr36 } #Bazzalan[110044]
+	1190.11.2 = { holder = satyr37 } #Vron[110044]
 }
 c_fylaess = {
-	10.1.1={
-		liege=d_darkshore
-	}
-	10.7.27 = { holder = night_elf30 } #Femoth[night_elf7]
+	10.11.21 = { holder = satyr36 } #Bazzalan[110044]
+	1190.11.2 = { holder = satyr37 } #Vron[110044]
 }
 d_lordanel = {
-	800.1.1={
-		liege=k_darkshore
-	}
+	1.1.1 ={ }
 }
 c_lordanel = {
 	1.7.13={
 		holder=340012
 		liege=d_darkshore
+	}
+	583.1.1 = {
+		holder = patron310682 # Patreon
 	}
 }
 c_nandal = {
@@ -80,8 +106,15 @@ c_nandal = {
 }
 c_gloomtide = {
 	10.1.1={
-		holder=340270 #Urcumish[0]
+		holder=340270 #Uraniel
 		liege=d_darkshore
+		government = administrative_government
+		effect = {
+			rtp_government_check_effect = yes
+		}
+	}
+	603.1.1 = {
+		holder = patron310687 #patreon
 	}
 }
 c_mathystra = {
@@ -123,21 +156,8 @@ c_althalaxx = {
 		liege = d_shatterspear
 	}
 	10.7.24 = { holder = dark_troll1 } #Zilnanju[dark_troll1]
-	90.11.18 = { holder = dark_troll2 } #Sejiju[dark_troll1]
-	147.5.17 = { holder = dark_troll3 } #Xenlak[dark_troll1]
-	187.5.19 = { holder = dark_troll4 } #Drukinjo[dark_troll1]
-	229.8.21 = { holder = dark_troll5 } #Malrimon[dark_troll1]
-	298.10.26 = { holder = dark_troll6 } #Shunashi[dark_troll1]
-	353.1.3 = { holder = dark_troll7 } #Zesnannanju[dark_troll1]
-	416.1.8 = { holder = dark_troll8 } #Voneshi[dark_troll1]
-	473.9.9 = { holder = dark_troll9 } #Malrimon[dark_troll1]
-	523.9.16 = { holder = dark_troll10 } #Rujakalai[dark_troll1]
-	559.11.21 = { holder = dark_troll11 } #Grik[dark_troll1]
-	591.7.22 = { holder = dark_troll12 } #Hakeshi[dark_troll1]
-
-	#Naga
-	603.1.1={
-		holder=150131
+	90.11.18 = { 
+		holder = athrikus_narassin
 		liege=0
 	}
 }
@@ -186,8 +206,8 @@ d_shatterspear = {
 	499.01.04={holder=221279} #ayambi[8386]
 	516.12.02={holder=221286} #Jum[8386]
 	560.12.03={holder=221287} #Tish[8386]
-	585.06.13={holder=221291} #Hokthil[8386]
-	595.03.27={holder=221296} #Korij[8386]
+	585.06.13={holder=221291} #Krah'ranik[8386]
+	610.3.27={holder=221296} #Jor'kil[8386]
 	800.1.1={
 		liege=k_ashenvale
 	}
@@ -245,8 +265,8 @@ c_shatterspear = {
 	499.01.04={holder=221279} #ayambi[8386]
 	516.12.02={holder=221286} #Jum[8386]
 	560.12.03={holder=221287} #Tish[8386]
-	585.06.13={holder=221291} #Hokthil[8386]
-	595.03.27={holder=221296} #Korij[8386]
+	585.06.13={holder=221291} #Krah'ranik[8386]
+	610.3.27={holder=221296} #Jor'kil[8386]
 	800.1.1={
 		liege=k_ashenvale
 	}
@@ -276,43 +296,72 @@ c_mugjamba = {
 	499.01.04={holder=221279} #ayambi[8386]
 	516.12.02={holder=221286} #Jum[8386]
 	560.12.03={holder=221287} #Tish[8386]
-	585.06.13={holder=221291} #Hokthil[8386]
-	595.03.27={holder=221296} #Korij[8386]
+	585.06.13={holder=221291} #Krah'ranik[8386]
+	610.3.27={holder=221296} #Jor'kil[8386]
 	800.1.1={
 		liege=k_ashenvale
 	}
 }
 d_thethiru = {
-	800.1.1={
-		liege=k_darkshore
+	10.1.1={
+		holder=340330 #Evelyne[dynn_freeheart]
+		liege = "e_kaldorei"
+		government = administrative_government
+		succession_laws = {
+			acclamation_succession_law
+		}
+		effect = {
+			rtp_government_check_effect = yes
+		}
 	}
 }
 c_ametharan = {
-	1.7.13={
-		holder=340012
-		liege=d_darkshore
+	10.1.1 = { 
+		holder=340330 #Evelyne[dynn_freeheart]
+		liege = "e_kaldorei"
 	}
-	#Usurped by patron
-	20.1.1={holder=310510} #Aenethia[patron]
 }
 c_ancients_grove = {
-	10.1.1={
-		holder=340250 #Sinas[0]
-		liege=d_darkshore
+	11.1.1={
+		holder=340230 #Nuri[0]
+		liege=d_thethiru
+		government = administrative_government
+		effect = {
+			rtp_government_check_effect = yes
+		}
 	}
+	481.7.30={ holder = night_elf81 } #Janath[dynn_darkglaive]
 }
 c_twilight_shore = {
-	10.1.1={
+	11.1.1={
 		holder=340240 #Nethe[0]
-		liege=d_darkshore
+		liege=d_thethiru
+		government = administrative_government
+		effect = {
+			rtp_government_check_effect = yes
+		}
 	}
+	501.6.25={ holder = night_elf82 } #Delaria[dynn_darkglaive]
 }
 d_nevedre = {
+	1.1.1 = {
+	}
+	11.1.1={
+		liege = "e_kaldorei"
+		holder = night_elf25 #Enoia[dynn_wisptender]
+		government = administrative_government
+		succession_laws = {
+			acclamation_succession_law
+		}
+		effect = {
+			rtp_government_check_effect = yes
+		}
+	}
 }
 c_nevedre = {
-	1.7.14={
-		holder=310100 #Jebediah[patron]
-		liege=d_darkshore
+	11.1.1={
+		liege = "e_kaldorei"
+		holder = night_elf25 #Enoia[dynn_wisptender]
 	}
 }
 c_blackfur = {
@@ -338,14 +387,22 @@ c_blackfur = {
 	589.02.07={holder=130486} #Froolfove[50022]
 }
 c_remtravel = {
-	10.1.1={
-		liege=d_darkshore
+	11.1.1={
+		liege = "e_kaldorei"
+		holder = night_elf25 #Enoia[dynn_wisptender]
+		government = administrative_government
+		effect = {
+			rtp_government_check_effect = yes
+		}
 	}
-	10.1.17 = { holder = night_elf25 } #Phufys[night_elf6]
 }
 c_tassik = {
-	10.1.1={
-		liege=d_darkshore
+	11.1.1={
+		liege=d_nevedre
+		holder=310100 #Jebediah[patron]
+		government = administrative_government
+		effect = {
+			rtp_government_check_effect = yes
+		}
 	}
-	10.1.17 = { holder = night_elf25 } #Phufys[night_elf6]
 }

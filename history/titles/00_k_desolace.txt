@@ -1,6 +1,4 @@
-﻿k_desolace = {
-}
-d_maraudon = {
+﻿d_maraudon = {
 	47.1.30={holder=320251} #Maraudos[126002]
 	227.04.03={holder=320254} #Vik[126002]
 	251.08.09={holder=320262} #Fagnong[126002]
@@ -75,6 +73,7 @@ c_gelkis = {
 	559.10.20={holder=320220} #Foganeth[126001]
 	580.12.18={holder=320225} #Blalla[126001]
 	582.1.1={holder=320002} #Shaka[126001]
+	602.12.9={holder=khan_shodo} #Shodo[126001]
 }
 c_sartheris = {
 	1.11.11={holder=221800} #Xunash[8387]
@@ -131,6 +130,7 @@ c_thargad = {
 	559.10.20={holder=320220} #Foganeth[126001]
 	580.12.18={holder=320225} #Blalla[126001]
 	582.1.1={holder=320002} #Shaka[126001]
+	602.12.9={holder=khan_shodo} #Shodo[126001]
 }
 d_dhurrah = {
 	800.1.1={
@@ -166,6 +166,7 @@ c_mannoroc = {
 	559.10.20={holder=320220} #Foganeth[126001]
 	580.12.18={holder=320225} #Blalla[126001]
 	582.1.1={holder=320002} #Shaka[126001]
+	602.12.9={holder=khan_shodo} #Shodo[126001]
 	604.1.1={
 		liege = 0
 		holder = 360001 #Azrethoc
@@ -252,8 +253,9 @@ c_khelnin = {
 	565.4.6 = { holder = centaur205 } #Rhek[centaur14]
 	604.1.1={
 		liege = d_magram
-		holder=320004 #Grihn[126003] Magram takeover
+		holder=320004 #Jehn[126003] Magram takeover
 	}
+	608.3.29 = { holder = khan_kammah } # Khan Kammah
 }
 d_magram = {
 	26.1.1={holder=320328} #Kublur[126003]
@@ -277,7 +279,8 @@ d_magram = {
 	491.05.20={holder=320405} #Hriglilk[126003]
 	511.12.03={holder=320406} #Ligtir[126003]
 	560.11.17={holder=320417} #Grihn[126003]
-	582.5.17={holder=320004} #Grihn[126003]
+	582.5.17={holder=320004} #Jehn[126003]
+	608.3.29 = { holder = khan_kammah } # Khan Kammah
 }
 c_magram = {
 	1.1.1={
@@ -304,7 +307,8 @@ c_magram = {
 	491.05.20={holder=320405} #Hriglilk[126003]
 	511.12.03={holder=320406} #Ligtir[126003]
 	560.11.17={holder=320417} #Grihn[126003]
-	582.5.17={holder=320004} #Grihn[126003]
+	582.5.17={holder=320004} #Jehn[126003]
+	608.3.29 = { holder = khan_kammah } # Khan Kammah
 }
 c_shadowbreak = {
 	1.1.1={
@@ -331,10 +335,10 @@ c_shadowbreak = {
 	491.05.20={holder=320405} #Hriglilk[126003]
 	511.12.03={holder=320406} #Ligtir[126003]
 	560.11.17={holder=320417} #Grihn[126003]
-	582.5.17={holder=320004} #Grihn[126003]
+	582.5.17={holder=320004} #Jehn[126003]
 	#Burning Blade
 	604.9.15={
-		liege = d_burning_blade
+		liege = d_burning_blade_clan
 		holder = 10653 #Jugkar Grim'rod
 	}
 }
@@ -394,7 +398,9 @@ c_kolkar = {
 	560.03.14={holder=320616} #Bleme[126005]
 	568.01.11={holder=320619} #Dikolah[126005]
 	596.07.07={holder=320623} #Gor[126005]
-	606.06.10={holder=320628} #Kong[126005]
+	602.6.10={holder=gragtor} #Gragtor[126005]
+	605.5.18={holder=dezhepah} #Dez'hepah[126005]
+	608.4.11={holder=lehprah} #Leh'prah[126005]
 }
 c_jortharu = {
 	1.1.1={
@@ -422,7 +428,9 @@ c_jortharu = {
 	560.03.14={holder=320616} #Bleme[126005]
 	568.01.11={holder=320619} #Dikolah[126005]
 	596.07.07={holder=320623} #Gor[126005]
-	606.06.10={holder=320628} #Kong[126005]
+	602.6.10={holder=gragtor} #Gragtor[126005]
+	605.5.18={holder=dezhepah} #Dez'hepah[126005]
+	608.4.11={holder=lehprah} #Leh'prah[126005]
 }
 c_sargeron = {
 	1.1.1={
@@ -466,7 +474,7 @@ c_tethris_aran = {
 	565.4.23 = { holder = centaur176 } #Jalk[centaur12]
 	603.6.28 = { holder = centaur177 } #Wazh[centaur12]
 	604.9.15={
-		liege = d_burning_blade
+		liege = d_burning_blade_clan
 		holder = 10652 #Kohor
 	}
 }
@@ -488,7 +496,7 @@ c_thunder_axe = {
 	565.4.23 = { holder = centaur176 } #Jalk[centaur12]
 	603.6.28 = { holder = centaur177 } #Wazh[centaur12]
 	604.9.15={
-		liege = d_burning_blade
+		liege = d_burning_blade_clan
 		holder = 10652 #Kohor
 	}
 }
@@ -510,7 +518,7 @@ c_pelthix = {
 	565.4.23 = { holder = centaur176 } #Jalk[centaur12]
 	603.6.28 = { holder = centaur177 } #Wazh[centaur12]
 	604.9.15={
-		liege = d_burning_blade
+		liege = d_burning_blade_clan
 		holder = 10652 #Kohor
 	}
 }
@@ -533,7 +541,7 @@ c_rhuhnas = {
 	599.3.19 = { holder = centaur192 } #Agrak[centaur13]
 	#Burning Blade
 	604.9.15={
-		liege = d_burning_blade
+		liege = d_burning_blade_clan
 		holder = 10653 #Jugkar Grim'rod
 	}
 }
@@ -559,7 +567,7 @@ c_ethel_rethor = {
 	523.04.04={holder=34968} #Lghmr[6022]
 	552.05.18={holder=34976} #Hgmghr[6022]
 	576.03.01={holder=34979} #Ghlml[6022]
-	582.06.03={holder=34986} #Gmrmh[6022]
+	582.06.03={holder=cackle} #Cackle
 }
 c_ranazjar = {
 	# c_ethel_rethor

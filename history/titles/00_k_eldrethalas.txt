@@ -1,4 +1,6 @@
 k_eldrethalas = {
+	1.1.1 = {
+	}
 }
 d_eldrethalas = {
 	5.1.1={
@@ -18,6 +20,9 @@ c_eldrethalas = {
 	}
 	604.1.1={
 		holder=52326 #Ulrok[42012]
+	}
+	611.1.15={
+		holder=silverlaine_thorne #Malus
 	}
 }
 c_avalune = {
@@ -44,6 +49,8 @@ c_shendralar_commons = {
 	}
 }
 d_elunar = {
+	1.1.1 = {
+	}
 }
 c_estulan = {
 	6.1.1={
@@ -98,6 +105,9 @@ d_isildien = {
 	604.1.1={
 		holder=52326 #Ulrok[42012]
 	}
+	611.1.15={
+		holder=silverlaine_thorne #Malus
+	}
 }
 c_ishelean = {
 	1.1.1={
@@ -117,6 +127,9 @@ c_ishelean = {
 	#Conquired by the Gordunni
 	604.1.1={
 		holder=52326 #Ulrok[42012]
+	}
+	611.1.15={
+		holder=silverlaine_thorne #Malus
 	}
 }
 c_frayfeather = {

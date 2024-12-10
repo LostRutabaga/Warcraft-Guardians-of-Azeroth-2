@@ -1,6 +1,6 @@
 ﻿
 should_apply_tribal_development_penalty_trigger = {
-	has_government = tribal_government
+	government_has_flag = government_is_tribal
 	NOR = {
 		any_liege_or_above = {
 			# Warcraft
@@ -18,6 +18,40 @@ should_apply_tribal_development_penalty_trigger = {
 				target = prev
 				value < -1
 			}
+		}
+	}
+}
+
+# Warcraft - Need adaptation TO DO
+faith_qualifies_for_west_african_pagan_feudalisation_trigger = {
+	always = no
+	#faith = {
+	#	# Unreformed West African Pagans are our targets.
+	#	OR = {
+	#		religion = religion:akom_religion
+	#		religion = religion:west_african_religion
+	#		religion = religion:west_african_bori_religion
+	#		religion = religion:west_african_orisha_religion
+	#		religion = religion:west_african_roog_religion
+	#	}
+	#	custom_tooltip = {
+	#		text = faith_qualifies_for_west_african_pagan_feudalisation_trigger.tt
+	#		has_doctrine_parameter = unreformed
+	#	}
+	#}
+}
+
+should_use_temple_character_background_trigger = {
+	trigger_if = {
+		limit = { is_landed = yes }
+		government_has_flag = government_is_theocracy
+	}
+	trigger_else = {
+		OR = {
+			has_trait = order_member
+			has_council_position = councillor_court_chaplain
+			government_has_flag = government_is_theocracy
+			is_clergy = yes
 		}
 	}
 }

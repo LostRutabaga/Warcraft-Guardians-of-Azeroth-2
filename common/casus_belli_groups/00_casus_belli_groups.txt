@@ -9,15 +9,18 @@
 		}
 		faith = {
 			NOR = {
-				has_doctrine = unreformed_faith_doctrine # Unreformed Pagans cannot Holy War
-				has_doctrine_parameter = holy_wars_forbidden # Pacifists cannot Holy War
+				has_doctrine_parameter = unreformed # Unreformed Pagans cannot Holy War
+				AND = {
+					has_doctrine_parameter = holy_wars_forbidden # Pacifists cannot Holy War
+					NOT = { prev = { has_character_flag = bonus_major_holy_war } } #...unless they got the legend bonus
+				}
 			}
 		}
 	}
 }
 
 #Holy wars that should be restricted if your liege disagrees, or your faith does, but which don't require organised religion. E.g., human sacrifice raids.
-religious_disorganised= {
+religious_disorganised = {
 	allowed_for_character = {
 		OR = { # Cannot Holy War if your Liege(s) are of a different Faith than you.
 			is_independent_ruler = yes
@@ -61,6 +64,10 @@ vassalization = {
 conquest = {
 }
 
+struggle = {
+	allowed_for_character = { can_use_struggle_cbs_trigger = yes }
+}
+
 subjugation = {
 }
 
@@ -70,4 +77,7 @@ independence = {
 event = {
 	should_check_for_interface_availability = no
 	can_only_start_via_script = yes # Only fired by event
+}
+
+artifact = {
 }

@@ -7,7 +7,7 @@ scripted_trigger de_jure_liege_title_to_destroy = {
 	tier > tier_county
 	is_titular = no
 	is_landless_type_title = no
-	NOT = { exists = controlled_faith }
+	is_head_of_faith = no
 	save_temporary_scope_as = de_jure_liege_title
 	
 	NOT = {
@@ -47,7 +47,7 @@ game_rule.1 = { # De Jure Requirement
 			save_scope_as = title_to_destroy
 		}
 		send_interface_message = {
-			type = event_chancellor_task_bad
+			type = event_title_bad
 			title = de_jure_requirement_title
 			desc = de_jure_requirement_desc
 
@@ -76,7 +76,7 @@ scripted_trigger only_ai_if_ai_only_trigger = {
 
 
 game_rule.1000 = {
-	type = empty
+	scope = none
 	hidden = yes
 
 	trigger = {
@@ -116,19 +116,17 @@ game_rule.1001 = { #by Mathilda Bjarnehed
 				always = yes
 			}
 		}
-		NOR = {
-			has_trait = celibate
-			has_trait = eunuch
-		}
+		is_eunuch_trigger = no
+		NOT = { has_trait = celibate }
 		age >= age_17_value #Because you need ~1 year of pregnancy
-		is_landed = yes
+		is_playable_character = yes
 		primary_title = {
 			is_mercenary_company = no
 			is_holy_order = no
 		}
 		NOR = {
-			has_government = republic_government
-			has_government = theocracy_government
+			government_has_flag = government_is_republic
+			government_has_flag = government_is_theocracy
 			
 			# Warcraft
 		}
@@ -143,7 +141,6 @@ game_rule.1001 = { #by Mathilda Bjarnehed
 		}
 	}
 
-	
 
 	immediate = {
 		if = {
@@ -167,6 +164,11 @@ game_rule.1001 = { #by Mathilda Bjarnehed
 			 	game_rule_create_spouse_and_children = { CHARACTER = scope:childless_heir }
 			}
 		}
+		# Error suppression.
+		# if = {
+		# 	limit = { always = no }
+		# 	add_character_flag = do_not_generate_starting_family
+		# }
 	}
 }
 

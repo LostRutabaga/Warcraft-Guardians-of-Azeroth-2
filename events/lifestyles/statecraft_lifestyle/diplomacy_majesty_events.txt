@@ -277,7 +277,8 @@ diplomacy_majesty.0005 = {
 			}
 			progress_towards_friend_effect = {
 				CHARACTER = scope:compliment_receiver
-				OPINION = no
+				OPINION = 0
+				REASON = friend_paid_compliment
 			}
 		}
 	}
@@ -307,9 +308,10 @@ diplomacy_majesty.0006 = {
 			opinion = -25
 		}
 		progress_towards_rival_effect = {
-				CHARACTER = scope:compliment_receiver
-				OPINION = no
-			}
+			REASON = rival_inadvertent_insult
+			CHARACTER = scope:compliment_receiver
+			OPINION = 0
+		}
 	}
 
 	option = {
@@ -426,12 +428,12 @@ diplomacy_majesty.0016 = {
 		if = {
 			limit = {
 				can_start_scheme = {
-					target = scope:potential_friend
+					target_character = scope:potential_friend
 					type = befriend
 				}
 			}
 			start_scheme = {
-				target = scope:potential_friend
+				target_character = scope:potential_friend
 				type = befriend
 			}
 			custom_tooltip = diplomacy_majesty.0016.a.tt
@@ -506,8 +508,20 @@ diplomacy_majesty.1020 = {
 	
 	trigger = {
 		is_available = yes
-		any_vassal = {
-			diplomacy_majesty_1020_vassal_trigger = yes
+
+		OR = {
+			any_vassal = {
+				diplomacy_majesty_1020_vassal_trigger = yes
+			}
+			AND = {
+				OR = {
+					is_landless_adventurer = yes
+					is_landless_administrative = yes
+				}
+				any_courtier = {
+					diplomacy_majesty_1020_vassal_trigger = yes					
+				}
+			}
 		}
 		OR = {
 			has_diplomacy_lifestyle_trait_trigger = yes
@@ -553,21 +567,45 @@ diplomacy_majesty.1020 = {
 				}
 				liege = { save_scope_as = important_ruler }
 			}
-
-			random_vassal = {
+			if = {
 				limit = {
-					diplomacy_majesty_1020_vassal_trigger = yes
-				}
-				weight = {
-					base = 1
-					modifier = {
-						add = {
-							value = ai_boldness
-							multiply = -1
-						}
+					OR = {
+						is_landless_adventurer = yes
+						is_landless_administrative = yes
 					}
 				}
-				save_scope_as = wounded_vassal
+				random_courtier = {
+					limit = {
+						diplomacy_majesty_1020_vassal_trigger = yes
+					}
+					weight = {
+						base = 1
+						modifier = {
+							add = {
+								value = ai_boldness
+								multiply = -1
+							}
+						}
+					}
+					save_scope_as = wounded_vassal
+				}
+			}
+			else = {
+				random_vassal = {
+					limit = {
+						diplomacy_majesty_1020_vassal_trigger = yes
+					}
+					weight = {
+						base = 1
+						modifier = {
+							add = {
+								value = ai_boldness
+								multiply = -1
+							}
+						}
+					}
+					save_scope_as = wounded_vassal
+				}
 			}
 		}
 	}
@@ -575,6 +613,8 @@ diplomacy_majesty.1020 = {
 	#Yes, I want to be better
 	option = {
 		name = diplomacy_majesty.1020.a
+
+		trigger = { is_landed = yes }
 
 		add_character_modifier = {
 			modifier = generous_ruler
@@ -967,17 +1007,20 @@ diplomacy_majesty.4033 = {
 #########################
 
 scripted_trigger diplomacy_majesty_4070_valid_culture = {
-	NOT = { has_same_culture_group_as = root }
+	NOT = { culture = { has_same_culture_heritage = root.culture } }
 	culture = {
 		save_temporary_scope_as = potential_culture
 	}
 
 	root = {
+		NOT = {
+			knows_language_of_culture = scope:potential_culture
+		}
 		OR = {
 			NOT = { has_variable = statecraft_4070_learned_language }
 			AND = {
 				has_variable = statecraft_4070_learned_language
-				NOT = {var:statecraft_4070_learned_language = scope:potential_culture}
+				NOT = { var:statecraft_4070_learned_language = scope:potential_culture }
 			}
 		}
 	}
@@ -991,15 +1034,32 @@ diplomacy_majesty.4070 = {
 	desc = diplomacy_majesty.4070.desc
 	theme = diplomacy_majesty_focus
 	override_background = {
-		event_background = study
+		reference = study
 	}
-	left_portrait = scope:my_vassal
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	right_portrait = {
+		character = scope:my_vassal
+		animation = debating
+	}
 	
 	trigger = {
 		NOT = { has_character_flag = had_diplomacy_majesty_4070_event }
-
-		any_vassal = {
-			diplomacy_majesty_4070_valid_culture = yes
+		OR = {
+			any_vassal = {
+				diplomacy_majesty_4070_valid_culture = yes
+			}
+			AND = {
+				OR = {
+					is_landless_adventurer = yes
+					is_landless_administrative = yes
+				}
+				any_courtier = {
+					diplomacy_majesty_4070_valid_culture = yes
+				}
+			}
 		}
 	}
 
@@ -1024,54 +1084,84 @@ diplomacy_majesty.4070 = {
 			years = ongoing_lifestyle_event_delay
 		}
 
-		random_vassal = {
+		if = {
 			limit = {
-				diplomacy_majesty_4070_valid_culture = yes
-
 				OR = {
-					# Prioritize powerful vassals, as you want to make them feel important.
-					is_powerful_vassal_of = root
+					is_landless_adventurer = yes
+					is_landless_administrative = yes
+				}
+			}
+			random_courtier = {
+				limit = {
+					diplomacy_majesty_4070_valid_culture = yes					
+				}
+				save_scope_as = my_vassal
+			}
+		}
+		else = {
+			random_vassal = {
+				limit = {
+					diplomacy_majesty_4070_valid_culture = yes
 
-					# Also can prioritize cultures that make up at least 25% of our realm.
-					AND = {
-						liege = {
-							any_vassal = {
-								percent > 0.25
-								culture = scope:potential_culture
+					OR = {
+						# Prioritize powerful vassals, as you want to make them feel important.
+						is_powerful_vassal_of = root
+
+						# Also can prioritize cultures that make up at least 25% of our realm.
+						AND = {
+							liege = {
+								any_vassal = {
+									percent > 0.25
+									culture = scope:potential_culture
+								}
 							}
 						}
 					}
 				}
-			}
-			alternative_limit = {
-				diplomacy_majesty_4070_valid_culture = yes
+				alternative_limit = {
+					diplomacy_majesty_4070_valid_culture = yes
 
-				# Prioritize cultures that make up at least 10% of our realm.
-				liege = {
-					any_vassal = {
-						percent > 0.10
-						culture = scope:potential_culture
+					# Prioritize cultures that make up at least 10% of our realm.
+					liege = {
+						any_vassal = {
+							percent > 0.10
+							culture = scope:potential_culture
+						}
 					}
 				}
-			}
-			# Otherwise just pick any culture.
-			alternative_limit = {
-				diplomacy_majesty_4070_valid_culture = yes
-			}
-
-			weight = {
-				base = 1
-				modifier = {
-					is_powerful_vassal_of = root
-					add = 20
+				# Otherwise just pick any culture.
+				alternative_limit = {
+					diplomacy_majesty_4070_valid_culture = yes
 				}
-				compare_modifier = {
-					value = highest_held_title_tier
-					multiplier = 10
+
+				weight = {
+					base = 1
+					modifier = {
+						is_powerful_vassal_of = root
+						add = 20
+					}
+					compare_modifier = {
+						value = highest_held_title_tier
+						multiplier = 10
+					}
+				}
+
+				save_scope_as = my_vassal
+			}
+		}
+		if = {
+			limit = {
+				employs_court_position = court_tutor_court_position
+				any_court_position_holder = {
+					type = court_tutor_court_position
+					knows_language_of_culture = scope:potential_culture
+					is_available_ai_adult = yes
 				}
 			}
-
-			save_scope_as = my_vassal
+			random_court_position_holder = {
+				type = court_tutor_court_position
+				save_scope_as = hired_court_tutor
+			}
 		}
 	}
 
@@ -1109,6 +1199,8 @@ diplomacy_majesty.4070 = {
 						}
 					}
 					add_diplomacy_lifestyle_xp = medium_lifestyle_xp
+		
+					learn_language_of_culture = scope:my_vassal.culture
 				}
 				trigger_event = {
 					id = diplomacy_majesty.4071
@@ -1140,6 +1232,75 @@ diplomacy_majesty.4070 = {
 				ai_energy = 200
 			}
 		}	
+	}
+
+	option = {		# EP1 - ask help from your court tutor
+		name = diplomacy_majesty.4070.d
+		trigger = {
+			exists = scope:hired_court_tutor
+		}
+		stress_impact = {
+			arrogant = medium_stress_impact_gain
+			callous = minor_stress_impact_gain
+			sadistic = minor_stress_impact_gain
+		}
+		duel = {
+			skill = learning
+			value = 10
+			desc = outcome_in_a_few_weeks
+			75 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 2.5
+					min = -74
+				}
+				desc = diplomacy_majesty.4070.success
+				show_as_tooltip = {
+					add_diplomacy_lifestyle_xp = medium_lifestyle_xp
+		
+					learn_language_of_culture = scope:my_vassal.culture
+					every_vassal = {
+						limit = {
+							has_same_culture_as = scope:my_vassal
+						}
+						add_opinion = {
+							target = root
+							modifier = respect_opinion
+							opinion = 30
+						}
+					}
+				}
+				trigger_event = {
+					id = diplomacy_majesty.4071
+					days = { 45 75 }
+				}
+			}
+			25 = {		
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -2.5
+					min = -24
+				}
+				desc = diplomacy_majesty.4070.failure
+				show_as_tooltip = {
+					add_stress = minor_stress_gain
+					custom_tooltip = diplomacy_majesty.4070.failure.tt
+				}
+				trigger_event = {
+					id = diplomacy_majesty.4072
+					days = { 45 75 }
+				}
+			}
+		}
+
+		ai_chance = {
+			base = 100
+			ai_value_modifier = {
+				ai_compassion = 500
+				ai_greed = -500
+				ai_energy = 100
+			}
+		}
 	}
 
 	# Hire a tutor to instruct you
@@ -1178,6 +1339,8 @@ diplomacy_majesty.4070 = {
 				desc = diplomacy_majesty.4070.success
 				show_as_tooltip = {
 					add_diplomacy_lifestyle_xp = medium_lifestyle_xp
+		
+					learn_language_of_culture = scope:my_vassal.culture
 					every_vassal = {
 						limit = {
 							has_same_culture_as = scope:my_vassal
@@ -1249,11 +1412,28 @@ diplomacy_majesty.4071 = {
 	desc = diplomacy_majesty.4071.desc
 	theme = diplomacy_majesty_focus
 	override_background = {
-		event_background = study
+		reference = study
 	}
 	left_portrait = {
 		character = root
+		animation = storyteller
+	}
+	right_portrait = {
+		character = scope:my_vassal
 		animation = happiness
+	}
+	lower_left_portrait = {
+		trigger = {
+			exists = scope:hired_court_tutor
+			scope:hired_court_tutor = { is_alive = yes }
+		}
+		character = scope:hired_court_tutor
+	}
+	
+	trigger = {
+		NOT = {
+			knows_language_of_culture = scope:my_vassal.culture
+		}
 	}
 
 	# Gain opinion bonus
@@ -1276,12 +1456,37 @@ diplomacy_majesty.4071 = {
 			name = statecraft_4070_learned_language
 			value = scope:my_vassal.culture
 		}
+		
+		learn_language_of_culture = scope:my_vassal.culture
+
+		if = {
+			limit = {
+				exists = scope:hired_court_tutor
+				scope:hired_court_tutor = { is_alive = yes }
+			}
+			scope:hired_court_tutor = {
+				add_opinion = {
+					target = root
+					modifier = respect_opinion
+					opinion = 20
+				}
+			}
+		}
+		if = {
+			limit = {
+				is_ai = yes
+				exists = scope:hired_court_tutor
+				scope:hired_court_tutor = { is_alive = yes }
+			}
+			add_opinion = {
+				target = scope:hired_court_tutor
+				modifier = grateful_opinion
+				opinion = 30
+			}
+		}
 
 		ai_chance = {
-			base = 200
-			ai_value_modifier = {
-				ai_rationality = 1
-			}
+			base = 100
 		}
 	}
 
@@ -1322,10 +1527,7 @@ diplomacy_majesty.4071 = {
 			}
 		}
 		ai_chance = {
-			base = -100
-			ai_value_modifier = {
-				ai_rationality = -2
-			}
+			base = 0
 		}
 	}
 
@@ -1338,11 +1540,17 @@ diplomacy_majesty.4072 = {
 	desc = diplomacy_majesty.4072.desc
 	theme = diplomacy_majesty_focus
 	override_background = {
-		event_background = study
+		reference = study
 	}
 	left_portrait = {
 		character = root
 		animation = stress
+	}
+	
+	trigger = {
+		NOT = {
+			knows_language_of_culture = scope:my_vassal.culture
+		}
 	}
 
 	immediate = {
@@ -1365,6 +1573,10 @@ diplomacy_majesty.4072 = {
 				modifier = {
 					factor = 1.2 # Higher success chance if you hired a tutor in the previous step
 					exists = scope:hired_tutor
+				}
+				modifier = {
+					factor = 1.2 # Higher success chance if you hired your court tutor in the previous step
+					exists = scope:hired_court_tutor
 				}
 
 				desc = diplomacy_majesty.4070.success
@@ -1396,6 +1608,10 @@ diplomacy_majesty.4072 = {
 					factor = 0.8 # Lower failure chance if you hired a tutor in the previous step
 					exists = scope:hired_tutor
 				}
+				modifier = {
+					factor = 0.8 # Lower failure chance if you hired your court tutor in the previous step
+					exists = scope:hired_court_tutor
+				}
 
 				desc = diplomacy_majesty.4070.failure
 				show_as_tooltip = {
@@ -1425,8 +1641,17 @@ diplomacy_majesty.4072 = {
 	# Give up and finally hire a tutor if you didn't already
 	option = {
 		name = diplomacy_majesty.4072.c
-		trigger = { NOT = { exists = scope:hired_tutor}	}
-
+		trigger = {
+			NOR = {
+				exists = scope:hired_tutor
+				exists = scope:hired_court_tutor
+			}
+			OR = {
+				is_ai = no
+				short_term_gold >= medium_gold_value_check
+			}
+		}
+		remove_short_term_gold = medium_gold_value
 		duel = {
 			skill = learning
 			value = 10
@@ -1514,11 +1739,17 @@ diplomacy_majesty.4073 = {
 	desc = diplomacy_majesty.4073.desc
 	theme = diplomacy_majesty_focus
 	override_background = {
-		event_background = study
+		reference = study
 	}
 	left_portrait = {
 		character = root
 		animation = sadness
+	}
+	
+	trigger = {
+		NOT = {
+			knows_language_of_culture = scope:my_vassal.culture
+		}
 	}
 
 	immediate = {
@@ -2065,11 +2296,11 @@ diplomacy_majesty_special.1010 = {
 				trigger = {
 					opposing_ai_values_trigger = { TARGET = scope:debater VALUE = zeal }
 					OR = {
-						root = {
-							like_abrahamic_religion_trigger = yes
+						root.faith = {
+							like_abrahamic_faith_trigger = yes
 						}
-						scope:debater = {
-							like_abrahamic_religion_trigger = yes
+						scope:debater.faith = {
+							like_abrahamic_faith_trigger = yes
 						}
 					}
 				}
@@ -3574,7 +3805,10 @@ diplomacy_majesty_special.1015 = {
 		if = {
 			limit = { has_character_flag = make_enemy }
 			scope:debater = {
-				set_relation_rival = root
+				set_relation_rival = {
+					target = root
+					reason = rival_humiliated_in_debate
+				}
 			}
 			hidden_effect = { remove_character_flag = make_enemy }
 		}

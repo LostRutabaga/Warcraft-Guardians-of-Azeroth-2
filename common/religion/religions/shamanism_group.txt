@@ -41,6 +41,14 @@
 	doctrine = doctrine_clerical_gender_either
 	doctrine = doctrine_clerical_marriage_allowed
 	doctrine = doctrine_clerical_succession_spiritual_fixed_appointment
+	
+	doctrine = special_doctrine_is_mortal_faith
+
+	#Allow pilgrimages
+	doctrine = doctrine_pilgrimage_encouraged
+	
+	#Funeral tradition
+	doctrine = doctrine_funeral_stoic
 
 	# Placeholder
 	traits = {
@@ -72,6 +80,10 @@
 		custom_faith_6 waaqism custom_faith_fp1_yggdrasil
 		# Flower
 		custom_faith_10
+		# Bush
+		custom_faith_burning_bush
+		# Lotus
+		custom_faith_lotus
 		# Elephant
 		custom_faith_5
 		# Horse
@@ -92,8 +104,12 @@
 		siberian
 		# Snake
 		custom_faith_fp1_jormungandr
+		# Sheep
+		custom_faith_lamb custom_faith_black_sheep
+		# Dove
+		custom_faith_dove
 		# Totem
-		custom_faith_fp1_thors_hammer custom_faith_fp1_irminsul
+		custom_faith_fp1_thors_hammer custom_faith_fp1_irminsul achamanism
 		# Head
 		kiratism mande yoruba west_african_custom
 		# Temple
@@ -113,6 +129,8 @@
 	localization = {
 		#HighGod
 		HighGodName = ANCESTORS_NAME
+		HighGodName2 = ANCESTORS_NAME
+		HighGodName3 = ANCESTORS_NAME
 		HighGodNamePossessive = ANCESTORS_POSSESSIVE
 		HighGodNameSheHe = CHARACTER_SHEHE_THEY
 		HighGodHerselfHimself = CHARACTER_THEMSELVES
@@ -198,6 +216,8 @@
 		WaterGodHerHim = CHARACTER_HERHIM_THEM
 
 		PantheonTerm = religion_the_spirits
+		PantheonTerm2 = religion_the_spirits
+		PantheonTerm3 = religion_the_spirits
 		PantheonTermHasHave = pantheon_term_have
 		GoodGodNames = {
 			ANCESTORS_NAME
@@ -213,10 +233,16 @@
 		}
 		
 		HouseOfWorship = TEMPLE_NAME
+		HouseOfWorship2 = TEMPLE_NAME
+		HouseOfWorship3 = TEMPLE_NAME
 		HouseOfWorshipPlural = TEMPLE_PLURAL
 		
 		ReligiousSymbol = TOTEM_NAME
+		ReligiousSymbol2 = TOTEM_NAME
+		ReligiousSymbol3 = TOTEM_NAME
 		ReligiousText = STORIES_NAME
+		ReligiousText2 = STORIES_NAME
+		ReligiousText3 = STORIES_NAME
 		
 		ReligiousHeadName = HIGH_SHAMAN_MALE_NAME
 		ReligiousHeadNameFemale = HIGH_SHAMAN_FEMALE_NAME
@@ -245,15 +271,25 @@
 		BishopNeuterPlural = SHAMAN_MALE_PLURAL
 		
 		DivineRealm = SPIRIT_WORLD_NAME
+		DivineRealm2 = SPIRIT_WORLD_NAME
+		DivineRealm3 = SPIRIT_WORLD_NAME
+		
 		PositiveAfterLife = SPIRIT_WORLD_NAME
+		PositiveAfterLife2 = SPIRIT_WORLD_NAME
+		PositiveAfterLife3 = SPIRIT_WORLD_NAME
+		
 		NegativeAfterLife = MAW_NAME
+		NegativeAfterLife2 = MAW_NAME
+		NegativeAfterLife3 = MAW_NAME
 		
 		DeathDeityName = DEATH_NAME
 		DeathDeityNamePossessive = DEATH_POSSESSIVE
 		DeathDeitySheHe = CHARACTER_SHEHE_IT
 		DeathDeityHerHis = CHARACTER_HERHIS_ITS
+		DeathDeityHerHim = CHARACTER_HERHIM_IT
 		
 		WitchGodName = UNSEEN_GUESTS_NAME
+		WitchGodNamePossessive  = UNSEEN_GUESTS_POSSESSIVE
 		WitchGodHerHis = CHARACTER_HERHIS_THEIR
 		WitchGodSheHe = CHARACTER_SHEHE_THEY
 		WitchGodHerHim = CHARACTER_HERHIM_THEM
@@ -286,6 +322,9 @@
 
 			#Marriage
 			doctrine = doctrine_monogamy
+			
+			#Funeral tradition
+			doctrine = doctrine_funeral_cremation
 
 			doctrine = tenet_ancestor_worship
 			doctrine = tenet_esotericism
@@ -315,10 +354,14 @@
 			
 			#Main Group
 			doctrine = doctrine_no_head
+			
+			#Special
+			doctrine = special_doctrine_eastern_kingdoms_syncretism
 
-			doctrine = tenet_eastern_kingdoms_syncretism
+			doctrine = tenet_communal_identity
 			doctrine = tenet_ancestor_worship
-			doctrine = tenet_sky_burials
+			#doctrine = tenet_sky_burials					 #TODO: add sky burials tradition to this religion and remove this comment before 1.12.x-update is merged
+			doctrine = tenet_sanctity_of_nature
 
 			holy_order_names = {
 				{ name = "holy_order_natures_hammer" }
@@ -350,7 +393,8 @@
 
 			doctrine = tenet_life_syncretism
 			doctrine = tenet_sanctity_of_nature
-			doctrine = tenet_sky_burials
+			#doctrine = tenet_sky_burials					 #TODO: add sky burials tradition to this religion and remove this comment before 1.12.x-update is merged
+			doctrine = tenet_sacred_childbirth
 
 			#Magic
 			doctrine = doctrine_light_magic_accepted
@@ -359,6 +403,8 @@
 			localization = {
 				#HighGod
 				HighGodName = EARTH_MOTHER_NAME
+				HighGodName2 = EARTH_MOTHER_NAME
+				HighGodName3 = EARTH_MOTHER_NAME
 				HighGodNamePossessive = EARTH_MOTHER_POSSESSIVE
 				HighGodNameSheHe = CHARACTER_SHEHE_SHE
 				HighGodHerselfHimself = CHARACTER_HERSELF
@@ -497,6 +543,8 @@
 			localization = {
 				#HighGod
 				HighGodName = OACHANOA_NAME
+				HighGodName2 = OACHANOA_NAME
+				HighGodName3 = OACHANOA_NAME
 				HighGodNamePossessive = OACHANOA_POSSESSIVE
 				HighGodNameSheHe = CHARACTER_SHEHE_SHE
 				HighGodHerselfHimself = CHARACTER_HERSELF
@@ -544,6 +592,7 @@
 				DeathDeityNamePossessive = KARKUT_POSSESSIVE
 				DeathDeitySheHe = CHARACTER_SHEHE_HE
 				DeathDeityHerHis = CHARACTER_HERHIS_HIS
+				DeathDeityHerHim = CHARACTER_HERHIM_HER
 			}
 
 			holy_order_names = {
@@ -608,8 +657,8 @@
 			doctrine = doctrine_no_head
 
 			doctrine = tenet_natural_primitivism
-			doctrine = tenet_sanctity_of_nature
-			doctrine = tenet_human_sacrifice
+			doctrine = tenet_cthonic_redoubts
+			doctrine = tenet_bloody_feast
 
 			#Magic
 			#Ignore all except some shaman, they don't know any other magic
@@ -635,17 +684,17 @@
 
 			doctrine = unreformed_faith_doctrine
 			
-			holy_site = icemist #These are placeholders, can't put proper ones until Broken Isles are mapped
-			holy_site = taunkale
-			holy_site = wintergarde
-			holy_site = njord
-			holy_site = grizzlemaw
+			holy_site = neltharions_lair # Origin + thunder totem
+			holy_site = rockcrawler_chasm
+			holy_site = suramar
+			holy_site = azurewing_rest
+			holy_site = zarkhenar
 
 			#Main Group
 			doctrine = doctrine_no_head
 
 			doctrine = tenet_natural_primitivism
-			doctrine = tenet_sanctity_of_nature
+			doctrine = tenet_cthonic_redoubts
 			doctrine = tenet_ancestor_worship
 
 			#Magic

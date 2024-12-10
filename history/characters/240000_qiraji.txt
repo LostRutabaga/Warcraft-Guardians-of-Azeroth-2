@@ -2,14 +2,14 @@
 240000={
 	name=Vek'nilash
 	dynasty=118000
-	culture=qiraji religion=cthun_worship
+	culture=qiraji religion=cthunism
 	martial=5 diplomacy=6 stewardship=5 intrigue=6 learning=7
 	trait=education_martial_4
 	trait=twin
 	trait=strategist trait=temperate trait=arrogant trait=wrathful trait=physique_good_3 trait=brave
 	father=240003 #Nuzzarad
-	2.1.1={ birth=yes trait=creature_qiraji trait=being_void }
-	20.1.1={
+	21.1.1={ birth=yes trait=creature_qiraji trait=being_void }
+	22.1.1={
 		effect={
 			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_5_physical_trait_value }
 			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_5_physical_trait_value }
@@ -23,24 +23,24 @@
 240001={
 	name=Vek'lor
 	dynasty=118000
-	culture=qiraji religion=cthun_worship
+	culture=qiraji religion=cthunism
 	martial=5 diplomacy=5 stewardship=7 intrigue=7 learning=8
 	trait=education_learning_4
 	trait=twin
 	trait=scholar trait=intellect_good_2 trait=patient trait=temperate trait=arrogant trait=diligent 
 	father=240003 #Nuzzarad
-	2.1.1={ birth=yes trait=creature_qiraji trait=being_void }
-	20.1.1={ effect={ set_variable = { name = wc_shadow_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_5_magic_trait_value } } }
+	21.1.1={ birth=yes trait=creature_qiraji trait=being_void }
+	22.1.1={ effect={ set_variable = { name = wc_shadow_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_5_magic_trait_value } } }
 	610.11.10={ death=yes }
 }
 # Placeholder father of twin emperors
 240003={
 	name=Nuzzarad
 	dynasty=118000
-	culture=qiraji religion=cthun_worship
+	culture=qiraji religion=cthunism
 	martial=5 diplomacy=5 stewardship=5 intrigue=5 learning=5
 	trait=education_learning_4
-	1.1.1={ birth=yes trait=creature_qiraji trait=being_void }
+	2.1.1={ birth=yes trait=creature_qiraji trait=being_void }
 	16.1.1={ effect={ set_variable = { name = wc_shadow_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_5_magic_trait_value } } }
 	20.1.1={ death=yes }
 }
@@ -48,12 +48,20 @@
 240002={
 	name=Skeram
 	dynasty=118001
-	culture=qiraji religion=cthun_worship
+	culture=qiraji religion=cthunism
 	martial=5 diplomacy=5 stewardship=7 intrigue=7 learning=8
 	trait=education_learning_4
-	trait=mystic_2 trait=intellect_good_2 trait=deceitful trait=temperate trait=zealous
-	1.1.1={ birth=yes trait=creature_qiraji trait=being_void }
-	16.1.1={ effect={ set_variable = { name = wc_shadow_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_4_magic_trait_value } } }
+	trait=lifestyle_mystic trait=intellect_good_2 trait=deceitful trait=temperate trait=zealous
+	2.1.1={ birth=yes trait=creature_qiraji trait=being_void }
+	16.1.1={ 
+		effect={ 
+			set_variable = { name = wc_shadow_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_4_magic_trait_value } 
+			add_trait_xp = {
+				trait = lifestyle_mystic
+				value = 50
+			}
+		} 
+	}
 	610.11.10={ death=yes }
 }
 
@@ -62,11 +70,11 @@
 	name=Sartura
 	female=yes
 	dynasty=118002
-	culture=qiraji religion=cthun_worship
+	culture=qiraji religion=cthunism
 	martial=4 diplomacy=8 stewardship=8 intrigue=5 learning=7
 	trait=education_martial_3
 	trait=paranoid trait=wrathful trait=ambitious trait=zealous
-	1.1.1={ birth=yes trait=creature_qiraji trait=being_void }
+	2.1.1={ birth=yes trait=creature_qiraji trait=being_void }
 	700.7.18={ death=yes }
 }
 
@@ -75,9 +83,9 @@ qiraji1 = { #Generated
 	name = Horko
 	female = yes
 	dynasty = qiraji1
-	religion = cthun_worship
+	religion = cthunism
 	culture = qiraji
-	1.10.8 = { birth = yes trait = creature_qiraji trait = being_void }
+	2.10.8 = { birth = yes trait = creature_qiraji trait = being_void }
 	1271.1.18 = { death = yes }
 }
 
@@ -85,9 +93,9 @@ qiraji1 = { #Generated
 qiraji5 = { #Generated
 	name = Mazzalan
 	dynasty = qiraji2
-	religion = cthun_worship
+	religion = cthunism
 	culture = qiraji
-	1.8.12 = { birth = yes trait = creature_qiraji trait = being_void }
+	2.8.12 = { birth = yes trait = creature_qiraji trait = being_void }
 	971.7.17 = { death = yes }
 }
 
@@ -96,9 +104,9 @@ qiraji10 = { #Generated
 	name = Hesuktu
 	female = yes
 	dynasty = qiraji3
-	religion = cthun_worship
+	religion = cthunism
 	culture = qiraji
-	1.6.23 = { birth = yes trait = creature_qiraji trait = being_void }
+	2.6.23 = { birth = yes trait = creature_qiraji trait = being_void }
 	911.11.21 = { death = yes }
 }
 
@@ -107,9 +115,9 @@ qiraji15 = { #Generated
 	name = Zati
 	female = yes
 	dynasty = qiraji4
-	religion = cthun_worship
+	religion = cthunism
 	culture = qiraji
-	1.9.6 = { birth = yes trait = creature_qiraji trait = being_void }
+	2.9.6 = { birth = yes trait = creature_qiraji trait = being_void }
 	731.10.9 = { death = yes }
 }
 
@@ -118,9 +126,9 @@ qiraji20 = { #Generated
 	name = Mitro
 	female = yes
 	dynasty = qiraji5
-	religion = cthun_worship
+	religion = cthunism
 	culture = qiraji
-	1.4.11 = { birth = yes trait = creature_qiraji trait = being_void }
+	2.4.11 = { birth = yes trait = creature_qiraji trait = being_void }
 	701.7.18 = { death = yes }
 }
 
@@ -128,7 +136,7 @@ qiraji20 = { #Generated
 qiraji25 = { #Generated
 	name = Drite'aggur
 	dynasty = qiraji6
-	religion = cthun_worship
+	religion = cthunism
 	culture = qiraji
 	10.4.6 = { birth = yes trait = creature_qiraji trait = being_void }
 	890.9.26 = { death = yes }
@@ -139,7 +147,7 @@ qiraji30 = { #Generated
 	name = Tadu
 	female = yes
 	dynasty = qiraji7
-	religion = cthun_worship
+	religion = cthunism
 	culture = qiraji
 	10.3.13 = { birth = yes trait = creature_qiraji trait = being_void }
 	890.7.14 = { death = yes }
@@ -150,7 +158,7 @@ qiraji35 = { #Generated
 	name = Qaloldu
 	female = yes
 	dynasty = qiraji8
-	religion = cthun_worship
+	religion = cthunism
 	culture = qiraji
 	10.2.19 = { birth = yes trait = creature_qiraji trait = being_void }
 	1160.1.22 = { death = yes }
@@ -161,7 +169,7 @@ zavas = { #Taken from HS
 	name = Zavas
 	female = yes
 	dynasty = qiraji9
-	religion = cthun_worship
+	religion = cthunism
 	culture = qiraji
 	10.2.19 = { birth = yes trait = creature_qiraji trait = being_void }
 	1160.1.22 = { death = yes }

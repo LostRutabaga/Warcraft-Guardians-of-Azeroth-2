@@ -10,6 +10,9 @@
 		religion = death_god
 		holding = castle_holding
 	}
+	603.1.1 = {
+		special_building = icecrown_citadel_01
+	}
 }
 
 3339 = {	# Kampaholt
@@ -230,7 +233,7 @@
 ###c_coldwind
 784 = {	# Coldwind
 	culture = harpy
-	religion = yoggsaron_worship
+	religion = yoggsaronism
 	holding = tribal_holding
 
 }

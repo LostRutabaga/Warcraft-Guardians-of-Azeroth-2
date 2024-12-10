@@ -88,15 +88,15 @@ stewardship_duty.0001 = {
 	theme = stewardship_duty_focus
 
 	left_portrait = {
-		character = scope:arguer_1
-		animation = dismissal
+		character = root
+		animation = eyeroll
 	}
 
 	right_portrait = {
-		character = scope:arguer_2
-		animation = anger
+		character = scope:arguer_1
+		animation = debating
 	}
-
+	lower_right_portrait = scope:arguer_2
 	
 	trigger = {
 		is_in_civil_war = no
@@ -430,12 +430,15 @@ stewardship_duty.0017 = {
 	
 	theme = stewardship_duty_focus
 	left_portrait = {
-		character = scope:councillor_1
-		animation = anger
+		character = root
+		animation = schadenfreude
 	}
 	right_portrait = {
+		character = scope:councillor_1
+		animation = debating
+	}
+	lower_right_portrait = {
 		character = scope:councillor_2
-		animation = dismissal
 	}
 
 
@@ -686,6 +689,9 @@ scripted_trigger stewardship_duty_1055_minimum_et_requirements = {
 
 	#Must not be chaste (since they allegedly had extramarital relations, and it could feel odd to the player if they are chaste).
 	NOT = { has_trait = chaste }
+
+	#And make sure they'd cheat on any partners they may have outside of marriage anyway.
+	might_cheat_on_every_partner_trigger = yes
 }
 
 #Ideal requirements for us to use a vassal's child as one of the event targets (creates more drama/choices for player).
@@ -698,10 +704,8 @@ scripted_trigger stewardship_duty_1055_is_unwed_child = {
 	is_married = no
 
 	OR = {
-		NOT = {
-			any_child = {
-				exists = this
-			}
+		any_child = {
+			count < 1
 		}
 		is_female = no
 	}
@@ -714,7 +718,12 @@ scripted_trigger stewardship_duty_1055_is_unwed_child = {
 #Requirements for Vassal 1 (the mother's parent or spouse).
 scripted_trigger stewardship_duty_1055_valid_mother_parent_or_spouse = {
 	is_available_ai_adult = yes
-	highest_held_title_tier > 1
+	trigger_if = {
+		limit = {
+			is_vassal_or_below_of = root
+		}
+		highest_held_title_tier > 1
+	}
 
 	#Must be of a different dynasty than Root.
 	NOT = { dynasty = root.dynasty}
@@ -737,8 +746,12 @@ scripted_trigger stewardship_duty_1055_valid_mother_parent_or_spouse = {
 # Requirements for Vassal 2 (the father's parent).
 scripted_trigger stewardship_duty_1055_valid_father_parent = {
 	is_available_ai_adult = yes
-	highest_held_title_tier > 1
-
+	trigger_if = {
+		limit = {
+			is_vassal_or_below_of = root
+		}
+		highest_held_title_tier > 1
+	}
 	# Must be of a different dynasty than Root or Vassal 1.
 	NOR = {
 		dynasty = root.dynasty
@@ -764,32 +777,46 @@ stewardship_duty.1055 = {
 	
 	theme = stewardship_duty_focus
 	override_background = {
-		event_background = throne_room
+		reference = throne_room
 	}
 	left_portrait = {
+		character = root
+		animation = eyeroll
+	}
+	right_portrait = {
 		character = scope:new_mothers_parent
 		animation = anger
 	}
-	lower_left_portrait = scope:new_mother
-	right_portrait = {
-		character = scope:new_fathers_parent
-		animation = disapproval
-	}	
-	lower_right_portrait = scope:new_father
+	lower_center_portrait = scope:new_mother
+	lower_right_portrait = scope:new_fathers_parent
+	lower_left_portrait = scope:new_father
 	
 	trigger = {
 		NOT = { has_character_flag = had_event_stewardship_duty_1055 }
 		#We must have a vassal with a different dynasty who has an unwed daughter.
-		any_vassal_or_below = {
-			is_vassal_of = root
-			stewardship_duty_1055_valid_mother_parent_or_spouse = yes
-
-			save_temporary_scope_as = vassal_1
-
-			#We also must have a vassal from a diffent family who has an unwed son.
-			root = {
-				any_vassal_or_below = {
-					stewardship_duty_1055_valid_father_parent = yes
+		OR = {
+			any_vassal_or_below = {
+				is_vassal_of = root
+				stewardship_duty_1055_valid_mother_parent_or_spouse = yes
+				save_temporary_scope_as = vassal_1
+				#We also must have a vassal from a diffent family who has an unwed son.
+				root = {
+					any_vassal_or_below = {
+						stewardship_duty_1055_valid_father_parent = yes
+					}
+				}
+			}
+			AND = {
+				is_landless_adventurer = yes
+				any_courtier = {
+					stewardship_duty_1055_valid_mother_parent_or_spouse = yes
+					save_temporary_scope_as = vassal_1
+					#We also must have a vassal from a diffent family who has an unwed son.
+					root = {
+						any_courtier = {
+							stewardship_duty_1055_valid_father_parent = yes
+						}
+					}
 				}
 			}
 		}
@@ -1034,7 +1061,6 @@ stewardship_duty.1055 = {
 				months = 10
 			}
 		}
-
 	}
 
 	#Option 1: Side with the mother's family, and force the father's family to pay renumeration.
@@ -1202,10 +1228,17 @@ stewardship_duty.1062 = {
 	
 	theme = stewardship_duty_focus
 	override_background = {
-		event_background = study
+		reference = study
 	}
-	left_portrait = scope:client_1
-	right_portrait = scope:client_2
+	left_portrait = {
+		character = root
+		animation = steward
+	}
+	right_portrait = {
+		character = scope:client_1
+		animation = personality_honorable
+	}
+	lower_right_portrait = scope:client_2
 	lower_center_portrait = scope:client_3
 
 	trigger = {
@@ -1412,6 +1445,7 @@ stewardship_duty.1062 = {
 			generous = medium_stress_impact_gain
 			zealous = minor_stress_impact_gain
 			shrewd = minor_stress_impact_gain
+			eccentric = minor_stress_impact_gain
 			
 		}
 		ai_chance = {
@@ -1459,9 +1493,16 @@ stewardship_duty.1063 = {
 	desc = stewardship_duty.1063.desc
 	theme = stewardship_duty_focus
 	override_background = {
-		event_background = study
+		reference = study
 	}
-	left_portrait = scope:client
+	left_portrait = {
+		character = root
+		animation = thinking
+	}
+	right_portrait = {
+		character = scope:client
+		animation = personality_greedy
+	}
 
 	trigger = {
 		exists = scope:client
@@ -1791,6 +1832,7 @@ stewardship_duty.1068 = {
 				scope:client = {
 					has_character_flag = governance_1062_philosopher_flag
 				}
+				is_landless_adventurer = no
 			}
 			#Philosopher makes an important breakthrough
 			send_interface_message = {
@@ -1851,7 +1893,7 @@ stewardship_duty.1068 = {
 scripted_trigger stewardship_duty_1071_abusive_ruler = {
 
 	#Neighboring province must be held by an AI Feudal Lord who is not our liege.
-	has_government = feudal_government
+	government_has_flag = government_is_feudal
 	NOT = {this = root}
 	NOT = {
 		root = {
@@ -1913,14 +1955,21 @@ stewardship_duty.1071 = {
 	
 	theme = stewardship_duty_focus
 	override_background = {
-		event_background = throne_room
+		reference = throne_room
 	}
-	left_portrait = scope:origin_county_owner
+	left_portrait = {
+		character = root
+		animation = thinking
+	}
+	right_portrait = {
+		character = scope:origin_county_owner
+		animation = personality_dishonorable
+	}
 	lower_left_portrait = scope:origin_county_owner_liege
 	
 	trigger = {
 		#Must be a feudal lord.
-		has_government = feudal_government
+		government_has_flag = government_is_feudal
 
 		#Must not be malevolent or unjust.
 		NOR = {
@@ -2396,7 +2445,10 @@ stewardship_duty.1072 = {
 							has_relation_rival = root
 						}
 					}
-					set_relation_rival = root
+					set_relation_rival = {
+						target = root
+						reason = rival_stolen_serfs
+					}
 				}
 			}
 		}
@@ -2481,10 +2533,14 @@ stewardship_duty.4010 = {
 	}
 	theme = stewardship_duty_focus
 	override_background = {
-		event_background = study
+		reference = study
 	}
-	
+
 	left_portrait = {
+		character = root
+		animation = storyteller
+	}
+	right_portrait = {
 		character = scope:faction_member
 		animation = schadenfreude
 	}
@@ -2917,7 +2973,7 @@ stewardship_duty.4011 = {
 	}
 	theme = stewardship_duty_focus
 	override_background = {
-		event_background = throne_room
+		reference = throne_room
 	}
 	
 	left_portrait = {
@@ -3010,7 +3066,7 @@ stewardship_duty.4012 = {
 	}
 	theme = stewardship_duty_focus
 	override_background = {
-		event_background = throne_room
+		reference = throne_room
 	}
 	
 	left_portrait = {
@@ -3113,7 +3169,7 @@ stewardship_duty.4013 = {
 	}
 	theme = stewardship_duty_focus
 	override_background = {
-		event_background = throne_room
+		reference = throne_room
 	}
 	
 	left_portrait = {
@@ -3177,6 +3233,7 @@ stewardship_duty.4013 = {
 		}
 
 		stress_impact = {
+			eccentric = minor_stress_impact_loss
 			humble = minor_stress_impact_gain
 			content = minor_stress_impact_gain
 		}
@@ -3219,7 +3276,7 @@ stewardship_duty.4014 = {
 	}
 	theme = stewardship_duty_focus
 	override_background = {
-		event_background = throne_room
+		reference = throne_room
 	}
 	
 	left_portrait = {
@@ -3288,6 +3345,7 @@ stewardship_duty.4014 = {
 
 		stress_impact = {
 			cynical = medium_stress_impact_gain
+			eccentric = medium_stress_impact_gain
 		}		
 	}
 
@@ -3340,7 +3398,7 @@ stewardship_duty.4015 = {
 	desc = stewardship_duty.4015.desc
 	theme = stewardship_duty_focus
 	override_background = {
-		event_background = study
+		reference = study
 	}
 	
 	left_portrait = {
@@ -3376,7 +3434,7 @@ stewardship_duty.4016 = {
 	desc = stewardship_duty.4015.desc
 	theme = stewardship_duty_focus
 	override_background = {
-		event_background = study
+		reference = study
 	}
 	
 	left_portrait = {
@@ -3412,7 +3470,7 @@ stewardship_duty.4017 = {
 	desc = stewardship_duty.4015.desc
 	theme = stewardship_duty_focus
 	override_background = {
-		event_background = study
+		reference = study
 	}
 	
 	left_portrait = {
@@ -3446,7 +3504,7 @@ stewardship_duty.4018 = {
 	desc = stewardship_duty.4015.desc
 	theme = stewardship_duty_focus
 	override_background = {
-		event_background = study
+		reference = study
 	}
 	
 	left_portrait = {
@@ -3480,7 +3538,7 @@ stewardship_duty.4019 = {
 	desc = stewardship_duty.4019.desc
 	theme = stewardship_duty_focus
 	override_background = {
-		event_background = study
+		reference = study
 	}
 
 	left_portrait = {
@@ -3554,8 +3612,15 @@ stewardship_duty.4040 = {
 	title = stewardship_duty.4040.t
 	desc = stewardship_duty.4040.desc
 	theme = stewardship_duty_focus
-	
-	left_portrait = scope:my_vassal
+
+	left_portrait = {
+		character = root
+		animation = thinking
+	}
+	right_portrait = {
+		character = scope:my_vassal
+		animation = personality_content
+	}
 	
 	trigger = {
 		NOT = { has_character_flag = had_stewardship_duty_4040_event }
@@ -3574,6 +3639,7 @@ stewardship_duty.4040 = {
 		modifier = {
 			any_vassal = {
 				vassal_contract_has_modifiable_obligations = yes
+				government_has_flag = government_is_feudal
 				NOT = { vassal_contract_obligation_level:feudal_government_taxes = feudal_tax_normal_level }
 			}
 			add = 1
@@ -3874,6 +3940,7 @@ stewardship_duty.4040 = {
 		}
 
 		stress_impact = {
+			eccentric = minor_stress_impact_gain
 			greedy = medium_stress_impact_gain
 			ambitious = minor_stress_impact_gain
 			just = minor_stress_impact_gain
@@ -3898,10 +3965,14 @@ stewardship_duty.4041 = {
 	title = stewardship_duty.4040.t
 	desc = stewardship_duty.4041.desc
 	theme = stewardship_duty_focus
-	
+
 	left_portrait = {
-		character = scope:my_vassal
+		character = root
 		animation = happiness
+	}
+	right_portrait = {
+		character = scope:my_vassal
+		animation = personality_forgiving
 	}
 
 
@@ -3924,8 +3995,12 @@ stewardship_duty.4042 = {
 	title = stewardship_duty.4040.t
 	desc = stewardship_duty.4042.desc
 	theme = stewardship_duty_focus
-	
+
 	left_portrait = {
+		character = root
+		animation = disappointed
+	}
+	right_portrait = {
 		character = scope:my_vassal
 		animation = dismissal
 	}
@@ -3945,10 +4020,14 @@ stewardship_duty.4043 = {
 	title = stewardship_duty.4040.t
 	desc = stewardship_duty.4043.desc
 	theme = stewardship_duty_focus
-	
+
 	left_portrait = {
+		character = root
+		animation = schadenfreude
+	}
+	right_portrait = {
 		character = scope:my_vassal
-		animation = happiness
+		animation = fear
 	}
 
 
@@ -3969,8 +4048,12 @@ stewardship_duty.4044 = {
 	title = stewardship_duty.4040.t
 	desc = stewardship_duty.4044.desc
 	theme = stewardship_duty_focus
-	
+
 	left_portrait = {
+		character = root
+		animation = stunned
+	}
+	right_portrait = {
 		character = scope:my_vassal
 		animation = disapproval
 	}
@@ -4039,8 +4122,12 @@ stewardship_duty.4060 = {
 		desc = stewardship_duty.4060.desc.end
 	}
 	theme = stewardship_duty_focus
-	
+
 	left_portrait = {
+		character = root
+		animation = stress
+	}
+	right_portrait = {
 		character = scope:faction_leader
 		animation = schadenfreude
 	}
@@ -4347,6 +4434,7 @@ stewardship_duty.4060 = {
 		stress_impact = {
 			base = minor_stress_impact_loss
 			diligent = medium_stress_impact_gain
+			eccentric = minor_stress_impact_gain
 		}
 
 		ai_chance = {
@@ -4368,7 +4456,7 @@ stewardship_duty.4060 = {
 
 scripted_trigger stewardship_duty_5021_cheating_vassal_trigger = {
 	is_ai = yes
-	has_government = feudal_government # Only feudal use obligations needed to check the script value
+	government_has_flag = government_is_feudal # Only feudal use obligations needed to check the script value
 	OR = {
 		opinion = {
 			target = root
@@ -4392,7 +4480,14 @@ stewardship_duty.5021 = {
 	desc = stewardship_duty.5021.desc
 	
 	theme = stewardship_duty_focus
-	left_portrait = scope:cheater_vassal
+	left_portrait = {
+		character = root
+		animation = page_flipping
+	}
+	right_portrait = {
+		character = scope:cheater_vassal
+		animation = personality_greedy
+	}
 	
 	trigger = {
 		has_lifestyle = stewardship_lifestyle
@@ -4583,7 +4678,7 @@ stewardship_duty.5021 = {
 
 			}
 			scope:cheater_vassal = { vassal_contract_decrease_obligation_level = feudal_government_taxes }
-			set_relation_friend = scope:cheater_vassal
+			set_relation_friend = { reason = friend_let_off_the_hook target = scope:cheater_vassal }
 		}
 		else = {
 			reverse_add_opinion = {
@@ -4634,16 +4729,17 @@ stewardship_duty.7001 = {
 	
 	theme = stewardship_duty_focus
 	override_background = {
-		event_background = battlefield
+		reference = battlefield
 	}
 	left_portrait = {
-		character = scope:war_vassal
-		animation = war_attacker
+		character = root
+		animation = stress
 	}
 	right_portrait = {
-		character = scope:war_vassal_2
-		animation = war_defender
+		character = scope:war_vassal_1
+		animation = war_attacker
 	}
+	lower_right_portrait = scope:war_vassal_2
 	
 	trigger = {
 		NOT = { has_character_flag = had_statecraft_7001_event }
@@ -4960,7 +5056,7 @@ stewardship_duty.7023 = {
 	}
 
 	trigger = {
-		is_landed = yes
+		is_playable_character = yes
 		OR = {
 			any_vassal = {
 				has_hook_of_type = {
@@ -4973,6 +5069,12 @@ stewardship_duty.7023 = {
 					target = root
 					type = favor_hook
 				}			
+			}
+			any_contact = {
+				has_hook_of_type = {
+					target = root
+					type = favor_hook
+				}	
 			}
 		}
 	}
@@ -5000,7 +5102,15 @@ stewardship_duty.7023 = {
 				save_scope_as = hook_holder
 			}
 		}
-		else = {
+		else_if = {
+			limit = {
+				any_vassal = {
+					has_hook_of_type = {
+						target = root
+						type = favor_hook
+					}		
+				}
+			}
 			random_vassal = {
 				limit = {
 					has_hook_of_type = {
@@ -5008,12 +5118,20 @@ stewardship_duty.7023 = {
 						type = favor_hook
 					}
 				}
-				save_scope_as = hook_holder	
+				save_scope_as = hook_holder
 			}
 		}
-
-		# This is only here to stop the script system from throwing erroneous errors.
-		# Note that EVERY options should overwrite this flag before triggering the next event, or the following events may become nonsensical.		
+		else = {
+			random_contact = {
+				limit = {
+					has_hook_of_type = {
+						target = root
+						type = favor_hook
+					}
+				}
+				save_scope_as = hook_holder
+			}
+		}		
 	}	
 
 	# Pay it off with gold
@@ -5802,11 +5920,14 @@ stewardship_duty_special.1201 = {
 	desc = stewardship_duty_special.1201.desc
 	
 	left_portrait = {
-		character = cp:councillor_steward
+		character = root
+		animation = thinking
 	}
 	right_portrait = {
-		character = scope:painting_land_owner
+		character = scope:steward
+		animation = survey
 	}
+	lower_right_portrait = scope:painting_land_owner
 	theme = stewardship_duty_focus
 	
 	trigger = {
@@ -5977,12 +6098,15 @@ stewardship_duty_special.1202 = {
 	theme = stewardship_duty_focus
 
 	override_background = {
-		event_background = wilderness_scope
+		reference = wilderness_scope
 	}
-	left_portrait = root
+	left_portrait = {
+		character = root
+		animation = interested_left
+	}
 	right_portrait = {
 		character = scope:painting_land_owner
-		animation = idle
+		animation = personality_compassionate
 	}
 
 	immediate = {
@@ -6010,9 +6134,12 @@ stewardship_duty_special.1203 = {
 	
 	theme = stewardship_duty_focus
 	override_background = {
-		event_background = wilderness_scope
+		reference = wilderness_scope
 	}
-	left_portrait = root
+	left_portrait = {
+		character = root
+		animation = fear
+	}
 
 	trigger = {
 		NOT = { exists = scope:had_1203 }
@@ -6065,9 +6192,12 @@ stewardship_duty_special.1204 = {
 	
 	theme = stewardship_duty_focus
 	override_background = {
-		event_background = wilderness_scope
+		reference = wilderness_scope
 	}
-	left_portrait = root
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
 	
 	trigger = {
 		NOT = { exists = scope:had_1204 }
@@ -6144,9 +6274,12 @@ stewardship_duty_special.1205 = {
 	
 	theme = stewardship_duty_focus
 	override_background = {
-		event_background = wilderness_scope
+		reference = wilderness_scope
 	}
-	left_portrait = root
+	left_portrait = {
+		character = root
+		animation = stunned
+	}
 	
 	trigger = {
 		NOT = { exists = scope:had_1205 }
@@ -6198,12 +6331,15 @@ stewardship_duty_special.1206 = {
 	
 	theme = stewardship_duty_focus
 	override_background = {
-		event_background = wilderness_scope
+		reference = wilderness_scope
 	}
-	left_portrait = root
+	left_portrait = {
+		character = root
+		animation = interested_left
+	}
 	right_portrait = {
 		character = scope:local_baron
-		animation = idle
+		animation = marshal
 	}
 	
 	trigger = {
@@ -6276,9 +6412,12 @@ stewardship_duty_special.1207 = {
 	
 	theme = stewardship_duty_focus
 	override_background = {
-		event_background = tavern
+		reference = bp1_crossroads_inn
 	}
-	left_portrait = root
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
 	
 	trigger = {
 		NOT = { exists = scope:had_1207 }
@@ -6328,9 +6467,12 @@ stewardship_duty_special.1208 = {
 	
 	theme = stewardship_duty_focus
 	override_background = {
-		event_background = wilderness_scope
+		reference = wilderness_scope
 	}
-	left_portrait = root
+	left_portrait = {
+		character = root
+		animation = survey
+	}
 	
 	trigger = {
 		NOT = { exists = scope:had_1208 }
@@ -6382,10 +6524,16 @@ stewardship_duty_special.1281 = {
 	
 	theme = stewardship_duty_focus
 	override_background = {
-		event_background = study
+		reference = study
 	}
-	left_portrait = root
-	right_portrait = scope:painting_land_owner
+	left_portrait = {
+		character = root
+		animation = happiness
+	}
+	right_portrait = {
+		character = scope:painting_land_owner
+		animation = personality_honorable
+	}
 	
 	option = {
 		name = stewardship_duty_special.1281.a
@@ -6416,10 +6564,16 @@ stewardship_duty_special.1282 = {
 	
 	theme = stewardship_duty_focus
 	override_background = {
-		event_background = study
+		reference = study
 	}
-	left_portrait = root
-	right_portrait = scope:painting_land_owner
+	left_portrait = {
+		character = root
+		animation = happiness
+	}
+	right_portrait = {
+		character = scope:painting_land_owner
+		animation = personality_honorable
+	}
 
 	trigger = {
 		scope:painting_land_owner = {
@@ -6456,10 +6610,16 @@ stewardship_duty_special.1283 = {
 	
 	theme = stewardship_duty_focus
 	override_background = {
-		event_background = study
+		reference = study
 	}
-	left_portrait = root
-	right_portrait = scope:painting_land_owner
+	left_portrait = {
+		character = root
+		animation = happiness
+	}
+	right_portrait = {
+		character = scope:painting_land_owner
+		animation = personality_honorable
+	}
 
 	trigger = {
 		scope:painting_land_owner = {
@@ -6496,9 +6656,16 @@ stewardship_duty_special.1284 = {
 	
 	theme = stewardship_duty_focus
 	override_background = {
-		event_background = study
+		reference = study
 	}
-	left_portrait = root
+	left_portrait = {
+		character = root
+		animation = happiness
+	}
+	right_portrait = {
+		character = scope:painting_land_owner
+		animation = personality_honorable
+	}
 
 	trigger = {
 		number_of_commander_traits < 3
@@ -6531,10 +6698,16 @@ stewardship_duty_special.1285 = {
 	
 	theme = stewardship_duty_focus
 	override_background = {
-		event_background = study
+		reference = study
 	}
-	left_portrait = root
-	right_portrait = scope:painting_land_owner
+	left_portrait = {
+		character = root
+		animation = happiness
+	}
+	right_portrait = {
+		character = scope:painting_land_owner
+		animation = personality_honorable
+	}
 
 	trigger = {
 		scope:painting_land_owner = {
@@ -6572,9 +6745,16 @@ stewardship_duty_special.1286 = {
 	
 	theme = stewardship_duty_focus
 	override_background = {
-		event_background = throne_room
+		reference = throne_room
 	}
-	left_portrait = root
+	left_portrait = {
+		character = root
+		animation = happiness
+	}
+	right_portrait = {
+		character = scope:painting_land_owner
+		animation = personality_honorable
+	}
 
 	trigger = {
 		scope:painting_land_owner = {
@@ -7538,13 +7718,6 @@ stewardship_duty_special.2015 = {
 	}
 }
 
-
-#Asks to be Favored
-
-
-#Learn one of their Secrets
-
-
 #Who breeds the famous horses
 stewardship_duty_special.2018 = {
 	type = character_event
@@ -7845,9 +8018,7 @@ stewardship_duty_special.2021 = {
 			}	
 		}
 		stress_impact = {
-			reveler_1 = medium_stress_impact_gain
-			reveler_2 = medium_stress_impact_gain
-			reveler_3 = major_stress_impact_gain
+			lifestyle_reveler = medium_stress_impact_gain
 		}
 	}
 
@@ -8153,9 +8324,7 @@ stewardship_duty_special.2026 = {
 	trigger = {
 		scope:story = {
 			NOT = { has_variable = had_event_stewardship_duty_special_2026 }
-			var:perceived_fairness = {
-				compare_value <= 0
-			}
+			var:perceived_fairness <= 0
 		}
 	}
 
@@ -8163,9 +8332,7 @@ stewardship_duty_special.2026 = {
 		base = 1
 		modifier = {
 			add = 1
-			scope:story.var:perceived_fairness = {
-				compare_value < 0
-			}
+			scope:story.var:perceived_fairness < 0
 		}
 	}
 
@@ -8182,11 +8349,7 @@ stewardship_duty_special.2026 = {
 			50 = {
 				modifier = {
 					add = 30
-					scope:story = {
-						var:favor_1 = {
-							compare_value < scope:story.var:favor_2
-						}
-					}
+					scope:story.var:favor_1 < scope:story.var:favor_2
 				}
 				modifier = {
 					add = 50
@@ -8208,11 +8371,7 @@ stewardship_duty_special.2026 = {
 			50 = {
 				modifier = {
 					add = 30
-					scope:story = {
-						var:favor_2 = {
-							compare_value < scope:story.var:favor_1
-						}
-					}
+					scope:story.var:favor_2 < scope:story.var:favor_1
 				}
 				modifier = {
 					add = 50
@@ -8233,7 +8392,7 @@ stewardship_duty_special.2026 = {
 			}
 		}
 		scope:victim = {
-			override_death_killer_effect = { DEATH_REASON = death_murder KILLER = scope:killer }
+			override_death_killer_effect = { death_reason = death_murder killer = scope:killer }
 		}
 		scope:story = {
 			hidden_effect = { end_story = yes }
@@ -8243,7 +8402,7 @@ stewardship_duty_special.2026 = {
 	option = { #Kill the killer
 		name = stewardship_duty_special.2026.a
 		scope:killer = {
-			override_death_killer_effect = { DEATH_REASON = death_execution KILLER = root }
+			override_death_killer_effect = { death_reason = death_execution killer = root }
 		}
 		add_prestige = minor_prestige_gain
 		stress_impact = {
@@ -8526,7 +8685,7 @@ stewardship_duty_special.2051 = {
 		random_in_list = {
 			list = potential_friends
 
-			set_relation_friend = scope:quarreler
+			set_relation_friend = { reason = friend_found_common_ground target = scope:quarreler }
 		}
 	}
 }
@@ -8617,7 +8776,7 @@ stewardship_duty_special.2052 = {
 		random_in_list = {
 			list = potential_lovers
 
-			set_relation_lover = scope:quarreler
+			set_random_lover_reason = { TARGET = scope:quarreler }
 		}
 	}
 }
@@ -8710,7 +8869,10 @@ stewardship_duty_special.2053 = {
 			random_in_list = {
 				list = potential_rivals
 
-				set_relation_rival = scope:quarreler
+				set_relation_rival = {
+					target = scope:quarreler
+					reason = rival_bad_chemistry
+				}
 			}
 		}
 
@@ -8758,18 +8920,14 @@ stewardship_duty_special.2070 = {
 				compare_modifier = {
 					value = scope:story.var:favor_1
 					trigger = {
-						scope:story.var:favor_2 = {
-							compare_value < scope:story.var:favor_1
-						}
+						scope:story.var:favor_2 < scope:story.var:favor_1
 					}
 					multiplier = 5
 				}
 				compare_modifier = {
 					value = scope:story.var:favor_2
 					trigger = {
-						scope:story.var:favor_1 = {
-							compare_value < scope:story.var:favor_2
-						}
+						scope:story.var:favor_1 < scope:story.var:favor_2
 					}
 					multiplier = 5
 				}
@@ -8827,7 +8985,7 @@ stewardship_duty_special.2071 = {
 				modifier = respect_opinion
 				opinion = 20
 			}
-			set_relation_friend = scope:vassal_2
+			set_relation_friend = { reason = friend_settled_differences target = scope:vassal_2 }
 		}
 		scope:story = {
 			hidden_effect = { end_story = yes }
@@ -8893,9 +9051,7 @@ stewardship_duty_special.2073 = {
 	immediate = {
 		if = {
 			limit = {
-				scope:story.var:favor_2 = {
-					compare_value < scope:story.var:favor_1
-				}
+				scope:story.var:favor_2 < scope:story.var:favor_1
 			}
 			scope:vassal_2 = {
 				save_scope_as = accuser
@@ -8961,7 +9117,10 @@ stewardship_duty_special.2074 = {
 	option = {
 		name = stewardship_duty_special.2074.a
 		scope:vassal_1 = {
-			set_relation_rival = scope:vassal_2
+			set_relation_rival = {
+				target = scope:vassal_2
+				reason = rival_bad_chemistry
+			}
 		}
 		scope:story = {
 			hidden_effect = { end_story = yes }

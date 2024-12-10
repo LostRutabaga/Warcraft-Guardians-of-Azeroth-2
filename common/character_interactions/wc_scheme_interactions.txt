@@ -4,12 +4,26 @@ start_plague_interaction = {
 	is_highlighted = {
 		always = yes
 	}
-	icon = "gfx/interface/icons/character_interactions/declare_war_interaction.dds"
+	icon = death_disease
 
 	send_name = start_plague_interaction
 
 	interface_priority = 90
-	use_diplomatic_range = yes
+	use_diplomatic_range = {
+		trigger_if = {
+			limit = { scope:actor = { has_trait = in_ice_prison } }
+			exists = scope:recipient.capital_province
+			scope:recipient.capital_province = {
+				NOR = {
+					geographical_region = special_scourge_conquest_region_prio_1
+					geographical_region = special_scourge_conquest_region_prio_2
+				}
+			}
+		}
+		trigger_else = {
+			always = yes
+		}
+	}
 
 	desc = start_plague_interaction_desc
 
@@ -22,12 +36,13 @@ start_plague_interaction = {
 		}
 	}
 	is_valid_showing_failures_only = {
+		scope:actor = { NOT = { is_isolated_from_trigger = { target = scope:recipient } } }
 		scope:actor = {
 			has_dark_frenzy_trigger = { VALUE = 95 }
 			
 			can_start_scheme = {
 				type = plague
-				target = scope:recipient
+				target_character = scope:recipient
 			}
 		}
 	}

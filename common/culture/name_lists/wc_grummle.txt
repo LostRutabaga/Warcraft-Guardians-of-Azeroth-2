@@ -1,0 +1,45 @@
+﻿name_list_grummle = {
+
+	cadet_dynasty_names = {
+		"dynn_Birdhat" "dynn_Bluesaddle" "dynn_Bluestring" "dynn_Brokendice" "dynn_Burrberry" "dynn_Cleankite" "dynn_Clovercatcher" "dynn_Copperfinder" "dynn_Derpa" "dynn_Eastwind" "dynn_Echoroot" "dynn_Eightcoins" "dynn_Fullflask" "dynn_Furtrim" "dynn_Goldensnow" "dynn_Gootfur" "dynn_Goottooth" "dynn_Greenfeather" "dynn_Greenlint" "dynn_Grumplefoot" "dynn_Hawktail" "dynn_Hopswift" "dynn_Hozenpaw" "dynn_Inkstain" "dynn_Keenbean" "dynn_Lintpocket" "dynn_Littlebrew" "dynn_Littlemug" "dynn_Luckhammer" "dynn_Mountainmusk" "dynn_Mountaintop" "dynn_Muskfree" "dynn_Noodle" "dynn_Oilyak" "dynn_Quillstar" "dynn_Rabbitsfoot" "dynn_Redhammer" "dynn_Shallowpond" "dynn_Slowhands" "dynn_Snowshoe" "dynn_Sootassle" "dynn_Tallmug" "dynn_Tealeaf" "dynn_Trailscenter" "dynn_Whetstone" "dynn_Wishbone" "dynn_Woolhands" "dynn_Yakshoe"
+	}
+
+	dynasty_names = {
+		"dynn_Birdhat" "dynn_Bluesaddle" "dynn_Bluestring" "dynn_Brokendice" "dynn_Burrberry" "dynn_Cleankite" "dynn_Clovercatcher" "dynn_Copperfinder" "dynn_Derpa" "dynn_Eastwind" "dynn_Echoroot" "dynn_Eightcoins" "dynn_Fullflask" "dynn_Furtrim" "dynn_Goldensnow" "dynn_Gootfur" "dynn_Goottooth" "dynn_Greenfeather" "dynn_Greenlint" "dynn_Grumplefoot" "dynn_Hawktail" "dynn_Hopswift" "dynn_Hozenpaw" "dynn_Inkstain" "dynn_Keenbean" "dynn_Lintpocket" "dynn_Littlebrew" "dynn_Littlemug" "dynn_Luckhammer" "dynn_Mountainmusk" "dynn_Mountaintop" "dynn_Muskfree" "dynn_Noodle" "dynn_Oilyak" "dynn_Quillstar" "dynn_Rabbitsfoot" "dynn_Redhammer" "dynn_Shallowpond" "dynn_Slowhands" "dynn_Snowshoe" "dynn_Sootassle" "dynn_Tallmug" "dynn_Tealeaf" "dynn_Trailscenter" "dynn_Whetstone" "dynn_Wishbone" "dynn_Woolhands" "dynn_Yakshoe"
+	}
+
+	male_names = {
+		Bag-of-Rocks Beige Bentnail Bigpocket Birdhat Bluesaddle Bluestring Brokendice Bump-On-A-Log Burrberry Chordy Clean Cleankite Clover Clovercatcher Cloverleaf Copperfinder Derpa Eastwind Echoroot Egg Eightcoins Fixxit Full Fullflask Furtrim
+		Golden Goldensnow Gootfur Goottooth Greenfeather Greenlint Grumplefoot Half-Eaten Hawktail Herder Hopswift Hozenpaw Inkstain Jambeezi Keenbean Lintpocket Little Littlebrew Littlemug Luckhammer Lucky Mountainmusk
+		Mountaintop Mushan Muskfree Noodle Oilyak Quillstar Rabbitsfoot Redhammer Rusty Shallowpond Sleeping Slimy Slowhands Smelly Smokey Snowshoe Sootassle Stained Stick-In-The-Mud Sweaty Tallmug Tealeaf Trailscenter Two-Socks Whetstone Wishbone Wooden Woolhands
+		Yakshoe
+	}
+	female_names = {
+		Bag-of-Rocks Beige Bentnail Bigpocket Birdhat Bluesaddle Bluestring Brokendice Bump-On-A-Log Burrberry Chordy Clean Cleankite Clover Clovercatcher Cloverleaf Copperfinder Derpa Eastwind Echoroot Egg Eightcoins Fixxit Full Fullflask Furtrim
+		Golden Goldensnow Gootfur Goottooth Greenfeather Greenlint Grumplefoot Half-Eaten Hawktail Herder Hopswift Hozenpaw Inkstain Jambeezi Keenbean Lintpocket Little Littlebrew Littlemug Luckhammer Lucky Mountainmusk
+		Mountaintop Mushan Muskfree Noodle Oilyak Quillstar Rabbitsfoot Redhammer Rusty Shallowpond Sleeping Slimy Slowhands Smelly Smokey Snowshoe Sootassle Stained Stick-In-The-Mud Sweaty Tallmug Tealeaf Trailscenter Two-Socks Whetstone Wishbone Wooden Woolhands
+		Yakshoe
+	}
+	dynasty_of_location_prefix = ""
+	
+	##grammar_transform = french
+	##patronym_prefix_male = "dynnpat_pre_fils"
+
+	# Chance of male children being named after their paternal or maternal grandfather, or their father. Sum must not exceed 100.
+	pat_grf_name_chance = 30
+	mat_grf_name_chance = 10
+	father_name_chance = 25
+	
+	# Chance of female children being named after their paternal or maternal grandmother, or their mother. Sum must not exceed 100.
+	pat_grm_name_chance = 20
+	mat_grm_name_chance = 40
+	mother_name_chance = 5
+	
+	
+	
+	mercenary_names = {
+		{ name = "mercenary_company_luckydos_warriors" }
+		{ name = "mercenary_company_yakraiders" }
+		{ name = "mercenary_company_last_resort_merchants" }
+	}
+}

@@ -10,15 +10,47 @@ racial_age_multiplier_value = {
 	if = {
 		limit = {
 			is_character_trigger = yes
-			OR = {
-				has_trait = being_void
-				has_trait = being_light
+			has_trait = fecund
+		}
+		add = 0.07
+	}
+	# Modifiers
+	if = {
+		limit = {
+			is_character_trigger = yes
+			has_character_modifier = loa_blessing
+		}
+		add = 2.9
+	}
+	if = {
+		limit = {
+			is_character_trigger = yes
+			has_character_modifier = hibernated_modifier
+		}
+		add = 8.5
+	}
+	if = {
+		limit = {
+			is_character_trigger = yes
+			exists = dynasty
+			dynasty = { has_dynasty_perk = blood_legacy_5 }
+		}
+		add = 0.07
+	}
+	if = {
+		limit = {
+			exists = faith
+			title:b_gjalerbron = {
+				is_holy_site_of = this.faith
+			}
+			faith = {
+				controls_holy_site = gjalerbron
 			}
 		}
-		add = 2
+		add = 0.04
 	}
 	
-	# Immortal traits
+	# Infusion traits
 	if = {
 		limit = {
 			is_character_trigger = yes
@@ -30,7 +62,21 @@ racial_age_multiplier_value = {
 		}
 		add = 357
 	}
-	
+	if = {
+		limit = {
+			is_character_trigger = yes
+			OR = {
+				has_trait = being_void
+				has_trait = being_light
+			}
+		}
+		add = 2
+	}
+	if = { limit = { has_trait_with_flag = life_expectancy_1 } multiply = 1.5 }		# long-lived creatures like tauren, trolls, yaungol etc
+	else_if = { limit = { has_trait_with_flag = life_expectancy_2 } multiply = 10 }	# centennarian creatures like dwarves, gnomes, vrykul etc
+	else_if = { limit = { has_trait_with_flag = life_expectancy_3 } multiply = 100 }	# millennarian creatures like elves, giants, quiraji etc
+	else_if = { limit = { has_trait_with_flag = life_expectancy_4 } multiply = 1000 }	# epochal creatures like dragons, demons, constructs etc
+
 	min = 1
 }
 cultural_age_multiplier_value = {
@@ -38,6 +84,10 @@ cultural_age_multiplier_value = {
 	if = {
 		limit = { is_race_no_gene_trigger = { RACE = creature_high_elf } }
 		add = 21
+	}
+	else_if = {
+		limit = { has_trait_with_flag = yaungol_family }
+		add = 0.35
 	}
 	else_if = {
 		limit = { is_race_no_gene_trigger = { RACE = creature_night_elf } }
@@ -52,11 +102,27 @@ cultural_age_multiplier_value = {
 		add = 21
 	}
 	else_if = {
+		limit = { is_race_no_gene_trigger = { RACE = creature_faldorei } }
+		add = 21
+	}
+	else_if = {
 		limit = { is_race_no_gene_trigger = { RACE = creature_dwarf } }
 		add = 5
 	}
 	else_if = {
 		limit = { is_race_no_gene_trigger = { RACE = creature_gnome } }
+		add = 5
+	}
+	else_if = {
+		limit = { is_race_no_gene_trigger = { RACE = creature_trogg } }
+		add = 5
+	}
+	else_if = {
+		limit = { is_race_no_gene_trigger = { RACE = creature_grummle } }
+		add = 5
+	}
+	else_if = {
+		limit = { is_race_no_gene_trigger = { RACE = creature_drogbar } }
 		add = 5
 	}
 	else_if = {
@@ -80,11 +146,26 @@ cultural_age_multiplier_value = {
 		add = 29
 	}
 	else_if = {
-		limit = { is_race_no_gene_trigger = { RACE = creature_draenei } }
+		limit = {
+			OR = {
+				has_trait_with_flag = eredar_family
+				is_race_no_gene_trigger = { RACE = creature_annihilan } 
+				is_race_no_gene_trigger = { RACE = creature_nathrezim }
+				is_race_no_gene_trigger = { RACE = creature_eredruin }
+				is_race_no_gene_trigger = { RACE = creature_sayaadi }
+				is_race_no_gene_trigger = { RACE = creature_shivarra }
+				is_race_no_gene_trigger = { RACE = creature_observer }
+				is_race_no_gene_trigger = { RACE = creature_flamewaker }
+			}
+		}
 		add = 357
 	}
 	else_if = {
 		limit = { is_race_no_gene_trigger = { RACE = creature_giant } }
+		add = 14
+	}
+	else_if = {
+		limit = { is_race_no_gene_trigger = { RACE = creature_sea_giant } }
 		add = 14
 	}
 	else_if = {
@@ -93,11 +174,43 @@ cultural_age_multiplier_value = {
 	}
 	else_if = {
 		limit = { is_race_no_gene_trigger = { RACE = creature_mantid } }
-		add = 2
+		add = 14
 	}
 	else_if = {
 		limit = { is_race_no_gene_trigger = { RACE = creature_qiraji } }
 		add = 14
+	}
+	else_if = {
+		limit = { is_race_no_gene_trigger = { RACE = creature_red_dragon } }
+		add = 50
+	}
+	else_if = {
+		limit = { is_race_no_gene_trigger = { RACE = creature_blue_dragon } }
+		add = 50
+	}
+	else_if = {
+		limit = { is_race_no_gene_trigger = { RACE = creature_green_dragon } }
+		add = 50
+	}
+	else_if = {
+		limit = { is_race_no_gene_trigger = { RACE = creature_bronze_dragon } }
+		add = 50
+	}
+	else_if = {
+		limit = { is_race_no_gene_trigger = { RACE = creature_black_dragon } }
+		add = 50
+	}
+	else_if = {
+		limit = { is_race_no_gene_trigger = { RACE = creature_infinite_dragon } }
+		add = 50
+	}
+	else_if = {
+		limit = { has_trait_with_flag = titanforged_class }
+		add = 50
+	}
+	else_if = {
+		limit = { is_race_no_gene_trigger = { RACE = creature_tortollan } }
+		add = 142
 	}
 	
 	min = 1
@@ -150,6 +263,9 @@ age_max_value = {
 
 undead_age_value = 18
 
+age_0_value = { 
+	value = 0 
+}
 age_1_value = {
 	value = 1
 	max = age_max_value
@@ -271,6 +387,11 @@ age_35_value = {
 	multiply = racial_age_multiplier_value
 	max = age_max_value
 }
+age_36_value = {
+	value = 36
+	multiply = racial_age_multiplier_value
+	max = age_max_value
+}
 age_40_value = {
 	value = 40
 	multiply = racial_age_multiplier_value
@@ -316,6 +437,11 @@ age_70_value = {
 	multiply = racial_age_multiplier_value
 	max = age_max_value
 }
+age_75_value = {
+	value = 75
+	multiply = racial_age_multiplier_value
+	max = age_max_value
+}
 age_80_value = {
 	value = 80
 	multiply = racial_age_multiplier_value
@@ -334,6 +460,23 @@ age_100_value = {
 age_debug_value = {
 	value = 90
 	multiply = racial_age_multiplier_value
+}
+
+# accounts for the "elderly" values in 00_defines.txt - replace any use of these values with this instead of age_x_value
+age_elderly_male_define_value = { 
+	value = Define:NCharacter|MALE_ELDERLY_AGE
+	multiply = racial_age_multiplier_value
+	max = age_max_value
+}
+
+age_elderly_female_define_value = { 
+	value = Define:NCharacter|FEMALE_ELDERLY_AGE
+	multiply = racial_age_multiplier_value
+	max = age_max_value
+}
+
+my_current_age_value = {
+	value = age
 }
 
 scaled_age_value = {

@@ -1,4 +1,6 @@
 ﻿k_kezan = {
+	1.1.1 = {
+	}
 }
 d_undermine = {
 	#e_trade_coalition
@@ -28,13 +30,13 @@ d_undermine = {
 		holder=64400
 	}
 	555.1.1={
-		holder=64100
+		holder=trade_prince_maldy
 	}
 	559.1.1={
 		holder=64501
 	}
 	563.1.1={
-		holder=64100
+		holder=trade_prince_maldy
 	}
 	567.1.1={
 		holder=64506
@@ -82,13 +84,13 @@ c_mount_kajaro = {
 		holder=64400
 	}
 	555.1.1={
-		holder=64100
+		holder=trade_prince_maldy
 	}
 	559.1.1={
 		holder=64501
 	}
 	563.1.1={
-		holder=64100
+		holder=trade_prince_maldy
 	}
 	567.1.1={
 		holder=64506
@@ -114,9 +116,9 @@ c_bilgewater = {
 		liege=e_trade_coalition
 	}
 	556.2.25={
-		holder=64100
+		holder=trade_prince_maldy
 	}
-	600.12.4={
+	591.12.4={
 		holder=64102
 	}
 }
@@ -125,9 +127,9 @@ c_gallywix = {
 		liege=e_trade_coalition
 	}
 	556.2.25={
-		holder=64100
+		holder=trade_prince_maldy
 	}
-	600.12.4={
+	591.12.4={
 		holder=64102
 	}
 }
@@ -136,9 +138,9 @@ c_kajamine = {
 		liege=e_trade_coalition
 	}
 	556.2.25={
-		holder=64100
+		holder=trade_prince_maldy
 	}
-	600.12.4={
+	591.12.4={
 		holder=64102
 	}
 }
@@ -169,9 +171,9 @@ c_speedway = {
 		liege=e_trade_coalition
 	}
 	556.2.25={
-		holder=64100
+		holder=trade_prince_maldy
 	}
-	600.12.4={
+	591.12.4={
 		holder=64102
 	}
 }
@@ -244,15 +246,18 @@ c_lost_isles = {
 	576.02.22={holder=280096} #Kralromer[122000]
 }
 d_glaive_isle = {
-	800.1.1={
-		liege=k_kezan
+	523.1.1={
+		liege=e_trade_coalition
+	}
+	550.12.21={
+		holder=64300
+	}
+	601.4.10={
+		holder=64301
 	}
 }
 c_glaive_isle = {
 #e_trade_coalition
-	523.1.1={
-		liege=e_trade_coalition
-	}
 	550.12.21={
 		holder=64300
 	}
@@ -265,5 +270,8 @@ c_mouth_of_dragon = {
 	1.1.1={
 		liege=e_black_dragonflight
 	}
-	3.1.1={holder=62202} #Nefarian[38050]
+	20.1.1={holder=62202} #Nefarian[38050]
+	593.2.1={
+		liege=0
+	}
 }

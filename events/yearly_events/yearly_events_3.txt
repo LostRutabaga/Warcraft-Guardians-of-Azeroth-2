@@ -14,7 +14,7 @@ scripted_trigger yearly_3001_vassal_trigger = {
 	OR = {
 		any_scheme = {
 			hostile_scheme_trigger = yes
-			scheme_target = root
+			scheme_target_character = root
 		}
 		is_a_faction_member = yes
 		OR = {
@@ -67,7 +67,7 @@ scripted_trigger yearly_3001_possibly_truthful_trigger = {
 			OR = {
 				any_scheme = {
 					hostile_scheme_trigger = yes
-					scheme_target = root
+					scheme_target_character = root
 				}
 				is_a_faction_member = yes
 			}
@@ -151,19 +151,7 @@ yearly.3001 = {
 		#To save the vassal that will be accused
 		random_vassal = {
 			limit = {
-				save_temporary_scope_as = vassal
 				yearly_3001_vassal_trigger = yes
-				OR = {
-					AND = {
-						is_independent_ruler = no	
-						any_neighboring_realm_same_rank_owner = {
-							yearly_3001_neighbor_trigger = yes
-						}
-					}
-					any_neighboring_top_liege_realm_owner = {
-						yearly_3001_neighbor_trigger = yes
-					}
-				}
 			}
 			save_scope_as = vassal
 		}
@@ -560,15 +548,11 @@ yearly.3001 = {
 						}
 					}
 					#If target is a baron or unlanded, have them escape.
-					else = {
-						if = {
-							limit = {
-								is_landed = yes
-							}
-							depose = yes
-						}
-						move_to_pool = yes
+					else_if = {
+						limit = { is_landed = yes }
+						depose_effect = { DEPOSER = root }
 					}
+					else = { move_to_pool = yes }
 				}
 			}
 		}	
@@ -1080,6 +1064,7 @@ yearly.3011 = {
 	trigger = {
 		NOT = { has_character_flag = had_event_yearly_3011 }
 		is_independent_ruler = no
+		exists = liege
 		liege = {
 			yearly_3011_liege_trigger = yes
 		}
@@ -1311,11 +1296,11 @@ yearly.3011 = {
 		trigger = {
 			OR = {
 				has_trait = gregarious
-				has_trait = reveler_3
+				has_trait = lifestyle_reveler
 			}
 		}
 		trait = gregarious
-		trait = reveler_3
+		trait = lifestyle_reveler
 		show_as_tooltip = {
 			duel = {
 				skill = stewardship
@@ -1393,7 +1378,7 @@ yearly.3012 = {
 	desc = yearly.3012.desc
 	theme = diplomacy
 	override_background = {
-		event_background = feast
+		reference = feast
 	}
 	left_portrait = {
 		character = scope:liege
@@ -1404,6 +1389,9 @@ yearly.3012 = {
 	trigger = {
 		scope:liege = {
 			basic_is_available_ai = yes
+		}
+		scope:vassal = {
+			is_alive = yes
 		}
 	}
 
@@ -1460,7 +1448,7 @@ yearly.3012 = {
 				opinion = 30
 			}
 		}
-		set_relation_friend = scope:vassal
+		set_relation_friend = { reason = friend_feast_for_liege target = scope:vassal involved_character = scope:liege }
 	}
 
 	option = {
@@ -1505,6 +1493,9 @@ yearly.3013 = {
 	trigger = {
 		scope:liege = {
 			basic_is_available_ai = yes
+		}
+		scope:vassal = {
+			is_alive = yes
 		}
 	}
 
@@ -1560,7 +1551,7 @@ yearly.3013 = {
 				opinion = 15
 			}
 		}
-		set_relation_friend = scope:vassal
+		set_relation_friend = { reason = friend_feast_for_liege target = scope:vassal involved_character = scope:liege }
 	}
 
 	option = {
@@ -1610,6 +1601,9 @@ yearly.3014 = {
 		scope:liege = {
 			basic_is_available_ai = yes
 		}
+		scope:vassal = {
+			is_alive = yes
+		}
 	}
 
 	immediate = {
@@ -1657,7 +1651,7 @@ yearly.3014 = {
 				opinion = -10
 			}
 		}
-		set_relation_friend = scope:vassal
+		set_relation_friend = { reason = friend_feast_for_liege target = scope:vassal involved_character = scope:liege }
 	}
 
 	option = {
@@ -1842,6 +1836,7 @@ yearly.3031 = {
 	
 	trigger = {
 		is_independent_ruler = no
+		is_adult = yes
 		NOT = { has_character_flag = had_event_yearly_3031 }
 		NOR = {
 			has_trait = generous
@@ -1971,7 +1966,7 @@ yearly.3031 = {
 					value = diplomacy
 					multiplier = 0.25
 				}
-
+				min = 1
 				show_as_tooltip = {
 					reverse_add_opinion = {
 						target = liege
@@ -2041,7 +2036,7 @@ yearly.3031 = {
 				compare_modifier = {
 					value = scope:duel_value
 				}
-
+				min = 2
 				show_as_tooltip = {
 					reverse_add_opinion = {
 						target = liege
@@ -2117,10 +2112,13 @@ yearly.3031 = {
 							limit = {
 								exists = scope:gain_rival
 							}
+							liege = { save_scope_as = relationship_reason_involved_character }
 							progress_towards_rival_effect = {
+								REASON = rival_competing_for_liege
 								CHARACTER = scope:fellow_vassal
-								OPINION = no
+								OPINION = 0
 							}
+							clear_saved_scope = relationship_reason_involved_character
 						}
 						else = {
 							random = {
@@ -2202,10 +2200,13 @@ yearly.3031 = {
 							limit = {
 								exists = scope:gain_rival
 							}
+							liege = { save_scope_as = relationship_reason_involved_character }
 							progress_towards_rival_effect = {
+								REASON = rival_competing_for_liege
 								CHARACTER = scope:fellow_vassal
-								OPINION = no
+								OPINION = 0
 							}
+							clear_saved_scope = relationship_reason_involved_character
 						}
 						else = {
 							random = {
@@ -2232,7 +2233,7 @@ yearly.3031 = {
 					value = diplomacy
 					multiplier = 0.25
 				}
-
+				min = 1
 				show_as_tooltip = {
 					reverse_add_opinion = {
 						target = liege
@@ -2297,10 +2298,13 @@ yearly.3031 = {
 							limit = {
 								exists = scope:gain_rival
 							}
+							liege = { save_scope_as = relationship_reason_involved_character }
 							progress_towards_rival_effect = {
+								REASON = rival_competing_for_liege
 								CHARACTER = scope:fellow_vassal
-								OPINION = no
+								OPINION = 0
 							}
+							clear_saved_scope = relationship_reason_involved_character
 						}
 						else = {
 							random = {
@@ -2335,7 +2339,7 @@ yearly.3031 = {
 					value = learning
 					multiplier = 0.25
 				}
-
+				min = 1
 				show_as_tooltip = {
 					reverse_add_opinion = {
 						target = liege
@@ -2405,7 +2409,7 @@ yearly.3031 = {
 				compare_modifier = {
 					value = scope:duel_value
 				}
-
+				min = 2
 				show_as_tooltip = {
 					reverse_add_opinion = {
 						target = liege
@@ -2481,10 +2485,13 @@ yearly.3031 = {
 							limit = {
 								exists = scope:gain_rival
 							}
+							liege = { save_scope_as = relationship_reason_involved_character }
 							progress_towards_rival_effect = {
+								REASON = rival_competing_for_liege
 								CHARACTER = scope:fellow_vassal
-								OPINION = no
+								OPINION = 0
 							}
+							clear_saved_scope = relationship_reason_involved_character
 						}
 						else = {
 							random = {
@@ -2508,7 +2515,6 @@ yearly.3031 = {
 						modifier = respect_opinion
 						opinion = -15
 					}
-
 					scope:fellow_vassal = {
 						if = {
 							limit = {
@@ -2567,10 +2573,13 @@ yearly.3031 = {
 							limit = {
 								exists = scope:gain_rival
 							}
+							liege = { save_scope_as = relationship_reason_involved_character }
 							progress_towards_rival_effect = {
+								REASON = rival_competing_for_liege
 								CHARACTER = scope:fellow_vassal
-								OPINION = no
+								OPINION = 0
 							}
+							clear_saved_scope = relationship_reason_involved_character
 						}
 						else = {
 							random = {
@@ -2586,7 +2595,6 @@ yearly.3031 = {
 					}
 				}
 			}
-
 			5 = {
 				desc = yearly.3031.a.nemesis_failure
 				trigger = {
@@ -2597,7 +2605,7 @@ yearly.3031 = {
 					value = learning
 					multiplier = 0.25
 				}
-
+				min = 1
 				show_as_tooltip = {
 					reverse_add_opinion = {
 						target = liege
@@ -2666,10 +2674,13 @@ yearly.3031 = {
 							limit = {
 								exists = scope:gain_rival
 							}
+							liege = { save_scope_as = relationship_reason_involved_character }
 							progress_towards_rival_effect = {
-								CHARACTER = scope:gain_rival
-								OPINION = no
+								REASON = rival_competing_for_liege
+								CHARACTER = scope:fellow_vassal
+								OPINION = 0
 							}
+							clear_saved_scope = relationship_reason_involved_character
 						}
 						else = {
 							random = {
@@ -2692,14 +2703,14 @@ yearly.3031 = {
 	option = {
 		name = yearly.3031.c
 		trigger = {
+			might_cheat_on_every_partner_trigger = yes
 			scope:liege = {
 				# Warcraft
 				can_have_sexual_relation_with_and_attracted_to_trigger = { target = root }
 				
 				is_attracted_to_gender_of = root
-				NOT = {
-					has_trait = chaste
-				}
+				NOT = { has_trait = chaste }
+				might_cheat_on_every_partner_trigger = yes
 			}
 			attraction >= 10
 		}
@@ -2779,10 +2790,13 @@ yearly.3031 = {
 					limit = {
 						exists = scope:gain_rival
 					}
+					liege = { save_scope_as = relationship_reason_involved_character }
 					progress_towards_rival_effect = {
+						REASON = rival_competing_for_liege
 						CHARACTER = scope:fellow_vassal
-						OPINION = no
+						OPINION = 0
 					}
+					clear_saved_scope = relationship_reason_involved_character
 				}
 				else = {
 					random = {
@@ -2803,13 +2817,13 @@ yearly.3031 = {
 					limit = {
 						any_scheme = {
 							scheme_type = seduce
-							NOT = { scheme_target = root }
+							NOT = { scheme_target_character = root }
 						}
 					}
 					random_scheme = {
 						limit = {
 							scheme_type = seduce
-							NOT = { scheme_target = root }	
+							NOT = { scheme_target_character = root }	
 						}
 						end_scheme = yes
 					}
@@ -2817,12 +2831,12 @@ yearly.3031 = {
 				if = {
 					limit = {
 						can_start_scheme = {
-							target = root
+							target_character = root
 							type = seduce
 						}
 					}
 					start_scheme = {
-						target = root
+						target_character = root
 						type = seduce
 					}
 				}
@@ -2856,6 +2870,7 @@ yearly.3040 = {
 	theme = faith
 	
 	trigger = {
+		is_landed = yes # Thematically landed
 		piety_level >= 2
 		NOT = { has_character_flag = had_event_yearly_3040 }
 	}
@@ -2928,7 +2943,7 @@ yearly.3040 = {
 ##############################
 scripted_trigger yearly_3041_religious_vassal = {
 	is_ai = yes
-	has_government = theocracy_government
+	government_has_flag = government_is_theocracy
 	faith = root.faith
 }
 
@@ -3220,7 +3235,10 @@ yearly.3051 = {
 				}
 				can_set_relation_rival_trigger = { CHARACTER = scope:vassal }
 			}
-			set_relation_rival = scope:vassal
+			set_relation_rival = {
+				target = scope:vassal
+				reason = rival_confiscated_title
+			}
 		}
 		else_if = {
 			limit = {

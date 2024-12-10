@@ -30,15 +30,6 @@ plague_agent_virtues = {
 		limit = { num_virtuous_traits = { value > 3 faith = scope:owner.faith } }
 		add = 1
 	}
-	# Except these traits
-	if = {
-		limit = { has_trait = calm }
-		add = -1
-	}
-	if = {
-		limit = { has_trait = patient }
-		add = -1
-	}
 
 	min = 0
 }
@@ -62,4 +53,10 @@ plague_agent_sins = {
 	}
 
 	min = 0
+}
+
+# Scourge conversion values
+
+scourge_undead_population_percent = { 
+	value = 80 # this could be changed with a game rule in the future
 }

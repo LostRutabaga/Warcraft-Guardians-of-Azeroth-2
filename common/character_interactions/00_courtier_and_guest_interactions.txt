@@ -1,6 +1,6 @@
 ﻿recruit_guest_interaction = {
 	category = interaction_category_vassal
-
+	icon = guest
 	common_interaction = yes
 
 	special_ai_interaction = recruit_courtier
@@ -25,6 +25,7 @@
 		scope:recipient = {
 			is_ruler = no
 		}
+		scope:actor = { NOT = { is_isolated_from_trigger = { target = scope:recipient } } }	# Warcraft
 		trigger_if = {
 			limit = {
 				NOR = {
@@ -64,6 +65,19 @@
 		flag = hook
 		localization = SCHEME_HOOK
 	}
+	send_option = { # EP3 Influence
+		is_shown = { # Actor must have a government that uses influence 
+			scope:actor = {
+				government_has_flag = government_has_influence
+			}
+		}
+		is_valid = {
+			# Actor has enough influence
+			scope:actor = { influence >= minor_influence_value }
+		}
+		flag = influence_send_option
+		localization = INFLUENCE_SEND_OPTION
+	}
 
 	on_accept = {
 		scope:recipient = {
@@ -79,6 +93,10 @@
 		else_if = {
 			limit = { always = scope:hook }
 			scope:actor = { use_hook = scope:recipient }
+		}
+		else_if = {
+			limit = { always = scope:influence_send_option }
+			scope:actor = { change_influence = minor_influence_loss }
 		}
 		else = {
 			scope:recipient = {
@@ -102,36 +120,29 @@
 			}
 		}
 
-		every_in_list = {
-			list = recruiting_family
-			scope:actor = {
-				recruit_courtier = prev
-			}
-			remove_variable = last_visited_ruler # Even though it times out automatically, removing it here saves cycles for performance.
-			add_opinion = {
-				target = scope:actor
-				opinion = 50
-				modifier = grateful_opinion
-			}
-		}
+
 
 		scope:actor = {
-			stress_impact = {
-				shy = minor_stress_impact_gain
-				paranoid = minor_stress_impact_gain
-			}
-
 			send_interface_message = {
 				type = event_generic_neutral
 				title = msg_recruited_guest_to_court_interaction_title
-				
 				right_icon = scope:recipient
-
-				show_as_tooltip = {
+				stress_impact = {
+					shy = minor_stress_impact_gain
+					paranoid = minor_stress_impact_gain
+				}
+				every_in_list = {
+					list = recruiting_family
 					scope:actor = {
-						custom_tooltip = msg_recruited_guest_to_court_interaction_message
+						add_courtier ?= prev
 					}
-		   		}
+					remove_variable = last_visited_ruler # Even though it times out automatically, removing it here saves cycles for performance.
+					add_opinion = {
+						target = scope:actor
+						opinion = 50
+						modifier = grateful_opinion
+					}
+				}
 			}
 		}
 	}
@@ -146,18 +157,13 @@
 
 	ai_potential = {
 		is_at_war = no # Try to avoid wasting your war chest!
-		trigger_if = {
-			limit = {
-				NOT = {
-					has_government = tribal_government # Tribes pay very little for their guests
-				}
-			}
-			short_term_gold >= yearly_character_income
-		}
+		ai_has_conqueror_personality = no
+		short_term_gold >= yearly_character_income
 		any_courtier_or_guest = {
 			is_alive = yes
 			count <= 30
 		}
+		ai_should_focus_on_building_in_their_capital = no
 	}
 
 	ai_will_do = {
@@ -165,7 +171,23 @@
 
 		#Lacking councillors
 		compare_modifier = {
-			trigger = { scope:actor = { NOT = { exists = cp:councillor_chancellor } } }
+			trigger = {
+				scope:actor = {
+					NOT = { exists = cp:councillor_chancellor }
+				}
+				scope:recipient = {
+					OR = {
+						AND = {
+							is_male = yes
+							scope:actor = { faith_dominant_gender_male_or_equal = yes }
+						}
+						AND = {
+							is_female = yes
+							scope:actor = { faith_dominant_gender_female_or_equal = yes }
+						}
+					}
+				}
+			}
 			target = scope:recipient
 			value = diplomacy
 			offset = {
@@ -174,7 +196,23 @@
 			}
 		}
 		compare_modifier = {
-			trigger = { scope:actor = { NOT = { exists = cp:councillor_marshal } } }
+			trigger = {
+				scope:actor = {
+					NOT = { exists = cp:councillor_marshal }
+				}
+				scope:recipient = {
+					OR = {
+						AND = {
+							is_male = yes
+							scope:actor = { faith_dominant_gender_male_or_equal = yes }
+						}
+						AND = {
+							is_female = yes
+							scope:actor = { faith_dominant_gender_female_or_equal = yes }
+						}
+					}
+				}
+			}
 			target = scope:recipient
 			value = martial
 			offset = {
@@ -183,7 +221,23 @@
 			}
 		}
 		compare_modifier = {
-			trigger = { scope:actor = { NOT = { exists = cp:councillor_steward } } }
+			trigger = {
+				scope:actor = {
+					NOT = { exists = cp:councillor_steward }
+				}
+				scope:recipient = {
+					OR = {
+						AND = {
+							is_male = yes
+							scope:actor = { faith_dominant_gender_male_or_equal = yes }
+						}
+						AND = {
+							is_female = yes
+							scope:actor = { faith_dominant_gender_female_or_equal = yes }
+						}
+					}
+				}
+			}
 			target = scope:recipient
 			value = stewardship
 			offset = {
@@ -203,7 +257,15 @@
 
 		#Lacking court physician
 		compare_modifier = {
-			trigger = { scope:actor = { court_physician_available_trigger = no } }
+			trigger = {
+				scope:actor = { court_physician_available_trigger = no }
+				scope:recipient = {
+					would_be_valid_for_court_position = {
+						employer = scope:actor
+						court_position = court_physician_court_position
+					}
+				}
+			}
 			target = scope:recipient
 			value = learning
 			offset = {
@@ -215,8 +277,10 @@
 		#Lacking knights
 		compare_modifier = {
 			trigger = {
-				prowess >= decent_skill_rating
-				can_be_knight_trigger = { ARMY_OWNER = scope:actor }
+				scope:recipient.prowess >= decent_skill_rating
+				scope:recipient = {
+					can_be_knight_trigger = { ARMY_OWNER = scope:actor }
+				}
 				scope:actor = {
 					OR = {
 						number_of_knights < max_number_of_knights
@@ -292,6 +356,7 @@
 
 kick_from_court_interaction = {
 	category = interaction_category_vassal
+	icon = guest
 
 
 	desc = {
@@ -311,12 +376,19 @@ kick_from_court_interaction = {
 				is_courtier_of = scope:actor
 				is_pool_guest_of = scope:actor
 			}
+			bp2_valid_for_standard_interactions_trigger = yes
 		}
 	}
 
 	cost = {
 		prestige = {
 			if = {
+				limit = {
+					scope:actor = { is_landless_adventurer = yes }
+				}
+				value = minor_prestige_value
+			}
+			else_if = {
 				limit = {
 					scope:recipient = {
 						any_traveling_family_member = {
@@ -334,6 +406,7 @@ kick_from_court_interaction = {
 	}
 
 	is_valid_showing_failures_only = {
+		scope:actor = { NOT = { is_isolated_from_trigger = { target = scope:recipient } } }	# Warcraft
 		scope:recipient = {
 			kick_from_court_validity_trigger = yes
 
@@ -354,7 +427,6 @@ kick_from_court_interaction = {
 		scope:actor = {
 			stress_impact = {
 				gregarious = minor_stress_impact_gain
-				compassionate = minor_stress_impact_gain
 			}
 			
 			hidden_effect = {
@@ -382,17 +454,11 @@ kick_from_court_interaction = {
 								has_relation_guardian = scope:recipient
 							}
 							save_scope_as = ward
-							scope:recipient = { remove_relation_ward = scope:ward }
-							if = {
-								limit = {
-									NOT = { host = liege }
-								}
-								return_to_court = yes
-							}
-							guardian_remove_opinion_effect = {
+							remove_guardian_effect = {
 								GUARDIAN = scope:recipient
-								WARD = this
-								WARD_LIEGE = scope:actor
+								WARD = scope:ward
+								RETURN_WARD = yes
+								HIDE_OPINION = no
 							}
 						}
 						scope:recipient = { trigger_event = char_interaction.0090 }
@@ -410,24 +476,15 @@ kick_from_court_interaction = {
 							save_scope_as = guardian
 
 							send_interface_message = {
-								type = event_generic_neutral
+								type = event_childhood_neutral
 								title = remove_guardian_interaction_notification
 								left_icon = scope:recipient
 								right_icon = scope:guardian
-
-								scope:guardian = {
-									remove_relation_ward = scope:recipient
-									if = {
-										limit = {
-											NOT = { host = liege }
-										}
-										return_to_court = yes
-									}
-									guardian_remove_opinion_effect = {
-										GUARDIAN = this
-										WARD = scope:recipient
-										WARD_LIEGE = scope:actor
-									}
+								remove_guardian_effect = {
+									GUARDIAN = scope:guardian
+									WARD = scope:recipient
+									RETURN_WARD = yes
+									HIDE_OPINION = no
 								}
 							}
 						}
@@ -449,17 +506,11 @@ kick_from_court_interaction = {
 							has_relation_guardian = scope:recipient
 						}
 						save_scope_as = ward
-						scope:recipient = { remove_relation_ward = scope:ward }
-						if = {
-							limit = {
-								NOT = { host = liege }
-							}
-							return_to_court = yes
-						}
-						guardian_remove_opinion_effect = {
+						remove_guardian_effect = {
 							GUARDIAN = scope:recipient
-							WARD = this
-							WARD_LIEGE = scope:actor
+							WARD = scope:ward
+							RETURN_WARD = yes
+							HIDE_OPINION = no
 						}
 					}
 				}
@@ -475,17 +526,12 @@ kick_from_court_interaction = {
 						limit = {
 							has_relation_ward = scope:recipient
 						}
-						remove_relation_ward = scope:recipient
-						if = {
-							limit = {
-								NOT = { host = liege }
-							}
-							return_to_court = yes
-						}
-						guardian_remove_opinion_effect = {
-							GUARDIAN = this
+						save_scope_as = guardian
+						remove_guardian_effect = {
+							GUARDIAN = scope:guardian
 							WARD = scope:recipient
-							WARD_LIEGE = scope:actor
+							RETURN_WARD = yes
+							HIDE_OPINION = no
 						}
 					}
 				}
@@ -520,14 +566,16 @@ kick_from_court_interaction = {
 				}
 			}
 		}
+
+		employed_booner_invalidation_effect = { EMPLOYEE = scope:recipient LIEGE = scope:actor }
 	}
-	
+
 	auto_accept = yes
 }
 
 invite_to_court_interaction = {
 	category = interaction_category_vassal
-
+	icon = guest
 	
 	desc = invite_to_court_interaction_desc
 	
@@ -541,165 +589,86 @@ invite_to_court_interaction = {
 					host = scope:actor
 				}
 				is_ruler = yes
-			}	
+			}
 		}
 	}
 
-
 	is_valid_showing_failures_only = {
-		scope:recipient = {
-			NOR = {
-				custom_description = {
-					text = is_not_wandering_child
-					subject = scope:recipient
-					OR = {
-						AND = {
-							is_adult = no
-							is_pool_character = no
-						}
-						AND = {
-							is_adult = no
-							NOT = { is_close_or_extended_family_of = scope:actor }
-						}
-					}
+		custom_tooltip = {
+			scope:recipient = {
+				OR = {
+					NOT = { exists = liege }
+					NOT = { has_variable = invite_to_court_cooldown }
 				}
-				is_imprisoned = yes
-				is_theocratic_lessee = yes
-				trigger_if = {
-					limit = {
-						exists = host
-						NOT = { is_player_heir_of = scope:actor }
-					}
-					is_player_heir_of = host
-				}
-				trigger_if = {
-					limit = { exists = host }
-					is_consort_of = host
-				}
-				trigger_if = {
-					limit = { exists = host }
-					host = {
-						pressing_claim_of_character_trigger = { CHARACTER = scope:recipient }
-					}
-				}
+			}
+			text = INVITE_TO_COURT_COOLDOWN
+		}	
+		scope:actor = { NOT = { is_isolated_from_trigger = { target = scope:recipient } } }	# Warcraft
+		can_recruit_character_to_court_trigger = {
+			RECRUITER = scope:actor
+			RECRUITEE = scope:recipient
+		}
+	}
+	
+	#Pay som gold to persuade a wandering character to come to your court
+	send_option = {
+		is_shown = {
+			exists = scope:recipient
+		}
+		flag = cover_travel_expenses
+		localization = COVER_TRAVEL_EXPENSES
+	}
+	send_option = { # EP3 Influence
+		is_shown = { # Actor must have a government that uses influence 
+			scope:actor = {
+				government_has_flag = government_has_influence
+			}
+		}
+		is_valid = {
+			# Actor has enough influence
+			scope:actor = { influence >= medium_influence_value }
+			# Both characters are within the same top realm
+			scope:recipient.top_liege = scope:actor.top_liege
+		}
+		flag = influence_send_option
+		localization = TRADE_INFLUENCE_FOR_BETTER_AI_ACCEPTANCE
+	}
+	send_option = {
+		is_valid = {
+			scope:actor = {
+				has_usable_hook = scope:recipient
+			}
+		}
+		flag = hook
+		localization = SCHEME_HOOK
+	}
+	should_use_extra_icon = {
+		scope:actor = { has_usable_hook = scope:recipient }
+	}
+	extra_icon = "gfx/interface/icons/character_interactions/hook_icon.dds"
 
-				#Do they have the "wrong" marriage type and the spouse is employed?
-				custom_description = {
-					text = is_married_matrilineally_and_spouse_is_dominant_partner
-					subject = scope:recipient
-					any_spouse = {
-						is_female = yes
-						matrilinear_marriage = yes
-						exists = host
-						host = scope:recipient.host
-						save_temporary_scope_as = spouse
-						OR = { #Is employed in some way
-							is_councillor_of = scope:recipient.host
-							is_knight_of = scope:recipient.host
-							any_relation = {
-								type = ward
-								OR = {
-									this = scope:recipient.host
-									is_close_family_of = scope:recipient.host
-								}
-							}
-							any_relation = {
-								type = guardian
-								OR = {
-									this = scope:recipient.host
-									is_close_family_of = scope:recipient.host
-								}
-							}
-							any_relation = {
-								type = mentor
-								OR = {
-									this = scope:recipient.host
-									is_close_family_of = scope:recipient.host
-								}
-							}
-							any_relation = {
-								type = student
-								OR = {
-									this = scope:recipient.host
-									is_close_family_of = scope:recipient.host
-								}
-							}
-							scope:recipient.host = {
-								has_relation_court_physician = scope:spouse
-							}
-						}
-					}
-				}
-				custom_description = {
-					text = is_married_patrilineally_and_spouse_is_dominant_partner
-					subject = scope:recipient
-					any_spouse = {
-						is_male = yes
-						patrilinear_marriage = yes
-						exists = host
-						host = scope:recipient.host
-						save_temporary_scope_as = spouse
-						OR = { #Is employed in some way
-							is_councillor_of = scope:recipient.host
-							is_knight_of = scope:recipient.host
-							any_relation = {
-								type = ward
-								OR = {
-									this = scope:recipient.host
-									is_close_family_of = scope:recipient.host
-								}
-							}
-							any_relation = {
-								type = guardian
-								OR = {
-									this = scope:recipient.host
-									is_close_family_of = scope:recipient.host
-								}
-							}
-							any_relation = {
-								type = mentor
-								OR = {
-									this = scope:recipient.host
-									is_close_family_of = scope:recipient.host
-								}
-							}
-							any_relation = {
-								type = student
-								OR = {
-									this = scope:recipient.host
-									is_close_family_of = scope:recipient.host
-								}
-							}
-							scope:recipient.host = {
-								has_relation_court_physician = scope:spouse
-							}
-						}
-					}
-				}
-				custom_description = {
-					text = "is_escaped_prisoner"
-					subject = scope:recipient
-					OR = {
-						has_opinion_modifier = {
-							modifier = attempted_imprisonment_opinion
-							target = scope:actor
-						}
-						has_opinion_modifier = {
-							modifier = treasonous_imprison_refusal
-							target = scope:actor
-						}
-						AND = {
-							exists = var:escaped_imprisonment_from
-							var:escaped_imprisonment_from = scope:actor
-						}
-					}
-				}
+	send_options_exclusive = no
+
+	cost = {
+		influence = {
+			value = 0
+			if = {
+				limit = { scope:influence_send_option = yes }
+				add = scope:actor.medium_influence_value
+				desc = INFLUENCE_INTERACTION_ACCEPTANCE_SEND_OPTION
 			}
 		}
 	}
 
 	on_accept = {
 		hidden_effect = {
+			scope:recipient = {
+				set_variable = {
+					name = invite_to_court_cooldown
+					years = 5
+				}
+			}		
+		
 			if = {
 				limit = {
 					exists = scope:recipient.liege
@@ -727,7 +696,7 @@ invite_to_court_interaction = {
 
 				scope:recipient = {
 					every_traveling_family_member = {
-						scope:actor = { recruit_courtier = prev }
+						scope:actor = { add_courtier = prev }
 						hidden_effect = {
 							return_to_court = yes
 						}
@@ -740,31 +709,22 @@ invite_to_court_interaction = {
 						use_hook = scope:recipient
 					}
 				}
-
-				scope:actor = {
-					stress_impact = {
-						shy = minor_stress_impact_gain
-					}
-				}
 			}
 		}
-
-		hidden_effect = {
-			if = {
-				limit = {
-					exists = scope:recipient.liege
-				}
-				scope:recipient.liege = {
-					send_interface_message = {
-						type = event_generic_neutral
-						title = msg_courtier_left_court_interaction_title
-						
-						right_icon = scope:recipient
-
-						show_as_tooltip = {
-							remove_courtier_or_guest = scope:recipient
-						}
+		
+		
+		if = {
+			limit = { always = scope:cover_travel_expenses }
+			scope:actor = {
+				pay_short_term_gold = {
+					gold = {
+						value = bribe_value
+						multiply = 0.5
 					}
+					target = scope:recipient
+				}
+				stress_impact = {
+					greedy = minor_stress_impact_gain
 				}
 			}
 		}
@@ -790,6 +750,14 @@ invite_to_court_interaction = {
  			step = 5
  			max = 25
  		}
+		
+		# Stooge modifier
+		modifier = {
+ 			scope:recipient = { has_variable = non_recruitable_var }
+			scope:recipient.var:non_recruitable_var = scope:actor
+ 			add = -200
+ 			desc = AI_STOOGE
+ 		}
 
  		#Current roles
  		modifier = {
@@ -806,6 +774,12 @@ invite_to_court_interaction = {
  			is_councillor = yes
  			add = -40
  			desc = AI_ON_THE_COUNCIL
+ 		}
+		
+		modifier = {		
+			trigger = { scope:recipient = { has_court_position = court_physician_court_position } }			
+ 			add = -20
+ 			desc = AI_COURT_PHYSICIAN
  		}
 
  		#Relations & relatives (with actor)
@@ -835,8 +809,22 @@ invite_to_court_interaction = {
 
  		modifier = {
  			this.house.house_head = scope:actor
- 			add = 30
+ 			add = 60
  			desc = AI_YOU_ARE_THE_HOUSE_HEAD
+ 		}
+		
+		modifier = {
+ 			this.top_liege = scope:actor
+ 			add = 60
+ 			desc = AI_YOU_ARE_THE_SOVEREIGN
+ 		}
+		
+		modifier = {
+ 			NOT = { is_child_of = scope:actor }
+ 			NOT = { is_close_family_of = scope:actor }
+			is_extended_family_of = scope:actor
+ 			add = 30
+ 			desc = AI_YOUR_RELATIVE
  		}
 
  		modifier = {
@@ -870,7 +858,7 @@ invite_to_court_interaction = {
  		modifier = {
  			exists = liege
  			is_child_of = liege
- 			add = -100
+ 			add = -160
  			desc = AI_THEIR_CHILD
  		}
 
@@ -920,23 +908,263 @@ invite_to_court_interaction = {
  		}
 
  		modifier = {
+ 			add = -50
+ 			desc = AI_INSPIRED
+ 			exists = inspiration
+			inspiration = {
+				NOT = {
+					exists = inspiration_sponsor
+				}
+			}
+ 		}
+
+ 		modifier = {
+ 			add = -500
+ 			desc = AI_SPONSORED_INSPIRATION
+ 			exists = inspiration
+			inspiration = {
+				exists = inspiration_sponsor
+			}
+ 		}
+
+ 		modifier = {
  			add = -500
  			desc = AI_WANDERLUST
 			is_child_of = scope:actor
  			has_character_modifier = lust_for_adventure
  		}
 		
+ 		modifier = {
+ 			add = -180
+ 			desc = ELUDING_CASTRATOR
+ 			is_adult = no
+ 			any_memory = {
+				has_memory_type = family_castration_fled_memory
+				memory_participant:castrator ?= {
+					this = scope:actor
+				}
+			}
+ 		}
+
+ 		modifier = {
+ 			liege ?= { is_landed = yes }
+ 			scope:actor = { is_landed = no }
+ 			add = -50
+ 			desc = AI_MY_LIEGE_IS_LANDED
+ 		}
+		
+		#Wandering characters (who aren't doing anything else)
+		modifier = {
+ 			add = {
+				value = 10
+				add = scope:actor.diplomacy
+				
+				if = {
+					limit = {
+						faith = scope:actor.faith
+					}
+					add = 10
+				}
+				else_if = {
+					limit = {
+						faith = { #Same religion - But faith should not be considered Hostile or Evil
+							religion = scope:actor.faith.religion
+							faith_hostility_level = {
+								target = scope:actor.faith
+								value < 2
+							}
+						}
+					}
+					add = 5
+				}
+				if = {
+					limit = {
+						culture = scope:actor.culture
+					}
+					add = 10
+				}
+				else_if = {
+					limit = {
+						culture = {
+							has_same_culture_heritage = scope:actor.culture
+						}
+					}
+					add = 5
+				}
+				if = {
+					limit = {
+						OR = {
+							has_trait = content
+							has_trait = lazy
+							has_trait = trusting
+						}
+					}
+					add = 10
+				}
+			}
+ 			desc = AI_CAN_BE_PERSUADED_TO_STAY
+			
+			is_pool_guest = no
+			location.province_owner = {
+				OR = {
+					any_liege_or_above = { this = scope:actor }
+					this = scope:actor
+				}
+			}
+			NOR = {
+				has_relation_rival = scope:actor
+				exists = liege
+				is_child_of = scope:actor
+				has_character_modifier = lust_for_adventure
+			}
+ 		}
+		
+		modifier = {
+			add = {
+				value = 20
+				if = {
+					limit = {
+						has_trait = greedy
+					}
+					multiply = 1.5
+				}
+				else_if = {
+					limit = {
+						has_trait = generous
+					}
+					multiply = 0.5
+				}
+			}
+			scope:cover_travel_expenses = yes
+			desc = AI_TRAVEL_EXPENSES
+		}
+
+ 		# Amenities impact
+ 		## Actor's amenities increases acceptance
+ 		modifier = {
+ 			add = {
+ 				value = 10
+ 				if = {
+ 					limit = {
+ 						scope:actor = {
+			 				has_royal_court = yes
+							has_dlc_feature = royal_court
+			 				amenity_level = { type = court_lodging_standards value >=  high_amenity_level }
+			 			}
+ 					}
+ 			 		add = 10
+ 				}
+ 				if = {
+ 					limit = {
+ 						scope:actor = {
+			 				amenity_level = { type = court_lodging_standards value >=  very_high_amenity_level }
+			 			}
+ 					}
+ 			 		add = 10
+ 				}
+ 				if = {
+ 					limit = {
+ 						scope:actor = {
+			 				amenity_level = { type = court_lodging_standards value >=  max_amenity_level }
+			 			}
+ 					}
+ 			 		add = 20
+ 				}
+ 			}
+ 			desc = AI_COURT_LODGING_STANDARDS_QUALITY
+			scope:actor = {
+			 	has_royal_court = yes
+				has_dlc_feature = royal_court
+				amenity_level = { type = court_lodging_standards value >=  medium_amenity_level }
+			}
+ 		}
+		## Target's liege amenities decreases acceptance 
+ 		modifier = {
+ 			add = {
+ 				value = -10
+				if = {
+					limit = {
+						liege = {
+							amenity_level = { type = court_lodging_standards value >=  high_amenity_level } 
+						}
+					}
+					add = -10
+				}
+				if = {
+					limit = {
+						liege = {
+							amenity_level = { type = court_lodging_standards value >=  very_high_amenity_level } 
+						}
+					}
+					add = -10
+				}
+				if = {
+					limit = {
+						liege = {
+							amenity_level = { type = court_lodging_standards value >=  max_amenity_level } 
+						}
+					}
+					add = -20
+				}
+ 			}
+ 			desc = AI_LIEGE_COURT_LODGING_STANDARDS_QUALITY
+			exists = liege
+			is_courtier_of = liege
+			liege = {
+				has_royal_court = yes
+				has_dlc_feature = royal_court
+				amenity_level = { type = court_lodging_standards value >=  medium_amenity_level }
+			}
+ 		}
+		
+ 		modifier = {
+ 			add = {
+				value = scope:actor.house.house_unity_value
+				multiply = 0.5
+			}
+ 			desc = AI_HOUSE_UNITY
+			scope:actor = { government_has_flag = government_is_clan }
+			exists = house
+			exists = scope:actor.house
+			house = scope:actor.house
+			house = {
+				OR = {
+					has_house_unity_stage = harmonious
+					has_house_unity_stage = friendly
+				}
+			}
+ 		}
+		
+		modifier = {
+			add = 25
+			scope:influence_send_option = yes
+			desc = INFLUENCE_INTERACTION_ACCEPTANCE_SEND_OPTION
+		}
+
+ 		modifier = {
+ 			add = -1000
+ 			desc = MALUS_TO_RECRUITMENT_FOR_IMPERIAL_EUNUCHS
+ 			scope:recipient = {
+ 				is_eunuch_trigger = yes
+	 			liege = {
+	 				government_allows = administrative
+	 				primary_title.tier = tier_empire
+	 				culture = { has_cultural_parameter = can_appoint_chief_eunuch }
+	 			}
+	 		}
+ 		}
+
 		# Warcraft
 		modifier = {
 			add = -1000
 			desc = RECIPIENT_SCOURGE_JAILOR_REASON
+			exists = scope:recipient.host
 			has_relation_scourge_damned = scope:recipient.host
 		}
-		
+
 		# Warcraft
 		scourge_interaction_modifiers = yes
 	}
-
 
 	auto_accept = {
 		custom_description = {
@@ -946,117 +1174,4 @@ invite_to_court_interaction = {
 			scope:hook = yes
 		}
 	}
-
-	send_option = {
-		is_valid = {
-			scope:actor = {
-				has_usable_hook = scope:recipient
-			}
-		}
-		flag = hook
-		localization = SCHEME_HOOK
-	}
-	should_use_extra_icon = {
-		scope:actor = { has_usable_hook = scope:recipient }
-	}
-	extra_icon = "gfx/interface/icons/character_interactions/hook_icon.dds"
-
-	send_options_exclusive = no
-}
-
-
-
-hire_court_physician_interaction = {
-	category = interaction_category_vassal
-
-	desc = hire_court_physician_interaction_desc
-
-	is_shown = {
-		scope:recipient = {
-			is_courtier_of = scope:actor
-			is_adult = yes
-		}
-		scope:actor = {
-			NOT = {
-				any_relation = {
-					type = court_physician
-					this = scope:recipient
-				}
-			}
-		}
-	}
-
-	is_valid_showing_failures_only = {
-		scope:recipient = {
-			can_be_court_physician_of = { EMPLOYER = scope:actor }
-		}
-	}
-
-	cost = {
-		gold = 10
-	}
-	
-	on_accept = {
-		scope:actor = {
-			send_interface_message = {
-				type = event_generic_neutral
-				title = msg_hired_court_physician_interaction_title
-				right_icon = scope:recipient
-
-				set_court_physician_effect = {
-					PHYSICIAN = scope:recipient
-					EMPLOYER = scope:actor
-				}
-			}
-		}
-		scope:recipient = {
-			add_opinion = {
-				target = scope:actor
-				modifier = grateful_opinion
-				opinion = 15 #Should match the amount lost when fired so it's not a way to farm opinion
-			}
-			add_gold = 10
-		}
-	}
-	
-	auto_accept = yes
-}
-
-fire_court_physician_interaction = {
-	category = interaction_category_vassal
-
-	desc = fire_court_physician_interaction_desc
-
-	is_shown = {
-		scope:recipient = {
-			is_courtier_of = scope:actor
-		}
-		scope:actor = {
-			any_relation = {
-				type = court_physician
-				this = scope:recipient
-			}
-		}
-	}
-
-	cost = {
-
-	}
-	
-	on_accept = {
-		scope:actor = {
-			send_interface_message = {
-				type = event_generic_neutral
-				title = msg_fired_court_physician_interaction_title
-				right_icon = scope:recipient
-
-				fire_court_physician_effect = {
-					PHYSICIAN = scope:recipient
-					EMPLOYER = scope:actor
-				}
-			}
-		}
-	}
-	
-	auto_accept = yes
 }

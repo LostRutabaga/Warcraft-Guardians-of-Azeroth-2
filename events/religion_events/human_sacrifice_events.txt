@@ -57,7 +57,7 @@ human_sacrifice.0001 = {
 		name = human_sacrifice.0001.a
 		every_prisoner = {
 			limit = { has_character_modifier = designated_human_sacrifice_modifier }
-			override_death_killer_effect = { DEATH_REASON = death_sacrificed_to_gods KILLER = root }
+			override_death_killer_effect = { death_reason = death_sacrificed_to_gods killer = root }
 		}
 		add_piety = {
 			value = miniscule_piety_gain
@@ -185,7 +185,7 @@ human_sacrifice.0001 = {
 		#save_scope_as = dead_designated_sacrifice
 		#imprisoner = {
 			#send_interface_message = {
-				#type = designated_sacrifice_unsacrificed
+				#type = event_religious_bad_with_text
 				#title = designated_sacrifice_died.t
 				#desc = designated_sacrifice_died.desc
 				#right_icon = scope:dead_designated_sacrifice
@@ -215,7 +215,7 @@ human_sacrifice.0003 = {
 					scope:released_designated_sacrifice = { is_alive = yes }
 				}
 				send_interface_message = {
-					type = designated_sacrifice_unsacrificed
+					type = event_religious_bad_with_text
 					title = designated_sacrifice_release.t
 					desc = designated_sacrifice_released.desc
 					right_icon = scope:released_designated_sacrifice

@@ -1,4 +1,6 @@
 ﻿k_greatwood = {
+	1.1.1 = {
+	}
 }
 d_greatwood = {
 	800.1.1={
@@ -66,6 +68,8 @@ c_farview = {
 	} 
 }
 d_boulderslide = {
+	1.1.1 = {
+	}
 }
 c_boulderslide = {
 	25.1.1={holder=2100719} #Dezhanul[1160013]
@@ -119,7 +123,8 @@ c_malakajin = {
 	575.04.22={holder=210047} #Dzhanvaant[1160013]
 	604.1.12={
 		liege=k_mulgore
-	} 
+	}
+	604.4.22={holder=jinzil}
 }
 c_becarela = {
 	25.1.1={holder=2100719} #Dezhanul[1160013]
@@ -140,6 +145,8 @@ c_becarela = {
 	}
 }
 d_webwinder = {
+	1.1.1 = {
+	}
 }
 c_webwinder = {
 	26.1.1={holder=2100555} #Faador[1160010]
@@ -211,35 +218,42 @@ c_fallowmere = {
 	} 
 }
 d_windshear = {
-	800.1.1={
-		liege=k_stonetalon
+	10.9.3={
+		liege = "e_kaldorei"
+		holder = night_elf55 #Galindriel[dynn_talonbranch]
+		government = administrative_government
+		effect = {
+			rtp_government_check_effect = yes
+		}
 	}
 }
 c_windshear = {
 	2.1.1={
-		liege=e_kaldorei
+		liege = d_windshear
 	}
-	10.1.5 = { holder = night_elf60 } #Asaei[night_elf13]
+	10.1.5 = { 
+		holder = night_elf60 #Arithien[night_elf13]
+		government = administrative_government
+		effect = {
+			rtp_government_check_effect = yes
+		}
+	} 
 	580.1.1={holder=310420} #Sedrieth[125042] #Patron, be care
 }
 c_nytanelle = {
-	2.1.1={
-		liege=e_kaldorei
+	10.9.3={
+		holder = night_elf55 #Galindriel[dynn_talonbranch]
 	}
-	10.9.3 = { holder = night_elf55 } #Goti[night_elf12]
 }
 c_talondeep = {
-	2.1.1={
-		liege=e_kaldorei
+	10.9.3={
+		holder = night_elf55 #Galindriel[dynn_talonbranch]
 	}
-	10.9.3 = { holder = night_elf55 } #Goti[night_elf12]
-
 }
 c_leladrieth = {
-	2.1.1={
-		liege=e_kaldorei
+	10.9.3={
+		holder = night_elf55 #Galindriel[dynn_talonbranch]
 	}
-	10.9.3 = { holder = night_elf55 } #Goti[night_elf12]
 }
 c_tewom = {
 	25.1.1={holder=2100612} #Tararb[1160011]
@@ -261,7 +275,9 @@ c_tewom = {
 }
 c_cragpool = {
 	2.1.1={
-		liege=e_kaldorei
+		liege = d_windshear
 	}
-	10.1.5 = { holder = night_elf60 } #Asaei[night_elf13]
+	10.1.5 = { 
+		holder = night_elf60 #Arithien[night_elf13]
+	} 
 }

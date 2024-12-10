@@ -35,6 +35,7 @@
 	culture = gurubashi
 	religion = gurubism
 	holding = tribal_holding
+	special_building = gurubashi_arena_01
 }
 
 2513 = {	# Treku
@@ -107,7 +108,7 @@
 ###c_nekmani
 98 = {	# Nek'mani
 	culture = murloc
-	religion = water_deities
+	religion = frghlaith
 	holding = tribal_holding
 }
 

@@ -15,10 +15,13 @@ lifestyle_nicknames.0001 = { #Stewardship nickname for when the character is arr
 	title = lifestyle_nicknames.0001.t
 	desc = lifestyle_nicknames.0001.desc
 	theme = stewardship
-	left_portrait = root
+	left_portrait = {
+		character = root
+		animation = steward
+	}
 	
 	trigger = {
-		is_ai = no
+		#is_ai = no
 		is_valid_for_narrow_yearly_events = yes
 		OR = { # Has no nickname or a bad nickname
 			has_any_nickname = no
@@ -122,12 +125,18 @@ lifestyle_nicknames.0002 = { #Stewardship nickname when the character is humble
 	title = lifestyle_nicknames.0001.t
 	desc = lifestyle_nicknames.0002.desc
 	theme = stewardship
-	left_portrait = root
+	left_portrait = {
+		character = root
+		animation = steward
+	}
 	
 	trigger = {
-		is_ai = no
+		#is_ai = no
 		is_valid_for_narrow_yearly_events = yes
-		exists = cp:councillor_steward
+		OR = {
+			exists = cp:councillor_steward
+			employs_court_position = second_camp_officer
+		}			
 		OR = { # Has no nickname or a bad nickname
 			has_any_nickname = no
 			has_bad_nickname = yes
@@ -165,8 +174,17 @@ lifestyle_nicknames.0002 = { #Stewardship nickname when the character is humble
 	}
 	
 	immediate = {
-		cp:councillor_steward = {
+		cp:councillor_steward ?= {
 			save_scope_as = my_steward
+		}
+		if = {
+			limit = {
+				NOT = { exists = scope:my_steward }
+			}
+			random_court_position_holder = {
+				type = second_camp_officer
+				save_scope_as = my_steward
+			}
 		}
 		add_character_flag = {
 			flag = had_nickname_event
@@ -238,7 +256,7 @@ lifestyle_nicknames.0003 = { # Diplomatic nickname for someone who's arrogant
 	left_portrait = root
 	
 	trigger = {
-		is_ai = no
+		#is_ai = no
 		is_valid_for_narrow_yearly_events = yes
 		OR = { # Has no nickname or a bad nickname
 			has_any_nickname = no
@@ -346,8 +364,9 @@ lifestyle_nicknames.0004 = { # Diplomatic nickname when the character is humble
 	left_portrait = root
 	
 	trigger = {
-		is_ai = no
+		#is_ai = no
 		is_valid_for_narrow_yearly_events = yes
+		is_landed = yes
 		OR = { # Has no nickname or a bad nickname
 			has_any_nickname = no
 			has_bad_nickname = yes
@@ -453,7 +472,7 @@ lifestyle_nicknames.0005 = { # Martial nickname for someone who's arrogant
 	left_portrait = root
 	
 	trigger = {
-		is_ai = no
+		#is_ai = no
 		is_valid_for_narrow_yearly_events = yes
 		OR = { # Has no nickname or a bad nickname
 			has_any_nickname = no
@@ -557,10 +576,17 @@ lifestyle_nicknames.0006 = { # Martial nickname when the character is humble
 	title = lifestyle_nicknames.0005.t
 	desc = lifestyle_nicknames.0006.desc
 	theme = martial
-	left_portrait = root
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+	right_portrait = {
+		character = scope:my_marshal
+		animation = flirtation
+	}
 	
 	trigger = {
-		is_ai = no
+		#is_ai = no
 		is_valid_for_narrow_yearly_events = yes
 		OR = { # Has no nickname or a bad nickname
 			has_any_nickname = no
@@ -577,6 +603,10 @@ lifestyle_nicknames.0006 = { # Martial nickname when the character is humble
 			has_perk = strategist_perk
 			has_perk = overseer_perk
 			has_perk = gallant_perk
+		}
+		OR = {
+			exists = cp:councillor_marshal
+			employs_court_position = second_camp_officer			
 		}
 	}
 
@@ -599,8 +629,20 @@ lifestyle_nicknames.0006 = { # Martial nickname when the character is humble
 	}
 	
 	immediate = {
-		cp:councillor_marshal = {
-			save_scope_as = my_marshal
+		if = {
+			limit = {
+				employs_court_position = second_camp_officer
+				any_court_position_holder = {
+					type = second_camp_officer
+				}
+			}
+			random_court_position_holder = {
+				type = second_camp_officer
+				save_scope_as = my_marshal
+			}
+		}
+		else = {
+			cp:councillor_marshal = { save_scope_as = my_marshal }
 		}
 		add_character_flag = {
 			flag = had_nickname_event
@@ -672,7 +714,7 @@ lifestyle_nicknames.0007 = { # Intrigue nickname for someone who's arrogant
 	left_portrait = root
 	
 	trigger = {
-		is_ai = no
+		#is_ai = no
 		is_valid_for_narrow_yearly_events = yes
 		OR = { # Has no nickname or a bad nickname
 			has_any_nickname = no
@@ -779,7 +821,7 @@ lifestyle_nicknames.0008 = { # Intrigue nickname when the character is humble
 	left_portrait = root
 	
 	trigger = {
-		is_ai = no
+		#is_ai = no
 		is_valid_for_narrow_yearly_events = yes
 		OR = { # Has no nickname or a bad nickname
 			has_any_nickname = no
@@ -869,7 +911,7 @@ lifestyle_nicknames.0008 = { # Intrigue nickname when the character is humble
 		remove_character_flag = had_nickname_event
 		add_piety = minor_piety_gain
 		add_character_flag = {
-			flag = denied_nickname_event_martial
+			flag = denied_nickname_event_intrigue
 		}
 		
 		ai_chance = {
@@ -884,10 +926,13 @@ lifestyle_nicknames.0009 = { # Learning nickname for someone who's arrogant
 	title = lifestyle_nicknames.0009.t
 	desc = lifestyle_nicknames.0009.desc
 	theme = learning
-	left_portrait = root
-	
+	left_portrait = {
+		character = root
+		animation = page_flipping
+	}
+
 	trigger = {
-		is_ai = no
+		#is_ai = no
 		is_valid_for_narrow_yearly_events = yes
 		OR = { # Has no nickname or a bad nickname
 			has_any_nickname = no
@@ -1000,10 +1045,13 @@ lifestyle_nicknames.0010 = { # Learning nickname when the character is humble
 	title = lifestyle_nicknames.0009.t
 	desc = lifestyle_nicknames.0010.desc
 	theme = learning
-	left_portrait = root
+	left_portrait = {
+		character = root
+		animation = page_flipping
+	}
 	
 	trigger = {
-		is_ai = no
+		#is_ai = no
 		is_valid_for_narrow_yearly_events = yes
 		OR = { # Has no nickname or a bad nickname
 			has_any_nickname = no
@@ -1021,6 +1069,7 @@ lifestyle_nicknames.0010 = { # Learning nickname when the character is humble
 			has_perk = scholar_perk
 			has_perk = theologian_perk
 		}
+		exists = cp:councillor_court_chaplain
 	}
 
 	weight_multiplier = {
@@ -1096,7 +1145,7 @@ lifestyle_nicknames.0010 = { # Learning nickname when the character is humble
 		
 		add_piety = minor_piety_gain
 		add_character_flag = {
-			flag = denied_nickname_event_martial
+			flag = denied_nickname_event_learning
 		}
 		
 		ai_chance = {
@@ -1143,6 +1192,528 @@ lifestyle_nicknames.0011 = { #Follow-up event
 			arrogant = medium_stress_impact_gain
 			humble = medium_stress_impact_loss
 		}
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+
+lifestyle_nicknames.1000 = { # You got a random nickname
+	type = character_event
+	title = lifestyle_nicknames.1000.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					is_imprisoned = yes
+				}
+				desc = lifestyle_nicknames.1000.desc_prison
+			}
+			desc = lifestyle_nicknames.1000.desc
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					has_bad_nickname = no
+				}
+				desc = lifestyle_nicknames.1000.desc_good
+			}
+			desc = lifestyle_nicknames.1000.desc_bad
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					has_bad_nickname = no
+					scope:informer = {
+						OR = {
+							has_relation_rival = root
+							opinion = {
+								target = root
+								value <= -30
+							}
+						}
+					}
+				}
+				desc = lifestyle_nicknames.1000.end_good_bad
+			}
+			triggered_desc = {
+				trigger = {
+					has_bad_nickname = yes
+					scope:informer = {
+						OR = {
+							has_relation_rival = root
+							opinion = {
+								target = root
+								value <= -30
+							}
+						}
+					}
+				}
+				desc = lifestyle_nicknames.1000.end_bad_bad
+			}
+			triggered_desc = {
+				trigger = {
+					has_bad_nickname = no
+					scope:informer = {
+						NOR = {
+							has_relation_rival = root
+							opinion = {
+								target = root
+								value <= -30
+							}
+						}
+					}
+				}
+				desc = lifestyle_nicknames.1000.end_good_good
+			}
+			triggered_desc = {
+				trigger = {
+					has_bad_nickname = yes
+					scope:informer = {
+						NOR = {
+							has_relation_rival = root
+							opinion = {
+								target = root
+								value <= -30
+							}
+						}
+					}
+				}
+				desc = lifestyle_nicknames.1000.end_bad_good
+			}
+		}
+	}
+	theme = crown
+	
+	left_portrait = {
+		character = root
+		triggered_animation = {
+			trigger = { 
+				is_incapable_trigger = yes 
+			}
+  			animation = personality_irrational
+  		}
+		triggered_animation = {
+			trigger = { 
+				has_bad_nickname = no
+			}
+  			animation = ecstasy
+  		}
+		triggered_animation = {
+			trigger = { 
+				has_bad_nickname = yes
+			}
+  			animation = eyeroll
+  		}
+	}
+	
+	right_portrait = {
+		character = scope:informer
+		triggered_animation = {
+			trigger = {
+				scope:nickname_getter = {
+					has_bad_nickname = no
+				}
+				NOR = {
+					has_relation_rival = root
+					opinion = {
+						target = root
+						value <= -30
+					}
+				}
+			}
+  			animation = toast_goblet
+  		}
+		triggered_animation = {
+			trigger = {
+				scope:nickname_getter = {
+					has_bad_nickname = no
+				}
+			}
+  			animation = drink_goblet
+  		}
+		triggered_animation = {
+			trigger = {
+				scope:nickname_getter = {
+					has_bad_nickname = yes
+				}
+				NOR = {
+					has_relation_rival = root
+					opinion = {
+						target = root
+						value <= -30
+					}
+				}
+			}
+  			animation = worry
+  		}
+		triggered_animation = {
+			trigger = {
+				scope:nickname_getter = {
+					has_bad_nickname = yes
+				}
+			}
+  			animation = schadenfreude
+  		}
+	}
+	
+	override_background = {
+		trigger = { is_imprisoned = yes }
+		reference = dungeon
+	}
+	
+	override_background = {
+		trigger = {
+			OR = {
+				AND = {
+					exists = root.capital_province
+					NOT = { location = root.capital_province}
+				}
+				is_travelling = yes
+			}
+		}
+		reference = terrain
+	}
+	
+	override_background = {
+		trigger = { is_incapable_trigger = yes  }
+		reference = bedchamber
+	}
+	
+	trigger = {
+		
+	}
+	
+	immediate = {
+		save_scope_as = nickname_getter
+		if = {
+			limit = {
+				has_bad_nickname = no
+			}
+			play_music_cue = mx_cue_positive_effect
+		}
+		else = {
+			play_music_cue = "mx_cue_negative"
+		}
+		
+		if = {
+			limit = {
+				exists = location
+				OR = {
+					is_travelling = yes
+					is_imprisoned = yes
+					AND = {
+						exists = root.capital_province
+						NOT = { location = root.capital_province }
+					}
+				}
+				location = {
+					any_character_in_location = {
+						is_physically_able_ai_adult = yes
+						NOT = { this = root }
+					}
+				}
+			}
+			location = {
+				random_character_in_location = {
+					limit = {
+						is_physically_able_ai_adult = yes
+						NOT = { this = root }
+					}
+					weight = {
+						base = 1
+						modifier = {
+							add = 100
+							is_travel_entourage_character = yes
+						}
+						modifier = {
+							add = 100
+							root = {
+								has_bad_nickname = yes
+							}
+							OR = {
+								has_relation_rival = root
+								opinion = {
+									target = root
+									value <= -30
+								}
+							}
+						}
+						modifier = {
+							add = 100
+							root = {
+								has_bad_nickname = no
+							}
+							has_any_good_relationship_with_character_trigger = { CHARACTER = root }
+						}
+					}
+					save_scope_as = informer
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				is_imprisoned = yes
+				imprisoner = {
+					any_courtier = {
+						is_physically_able_ai_adult = yes
+					}
+				}
+			}
+			imprisoner = {
+				random_courtier = {
+					limit = {
+						is_physically_able_ai_adult = yes
+					}
+					save_scope_as = informer
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				any_courtier = {
+					is_physically_able_ai_adult = yes
+				}
+			}
+			random_courtier = {
+				limit = {
+					is_physically_able_ai_adult = yes
+				}
+				weight = {
+					base = 1
+					modifier = {
+						add = 100
+						is_travel_entourage_character = yes
+					}
+					modifier = {
+						add = 100
+						root = {
+							has_bad_nickname = yes
+						}
+						OR = {
+							has_relation_rival = root
+							opinion = {
+								target = root
+								value <= -30
+							}
+						}
+					}
+					modifier = {
+						add = 100
+						root = {
+							has_bad_nickname = no
+						}
+						has_any_good_relationship_with_character_trigger = { CHARACTER = root }
+					}
+				}
+				save_scope_as = informer
+			}
+		}
+		else = {
+			create_character = {
+				template = servant_character
+				location = root.location
+				dynasty = none
+				save_scope_as = informer
+			}
+		}
+		scope:informer = { assign_quirk_effect = yes }
+	}
+
+	option = {
+		name = lifestyle_nicknames.1000.a
+		
+		trigger = {
+			has_bad_nickname = no
+			is_imprisoned = no
+			is_incapable_trigger = no  # Warcraft
+		}
+		
+		reverse_add_opinion = {
+			modifier = impressed_opinion
+			target = scope:informer
+			opinion = 30
+		}
+		
+		add_prestige = medium_prestige_gain
+		
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	option = {
+		name = lifestyle_nicknames.1000.b
+		
+		trigger = {
+			has_bad_nickname = yes
+			is_imprisoned = no
+			is_incapable_trigger = no  # Warcraft
+		}
+		
+		if = {
+			limit = {
+				scope:informer = {
+					OR = {
+						has_relation_rival = root
+						opinion = {
+							target = root
+							value <= -30
+						}
+					}
+				}
+			}
+			reverse_add_opinion = {
+				modifier = respect_opinion
+				target = scope:informer
+				opinion = -20
+			}
+		}
+		else = {
+			reverse_add_opinion = {
+				modifier = pity_opinion
+				target = scope:informer
+				opinion = 5
+			}
+		}
+		
+		if = {
+			limit = { is_ai = no }
+			add_prestige = medium_prestige_loss
+		}
+
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	option = {
+		name = lifestyle_nicknames.1000.c
+		
+		trigger = {
+			has_bad_nickname = no
+			is_imprisoned = yes
+			is_incapable_trigger = no  # Warcraft
+		}
+		
+		reverse_add_opinion = {
+			modifier = impressed_opinion
+			target = scope:informer
+			opinion = 30
+		}
+		
+		add_prestige = medium_prestige_gain
+		
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	option = {
+		name = lifestyle_nicknames.1000.d
+		
+		trigger = {
+			has_bad_nickname = yes
+			is_imprisoned = yes
+			is_incapable_trigger = no  # Warcraft
+		}
+		
+		if = {
+			limit = {
+				scope:informer = {
+					OR = {
+						has_relation_rival = root
+						opinion = {
+							target = root
+							value <= -30
+						}
+					}
+				}
+			}
+			reverse_add_opinion = {
+				modifier = respect_opinion
+				target = scope:informer
+				opinion = -20
+			}
+		}
+		else = {
+			reverse_add_opinion = {
+				modifier = pity_opinion
+				target = scope:informer
+				opinion = 5
+			}
+		}
+
+		if = {
+			limit = { is_ai = no }
+			add_prestige = medium_prestige_loss
+		}
+		
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	option = {
+		name = lifestyle_nicknames.1000.e
+		
+		trigger = {
+			has_bad_nickname = no
+			is_incapable_trigger = yes 
+		}
+		
+		reverse_add_opinion = {
+			modifier = impressed_opinion
+			target = scope:informer
+			opinion = 30
+		}
+		
+		add_prestige = medium_prestige_gain
+		
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	option = {
+		name = lifestyle_nicknames.1000.f
+		
+		trigger = {
+			has_bad_nickname = yes
+			is_incapable_trigger = yes 
+		}
+		
+		if = {
+			limit = {
+				scope:informer = {
+					OR = {
+						has_relation_rival = root
+						opinion = {
+							target = root
+							value <= -30
+						}
+					}
+				}
+			}
+			reverse_add_opinion = {
+				modifier = respect_opinion
+				target = scope:informer
+				opinion = -20
+			}
+		}
+		else = {
+			reverse_add_opinion = {
+				modifier = pity_opinion
+				target = scope:informer
+				opinion = 5
+			}
+		}
+
+		if = {
+			limit = { is_ai = no }
+			add_prestige = medium_prestige_loss
+		}
+		
 		ai_chance = {
 			base = 100
 		}

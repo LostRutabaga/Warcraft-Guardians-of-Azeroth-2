@@ -17,7 +17,13 @@ send_poem_interaction = {
 		scope:actor = { wc_can_write_poem_for_trigger = { TARGET = scope:recipient } }
 		
 		# Must be a poet.
-		scope:actor = { has_trait = poet }
+		scope:actor = {
+			OR = { 
+				has_trait = poet
+				employs_court_position = master_bard_camp_officer
+				employs_court_position = laureate_camp_officer
+			}
+		}
 		# Cannot send self fan-poetry. Egoist.
 		NOT = { scope:actor = scope:recipient }
 		# May only write for adults.
@@ -28,6 +34,8 @@ send_poem_interaction = {
 		# Neither of the characters can be imprisoned.
 		scope:actor = { is_imprisoned = no }
 		scope:recipient = { is_imprisoned = no }
+		# Not isolated
+		scope:actor = { NOT = { is_isolated_from_trigger = { target = scope:recipient } } }	# Warcraft
 	}
 
 	can_send = {
@@ -37,7 +45,9 @@ send_poem_interaction = {
 				NOT = { has_character_flag = flag_hostile_actions_disabled_delay }
 			}
 		}
-	}
+    }
+
+    send_options_exclusive = yes
 
 	cost = { prestige = minor_prestige_value }
 
@@ -70,8 +80,8 @@ send_poem_interaction = {
 			custom_tooltip = send_poem_interaction.positive_auto_accept.tt
 			# Show the potential duel.
 			show_as_tooltip = {
-				scope:actor = {
-					send_poem_romance_duel_effect = { POV_TARGET = scope:recipient }
+				scope:recipient = {
+					send_poem_romance_duel_effect = { POV_TARGET = scope:actor }
 				}
 			}
 			# Set up the theme.
@@ -86,8 +96,8 @@ send_poem_interaction = {
 			custom_tooltip = send_poem_interaction.positive_auto_accept.tt
 			# Show the potential duel.
 			show_as_tooltip = {
-				scope:actor = {
-					send_poem_mourning_duel_effect = { POV_TARGET = scope:recipient }
+				scope:recipient = {
+					send_poem_mourning_duel_effect = { POV_TARGET = scope:actor }
 				}
 			}
 			# Set up the theme.
@@ -102,8 +112,8 @@ send_poem_interaction = {
 			custom_tooltip = send_poem_interaction.positive_auto_accept.tt
 			# Show the potential duel.
 			show_as_tooltip = {
-				scope:actor = {
-					send_poem_legacy_duel_effect = { POV_TARGET = scope:recipient }
+				scope:recipient = {
+					send_poem_legacy_duel_effect = { POV_TARGET = scope:actor }
 				}
 			}
 			# Set up the theme.
@@ -118,8 +128,8 @@ send_poem_interaction = {
 			custom_tooltip = send_poem_interaction.positive_auto_accept.tt
 			# Show the potential duel.
 			show_as_tooltip = {
-				scope:actor = {
-					send_poem_strife_duel_effect = { POV_TARGET = scope:recipient }
+				scope:recipient = {
+					send_poem_strife_duel_effect = { POV_TARGET = scope:actor }
 				}
 			}
 			# Set up the theme.
@@ -132,8 +142,8 @@ send_poem_interaction = {
 			limit = { always = scope:poem_theme_incompetence }
 			# Show the potential duel.
 			show_as_tooltip = {
-				scope:actor = {
-					send_poem_incompetence_duel_effect = { POV_TARGET = scope:recipient }
+				scope:recipient = {
+					send_poem_incompetence_duel_effect = { POV_TARGET = scope:actor }
 				}
 			}
 			# Set up the theme.
@@ -141,12 +151,33 @@ send_poem_interaction = {
 			# Send the response event to scope:recipient.
 			scope:recipient = { trigger_event = trait_specific_interactions.0041 }
 		}
+		# Make sure the AI doesn't spam players
+		scope:recipient = {
+			if = {
+				limit = {
+					is_ai = no
+				}
+				add_character_flag = {
+					flag = ai_poem_block
+					years = 5
+				}
+			}
+		}
 		# Clear up hostile actions flag.
 		if = {
 			limit = {
 				scope:actor = { has_character_flag = flag_hostile_actions_disabled_delay }
 			}
 			scope:actor = { remove_character_flag = flag_hostile_actions_disabled_delay }
+		}
+
+		# If we're a clan this interaction affects unity
+		add_clan_unity_interaction_effect = {
+			CHARACTER = scope:actor
+			TARGET = scope:recipient
+			VALUE = minor_unity_gain
+			DESC = clan_unity_poetry.desc
+			REVERSE_NON_HOUSE_TARGET = no
 		}
 	}
 
@@ -265,6 +296,7 @@ send_poem_interaction = {
 	ai_targets = {
 		ai_recipients = neighboring_rulers
 		ai_recipients = peer_vassals
+		ai_recipients = top_realm_domicile_owners
 		max = 10
 	}
 	ai_targets = {
@@ -333,6 +365,11 @@ send_poem_interaction = {
 				is_ai = no
 			}
 		}
+
+		# Unity modifiers
+		evaluate_action_increasing_house_unity = {
+			VALUE = 100
+		}
 		
 		# Characters who are not lustful don't send romantic poems to just anyone
 		modifier = {
@@ -374,6 +411,14 @@ send_poem_interaction = {
 			scope:recipient = {
 				is_ai = no
 				is_at_war = yes
+			}
+		}
+		
+		## Don't spam players when the poetry block is active
+		modifier = {
+			factor = 0
+			scope:recipient = {
+				has_character_flag = ai_poem_block
 			}
 		}
 	}
