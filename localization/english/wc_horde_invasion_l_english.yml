@@ -95,14 +95,13 @@
  wc_horde_invasion.1500.b.flavor:0 "AAAAAAAAAAAAAAAAAAAAH"
 
  wc_horde_invasion.1501.title:0 "Darkness Incarnate"
- wc_horde_invasion.1501.desc:0 "WIP"
- wc_horde_invasion.1501.a:0 "WIP"
- wc_horde_invasion.1501.a.flavor:0 "AAAAAAAAAAH"
- wc_horde_invasion.1501.a_alternative:0 "AAAAH"
- wc_horde_invasion.1501.a_alternative.flavor:0 "RAAAAAAAAAAAAAAH"
- wc_horde_invasion.1501.b:0 "WIP"
- wc_horde_invasion.1501.b.flavor:0 "AAAAAAAAAAAAAAAAAAAAH"
-
+ wc_horde_invasion.1501.desc:0 "The portal worked, just as that wizard said. But this time, I will not be the pawn—I will reign supreme. [Glossary( 'My ex-master', 'NERZHUL_GLOSS' )] trusted such a being, and he lost everything for it, as did I. Kil’jaeden made me slaughter the draenei, [Glossary( 'shatter the elements', 'HAND_OF_GULDAN_GLOSS' )] of Draenor, and enslave the Horde, my masterpiece, with the [Glossary('Blood of Mannoroth', 'BLOOD_OF_MANNOROTH_GLOSS')]. All of that for a dying world, warring clans for the last scraps of life, and the loss of their faith in me, the prophet of their ascension! But this dying world is behind me now. Ahead lies Azeroth, ripe for conquest.\n\nThis portal offers us this world, a land of divided kingdoms and feeble lords... They will burn, but not for him. I learned Kil'jaeden's ways and this wizard will fare no better. He spoke about the Tomb of Sargeras only once, but that was enough, I know it exists. [stormwind_holder.GetPrimaryTitle.GetNameNoTier] will burn, as he demanded. Then he will reveal his secrets to me… #EMP #bold before I crush him!#!#!"
+ wc_horde_invasion.1501.a:0 "And the Shadow Council will be my blade!"
+ wc_horde_invasion.1501.a.flavor:0 "The Shadow Council is your ultimate weapon. Your agents and servants are everywhere within the Horde, even among your internal enemies. They still believe in you, convinced that you will lead them to power by your side. The strength of the Horde is within your grasp."
+ wc_horde_invasion.1501.a_alternative:0 "I must rebuild the Council, otherwise I'm screwed."
+ wc_horde_invasion.1501.a_alternative.flavor:0 "The Shadow Council is shattered. Most of its members are dead or have betrayed you, leaving you vulnerable. Many within the Horde have not forgotten how your guidance nearly led them to extinction. Without your agents and influence, it is difficult to confront them."
+ wc_horde_invasion.1501.b:0 "Blackhand will betray me, it's sure."
+ wc_horde_invasion.1501.b.flavor:0 "Blackhand is too ambitious to remain loyal for long. He knows you manipulated his rise to power and resents the strings you hold over him. One day, he will try to cast you aside to claim the Horde as his own — better to strike first."
  wc_horde_invasion.1502.title:0 "The Betrayer of the Orcs"
  wc_horde_invasion.1502.desc:0 "For years now, [guldan.GetFirstName] has gathered the orcs at the [Glossary( 'Throne of Kil’Jaeden', 'THRONE_OF_KILJAEDEN_GLOSS' )], offering them his [Glossary( '"gift"', 'BLOOD_OF_MANNOROTH_GLOSS' )]. This brew strengthened us, but it also tainted our skin with a green hue and awakened a deep thirst for blood and violence. Horrified by what I witnessed, I forbade the [ROOT.Char.GetCulture.GetCollectiveNoun] from touching it. Yet it wasn’t enough — our skin turned green as well, and already I can see the bloodlust creeping into our hearts.\n\nThe clans left behind on Draenor have fallen into savage madness. [ROOT.Char.GetLiege.GetFirstName] had chosen only those with a shred of reason left, like us, to follow him here, to Azeroth."
  wc_horde_invasion.1502.desc_normal_outro:0 "\n\n[orgrim.GetFirstName] still doubts me; he claims that a single orc cannot destroy an entire world. Yet the earth around the portal is already withering, just as it did on Draenor. #EMP Cursed be [guldan.GetFirstNameNoTooltip]!#! If he is not stopped, our people are doomed to destruction."
@@ -147,7 +146,7 @@
  wc_horde_invasion.1507.a_flavor:0 "WIP"
  wc_horde_invasion.1507.b:0 "WIP"
  wc_horde_invasion.1507.b_flavor:0 "WIP"
- convert_to_twilights_hammer_effect_tt:0 "You will attempt to convince Gall to embrace Their will:\nThis can lead to your secret conversion to the [new_faith.GetName|V]"
+ convert_to_twilights_hammer_effect_tt:0 "This can lead to your secret conversion to the [new_faith.GetName|V]"
 
  #################################
  # Conquests of the Horde
@@ -179,8 +178,8 @@
  # Glossary
  #################################
  APOCALYPSE_RENILASH_GLOSS:0 "The Apocalypse, or Renilash in the ancient common tongue, prophesied by Mereldar, refers to the final conflict between the forces of good and evil. This event, seen as an ultimate judgment, will seal the world’s fate, bringing both destruction and renewal."
- THRONE_OF_KILJAEDEN_GLOSS:0 "The Throne of Kil'Jaeden was once a sacred mountain of the Bonechewer Clan, located in the Hellfire Peninsula, formerly the Tanaan Jungle. Gul'dan renamed this site when he gathered all the orcish clans here for a dark ritual — drinking the blood of Mannoroth, sealing their pact with the Burning Legion, and forever altering the fate of the orcs."
  BLOOD_OF_MANNOROTH_GLOSS:0 "The Blood of Mannoroth, a vile substance, is the very essence of the pit lord Mannoroth. When consumed, it grants immense strength and bloodlust but at a terrible cost: eternal servitude to the Burning Legion. It was this cursed blood that Gul'dan used to corrupt the orcs, marking the beginning of their descent into darkness."
+ THRONE_OF_KILJAEDEN_GLOSS:0 "The Throne of Kil'Jaeden was once a sacred mountain of the Bonechewer Clan, located in the Hellfire Peninsula, formerly the Tanaan Jungle. Gul'dan renamed this site when he gathered all the orcish clans here for a dark ritual — drinking the blood of Mannoroth, sealing their pact with the Burning Legion, and forever altering the fate of the orcs."
  JUNGLE_OF_TANAAN_GLOSS:0 "Once a lush and untamed jungle, Tanaan was home to some of the fiercest orc clans. But, as Draenor fell into decline, it withered at an alarming and unexplained pace. Today, it is nothing more than a barren wasteland, now known as the Hellfire Peninsula."
  EYE_RITUAL_GLOSS:0 "When a new chieftain rises, every Bleeding Hollow lord must undergo the dark Eye Ritual. This rite demands they sacrifice one of their eyes in exchange for a prophetic vision of their own death. It is no trivial act: those who dare to perform the ritual emerge forever changed, freed from fear but haunted by the certainty of their fate."
  CHOGALL_FORMATION_GLOSS:0 "The arrogance and thirst for power of Cho and Gall led to their exile from Highmaul, their birthplace. When Gul’dan created the Shadow Council, he took Cho’gall under his wing, teaching him the demonic arts. Thus, Cho’gall became one of the first ogre mages bound to the Horde and a devoted servant of the Shadow Council."

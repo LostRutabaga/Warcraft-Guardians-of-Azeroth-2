@@ -1051,6 +1051,10 @@ wc_horde_invasion.1501 = {
 		animation = scheme
 	}
 
+	immediate = {
+		title:k_stormwind.holder = { save_scope_as = stormwind_holder }
+	}
+
 	option = { # We are going to destroy the world (canon)
 		name = wc_horde_invasion.1501.a
 		flavor = wc_horde_invasion.1501.a.flavor
