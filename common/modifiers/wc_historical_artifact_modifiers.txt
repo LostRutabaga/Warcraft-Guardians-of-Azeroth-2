@@ -152,6 +152,6 @@ twilight_canticle_modifier = {
 	intrigue = 3
 	learning = 2
 	general_opinion = -10
-	shathgral_opinion = 20
+	shathgral_religion_opinion = 20
 	#TODO: Sus spells
 }
