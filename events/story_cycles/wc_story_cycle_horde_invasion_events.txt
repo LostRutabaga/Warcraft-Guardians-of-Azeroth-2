@@ -641,16 +641,6 @@ wc_horde_invasion.1004 = {
 			limit = { root = scope:blackhand }
 			trigger_event = wc_horde_invasion.1500
 		}
-		# Trigger Gul'dan
-		if = {
-			limit = { scope:guldan ?= { is_alive = yes } }
-			scope:guldan = {
-				trigger_event = {
-					id = wc_horde_invasion.1501
-					days = 7
-				}
-			}
-		}
 
 		every_player = { # At location notification
 			if = {

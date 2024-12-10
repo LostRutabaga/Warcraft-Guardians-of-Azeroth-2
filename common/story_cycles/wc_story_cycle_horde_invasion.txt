@@ -31,6 +31,14 @@
 			}
 		}
 
+		# Gul'dan introduction
+		character:10015 = {
+			trigger_event = {
+				id = wc_horde_invasion.1501
+				days = 1
+			}
+		}
+
 		# Durotan Introduction
 		character:10019 = {
 			trigger_event = {
