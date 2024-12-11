@@ -70,6 +70,21 @@
 				days = 30
 			}
 		}
+
+		# Twilight's Hammer Introduction
+		every_living_character = {
+			limit = {
+				OR = {
+					has_culture = culture:twilights_hammer
+					has_title = title:d_twilights_hammer_clan
+				}
+				is_chogall_trigger = no
+			}
+			trigger_event = {
+				id = wc_horde_invasion.1507
+				days = 7
+			}
+		}
 	}
 
 	on_end = {

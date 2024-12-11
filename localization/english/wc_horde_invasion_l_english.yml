@@ -139,11 +139,11 @@
  wc_horde_invasion.1506.a:0 "The Hour of Twilight is upon us!"
  wc_horde_invasion.1506.a_flavor:0 "You are now the will of the Old Gods. The stars grow dim, the heavens tremble, and the earth shudders. The Horde will likely usher in the Hour of Twilight, but you must be one of its architects. Their whispers demand it: #EMP fight for the Horde!#!"
  wc_horde_invasion.1507.title:0 "$wc_horde_invasion.1505.title$"
- wc_horde_invasion.1507.desc:0 "WIP"
- wc_horde_invasion.1507.a:0 "WIP"
- wc_horde_invasion.1507.a_flavor:0 "WIP"
- wc_horde_invasion.1507.b:0 "WIP"
- wc_horde_invasion.1507.b_flavor:0 "WIP"
+ wc_horde_invasion.1507.desc:0 "Since our arrival on Azeroth, whispers have crawled into my mind. Sometimes faint murmurs, sometimes piercing screams. Shapeless shadows haunt my dreams, commanding me to kneel. The gods of Draenor… they have fallen silent. And the [Glossary( 'Star', 'DARK_STAR_GLOSS' )] is gone. But here… here, it’s different. Here, they are many. Four… No, five? I know them, even though I have never seen them.\n\n#EMP Yogg-Saron#!, death and the end of all things. #EMP Y’Shaarj#!, rage and hatred burning in my heart. #EMP N’Zoth#!, secrets that must never be revealed. #EMP C’Thun#!, pure, unrelenting madness. And another... distant, weak, but present. The god of blood and rot.\n\nDoes any of this make sense? Perhaps Azeroth is a new beginning… or a mistake. A terrible, terrible mistake."
+ wc_horde_invasion.1507.a:0 "I will follow. @twilights_hammer_cult_icon!"
+ wc_horde_invasion.1507.a_flavor:0 "The whispers are clear now. They do not beg, they call. Yogg-Saron, Y'Shaarj, N'Zoth, C'Thun... and the bleeding shadow beyond them all. No chains. No masters. Only fate."
+ wc_horde_invasion.1507.b:0 "Demons pay better than whispers."
+ wc_horde_invasion.1507.b_flavor:0 "Whispers promise. Demons deliver. Power is blood, not dreams. The Legion gave us strength, and with it, we took worlds. I’ll take another."
  convert_to_twilights_hammer_effect_tt:0 "This can lead to your secret conversion to the [new_faith.GetName|V]"
 
  #################################
@@ -185,6 +185,7 @@
  EYE_RITUAL_GLOSS:0 "When a new chieftain rises, every Bleeding Hollow lord must undergo the dark Eye Ritual. This rite demands they sacrifice one of their eyes in exchange for a prophetic vision of their own death. It is no trivial act: those who dare to perform the ritual emerge forever changed, freed from fear but haunted by the certainty of their fate."
  CHOGALL_FORMATION_GLOSS:0 "The arrogance and thirst for power of Cho and Gall led to their exile from Highmaul, their birthplace. When Gul’dan created the Shadow Council, he took Cho’gall under his wing, teaching him the demonic arts. Thus, Cho’gall became one of the first ogre mages bound to the Horde and a devoted servant of the Shadow Council."
  PALE_ORCS_GLOSS:0 "The pale orcs, Void-corrupted outcasts beneath Nagrand, worshipped the Void and its prophecy of the Hour of Twilight — when darkness consumes the cosmos. Once savage and uncontrollable, they embraced Cho’gall as the herald of their dark gods when he came to annihilate them. He returned to the Horde with these fanatics fully under his control."
+ DARK_STAR_GLOSS:0 "The Dark Star, worshipped by the pale orcs as a divine omen, vanished after the assault on Karabor. Called down by their rituals, its shadow engulfed the temple in voidlight, breaking minds and corrupting the land. Its disappearance is seen as a prelude to the Hour of Twilight."
 
  #################################
  # Effects

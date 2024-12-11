@@ -1587,25 +1587,9 @@ wc_horde_invasion.1507 = {
 		random = {
 			chance = 15
 			random_list = {
-				100 = {
-					random_list = {
-						100 = { add_trait = depressed_genetic }
-						100 = { add_trait = depressed_1 }
-					}
-				}
-				# Schizophrenia.
-				100 = {
-					random_list = {
-						100 = { add_trait = lunatic_genetic }
-						100 = { add_trait = lunatic_1 }
-					}
-				}
-				100 = {
-					random_list = {
-						100 = { add_trait = possessed_genetic }
-						100 = { add_trait = possessed_1 }
-					}
-				}
+				100 = { add_trait = depressed_1 }
+				100 = { add_trait = lunatic_1 }
+				100 = { add_trait = possessed_1 }
 			}
 		}
 
