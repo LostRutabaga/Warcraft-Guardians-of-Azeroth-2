@@ -43,7 +43,7 @@
 		character:10019 = {
 			trigger_event = {
 				id = wc_horde_invasion.1502
-				days = 5
+				days = 7
 			}
 		}
 
@@ -51,7 +51,7 @@
 		character:10050 = {
 			trigger_event = {
 				id = wc_horde_invasion.1503
-				days = 1
+				days = 7
 			}
 		}
 
@@ -59,7 +59,7 @@
 		character:10005 = {
 			trigger_event = {
 				id = wc_horde_invasion.1504
-				days = 5
+				days = 7
 			}
 		}
 
@@ -67,7 +67,7 @@
 		character:52000 = {
 			trigger_event = {
 				id = wc_horde_invasion.1505
-				days = 30
+				days = 24
 			}
 		}
 
