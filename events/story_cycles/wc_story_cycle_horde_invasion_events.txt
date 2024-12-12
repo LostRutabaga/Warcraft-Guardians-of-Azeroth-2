@@ -1330,7 +1330,10 @@ wc_horde_invasion.1503 = {
 		# You are strong and ambitious, and you want the warchief position, the Horde like that
 		title:e_horde.holder = {
 			every_vassal = {
-				limit = { NOT = { this = root }}
+				limit = {
+					NOT = { this = root }
+					is_durotan = no
+				}
 				add_opinion = {
 					target = root
 					modifier = path_to_glory_opinion
