@@ -1332,7 +1332,7 @@ wc_horde_invasion.1503 = {
 			every_vassal = {
 				limit = {
 					NOT = { this = root }
-					is_durotan = no
+					is_durotan_trigger = no
 				}
 				add_opinion = {
 					target = root
