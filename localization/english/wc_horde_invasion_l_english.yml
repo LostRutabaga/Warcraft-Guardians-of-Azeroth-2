@@ -86,14 +86,13 @@
  # Introduction Events
  #################################
  wc_horde_invasion.1500.title:0 "The Greatest of Warlords"
- wc_horde_invasion.1500.desc:0 "WIP"
- wc_horde_invasion.1500.a:0 "WIP"
- wc_horde_invasion.1500.a.flavor:0 "AAAAAAAAAAH"
- wc_horde_invasion.1500.a_alternative:0 "AAAAH"
- wc_horde_invasion.1500.a_alternative.flavor:0 "RAAAAAAAAAAAAAAH"
- wc_horde_invasion.1500.b:0 "WIP"
- wc_horde_invasion.1500.b.flavor:0 "AAAAAAAAAAAAAAAAAAAAH"
-
+ wc_horde_invasion.1500.desc:0 "I did what had to be done. Now, the Horde will sweep across this world, and the orcs shall reign for centuries to come. The [Glossary( ' war against the draenei ', 'WAR_DRAENEI_GLOSS' )] marked the beginning of my rise. [blackrock_clan_title.GetName] became the most feared and respected of all orc clans, and I was its ruthless leader.\n\nWhen [ROOT.Char.GetPrimaryTitle.GetName|l] needed a Warchief, who else could have been chosen? I am a leader respected and feared by my warriors. [guldan.GetFirstName] may have manipulated my popularity to elevate me to this rank, but what of it? It serves his ambitions as much as it serves mine. Draenor is finished, but it matters not. I will rule across galaxies if I must—not over a world too weak to endure the power of the demons.\n\nMy sons shall inherit this new world. A world the Horde will forge in its image."
+ wc_horde_invasion.1500.a:0 "The Council is our greatest ally."
+ wc_horde_invasion.1500.a.flavor:0 "The Shadow Council has guided the Horde to greatness, and [guldan.GetFirstNameNoTooltip] is the architect of your destiny. Loyalty to the Council ensures unity among the clans and victory over your enemies. Together, you shall forge a future worthy of the orcs."
+ wc_horde_invasion.1500.a_alternative:0 "The universe shall withness orcish might!"
+ wc_horde_invasion.1500.a_alternative.flavor:0 "Draenor may be gone, but the Horde will rise beyond this dying world. The strength of our warriors and the will of our Warchief will carve our legacy across the stars!"
+ wc_horde_invasion.1500.b:0 "[guldan.GetFirstNameNoTooltip] has outlived [guldan.GetHerHis] usefulness."
+ wc_horde_invasion.1500.b.flavor:0 "[guldan.GetFirstNamePossessiveNoTooltip] schemes served their purpose, but his time is over. The Horde will no longer be a puppet to his ambitions. [guldan.GetHerHis|U] death will free us from his shackles, and my leadership will lead the orcs to true glory."
  wc_horde_invasion.1501.title:0 "Darkness Incarnate"
  wc_horde_invasion.1501.desc:0 "The portal worked, just as that wizard said. But this time, I will not be the pawn—I will reign supreme. [Glossary( 'My ex-master', 'NERZHUL_GLOSS' )] trusted such a being, and he lost everything for it, as did I. Kil’jaeden made me slaughter the draenei, [Glossary( 'shatter the elements', 'HAND_OF_GULDAN_GLOSS' )] of Draenor, and enslave the Horde, my masterpiece, with the [Glossary('Blood of Mannoroth', 'BLOOD_OF_MANNOROTH_GLOSS')]. All of that for a dying world, warring clans for the last scraps of life, and the loss of their faith in me, the prophet of their ascension! But this dying world is behind me now. Ahead lies Azeroth, ripe for conquest.\n\nThis portal offers us this world, a land of divided kingdoms and feeble lords... They will burn, but not for him. I learned Kil'jaeden's ways and this wizard will fare no better. He spoke about the Tomb of Sargeras only once, but that was enough, I know it exists. [stormwind_holder.GetPrimaryTitle.GetNameNoTier] will burn, as he demanded. Then he will reveal his secrets to me… #EMP #bold before I crush him!#!#!"
  wc_horde_invasion.1501.a:0 "And the Shadow Council will be my blade!"
@@ -176,6 +175,7 @@
  # Glossary
  #################################
  APOCALYPSE_RENILASH_GLOSS:0 "The Apocalypse, or Renilash in the ancient common tongue, prophesied by Mereldar, refers to the final conflict between the forces of good and evil. This event, seen as an ultimate judgment, will seal the world’s fate, bringing both destruction and renewal."
+ WAR_DRAENEI_GLOSS:0 "The War against the Draenei was a catastrophic conflict instigated by Kil’jaeden and carried out by the orc clans under Ner’zhul’s guidance. Deceived into believing the draenei were enemies of their survival, the orcs waged a brutal campaign, massacring countless innocents. This war marked the beginning of the orcs' descent into corruption and the eventual shattering of Draenor."
  NERZHUL_GLOSS:0 "Ner'zhul, once the most revered shaman among the orcs and the mentor of Gul'dan, was a spiritual leader who guided his people with wisdom. Deceived by Kil'jaeden, he initiated a bloody war against the draenei, leading to a catastrophic massacre. Upon realizing the demonic betrayal, Ner'zhul sought to defy the Legion, only to be dethroned and replaced by Gul'dan, missing the Horde's grim descent into corruption. Now, Ner'zhul lives in exile, a shadow of his former self, left to dwell on the ashes of Draenor"
  HAND_OF_GULDAN_GLOSS:0 "The Hand of Gul'dan, formerly Mount Cyrukhar, is a colossal fel-tainted volcano in Draenor. Once dormant, Gul'dan gathered his loyal followers at its base for a demonstration of unparalleled power. Using the Cipher of Damnation, he struck down Cyrukh the Firelord, awakening the volcano and unleashing a demonic eruption that scorched the land. This act severed the orcs’ bond with the elemental spirits, leaving Draenor to wither and die. The Hand of Gul'dan now stands as a scar upon the world."
  BLOOD_OF_MANNOROTH_GLOSS:0 "The Blood of Mannoroth, a vile substance, is the very essence of the pit lord Mannoroth. When consumed, it grants immense strength and bloodlust but at a terrible cost: eternal servitude to the Burning Legion. It was this cursed blood that Gul'dan used to corrupt the orcs, marking the beginning of their descent into darkness."

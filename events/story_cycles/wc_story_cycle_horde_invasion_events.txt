@@ -951,6 +951,10 @@ wc_horde_invasion.1500 = {
 		animation = personality_bold
 	}
 
+	immediate = {
+		title:k_blackrock_clan = { save_scope_as = blackrock_clan_title }
+	}
+
 	option = { # We are going to destroy the world (canon)
 		name = wc_horde_invasion.1500.a
 		flavor = wc_horde_invasion.1500.a.flavor
