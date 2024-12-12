@@ -63,3 +63,113 @@ start_cultural_and_religious_propaganda_campaign = {
 		years = 2
 	}
 }
+
+wc_resurrect_CHARACTER_with_STATUS_effect = {  # STATUS = [alive, undead, lich]
+	if = { limit = { $CHARACTER$ = { is_alive = no } }
+	# Copy DNA (must do before the char dies)
+		create_character = {
+			age = $CHARACTER$.age
+			gender = $CHARACTER$
+			location = root.location
+			faith = faith:wc_dummy
+			culture = culture:wc_dummy
+			random_traits = no
+			father = $CHARACTER$.father
+			mother = $CHARACTER$.mother
+			real_father = $CHARACTER$.real_father
+			dynasty = none
+			save_scope_as = resurrected_character
+			after_creation = {
+				copy_traits = $CHARACTER$
+
+				copy_inheritable_appearance_from = $CHARACTER$
+				change_first_name = { template_character = $CHARACTER$ }
+				if = {
+					limit = {
+						exists = $CHARACTER$.house
+					}
+					set_house = $CHARACTER$.house
+				}
+			}
+		}
+
+		# Has to be done outside of after_creation, otherwise it bugs out
+		scope:resurrected_character ?= {
+			$CHARACTER$ = {
+				faith = { save_scope_as = new_faith }
+				culture = { save_scope_as = new_culture }
+				set_character_faith = faith:wc_dummy
+				set_culture = culture:wc_dummy
+			}
+
+			# Copy stats
+			add_diplomacy_skill = 	{ subtract = diplomacy 		add = $CHARACTER$.diplomacy }
+			add_martial_skill = 	{ subtract = martial 		add = $CHARACTER$.martial }
+			add_stewardship_skill = { subtract = stewardship 	add = $CHARACTER$.stewardship }
+			add_intrigue_skill = 	{ subtract = intrigue 		add = $CHARACTER$.intrigue }
+			add_learning_skill = 	{ subtract = learning 		add = $CHARACTER$.learning }
+			add_prowess_skill = 	{ subtract = prowess 		add = $CHARACTER$.prowess }
+
+			set_character_faith = scope:new_faith
+			set_culture = scope:new_culture
+
+			wc_resurrection_options_$STATUS$_effect = yes
+			trigger_race_giving_no_gene_effect = yes
+
+			# Set correct parents and children
+			$CHARACTER$ = {
+				purge_historical_character_effect = yes
+
+				every_child = {
+					even_if_dead = yes
+
+					if = {
+						limit = {
+							exists = father
+							father = $CHARACTER$
+						}
+
+						set_father = scope:resurrected_character
+					}
+					else_if = {
+						limit = {
+							exists = real_father
+							real_father = $CHARACTER$
+						}
+
+						set_real_father = scope:resurrected_character
+					}
+					else_if = {
+						limit = {
+							exists = mother
+							mother = $CHARACTER$
+						}
+
+						set_mother = scope:resurrected_character
+					}
+				}
+			}
+		}
+	}
+}
+
+wc_resurrection_options_lich_effect = {
+	remove_racial_traits_effect = yes
+	add_trait = creature_lich
+	wc_resurrection_options_undead_effect = yes
+}
+
+wc_resurrection_options_undead_effect = { 
+	add_trait = being_undead
+
+	if = {
+		limit = {
+			has_trait = impotent
+		}
+		remove_trait = impotent
+	}
+}
+
+wc_resurrection_options_alive_effect = { 
+	# add something here?
+}

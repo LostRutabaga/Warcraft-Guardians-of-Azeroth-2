@@ -4,6 +4,12 @@
 death_wandering_isle = {
 	icon = "death_unknown.dds"
 }
+death_plague = { 
+	icon = "death_disease.dds"
+}
+death_horde = {
+	icon = "death_murder.dds"
+}
 death_arcane_explosion = { 
 	icon = "death_natural.dds"
 }

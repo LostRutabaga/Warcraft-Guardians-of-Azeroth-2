@@ -90,10 +90,6 @@ cultural_age_multiplier_value = {
 		add = 0.35
 	}
 	else_if = {
-		limit = { has_trait_with_flag = plant_class }
-		add = 93
-	}
-	else_if = {
 		limit = { is_race_no_gene_trigger = { RACE = creature_night_elf } }
 		add = 29
 	}
@@ -267,6 +263,9 @@ age_max_value = {
 
 undead_age_value = 18
 
+age_0_value = { 
+	value = 0 
+}
 age_1_value = {
 	value = 1
 	max = age_max_value
@@ -438,6 +437,11 @@ age_70_value = {
 	multiply = racial_age_multiplier_value
 	max = age_max_value
 }
+age_75_value = {
+	value = 75
+	multiply = racial_age_multiplier_value
+	max = age_max_value
+}
 age_80_value = {
 	value = 80
 	multiply = racial_age_multiplier_value
@@ -456,6 +460,19 @@ age_100_value = {
 age_debug_value = {
 	value = 90
 	multiply = racial_age_multiplier_value
+}
+
+# accounts for the "elderly" values in 00_defines.txt - replace any use of these values with this instead of age_x_value
+age_elderly_male_define_value = { 
+	value = Define:NCharacter|MALE_ELDERLY_AGE
+	multiply = racial_age_multiplier_value
+	max = age_max_value
+}
+
+age_elderly_female_define_value = { 
+	value = Define:NCharacter|FEMALE_ELDERLY_AGE
+	multiply = racial_age_multiplier_value
+	max = age_max_value
 }
 
 my_current_age_value = {
