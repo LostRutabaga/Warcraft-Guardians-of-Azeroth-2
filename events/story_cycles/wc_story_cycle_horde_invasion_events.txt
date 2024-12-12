@@ -431,6 +431,16 @@ wc_horde_invasion.1001 = {
 		name = wc_horde_invasion.1001.b
 		destroy_title_free_vassals_effect = { limit_size = minor_realm_size }
 
+		every_vassal_or_below = {
+			add_to_temporary_list = horde_vassals
+		}
+
+		every_in_list = {
+			list = horde_vassals
+
+			trigger_event = wc_horde_invasion.1003
+		}
+
 		ai_chance = {
 			base = 200
 			ai_value_modifier = {
