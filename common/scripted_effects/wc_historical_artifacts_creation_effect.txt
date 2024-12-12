@@ -290,6 +290,6 @@ create_artifact_twilight_canticle_effect = {
 
 	scope:newly_created_artifact = {
 		set_variable = { name = historical_unique_artifact value = yes }
-		set_variable = { name = twilight_canticle value = yes }
+		#set_variable = { name = twilight_canticle value = yes }
 	}
 }
