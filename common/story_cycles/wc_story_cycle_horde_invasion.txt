@@ -20,17 +20,6 @@
 			trigger_event = wc_horde_invasion.1000 # Notification
 		}
 
-		# Assault on Stormwind
-		if = {
-			limit = { exists = title:e_horde.holder }
-			title:e_horde.holder = {
-				trigger_event = {
-					id = wc_horde_invasion.1004
-					days = 30
-				}
-			}
-		}
-
 		# Gul'dan introduction
 		character:10015 = {
 			trigger_event = {
@@ -114,7 +103,7 @@
 			end_story = yes
 		}
 	}
-	
+
 	# The story should pick another target for AI Horde to invade
 	effect_group = {
 		days = { 30 60 }
@@ -144,6 +133,20 @@
 					save_scope_as = owner
 				}
 				debug_log_scopes = yes
+			}
+		}
+
+		# Assault on Stormwind
+		triggered_effect = {
+			trigger = {
+				exists = title:e_horde.holder
+				NOT = { has_global_variable = horde_invasions_started }
+			}
+			title:e_horde.holder = { trigger_event = wc_horde_invasion.1004 }
+
+			set_global_variable = {
+				name = horde_invasions_started
+				value = yes
 			}
 		}
 	}
