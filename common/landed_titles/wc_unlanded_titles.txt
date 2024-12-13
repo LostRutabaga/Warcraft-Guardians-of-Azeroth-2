@@ -279,7 +279,7 @@ d_harrison_jones = { # Harrison Jones
 # Horde Landless Titles
 d_laamp_burning_blade_clan = { # Burning Blade Nomads
 	color = { 178 28 0 }
-	capital = c_orgrimmar
+	capital = c_dark_portal
 
 	definite_form = yes
 	landless = yes
