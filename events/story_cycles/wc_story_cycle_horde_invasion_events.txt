@@ -644,6 +644,7 @@ wc_horde_invasion.1004 = {
 
 		title:k_stormwind.holder = { save_scope_as = king_of_stormwind }
 		title:e_horde.holder = { save_scope_as = warchief }
+		character:10015 = { save_scope_as = guldan }
 	}
 
 	option = { # Lok'tar Ogar!
@@ -653,7 +654,7 @@ wc_horde_invasion.1004 = {
 
 		# Trigger Blackhand introduction, if the Warchief is Blackhand
 		if = {
-			limit = { root = scope:blackhand }
+			limit = { is_blackhand_trigger = yes }
 			trigger_event = wc_horde_invasion.1500
 		}
 

@@ -143,7 +143,7 @@ declare_war_on_stormwind_effect = {
 	
 	title:k_stormwind.holder = { save_scope_as = stormwind_holder }
 	
-	scope:blackhand = {
+	scope:warchief = {
 		add_character_flag = {
 			flag = free_mongol_cb
 			days = 14

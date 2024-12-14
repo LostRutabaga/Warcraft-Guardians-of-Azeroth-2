@@ -80,13 +80,13 @@
 			#}
 			# Warcraft mongol
 
-			trigger_if = {
-				limit = {
-					has_title = title:e_horde
-					owns_story_of_type = story_horde_invasion
-				}
-				NOT = { has_global_variable = horde_invasions_started }
-			}
+			#trigger_if = {
+			#	limit = {
+			#		has_title = title:e_horde
+			#		owns_story_of_type = story_horde_invasion
+			#	}
+			#	NOT = { has_global_variable = horde_invasions_started }
+			#}
 		}
 		scope:recipient = { NOT = { has_strong_hook = scope:actor } }
 		scope:recipient = {
