@@ -115,6 +115,7 @@
 					this = title:e_horde
 				}
 			}
+			has_global_variable = horde_invasions_started
 		}
 
 		triggered_effect = {
