@@ -2831,13 +2831,16 @@ wc_suramar_events.0060 = {
             }
         }
 
-        scope:target_barony.title_province = {
-            add_building = breweries_01
+        if = {
+            limit = {
+                exists = scope:target_barony
+            }
+            scope:target_barony.title_province = {
+                add_building = breweries_01
+            }
         }
 
-        scope:arcwinist = {
-            add_to_court_and_entourage_effect = yes
-        }
+        add_courtier = scope:arcwinist
 
         show_as_tooltip = {
             appoint_court_position = {

@@ -93,7 +93,7 @@ l_english:
  wc_suramar_events.0012.pet_1:0 "You're coming with me!"
  wc_suramar_events.0012.pet_2:0 "Aww, how cute."
  wc_suramar_events.0012.monster_1:0 "Study it, how did it get that power?"
- wc_suramar_events.0012.monster_2:0 "Bring this beasts' corpse back to the city for display."
+ wc_suramar_events.0012.monster_2:0 "Bring this beast's corpse back to the city for display."
  wc_suramar_events.0012.outsider_1:0 "Come with me, strange creature..."
  wc_suramar_events.0012.outsider_2:0 "What are you? Die!"
  wc_suramar_studying_monsters_modifier:0 "Studying Monsters"
@@ -166,10 +166,10 @@ l_english:
  wc_suramar_events.0044.desc:0 "\n\nThe tunnels are cool and dark, just as [informant.GetFirstNameNoTooltip] described. Mana crystals line the walls, and the floors crackle with energy."
  wc_suramar_events.0044.desc_died:0 "In my deepest awe, I watch as [informant.GetFirstNameNoTooltip] takes [informant.GetHerHis] last breath. Sorrow washes over me. Did [informant.GetSheHe] die in vain?"
  wc_suramar_events.0044.desc_died_attacker:0 "\n\nOur attacker croaks and coughs, and soon becomes still. Deep inside, I feel a sense of relief, but it looks so similar to us. What could it have been?"
- wc_suramar_events.0044.desc_outro:0 "[informant.GetFirstName] lets out a deep sigh. "The Fal'dorei," [informant.GetSheHe] says, "They are our kin, but they have been twisted long ago. They are no longer the elves we once knew." [informant.GetSheHe|U] explains more about the Arcan'dor tree, it's corruption, and the Fal'dorei's connection to it. [informant.GetSheHe|U] mentions a seed in these tunnels, and how they must be searching for it."
+ wc_suramar_events.0044.desc_outro:0 "[informant.GetFirstName] lets out a deep sigh. "The Fal'dorei," [informant.GetSheHe] says, "They are our kin, but they have been twisted long ago. They are no longer the elves we once knew." [informant.GetSheHe|U] explains more about the Arcan'dor tree, its corruption, and the Fal'dorei's connection to it. [informant.GetSheHe|U] mentions a seed in these tunnels, and how they must be searching for it."
  wc_suramar_events.0044.desc_outro_solo:0 "I am left alone in the tunnels, with only the memory of [informant.GetFirstName] to keep me company. I recall [informant.GetSheHe|U] words, and the mention of an ancient seed, and the creatures that hunt for it. 'Fal'dorei', they were called. Corrupted and twisted elves, once hailed from our land, dependent on the Arcan'dor tree in absence of the Nightwell."
  wc_suramar_events.0044.desc_seed_solo:0 "\n\nBefore I can delve further into thought, I think of the glowing rock I found earlier. Could it be the seed [informant.GetFirstName] spoke of?"
- wc_suramar_events.0044.desc_seed:0 "\n\nI reach into my pocket, and pull out the glowing rock.  "The seed of the Arcan'dor!" [informant.GetFirstName] gasps."
+ wc_suramar_events.0044.desc_seed:0 "\n\nI reach into my pocket, and pull out the glowing rock. "The seed of the Arcan'dor!" [informant.GetFirstName] gasps."
  wc_suramar_events.0044.a:0 "This rock... it's the seed?"
  wc_suramar_events.0044.a_alt:0 "It's time to head home, I suppose."
  wc_suramar_events.0044.a_tt:0 "You've found what [informant.GetFirstName] was looking for, and you decide to head home."
@@ -304,7 +304,7 @@ l_english:
  wc_suramar_faldorei_raided_modifier_desc:0 "This character has betrayed the Fal'dorei, and they have retaliated."
 
  wc_suramar_events.0120.t:0 "The Fate of Azshara"
- wc_suramar_events.0120.desc:0 "Many in Suramar gossip about the fate of Queen Azshara, and what has become of her. Some say she is dead, others say she is still alive, but the most intrigue theory has been that she had been transformed into a creature that rules the depths of the ocean.\n\nI have not given in to any particular theory, but I spot an interesting figure upon the sands of [target_barony.GetName]. They resemble us, ever so slightly, but seem to be more... aquatic."
+ wc_suramar_events.0120.desc:0 "Many in Suramar gossip about the fate of Queen Azshara, and what has become of her. Some say she is dead, others say she is still alive, but the most intriguing theory has been that she had been transformed into a creature that rules the depths of the ocean.\n\nI have not given in to any particular theory, but I spot an interesting figure upon the sands of [target_barony.GetName]. They resemble us, ever so slightly, but seem to be more... aquatic."
  wc_suramar_events.0120.a:0 "Hmm... how interesting."
 
  wc_suramar_events.0121.desc:0 "As I approach the figure, [naga_leader.GetHerHis] body coils and slithers. [naga_leader.GetSheHe|U] turns to me, wide-eyed. [naga_leader.GetSheHe|U] hisses something in a broken, twisted dialect of [ROOT.Char.GetCulture.GetLanguage.GetName], yet it is enough for me to understand.\n\nI sit in the sands with the surprisingly [naga_leader.Custom('ComplimentAdjective')] figure, and [naga_leader.GetSheHe] tells me of [naga_leader.GetHerHis] people, and how they were once Nightborne, but had been transformed into the Naga after Suramar fell.\n\nAfter all this time, Aszhara could still live. But considering her betrayal, can these Naga be trusted?"
@@ -338,6 +338,6 @@ l_english:
  wc_suramar_sacrifice_arcandor_modifier_desc:0 "This character has sewn the seed of the Arcan'dor tree, and is benefiting from its power."
 
  wc_suramar_events.1002.t:0 "The Great Mana Tree"
- wc_suramar_events.1002.desc:0 "As I walk into the tunnel connecting Meredil to Falanaar, I am almost blinded by the light of the Arcan'dor tree. It's roots are deep, and its branches are wide, and it's mana flows through the air.\n\nThe Fal'dorei and the Withered alike are gathered around the tree, and they are in awe of its power. They are no longer cursed, and they are no longer twisted."
+ wc_suramar_events.1002.desc:0 "As I walk into the tunnel connecting Meredil to Falanaar, I am almost blinded by the light of the Arcan'dor tree. Its roots are deep, and its branches are wide, and its mana flows through the air.\n\nThe Fal'dorei and the Withered alike are gathered around the tree, and they are in awe of its power. They are no longer cursed, and they are no longer twisted."
  wc_suramar_events.1002.desc_wretched:0 "I join them in their celebration, as I feel the essence of the ley lines course through my veins, restoring me to what I once was."
  wc_suramar_events.1002.desc_faldorei:0 "I join them in their celebration, remembering the kin who fell due to the destruction of this tree, glad that I can see it restored in my lifetime."`
