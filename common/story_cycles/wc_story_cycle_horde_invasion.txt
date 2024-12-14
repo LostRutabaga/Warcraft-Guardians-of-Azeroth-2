@@ -139,11 +139,8 @@
 
 		# Assault on Stormwind
 		triggered_effect = {
-			trigger = {
-				exists = story_owner
-				NOT = { has_global_variable = horde_invasions_started }
-			}
-			story_owner = { trigger_event = wc_horde_invasion.1004 }
+			trigger = { NOT = { has_global_variable = horde_invasions_started } }
+			effect = { story_owner = { trigger_event = wc_horde_invasion.1004 } }
 		}
 	}
 	
