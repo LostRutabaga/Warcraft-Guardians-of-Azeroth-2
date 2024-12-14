@@ -21,6 +21,16 @@
 				is_at_war_with = scope:recipient
 			}
 		}
+
+		trigger_if = {
+			limit = {
+				scope:actor = {
+					has_title = title:e_horde
+					owns_story_of_type = story_horde_invasion
+				}
+			}
+			has_global_variable = horde_invasions_started
+		}
 	}
 
 	is_valid_showing_failures_only = {
