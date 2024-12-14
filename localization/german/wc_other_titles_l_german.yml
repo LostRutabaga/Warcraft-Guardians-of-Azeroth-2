@@ -513,10 +513,6 @@
  d_ursine_adj:0 "bärisch"
  d_ursine_article:0 "der "
 
- d_water_deities:0 "Kirche der Gezeiten"
- d_water_deities_adj:0 "gezeitisch"
- d_water_deities_article:0 "die "
-
  d_cult_of_the_candle:0 "Kirche der Kerze"
  d_cult_of_the_candle_adj:0 "wächsern"
  d_cult_of_the_candle_article:0 "die "
@@ -691,7 +687,7 @@
  # c_stromgarde_adj:0 "stromgardisch"
  # e_kul_tiras_adj:0 "kultirisch"
  # k_kul_tiras_adj:0 "kultirisch"
- # e_arathor_empire_adj:0 "arathisch"
+ # e_arathor_adj:0 "arathisch"
  # k_stratholme:0 "Östlichen Lande"
  # k_stratholme_adj:0 "ostländisch"
  # d_dazaralor:0 "Zuldazar"
@@ -744,7 +740,7 @@
  # d_jade_serpent:0 "Jadeschlange"
  # d_red_crane:0 "Roter Kranich"
  # d_white_tiger:0 "Weißer Tiger"
- # d_golden_lotus:0 "Goldener Lotus"
+ # k_golden_lotus:0 "Goldener Lotus"
  # d_klaxxi:0 "Klaxxi"
  # c_south_islands:0 "Jaguero"
  # c_south_islands_adj:0 "jaguerisch"

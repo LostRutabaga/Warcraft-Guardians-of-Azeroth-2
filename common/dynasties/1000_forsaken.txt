@@ -398,4 +398,8 @@
 # 	name = "dynn_Voidbrain"
 # 	culture = forsaken	
 # }
-payson = { name = "Payson" culture = forsaken motto = Payson_motto }
+brack = { name = "dynn_Brack" culture = forsaken }
+valdread = { name = "Valdread" culture = forsaken }
+dourman = { name = "Dourman" culture = forsaken }
+schweitzer = { name = "Schweitzer" culture = forsaken }
+goreblade = { name = "Goreblade" culture = forsaken }

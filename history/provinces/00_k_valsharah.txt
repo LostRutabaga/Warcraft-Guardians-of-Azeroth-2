@@ -69,13 +69,13 @@
 ###c_bradensbrook
 6572 = {	# Bradensbrook Landing
 	culture = murloc
-	religion = water_deities
+	religion = frghlaith
 	holding = tribal_holding
 	
 	603.5.1 = {
 		culture = gilnean
 		religion = holy_light
-		holding = castle_holding
+		holding = city_holding
 	}
 }
 
@@ -91,7 +91,7 @@
 ###c_gloaming_reef
 6814 = {	# Angler's Deep
 	culture = murloc
-	religion = water_deities
+	religion = frghlaith
 	holding = tribal_holding
 }
 
@@ -130,7 +130,7 @@
 	
 	615.1.1 = {
 		culture = harpy
-		religion = yoggsaron_worship
+		religion = yoggsaronism
 	}
 }
 

@@ -131,13 +131,14 @@ pilgrimage_arrival_events = {
 		burial_arrival_events
 		#christian_arrival_events
 		#jewish_arrival_events
-		pagan_arrival_events
-		pilgrimage_generic_arrival_events
+		# pagan_arrival_events
+		# pilgrimage_generic_arrival_events
 	}
 	effect = {
 		if = {
 			limit = { has_character_flag = pilgrim_group_joined }
 			send_interface_toast = {
+				type = event_toast_effect_good
 				title = grateful_pilgrims_title
 				left_icon = scope:group_leader
 				current_travel_plan = {
@@ -157,6 +158,32 @@ pilgrimage_arrival_events = {
 				}
 			}
 		}
+		if = {
+			limit = {
+				has_variable_list = holy_site_dreams
+				is_target_in_variable_list = {
+					name = holy_site_dreams
+					target = root.location
+				}
+			}
+			send_interface_message = {
+				type = send_interface_message_good
+				title = travel_events_bp3.95.t
+				left_icon = root
+
+				if = {
+					limit = {
+						has_lifestyle = wanderer_lifestyle
+					}
+					add_wanderer_lifestyle_xp = 500
+				}
+				stress_impact = { 
+					base = major_stress_impact_loss 
+					zealous = medium_stress_impact_loss
+				}
+				add_piety = major_piety_gain
+			}
+		}
 	}
 }
 
@@ -167,6 +194,7 @@ burial_arrival_events = {
 	}
 }
 
+# Warcraft - TODO: replace these with lore friendly events
 # Vanilla examples
 #christian_arrival_events = {
 #	trigger = {

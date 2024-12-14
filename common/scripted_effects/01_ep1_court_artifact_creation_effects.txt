@@ -2733,6 +2733,21 @@ set_book_subject_effect = {
 							value = flag:herbalist
 						}
 					}
+					40 = {
+						trigger = {
+							has_trait = legend
+						}
+						modifier = {
+							add = {
+								value = martial
+								multiply = 2
+							}
+						}
+						set_variable = {
+							name = book_subject
+							value = flag:legend
+						}
+					}
 					1 = {
 						trigger = {
 							is_cannibal_trigger = yes
@@ -3605,6 +3620,8 @@ create_artifact_book_effect = {
 
 		if = { #Should this be a court artifact?
 			limit = {
+				has_royal_court = yes
+				has_dlc_feature = court_artifacts
 				NOT = { exists = scope:should_be_trinket }
 			}
 			if = { #Do we have an author?
@@ -3699,7 +3716,7 @@ create_artifact_book_effect = {
 							creator = scope:author
 							description = placeholder # Will be regenerated in the post-creation effects
 							visuals = indian_book
-							type = miscellaneous
+							type = journal
 							modifier = artifact_placeholder_modifier
 							save_scope_as = newly_created_artifact
 							wealth = scope:wealth
@@ -3719,7 +3736,7 @@ create_artifact_book_effect = {
 							creator = scope:author
 							description = placeholder # Will be regenerated in the post-creation effects
 							visuals = book
-							type = miscellaneous
+							type = journal
 							modifier = artifact_placeholder_modifier
 							save_scope_as = newly_created_artifact
 							wealth = scope:wealth
@@ -3744,7 +3761,7 @@ create_artifact_book_effect = {
 							name = placeholder # Will be regenerated in the post-creation effects
 							description = placeholder # Will be regenerated in the post-creation effects
 							visuals = indian_book
-							type = miscellaneous
+							type = journal
 							modifier = artifact_placeholder_modifier
 							save_scope_as = newly_created_artifact
 							wealth = scope:wealth
@@ -3763,7 +3780,7 @@ create_artifact_book_effect = {
 							name = placeholder # Will be regenerated in the post-creation effects
 							description = placeholder # Will be regenerated in the post-creation effects
 							visuals = book
-							type = miscellaneous
+							type = journal
 							history = { type = created_before_history } # We don't know who wrote it
 							modifier = artifact_placeholder_modifier
 							save_scope_as = newly_created_artifact
@@ -4204,25 +4221,25 @@ create_artifact_book_effect = {
 					limit = {
 						rarity = illustrious
 					}
-					add_artifact_modifier = artifact_personal_scheme_power_add_10_modifier
+					add_artifact_modifier = artifact_personal_scheme_phase_duration_add_10_modifier
 				}
 				else_if = {
 					limit = {
 						rarity = famed
 					}
-					add_artifact_modifier = artifact_personal_scheme_power_add_7_modifier
+					add_artifact_modifier = artifact_personal_scheme_phase_duration_add_7_modifier
 				}
 				else_if = {
 					limit = {
 						rarity = masterwork
 					}
-					add_artifact_modifier = artifact_personal_scheme_power_add_5_modifier
+					add_artifact_modifier = artifact_personal_scheme_phase_duration_add_5_modifier
 				} 
 				else_if = {
 					limit = {
 						rarity = common
 					}
-					add_artifact_modifier = artifact_personal_scheme_power_add_2_modifier
+					add_artifact_modifier = artifact_personal_scheme_phase_duration_add_2_modifier
 				}
 			}
 			else_if = {
@@ -4251,7 +4268,7 @@ create_artifact_book_effect = {
 				}
 				add_scaled_artifact_modifier_prestige_effect = yes
 			}
-			else_if = {
+			if = {
 				limit = {
 					OR = {
 						has_artifact_feature = book_subject_family_epic
@@ -4259,27 +4276,37 @@ create_artifact_book_effect = {
 					}
 				}
 				remove_artifact_modifier = artifact_placeholder_modifier
+				add_artifact_modifier = artifact_monthly_prestige_add_2_modifier 
+				if = {
+					limit = {
+						artifact_type = book
+					}
+					add_artifact_modifier = artifact_court_grandeur_baseline_add_1_modifier
+				}
+				else = {
+					add_artifact_modifier = artifact_monthly_prestige_2_modifier
+				}
 				if = { # Vassal Opinion
 					limit = {
 						scope:story = { has_variable = opinion_artifact }
 					}
-					if = { # 10
+					if = {
 						limit = { rarity = illustrious }
 						add_artifact_modifier = artifact_parochial_vassal_opinion_3_modifier
-						add_artifact_modifier = artifact_courtly_vassal_opinion_3_modifier
+						add_artifact_modifier = artifact_courtly_vassal_opinion_4_modifier
 					}
-					else_if = { # 7
+					else_if = {
 						limit = { rarity = famed }
-						add_artifact_modifier = artifact_parochial_vassal_opinion_2_modifier
-						add_artifact_modifier = artifact_courtly_vassal_opinion_2_modifier
-						add_artifact_modifier = artifact_courtly_vassal_opinion_1_modifier
+						add_artifact_modifier = artifact_parochial_vassal_opinion_3_modifier
+						add_artifact_modifier = artifact_courtly_vassal_opinion_3_modifier
+						add_artifact_modifier = artifact_parochial_vassal_opinion_3_modifier
 					}
-					else_if = { # 6
+					else_if = {
 						limit = { rarity = masterwork }
-						add_artifact_modifier = artifact_courtly_vassal_opinion_2_modifier
-						add_artifact_modifier = artifact_courtly_vassal_opinion_2_modifier
+						add_artifact_modifier = artifact_courtly_vassal_opinion_3_modifier
+						add_artifact_modifier = artifact_parochial_vassal_opinion_3_modifier
 					} 
-					else_if = { # 4
+					else_if = {
 						limit = { rarity = common }
 						add_artifact_modifier = artifact_courtly_vassal_opinion_1_modifier
 						add_artifact_modifier = artifact_parochial_vassal_opinion_1_modifier
@@ -4390,8 +4417,10 @@ create_artifact_book_effect = {
 				}
 				if = {
 					limit = { has_artifact_feature = book_subject_family_epic_great }
-					add_artifact_modifier = artifact_monthly_prestige_2_modifier
+					add_artifact_modifier = artifact_monthly_prestige_add_2_modifier #This is renown, can be combined with the renown option during making and adds up with the base renown added to all chronicles
 				}
+				#Small boost from perspectives:
+				
 			}
 			# Modifiers applied based on topic
 			if = {
@@ -4611,7 +4640,7 @@ create_artifact_book_effect = {
 						}
 					}
 					trigger_else = {
-						#OR = {
+						#OR = { # Warcraft - remove this condition
 						#	has_artifact_feature = book_topic_stewardship_digest
 							has_artifact_feature = book_topic_stewardship_admin
 						#}
@@ -5219,7 +5248,7 @@ create_artifact_book_effect = {
 						OR = {
 							scope:topic = flag:religious
 							scope:topic = flag:prayers
-							scope:topic = flag:golden_legend
+							#scope:topic = flag:golden_legend
 							scope:topic = flag:hours
 						}
 					}
@@ -5736,7 +5765,7 @@ create_artifact_book_effect = {
 				limit = {
 					has_artifact_feature = book_subject_language_manual
 				}
-				add_artifact_modifier = artifact_learn_language_scheme_power_add_1_modifier
+				add_artifact_modifier = artifact_learn_language_scheme_phase_duration_add_1_modifier
 				remove_artifact_modifier = artifact_placeholder_modifier
 			}
 			else_if = {
@@ -6145,8 +6174,15 @@ create_artifact_book_effect = {
 				}
 				if = {
 					limit = {
-						exists = scope:topic
-						scope:topic = flag:cannibal_recipes
+						trigger_if = {
+							limit = {
+								exists = scope:topic
+							}
+							scope:topic = flag:cannibal_recipes
+						}
+						trigger_else = {
+							has_artifact_feature = book_topic_cannibal_recipes
+						}
 					}
 					add_artifact_modifier = artifact_health_gain_1_modifier
 				}
@@ -6180,11 +6216,11 @@ create_artifact_book_effect = {
 					}
 					add_artifact_modifier = artifact_vassal_opinion_penalty_1_modifier
 					add_artifact_modifier = artifact_stress_gain_2_modifier
-					add_artifact_modifier = artifact_seduce_scheme_power_mult_1_modifier
+					add_artifact_modifier = artifact_seduce_scheme_phase_duration_mult_1_modifier
 				}
 				else = {
 					add_artifact_modifier = artifact_stress_gain_1_modifier
-					add_artifact_modifier = artifact_seduce_scheme_power_mult_1_modifier
+					add_artifact_modifier = artifact_seduce_scheme_phase_duration_mult_1_modifier
 				}
 			}
 			set_variable = {

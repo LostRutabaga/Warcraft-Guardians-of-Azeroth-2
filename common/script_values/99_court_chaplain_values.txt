@@ -311,6 +311,12 @@ court_chaplain_fabricate_claim_tradition_language_scholars_bonus = {
 	}
 }
 
+court_chaplain_fabricate_claim_inspection_reward_bonus = {
+	value = 0
+	add = court_chaplain_fabricate_claim_base_total
+	multiply = 0.25
+}
+
 # Warcraft 
 # Bonus from Expansionism innovation
 court_chaplain_fabricate_claim_innovation_bonus_expansionism = {
@@ -665,7 +671,7 @@ court_chaplain_conversion_contextual_bonuses = {
 			desc = COURT_CHAPLAIN_CONVERSION_GHW_TENET_NO_HOF_MODIFIER
 		}
 	}
-	### Cthonic Redoubts
+	### Chthonic Redoubts
 	if = {
 		limit = {
 			exists = scope:county
@@ -685,11 +691,52 @@ court_chaplain_conversion_contextual_bonuses = {
 			desc = COURT_CHAPLAIN_CONVERSION_EASIER_TO_CONVERT_FAITH_IN_MOUNTAINS_BONUS_MODIFIER
 		}
 	}
+	## Maluses
+	### Chthonic Redoubts
+	if = {
+		limit = {
+			exists = scope:county
+			scope:county = {
+				faith = { has_doctrine_parameter = harder_to_convert_faith_away_in_mountains }
+				# We check any province and not just title province, to be generous.
+				any_county_province = {
+					OR = {
+						terrain = mountains
+						terrain = desert_mountains
+					}
+				}
+			}
+		}
+		add = {
+			value = scope:councillor.harder_to_convert_faith_away_in_mountains_malus
+			desc = COURT_CHAPLAIN_CONVERSION_HARDER_TO_CONVERT_FAITH_AWAY_IN_MOUNTAINS_MALUS_MODIFIER
+		}
+	}
 
 	#Maluses for syncretic faiths.
 	# Warcraft - Removed unused syncretic vanilla faith maluses
 
 	#Various Modifier Penalties
+	if = {
+		limit = {
+			exists = scope:county
+			scope:county = { has_county_modifier = tougher_to_convert }
+		}
+		add = {
+			value = -0.25
+			desc = COURT_CHAPLAIN_CONVERSION_LOCAL_COUNTY_MODIFIERS
+		}
+	}
+	if = {
+		limit = {
+			exists = scope:county
+			scope:county = { has_county_modifier = easier_to_convert }
+		}
+		add = {
+			value = 0.25
+			desc = COURT_CHAPLAIN_CONVERSION_LOCAL_COUNTY_MODIFIERS
+		}
+	}
 	if = {
 		limit = {
 			exists = scope:county

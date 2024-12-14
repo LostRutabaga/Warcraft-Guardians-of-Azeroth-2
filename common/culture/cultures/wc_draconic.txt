@@ -22,8 +22,8 @@
 	unit_gfx = { western_unit_gfx }
 	
 	ethnicities = {
-		5 = night_elven
-		1 = dragon_green_ethnicity
+		67 = green_dragon_night_elven
+		33 = green_dragon_high_elven
 	}
 }
 
@@ -57,11 +57,8 @@ black_dragon = {
 	unit_gfx = { western_unit_gfx }
 	
 	ethnicities = {
-		5 = caucasian_blond
-		30 = caucasian_ginger
-		35 = caucasian_brown_hair
-		30 = caucasian_dark_hair
-		35 = dragon_black_ethnicity
+		80 = black_dragon_human
+		20 = black_dragon_high_elven
 	}
 }
 
@@ -89,8 +86,8 @@ red_dragon = {
 	unit_gfx = { western_unit_gfx }
 	
 	ethnicities = {
-		5 = high_elven
-		1 = dragon_red_ethnicity_without_horn
+		80 = red_dragon_human
+		20 = red_dragon_high_elven
 	}
 }
 
@@ -118,10 +115,9 @@ blue_dragon = {
 	unit_gfx = { western_unit_gfx }
 	
 	ethnicities = {
-		5 = caucasian_blond
-		30 = caucasian_ginger
-		35 = caucasian_brown_hair
-		30 = caucasian_dark_hair
+		30 = blue_dragon_human
+		60 = blue_dragon_high_elven
+		10 = blue_dragon_gnome
 	}
 }
 
@@ -149,10 +145,9 @@ bronze_dragon = {
 	unit_gfx = { western_unit_gfx }
 	
 	ethnicities = {
-		5 = caucasian_blond
-		30 = caucasian_ginger
-		35 = caucasian_brown_hair
-		30 = caucasian_dark_hair
+		70 = bronze_dragon_high_elven
+		20 = bronze_dragon_human
+		10 = bronze_dragon_gnome
 	}
 
 }

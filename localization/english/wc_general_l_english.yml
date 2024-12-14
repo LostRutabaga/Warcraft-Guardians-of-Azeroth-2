@@ -67,6 +67,9 @@
  
  ACCEPT_OPT:3 "Accept."
  DECLINE_OPT:3 "Decline."
+ DECLINE_OPT_5years:3 "We're not accepting anyone for the next 5 years."
  
  GREAT_OPT:3 "Great!"
  ALAS_OPT:3 "Alas!"
+ 
+ epidemic_events.1020.wc1:0 "We're always looking for an excuse to expand our gardens!"

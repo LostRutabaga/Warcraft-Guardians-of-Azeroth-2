@@ -9,6 +9,7 @@
  creature_mantid_gfx:0 "$trait_creature_mantid$"
  creature_human_gfx:0 "$trait_creature_human$"
  creature_draenei_gfx:0 "$trait_creature_draenei$"
+ creature_manari_gfx:0 "$trait_creature_manari$"
  creature_harpy_gfx:0 "$trait_creature_harpy$"
  creature_naga_gfx:0 "$trait_creature_naga$"
  creature_dryad_gfx:0 "$trait_creature_dryad$"
@@ -73,12 +74,15 @@
  creature_makrura_gfx:0 "$trait_creature_makrura$"
 
  #Others
+ human_coa_gfx:0 "$human$"
  arathorian_coa_gfx:0 "$arathorian$"
  lordaeronian_coa_gfx:0 "$lordaeronian$"
  alteraci_coa_gfx:0 "$alteraci$"
  tirassian_coa_gfx:0 "$tirassian$"
  azerothian_coa_gfx:0 "$azerothian$"
  gilnean_coa_gfx:0 "$gilnean$"
+ baradin_coa_gfx:0 "$baradin$"
+ northsea_coa_gfx:0 "$northsea$"
 
  orcish_coa_gfx:0 "$heritage_orcish_name$"
  orcish_clothing_gfx:0 "$heritage_orcish_name$"
@@ -86,6 +90,18 @@
  orcish_beards_gfx:0 "$heritage_orcish_name$"
  moknathal_hairstyles_gfx:0 "$moknathal$"
  moknathal_beards_gfx:0 "$moknathal$"
+ blackrock_coa_gfx:0 "$blackrock$"
+ bleeding_hollow_coa_gfx:0 "$bleeding_hollow$"
+ burning_blade_coa_gfx:0 "$burning_blade$"
+ dragonmaw_coa_gfx:0 "$dragonmaw$"
+ frostwolf_coa_gfx:0 "$frostwolf$"
+ twilights_hammer_coa_gfx:0 "$twilights_hammer$"
+ warsong_coa_gfx:0 "$warsong$"
+ shadowmoon_coa_gfx:0 "$shadowmoon$"
+ stormreaver_coa_gfx:0 "$stormreaver$"
+ shattered_hand_coa_gfx:0 "$shattered_hand$"
+ laughing_skull_coa_gfx:0 "$laughing_skull$"
+ moknathal_coa_gfx:0 "$moknathal$"
 
  ogre_coa_gfx:0 "$ogre$"
  ogre_clothing_gfx:0 "$ogre$"
@@ -122,6 +138,9 @@
 
  goblin_clothing_gfx:0 "$goblin$"
  goblin_hairstyles_gfx:0 "$goblin$"
+ goblin_coa_gfx:0 "$goblin$"
+ blackwater_coa_gfx:0 "$blackwater$"
+ gilblin_coa_gfx:0 "$gilblin$"
 
  scourge_clothing_gfx:0 "$scourge$"
  
@@ -146,6 +165,7 @@
  being_order_gfx:0 "$trait_being_order$"
  being_life_gfx:0 "$trait_being_life$"
  being_light_gfx:0 "$trait_being_light$"
+ being_nature_gfx:0 "$trait_being_nature$"
  
  creature_infinite_dragon_gfx:0 "$trait_creature_infinite_dragon$"
  creature_wicker_golem_gfx:0 "$trait_creature_wicker_golem$"
@@ -171,6 +191,8 @@
  wc_pagan_coa_gfx:0 "$Primal$"
  murine_coa_gfx:0 "$heritage_murine_name$"
  naga_coa_gfx:0 "$heritage_azsharic_name$"
+ murloc_coa_gfx:0 "$trait_creature_murloc$"
+ trogg_coa_gfx:0 "$trait_creature_trogg$"
  tuskarr_coa_gfx:0 "$language_tuskarr_name$"
  mechagnome_coa_gfx:0 "$trait_creature_mechagnome$"
  highmountain_coa_gfx:0 "$highmountain$"
@@ -197,3 +219,6 @@
  night_elven_building_gfx:0 "$night_elf$"
  no_lowborn_headgear_gfx:0 "$no_headgear_gfx$"
  trogg_clothing_gfx:0 "$Troggish$"
+ drogbar_coa_gfx:0 "$trait_creature_drogbar$"
+
+ orcish_building_gfx:0 "$orcish$"

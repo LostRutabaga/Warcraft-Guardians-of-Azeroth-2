@@ -2,16 +2,15 @@
 ###c_orgrimmar
 1700 = {	# Orgrimmar
 	culture = harpy
-	religion = yoggsaron_worship
+	religion = yoggsaronism
 	holding = tribal_holding
 
 	#History
 	603.1.1={
-		culture = frostwolf
+		culture = durotaric
 		religion = orcish_shamanism
 	}
 	605.1.1={
-		culture = durotaric
 		holding = castle_holding
 	}
 }
@@ -36,7 +35,7 @@
 ###c_spiritvale
 1701 = {	# Spiritvale
 	culture = harpy
-	religion = yoggsaron_worship
+	religion = yoggsaronism
 	holding = tribal_holding
 
 	603.1.1={
@@ -64,7 +63,7 @@
 ###c_rocktusk
 1702 = {	# Rocktusk
 	culture = harpy
-	religion = yoggsaron_worship
+	religion = yoggsaronism
 	holding = tribal_holding
 
 	603.1.1={
@@ -92,7 +91,7 @@
 ###c_bladefist
 1703 = {	# Bladefist
 	culture = harpy
-	religion = yoggsaron_worship
+	religion = yoggsaronism
 	holding = tribal_holding
 
 	603.1.1={
@@ -276,7 +275,7 @@
 ###c_southwatch
 1712 = {	# Southwatch
 	culture = centaur
-	religion = theradras_worship
+	religion = theradrasism
 	holding = tribal_holding
 
 	603.1.1={
@@ -297,7 +296,7 @@
 ###c_geruzh
 1713 = {	# Geruzh
 	culture = centaur
-	religion = theradras_worship
+	religion = theradrasism
 	holding = tribal_holding
 
 	603.1.1={
@@ -333,7 +332,7 @@
 ###c_darkspear_isle
 1714 = {	# Darkspear Hold
 	culture = murloc
-	religion = water_deities
+	religion = frghlaith
 	holding = tribal_holding
 
 	603.1.1={
@@ -366,7 +365,7 @@
 ###c_echo_isles
 1715 = {	# Spitescale Cove
 	culture = murloc
-	religion = water_deities
+	religion = frghlaith
 	holding = tribal_holding
 }
 
@@ -390,7 +389,7 @@
 ###c_senjin
 1711 = {	# Sen'jin
 	culture = centaur
-	religion = theradras_worship
+	religion = theradrasism
 	holding = tribal_holding
 
 	603.1.1={

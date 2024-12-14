@@ -454,3 +454,15 @@ callow = {
 	name = "Callow"
 	culture = arathorian
 }
+valdelmar = {
+	name = "Valdelmar"
+	culture = arathorian
+}
+weltom = {
+	name = "Weltom"
+	culture = arathorian
+}
+palimore = {
+	name = "Palimore"
+	culture = arathorian
+}
